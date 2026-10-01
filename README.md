@@ -19,7 +19,7 @@
 | Gate 2 | 정답을 모르는 공개 물리 계산 — [허용 오차 규칙 V1(봉인)](docs/BINARY64_TOLERANCE_RULE_V1.md), [후보 비교](docs/GATE2_CANDIDATES.md) | 대상: Hénon–Heiles (설계자 결정). FPUT·3체 보류 |
 | **Gate 2A** | Published-model reproduction and multi-layer verification (외부 코드 감사 아님) — [계획(봉인)](docs/GATE2A_PLAN.md), [결과](docs/GATE2A_RESULT.md), [보고서](reports/cloud-container-2026-10-01/GATE2A_REPORT.md) | **CLOSED / PARTIAL** (2026-10-01) — 집 PC digest `644fc922…57e1` 동일 확인. G2A-5 부분 충족. 결과 봉인(수정 금지) |
 | **V2** | 오차 상한 V2 시제품: affine 산술 + QR 기저 교체 — [계획(봉인)](docs/V2_ERROR_BOUND_PLAN.md), [결과](docs/V2_RESULT.md) | **V2 = AUDITED / PASS / FROZEN** → [BINARY64_TOLERANCE_RULE_V2](docs/BINARY64_TOLERANCE_RULE_V2.md)로 정식 승격 (2026-10-01). 독립 감사 P1–P15 PASS, 치명·주요·미결 0, 경미 5 → [V2.1_BACKLOG](docs/V2.1_BACKLOG.md). [provenance](docs/V2_PROVENANCE.md) |
-| Gate 2B | 공개 제3자 Hénon–Heiles 구현 감사 | 계획 단계 (외부 코드 실행 전 계획 봉인) |
+| Gate 2B | 공개 제3자 Hénon–Heiles 구현 감사 — [계획(봉인)](docs/GATE2B_PLAN.md) | 계획 봉인. 대상 gala 1.12.0 (MIT). 외부 코드 궤도 미실행. 설계자 승인 대기 |
 
 각 Gate에서 추가 정보가 없거나 비용이 맞지 않으면 그 자리에서 중단한다.
 
