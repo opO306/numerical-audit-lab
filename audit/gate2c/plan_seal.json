@@ -1,0 +1,14 @@
+{
+  "schema": "gate2c-plan-seal-v1",
+  "recorded_at_utc": "2026-10-01T09:33:00.535627+00:00",
+  "git_metadata_available": false,
+  "implementation_files_present_at_seal": {
+    "run_gate2c.py": false,
+    "benchmarks\\gate2c\\binary_replay.py": false,
+    "lab\\gate2c_checks.py": false
+  },
+  "files": {
+    "docs/GATE2C_PLAN.md": "2dd72f3f5664d61085db51d26c496f428d2161ec7d12f2be085474da8f4660cc",
+    "audit/gate2b/closure_seal.json": "413b89cc81bc9cede544469be03e80f3fcd05d81fbd89ba55f8ee511d38f339a"
+  }
+}
