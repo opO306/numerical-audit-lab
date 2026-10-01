@@ -18,8 +18,8 @@
 | **Gate 1** | 2D 두 원판 완전탄성충돌: 검사 11개 × 심은 버그 7개 × 시나리오 6개 — [계획(봉인)](docs/GATE1_PLAN.md), [해석](docs/GATE1_RESULT.md), [보고서](reports/cloud-container-2026-10-01/GATE1_REPORT.md) | **CLOSED / PASS** (2026-10-01) — 설계자 집 PC에서 digest `6adecd6c…2f03` 클라우드와 동일 확인. 시나리오·mutant 추가 금지 |
 | Gate 2 | 정답을 모르는 공개 물리 계산 — [허용 오차 규칙 V1(봉인)](docs/BINARY64_TOLERANCE_RULE_V1.md), [후보 비교](docs/GATE2_CANDIDATES.md) | 대상: Hénon–Heiles (설계자 결정). FPUT·3체 보류 |
 | **Gate 2A** | Published-model reproduction and multi-layer verification (외부 코드 감사 아님) — [계획(봉인)](docs/GATE2A_PLAN.md), [결과](docs/GATE2A_RESULT.md), [보고서](reports/cloud-container-2026-10-01/GATE2A_REPORT.md) | **CLOSED / PARTIAL** (2026-10-01) — 집 PC digest `644fc922…57e1` 동일 확인. G2A-5 부분 충족. 결과 봉인(수정 금지) |
-| **V2** | 오차 상한 V2 시제품: affine 산술 + QR 기저 교체 — [계획(봉인)](docs/V2_ERROR_BOUND_PLAN.md), [결과](docs/V2_RESULT.md) | **PASS** (봉인 기준 전부). 규칙 궤도 10⁵ step까지 인증(V1: 1,779), 혼돈 13,667. 집 PC digest `6b5a39dc…` 미확인. 규칙 V2 봉인은 설계자 결정 대기 |
-| Gate 2B | 공개 제3자 Hénon–Heiles 구현 감사 | V2 이후 |
+| **V2** | 오차 상한 V2 시제품: affine 산술 + QR 기저 교체 — [계획(봉인)](docs/V2_ERROR_BOUND_PLAN.md), [결과](docs/V2_RESULT.md) | **PROTOTYPE PASS** (봉인 기준 전부) · **home-PC reproducibility PASS** (digest `6b5a39dc…` 동일). 구현 동결. [독립 감사](docs/V2_AUDIT_CHARTER.md) 대기 — PASS 전 규칙 승격 금지 |
+| Gate 2B | 공개 제3자 Hénon–Heiles 구현 감사 | V2 독립 감사 종료 전 착수 금지 |
 
 각 Gate에서 추가 정보가 없거나 비용이 맞지 않으면 그 자리에서 중단한다.
 

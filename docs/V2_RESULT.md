@@ -1,5 +1,7 @@
 # V2 오차 상한 시제품 결과 (2026-10-01)
 
+**상태: PROTOTYPE PASS, home-PC reproducibility PASS** — 설계자 집 PC에서 `run_v2.py`의 deterministic_digest `6b5a39dc4be4d1603ac3eb225b7767cc271851f1ee13668d5eeb636b60a16f7b`가 클라우드와 동일함을 확인(설계자 보고). **구현 동결.** `BINARY64_TOLERANCE_RULE_V2`로 승격하기 전에 [독립 감사](V2_AUDIT_CHARTER.md)를 통과해야 한다. Gate 2B는 감사 종료 전까지 시작하지 않는다.
+
 - 계획(봉인): [V2_ERROR_BOUND_PLAN.md](V2_ERROR_BOUND_PLAN.md), 커밋 `4f443da`. 구현 커밋 `3b8d445`(전체 실행 전)
 - 보고서: `reports/cloud-container-2026-10-01/v2_report.json`, digest `6b5a39dc4be4d1603ac3eb225b7767cc271851f1ee13668d5eeb636b60a16f7b`
 - Gate 2A 파일은 바꾸지 않았다(해시 시험 통과). V2도 **반올림 층(A)만** 다룬다. 연속 궤적(층 B)은 인증하지 않는다.
@@ -62,7 +64,6 @@ hold-out 4개도 같은 양상이다. 구현자가 결과를 보고 조정하지
 
 ## 남은 한계
 
-- 집 PC 재현은 아직 하지 않았다(digest `6b5a39dc…`).
 - 120자리 추정은 엄밀한 기준이 아니다. S3는 반증 시험이고 증명이 아니다. 엄밀한 보장은 S1(규칙의 수학)과 S2(정확 산술 구간)에 있다.
 - 분기 없는 직선형 프로그램만 다룬다.
 - 여전히 반올림 층만 다룬다. 방법 오차(층 B)는 인증하지 않는다.
@@ -70,5 +71,4 @@ hold-out 4개도 같은 양상이다. 구현자가 결과를 보고 조정하지
 ## 제안 (설계자 결정 필요)
 
 1. 이 V2 방법을 `BINARY64_TOLERANCE_RULE_V2`로 봉인한다. 이번 시제품의 수식·코드 해시·한계를 그대로 적는다.
-2. 집 PC에서 `python run_v2.py`(약 20–25분)를 실행해 digest를 확인한다.
 3. 그 뒤 Gate 2B(공개 제3자 Hénon–Heiles 구현 감사)로 간다. 이때는 V2를 사용한다.
