@@ -1,0 +1,1818 @@
+{
+  "deterministic_digest": "6adecd6c57555d3e6b36f4e3ff7da5c5c03f713d5be8d16f43e477a084f82f03",
+  "deterministic": {
+    "plan": "docs/GATE1_PLAN.md",
+    "predictions": "benchmarks/gate1/predictions.json",
+    "scenarios": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6"
+    ],
+    "checks": [
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C4b",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "C10"
+    ],
+    "oracle_free_checks": [
+      "C3",
+      "C4",
+      "C4b",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "C10"
+    ],
+    "matrix": {
+      "M0": {
+        "S1": {
+          "C1": false,
+          "C2": false,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": false,
+          "C10": false
+        },
+        "S2": {
+          "C1": false,
+          "C2": false,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": false,
+          "C10": false
+        },
+        "S3": {
+          "C1": false,
+          "C2": false,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": false,
+          "C10": false
+        },
+        "S4": {
+          "C1": false,
+          "C2": false,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": false,
+          "C10": false
+        },
+        "S5": {
+          "C1": false,
+          "C2": false,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": false,
+          "C10": false
+        },
+        "S6": {
+          "C1": false,
+          "C2": false,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": false,
+          "C10": false
+        }
+      },
+      "M1": {
+        "S1": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": true,
+          "C4b": true,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": true,
+          "C10": true
+        },
+        "S2": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": true,
+          "C4b": true,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": true,
+          "C10": true
+        },
+        "S3": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": true,
+          "C4b": true,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": true,
+          "C10": true
+        },
+        "S4": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": true,
+          "C4b": true,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": true,
+          "C10": true
+        },
+        "S5": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": true,
+          "C4b": true,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": true,
+          "C10": true
+        },
+        "S6": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": true,
+          "C4b": true,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": true,
+          "C10": true
+        }
+      },
+      "M2": {
+        "S1": {
+          "C1": true,
+          "C2": true,
+          "C3": true,
+          "C4": true,
+          "C4b": true,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": true,
+          "C10": false
+        },
+        "S2": {
+          "C1": false,
+          "C2": false,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": false,
+          "C10": false
+        },
+        "S3": {
+          "C1": false,
+          "C2": false,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": false,
+          "C10": false
+        },
+        "S4": {
+          "C1": true,
+          "C2": true,
+          "C3": true,
+          "C4": true,
+          "C4b": true,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": true,
+          "C10": false
+        },
+        "S5": {
+          "C1": true,
+          "C2": true,
+          "C3": true,
+          "C4": true,
+          "C4b": true,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": true,
+          "C10": false
+        },
+        "S6": {
+          "C1": true,
+          "C2": true,
+          "C3": true,
+          "C4": true,
+          "C4b": true,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": true,
+          "C10": false
+        }
+      },
+      "M3": {
+        "S1": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": true,
+          "C4b": true,
+          "C5": false,
+          "C6": false,
+          "C7": true,
+          "C8": false,
+          "C9": true,
+          "C10": true
+        },
+        "S2": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": false,
+          "C10": true
+        },
+        "S3": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": true,
+          "C4b": true,
+          "C5": false,
+          "C6": false,
+          "C7": true,
+          "C8": false,
+          "C9": true,
+          "C10": true
+        },
+        "S4": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": true,
+          "C4b": true,
+          "C5": false,
+          "C6": false,
+          "C7": true,
+          "C8": false,
+          "C9": true,
+          "C10": true
+        },
+        "S5": {
+          "C1": false,
+          "C2": false,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": false,
+          "C6": false,
+          "C7": true,
+          "C8": false,
+          "C9": false,
+          "C10": false
+        },
+        "S6": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": true,
+          "C4b": true,
+          "C5": false,
+          "C6": false,
+          "C7": true,
+          "C8": false,
+          "C9": true,
+          "C10": true
+        }
+      },
+      "M4": {
+        "S1": {
+          "C1": false,
+          "C2": false,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": true,
+          "C6": false,
+          "C7": false,
+          "C8": true,
+          "C9": true,
+          "C10": false
+        },
+        "S2": {
+          "C1": true,
+          "C2": true,
+          "C3": true,
+          "C4": true,
+          "C4b": true,
+          "C5": true,
+          "C6": false,
+          "C7": false,
+          "C8": true,
+          "C9": true,
+          "C10": true
+        },
+        "S3": {
+          "C1": true,
+          "C2": true,
+          "C3": true,
+          "C4": true,
+          "C4b": true,
+          "C5": true,
+          "C6": false,
+          "C7": false,
+          "C8": true,
+          "C9": true,
+          "C10": true
+        },
+        "S4": {
+          "C1": true,
+          "C2": true,
+          "C3": true,
+          "C4": true,
+          "C4b": true,
+          "C5": true,
+          "C6": false,
+          "C7": false,
+          "C8": true,
+          "C9": true,
+          "C10": true
+        },
+        "S5": {
+          "C1": false,
+          "C2": false,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": true,
+          "C6": false,
+          "C7": false,
+          "C8": true,
+          "C9": true,
+          "C10": false
+        },
+        "S6": {
+          "C1": true,
+          "C2": true,
+          "C3": true,
+          "C4": true,
+          "C4b": true,
+          "C5": true,
+          "C6": false,
+          "C7": false,
+          "C8": true,
+          "C9": true,
+          "C10": true
+        }
+      },
+      "M5": {
+        "S1": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": true,
+          "C6": true,
+          "C7": false,
+          "C8": false,
+          "C9": false,
+          "C10": true
+        },
+        "S2": {
+          "C1": false,
+          "C2": false,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": true,
+          "C6": true,
+          "C7": false,
+          "C8": false,
+          "C9": false,
+          "C10": false
+        },
+        "S3": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": true,
+          "C6": true,
+          "C7": false,
+          "C8": false,
+          "C9": false,
+          "C10": true
+        },
+        "S4": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": true,
+          "C6": true,
+          "C7": false,
+          "C8": false,
+          "C9": false,
+          "C10": true
+        },
+        "S5": {
+          "C1": false,
+          "C2": false,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": true,
+          "C6": true,
+          "C7": false,
+          "C8": false,
+          "C9": false,
+          "C10": false
+        },
+        "S6": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": true,
+          "C6": true,
+          "C7": false,
+          "C8": false,
+          "C9": false,
+          "C10": true
+        }
+      },
+      "M6": {
+        "S1": {
+          "C1": false,
+          "C2": false,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": true,
+          "C6": false,
+          "C7": false,
+          "C8": true,
+          "C9": true,
+          "C10": false
+        },
+        "S2": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": true,
+          "C4b": true,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": true,
+          "C9": true,
+          "C10": true
+        },
+        "S3": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": true,
+          "C4b": true,
+          "C5": true,
+          "C6": false,
+          "C7": false,
+          "C8": true,
+          "C9": true,
+          "C10": true
+        },
+        "S4": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": true,
+          "C4b": true,
+          "C5": true,
+          "C6": false,
+          "C7": false,
+          "C8": true,
+          "C9": true,
+          "C10": true
+        },
+        "S5": {
+          "C1": false,
+          "C2": false,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": true,
+          "C6": false,
+          "C7": false,
+          "C8": true,
+          "C9": true,
+          "C10": false
+        },
+        "S6": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": true,
+          "C4b": true,
+          "C5": true,
+          "C6": false,
+          "C7": false,
+          "C8": true,
+          "C9": true,
+          "C10": true
+        }
+      },
+      "M7": {
+        "S1": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": false,
+          "C4b": true,
+          "C5": true,
+          "C6": false,
+          "C7": false,
+          "C8": true,
+          "C9": true,
+          "C10": false
+        },
+        "S2": {
+          "C1": false,
+          "C2": false,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": false,
+          "C10": false
+        },
+        "S3": {
+          "C1": false,
+          "C2": false,
+          "C3": false,
+          "C4": false,
+          "C4b": false,
+          "C5": false,
+          "C6": false,
+          "C7": false,
+          "C8": false,
+          "C9": false,
+          "C10": false
+        },
+        "S4": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": false,
+          "C4b": true,
+          "C5": true,
+          "C6": false,
+          "C7": false,
+          "C8": true,
+          "C9": true,
+          "C10": false
+        },
+        "S5": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": false,
+          "C4b": true,
+          "C5": true,
+          "C6": false,
+          "C7": false,
+          "C8": true,
+          "C9": true,
+          "C10": false
+        },
+        "S6": {
+          "C1": true,
+          "C2": true,
+          "C3": false,
+          "C4": false,
+          "C4b": true,
+          "C5": true,
+          "C6": false,
+          "C7": false,
+          "C8": true,
+          "C9": true,
+          "C10": false
+        }
+      }
+    },
+    "notes": {
+      "M0": {
+        "S1": {},
+        "S2": {},
+        "S3": {},
+        "S4": {},
+        "S5": {},
+        "S6": {}
+      },
+      "M1": {
+        "S1": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C9": "running the collision backwards does not undo it",
+          "C10": "normal relative velocity not exactly reversed (e != 1)"
+        },
+        "S2": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C9": "running the collision backwards does not undo it",
+          "C10": "normal relative velocity not exactly reversed (e != 1)"
+        },
+        "S3": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C9": "running the collision backwards does not undo it",
+          "C10": "normal relative velocity not exactly reversed (e != 1)"
+        },
+        "S4": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C9": "running the collision backwards does not undo it",
+          "C10": "normal relative velocity not exactly reversed (e != 1)"
+        },
+        "S5": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C9": "running the collision backwards does not undo it",
+          "C10": "normal relative velocity not exactly reversed (e != 1)"
+        },
+        "S6": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C9": "running the collision backwards does not undo it",
+          "C10": "normal relative velocity not exactly reversed (e != 1)"
+        }
+      },
+      "M2": {
+        "S1": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C3": "total momentum changed",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C9": "running the collision backwards does not undo it"
+        },
+        "S2": {},
+        "S3": {},
+        "S4": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C3": "total momentum changed",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C9": "running the collision backwards does not undo it"
+        },
+        "S5": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C3": "total momentum changed",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C9": "running the collision backwards does not undo it"
+        },
+        "S6": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C3": "total momentum changed",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C9": "running the collision backwards does not undo it"
+        }
+      },
+      "M3": {
+        "S1": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C7": "rotating the input did not rotate the output",
+          "C9": "running the collision backwards does not undo it",
+          "C10": "normal relative velocity not exactly reversed (e != 1)"
+        },
+        "S2": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C10": "normal relative velocity not exactly reversed (e != 1)"
+        },
+        "S3": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C7": "rotating the input did not rotate the output",
+          "C9": "running the collision backwards does not undo it",
+          "C10": "normal relative velocity not exactly reversed (e != 1)"
+        },
+        "S4": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C7": "rotating the input did not rotate the output",
+          "C9": "running the collision backwards does not undo it",
+          "C10": "normal relative velocity not exactly reversed (e != 1)"
+        },
+        "S5": {
+          "C7": "rotating the input did not rotate the output"
+        },
+        "S6": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C7": "rotating the input did not rotate the output",
+          "C9": "running the collision backwards does not undo it",
+          "C10": "normal relative velocity not exactly reversed (e != 1)"
+        }
+      },
+      "M4": {
+        "S1": {
+          "C5": "relabelling the particles changed the physics",
+          "C8": "a moving observer sees different physics",
+          "C9": "running the collision backwards does not undo it"
+        },
+        "S2": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C3": "total momentum changed",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C5": "relabelling the particles changed the physics",
+          "C8": "a moving observer sees different physics",
+          "C9": "running the collision backwards does not undo it",
+          "C10": "normal relative velocity not exactly reversed (e != 1)"
+        },
+        "S3": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C3": "total momentum changed",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C5": "relabelling the particles changed the physics",
+          "C8": "a moving observer sees different physics",
+          "C9": "running the collision backwards does not undo it",
+          "C10": "normal relative velocity not exactly reversed (e != 1)"
+        },
+        "S4": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C3": "total momentum changed",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C5": "relabelling the particles changed the physics",
+          "C8": "a moving observer sees different physics",
+          "C9": "running the collision backwards does not undo it",
+          "C10": "normal relative velocity not exactly reversed (e != 1)"
+        },
+        "S5": {
+          "C5": "relabelling the particles changed the physics",
+          "C8": "a moving observer sees different physics",
+          "C9": "running the collision backwards does not undo it"
+        },
+        "S6": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C3": "total momentum changed",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C5": "relabelling the particles changed the physics",
+          "C8": "a moving observer sees different physics",
+          "C9": "running the collision backwards does not undo it",
+          "C10": "normal relative velocity not exactly reversed (e != 1)"
+        }
+      },
+      "M5": {
+        "S1": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C5": "relabelling the particles changed the physics",
+          "C6": "moving both discs changed the result",
+          "C10": "velocity change not along the line of centres (friction-like)"
+        },
+        "S2": {
+          "C5": "SUT halted: division_by_zero at pc 20",
+          "C6": "moving both discs changed the result"
+        },
+        "S3": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C5": "relabelling the particles changed the physics",
+          "C6": "moving both discs changed the result",
+          "C10": "velocity change not along the line of centres (friction-like)"
+        },
+        "S4": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C5": "relabelling the particles changed the physics",
+          "C6": "moving both discs changed the result",
+          "C10": "velocity change not along the line of centres (friction-like)"
+        },
+        "S5": {
+          "C5": "SUT halted: division_by_zero at pc 20",
+          "C6": "moving both discs changed the result"
+        },
+        "S6": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C5": "relabelling the particles changed the physics",
+          "C6": "moving both discs changed the result",
+          "C10": "velocity change not along the line of centres (friction-like)"
+        }
+      },
+      "M6": {
+        "S1": {
+          "C5": "relabelling the particles changed the physics",
+          "C8": "a moving observer sees different physics",
+          "C9": "running the collision backwards does not undo it"
+        },
+        "S2": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C8": "a moving observer sees different physics",
+          "C9": "running the collision backwards does not undo it",
+          "C10": "normal relative velocity not exactly reversed (e != 1)"
+        },
+        "S3": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C5": "relabelling the particles changed the physics",
+          "C8": "a moving observer sees different physics",
+          "C9": "running the collision backwards does not undo it",
+          "C10": "normal relative velocity not exactly reversed (e != 1)"
+        },
+        "S4": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C5": "relabelling the particles changed the physics",
+          "C8": "a moving observer sees different physics",
+          "C9": "running the collision backwards does not undo it",
+          "C10": "normal relative velocity not exactly reversed (e != 1)"
+        },
+        "S5": {
+          "C5": "relabelling the particles changed the physics",
+          "C8": "a moving observer sees different physics",
+          "C9": "running the collision backwards does not undo it"
+        },
+        "S6": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C4": "kinetic energy (recomputed from SUT velocities) changed",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C5": "relabelling the particles changed the physics",
+          "C8": "a moving observer sees different physics",
+          "C9": "running the collision backwards does not undo it",
+          "C10": "normal relative velocity not exactly reversed (e != 1)"
+        }
+      },
+      "M7": {
+        "S1": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C5": "relabelling the particles changed the physics",
+          "C8": "a moving observer sees different physics",
+          "C9": "running the collision backwards does not undo it"
+        },
+        "S2": {},
+        "S3": {},
+        "S4": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C5": "relabelling the particles changed the physics",
+          "C8": "a moving observer sees different physics",
+          "C9": "running the collision backwards does not undo it"
+        },
+        "S5": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C5": "relabelling the particles changed the physics",
+          "C8": "a moving observer sees different physics",
+          "C9": "running the collision backwards does not undo it"
+        },
+        "S6": {
+          "C1": "differs from impulse-formula reference",
+          "C2": "differs from centre-of-mass reference",
+          "C4b": "SUT-reported KE' differs from KE before",
+          "C5": "relabelling the particles changed the physics",
+          "C8": "a moving observer sees different physics",
+          "C9": "running the collision backwards does not undo it"
+        }
+      }
+    },
+    "scenario_count_per_mutant_and_check": {
+      "M0": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0,
+        "C4b": 0,
+        "C5": 0,
+        "C6": 0,
+        "C7": 0,
+        "C8": 0,
+        "C9": 0,
+        "C10": 0
+      },
+      "M1": {
+        "C1": 6,
+        "C2": 6,
+        "C3": 0,
+        "C4": 6,
+        "C4b": 6,
+        "C5": 0,
+        "C6": 0,
+        "C7": 0,
+        "C8": 0,
+        "C9": 6,
+        "C10": 6
+      },
+      "M2": {
+        "C1": 4,
+        "C2": 4,
+        "C3": 4,
+        "C4": 4,
+        "C4b": 4,
+        "C5": 0,
+        "C6": 0,
+        "C7": 0,
+        "C8": 0,
+        "C9": 4,
+        "C10": 0
+      },
+      "M3": {
+        "C1": 5,
+        "C2": 5,
+        "C3": 0,
+        "C4": 4,
+        "C4b": 4,
+        "C5": 0,
+        "C6": 0,
+        "C7": 5,
+        "C8": 0,
+        "C9": 4,
+        "C10": 5
+      },
+      "M4": {
+        "C1": 4,
+        "C2": 4,
+        "C3": 4,
+        "C4": 4,
+        "C4b": 4,
+        "C5": 6,
+        "C6": 0,
+        "C7": 0,
+        "C8": 6,
+        "C9": 6,
+        "C10": 4
+      },
+      "M5": {
+        "C1": 4,
+        "C2": 4,
+        "C3": 0,
+        "C4": 0,
+        "C4b": 0,
+        "C5": 6,
+        "C6": 6,
+        "C7": 0,
+        "C8": 0,
+        "C9": 0,
+        "C10": 4
+      },
+      "M6": {
+        "C1": 4,
+        "C2": 4,
+        "C3": 0,
+        "C4": 4,
+        "C4b": 4,
+        "C5": 5,
+        "C6": 0,
+        "C7": 0,
+        "C8": 6,
+        "C9": 6,
+        "C10": 4
+      },
+      "M7": {
+        "C1": 4,
+        "C2": 4,
+        "C3": 0,
+        "C4": 0,
+        "C4b": 4,
+        "C5": 4,
+        "C6": 0,
+        "C7": 0,
+        "C8": 4,
+        "C9": 4,
+        "C10": 0
+      }
+    },
+    "baseline_false_alarms": [],
+    "equivalent_on_input": {
+      "M1": {
+        "S1": false,
+        "S2": false,
+        "S3": false,
+        "S4": false,
+        "S5": false,
+        "S6": false
+      },
+      "M2": {
+        "S1": false,
+        "S2": true,
+        "S3": true,
+        "S4": false,
+        "S5": false,
+        "S6": false
+      },
+      "M3": {
+        "S1": false,
+        "S2": false,
+        "S3": false,
+        "S4": false,
+        "S5": true,
+        "S6": false
+      },
+      "M4": {
+        "S1": true,
+        "S2": false,
+        "S3": false,
+        "S4": false,
+        "S5": true,
+        "S6": false
+      },
+      "M5": {
+        "S1": false,
+        "S2": true,
+        "S3": false,
+        "S4": false,
+        "S5": true,
+        "S6": false
+      },
+      "M6": {
+        "S1": true,
+        "S2": false,
+        "S3": false,
+        "S4": false,
+        "S5": true,
+        "S6": false
+      },
+      "M7": {
+        "S1": false,
+        "S2": true,
+        "S3": true,
+        "S4": false,
+        "S5": false,
+        "S6": false
+      }
+    },
+    "every_bug_caught_somewhere_by_oracle_free_checks": true,
+    "bugs_caught_by_each_oracle_free_check (any scenario, of 7)": {
+      "C3": 2,
+      "C4": 5,
+      "C4b": 6,
+      "C5": 4,
+      "C6": 1,
+      "C7": 1,
+      "C8": 3,
+      "C9": 6,
+      "C10": 5
+    },
+    "any_single_oracle_free_check_catches_all_7": false,
+    "minimal_oracle_free_check_sets_covering_all_7": [
+      [
+        "C4",
+        "C5"
+      ],
+      [
+        "C4b",
+        "C5"
+      ],
+      [
+        "C4b",
+        "C6"
+      ],
+      [
+        "C4b",
+        "C10"
+      ],
+      [
+        "C5",
+        "C9"
+      ],
+      [
+        "C6",
+        "C9"
+      ],
+      [
+        "C9",
+        "C10"
+      ]
+    ],
+    "oracle_free_checks_per_bug_per_scenario": {
+      "M1": {
+        "S1": [
+          "C10",
+          "C4",
+          "C4b",
+          "C9"
+        ],
+        "S2": [
+          "C10",
+          "C4",
+          "C4b",
+          "C9"
+        ],
+        "S3": [
+          "C10",
+          "C4",
+          "C4b",
+          "C9"
+        ],
+        "S4": [
+          "C10",
+          "C4",
+          "C4b",
+          "C9"
+        ],
+        "S5": [
+          "C10",
+          "C4",
+          "C4b",
+          "C9"
+        ],
+        "S6": [
+          "C10",
+          "C4",
+          "C4b",
+          "C9"
+        ]
+      },
+      "M2": {
+        "S1": [
+          "C3",
+          "C4",
+          "C4b",
+          "C9"
+        ],
+        "S2": [],
+        "S3": [],
+        "S4": [
+          "C3",
+          "C4",
+          "C4b",
+          "C9"
+        ],
+        "S5": [
+          "C3",
+          "C4",
+          "C4b",
+          "C9"
+        ],
+        "S6": [
+          "C3",
+          "C4",
+          "C4b",
+          "C9"
+        ]
+      },
+      "M3": {
+        "S1": [
+          "C10",
+          "C4",
+          "C4b",
+          "C7",
+          "C9"
+        ],
+        "S2": [
+          "C10"
+        ],
+        "S3": [
+          "C10",
+          "C4",
+          "C4b",
+          "C7",
+          "C9"
+        ],
+        "S4": [
+          "C10",
+          "C4",
+          "C4b",
+          "C7",
+          "C9"
+        ],
+        "S5": [
+          "C7"
+        ],
+        "S6": [
+          "C10",
+          "C4",
+          "C4b",
+          "C7",
+          "C9"
+        ]
+      },
+      "M4": {
+        "S1": [
+          "C5",
+          "C8",
+          "C9"
+        ],
+        "S2": [
+          "C10",
+          "C3",
+          "C4",
+          "C4b",
+          "C5",
+          "C8",
+          "C9"
+        ],
+        "S3": [
+          "C10",
+          "C3",
+          "C4",
+          "C4b",
+          "C5",
+          "C8",
+          "C9"
+        ],
+        "S4": [
+          "C10",
+          "C3",
+          "C4",
+          "C4b",
+          "C5",
+          "C8",
+          "C9"
+        ],
+        "S5": [
+          "C5",
+          "C8",
+          "C9"
+        ],
+        "S6": [
+          "C10",
+          "C3",
+          "C4",
+          "C4b",
+          "C5",
+          "C8",
+          "C9"
+        ]
+      },
+      "M5": {
+        "S1": [
+          "C10",
+          "C5",
+          "C6"
+        ],
+        "S2": [
+          "C5",
+          "C6"
+        ],
+        "S3": [
+          "C10",
+          "C5",
+          "C6"
+        ],
+        "S4": [
+          "C10",
+          "C5",
+          "C6"
+        ],
+        "S5": [
+          "C5",
+          "C6"
+        ],
+        "S6": [
+          "C10",
+          "C5",
+          "C6"
+        ]
+      },
+      "M6": {
+        "S1": [
+          "C5",
+          "C8",
+          "C9"
+        ],
+        "S2": [
+          "C10",
+          "C4",
+          "C4b",
+          "C8",
+          "C9"
+        ],
+        "S3": [
+          "C10",
+          "C4",
+          "C4b",
+          "C5",
+          "C8",
+          "C9"
+        ],
+        "S4": [
+          "C10",
+          "C4",
+          "C4b",
+          "C5",
+          "C8",
+          "C9"
+        ],
+        "S5": [
+          "C5",
+          "C8",
+          "C9"
+        ],
+        "S6": [
+          "C10",
+          "C4",
+          "C4b",
+          "C5",
+          "C8",
+          "C9"
+        ]
+      },
+      "M7": {
+        "S1": [
+          "C4b",
+          "C5",
+          "C8",
+          "C9"
+        ],
+        "S2": [],
+        "S3": [],
+        "S4": [
+          "C4b",
+          "C5",
+          "C8",
+          "C9"
+        ],
+        "S5": [
+          "C4b",
+          "C5",
+          "C8",
+          "C9"
+        ],
+        "S6": [
+          "C4b",
+          "C5",
+          "C8",
+          "C9"
+        ]
+      }
+    },
+    "references_missed_but_oracle_free_checks_caught": [
+      {
+        "mutant": "M3",
+        "scenario": "S5",
+        "caught_by": [
+          "C7"
+        ]
+      },
+      {
+        "mutant": "M4",
+        "scenario": "S1",
+        "caught_by": [
+          "C5",
+          "C8",
+          "C9"
+        ]
+      },
+      {
+        "mutant": "M4",
+        "scenario": "S5",
+        "caught_by": [
+          "C5",
+          "C8",
+          "C9"
+        ]
+      },
+      {
+        "mutant": "M5",
+        "scenario": "S2",
+        "caught_by": [
+          "C5",
+          "C6"
+        ]
+      },
+      {
+        "mutant": "M5",
+        "scenario": "S5",
+        "caught_by": [
+          "C5",
+          "C6"
+        ]
+      },
+      {
+        "mutant": "M6",
+        "scenario": "S1",
+        "caught_by": [
+          "C5",
+          "C8",
+          "C9"
+        ]
+      },
+      {
+        "mutant": "M6",
+        "scenario": "S5",
+        "caught_by": [
+          "C5",
+          "C8",
+          "C9"
+        ]
+      }
+    ],
+    "prediction_mismatches_S1_S2": [
+      {
+        "scenario": "S1",
+        "mutant": "M2",
+        "check": "C9",
+        "predicted": false,
+        "measured": true,
+        "note": "running the collision backwards does not undo it"
+      },
+      {
+        "scenario": "S1",
+        "mutant": "M4",
+        "check": "C1",
+        "predicted": true,
+        "measured": false,
+        "note": "not detected"
+      },
+      {
+        "scenario": "S1",
+        "mutant": "M4",
+        "check": "C2",
+        "predicted": true,
+        "measured": false,
+        "note": "not detected"
+      },
+      {
+        "scenario": "S1",
+        "mutant": "M4",
+        "check": "C3",
+        "predicted": true,
+        "measured": false,
+        "note": "not detected"
+      },
+      {
+        "scenario": "S1",
+        "mutant": "M4",
+        "check": "C4",
+        "predicted": true,
+        "measured": false,
+        "note": "not detected"
+      },
+      {
+        "scenario": "S1",
+        "mutant": "M4",
+        "check": "C4b",
+        "predicted": true,
+        "measured": false,
+        "note": "not detected"
+      },
+      {
+        "scenario": "S1",
+        "mutant": "M4",
+        "check": "C10",
+        "predicted": true,
+        "measured": false,
+        "note": "not detected"
+      },
+      {
+        "scenario": "S1",
+        "mutant": "M6",
+        "check": "C1",
+        "predicted": true,
+        "measured": false,
+        "note": "not detected"
+      },
+      {
+        "scenario": "S1",
+        "mutant": "M6",
+        "check": "C2",
+        "predicted": true,
+        "measured": false,
+        "note": "not detected"
+      },
+      {
+        "scenario": "S1",
+        "mutant": "M6",
+        "check": "C4",
+        "predicted": true,
+        "measured": false,
+        "note": "not detected"
+      },
+      {
+        "scenario": "S1",
+        "mutant": "M6",
+        "check": "C4b",
+        "predicted": true,
+        "measured": false,
+        "note": "not detected"
+      },
+      {
+        "scenario": "S1",
+        "mutant": "M6",
+        "check": "C10",
+        "predicted": true,
+        "measured": false,
+        "note": "not detected"
+      }
+    ],
+    "POSTHOC_control_C1_on_the_transformed_inputs": {
+      "M1": {
+        "S1": true,
+        "S2": true,
+        "S3": true,
+        "S4": true,
+        "S5": true,
+        "S6": true
+      },
+      "M2": {
+        "S1": true,
+        "S2": false,
+        "S3": false,
+        "S4": true,
+        "S5": true,
+        "S6": true
+      },
+      "M3": {
+        "S1": true,
+        "S2": true,
+        "S3": true,
+        "S4": true,
+        "S5": true,
+        "S6": true
+      },
+      "M4": {
+        "S1": true,
+        "S2": true,
+        "S3": true,
+        "S4": true,
+        "S5": true,
+        "S6": true
+      },
+      "M5": {
+        "S1": true,
+        "S2": true,
+        "S3": true,
+        "S4": true,
+        "S5": true,
+        "S6": true
+      },
+      "M6": {
+        "S1": true,
+        "S2": true,
+        "S3": true,
+        "S4": true,
+        "S5": true,
+        "S6": true
+      },
+      "M7": {
+        "S1": true,
+        "S2": false,
+        "S3": false,
+        "S4": true,
+        "S5": true,
+        "S6": true
+      }
+    },
+    "numeric_layer": {
+      "N1_on_logic_bugs": {
+        "M0": {
+          "S1": false,
+          "S2": false,
+          "S3": false,
+          "S4": false,
+          "S5": false,
+          "S6": false
+        },
+        "M1": {
+          "S1": false,
+          "S2": false,
+          "S3": false,
+          "S4": false,
+          "S5": false,
+          "S6": false
+        },
+        "M2": {
+          "S1": false,
+          "S2": false,
+          "S3": false,
+          "S4": false,
+          "S5": false,
+          "S6": false
+        },
+        "M3": {
+          "S1": false,
+          "S2": false,
+          "S3": false,
+          "S4": false,
+          "S5": false,
+          "S6": false
+        },
+        "M4": {
+          "S1": false,
+          "S2": false,
+          "S3": false,
+          "S4": false,
+          "S5": false,
+          "S6": false
+        },
+        "M5": {
+          "S1": false,
+          "S2": false,
+          "S3": false,
+          "S4": false,
+          "S5": false,
+          "S6": false
+        },
+        "M6": {
+          "S1": false,
+          "S2": false,
+          "S3": false,
+          "S4": false,
+          "S5": false,
+          "S6": false
+        },
+        "M7": {
+          "S1": false,
+          "S2": false,
+          "S3": false,
+          "S4": false,
+          "S5": false,
+          "S6": false
+        }
+      },
+      "N1_on_R1": {
+        "S1": true,
+        "S2": false,
+        "S3": true,
+        "S4": true,
+        "S5": true,
+        "S6": true
+      },
+      "binary64_correct_program_exact_equality_alarms": {
+        "S1": [
+          "C3",
+          "C4",
+          "C4b",
+          "C6",
+          "C8",
+          "C9",
+          "C10"
+        ],
+        "S2": [
+          "C8"
+        ],
+        "S3": [
+          "C3",
+          "C4",
+          "C4b",
+          "C6",
+          "C8",
+          "C9",
+          "C10"
+        ],
+        "S4": [
+          "C3",
+          "C4",
+          "C6",
+          "C8",
+          "C9",
+          "C10"
+        ],
+        "S5": [
+          "C3",
+          "C4",
+          "C8"
+        ],
+        "S6": [
+          "C3",
+          "C4",
+          "C4b",
+          "C8",
+          "C9",
+          "C10"
+        ]
+      }
+    },
+    "independence": {
+      "static_violations": [],
+      "A_modules_loaded": []
+    }
+  },
+  "costs": {
+    "detection_map_seconds": 1.079800424000041,
+    "numeric_layer_seconds": 0.3002223659999572,
+    "sut_calls_in_detection_map": 768
+  },
+  "machine": {
+    "system": "Linux",
+    "machine": "x86_64",
+    "python": "3.11.15",
+    "mpmath": "1.3.0"
+  },
+  "total_wall_seconds": 1.7155055329999414
+}
