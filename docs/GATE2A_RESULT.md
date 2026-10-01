@@ -1,5 +1,7 @@
 # Gate 2A 결과 — Hénon–Heiles published-model reproduction and multi-layer verification
 
+**상태: CLOSED / PARTIAL (2026-10-01, 설계자 결정).** 설계자 집 PC에서 `run_gate2a.py`의 deterministic_digest `644fc9225a753dbea02f221d0aac7489bba2fdbd59d5b0ed2bddfc52db3957e1`가 클라우드와 동일함을 확인(설계자 보고)했다. 이 문서와 결과는 이후 수정하지 않는다(`tests/test_gate2a_sealed.py`가 해시로 고정).
+
 - 계획(봉인): [GATE2A_PLAN.md](GATE2A_PLAN.md), 커밋 `3986d33`
 - 보고서: [GATE2A_REPORT.md](../reports/cloud-container-2026-10-01/GATE2A_REPORT.md), digest `644fc922…57e1`
 - **외부 코드 감사가 아니다.** Lab이 공개 모형을 옮겨 적은 clean-room SUT를 검증한 것이다.
@@ -61,14 +63,14 @@ K5는 모든 결함을 잡았다. 하지만 K5는 사양을 따로 구현한 **�
 
 | ID | 결과 | 근거 |
 |---|---|---|
-| G2A-1 | **클라우드에서 충족, 집 PC 미확인** | 두 궤도 모두 N1 전수 감사 포함 완주, 740초, 최대 RSS 25 MiB. 설계자 집 PC에서 digest `644fc922…57e1` 확인 필요 |
+| G2A-1 | **PASS** | 두 궤도 모두 N1 전수 감사 포함 완주(클라우드 740초, 최대 RSS 25 MiB). 설계자 집 PC에서 digest `644fc922…57e1` 동일 확인 |
 | G2A-2 | **PASS** | 잘못 반올림 0 / 20,532,600 |
 | G2A-3 | **PASS** | K4 6개 구간 상한 위반 0 |
 | G2A-4 | **PASS** | K5 불일치 0 |
 | G2A-5 | **부분 충족 (2/3)** | D2를 예측한 검사(K1, L = 1000)가 잡지 못함. 원인과 사후 확인은 위에 적음 |
 | G2A-6 | **PASS** | 모든 판정에 규칙상 이유가 기록됨. 2종 검사는 REFUSED |
 
-**구현자 판정: Gate 2A는 측정 목적을 달성했고, G2A-5는 부분 충족이다. CLOSED 여부는 설계자가 정한다.**
+**최종: Gate 2A = CLOSED / PARTIAL** (G2A-1·2·3·4·6 PASS, G2A-5 부분 충족 2/3).
 
 ## 실행 중 발생한 구현 결함 (봉인 계획은 변경 없음)
 
