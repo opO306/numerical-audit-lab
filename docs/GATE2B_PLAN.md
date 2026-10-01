@@ -115,3 +115,33 @@ adapter 결함, 단위 변환, 출력 저장 경로를 먼저 배제하고, 재�
 - 궤도 두 개, 하나의 dt.
 - 결과는 이 wheel(manylinux, x86-64)의 기계어에 대한 것이다. 다른 플랫폼의 빌드(예: FMA를 쓰는 ARM)에는 그대로 옮겨 적용하지 않는다.
 - 연속 물리(층 B)는 인증하지 않는다.
+
+---
+
+## 부록 A — 실행 전 설계자 요청 추가 (2026-10-01, 외부 코드 실행 전)
+
+본문은 고치지 않고, 설계자가 실행 전에 요청한 세 가지를 여기 추가한다.
+
+### A1. execution reproducibility와 analysis reproducibility를 구분한다
+
+| 구분 | 무엇을 재현하나 | 판정 방법 | 이번 계획에서 |
+|---|---|---|---|
+| **execution reproducibility** | gala를 실제로 다시 실행했을 때 같은 출력(fixture)이 나오는가 | 다른 실행에서 fixture SHA-256이 같은지 | 클라우드 Linux에서 1회 생성. 집 PC(Windows)는 gala wheel이 없으므로 **기본 범위 밖**. WSL 등으로 재현하면 별도로 기록한다 |
+| **analysis reproducibility** | 동결된 fixture를 입력으로 한 Lab의 분석(W1–W4, B1–B4)이 같은 결과를 내는가 | 분석 보고서의 deterministic_digest가 같은지 | 클라우드와 설계자 집 PC에서 비교. 집 PC에는 gala가 필요 없다 |
+
+두 가지를 섞어 보고하지 않는다. "집 PC 재현 PASS"는 별도로 적지 않는 한 **analysis reproducibility**를 뜻한다.
+
+### A2. W2 인증 대상의 정확한 범위
+
+W2가 PASS여도 인증되는 것은 다음뿐이다.
+> **gala 1.12.0 Linux wheel** (`gala-1.12.0-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl`, SHA-256 `cc5f0cf3…f2c0`)을 클라우드 x86-64 Linux에서 **한 번 실행해 동결한 출력(fixture)**,
+> 그리고 그 fixture와 비트 단위로 같다고 확인된 **replay 프로그램 T**.
+> 상한은 "fixture 값 ↔ T를 정확 산술로 실행한 값" 사이에 대한 것이다.
+
+인증하지 않는 것:
+- gala 소스 일반, 다른 wheel이나 다른 플랫폼 빌드, 다른 dt·초기조건·적분기
+- 연속 Hénon–Heiles 궤적
+
+### A3. provenance
+
+[GATE2B_PROVENANCE.md](GATE2B_PROVENANCE.md)에 wheel SHA-256과 PyPI attestation의 GitHub source commit `bebac7d728478c5122a568e12175ef894d1c1516`을 기록한다.
