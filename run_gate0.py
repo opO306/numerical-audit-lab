@@ -219,13 +219,12 @@ def main(argv=None) -> int:
     criteria["G0-6"] = "NOT_JUDGED_HERE (designer's home-PC run decides; compare deterministic_digest)"
     criteria["G0-7"] = "RECORDED (not a pass/fail criterion)"
     det["criteria"] = criteria
-    det["benchmark_3"] = ("gendot_n50_c1e25_v1: frozen fixture generated once by the published GenDot algorithm "
-                          "(Ogita-Rump-Oishi 2005, Alg. 6.1), designer-approved 2026-10-01")
+    det["benchmark_3"] = ("gendot_n50_c1e25_v1: GenDot-derived fixture (implementer's reconstruction of "
+                          "Ogita-Rump-Oishi 2005 Alg. 6.1; only 3 of 15 lines confirmed against source text; "
+                          "different RNG), generated once and frozen, designer-approved 2026-10-01")
     det["post_seal_changes"] = POST_SEAL_CHANGES
-    det["open_items"] = ["G0-6: designer's home-PC run with matching deterministic_digest",
-                         "GenDot generator is the implementer's reconstruction (paper unreachable from the build "
-                         "environment); designer to diff against Algorithm 6.1. Affects the fixture's name only, "
-                         "not its oracle or verdicts"]
+    det["open_items"] = ["GenDot fixture name may be upgraded to 'Algorithm 6.1 implementation' only after a "
+                         "verbatim line-by-line diff (docs/BENCHMARK3_SELECTION.md); fixture and oracle unaffected"]
     automated_fail = any(v == "FAIL" for v in criteria.values())
     det["gate0_overall"] = "FAIL" if automated_fail else "INCOMPLETE (open items below)"
 

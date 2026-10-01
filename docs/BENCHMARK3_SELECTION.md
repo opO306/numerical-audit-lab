@@ -1,4 +1,4 @@
-# Gate 0 벤치마크 3 — GenDot (설계자 승인 2026-10-01)
+# Gate 0 벤치마크 3 — GenDot-derived fixture (설계자 승인 2026-10-01)
 
 ## 결정
 
@@ -60,3 +60,34 @@ C = 2 * (abs(x') * abs(y)) / abs(d)
   - 필요하면 v2 fixture를 새로 만든다. v1은 지우지 않는다.
 - 이 재구성이 틀려도 벤치마크의 **정답(oracle)과 판정은 틀리지 않는다.** 정답은 동결된 벡터에서 Lab이 직접 계산하기 때문이다.
   영향을 받는 것은 "GenDot으로 생성했다"는 이름뿐이다.
+
+## Algorithm 6.1 줄 단위 대조 결과 (2026-10-01) → 이름: **GenDot-derived fixture**
+
+원문 PDF는 이번에도 받지 못했다. tuhh.de, arxiv.org에 더해 저자 연구실(ogilab.w.waseda.jp)도 네트워크 정책에 막혔다.
+검색 결과 요약에 원문 몇 줄이 인용되어 그 줄들만 대조할 수 있었다.
+
+| # | 구현한 줄 | 원문 대조 | 근거 |
+|---|---|---|---|
+| 1 | `n2 = round(n/2)` | 부분 확인 | 검색 요약: "sets n2 = round(n/2)" |
+| 2 | `b = log2(c)` | 미확인 | — |
+| 3 | `e = round(rand(n2,1)*b/2)` | 미확인 | 검색 요약: 앞 절반은 "조건수에 맞춘 큰 지수 범위에서 무작위" (형태만 일치) |
+| 4 | `e(1) = round(b/2)+1` | **확인** | 검색 인용 + 원문 주석 "ensures that exponents b/2 and 0 actually occur" |
+| 5 | `e(end) = 0` | 간접 확인 | 위 주석이 지수 0이 나오도록 한다고 말함 |
+| 6–7 | `x(1:n2)`, `y(1:n2) = (2*rand(n2,1)-1).*(2.^e)` | **확인** (식 형태) | 검색 인용 |
+| 8 | `e = round(linspace(b/2,0,n-n2))` | 부분 확인 | 검색 요약: "uses linspace … decreasing exponent" |
+| 9–12 | 뒤 절반 루프: `x(i)` 무작위, `y(i) = ((2*rand-1)*2^e - Dot_(…))/x(i)` | 부분 확인 | 검색 요약: "x_i randomly with decreasing exponent and calculating y_i such that some cancellation occurs". 정확한 식은 미확인 |
+| 13 | 무작위 순서 섞기 | 부분 확인 | 설계자 요약 + 검색 요약("randomly permuting") |
+| 14 | `d = Dot_(x',y)` | 확인(설계자) | 설계자: "d는 정확한 dot product를 nearest로 반올림" |
+| 15 | `C = 2*(abs(x')*abs(y))/abs(d)` | **확인** | 검색 인용 |
+
+**확실한 차이 1개:** 난수 발생기가 다르다. MATLAB `rand`가 아니라 Python Mersenne Twister를 쓰며, 둘은 seed 방식이 다르다.
+따라서 이 fixture는 원문 코드로 재현되지 않는다.
+
+**판정:**
+- 15줄 중 원문 문자열로 확인된 것은 3줄(4, 6–7, 15)뿐이다. 나머지는 요약이나 설계자 설명과 형태만 일치한다.
+- "동일"이라고 쓸 근거가 부족하므로, 설계자 지시에 따라 **`GenDot-derived fixture`**로 기록한다.
+- fixture는 다시 만들지 않았고, SHA-256 `b9c97150…5582`를 그대로 유지한다.
+- oracle은 계속 Lab의 정확 유리수 계산(두 경로)이다.
+
+**나중에 올릴 수 있는 조건:** 누군가 원문 Algorithm 6.1과 위 표를 글자 단위로 대조해 차이가 없으면(난수 발생기는 제외),
+이름을 `GenDot Algorithm 6.1 implementation (Python RNG)`로 올릴 수 있다. 그때도 fixture는 그대로다.

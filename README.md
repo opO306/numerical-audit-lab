@@ -14,8 +14,8 @@
 
 | Gate | 내용 | 상태 |
 |---|---|---|
-| **Gate 0** | 계산기·채점기 자체 검사 (Rump, Muller, GenDot 동결 fixture) — [기준](docs/GATE0_CRITERIA.md) | **INCOMPLETE** — 자동 조건 G0-1〜5 PASS(클라우드). 남은 일: G0-6 집 PC digest 대조, GenDot 생성기 원문 대조([선정 기록](docs/BENCHMARK3_SELECTION.md)). 봉인 후 변경 [감사 기록](docs/AUDIT_POST_SEAL_ORACLE_TOLERANCE.md). [클라우드 보고서](reports/cloud-container-2026-10-01/GATE0_REPORT.md) |
-| Gate 1 | 작은 물리 benchmark 하나를 서로 다른 실패 원인을 잡는 여러 검사로 검증 | Gate 0 통과 후 |
+| **Gate 0** | 계산기·채점기 자체 검사 (Rump, Muller, GenDot-derived 동결 fixture) — [기준](docs/GATE0_CRITERIA.md) | **CLOSED / PASS** (2026-10-01) — [종료 기록](docs/GATE0_CLOSURE.md), [감사 기록](docs/AUDIT_POST_SEAL_ORACLE_TOLERANCE.md), [보고서](reports/cloud-container-2026-10-01/GATE0_REPORT.md) |
+| Gate 1 | 2D 두 원판 완전탄성충돌을 서로 다른 검사 층으로 검증하고, 심은 버그를 어느 층이 잡는지 매핑 — [계획(봉인)](docs/GATE1_PLAN.md) | 진행 중 |
 | Gate 2 | 공개 논문/시뮬레이션 재검증 → 공개 보고서 | Gate 0·1 통과 후 |
 
 각 Gate에서 추가 정보가 없거나 비용이 맞지 않으면 그 자리에서 중단한다.

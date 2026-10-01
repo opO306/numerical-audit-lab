@@ -1,9 +1,9 @@
 # Gate 0 결과 보고서
 
 - 전체 판정: **INCOMPLETE (open items below)**
-- deterministic_digest: `2d05505d3c499f0c3ac94970b35dfd7258f1fc2913c3b9ecbbb871f36158aa98`
+- deterministic_digest: `27094d057e7d2c9469ddf5ad11f6758ae78ec0ddfff3e7e287cebe3ff63b714a`
 - 실행 환경: {'system': 'Linux', 'release': '6.18.44-fc-v50', 'machine': 'x86_64', 'python': '3.11.15', 'mpmath': '1.3.0', 'cpu_count': 4}
-- 총 시간: 19.5초
+- 총 시간: 19.4초
 
 ## 합격 조건
 
@@ -17,12 +17,11 @@
 | G0-6 | NOT_JUDGED_HERE (designer's home-PC run decides; compare deterministic_digest) |
 | G0-7 | RECORDED (not a pass/fail criterion) |
 
-벤치마크 3: gendot_n50_c1e25_v1: frozen fixture generated once by the published GenDot algorithm (Ogita-Rump-Oishi 2005, Alg. 6.1), designer-approved 2026-10-01
+벤치마크 3: gendot_n50_c1e25_v1: GenDot-derived fixture (implementer's reconstruction of Ogita-Rump-Oishi 2005 Alg. 6.1; only 3 of 15 lines confirmed against source text; different RNG), generated once and frozen, designer-approved 2026-10-01
 
 남은 일:
 
-- G0-6: designer's home-PC run with matching deterministic_digest
-- GenDot generator is the implementer's reconstruction (paper unreachable from the build environment); designer to diff against Algorithm 6.1. Affects the fixture's name only, not its oracle or verdicts
+- GenDot fixture name may be upgraded to 'Algorithm 6.1 implementation' only after a verbatim line-by-line diff (docs/BENCHMARK3_SELECTION.md); fixture and oracle unaffected
 
 봉인 이후 변경(감사 기록):
 
@@ -285,37 +284,37 @@ oracle을 정한 서로 다른 방법:
 | 벤치마크 | 프로그램 | 프로필 | 시간(초) | Python 힙 peak(바이트) | 연산 수 |
 |---|---|---|---|---|---|
 | rump | sequential | binary64 | 0.0012 | 15047 | 26 |
-| rump | sequential | exact | 0.0009 | 11703 | 26 |
-| rump | sequential | FX(64,32) | 0.0007 | 11817 | 4 |
-| rump | sequential | FX(128,96) | 0.0006 | 11850 | 4 |
-| rump | sequential | FX(256,64) | 0.0010 | 11858 | 26 |
+| rump | sequential | exact | 0.0007 | 11703 | 26 |
+| rump | sequential | FX(64,32) | 0.0005 | 11817 | 4 |
+| rump | sequential | FX(128,96) | 0.0005 | 11850 | 4 |
+| rump | sequential | FX(256,64) | 0.0006 | 11858 | 26 |
 | rump | sequential | FX(256,192) | 0.0005 | 11787 | 5 |
 | rump | sum | binary64 | 0.0010 | 11063 | 24 |
 | rump | sum | exact | 0.0007 | 11047 | 24 |
 | rump | sum | FX(64,32) | 0.0005 | 11137 | 4 |
 | rump | sum | FX(128,96) | 0.0004 | 11178 | 4 |
-| rump | sum | FX(256,64) | 0.0007 | 11202 | 24 |
-| rump | sum | FX(256,192) | 0.0005 | 11139 | 5 |
+| rump | sum | FX(256,64) | 0.0006 | 11202 | 24 |
+| rump | sum | FX(256,192) | 0.0004 | 11139 | 5 |
 | rump | (oracle 확정) | — | 0.0003 | — | — |
-| muller | recurrence | binary64 | 0.0043 | 61639 | 121 |
-| muller | recurrence | exact | 0.0028 | 60479 | 121 |
-| muller | recurrence | FX(64,32) | 0.0021 | 60553 | 121 |
-| muller | recurrence | FX(128,96) | 0.0022 | 60562 | 121 |
-| muller | recurrence | FX(256,64) | 0.0024 | 60586 | 121 |
+| muller | recurrence | binary64 | 0.0042 | 61639 | 121 |
+| muller | recurrence | exact | 0.0025 | 60479 | 121 |
+| muller | recurrence | FX(64,32) | 0.0020 | 60553 | 121 |
+| muller | recurrence | FX(128,96) | 0.0020 | 60562 | 121 |
+| muller | recurrence | FX(256,64) | 0.0020 | 60586 | 121 |
 | muller | recurrence | FX(256,192) | 0.0021 | 60579 | 121 |
-| muller | (oracle 확정) | — | 0.0009 | — | — |
-| gendot | naive | binary64 | 0.0091 | 98034 | 199 |
-| gendot | naive | exact | 0.0074 | 98002 | 199 |
-| gendot | naive | FX(64,32) | 0.0042 | 98052 | 4 |
-| gendot | naive | FX(128,96) | 0.0044 | 98109 | 4 |
-| gendot | naive | FX(256,64) | 0.0076 | 98133 | 199 |
-| gendot | naive | FX(256,192) | 0.0062 | 98070 | 106 |
-| gendot | vm_dot | binary64 | 0.0062 | 55538 | 101 |
-| gendot | vm_dot | exact | 0.0064 | 55530 | 101 |
+| muller | (oracle 확정) | — | 0.0010 | — | — |
+| gendot | naive | binary64 | 0.0087 | 98034 | 199 |
+| gendot | naive | exact | 0.0070 | 98002 | 199 |
+| gendot | naive | FX(64,32) | 0.0040 | 98052 | 4 |
+| gendot | naive | FX(128,96) | 0.0042 | 98109 | 4 |
+| gendot | naive | FX(256,64) | 0.0065 | 98133 | 199 |
+| gendot | naive | FX(256,192) | 0.0057 | 98070 | 106 |
+| gendot | vm_dot | binary64 | 0.0066 | 55538 | 101 |
+| gendot | vm_dot | exact | 0.0058 | 55530 | 101 |
 | gendot | vm_dot | FX(64,32) | 0.0032 | 55548 | 4 |
-| gendot | vm_dot | FX(128,96) | 0.0044 | 55557 | 4 |
-| gendot | vm_dot | FX(256,64) | 0.0054 | 55581 | 101 |
-| gendot | vm_dot | FX(256,192) | 0.0058 | 55574 | 101 |
-| gendot | (oracle 확정) | — | 0.0013 | — | — |
+| gendot | vm_dot | FX(128,96) | 0.0030 | 55557 | 4 |
+| gendot | vm_dot | FX(256,64) | 0.0051 | 55581 | 101 |
+| gendot | vm_dot | FX(256,192) | 0.0054 | 55574 | 101 |
+| gendot | (oracle 확정) | — | 0.0012 | — | — |
 
 Python 힙 peak는 tracemalloc 값이다. 프로세스 전체 메모리(RSS)가 아니다.

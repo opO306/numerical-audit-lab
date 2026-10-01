@@ -74,3 +74,45 @@ def test_floor_blocks_fixing_a_refusal_by_declaring_a_huge_loss():
 def test_the_tolerance_never_moves_the_oracle_value():
     exact, angle = muller.oracle_inputs()
     assert settle_oracle(exact, angle).value == Fraction(3**31 + 5**31, 3**30 + 5**30)
+
+
+# --- final confirmation: the numbers in the audit table, pinned ----------------
+
+def _numbers(digits: int, agree: int) -> dict:
+    bits = int(digits * 3.33) + 20
+    hp = muller.mp_iteration(bits)[muller.N]
+    t = muller.closed_form()
+    with mpmath.workdps(900):
+        T = mpmath.mpf(t.numerator) / t.denominator
+        err = abs(mpmath.mpf(hp) - T)
+        tol = mpmath.mpf(10) ** (-agree) * max(abs(T), 1)
+        return {"bits": bits, "available": float(bits * mpmath.log10(2)), "err": err, "tol": tol,
+                "loss": float(mpmath.log10(err / mpmath.mpf(2) ** -bits)), "kept": float(-mpmath.log10(err / abs(T)))}
+
+
+def test_audit_table_before_change():
+    n = _numbers(200, ORIGINAL_AGREE)
+    assert n["bits"] == 686 and 206.5 < n["available"] < 206.6
+    assert mpmath.mpf("3.70e-169") < n["err"] < mpmath.mpf("3.72e-169")
+    assert mpmath.mpf("4.99e-190") < n["tol"] < mpmath.mpf("5.01e-190")
+    assert 38.0 < n["loss"] < 38.2                                   # implicit allowance was only 10
+    assert 169.0 < n["kept"] < 169.2 < 190                           # kept < required  ->  REFUSED
+    assert n["err"] / n["tol"] > mpmath.mpf("7e20")
+
+
+def test_audit_table_after_change():
+    agree = muller.oracle_inputs()[1][2]
+    n = _numbers(400, agree)
+    assert agree == 350 and n["bits"] == 1352 and 406.9 < n["available"] < 407.1
+    assert mpmath.mpf("2.84e-370") < n["err"] < mpmath.mpf("2.86e-370")
+    assert mpmath.mpf("4.99e-350") < n["tol"] < mpmath.mpf("5.01e-350")
+    assert 37.4 < n["loss"] < 37.5 < muller.DECLARED_LOSS_DIGITS
+    assert 350 < 370.2 < n["kept"] < 370.3                           # kept >= required  ->  passes
+    assert n["err"] / n["tol"] < mpmath.mpf("6e-21")
+
+
+def test_available_minus_loss_explains_kept_digits():
+    """kept ~= available - loss (+ log10|x30| ~ 0.7, since tolerance is relative to |x30| ~ 5)."""
+    for digits, agree in ((200, ORIGINAL_AGREE), (400, 350)):
+        n = _numbers(digits, agree)
+        assert abs(n["kept"] - (n["available"] - n["loss"] + 0.699)) < 0.01
