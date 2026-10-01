@@ -23,7 +23,7 @@ from pathlib import Path
 
 import mpmath
 
-from benchmarks.gate0 import muller, rump
+from benchmarks.gate0 import gendot, muller, rump
 from benchmarks.gate0.harness import execute, make_profile
 from independent_checker.oracle import to_bits
 from lab.claim import Profile, audit_steps, decode, judge_claim, judge_step, settle_oracle
@@ -34,10 +34,17 @@ ROOT = Path(__file__).resolve().parent
 B64, EXACT = Profile("binary64"), Profile("exact")
 EXTRA_PROFILES = [Profile("fx", 64, 32), Profile("fx", 128, 96), Profile("fx", 256, 64), Profile("fx", 256, 192)]
 TINY = Fraction(1, 10 ** 40)
+# Each program is either a known trap (an ordinary binary64 run must be INVALID: G0-1) or
+# correct by specification (the calculator's DOT is exact-then-round-once, so it must be VALID: G0-3).
+TRAP, BY_SPEC = "trap", "correct_by_spec"
 BENCHMARKS = {
-    "rump": (rump, {"sequential": rump.program("sequential"), "sum": rump.program("sum")}),
-    "muller": (muller, {"recurrence": muller.program()}),
+    "rump": (rump, {"sequential": (rump.program("sequential"), TRAP), "sum": (rump.program("sum"), TRAP)}),
+    "muller": (muller, {"recurrence": (muller.program(), TRAP)}),
+    "gendot": (gendot, {"naive": (gendot.program("naive"), TRAP), "vm_dot": (gendot.program("vm_dot"), BY_SPEC)}),
 }
+POST_SEAL_CHANGES = ["docs/AUDIT_POST_SEAL_ORACLE_TOLERANCE.md: oracle cross-check tolerance rule replaced after a "
+                     "REFUSED on Muller; Rump restored to the original rule; regression tests in "
+                     "tests/test_post_seal_audit.py"]
 
 
 def show(x: Fraction | None) -> str | None:
@@ -141,6 +148,17 @@ def informational(name: str, mod, oracle: Fraction, exact_run, b64_run) -> dict:
         for bits in (53, 113, 200, 300):
             sweep[f"{bits}_bits"] = mpmath.nstr(muller.mp_iteration(bits)[muller.N], 17)
         info["mpmath x_30 by precision"] = sweep
+    if name == "gendot":
+        fx = gendot.load()
+        info["fixture_sha256"] = gendot.FIXTURE_SHA256
+        info["exact condition number C = 2*sum|x_i*y_i| / |x.y|"] = mpmath.nstr(
+            mpmath.mpf(gendot.condition_number().numerator) / gendot.condition_number().denominator, 6)
+        info["generator-reported condition number"] = fx["generator_condition_number"]
+        info["generator d judged against the Lab's exact oracle"] = (
+            judge_claim(oracle, B64, fx["generator_d_bits"])[0].value)
+        info["host float64 naive loop bit-identical to calculator binary64 naive"] = (
+            gendot.hardware_naive_bits() == execute(gendot.program("naive"), B64, gendot.OUT).final)
+        info["product exponent span (bits)"] = gendot.term_exponent_span()
     return info
 
 
@@ -160,7 +178,7 @@ def main(argv=None) -> int:
         b = {"oracle": {"value": f"{oracle.value.numerator}/{oracle.value.denominator}", "approx": show(oracle.value),
                         "angles": oracle.angles}, "programs": {}}
         costs[name] = {"oracle_seconds": oracle_seconds, "programs": {}}
-        for pname, prog in programs.items():
+        for pname, (prog, kind) in programs.items():
             rows, prow_costs, runs = [], [], {}
             for p in [B64, EXACT] + EXTRA_PROFILES:
                 e, row, cost = run_one(prog, p, mod.OUT, oracle.value)
@@ -170,11 +188,14 @@ def main(argv=None) -> int:
                 runs[p.label] = e
             b64, ex = runs["binary64"], runs["exact"]
             inj = injections(oracle.value, exact_inputs, mp_angle, b64, ex)
-            b["programs"][pname] = {"runs": rows, "injections": inj,
+            b["programs"][pname] = {"kind": kind, "runs": rows, "injections": inj,
                                     "informational": informational(name, mod, oracle.value, ex, b64)}
             costs[name]["programs"][pname] = prow_costs
             r = {row["profile"]: row for row in rows}
-            ok["G0-1"] &= r["binary64"]["verdict"] == "INVALID"
+            if kind == TRAP:
+                ok["G0-1"] &= r["binary64"]["verdict"] == "INVALID"
+            else:
+                ok["G0-3"] &= r["binary64"]["verdict"] == "VALID"
             ok["G0-2"] &= r["exact"]["verdict"] == "VALID"
             ok["G0-3"] &= (r["binary64"]["steps_rejected"] == 0 and r["exact"]["steps_rejected"] == 0
                            and next(i for i in inj if i["name"] == "claim: correctly rounded oracle")["ok"]
@@ -198,9 +219,15 @@ def main(argv=None) -> int:
     criteria["G0-6"] = "NOT_JUDGED_HERE (designer's home-PC run decides; compare deterministic_digest)"
     criteria["G0-7"] = "RECORDED (not a pass/fail criterion)"
     det["criteria"] = criteria
-    det["benchmark_3"] = "PENDING: canonical summation/dot-product benchmark not selected (source must be verified)"
+    det["benchmark_3"] = ("gendot_n50_c1e25_v1: frozen fixture generated once by the published GenDot algorithm "
+                          "(Ogita-Rump-Oishi 2005, Alg. 6.1), designer-approved 2026-10-01")
+    det["post_seal_changes"] = POST_SEAL_CHANGES
+    det["open_items"] = ["G0-6: designer's home-PC run with matching deterministic_digest",
+                         "GenDot generator is the implementer's reconstruction (paper unreachable from the build "
+                         "environment); designer to diff against Algorithm 6.1. Affects the fixture's name only, "
+                         "not its oracle or verdicts"]
     automated_fail = any(v == "FAIL" for v in criteria.values())
-    det["gate0_overall"] = "FAIL" if automated_fail else "INCOMPLETE (benchmark 3 pending, G0-6 pending)"
+    det["gate0_overall"] = "FAIL" if automated_fail else "INCOMPLETE (open items below)"
 
     digest = hashlib.sha256(json.dumps(det, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
     report = {"deterministic_digest": digest, "deterministic": det, "costs": costs,
@@ -229,13 +256,17 @@ def markdown(rep: dict) -> str:
          f"- 총 시간: {rep['total_wall_seconds']:.1f}초", "",
          "## 합격 조건", "", "| 조건 | 결과 |", "|---|---|"]
     L += [f"| {k} | {v} |" for k, v in d["criteria"].items()]
-    L += ["", f"벤치마크 3: {d['benchmark_3']}", ""]
+    L += ["", f"벤치마크 3: {d['benchmark_3']}", "", "남은 일:", ""]
+    L += [f"- {x}" for x in d["open_items"]]
+    L += ["", "봉인 이후 변경(감사 기록):", ""]
+    L += [f"- {x}" for x in d["post_seal_changes"]]
+    L += [""]
     for name, b in d["benchmarks"].items():
         L += [f"## {name}", "", f"oracle = `{b['oracle']['value']}` ≈ {b['oracle']['approx']}", "",
               "oracle을 정한 서로 다른 방법:", ""]
         L += [f"- {k}: `{v}`" for k, v in b["oracle"]["angles"].items()]
         for pname, pr in b["programs"].items():
-            L += ["", f"### {name} / {pname}", "",
+            L += ["", f"### {name} / {pname} ({'알려진 함정' if pr['kind'] == TRAP else '명세상 정답이어야 함'})", "",
                   "| 프로필 | 기준 대상 | 값 | 멈춤 | 판정 | 단계 감사(거부/전체) |", "|---|---|---|---|---|---|"]
             for r in pr["runs"]:
                 L.append(f"| {r['profile']} | {'예' if r['counts_for_criteria'] else '참고'} | {r['value']} | "

@@ -14,7 +14,7 @@
 
 | Gate | 내용 | 상태 |
 |---|---|---|
-| **Gate 0** | 계산기·채점기 자체 검사 (Rump, Muller, canonical summation/dot) — [기준](docs/GATE0_CRITERIA.md) | **INCOMPLETE** — 자동 조건 G0-1〜5 PASS(클라우드). 벤치마크 3 [선정 보류](docs/BENCHMARK3_SELECTION.md), G0-6(집 PC 완주) 미확인. [클라우드 보고서](reports/cloud-container-2026-10-01/GATE0_REPORT.md) |
+| **Gate 0** | 계산기·채점기 자체 검사 (Rump, Muller, GenDot 동결 fixture) — [기준](docs/GATE0_CRITERIA.md) | **INCOMPLETE** — 자동 조건 G0-1〜5 PASS(클라우드). 남은 일: G0-6 집 PC digest 대조, GenDot 생성기 원문 대조([선정 기록](docs/BENCHMARK3_SELECTION.md)). 봉인 후 변경 [감사 기록](docs/AUDIT_POST_SEAL_ORACLE_TOLERANCE.md). [클라우드 보고서](reports/cloud-container-2026-10-01/GATE0_REPORT.md) |
 | Gate 1 | 작은 물리 benchmark 하나를 서로 다른 실패 원인을 잡는 여러 검사로 검증 | Gate 0 통과 후 |
 | Gate 2 | 공개 논문/시뮬레이션 재검증 → 공개 보고서 | Gate 0·1 통과 후 |
 
@@ -36,7 +36,7 @@ python -m pytest tests -q
 | `independent_checker/` | 독립 채점기: 반올림을 직접 계산하지 않고, 정답이 결과의 반올림 구간 안에 있는지만 본다 | A `audit/independent_numeric/` 복사(무수정) |
 | `lab/verdict.py` | VALID / INVALID / REFUSED 판정 틀 | A `c1b1_replay/types.py`의 일부를 발췌·축약 |
 | `lab/claim.py` | 최종값 주장 판정, 단계별 감사 | Lab 신규 |
-| `benchmarks/gate0/` | Gate 0 벤치마크 | Lab 신규 |
+| `benchmarks/gate0/` | Gate 0 벤치마크. `fixtures/gendot_n50_c1e25_v1.json`은 한 번 생성 후 동결(SHA-256 고정, 재생성 금지) | Lab 신규 |
 | `tests/test_ported_hard_cases.py` | A의 hard-case 시험과 반올림 결함 10종 주입 시험 | A `tests/test_audit_numeric_hard_cases.py`의 import 경로만 바꿈 |
 
 ## 알려진 한계

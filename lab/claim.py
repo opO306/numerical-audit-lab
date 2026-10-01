@@ -141,6 +141,9 @@ def judge_step(profile: Profile, op: str, args: tuple, result: str) -> str | Non
         exact = _EXACT_OPS[op](a, b)
     elif op == "SUM":
         exact = sum((decode(profile, x) for x in args), Fraction(0))
+    elif op == "DOT":
+        xs, ys = args
+        exact = sum((decode(profile, a) * decode(profile, b) for a, b in zip(xs, ys)), Fraction(0))
     else:
         raise Refused(f"step audit does not cover {op}")
     if profile.kind == "exact":

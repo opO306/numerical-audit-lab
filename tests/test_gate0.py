@@ -57,3 +57,37 @@ def test_disagreeing_derivations_are_refused():
     with mpmath.workdps(agree + 40):
         with pytest.raises(Refused):
             settle_oracle(exact, (name, val * (1 + mpmath.mpf(10) ** -100), agree))
+
+
+# --- benchmark 3: frozen GenDot fixture --------------------------------------
+
+from benchmarks.gate0 import gendot  # noqa: E402
+from benchmarks.gate0 import gendot_generate  # noqa: E402
+
+
+def test_gendot_fixture_is_frozen_and_never_regenerated(monkeypatch, capsys):
+    assert gendot.load()["parameters"] == {"n": 50, "c": "1e25", "seed": 20261001, "prng": "Python random.Random (MT19937)"}
+    assert gendot_generate.main() == 1                          # refuses: the fixture exists
+    assert "frozen" in capsys.readouterr().out
+
+
+def test_gendot_two_exact_paths_agree_and_audit_the_generator(oracles):
+    assert gendot.exact_fraction() == gendot.exact_integer()
+    o = gendot.exact_integer()
+    assert judge_claim(o, B64, gendot.load()["generator_d_bits"])[0] is Verdict.VALID
+    assert 10**26 < gendot.condition_number() < 10**27
+
+
+def test_gendot_naive_loop_fails_and_matches_the_host_cpu():
+    o = gendot.exact_integer()
+    run = execute(gendot.program("naive"), B64, gendot.OUT)
+    assert audit_steps(B64, run.steps) == []
+    assert judge_claim(o, B64, run.final)[0] is Verdict.INVALID
+    assert run.final == gendot.hardware_naive_bits()
+
+
+def test_gendot_vm_dot_is_correctly_rounded_by_specification():
+    o = gendot.exact_integer()
+    run = execute(gendot.program("vm_dot"), B64, gendot.OUT)
+    assert audit_steps(B64, run.steps) == []
+    assert judge_claim(o, B64, run.final)[0] is Verdict.VALID

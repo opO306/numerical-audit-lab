@@ -63,6 +63,9 @@ def execute(program: list, p: Profile, out: str) -> Execution:
             lit = ins.args[0]
             steps.append(("CONST", (str(lit) if not isinstance(lit, Fraction) else f"{lit.numerator}/{lit.denominator}",),
                           regs[ins.dst]))
+        elif ins.op == "DOT":
+            xs, ys = ins.args
+            steps.append(("DOT", (tuple(regs[a] for a in xs), tuple(regs[a] for a in ys)), regs[ins.dst]))
         else:
             steps.append((ins.op, tuple(regs[a] for a in ins.args), regs[ins.dst]))
     final = None if res.halt else regs[out]

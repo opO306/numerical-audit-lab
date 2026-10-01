@@ -1,5 +1,5 @@
 {
-  "deterministic_digest": "a063708446ab2905da1b403aed6c407acac945253ebb869c39b610258af09e06",
+  "deterministic_digest": "2d05505d3c499f0c3ac94970b35dfd7258f1fc2913c3b9ecbbb871f36158aa98",
   "deterministic": {
     "criteria_document": "docs/GATE0_CRITERIA.md",
     "benchmarks": {
@@ -15,6 +15,7 @@
         },
         "programs": {
           "sequential": {
+            "kind": "trap",
             "runs": [
               {
                 "profile": "binary64",
@@ -171,6 +172,7 @@
             }
           },
           "sum": {
+            "kind": "trap",
             "runs": [
               {
                 "profile": "binary64",
@@ -340,6 +342,7 @@
         },
         "programs": {
           "recurrence": {
+            "kind": "trap",
             "runs": [
               {
                 "profile": "binary64",
@@ -495,6 +498,328 @@
             }
           }
         }
+      },
+      "gendot": {
+        "oracle": {
+          "value": "1797396946548930006824725877263/20282409603651670423947251286016",
+          "approx": "0.088618511393504469",
+          "angles": {
+            "exact_fraction": "1797396946548930006824725877263/20282409603651670423947251286016",
+            "exact_integer": "1797396946548930006824725877263/20282409603651670423947251286016",
+            "mpmath_fdot_300_digits": "0.08861851139350446851023229"
+          }
+        },
+        "programs": {
+          "naive": {
+            "kind": "trap",
+            "runs": [
+              {
+                "profile": "binary64",
+                "value": "-1834782720.0",
+                "halt": null,
+                "verdict": "INVALID",
+                "reason": "wrong sign",
+                "steps_audited": 199,
+                "steps_rejected": 0,
+                "counts_for_criteria": true
+              },
+              {
+                "profile": "exact",
+                "value": "0.088618511393504469",
+                "halt": null,
+                "verdict": "VALID",
+                "reason": "equals oracle",
+                "steps_audited": 199,
+                "steps_rejected": 0,
+                "counts_for_criteria": true
+              },
+              {
+                "profile": "FX(64,32)",
+                "value": null,
+                "halt": [
+                  3,
+                  "overflow"
+                ],
+                "verdict": "REFUSED",
+                "reason": "run halted; no value was claimed",
+                "steps_audited": 3,
+                "steps_rejected": 0,
+                "counts_for_criteria": false
+              },
+              {
+                "profile": "FX(128,96)",
+                "value": null,
+                "halt": [
+                  3,
+                  "overflow"
+                ],
+                "verdict": "REFUSED",
+                "reason": "run halted; no value was claimed",
+                "steps_audited": 3,
+                "steps_rejected": 0,
+                "counts_for_criteria": false
+              },
+              {
+                "profile": "FX(256,64)",
+                "value": "0.088618511393504469",
+                "halt": null,
+                "verdict": "INVALID",
+                "reason": "expected 1634722999869090933, got 1634722999869090934",
+                "steps_audited": 199,
+                "steps_rejected": 0,
+                "counts_for_criteria": false
+              },
+              {
+                "profile": "FX(256,192)",
+                "value": null,
+                "halt": [
+                  105,
+                  "overflow"
+                ],
+                "verdict": "REFUSED",
+                "reason": "run halted; no value was claimed",
+                "steps_audited": 105,
+                "steps_rejected": 0,
+                "counts_for_criteria": false
+              }
+            ],
+            "injections": [
+              {
+                "name": "host and calculator round the oracle to the same binary64",
+                "expected": true,
+                "got": true,
+                "ok": true
+              },
+              {
+                "name": "claim: correctly rounded oracle",
+                "expected": "VALID",
+                "got": "VALID",
+                "ok": true
+              },
+              {
+                "name": "claim: oracle + 1 ulp",
+                "expected": "INVALID",
+                "got": "INVALID",
+                "ok": true
+              },
+              {
+                "name": "claim: oracle - 1 ulp",
+                "expected": "INVALID",
+                "got": "INVALID",
+                "ok": true
+              },
+              {
+                "name": "claim: exact oracle",
+                "expected": "VALID",
+                "got": "VALID",
+                "ok": true
+              },
+              {
+                "name": "claim: exact oracle + 1e-40",
+                "expected": "INVALID",
+                "got": "INVALID",
+                "ok": true
+              },
+              {
+                "name": "claim: halted run (no value)",
+                "expected": "REFUSED",
+                "got": "REFUSED",
+                "ok": true
+              },
+              {
+                "name": "oracle: 'exact_fraction' shifted by 1e-40",
+                "expected": "REFUSED",
+                "got": "REFUSED",
+                "ok": true
+              },
+              {
+                "name": "oracle: high-precision angle shifted by 1e-100 relative",
+                "expected": "REFUSED",
+                "got": "REFUSED",
+                "ok": true
+              },
+              {
+                "name": "oracle: only one exact derivation",
+                "expected": "REFUSED",
+                "got": "REFUSED",
+                "ok": true
+              },
+              {
+                "name": "binary64 steps: every step nudged +-1 unit is rejected (398/398)",
+                "expected": true,
+                "got": true,
+                "ok": true
+              },
+              {
+                "name": "exact steps: every step nudged +-1 unit is rejected (398/398)",
+                "expected": true,
+                "got": true,
+                "ok": true
+              }
+            ],
+            "informational": {
+              "fixture_sha256": "b9c971502f5d96a3afb043a0748de34e82ac899d0b999569815b057a0bce5582",
+              "exact condition number C = 2*sum|x_i*y_i| / |x.y|": "3.61004e+26",
+              "generator-reported condition number": "3.610040e+26",
+              "generator d judged against the Lab's exact oracle": "VALID",
+              "host float64 naive loop bit-identical to calculator binary64 naive": true,
+              "product exponent span (bits)": 189
+            }
+          },
+          "vm_dot": {
+            "kind": "correct_by_spec",
+            "runs": [
+              {
+                "profile": "binary64",
+                "value": "0.088618511393504462",
+                "halt": null,
+                "verdict": "VALID",
+                "reason": "correctly rounded oracle",
+                "steps_audited": 101,
+                "steps_rejected": 0,
+                "counts_for_criteria": true
+              },
+              {
+                "profile": "exact",
+                "value": "0.088618511393504469",
+                "halt": null,
+                "verdict": "VALID",
+                "reason": "equals oracle",
+                "steps_audited": 101,
+                "steps_rejected": 0,
+                "counts_for_criteria": true
+              },
+              {
+                "profile": "FX(64,32)",
+                "value": null,
+                "halt": [
+                  3,
+                  "overflow"
+                ],
+                "verdict": "REFUSED",
+                "reason": "run halted; no value was claimed",
+                "steps_audited": 3,
+                "steps_rejected": 0,
+                "counts_for_criteria": false
+              },
+              {
+                "profile": "FX(128,96)",
+                "value": null,
+                "halt": [
+                  3,
+                  "overflow"
+                ],
+                "verdict": "REFUSED",
+                "reason": "run halted; no value was claimed",
+                "steps_audited": 3,
+                "steps_rejected": 0,
+                "counts_for_criteria": false
+              },
+              {
+                "profile": "FX(256,64)",
+                "value": "0.088618511393504469",
+                "halt": null,
+                "verdict": "VALID",
+                "reason": "correctly rounded oracle",
+                "steps_audited": 101,
+                "steps_rejected": 0,
+                "counts_for_criteria": false
+              },
+              {
+                "profile": "FX(256,192)",
+                "value": "0.088618511393504469",
+                "halt": null,
+                "verdict": "VALID",
+                "reason": "correctly rounded oracle",
+                "steps_audited": 101,
+                "steps_rejected": 0,
+                "counts_for_criteria": false
+              }
+            ],
+            "injections": [
+              {
+                "name": "host and calculator round the oracle to the same binary64",
+                "expected": true,
+                "got": true,
+                "ok": true
+              },
+              {
+                "name": "claim: correctly rounded oracle",
+                "expected": "VALID",
+                "got": "VALID",
+                "ok": true
+              },
+              {
+                "name": "claim: oracle + 1 ulp",
+                "expected": "INVALID",
+                "got": "INVALID",
+                "ok": true
+              },
+              {
+                "name": "claim: oracle - 1 ulp",
+                "expected": "INVALID",
+                "got": "INVALID",
+                "ok": true
+              },
+              {
+                "name": "claim: exact oracle",
+                "expected": "VALID",
+                "got": "VALID",
+                "ok": true
+              },
+              {
+                "name": "claim: exact oracle + 1e-40",
+                "expected": "INVALID",
+                "got": "INVALID",
+                "ok": true
+              },
+              {
+                "name": "claim: halted run (no value)",
+                "expected": "REFUSED",
+                "got": "REFUSED",
+                "ok": true
+              },
+              {
+                "name": "oracle: 'exact_fraction' shifted by 1e-40",
+                "expected": "REFUSED",
+                "got": "REFUSED",
+                "ok": true
+              },
+              {
+                "name": "oracle: high-precision angle shifted by 1e-100 relative",
+                "expected": "REFUSED",
+                "got": "REFUSED",
+                "ok": true
+              },
+              {
+                "name": "oracle: only one exact derivation",
+                "expected": "REFUSED",
+                "got": "REFUSED",
+                "ok": true
+              },
+              {
+                "name": "binary64 steps: every step nudged +-1 unit is rejected (202/202)",
+                "expected": true,
+                "got": true,
+                "ok": true
+              },
+              {
+                "name": "exact steps: every step nudged +-1 unit is rejected (202/202)",
+                "expected": true,
+                "got": true,
+                "ok": true
+              }
+            ],
+            "informational": {
+              "fixture_sha256": "b9c971502f5d96a3afb043a0748de34e82ac899d0b999569815b057a0bce5582",
+              "exact condition number C = 2*sum|x_i*y_i| / |x.y|": "3.61004e+26",
+              "generator-reported condition number": "3.610040e+26",
+              "generator d judged against the Lab's exact oracle": "VALID",
+              "host float64 naive loop bit-identical to calculator binary64 naive": true,
+              "product exponent span (bits)": 189
+            }
+          }
+        }
       }
     },
     "ported_hard_case_and_mutant_test": {
@@ -517,18 +842,25 @@
       "G0-6": "NOT_JUDGED_HERE (designer's home-PC run decides; compare deterministic_digest)",
       "G0-7": "RECORDED (not a pass/fail criterion)"
     },
-    "benchmark_3": "PENDING: canonical summation/dot-product benchmark not selected (source must be verified)",
-    "gate0_overall": "INCOMPLETE (benchmark 3 pending, G0-6 pending)"
+    "benchmark_3": "gendot_n50_c1e25_v1: frozen fixture generated once by the published GenDot algorithm (Ogita-Rump-Oishi 2005, Alg. 6.1), designer-approved 2026-10-01",
+    "post_seal_changes": [
+      "docs/AUDIT_POST_SEAL_ORACLE_TOLERANCE.md: oracle cross-check tolerance rule replaced after a REFUSED on Muller; Rump restored to the original rule; regression tests in tests/test_post_seal_audit.py"
+    ],
+    "open_items": [
+      "G0-6: designer's home-PC run with matching deterministic_digest",
+      "GenDot generator is the implementer's reconstruction (paper unreachable from the build environment); designer to diff against Algorithm 6.1. Affects the fixture's name only, not its oracle or verdicts"
+    ],
+    "gate0_overall": "INCOMPLETE (open items below)"
   },
   "costs": {
     "rump": {
-      "oracle_seconds": 0.0003162699999847973,
+      "oracle_seconds": 0.0003286040000034518,
       "programs": {
         "sequential": [
           {
             "profile": "binary64",
-            "wall_seconds": 0.0012370659999305644,
-            "peak_python_heap_bytes": 15287,
+            "wall_seconds": 0.0012380250000205706,
+            "peak_python_heap_bytes": 15047,
             "op_count": {
               "CONST": 7,
               "MUL": 12,
@@ -539,7 +871,7 @@
           },
           {
             "profile": "exact",
-            "wall_seconds": 0.0008205550000184303,
+            "wall_seconds": 0.0008570229999804724,
             "peak_python_heap_bytes": 11703,
             "op_count": {
               "CONST": 7,
@@ -551,7 +883,7 @@
           },
           {
             "profile": "FX(64,32)",
-            "wall_seconds": 0.0005385590000059892,
+            "wall_seconds": 0.0006558489999974881,
             "peak_python_heap_bytes": 11817,
             "op_count": {
               "CONST": 2,
@@ -560,7 +892,7 @@
           },
           {
             "profile": "FX(128,96)",
-            "wall_seconds": 0.00047934200006238825,
+            "wall_seconds": 0.0006376179999847409,
             "peak_python_heap_bytes": 11850,
             "op_count": {
               "CONST": 2,
@@ -569,7 +901,7 @@
           },
           {
             "profile": "FX(256,64)",
-            "wall_seconds": 0.0005729450000444558,
+            "wall_seconds": 0.0010346560000016325,
             "peak_python_heap_bytes": 11858,
             "op_count": {
               "CONST": 7,
@@ -581,7 +913,7 @@
           },
           {
             "profile": "FX(256,192)",
-            "wall_seconds": 0.0005087560000447411,
+            "wall_seconds": 0.0005345200000306249,
             "peak_python_heap_bytes": 11787,
             "op_count": {
               "CONST": 2,
@@ -592,7 +924,7 @@
         "sum": [
           {
             "profile": "binary64",
-            "wall_seconds": 0.001039166999930785,
+            "wall_seconds": 0.0009981609999840657,
             "peak_python_heap_bytes": 11063,
             "op_count": {
               "CONST": 7,
@@ -604,7 +936,7 @@
           },
           {
             "profile": "exact",
-            "wall_seconds": 0.0006703139999899577,
+            "wall_seconds": 0.0006649900000184061,
             "peak_python_heap_bytes": 11047,
             "op_count": {
               "CONST": 7,
@@ -616,7 +948,7 @@
           },
           {
             "profile": "FX(64,32)",
-            "wall_seconds": 0.0004285520000166798,
+            "wall_seconds": 0.000489328000014666,
             "peak_python_heap_bytes": 11137,
             "op_count": {
               "CONST": 2,
@@ -625,7 +957,7 @@
           },
           {
             "profile": "FX(128,96)",
-            "wall_seconds": 0.00043387400000938214,
+            "wall_seconds": 0.0004230240000424601,
             "peak_python_heap_bytes": 11178,
             "op_count": {
               "CONST": 2,
@@ -634,7 +966,7 @@
           },
           {
             "profile": "FX(256,64)",
-            "wall_seconds": 0.0005599480000455515,
+            "wall_seconds": 0.0006553449999842087,
             "peak_python_heap_bytes": 11202,
             "op_count": {
               "CONST": 7,
@@ -646,7 +978,7 @@
           },
           {
             "profile": "FX(256,192)",
-            "wall_seconds": 0.0004146359999595006,
+            "wall_seconds": 0.00046123399999942194,
             "peak_python_heap_bytes": 11139,
             "op_count": {
               "CONST": 2,
@@ -657,12 +989,12 @@
       }
     },
     "muller": {
-      "oracle_seconds": 0.000764032999995834,
+      "oracle_seconds": 0.0009376790000032997,
       "programs": {
         "recurrence": [
           {
             "profile": "binary64",
-            "wall_seconds": 0.004427288999977463,
+            "wall_seconds": 0.004326235000007728,
             "peak_python_heap_bytes": 61639,
             "op_count": {
               "CONST": 5,
@@ -672,7 +1004,7 @@
           },
           {
             "profile": "exact",
-            "wall_seconds": 0.00252705100001549,
+            "wall_seconds": 0.0027854730000171912,
             "peak_python_heap_bytes": 60479,
             "op_count": {
               "CONST": 5,
@@ -682,7 +1014,7 @@
           },
           {
             "profile": "FX(64,32)",
-            "wall_seconds": 0.0020396109999865075,
+            "wall_seconds": 0.0020625850000328683,
             "peak_python_heap_bytes": 60553,
             "op_count": {
               "CONST": 5,
@@ -692,7 +1024,7 @@
           },
           {
             "profile": "FX(128,96)",
-            "wall_seconds": 0.0021209579999776906,
+            "wall_seconds": 0.002152104000003874,
             "peak_python_heap_bytes": 60562,
             "op_count": {
               "CONST": 5,
@@ -702,8 +1034,8 @@
           },
           {
             "profile": "FX(256,64)",
-            "wall_seconds": 0.003078487999914614,
-            "peak_python_heap_bytes": 60530,
+            "wall_seconds": 0.002418438999995942,
+            "peak_python_heap_bytes": 60586,
             "op_count": {
               "CONST": 5,
               "DIV": 58,
@@ -712,12 +1044,128 @@
           },
           {
             "profile": "FX(256,192)",
-            "wall_seconds": 0.0021266460000788356,
+            "wall_seconds": 0.0020808759999795257,
             "peak_python_heap_bytes": 60579,
             "op_count": {
               "CONST": 5,
               "DIV": 58,
               "SUB": 58
+            }
+          }
+        ]
+      }
+    },
+    "gendot": {
+      "oracle_seconds": 0.0012811340000098426,
+      "programs": {
+        "naive": [
+          {
+            "profile": "binary64",
+            "wall_seconds": 0.009107372000016767,
+            "peak_python_heap_bytes": 98034,
+            "op_count": {
+              "CONST": 100,
+              "MUL": 50,
+              "ADD": 49
+            }
+          },
+          {
+            "profile": "exact",
+            "wall_seconds": 0.007384174000037547,
+            "peak_python_heap_bytes": 98002,
+            "op_count": {
+              "CONST": 100,
+              "MUL": 50,
+              "ADD": 49
+            }
+          },
+          {
+            "profile": "FX(64,32)",
+            "wall_seconds": 0.0042063599999551116,
+            "peak_python_heap_bytes": 98052,
+            "op_count": {
+              "CONST": 4
+            }
+          },
+          {
+            "profile": "FX(128,96)",
+            "wall_seconds": 0.004363600999965911,
+            "peak_python_heap_bytes": 98109,
+            "op_count": {
+              "CONST": 4
+            }
+          },
+          {
+            "profile": "FX(256,64)",
+            "wall_seconds": 0.0076433090000023185,
+            "peak_python_heap_bytes": 98133,
+            "op_count": {
+              "CONST": 100,
+              "MUL": 50,
+              "ADD": 49
+            }
+          },
+          {
+            "profile": "FX(256,192)",
+            "wall_seconds": 0.006191612999998597,
+            "peak_python_heap_bytes": 98070,
+            "op_count": {
+              "CONST": 100,
+              "MUL": 6
+            }
+          }
+        ],
+        "vm_dot": [
+          {
+            "profile": "binary64",
+            "wall_seconds": 0.00621198600003936,
+            "peak_python_heap_bytes": 55538,
+            "op_count": {
+              "CONST": 100,
+              "DOT": 1
+            }
+          },
+          {
+            "profile": "exact",
+            "wall_seconds": 0.006413977999955023,
+            "peak_python_heap_bytes": 55530,
+            "op_count": {
+              "CONST": 100,
+              "DOT": 1
+            }
+          },
+          {
+            "profile": "FX(64,32)",
+            "wall_seconds": 0.003167969000003268,
+            "peak_python_heap_bytes": 55548,
+            "op_count": {
+              "CONST": 4
+            }
+          },
+          {
+            "profile": "FX(128,96)",
+            "wall_seconds": 0.004381062999982532,
+            "peak_python_heap_bytes": 55557,
+            "op_count": {
+              "CONST": 4
+            }
+          },
+          {
+            "profile": "FX(256,64)",
+            "wall_seconds": 0.0053844170000161284,
+            "peak_python_heap_bytes": 55581,
+            "op_count": {
+              "CONST": 100,
+              "DOT": 1
+            }
+          },
+          {
+            "profile": "FX(256,192)",
+            "wall_seconds": 0.005847523999989335,
+            "peak_python_heap_bytes": 55574,
+            "op_count": {
+              "CONST": 100,
+              "DOT": 1
             }
           }
         ]
@@ -732,5 +1180,5 @@
     "mpmath": "1.3.0",
     "cpu_count": 4
   },
-  "total_wall_seconds": 19.174200321999933
+  "total_wall_seconds": 19.461487715999965
 }
