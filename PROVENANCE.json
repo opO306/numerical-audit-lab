@@ -1,0 +1,98 @@
+{
+  "source_repository": "opO306/success-is-mother-of-failure",
+  "source_commit": "f03fb30c89c9f5d610bc1c6c419af8e6098431ec",
+  "source_worktree_clean": true,
+  "copied_at_utc": "2026-10-01T03:49:45+00:00",
+  "hash_rule": "sha256 of file bytes with CRLF normalized to LF (same rule A uses for IMPLEMENTATION_DIGEST)",
+  "files": [
+    {
+      "source_path": "a_numeric/__init__.py",
+      "lab_path": "numeric_core/__init__.py",
+      "sha256_lf": "92b6f1efd265703134b411a3494d87cbf08cd3ebe3a027317e123860c8b25314",
+      "mode": "verbatim_copy"
+    },
+    {
+      "source_path": "a_numeric/profiles.py",
+      "lab_path": "numeric_core/profiles.py",
+      "sha256_lf": "ef15c24330cec5b2ca8db28b072d12dcc46d35c15afcbb2d3f89977140bd9aec",
+      "mode": "verbatim_copy"
+    },
+    {
+      "source_path": "a_numeric/vm.py",
+      "lab_path": "numeric_core/vm.py",
+      "sha256_lf": "9932106017a40dabc6b48b4220594ced79656ea23cb3b66dc5111578a68a9f68",
+      "mode": "verbatim_copy"
+    },
+    {
+      "source_path": "a_numeric/exp.py",
+      "lab_path": "numeric_core/exp.py",
+      "sha256_lf": "33522adcb4cc07cac5c65ec26187993d0b43efd214a7b846c2a207605108d58b",
+      "mode": "verbatim_copy"
+    },
+    {
+      "source_path": "audit/independent_numeric/__init__.py",
+      "lab_path": "independent_checker/__init__.py",
+      "sha256_lf": "b602bd82271af1d06693563d12d652da86c3dd1bd39e903c3c07dfa345c1f7df",
+      "mode": "verbatim_copy"
+    },
+    {
+      "source_path": "audit/independent_numeric/audit.py",
+      "lab_path": "independent_checker/audit.py",
+      "sha256_lf": "5d421df2ed6a0ccc0130ad57a5d0428a770578cddf7853061297ad4e77878633",
+      "mode": "verbatim_copy"
+    },
+    {
+      "source_path": "audit/independent_numeric/exp_cases.py",
+      "lab_path": "independent_checker/exp_cases.py",
+      "sha256_lf": "4fa334784294b51ec96ab08511afb9acf6d6cca6716eed3eb03d4547812408cd",
+      "mode": "verbatim_copy"
+    },
+    {
+      "source_path": "audit/independent_numeric/exp_judge.py",
+      "lab_path": "independent_checker/exp_judge.py",
+      "sha256_lf": "3371da281a4a190f4907cbae13daa0254e9cad37629f0a8149ce7a8b0fa2f294",
+      "mode": "verbatim_copy"
+    },
+    {
+      "source_path": "audit/independent_numeric/hard_cases.py",
+      "lab_path": "independent_checker/hard_cases.py",
+      "sha256_lf": "111af695e8b949bce13243ec3702ab8044acbf4e73c44daa0102c0e05d7cb87b",
+      "mode": "verbatim_copy"
+    },
+    {
+      "source_path": "audit/independent_numeric/oracle.py",
+      "lab_path": "independent_checker/oracle.py",
+      "sha256_lf": "aee48b452afd0cd115be97b318543d52fbf946ed5b4bcf907ce2e0fff9223ec9",
+      "mode": "verbatim_copy"
+    },
+    {
+      "source_path": "audit/independent_numeric/README.md",
+      "lab_path": "independent_checker/README.md",
+      "sha256_lf": "904deb97f7d81f1314ba2469ecfff0d3251c21c21e096bba9c9aa3634915bf3b",
+      "mode": "verbatim_copy"
+    },
+    {
+      "source_path": "c1b1_replay/types.py",
+      "lab_path": "lab/verdict.py",
+      "sha256_lf": "d87d4b9bdec7dd4812f6df6141adbcd7ca557d9f7736057e4134724739332182",
+      "mode": "excerpt",
+      "note": "Only the Verdict enum and the Invalid/Refused exception classes were kept. Limits/Result (C1-B1-specific precision caps, fingerprints) were dropped. The lab file is not byte-identical by design; source hash identifies the version excerpted from."
+    },
+    {
+      "source_path": "tests/test_audit_numeric_hard_cases.py",
+      "lab_path": "tests/test_ported_hard_cases.py",
+      "sha256_lf": "d9dc449e4175728fe113b45f2b9e08072776b2ade8ed1265cf3068cd5a6e27b6",
+      "lab_sha256_lf": "cb810b04387bc8f3626fd3a8d766ea7409ff8f8afd8e36cc6888376ec15b4db8",
+      "mode": "adapted",
+      "note": "Only import paths and directory names changed (7 lines): a_numeric -> numeric_core, audit.independent_numeric -> independent_checker, the scanned checker directory, and numeric_core added to the forbidden-import tuple. Test bodies, hard cases and the 10 rounding mutants are unchanged."
+    }
+  ],
+  "not_copied": [
+    "a_reference/ (A physics reference evaluators)",
+    "c1b1_replay/ except the excerpt above (Ar-Ar replay model)",
+    "shell / D_valid / Ar-Ar specific code",
+    "a_numeric_native/ (C++/CUDA executors)"
+  ],
+  "lab_modifications": [],
+  "numeric_core_implementation_digest": "2c050873e9b58eea3c2e6524e87d0c6865dc7c8b7890257d283b98419d3c0e2e"
+}
