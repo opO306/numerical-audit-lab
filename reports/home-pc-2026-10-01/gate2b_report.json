@@ -1,0 +1,442 @@
+{
+  "deterministic_digest": "6ccf3d5dd6f2d274c393c4f266bd740ebe9755fd589e4e335507ba7568b2928d",
+  "deterministic": {
+    "plan": "docs/GATE2B_PLAN.md (incl. amendment A)",
+    "fixture": "cloud-2026-10-01",
+    "fixture_manifest_sha256": "fe02a0ef21c56ff80c534310715997656d2438bd943adc72fe96fcdc9977daeb",
+    "gala_version": "1.12.0",
+    "dt_hex": "0x1.0000000000000p-6",
+    "orbits": {
+      "regular": {
+        "N": 100000,
+        "W1_forward": {
+          "result": "NOT_IDENTICAL",
+          "steps_identical": 25,
+          "first_mismatch": {
+            "step": 26,
+            "component": "vy",
+            "bit_pattern_diff": -1
+          }
+        },
+        "W1_mirror": {
+          "result": "NOT_IDENTICAL",
+          "steps_identical": 25,
+          "first_mismatch": {
+            "step": 26,
+            "component": "vy",
+            "bit_pattern_diff": -1
+          }
+        },
+        "W2": "REFUSED: W1 NOT_IDENTICAL (plan section 3)",
+        "W3": "REFUSED: W1 NOT_IDENTICAL (plan section 3)",
+        "W4": "REFUSED: W1 NOT_IDENTICAL (plan section 3)",
+        "G2B_3_exact_windows": "not applicable: W2 was not applied",
+        "B1_energy": {
+          "verdict": "REFUSED",
+          "reason": "class II: no rigorous method-error bound (layer B not certified)",
+          "E0": 0.0390625,
+          "max_abs_dE": 2.6607670183386573e-06,
+          "max_rel_dE": 6.811563566946964e-05,
+          "at_step": 47220
+        },
+        "B2_reversal": [
+          {
+            "L": 100,
+            "residual": [
+              1.3010426069826053e-17,
+              -1.2793585635328952e-17,
+              -5.551115123125783e-17,
+              -2.7755575615628914e-17
+            ],
+            "max_abs_residual": 5.551115123125783e-17,
+            "verdict": "REFUSED",
+            "reason": "nonzero residual needs a bound; black box gives none (W3 needs W2)"
+          },
+          {
+            "L": 1000,
+            "residual": [
+              -1.5265566588595902e-16,
+              -9.367506770274758e-17,
+              4.440892098500626e-16,
+              8.326672684688674e-17
+            ],
+            "max_abs_residual": 4.440892098500626e-16,
+            "verdict": "REFUSED",
+            "reason": "nonzero residual needs a bound; black box gives none (W3 needs W2)"
+          },
+          {
+            "L": 10000,
+            "residual": [
+              7.521760991835436e-15,
+              3.0470417855532617e-15,
+              -1.4432899320127035e-15,
+              3.608224830031759e-16
+            ],
+            "max_abs_residual": 7.521760991835436e-15,
+            "verdict": "REFUSED",
+            "reason": "nonzero residual needs a bound; black box gives none (W3 needs W2)"
+          },
+          {
+            "L": 100000,
+            "residual": [
+              4.1807182715736246e-13,
+              2.628925722947262e-13,
+              2.0594637106796654e-14,
+              -5.115352585960409e-14
+            ],
+            "max_abs_residual": 4.1807182715736246e-13,
+            "verdict": "REFUSED",
+            "reason": "nonzero residual needs a bound; black box gives none (W3 needs W2)"
+          }
+        ],
+        "B3_mirror": {
+          "verdict": "PASS",
+          "steps_compared": 100001,
+          "mismatched_steps": 0,
+          "first_mismatch": null,
+          "signed_zero_bit_differences": 0,
+          "reason": "mirror equals reflected trajectory exactly at every step"
+        },
+        "B4_force_law": {
+          "verdict": "PASS",
+          "positions": 100001,
+          "violations": 0,
+          "first_violation": null,
+          "max_residual_over_bound": 0.5826529524639267,
+          "reason": "|gala gradient - exact gradient| <= local bound at every position"
+        },
+        "diagnostic_W1_cause": {
+          "label": "DIAGNOSTIC ONLY - not a verdict, not a replacement for T",
+          "gradient_bit_agreement": {
+            "source_order": {
+              "comp0_bit_equal": 100001,
+              "comp1_bit_equal": 76793,
+              "positions": 100001
+            },
+            "machine_order": {
+              "comp0_bit_equal": 100001,
+              "comp1_bit_equal": 100001,
+              "positions": 100001
+            }
+          },
+          "machine_order_replay": {
+            "forward_first_mismatch": null,
+            "mirror_first_mismatch": null,
+            "reversal_ends_equal": [
+              {
+                "L": 100,
+                "equal": true
+              },
+              {
+                "L": 1000,
+                "equal": true
+              },
+              {
+                "L": 10000,
+                "equal": true
+              },
+              {
+                "L": 100000,
+                "equal": true
+              }
+            ]
+          }
+        },
+        "tamper": {
+          "T1": {
+            "predicted_detectors": [
+              "W1",
+              "W4"
+            ],
+            "W1": {
+              "result": "NOT_IDENTICAL",
+              "steps_identical": 25,
+              "first_mismatch": {
+                "step": 26,
+                "component": "vy",
+                "bit_pattern_diff": -1
+              }
+            },
+            "W1_detected_tamper": false,
+            "W4": "REFUSED (W1 NOT_IDENTICAL on the untampered fixture)",
+            "B3": {
+              "verdict": "FAIL",
+              "steps_compared": 100001,
+              "mismatched_steps": 1,
+              "first_mismatch": 50000,
+              "signed_zero_bit_differences": 0,
+              "reason": "class I symmetry broken; must be reconfirmed before any defect claim"
+            },
+            "B3_detected_tamper": true,
+            "diagnostic_machine_order_first_mismatch": {
+              "step": 50000,
+              "component": "x",
+              "bit_pattern_diff": -1
+            }
+          },
+          "T2": {
+            "predicted_detectors": [
+              "W1",
+              "W4"
+            ],
+            "W1": {
+              "result": "NOT_IDENTICAL",
+              "steps_identical": 25,
+              "first_mismatch": {
+                "step": 26,
+                "component": "vy",
+                "bit_pattern_diff": -1
+              }
+            },
+            "W1_detected_tamper": false,
+            "W4": "REFUSED (W1 NOT_IDENTICAL on the untampered fixture)",
+            "B3": {
+              "verdict": "FAIL",
+              "steps_compared": 100001,
+              "mismatched_steps": 2,
+              "first_mismatch": 50000,
+              "signed_zero_bit_differences": 0,
+              "reason": "class I symmetry broken; must be reconfirmed before any defect claim"
+            },
+            "B3_detected_tamper": true,
+            "diagnostic_machine_order_first_mismatch": {
+              "step": 50000,
+              "component": "x",
+              "bit_pattern_diff": 112585376428866
+            }
+          }
+        }
+      },
+      "chaotic": {
+        "N": 100000,
+        "W1_forward": {
+          "result": "NOT_IDENTICAL",
+          "steps_identical": 80,
+          "first_mismatch": {
+            "step": 81,
+            "component": "vy",
+            "bit_pattern_diff": 1
+          }
+        },
+        "W1_mirror": {
+          "result": "NOT_IDENTICAL",
+          "steps_identical": 80,
+          "first_mismatch": {
+            "step": 81,
+            "component": "vy",
+            "bit_pattern_diff": 1
+          }
+        },
+        "W2": "REFUSED: W1 NOT_IDENTICAL (plan section 3)",
+        "W3": "REFUSED: W1 NOT_IDENTICAL (plan section 3)",
+        "W4": "REFUSED: W1 NOT_IDENTICAL (plan section 3)",
+        "G2B_3_exact_windows": "not applicable: W2 was not applied",
+        "B1_energy": {
+          "verdict": "REFUSED",
+          "reason": "class II: no rigorous method-error bound (layer B not certified)",
+          "E0": 0.15625,
+          "max_abs_dE": 1.1639088453053728e-05,
+          "max_rel_dE": 7.449016609954385e-05,
+          "at_step": 12595
+        },
+        "B2_reversal": [
+          {
+            "L": 100,
+            "residual": [
+              4.85722573273506e-17,
+              -5.0306980803327406e-17,
+              0.0,
+              0.0
+            ],
+            "max_abs_residual": 5.0306980803327406e-17,
+            "verdict": "REFUSED",
+            "reason": "nonzero residual needs a bound; black box gives none (W3 needs W2)"
+          },
+          {
+            "L": 1000,
+            "residual": [
+              -1.474514954580286e-16,
+              3.681950577760773e-16,
+              1.6653345369377348e-16,
+              1.3877787807814457e-16
+            ],
+            "max_abs_residual": 3.681950577760773e-16,
+            "verdict": "REFUSED",
+            "reason": "nonzero residual needs a bound; black box gives none (W3 needs W2)"
+          },
+          {
+            "L": 10000,
+            "residual": [
+              2.8260965217324907e-09,
+              1.2846087058676625e-08,
+              8.746624535760361e-10,
+              -1.7488084314010166e-09
+            ],
+            "max_abs_residual": 1.2846087058676625e-08,
+            "verdict": "REFUSED",
+            "reason": "nonzero residual needs a bound; black box gives none (W3 needs W2)"
+          },
+          {
+            "L": 100000,
+            "residual": [
+              0.4288335994017963,
+              -0.09271920840885017,
+              0.7582305991118417,
+              -0.04479909241919072
+            ],
+            "max_abs_residual": 0.7582305991118417,
+            "verdict": "REFUSED",
+            "reason": "nonzero residual needs a bound; black box gives none (W3 needs W2)"
+          }
+        ],
+        "B3_mirror": {
+          "verdict": "PASS",
+          "steps_compared": 100001,
+          "mismatched_steps": 0,
+          "first_mismatch": null,
+          "signed_zero_bit_differences": 0,
+          "reason": "mirror equals reflected trajectory exactly at every step"
+        },
+        "B4_force_law": {
+          "verdict": "PASS",
+          "positions": 100001,
+          "violations": 0,
+          "first_violation": null,
+          "max_residual_over_bound": 0.7272320642737591,
+          "reason": "|gala gradient - exact gradient| <= local bound at every position"
+        },
+        "diagnostic_W1_cause": {
+          "label": "DIAGNOSTIC ONLY - not a verdict, not a replacement for T",
+          "gradient_bit_agreement": {
+            "source_order": {
+              "comp0_bit_equal": 100001,
+              "comp1_bit_equal": 69053,
+              "positions": 100001
+            },
+            "machine_order": {
+              "comp0_bit_equal": 100001,
+              "comp1_bit_equal": 100001,
+              "positions": 100001
+            }
+          },
+          "machine_order_replay": {
+            "forward_first_mismatch": null,
+            "mirror_first_mismatch": null,
+            "reversal_ends_equal": [
+              {
+                "L": 100,
+                "equal": true
+              },
+              {
+                "L": 1000,
+                "equal": true
+              },
+              {
+                "L": 10000,
+                "equal": true
+              },
+              {
+                "L": 100000,
+                "equal": true
+              }
+            ]
+          }
+        },
+        "tamper": {
+          "T1": {
+            "predicted_detectors": [
+              "W1",
+              "W4"
+            ],
+            "W1": {
+              "result": "NOT_IDENTICAL",
+              "steps_identical": 80,
+              "first_mismatch": {
+                "step": 81,
+                "component": "vy",
+                "bit_pattern_diff": 1
+              }
+            },
+            "W1_detected_tamper": false,
+            "W4": "REFUSED (W1 NOT_IDENTICAL on the untampered fixture)",
+            "B3": {
+              "verdict": "FAIL",
+              "steps_compared": 100001,
+              "mismatched_steps": 1,
+              "first_mismatch": 50000,
+              "signed_zero_bit_differences": 0,
+              "reason": "class I symmetry broken; must be reconfirmed before any defect claim"
+            },
+            "B3_detected_tamper": true,
+            "diagnostic_machine_order_first_mismatch": {
+              "step": 50000,
+              "component": "x",
+              "bit_pattern_diff": -1
+            }
+          },
+          "T2": {
+            "predicted_detectors": [
+              "W1",
+              "W4"
+            ],
+            "W1": {
+              "result": "NOT_IDENTICAL",
+              "steps_identical": 80,
+              "first_mismatch": {
+                "step": 81,
+                "component": "vy",
+                "bit_pattern_diff": 1
+              }
+            },
+            "W1_detected_tamper": false,
+            "W4": "REFUSED (W1 NOT_IDENTICAL on the untampered fixture)",
+            "B3": {
+              "verdict": "FAIL",
+              "steps_compared": 100001,
+              "mismatched_steps": 2,
+              "first_mismatch": 50000,
+              "signed_zero_bit_differences": 0,
+              "reason": "class I symmetry broken; must be reconfirmed before any defect claim"
+            },
+            "B3_detected_tamper": true,
+            "diagnostic_machine_order_first_mismatch": {
+              "step": 50000,
+              "component": "x",
+              "bit_pattern_diff": 16078418253438
+            }
+          }
+        }
+      }
+    },
+    "independence": {
+      "static_violations": [],
+      "A_modules_loaded": []
+    }
+  },
+  "costs": {
+    "regular": {
+      "W1_seconds": 0.014293400017777458,
+      "B1_seconds": 2.2980864999990445,
+      "B3_seconds": 0.16005569999106228,
+      "B4_seconds": 5.497709899995243,
+      "diagnostic_seconds": 0.6070883999927901,
+      "tamper_seconds": 0.5871627999877091,
+      "total_seconds": 9.259301300015068
+    },
+    "chaotic": {
+      "W1_seconds": 0.023051799973472953,
+      "B1_seconds": 2.250088800006779,
+      "B3_seconds": 0.156644700007746,
+      "B4_seconds": 5.281929799995851,
+      "diagnostic_seconds": 0.6650590999925043,
+      "tamper_seconds": 0.645343199983472,
+      "total_seconds": 9.115568000008352
+    }
+  },
+  "machine": {
+    "system": "Windows",
+    "machine": "AMD64",
+    "python": "3.12.7"
+  },
+  "total_wall_seconds": 18.783523300022352
+}
