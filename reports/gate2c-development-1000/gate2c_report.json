@@ -1,0 +1,320 @@
+{
+  "deterministic_digest": "db3627f37e518167159c93544c5d5d8c98f72230669cb82fe77461234dd37f52",
+  "deterministic": {
+    "plan": "docs/GATE2C_PLAN.md",
+    "seal": {
+      "plan_seal_sha256": "ddc6c9822fe5f7af4ff8f2d9e72c8ef7a6be0c3a91b478f5644d45ffbdfe31e8",
+      "inputs": "UNCHANGED"
+    },
+    "N": 1000,
+    "scope": "DEVELOPMENT_SHORT_RUN",
+    "known_matching_replay": "post-diagnostic knowledge from Gate 2B; not blind or independent discovery",
+    "certification_scope": "roundoff layer of same exact discrete map only",
+    "independent_audit": "NOT_PERFORMED",
+    "orbits": {
+      "regular": {
+        "N": 1000,
+        "steps_measured": 1000,
+        "replay": {
+          "label": "KNOWN_PREREQUISITE_NOT_BLIND_SUCCESS",
+          "first_mismatch": null,
+          "steps_checked": 1000
+        },
+        "first_refused": null,
+        "certified_prefix": 1000,
+        "bin_bound_unavailable_from": null,
+        "lab_bound_unavailable_from": null,
+        "abort": null,
+        "cross": {
+          "counts": {
+            "PASS": 1000,
+            "FAIL": 0,
+            "REFUSED": 0
+          },
+          "first_refused": null,
+          "raw_enclosure_violation_count": 0,
+          "violation_examples": [],
+          "max_residual_over_bound_finite": 0.8860840412813303
+        },
+        "exact_local_windows": {
+          "0": {
+            "steps": 8,
+            "scope": "LOCAL_RESTART_FROM_REPRESENTED_LATENT_STATE",
+            "violations": 0,
+            "details": [],
+            "max_actual_over_bound": 0.9999999999999994
+          },
+          "500": {
+            "steps": 8,
+            "scope": "LOCAL_RESTART_FROM_REPRESENTED_LATENT_STATE",
+            "violations": 0,
+            "details": [],
+            "max_actual_over_bound": 0.9999999999999994
+          },
+          "992": {
+            "steps": 8,
+            "scope": "LOCAL_RESTART_FROM_REPRESENTED_LATENT_STATE",
+            "violations": 0,
+            "details": [],
+            "max_actual_over_bound": 0.9999999999999993
+          }
+        },
+        "marks": [
+          {
+            "step": 10,
+            "external_bound": [
+              1.4971845784478897e-17,
+              1.0264543758853003e-17,
+              5.551691831387405e-17,
+              3.418732764457449e-17
+            ],
+            "lab_bound": [
+              3.8590692070801656e-17,
+              1.8857502887244234e-17,
+              1.5271515774455534e-16,
+              6.85280586954512e-17
+            ],
+            "external_status": "PASS",
+            "external_reason": "finite bound smaller than represented state scale",
+            "cross": {
+              "verdict": "PASS",
+              "reason": "residual contained in exact sum bound",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": [
+                "17382037315070375/324518553658426726783156020576256",
+                "18901288914329425/649037107316853453566312041152512",
+                "16893793036943253/81129638414606681695789005144064",
+                "16666524306765829/162259276829213363391578010288128"
+              ],
+              "max_residual": 2.7755575615628914e-17,
+              "max_sum_bound": 2.0823207605842937e-16,
+              "max_residual_over_bound": 0.13329154730148668
+            }
+          },
+          {
+            "step": 100,
+            "external_bound": [
+              1.3090287918611837e-15,
+              7.852487248581629e-16,
+              9.262664902511128e-16,
+              8.014725603525854e-16
+            ],
+            "lab_bound": [
+              1.987632283617541e-15,
+              1.1821709299106367e-15,
+              1.4253866531474648e-15,
+              1.197545086839012e-15
+            ],
+            "external_status": "PASS",
+            "external_reason": "finite bound smaller than represented state scale",
+            "cross": {
+              "verdict": "PASS",
+              "reason": "residual contained in exact sum bound",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": [
+                "8358028782159291/2535301200456458802993406410752",
+                "9976002825073939/5070602400912917605986812821504",
+                "11924298075031237/5070602400912917605986812821504",
+                "5068111840658503/2535301200456458802993406410752"
+              ],
+              "max_residual": 1.942890293094024e-16,
+              "max_sum_bound": 3.2966610754787246e-15,
+              "max_residual_over_bound": 0.05893509367843909
+            }
+          },
+          {
+            "step": 1000,
+            "external_bound": [
+              6.663514800922983e-14,
+              2.776681643689558e-14,
+              5.4291676412494764e-14,
+              2.1389230045182186e-14
+            ],
+            "lab_bound": [
+              9.809123803068253e-14,
+              4.145482114354898e-14,
+              8.008267164233339e-14,
+              3.1945376246319235e-14
+            ],
+            "external_status": "PASS",
+            "external_reason": "finite bound smaller than represented state scale",
+            "cross": {
+              "verdict": "PASS",
+              "reason": "residual contained in exact sum bound",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": [
+                "13050968883557621/79228162514264337593543950336",
+                "21937212606907877/316912650057057350374175801344",
+                "10646232685436245/79228162514264337593543950336",
+                "16902411419589519/316912650057057350374175801344"
+              ],
+              "max_residual": 6.106226635438361e-16,
+              "max_sum_bound": 1.6472638603991235e-13,
+              "max_residual_over_bound": 0.004911842787543464
+            }
+          }
+        ]
+      },
+      "chaotic": {
+        "N": 1000,
+        "steps_measured": 1000,
+        "replay": {
+          "label": "KNOWN_PREREQUISITE_NOT_BLIND_SUCCESS",
+          "first_mismatch": null,
+          "steps_checked": 1000
+        },
+        "first_refused": null,
+        "certified_prefix": 1000,
+        "bin_bound_unavailable_from": null,
+        "lab_bound_unavailable_from": null,
+        "abort": null,
+        "cross": {
+          "counts": {
+            "PASS": 1000,
+            "FAIL": 0,
+            "REFUSED": 0
+          },
+          "first_refused": null,
+          "raw_enclosure_violation_count": 0,
+          "violation_examples": [],
+          "max_residual_over_bound_finite": 0.6401900600703238
+        },
+        "exact_local_windows": {
+          "0": {
+            "steps": 8,
+            "scope": "LOCAL_RESTART_FROM_REPRESENTED_LATENT_STATE",
+            "violations": 0,
+            "details": [],
+            "max_actual_over_bound": 0.9999999999999993
+          },
+          "500": {
+            "steps": 8,
+            "scope": "LOCAL_RESTART_FROM_REPRESENTED_LATENT_STATE",
+            "violations": 0,
+            "details": [],
+            "max_actual_over_bound": 0.9999999999999989
+          },
+          "992": {
+            "steps": 8,
+            "scope": "LOCAL_RESTART_FROM_REPRESENTED_LATENT_STATE",
+            "violations": 0,
+            "details": [],
+            "max_actual_over_bound": 0.9999999999999994
+          }
+        },
+        "marks": [
+          {
+            "step": 10,
+            "external_bound": [
+              3.6522434947104244e-17,
+              1.678934008777107e-17,
+              1.2449518790483903e-16,
+              6.527199294226437e-17
+            ],
+            "lab_bound": [
+              5.4588137486594455e-17,
+              3.175553442178196e-17,
+              2.312290678890804e-16,
+              1.3068170181795133e-16
+            ],
+            "external_status": "PASS",
+            "external_reason": "finite bound smaller than represented state scale",
+            "cross": {
+              "verdict": "PASS",
+              "reason": "residual contained in exact sum bound",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": [
+                "14783535594587613/162259276829213363391578010288128",
+                "15753712463369977/324518553658426726783156020576256",
+                "14429890123932869/40564819207303340847894502572032",
+                "3974413100475627/20282409603651670423947251286016"
+              ],
+              "max_residual": 1.6653345369377348e-16,
+              "max_sum_bound": 3.557242557939194e-16,
+              "max_residual_over_bound": 0.4681532141295722
+            }
+          },
+          {
+            "step": 100,
+            "external_bound": [
+              3.418817226661225e-15,
+              2.2638755952817807e-15,
+              2.4375349219430704e-15,
+              2.4378651275551978e-15
+            ],
+            "lab_bound": [
+              4.8181387266132025e-15,
+              3.0539917445591564e-15,
+              3.4069402710971592e-15,
+              3.413168373703258e-15
+            ],
+            "external_status": "PASS",
+            "external_reason": "finite bound smaller than represented state scale",
+            "cross": {
+              "verdict": "PASS",
+              "reason": "residual contained in exact sum bound",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": [
+                "20883164316443631/2535301200456458802993406410752",
+                "13482395450566923/2535301200456458802993406410752",
+                "1852188121619111/316912650057057350374175801344",
+                "231783316557055/39614081257132168796771975168"
+              ],
+              "max_residual": 3.885780586188048e-16,
+              "max_sum_bound": 8.236955953274428e-15,
+              "max_residual_over_bound": 0.06641186698644409
+            }
+          },
+          {
+            "step": 1000,
+            "external_bound": [
+              1.0856960404128685e-12,
+              7.848524728231801e-13,
+              7.117802981148244e-13,
+              3.5533280740315825e-13
+            ],
+            "lab_bound": [
+              1.5763199774588421e-12,
+              1.1388650939126163e-12,
+              1.0202979440932858e-12,
+              5.032175208838833e-13
+            ],
+            "external_status": "PASS",
+            "external_reason": "finite bound smaller than represented state scale",
+            "cross": {
+              "verdict": "PASS",
+              "reason": "residual contained in exact sum bound",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": [
+                "3295416213742417/1237940039285380274899124224",
+                "19051576001111103/9903520314283042199192993792",
+                "17153672057635683/9903520314283042199192993792",
+                "17005341234050181/19807040628566084398385987584"
+              ],
+              "max_residual": 1.9595436384634013e-14,
+              "max_sum_bound": 2.6620160178717106e-12,
+              "max_residual_over_bound": 0.009407570223941083
+            }
+          }
+        ]
+      }
+    },
+    "independence": {
+      "static_violations": [],
+      "A_modules_loaded": []
+    },
+    "gate_verdict": "PASS",
+    "utility": "LIMITED_HORIZON"
+  },
+  "costs_seconds": {
+    "regular": 2.7102330999914557,
+    "chaotic": 2.688845399999991
+  },
+  "total_wall_seconds": 5.531039699999383,
+  "peak_rss_bytes": 0,
+  "machine": {
+    "system": "Windows",
+    "machine": "AMD64",
+    "python": "3.12.7"
+  }
+}

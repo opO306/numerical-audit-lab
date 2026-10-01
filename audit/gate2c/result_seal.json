@@ -1,0 +1,40 @@
+{
+  "schema": "gate2c-result-raw-sha256-v1",
+  "status": "MEASURED / PASS / LONG_REGULAR_PREFIX",
+  "independent_numerical_audit": "NOT_PERFORMED",
+  "git_metadata_available": false,
+  "verified_digest": "a796c32a5be379c2cdfdd93757963ed92d981bf83dbd4c5e784d45c863fa3acc",
+  "final_suite": {
+    "command": "python -m pytest tests -q",
+    "passed": 210,
+    "failed": 0,
+    "exit_code": 0,
+    "seconds": 24.42
+  },
+  "files": {
+    "README.md": "b962f2f80f0b8a12396be181007ea9242db47604d64b5181bee53813e4c1ad65",
+    "audit/gate2b/closure_seal.json": "413b89cc81bc9cede544469be03e80f3fcd05d81fbd89ba55f8ee511d38f339a",
+    "audit/gate2c/CODE_REVIEW.md": "77099cbaed39b44316e4712e59738a012a63e230b5bd32715f59a38899fafef5",
+    "audit/gate2c/EXECUTION_LOG.md": "36644c82473a1c09444102fb3a0264028b0fee124b08f141bbae2f09896ba434",
+    "audit/gate2c/plan_seal.json": "ddc6c9822fe5f7af4ff8f2d9e72c8ef7a6be0c3a91b478f5644d45ffbdfe31e8",
+    "audit/gate2c/pre_review/benchmarks__gate2c__binary_replay.py.txt": "12449c2c5e017566230ec858e46a2d1abe390e6628787f4435b89c32f14ed41c",
+    "audit/gate2c/pre_review/lab__gate2c_checks.py.txt": "35fbcdea5651112cf78e80462b1c37695797873146cb4107084497a9f6558ee4",
+    "audit/gate2c/pre_review/run_gate2c.py.txt": "320f46a773f921df8d1e4706d89a35a9a0a4746935fec4b8c1abf49bd27e878a",
+    "audit/gate2c/pre_review/source_hashes.json": "5e06d02cc5c72f754fea3fed58f34db4d6e49fe346a4881e5610f64f09a2b521",
+    "audit/gate2c/pre_review/tests__test_gate2c.py.txt": "61953196617dd78d4fc54457b5f8889d81053b2be45b973f13a2cb0eb40989df",
+    "audit/gate2c/pre_review/tests__test_gate2c_sealed.py.txt": "cfa5f8c8435678766a69e6eaeaef0eaaebf13d4bf9a36441030156e8b5d71cc7",
+    "audit/gate2c/verified_source_hashes.json": "5405496d07a956ab5d7a84410caa9615690eb0e575ca02777616901d8f106faf",
+    "benchmarks/gate2c/__init__.py": "1864a6a8b6fe062e856f74a7b5f6ac47131c6e7fd8d2b9097c0dff98b177cbad",
+    "benchmarks/gate2c/binary_replay.py": "12449c2c5e017566230ec858e46a2d1abe390e6628787f4435b89c32f14ed41c",
+    "docs/GATE2B_CLOSURE.md": "4bc3983df2f4519c6f9c3b15ede242e9780de86ebf88032f0a6361aa51e223ba",
+    "docs/GATE2C_PLAN.md": "2dd72f3f5664d61085db51d26c496f428d2161ec7d12f2be085474da8f4660cc",
+    "docs/GATE2C_RESULT.md": "853d344328a341dc39bb039ee043d3ba7ff66d1c00a37792229f836b1a320c4d",
+    "lab/gate2c_checks.py": "493aacdb6cd8a41b7754a53015e839269aed90c94425258537e6c6bc68f735eb",
+    "reports/gate2c-development-1000/gate2c_report.json": "71cdfb6b679187b5ca149a11e2b9e34ce6ca53a3996b7ceaab37478adab6b482",
+    "reports/gate2c-home-pc-2026-10-01-verified/gate2c_report.json": "c11023b11bbddebea8810a4aa69e5e5c18fbdf3f25944235053feaf0dd50db03",
+    "reports/gate2c-home-pc-2026-10-01/gate2c_report.json": "59a91c481081c12a84ca29c11282bf508a07e105bba9fe45118046e1f87eb973",
+    "run_gate2c.py": "b1c4f024e4e4ccf7a0e433e064bb8a548e73c340fe9507cce89225c89ca2653a",
+    "tests/test_gate2c.py": "92c5fb3237eef77496888dcc3c341c2c3847567bfcdf588f4df884767e3ef6ac",
+    "tests/test_gate2c_sealed.py": "cfa5f8c8435678766a69e6eaeaef0eaaebf13d4bf9a36441030156e8b5d71cc7"
+  }
+}
