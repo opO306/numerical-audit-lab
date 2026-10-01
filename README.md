@@ -19,7 +19,7 @@
 | Gate 2 | 정답을 모르는 공개 물리 계산 — [허용 오차 규칙 V1(봉인)](docs/BINARY64_TOLERANCE_RULE_V1.md), [후보 비교](docs/GATE2_CANDIDATES.md) | 대상: Hénon–Heiles (설계자 결정). FPUT·3체 보류 |
 | **Gate 2A** | Published-model reproduction and multi-layer verification (외부 코드 감사 아님) — [계획(봉인)](docs/GATE2A_PLAN.md), [결과](docs/GATE2A_RESULT.md), [보고서](reports/cloud-container-2026-10-01/GATE2A_REPORT.md) | **CLOSED / PARTIAL** (2026-10-01) — 집 PC digest `644fc922…57e1` 동일 확인. G2A-5 부분 충족. 결과 봉인(수정 금지) |
 | **V2** | 오차 상한 V2 시제품: affine 산술 + QR 기저 교체 — [계획(봉인)](docs/V2_ERROR_BOUND_PLAN.md), [결과](docs/V2_RESULT.md) | **V2 = AUDITED / PASS / FROZEN** → [BINARY64_TOLERANCE_RULE_V2](docs/BINARY64_TOLERANCE_RULE_V2.md)로 정식 승격 (2026-10-01). 독립 감사 P1–P15 PASS, 치명·주요·미결 0, 경미 5 → [V2.1_BACKLOG](docs/V2.1_BACKLOG.md). [provenance](docs/V2_PROVENANCE.md) |
-| Gate 2B | 공개 제3자 Hénon–Heiles 구현 감사 — [계획(봉인)](docs/GATE2B_PLAN.md) | 계획 승인(부록 A 추가). 대상 gala 1.12.0 Linux wheel (MIT, source commit `bebac7d7…`). [provenance](docs/GATE2B_PROVENANCE.md). 실행 중 |
+| **Gate 2B** | 공개 제3자 Hénon–Heiles 구현 감사 — [계획(봉인)](docs/GATE2B_PLAN.md), [결과](docs/GATE2B_RESULT.md) | **PASS / 답 LIMITED** (클라우드 2026-10-01, 집 PC 분석 재현 확인 전). 대상 gala 1.12.0 Linux wheel (MIT, source commit `bebac7d7…`), [provenance](docs/GATE2B_PROVENANCE.md). W1 NOT_IDENTICAL(원인: `-Ofast`가 y 기울기 계산 순서를 바꿈, 기계어로 확인) → W2–W4 REFUSED. B3·B4 PASS. digest `6ccf3d5d…928d` |
 
 각 Gate에서 추가 정보가 없거나 비용이 맞지 않으면 그 자리에서 중단한다.
 
@@ -32,6 +32,7 @@ python run_gate1.py                 # Gate 1 검사표 (약 2초)
 python run_gate2a.py                # Gate 2A (N=10^5, N1 전수 감사 포함 약 10–15분)
 python tools/render_gate2a.py reports/latest   # JSON → GATE2A_REPORT.md
 python run_v2.py                    # V2 오차 상한 시제품 (약 20–25분)
+python run_gate2b.py                # Gate 2B 분석 (동결 gala fixture 입력, gala 불필요, 약 30초)
 python -m pytest tests -q
 ```
 
