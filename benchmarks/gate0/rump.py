@@ -12,6 +12,8 @@ from fractions import Fraction
 
 import mpmath
 
+from lab.claim import agree_digits
+
 from .harness import Instr
 
 NAME = "rump"
@@ -66,9 +68,10 @@ def mp_eval(prec_bits: int):
 
 
 def oracle_inputs():
-    # 200 digits computed, 150 required to agree: the cancellation loses about
-    # 37 digits (terms near 1e36, answer near 1).
-    digits, agree = 200, 150
+    # Declared loss 0: in this evaluation order every intermediate is an integer below
+    # 2**130 or an exact quarter/half, so a 686-bit run is exact except a/(2b)
+    # (measured error 3.1e-207). Same tolerance as the original rule (200 - 10).
+    digits = 200
     hp = mp_eval(int(digits * 3.33) + 20)
     return ({"literature": LITERATURE_VALUE, "direct_rational": exact_direct()},
-            (f"mpmath_{digits}_digits", hp, agree))
+            (f"mpmath_{digits}_digits", hp, agree_digits(digits, 0)))

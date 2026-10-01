@@ -11,6 +11,8 @@ from fractions import Fraction
 
 import mpmath
 
+from lab.claim import agree_digits
+
 from .harness import Instr
 
 NAME = "muller"
@@ -48,10 +50,16 @@ def mp_iteration(prec_bits: int, n: int = N):
         return [+x for x in xs]
 
 
+# Declared loss, derived: the general solution is
+#   x_n = (a 3^(n+1) + b 5^(n+1) + g 100^(n+1)) / (a 3^n + b 5^n + g 100^n),
+# the true data have g = 0, and a rounding error of relative size u gives g ~ u, whose
+# effect on x_n grows like (100/5)^n = 20^n. At n = 30 that is 10^39.03. Measured:
+# |error| / u = 10^38.08 (686 bits) and 10^37.45 (1352 bits). Declared: 40 digits.
+DECLARED_LOSS_DIGITS = 40
+
+
 def oracle_inputs():
-    # 400 digits computed, 300 required to agree: the parasitic solution grows
-    # like (100/5)^n = 20^30, about 1e39, so ~40 digits are lost by n = 30.
-    digits, agree = 400, 300
+    digits = 400
     hp = mp_iteration(int(digits * 3.33) + 20)[N]
     return ({"closed_form": closed_form(), "direct_rational": exact_iteration()[N]},
-            (f"mpmath_{digits}_digits", hp, agree))
+            (f"mpmath_{digits}_digits", hp, agree_digits(digits, DECLARED_LOSS_DIGITS)))

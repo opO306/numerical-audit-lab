@@ -54,24 +54,40 @@ class Oracle:
     angles: dict                  # name -> str description of what each angle produced
 
 
+# Tolerance rule for the high-precision cross-check (see docs/AUDIT_POST_SEAL_ORACLE_TOLERANCE.md).
+# The first implementation required agreement to (computed digits - 10), silently assuming no
+# computation loses more than 10 digits. Muller's recurrence loses ~38, so that rule refused a
+# correct oracle. The loss is now declared per benchmark, with its derivation, and the floor
+# stops anyone from "fixing" a refusal by declaring a huge loss.
+MIN_AGREE_DIGITS = 100
+SAFETY_DIGITS = 10
+
+
+def agree_digits(computed_digits: int, declared_loss_digits: int) -> int:
+    return computed_digits - declared_loss_digits - SAFETY_DIGITS
+
+
 def settle_oracle(exact_angles: dict, mp_angle: tuple) -> Oracle:
     """exact_angles: name -> Fraction (each from a different derivation).
-    mp_angle: (name, mpf value, agree_digits). The benchmark states how many
-    digits its high-precision run is expected to keep, leaving headroom for
-    error amplification (e.g. Muller's recurrence multiplies rounding error by
-    about 20 per step). All exact angles must be identical, and the
-    high-precision angle must agree with them to agree_digits. Otherwise REFUSED: the checker
-    never picks one of several disagreeing answers."""
+    mp_angle: (name, mpf value, agree_digits), agree_digits from agree_digits() above.
+    All exact angles must be identical, and the high-precision angle must agree with
+    them to agree_digits (relative to max(|t|, 1)). Otherwise REFUSED: the checker
+    never picks one of several disagreeing answers.
+
+    The oracle VALUE is always the exact rational the exact derivations agree on; the
+    high-precision angle can only veto it, never supply or adjust it."""
     if len(exact_angles) < 2:
         raise Refused("need at least two exact derivations")
     vals = set(exact_angles.values())
     if len(vals) != 1 or not all(isinstance(v, Fraction) for v in vals):
         raise Refused("exact derivations disagree: " + ", ".join(f"{k}={v}" for k, v in exact_angles.items()))
     target = vals.pop()
-    name, mp_value, agree_digits = mp_angle
-    with mpmath.workdps(agree_digits + 20):
+    name, mp_value, agree = mp_angle
+    if agree < MIN_AGREE_DIGITS:
+        raise Refused(f"cross-check tolerance 1e-{agree} is looser than the floor 1e-{MIN_AGREE_DIGITS}")
+    with mpmath.workdps(agree + 20):
         t = mpmath.mpf(target.numerator) / target.denominator
-        tol = mpmath.mpf(10) ** (-agree_digits) * max(abs(t), mpmath.mpf(1))
+        tol = mpmath.mpf(10) ** (-agree) * max(abs(t), mpmath.mpf(1))
         if not abs(mpmath.mpf(mp_value) - t) <= tol:
             raise Refused(f"high-precision angle {name} disagrees with exact derivations")
     angles = {k: f"{v.numerator}/{v.denominator}" for k, v in exact_angles.items()}
