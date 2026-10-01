@@ -1,5 +1,7 @@
 # Gate 1 결과 해석 — 2D 두 원판 완전탄성충돌 (2026-10-01)
 
+**상태: CLOSED / PASS** — 설계자 승인. 설계자 집 PC에서 `run_gate1.py`의 deterministic_digest `6adecd6c57555d3e6b36f4e3ff7da5c5c03f713d5be8d16f43e477a084f82f03`가 클라우드와 동일함을 확인(설계자 보고). Gate 1에는 시나리오·mutant를 더 추가하지 않는다.
+
 - 계획·예측: [GATE1_PLAN.md](GATE1_PLAN.md) (커밋 `10c37a0`에서 봉인, 코드 작성 전)
 - 보고서: [GATE1_REPORT.md](../reports/cloud-container-2026-10-01/GATE1_REPORT.md)
 - 시험: `tests/test_gate1.py`

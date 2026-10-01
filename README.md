@@ -15,7 +15,7 @@
 | Gate | 내용 | 상태 |
 |---|---|---|
 | **Gate 0** | 계산기·채점기 자체 검사 (Rump, Muller, GenDot-derived 동결 fixture) — [기준](docs/GATE0_CRITERIA.md) | **CLOSED / PASS** (2026-10-01) — [종료 기록](docs/GATE0_CLOSURE.md), [감사 기록](docs/AUDIT_POST_SEAL_ORACLE_TOLERANCE.md), [보고서](reports/cloud-container-2026-10-01/GATE0_REPORT.md) |
-| **Gate 1** | 2D 두 원판 완전탄성충돌: 검사 11개 × 심은 버그 7개 × 시나리오 6개 — [계획(봉인)](docs/GATE1_PLAN.md), [해석](docs/GATE1_RESULT.md), [보고서](reports/cloud-container-2026-10-01/GATE1_REPORT.md) | **APPROVED** (설계자 2026-10-01). 집 PC digest `6adecd6c…2f03` 일치 확인 뒤 CLOSED. 시나리오·mutant 추가 금지 |
+| **Gate 1** | 2D 두 원판 완전탄성충돌: 검사 11개 × 심은 버그 7개 × 시나리오 6개 — [계획(봉인)](docs/GATE1_PLAN.md), [해석](docs/GATE1_RESULT.md), [보고서](reports/cloud-container-2026-10-01/GATE1_REPORT.md) | **CLOSED / PASS** (2026-10-01) — 설계자 집 PC에서 digest `6adecd6c…2f03` 클라우드와 동일 확인. 시나리오·mutant 추가 금지 |
 | Gate 2 | 정답을 모르는 공개 물리 계산 재검증 — [허용 오차 규칙 V1(봉인)](docs/BINARY64_TOLERANCE_RULE_V1.md), [후보 비교·선정안](docs/GATE2_CANDIDATES.md) | 준비: 규칙 봉인, 후보 선정안 제출(Hénon–Heiles). 구현 전 |
 
 각 Gate에서 추가 정보가 없거나 비용이 맞지 않으면 그 자리에서 중단한다.
