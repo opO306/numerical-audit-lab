@@ -1,0 +1,135 @@
+{
+ "Ls": [
+  100,
+  1000,
+  10000,
+  100000
+ ],
+ "cpu_flags": [
+  "avx",
+  "avx2",
+  "avx512f",
+  "fma",
+  "sse2"
+ ],
+ "distribution_files_sha256": {
+  "gala/_cconfig.cpython-312-x86_64-linux-gnu.so": "4c09f803b2e518642d77b99cfa8023ebc3fddd049e9c4309998f464a507a63f6",
+  "gala/dynamics/lyapunov/dop853_lyapunov.cpython-312-x86_64-linux-gnu.so": "ef4dc4b394550bf780fc77ef9242681a54e6a92032270d821d521e2df1a5afbc",
+  "gala/dynamics/mockstream/_coord.cpython-312-x86_64-linux-gnu.so": "afb4a19068bc24a808aeb755db5498c2075c320bb6d108dde19345fb101c4531",
+  "gala/dynamics/mockstream/_mockstream.cpython-312-x86_64-linux-gnu.so": "57c3c79771f912d7903b3da20877760a761da5a1b99ae789c34c51271f332bee",
+  "gala/dynamics/mockstream/df.cpython-312-x86_64-linux-gnu.so": "b199c733ffc8ff3bc2326ac40b0349a80973ad29f8158287adcb0bd8e4b51763",
+  "gala/dynamics/nbody/nbody.cpython-312-x86_64-linux-gnu.so": "0275c8384eaa532965a0405693b2ecb8c6846f2349a6f8a71abd226ee0636976",
+  "gala/integrate/cyintegrators/dop853.cpython-312-x86_64-linux-gnu.so": "3686e4230fe692f09c3d24fd73ea61feacd4d11a4859b83f842e7fb6f584fa6d",
+  "gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so": "a6ac98736304bb9f6a92e473bba45da10d9b5b99f8019e2ca15eb6a7f86234fc",
+  "gala/integrate/cyintegrators/ruth4.cpython-312-x86_64-linux-gnu.so": "137f4c04db4ee38880e7300856a8e0359363c570a118ae8a56b55818b539133f",
+  "gala/potential/frame/builtin/frames.cpython-312-x86_64-linux-gnu.so": "7fa38285de473698b0ea5f08ad5def9d598b410328a84916b18a70da5a976649",
+  "gala/potential/frame/cframe.cpython-312-x86_64-linux-gnu.so": "234e602690ddd9a18ff962cf1c41e4493597fe13b3c8322d606e9b5f836a2065",
+  "gala/potential/hamiltonian/chamiltonian.cpython-312-x86_64-linux-gnu.so": "0bb7d5ae0b58705bf4cdb29035e7e006c04b397f879107685a2f829c0729003f",
+  "gala/potential/potential/builtin/cybuiltin.cpython-312-x86_64-linux-gnu.so": "33d66d82c34c717560747ffbfca1d98f97432a0a671a0a210a0a225d8367ecaf",
+  "gala/potential/potential/builtin/cytimeinterp.cpython-312-x86_64-linux-gnu.so": "a46d002df5814f4e5e87a7a11a5d39b0fce7f056193e81bb4fdd07399824d831",
+  "gala/potential/potential/ccompositepotential.cpython-312-x86_64-linux-gnu.so": "9c2dd7d3f553f66669357c872060f9950d8ce10142cce1fae19e407527747942",
+  "gala/potential/potential/cpotential.cpython-312-x86_64-linux-gnu.so": "9bf30bb2ae0fe4f6ed6470511174f96d97d7d9e5eb590c4f60a553b6e1316783",
+  "gala/potential/scf/_bfe.cpython-312-x86_64-linux-gnu.so": "01450560558f56197d799f13dedabe5bcdb20970437272d274b98d2f2c1f02e3",
+  "gala/potential/scf/_bfe_class.cpython-312-x86_64-linux-gnu.so": "96fdaa0a5f5b976b8e05a81599c3ae79fc12247d14873cb50da912e5c218e3e0",
+  "gala/potential/scf/_computecoeff.cpython-312-x86_64-linux-gnu.so": "8eca07ea2c3a2dda4e101003974fd9dd56ddbf8ceeec88f86f15732a78592af1"
+ },
+ "dt": 0.015625,
+ "dt_hex": "0x1.0000000000000p-6",
+ "files": {
+  "chaotic_forward": {
+   "sha256_gz": "5f742f8eeea8e42b325e0d05b51a11c4d4d767414727af3627350ce06141c2ea",
+   "sha256_raw": "a72aedb2b041f62e207b21957af79634987c72852a3696d67b813616ce6cd3bb",
+   "shape": [
+    4,
+    100001
+   ]
+  },
+  "chaotic_gradient": {
+   "sha256_gz": "6e01f857e4ef5b664702173e91f2ce0a80f732bb2535ee39bf49f0b53fdb40e2",
+   "sha256_raw": "4a6bee6f6462e05eb268bafb3e67b065537fb3a5120dd5db406ccf942f39597f",
+   "shape": [
+    2,
+    100001
+   ]
+  },
+  "chaotic_mirror": {
+   "sha256_gz": "195180aff96696c22302b76ae6c9c1a588b1acfa00cb67c9d08af199960316e5",
+   "sha256_raw": "bb1915dc200d5740e62e5b6f95d70d43235d05f324084c33a8acfe2106398914",
+   "shape": [
+    4,
+    100001
+   ]
+  },
+  "chaotic_reversal_ends": {
+   "sha256_gz": "af8f1b10266e301f5ac21408658d0c9c30273f76d1e6b5a5e5ed8aa92634015d",
+   "sha256_raw": "bdb204655bb1bd4534defdc55b254d07733d0b6db806123a9ebc98f2b576b34c",
+   "shape": [
+    4,
+    4
+   ]
+  },
+  "regular_forward": {
+   "sha256_gz": "9abce9ded95251094fee7d57d49ecc1f241bdc7b9c472ac6494e2c913d32cb68",
+   "sha256_raw": "aae278faef831f23ee952626fa45a6bee9550835126077f6376cac9d9ec6e6ae",
+   "shape": [
+    4,
+    100001
+   ]
+  },
+  "regular_gradient": {
+   "sha256_gz": "99d55582ae14e035e8f418491ec30cd359307bac52e7450ab79e46643f075a4b",
+   "sha256_raw": "ded0dcab9745834dd5d161d0db36a3b4c71c3c203a686d85e4420ca33c5adb1b",
+   "shape": [
+    2,
+    100001
+   ]
+  },
+  "regular_mirror": {
+   "sha256_gz": "a66b95f77446728db994b24dba1dd04701409ab502e58f2b06bbcea2dd4f11f0",
+   "sha256_raw": "43e7c550d7460f528e30bce0479b24dab9df85973ac4a09a5b411335d9c7bcf6",
+   "shape": [
+    4,
+    100001
+   ]
+  },
+  "regular_reversal_ends": {
+   "sha256_gz": "e10503c89d362aab6f75b404feebc4e659075c910e47e6d06d499c8e556187cb",
+   "sha256_raw": "d0c1ee938f45a111fb0f9f80a3555b1d0caa8c28fb253e0273ae6027a5644740",
+   "shape": [
+    4,
+    4
+   ]
+  }
+ },
+ "gala_version": "1.12.0",
+ "integrator": "gala.integrate.LeapfrogIntegrator (cython)",
+ "machine": "x86_64",
+ "n_steps": 100000,
+ "numpy": "2.5.3",
+ "orbits": {
+  "chaotic": [
+   0.5,
+   0.25
+  ],
+  "regular": [
+   0.25,
+   0.125
+  ]
+ },
+ "plan": "docs/GATE2B_PLAN.md (incl. amendment A)",
+ "platform": "Linux-6.18.44-fc-v50-x86_64-with-glibc2.39",
+ "python": "3.12.3",
+ "time_checks": {
+  "chaotic": {
+   "t0_hex": "0x0.0p+0",
+   "t1_minus_t0_hex": "0x1.0000000000000p-6",
+   "t_last_hex": "0x1.86a0000000000p+10"
+  },
+  "regular": {
+   "t0_hex": "0x0.0p+0",
+   "t1_minus_t0_hex": "0x1.0000000000000p-6",
+   "t_last_hex": "0x1.86a0000000000p+10"
+  }
+ },
+ "units": "<UnitSystem (dimensionless)>"
+}
