@@ -1,0 +1,609 @@
+{
+  "deterministic_digest": "644fc9225a753dbea02f221d0aac7489bba2fdbd59d5b0ed2bddfc52db3957e1",
+  "deterministic": {
+    "plan": "docs/GATE2A_PLAN.md",
+    "N": 100000,
+    "h": "1/64",
+    "classification": {
+      "R": [
+        {
+          "px": 0.25,
+          "py": 0.125,
+          "max_separation": 1.0247069369287778e-07,
+          "label": "regular"
+        },
+        {
+          "px": 0.125,
+          "py": 0.25,
+          "max_separation": 5.376985809379953e-08,
+          "label": "regular"
+        },
+        {
+          "px": 0.25,
+          "py": 0.0,
+          "max_separation": 8.255664902959495e-08,
+          "label": "regular"
+        }
+      ],
+      "C": [
+        {
+          "px": 0.5,
+          "py": 0.25,
+          "max_separation": 1.2803736698131205,
+          "label": "chaotic"
+        },
+        {
+          "px": 0.4375,
+          "py": 0.3125,
+          "max_separation": 1.1836017135793049,
+          "label": "chaotic"
+        },
+        {
+          "px": 0.5625,
+          "py": 0.125,
+          "max_separation": 1.3904177851089794,
+          "label": "chaotic"
+        }
+      ]
+    },
+    "selected": {
+      "regular": [
+        0.25,
+        0.125
+      ],
+      "chaotic": [
+        0.5,
+        0.25
+      ]
+    },
+    "orbits": {
+      "regular": {
+        "initial_momentum": [
+          0.25,
+          0.125
+        ],
+        "energy": 0.0390625,
+        "N1": {
+          "ops_audited": 10266300,
+          "incorrectly_rounded": 0
+        },
+        "bound_growth": [
+          {
+            "step": 0,
+            "max_bound": 0.0,
+            "max_abs_state": 0.25
+          },
+          {
+            "step": 10,
+            "max_bound": 1.5176418960686864e-16,
+            "max_abs_state": 0.24687500566354645
+          },
+          {
+            "step": 100,
+            "max_bound": 2.5349111776951967e-15,
+            "max_abs_state": 0.23052009135937152
+          },
+          {
+            "step": 1000,
+            "max_bound": 6.796868137527412e-08,
+            "max_abs_state": 0.24042029533432369
+          },
+          {
+            "step": 10000,
+            "max_bound": Infinity,
+            "max_abs_state": 0.2320891069483993
+          },
+          {
+            "step": 50000,
+            "max_bound": Infinity,
+            "max_abs_state": 0.19890246649769747
+          },
+          {
+            "step": 100000,
+            "max_bound": Infinity,
+            "max_abs_state": 0.26863506976152146
+          }
+        ],
+        "state_horizon": 1779,
+        "K1_time_reversal": [
+          {
+            "L": 100,
+            "verdict": "PASS",
+            "reason": "residual explained by rounding",
+            "max_residual": 5.551115123125783e-17,
+            "max_bound": 1.703552948209288e-14
+          },
+          {
+            "L": 1000,
+            "verdict": "REFUSED",
+            "reason": "bound is not finite",
+            "max_residual": 2.701831813833877e-16,
+            "max_bound": Infinity
+          },
+          {
+            "L": 10000,
+            "verdict": "REFUSED",
+            "reason": "bound is not finite",
+            "max_residual": 5.990000162547915e-15,
+            "max_bound": Infinity
+          },
+          {
+            "L": 100000,
+            "verdict": "REFUSED",
+            "reason": "bound is not finite",
+            "max_residual": 4.699240128969162e-13,
+            "max_bound": Infinity
+          }
+        ],
+        "K2_mirror": {
+          "verdict": "REFUSED",
+          "reason": "step 10000: bound is not finite",
+          "checkpoints_exactly_mirrored": "7/7",
+          "rows": [
+            {
+              "step": 0,
+              "verdict": "PASS",
+              "max_residual": 0.0
+            },
+            {
+              "step": 10,
+              "verdict": "PASS",
+              "max_residual": 0.0
+            },
+            {
+              "step": 100,
+              "verdict": "PASS",
+              "max_residual": 0.0
+            },
+            {
+              "step": 1000,
+              "verdict": "PASS",
+              "max_residual": 0.0
+            },
+            {
+              "step": 10000,
+              "verdict": "REFUSED",
+              "max_residual": 0.0
+            },
+            {
+              "step": 50000,
+              "verdict": "REFUSED",
+              "max_residual": 0.0
+            },
+            {
+              "step": 100000,
+              "verdict": "REFUSED",
+              "max_residual": 0.0
+            }
+          ]
+        },
+        "K3_force_law": {
+          "checks": 400000,
+          "failed": 0,
+          "max_residual_over_bound": 0.9999999999999999
+        },
+        "K4_exact_windows_SAMPLED": [
+          {
+            "n0": 0,
+            "steps": 8,
+            "bound_violations": 0,
+            "max_actual_over_bound": 0.9999999999999999,
+            "final_bound": 1.2594186727175206e-16
+          },
+          {
+            "n0": 50000,
+            "steps": 8,
+            "bound_violations": 0,
+            "max_actual_over_bound": 0.9999251474911978,
+            "final_bound": 1.289456360181737e-16
+          },
+          {
+            "n0": 99992,
+            "steps": 8,
+            "bound_violations": 0,
+            "max_actual_over_bound": 0.9999215039174879,
+            "final_bound": 1.2517051641856587e-16
+          }
+        ],
+        "K5_host_float_bit_identity": {
+          "mismatch_steps": 0,
+          "first_mismatch": null
+        },
+        "M1_energy": {
+          "verdict": "REFUSED",
+          "reason": "class II: no rigorous method-error (layer B) bound; values are information only",
+          "rows": [
+            {
+              "step": 0,
+              "energy_change": 0.0,
+              "rounding_part_bound": 0.0,
+              "explained_by_rounding": true,
+              "H": 0.0390625
+            },
+            {
+              "step": 10,
+              "energy_change": -7.214105344347306e-08,
+              "rounding_part_bound": 4.684702032718692e-17,
+              "explained_by_rounding": false,
+              "H": 0.039062427858946557
+            },
+            {
+              "step": 100,
+              "energy_change": 2.5644949270664837e-06,
+              "rounding_part_bound": 9.33764108822071e-16,
+              "explained_by_rounding": false,
+              "H": 0.03906506449492707
+            },
+            {
+              "step": 1000,
+              "energy_change": -1.9119014048697514e-08,
+              "rounding_part_bound": 2.999251694288812e-08,
+              "explained_by_rounding": true,
+              "H": 0.039062480880985954
+            },
+            {
+              "step": 10000,
+              "energy_change": 1.911078893706469e-07,
+              "rounding_part_bound": Infinity,
+              "explained_by_rounding": true,
+              "H": 0.03906269110788937
+            },
+            {
+              "step": 50000,
+              "energy_change": 1.2431865225010753e-06,
+              "rounding_part_bound": Infinity,
+              "explained_by_rounding": true,
+              "H": 0.039063743186522504
+            },
+            {
+              "step": 100000,
+              "energy_change": 1.9985640521499763e-06,
+              "rounding_part_bound": Infinity,
+              "explained_by_rounding": true,
+              "H": 0.03906449856405215
+            }
+          ]
+        },
+        "POSTHOC_ESTIMATE_actual_error_120_digits": [
+          {
+            "step": 10,
+            "estimated_actual_error": 2.4221248091046187e-17
+          },
+          {
+            "step": 100,
+            "estimated_actual_error": 1.3133000692086973e-16
+          },
+          {
+            "step": 1000,
+            "estimated_actual_error": 3.3701616942750574e-16
+          },
+          {
+            "step": 10000,
+            "estimated_actual_error": 8.491715901823031e-15
+          },
+          {
+            "step": 50000,
+            "estimated_actual_error": 4.510653467916427e-15
+          },
+          {
+            "step": 100000,
+            "estimated_actual_error": 1.6721313963634632e-13
+          }
+        ],
+        "M2_bounded": {
+          "max_abs_state": 0.26863506976152146,
+          "energy_stays_below_escape_1_6": true
+        }
+      },
+      "chaotic": {
+        "initial_momentum": [
+          0.5,
+          0.25
+        ],
+        "energy": 0.15625,
+        "N1": {
+          "ops_audited": 10266300,
+          "incorrectly_rounded": 0
+        },
+        "bound_growth": [
+          {
+            "step": 0,
+            "max_bound": 0.0,
+            "max_abs_state": 0.5
+          },
+          {
+            "step": 10,
+            "max_bound": 2.304101209093016e-16,
+            "max_abs_state": 0.49359128609955705
+          },
+          {
+            "step": 100,
+            "max_bound": 5.700681474447085e-15,
+            "max_abs_state": 0.42582856349860376
+          },
+          {
+            "step": 1000,
+            "max_bound": 1.2886330168859273e-05,
+            "max_abs_state": 0.4663194892180271
+          },
+          {
+            "step": 10000,
+            "max_bound": Infinity,
+            "max_abs_state": 0.4823140156429625
+          },
+          {
+            "step": 50000,
+            "max_bound": Infinity,
+            "max_abs_state": 0.43647311574837294
+          },
+          {
+            "step": 100000,
+            "max_bound": Infinity,
+            "max_abs_state": 0.4850865120767174
+          }
+        ],
+        "state_horizon": 1474,
+        "K1_time_reversal": [
+          {
+            "L": 100,
+            "verdict": "PASS",
+            "reason": "residual explained by rounding",
+            "max_residual": 1.1102230246251565e-16,
+            "max_bound": 4.595537056890907e-14
+          },
+          {
+            "L": 1000,
+            "verdict": "REFUSED",
+            "reason": "bound is not finite",
+            "max_residual": 7.048181482893767e-15,
+            "max_bound": Infinity
+          },
+          {
+            "L": 10000,
+            "verdict": "REFUSED",
+            "reason": "bound is not finite",
+            "max_residual": 4.0098449361272714e-09,
+            "max_bound": Infinity
+          },
+          {
+            "L": 100000,
+            "verdict": "REFUSED",
+            "reason": "bound is not finite",
+            "max_residual": 0.828007218894538,
+            "max_bound": Infinity
+          }
+        ],
+        "K2_mirror": {
+          "verdict": "REFUSED",
+          "reason": "step 10000: bound is not finite",
+          "checkpoints_exactly_mirrored": "7/7",
+          "rows": [
+            {
+              "step": 0,
+              "verdict": "PASS",
+              "max_residual": 0.0
+            },
+            {
+              "step": 10,
+              "verdict": "PASS",
+              "max_residual": 0.0
+            },
+            {
+              "step": 100,
+              "verdict": "PASS",
+              "max_residual": 0.0
+            },
+            {
+              "step": 1000,
+              "verdict": "PASS",
+              "max_residual": 0.0
+            },
+            {
+              "step": 10000,
+              "verdict": "REFUSED",
+              "max_residual": 0.0
+            },
+            {
+              "step": 50000,
+              "verdict": "REFUSED",
+              "max_residual": 0.0
+            },
+            {
+              "step": 100000,
+              "verdict": "REFUSED",
+              "max_residual": 0.0
+            }
+          ]
+        },
+        "K3_force_law": {
+          "checks": 400000,
+          "failed": 0,
+          "max_residual_over_bound": 0.9999999999999999
+        },
+        "K4_exact_windows_SAMPLED": [
+          {
+            "n0": 0,
+            "steps": 8,
+            "bound_violations": 0,
+            "max_actual_over_bound": 0.9999999999999999,
+            "final_bound": 1.6834304223156262e-16
+          },
+          {
+            "n0": 50000,
+            "steps": 8,
+            "bound_violations": 0,
+            "max_actual_over_bound": 0.996559002105244,
+            "final_bound": 9.913715479865489e-17
+          },
+          {
+            "n0": 99992,
+            "steps": 8,
+            "bound_violations": 0,
+            "max_actual_over_bound": 0.9992152908094192,
+            "final_bound": 2.0240091665205317e-16
+          }
+        ],
+        "K5_host_float_bit_identity": {
+          "mismatch_steps": 0,
+          "first_mismatch": null
+        },
+        "M1_energy": {
+          "verdict": "REFUSED",
+          "reason": "class II: no rigorous method-error (layer B) bound; values are information only",
+          "rows": [
+            {
+              "step": 0,
+              "energy_change": 0.0,
+              "rounding_part_bound": 0.0,
+              "explained_by_rounding": true,
+              "H": 0.15625
+            },
+            {
+              "step": 10,
+              "energy_change": -8.069396654848809e-07,
+              "rounding_part_bound": 1.4835669954756158e-16,
+              "explained_by_rounding": false,
+              "H": 0.15624919306033452
+            },
+            {
+              "step": 100,
+              "energy_change": 9.915737332748726e-06,
+              "rounding_part_bound": 4.7761610112187235e-15,
+              "explained_by_rounding": false,
+              "H": 0.15625991573733275
+            },
+            {
+              "step": 1000,
+              "energy_change": 7.126870310707991e-06,
+              "rounding_part_bound": 1.4548170124893928e-05,
+              "explained_by_rounding": true,
+              "H": 0.1562571268703107
+            },
+            {
+              "step": 10000,
+              "energy_change": 5.7047514345050415e-06,
+              "rounding_part_bound": Infinity,
+              "explained_by_rounding": true,
+              "H": 0.1562557047514345
+            },
+            {
+              "step": 50000,
+              "energy_change": 1.0056055161632117e-05,
+              "rounding_part_bound": Infinity,
+              "explained_by_rounding": true,
+              "H": 0.15626005605516163
+            },
+            {
+              "step": 100000,
+              "energy_change": -1.0921685888378009e-07,
+              "rounding_part_bound": Infinity,
+              "explained_by_rounding": true,
+              "H": 0.1562498907831411
+            }
+          ]
+        },
+        "POSTHOC_ESTIMATE_actual_error_120_digits": [
+          {
+            "step": 10,
+            "estimated_actual_error": 1.3793239221631982e-16
+          },
+          {
+            "step": 100,
+            "estimated_actual_error": 3.584455011136007e-16
+          },
+          {
+            "step": 1000,
+            "estimated_actual_error": 2.1068613917547683e-14
+          },
+          {
+            "step": 10000,
+            "estimated_actual_error": 9.555944317952161e-08
+          },
+          {
+            "step": 50000,
+            "estimated_actual_error": 0.8354918974987736
+          },
+          {
+            "step": 100000,
+            "estimated_actual_error": 0.6440264171368714
+          }
+        ],
+        "M2_bounded": {
+          "max_abs_state": 0.5,
+          "energy_stays_below_escape_1_6": true
+        }
+      }
+    },
+    "planted_defects": {
+      "D1": {
+        "N1_incorrectly_rounded": 25525,
+        "K1": "REFUSED",
+        "K2": "PASS",
+        "POSTHOC_K1_L100": "PASS",
+        "K3_failed": 0,
+        "K5_mismatch_steps": 982,
+        "detected_by": [
+          "N1",
+          "K5"
+        ]
+      },
+      "D2": {
+        "N1_incorrectly_rounded": 0,
+        "K1": "REFUSED",
+        "K2": "PASS",
+        "POSTHOC_K1_L100": "FAIL",
+        "K3_failed": 0,
+        "K5_mismatch_steps": 999,
+        "detected_by": [
+          "K5"
+        ]
+      },
+      "D3": {
+        "N1_incorrectly_rounded": 0,
+        "K1": "REFUSED",
+        "K2": "PASS",
+        "POSTHOC_K1_L100": "PASS",
+        "K3_failed": 1999,
+        "K5_mismatch_steps": 1000,
+        "detected_by": [
+          "K3",
+          "K5"
+        ]
+      }
+    },
+    "independence": {
+      "static_violations": [],
+      "A_modules_loaded": []
+    }
+  },
+  "costs": {
+    "classification_seconds": 1.0474210630000016,
+    "orbits": {
+      "regular": {
+        "forward_seconds": 116.20959906400003,
+        "reversal_seconds": 127.58733329699999,
+        "mirror_seconds": 117.47684518999995,
+        "windows_seconds": 0.2557751389999794,
+        "total_seconds": 365.17656237100005,
+        "steps_executed": 311148
+      },
+      "chaotic": {
+        "forward_seconds": 114.37483718800013,
+        "reversal_seconds": 127.63569916699998,
+        "mirror_seconds": 116.96676651799999,
+        "windows_seconds": 0.2773191180001504,
+        "total_seconds": 362.9583569219999,
+        "steps_executed": 311148
+      }
+    },
+    "defects_seconds": 10.597829910999963
+  },
+  "peak_rss_bytes": 26406912,
+  "machine": {
+    "system": "Linux",
+    "machine": "x86_64",
+    "python": "3.11.15",
+    "mpmath": "1.3.0"
+  },
+  "total_wall_seconds": 739.8538573630001
+}

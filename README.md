@@ -16,7 +16,9 @@
 |---|---|---|
 | **Gate 0** | 계산기·채점기 자체 검사 (Rump, Muller, GenDot-derived 동결 fixture) — [기준](docs/GATE0_CRITERIA.md) | **CLOSED / PASS** (2026-10-01) — [종료 기록](docs/GATE0_CLOSURE.md), [감사 기록](docs/AUDIT_POST_SEAL_ORACLE_TOLERANCE.md), [보고서](reports/cloud-container-2026-10-01/GATE0_REPORT.md) |
 | **Gate 1** | 2D 두 원판 완전탄성충돌: 검사 11개 × 심은 버그 7개 × 시나리오 6개 — [계획(봉인)](docs/GATE1_PLAN.md), [해석](docs/GATE1_RESULT.md), [보고서](reports/cloud-container-2026-10-01/GATE1_REPORT.md) | **CLOSED / PASS** (2026-10-01) — 설계자 집 PC에서 digest `6adecd6c…2f03` 클라우드와 동일 확인. 시나리오·mutant 추가 금지 |
-| Gate 2 | 정답을 모르는 공개 물리 계산 재검증 — [허용 오차 규칙 V1(봉인)](docs/BINARY64_TOLERANCE_RULE_V1.md), [후보 비교·선정안](docs/GATE2_CANDIDATES.md) | 준비: 규칙 봉인, 후보 선정안 제출(Hénon–Heiles). 구현 전 |
+| Gate 2 | 정답을 모르는 공개 물리 계산 — [허용 오차 규칙 V1(봉인)](docs/BINARY64_TOLERANCE_RULE_V1.md), [후보 비교](docs/GATE2_CANDIDATES.md) | 대상: Hénon–Heiles (설계자 결정). FPUT·3체 보류 |
+| **Gate 2A** | Published-model reproduction and multi-layer verification (외부 코드 감사 아님) — [계획(봉인)](docs/GATE2A_PLAN.md), [결과](docs/GATE2A_RESULT.md), [보고서](reports/cloud-container-2026-10-01/GATE2A_REPORT.md) | 측정 완료. G2A-5 부분 충족, 집 PC digest `644fc922…57e1` 미확인. 설계자 판단 대기 |
+| Gate 2B | 공개 제3자 Hénon–Heiles 구현 감사 | Gate 2A 이후 |
 
 각 Gate에서 추가 정보가 없거나 비용이 맞지 않으면 그 자리에서 중단한다.
 
@@ -26,6 +28,8 @@
 pip install -r requirements.txt     # mpmath
 python run_gate0.py                 # reports/latest/ 에 보고서 생성 (--out 으로 위치 변경)
 python run_gate1.py                 # Gate 1 검사표 (약 2초)
+python run_gate2a.py                # Gate 2A (N=10^5, N1 전수 감사 포함 약 10–15분)
+python tools/render_gate2a.py reports/latest   # JSON → GATE2A_REPORT.md
 python -m pytest tests -q
 ```
 
@@ -38,6 +42,7 @@ python -m pytest tests -q
 | `lab/verdict.py` | VALID / INVALID / REFUSED 판정 틀 | A `c1b1_replay/types.py`의 일부를 발췌·축약 |
 | `lab/claim.py` | 최종값 주장 판정, 단계별 감사 | Lab 신규 |
 | `benchmarks/gate0/` | Gate 0 벤치마크. `fixtures/gendot_n50_c1e25_v1.json`은 한 번 생성 후 동결(SHA-256 고정, 재생성 금지) | Lab 신규 |
+| `benchmarks/gate2a/`, `lab/gate2a_*.py`, `run_gate2a.py` | Gate 2A: Hénon–Heiles velocity Verlet SUT(계산기 쪽), N1·규칙 V1 상한·K1–K5 검사(검사기 쪽) | Lab 신규 |
 | `tests/test_ported_hard_cases.py` | A의 hard-case 시험과 반올림 결함 10종 주입 시험 | A `tests/test_audit_numeric_hard_cases.py`의 import 경로만 바꿈 |
 
 ## 알려진 한계
