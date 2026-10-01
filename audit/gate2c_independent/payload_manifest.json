@@ -1,0 +1,26 @@
+{
+  "schema": "gate2c-producer-payload-manifest-v1",
+  "role": "PRODUCER_EVIDENCE_NOT_INDEPENDENT_CHECKER",
+  "source_exporter_sha256": "cc9bd482d1c3f9d0b61b113eb5faa9609a0c627269849eff92667bdfaf954063",
+  "charter_sha256": "7176dc8533e7c7e476d7256bff951d942c7f0056e6036c8373e146769e01fd1a",
+  "new_100000_step_execution": false,
+  "horizon_recomputation": false,
+  "historical_latent_checkpoints_not_persisted": 4,
+  "operation_trace_files": 4,
+  "exact_8step_fixture_files": 2,
+  "full_state_anchor_count": 6,
+  "files": {
+    "audit/gate2c_independent/payload/anchors/chaotic_frozen_full_state_anchors.json": "5f2c1f8f12d0b671acad7f14c40384a147d6059848b808caa6e96a1fb1a7185e",
+    "audit/gate2c_independent/payload/anchors/regular_frozen_full_state_anchors.json": "7e44a217e3a4a878ab20320b02450d9fb32325d752abdd1b953a004ed06af3ca",
+    "audit/gate2c_independent/payload/exact/chaotic_n0_0_8step_producer.json": "53e797dd2373ee32de3b4078c9f982e52abbac510523087a0a98512ccc36e345",
+    "audit/gate2c_independent/payload/exact/regular_n0_0_8step_producer.json": "7ccbb27c0f557cda1887d5550bc3e79f9cd1c9da92a6097c2617bc48d4ba3a38",
+    "audit/gate2c_independent/payload/logs/chaotic_cross_saved_report.json": "0ed765ade705c8fd503362642a0910dccb37effd451f596ed14bd197f447e0f8",
+    "audit/gate2c_independent/payload/logs/chaotic_horizon_saved_report.json": "9a14354dbdf1cd48f07b834a232f3cc2033c5656eaeaea1f19b4dd222bfffaee",
+    "audit/gate2c_independent/payload/logs/regular_cross_saved_report.json": "fe04a7810ee0b897f56e787e78c40a28ab4e97c35959343003c5756e0b46e16a",
+    "audit/gate2c_independent/payload/logs/regular_horizon_saved_report.json": "0060bd83760e98d1c501fc85106ea4bbb430345db8aec68057dbbc42f557eebc",
+    "audit/gate2c_independent/payload/traces/chaotic_init.json": "77eb0530d57e905fd65ca1af1a39fc01fac72a1b1655e79909463faaf203289d",
+    "audit/gate2c_independent/payload/traces/chaotic_step_1.json": "05e7633b596d33ce5deafef1c57c3e044162f56ffca3ac52c2107bfb7e4c6360",
+    "audit/gate2c_independent/payload/traces/regular_init.json": "08a6cae7a05d31fb9ab6fa05bd70da9170ef9fd264e2d6cc24c683fd358550bc",
+    "audit/gate2c_independent/payload/traces/regular_step_1.json": "6545f4a8da8a92c5a219eecca9a2307428ac32bfcf77c356cccd959f27e630f5"
+  }
+}

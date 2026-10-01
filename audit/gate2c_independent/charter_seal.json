@@ -1,0 +1,61 @@
+{
+  "schema": "gate2c-independent-audit-charter-seal-v1",
+  "gate_status": "PROVISIONAL PASS / LONG_REGULAR_PREFIX",
+  "independent_audit": "PENDING",
+  "charter": {
+    "docs/GATE2C_AUDIT_CHARTER.md": "7176dc8533e7c7e476d7256bff951d942c7f0056e6036c8373e146769e01fd1a"
+  },
+  "new_adapter_audit_targets": {
+    "benchmarks/gate2c/__init__.py": "1864a6a8b6fe062e856f74a7b5f6ac47131c6e7fd8d2b9097c0dff98b177cbad",
+    "benchmarks/gate2c/binary_replay.py": "12449c2c5e017566230ec858e46a2d1abe390e6628787f4435b89c32f14ed41c",
+    "docs/GATE2C_PLAN.md": "2dd72f3f5664d61085db51d26c496f428d2161ec7d12f2be085474da8f4660cc",
+    "docs/GATE2C_RESULT.md": "853d344328a341dc39bb039ee043d3ba7ff66d1c00a37792229f836b1a320c4d",
+    "lab/gate2c_checks.py": "493aacdb6cd8a41b7754a53015e839269aed90c94425258537e6c6bc68f735eb",
+    "reports/gate2c-home-pc-2026-10-01-verified/gate2c_report.json": "c11023b11bbddebea8810a4aa69e5e5c18fbdf3f25944235053feaf0dd50db03",
+    "run_gate2c.py": "b1c4f024e4e4ccf7a0e433e064bb8a548e73c340fe9507cce89225c89ca2653a",
+    "tests/test_gate2c.py": "92c5fb3237eef77496888dcc3c341c2c3847567bfcdf588f4df884767e3ef6ac",
+    "tests/test_gate2c_sealed.py": "cfa5f8c8435678766a69e6eaeaef0eaaebf13d4bf9a36441030156e8b5d71cc7"
+  },
+  "historical_evidence_inputs": {
+    "CURRENT_STATUS.md": "6cd29a5038120bb71b020a79c9065b51210b89f46fed8a916c14aed64bae09a8",
+    "audit/gate2b/closure_seal.json": "413b89cc81bc9cede544469be03e80f3fcd05d81fbd89ba55f8ee511d38f339a",
+    "audit/gate2c/CODE_REVIEW.md": "77099cbaed39b44316e4712e59738a012a63e230b5bd32715f59a38899fafef5",
+    "audit/gate2c/EXECUTION_LOG.md": "36644c82473a1c09444102fb3a0264028b0fee124b08f141bbae2f09896ba434",
+    "audit/gate2c/GIT_RECONSTRUCTION.json": "b4674fe25dd49204163208bfffe4adfaf14257da4414045e5b004d631a346691",
+    "audit/gate2c/plan_seal.json": "ddc6c9822fe5f7af4ff8f2d9e72c8ef7a6be0c3a91b478f5644d45ffbdfe31e8",
+    "audit/gate2c/pre_review/benchmarks__gate2c__binary_replay.py.txt": "12449c2c5e017566230ec858e46a2d1abe390e6628787f4435b89c32f14ed41c",
+    "audit/gate2c/pre_review/lab__gate2c_checks.py.txt": "35fbcdea5651112cf78e80462b1c37695797873146cb4107084497a9f6558ee4",
+    "audit/gate2c/pre_review/run_gate2c.py.txt": "320f46a773f921df8d1e4706d89a35a9a0a4746935fec4b8c1abf49bd27e878a",
+    "audit/gate2c/pre_review/source_hashes.json": "5e06d02cc5c72f754fea3fed58f34db4d6e49fe346a4881e5610f64f09a2b521",
+    "audit/gate2c/pre_review/tests__test_gate2c.py.txt": "61953196617dd78d4fc54457b5f8889d81053b2be45b973f13a2cb0eb40989df",
+    "audit/gate2c/pre_review/tests__test_gate2c_sealed.py.txt": "cfa5f8c8435678766a69e6eaeaef0eaaebf13d4bf9a36441030156e8b5d71cc7",
+    "audit/gate2c/result_seal.json": "738882c71909535cdf08f29661a44fbeb4cbe5704229845f2ca787a740ef80e1",
+    "audit/gate2c/verified_source_hashes.json": "5405496d07a956ab5d7a84410caa9615690eb0e575ca02777616901d8f106faf",
+    "benchmarks/gate2b/evidence/disassembly.txt": "309524e4e6c6675fe32932e042ea52a101e775cb68a051502191243f84dca68f",
+    "benchmarks/gate2b/fixtures/cloud-2026-10-01/chaotic_forward.u64.gz": "5f742f8eeea8e42b325e0d05b51a11c4d4d767414727af3627350ce06141c2ea",
+    "benchmarks/gate2b/fixtures/cloud-2026-10-01/chaotic_gradient.u64.gz": "6e01f857e4ef5b664702173e91f2ce0a80f732bb2535ee39bf49f0b53fdb40e2",
+    "benchmarks/gate2b/fixtures/cloud-2026-10-01/chaotic_mirror.u64.gz": "195180aff96696c22302b76ae6c9c1a588b1acfa00cb67c9d08af199960316e5",
+    "benchmarks/gate2b/fixtures/cloud-2026-10-01/chaotic_reversal_ends.u64.gz": "af8f1b10266e301f5ac21408658d0c9c30273f76d1e6b5a5e5ed8aa92634015d",
+    "benchmarks/gate2b/fixtures/cloud-2026-10-01/manifest.json": "fe02a0ef21c56ff80c534310715997656d2438bd943adc72fe96fcdc9977daeb",
+    "benchmarks/gate2b/fixtures/cloud-2026-10-01/regular_forward.u64.gz": "9abce9ded95251094fee7d57d49ecc1f241bdc7b9c472ac6494e2c913d32cb68",
+    "benchmarks/gate2b/fixtures/cloud-2026-10-01/regular_gradient.u64.gz": "99d55582ae14e035e8f418491ec30cd359307bac52e7450ab79e46643f075a4b",
+    "benchmarks/gate2b/fixtures/cloud-2026-10-01/regular_mirror.u64.gz": "a66b95f77446728db994b24dba1dd04701409ab502e58f2b06bbcea2dd4f11f0",
+    "benchmarks/gate2b/fixtures/cloud-2026-10-01/regular_reversal_ends.u64.gz": "e10503c89d362aab6f75b404feebc4e659075c910e47e6d06d499c8e556187cb",
+    "docs/GATE2B_CLOSURE.md": "4bc3983df2f4519c6f9c3b15ede242e9780de86ebf88032f0a6361aa51e223ba",
+    "docs/GATE2B_PROVENANCE.md": "744239062711b9cc3a0bd41d19e30f2d7e460c961b967dc5f58321e0ce7b3252",
+    "docs/GATE2C_STATUS.md": "d1d1e81cf75f546ab7ec7af0eaaa5a867bec4bf5c614508c140d9c565f1aa3bc",
+    "docs/GIT_PROVENANCE_RECOVERY.md": "82d5c18d6504a460cb04c871e4b5f7e61d1e96b4ab0b98f01f7b41db26b72f73"
+  },
+  "accepted_dependencies_not_reaudited": {
+    "benchmarks/gate2a/henon_heiles.py": "1e1d690f049bc92ad26caad32517db603902eae8d7cdf252e4a5cc1fb0042a7d",
+    "docs/BINARY64_TOLERANCE_RULE_V2.md": "518bc8e3cc4033208fab002ab896ad8deb3fa9aa51f64e51805af3143983ea1c",
+    "docs/V2_PROVENANCE.md": "1d6926acdb997e1b09010391fa9c9391f40c76e97b314b73770f0c28e6eb9dfa",
+    "lab/v2_bound.py": "48b91d0c45fd7f62dd09df4db28756e6f82c6bd464a040dc60ac1c924ed99780"
+  },
+  "decision_rule": {
+    "PASS": "Critical 0, Major 0, UNRESOLVED 0",
+    "CONDITIONAL": "Critical 0, Major or UNRESOLVED exists",
+    "FAIL": "Critical >= 1"
+  },
+  "raw_hashes_no_newline_normalization": true
+}

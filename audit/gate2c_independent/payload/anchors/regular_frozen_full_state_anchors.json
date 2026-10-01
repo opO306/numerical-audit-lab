@@ -1,0 +1,94 @@
+[
+  {
+    "n0": 0,
+    "full_state_bits": [
+      "0000000000000000",
+      "0000000000000000",
+      "3fd0000000000000",
+      "3fc0000000000000"
+    ],
+    "full_state_exact": [
+      {
+        "numerator_hex": "0x0",
+        "denominator_hex": "0x1"
+      },
+      {
+        "numerator_hex": "0x0",
+        "denominator_hex": "0x1"
+      },
+      {
+        "numerator_hex": "0x1",
+        "denominator_hex": "0x4"
+      },
+      {
+        "numerator_hex": "0x1",
+        "denominator_hex": "0x8"
+      }
+    ],
+    "historical_latent_start_bits": [
+      "0000000000000000",
+      "0000000000000000",
+      "3fd0000000000000",
+      "3fc0000000000000"
+    ],
+    "latent_availability": "AVAILABLE_INITIAL"
+  },
+  {
+    "n0": 50000,
+    "full_state_bits": [
+      "bfc5c35e84a79066",
+      "bfb7075f64ba45fe",
+      "3fc975a2d259c4f0",
+      "3fb449afbc0659bf"
+    ],
+    "full_state_exact": [
+      {
+        "numerator_hex": "-0xae1af4253c833",
+        "denominator_hex": "0x40000000000000"
+      },
+      {
+        "numerator_hex": "-0xb83afb25d22ff",
+        "denominator_hex": "0x80000000000000"
+      },
+      {
+        "numerator_hex": "0x1975a2d259c4f",
+        "denominator_hex": "0x8000000000000"
+      },
+      {
+        "numerator_hex": "0x1449afbc0659bf",
+        "denominator_hex": "0x100000000000000"
+      }
+    ],
+    "historical_latent_start_bits": null,
+    "latent_availability": "NOT_PERSISTED_REQUIRES_AUDITOR_RECONSTRUCTION"
+  },
+  {
+    "n0": 99992,
+    "full_state_bits": [
+      "bfd1a387dc8af34a",
+      "bfc1f5564b168f3d",
+      "3fa63f693da2e62b",
+      "3f8144ede5c2b602"
+    ],
+    "full_state_exact": [
+      {
+        "numerator_hex": "-0x8d1c3ee4579a5",
+        "denominator_hex": "0x20000000000000"
+      },
+      {
+        "numerator_hex": "-0x11f5564b168f3d",
+        "denominator_hex": "0x80000000000000"
+      },
+      {
+        "numerator_hex": "0x163f693da2e62b",
+        "denominator_hex": "0x200000000000000"
+      },
+      {
+        "numerator_hex": "0x8a276f2e15b01",
+        "denominator_hex": "0x400000000000000"
+      }
+    ],
+    "historical_latent_start_bits": null,
+    "latent_availability": "NOT_PERSISTED_REQUIRES_AUDITOR_RECONSTRUCTION"
+  }
+]

@@ -1,0 +1,663 @@
+{
+  "schema": "gate2c-operation-trace-producer-v1",
+  "kind": "step_1",
+  "label": "PRODUCER_OBSERVATION_NOT_INDEPENDENT_REFERENCE",
+  "V2_structure": [
+    [
+      "CONST",
+      "dt",
+      [],
+      "1/64"
+    ],
+    [
+      "CONST",
+      "half",
+      [],
+      "1/2"
+    ],
+    [
+      "CONST",
+      "gz",
+      [],
+      "0"
+    ],
+    [
+      "MUL",
+      "hhalf",
+      [
+        "dt",
+        "half"
+      ],
+      null
+    ],
+    [
+      "MUL",
+      "dx",
+      [
+        "dt",
+        "vhx"
+      ],
+      null
+    ],
+    [
+      "ADD",
+      "x1",
+      [
+        "x",
+        "dx"
+      ],
+      null
+    ],
+    [
+      "MUL",
+      "dy",
+      [
+        "dt",
+        "vhy"
+      ],
+      null
+    ],
+    [
+      "ADD",
+      "y1",
+      [
+        "y",
+        "dy"
+      ],
+      null
+    ],
+    [
+      "ADD",
+      "axs",
+      [
+        "gz",
+        "x1"
+      ],
+      null
+    ],
+    [
+      "ADD",
+      "dbls",
+      [
+        "x1",
+        "x1"
+      ],
+      null
+    ],
+    [
+      "MUL",
+      "xys",
+      [
+        "dbls",
+        "y1"
+      ],
+      null
+    ],
+    [
+      "ADD",
+      "gxs",
+      [
+        "axs",
+        "xys"
+      ],
+      null
+    ],
+    [
+      "MUL",
+      "xxs",
+      [
+        "x1",
+        "x1"
+      ],
+      null
+    ],
+    [
+      "MUL",
+      "yys",
+      [
+        "y1",
+        "y1"
+      ],
+      null
+    ],
+    [
+      "SUB",
+      "diffs",
+      [
+        "xxs",
+        "yys"
+      ],
+      null
+    ],
+    [
+      "ADD",
+      "ays",
+      [
+        "gz",
+        "y1"
+      ],
+      null
+    ],
+    [
+      "ADD",
+      "gys",
+      [
+        "diffs",
+        "ays"
+      ],
+      null
+    ],
+    [
+      "MUL",
+      "kx",
+      [
+        "gxs",
+        "hhalf"
+      ],
+      null
+    ],
+    [
+      "SUB",
+      "vox",
+      [
+        "vhx",
+        "kx"
+      ],
+      null
+    ],
+    [
+      "MUL",
+      "gdx",
+      [
+        "dt",
+        "gxs"
+      ],
+      null
+    ],
+    [
+      "SUB",
+      "vhx1",
+      [
+        "vhx",
+        "gdx"
+      ],
+      null
+    ],
+    [
+      "MUL",
+      "ky",
+      [
+        "gys",
+        "hhalf"
+      ],
+      null
+    ],
+    [
+      "SUB",
+      "voy",
+      [
+        "vhy",
+        "ky"
+      ],
+      null
+    ],
+    [
+      "MUL",
+      "gdy",
+      [
+        "dt",
+        "gys"
+      ],
+      null
+    ],
+    [
+      "SUB",
+      "vhy1",
+      [
+        "vhy",
+        "gdy"
+      ],
+      null
+    ]
+  ],
+  "V2_registers_bits": {
+    "x": "0000000000000000",
+    "y": "0000000000000000",
+    "vhx": "3fd0000000000000",
+    "vhy": "3fc0000000000000",
+    "dt": "3f90000000000000",
+    "half": "3fe0000000000000",
+    "gz": "0000000000000000",
+    "hhalf": "3f80000000000000",
+    "dx": "3f70000000000000",
+    "x1": "3f70000000000000",
+    "dy": "3f60000000000000",
+    "y1": "3f60000000000000",
+    "axs": "3f70000000000000",
+    "dbls": "3f80000000000000",
+    "xys": "3ef0000000000000",
+    "gxs": "3f70100000000000",
+    "xxs": "3ef0000000000000",
+    "yys": "3ed0000000000000",
+    "diffs": "3ee8000000000000",
+    "ays": "3f60000000000000",
+    "gys": "3f60180000000000",
+    "kx": "3f00100000000000",
+    "vox": "3fcffeff00000000",
+    "gdx": "3f10100000000000",
+    "vhx1": "3fcffdfe00000000",
+    "ky": "3ef0180000000000",
+    "voy": "3fbffefe80000000",
+    "gdy": "3f00180000000000",
+    "vhy1": "3fbffdfd00000000"
+  },
+  "V2_input_forms": {
+    "x": {
+      "coef_bits": [
+        "0000000000000000",
+        "0000000000000000",
+        "0000000000000000",
+        "0000000000000000"
+      ],
+      "box_bits": "000000000000000c"
+    },
+    "y": {
+      "coef_bits": [
+        "0000000000000000",
+        "0000000000000000",
+        "0000000000000000",
+        "0000000000000000"
+      ],
+      "box_bits": "000000000000000c"
+    },
+    "vhx": {
+      "coef_bits": [
+        "0000000000000000",
+        "0000000000000000",
+        "000000000000003a",
+        "0000000000000000"
+      ],
+      "box_bits": "000000000000000c"
+    },
+    "vhy": {
+      "coef_bits": [
+        "0000000000000000",
+        "0000000000000000",
+        "0000000000000000",
+        "000000000000003a"
+      ],
+      "box_bits": "000000000000000c"
+    }
+  },
+  "operations": [
+    {
+      "index": 0,
+      "op": "CONST",
+      "dst": "dt",
+      "operands": [],
+      "literal": "1/64",
+      "operand_bits": [],
+      "result_bits": "3f90000000000000"
+    },
+    {
+      "index": 1,
+      "op": "CONST",
+      "dst": "half",
+      "operands": [],
+      "literal": "1/2",
+      "operand_bits": [],
+      "result_bits": "3fe0000000000000"
+    },
+    {
+      "index": 2,
+      "op": "CONST",
+      "dst": "gz",
+      "operands": [],
+      "literal": "0",
+      "operand_bits": [],
+      "result_bits": "0000000000000000"
+    },
+    {
+      "index": 3,
+      "op": "MUL",
+      "dst": "hhalf",
+      "operands": [
+        "dt",
+        "half"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3f90000000000000",
+        "3fe0000000000000"
+      ],
+      "result_bits": "3f80000000000000"
+    },
+    {
+      "index": 4,
+      "op": "MUL",
+      "dst": "dx",
+      "operands": [
+        "dt",
+        "vhx"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3f90000000000000",
+        "3fd0000000000000"
+      ],
+      "result_bits": "3f70000000000000"
+    },
+    {
+      "index": 5,
+      "op": "ADD",
+      "dst": "x1",
+      "operands": [
+        "x",
+        "dx"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "0000000000000000",
+        "3f70000000000000"
+      ],
+      "result_bits": "3f70000000000000"
+    },
+    {
+      "index": 6,
+      "op": "MUL",
+      "dst": "dy",
+      "operands": [
+        "dt",
+        "vhy"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3f90000000000000",
+        "3fc0000000000000"
+      ],
+      "result_bits": "3f60000000000000"
+    },
+    {
+      "index": 7,
+      "op": "ADD",
+      "dst": "y1",
+      "operands": [
+        "y",
+        "dy"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "0000000000000000",
+        "3f60000000000000"
+      ],
+      "result_bits": "3f60000000000000"
+    },
+    {
+      "index": 8,
+      "op": "ADD",
+      "dst": "axs",
+      "operands": [
+        "gz",
+        "x1"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "0000000000000000",
+        "3f70000000000000"
+      ],
+      "result_bits": "3f70000000000000"
+    },
+    {
+      "index": 9,
+      "op": "ADD",
+      "dst": "dbls",
+      "operands": [
+        "x1",
+        "x1"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3f70000000000000",
+        "3f70000000000000"
+      ],
+      "result_bits": "3f80000000000000"
+    },
+    {
+      "index": 10,
+      "op": "MUL",
+      "dst": "xys",
+      "operands": [
+        "dbls",
+        "y1"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3f80000000000000",
+        "3f60000000000000"
+      ],
+      "result_bits": "3ef0000000000000"
+    },
+    {
+      "index": 11,
+      "op": "ADD",
+      "dst": "gxs",
+      "operands": [
+        "axs",
+        "xys"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3f70000000000000",
+        "3ef0000000000000"
+      ],
+      "result_bits": "3f70100000000000"
+    },
+    {
+      "index": 12,
+      "op": "MUL",
+      "dst": "xxs",
+      "operands": [
+        "x1",
+        "x1"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3f70000000000000",
+        "3f70000000000000"
+      ],
+      "result_bits": "3ef0000000000000"
+    },
+    {
+      "index": 13,
+      "op": "MUL",
+      "dst": "yys",
+      "operands": [
+        "y1",
+        "y1"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3f60000000000000",
+        "3f60000000000000"
+      ],
+      "result_bits": "3ed0000000000000"
+    },
+    {
+      "index": 14,
+      "op": "SUB",
+      "dst": "diffs",
+      "operands": [
+        "xxs",
+        "yys"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3ef0000000000000",
+        "3ed0000000000000"
+      ],
+      "result_bits": "3ee8000000000000"
+    },
+    {
+      "index": 15,
+      "op": "ADD",
+      "dst": "ays",
+      "operands": [
+        "gz",
+        "y1"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "0000000000000000",
+        "3f60000000000000"
+      ],
+      "result_bits": "3f60000000000000"
+    },
+    {
+      "index": 16,
+      "op": "ADD",
+      "dst": "gys",
+      "operands": [
+        "diffs",
+        "ays"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3ee8000000000000",
+        "3f60000000000000"
+      ],
+      "result_bits": "3f60180000000000"
+    },
+    {
+      "index": 17,
+      "op": "MUL",
+      "dst": "kx",
+      "operands": [
+        "gxs",
+        "hhalf"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3f70100000000000",
+        "3f80000000000000"
+      ],
+      "result_bits": "3f00100000000000"
+    },
+    {
+      "index": 18,
+      "op": "SUB",
+      "dst": "vox",
+      "operands": [
+        "vhx",
+        "kx"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3fd0000000000000",
+        "3f00100000000000"
+      ],
+      "result_bits": "3fcffeff00000000"
+    },
+    {
+      "index": 19,
+      "op": "MUL",
+      "dst": "gdx",
+      "operands": [
+        "dt",
+        "gxs"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3f90000000000000",
+        "3f70100000000000"
+      ],
+      "result_bits": "3f10100000000000"
+    },
+    {
+      "index": 20,
+      "op": "SUB",
+      "dst": "vhx1",
+      "operands": [
+        "vhx",
+        "gdx"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3fd0000000000000",
+        "3f10100000000000"
+      ],
+      "result_bits": "3fcffdfe00000000"
+    },
+    {
+      "index": 21,
+      "op": "MUL",
+      "dst": "ky",
+      "operands": [
+        "gys",
+        "hhalf"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3f60180000000000",
+        "3f80000000000000"
+      ],
+      "result_bits": "3ef0180000000000"
+    },
+    {
+      "index": 22,
+      "op": "SUB",
+      "dst": "voy",
+      "operands": [
+        "vhy",
+        "ky"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3fc0000000000000",
+        "3ef0180000000000"
+      ],
+      "result_bits": "3fbffefe80000000"
+    },
+    {
+      "index": 23,
+      "op": "MUL",
+      "dst": "gdy",
+      "operands": [
+        "dt",
+        "gys"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3f90000000000000",
+        "3f60180000000000"
+      ],
+      "result_bits": "3f00180000000000"
+    },
+    {
+      "index": 24,
+      "op": "SUB",
+      "dst": "vhy1",
+      "operands": [
+        "vhy",
+        "gdy"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3fc0000000000000",
+        "3f00180000000000"
+      ],
+      "result_bits": "3fbffdfd00000000"
+    }
+  ],
+  "producer_output_bound_bits": [
+    "000000000000004a",
+    "000000000000004a",
+    "0000000000000084",
+    "0000000000000085"
+  ],
+  "fixture_output_bits": [
+    "3f70000000000000",
+    "3f60000000000000",
+    "3fcffeff00000000",
+    "3fbffefe80000000"
+  ]
+}

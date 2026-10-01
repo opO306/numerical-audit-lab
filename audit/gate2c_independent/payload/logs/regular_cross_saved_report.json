@@ -1,0 +1,203 @@
+{
+  "label": "EXTRACTED_HISTORICAL_REPORT_NOT_FRESH_RECALCULATION",
+  "cross_summary": {
+    "counts": {
+      "PASS": 100000,
+      "FAIL": 0,
+      "REFUSED": 0
+    },
+    "first_refused": null,
+    "raw_enclosure_violation_count": 0,
+    "violation_examples": [],
+    "max_residual_over_bound_finite": 0.8860840412813303
+  },
+  "saved_marks": [
+    {
+      "step": 10,
+      "external_bound": [
+        1.4971845784478897e-17,
+        1.0264543758853003e-17,
+        5.551691831387405e-17,
+        3.418732764457449e-17
+      ],
+      "lab_bound": [
+        3.8590692070801656e-17,
+        1.8857502887244234e-17,
+        1.5271515774455534e-16,
+        6.85280586954512e-17
+      ],
+      "external_status": "PASS",
+      "external_reason": "finite bound smaller than represented state scale",
+      "cross": {
+        "verdict": "PASS",
+        "reason": "residual contained in exact sum bound",
+        "raw_enclosure_violations": [],
+        "sum_bounds_q": [
+          "17382037315070375/324518553658426726783156020576256",
+          "18901288914329425/649037107316853453566312041152512",
+          "16893793036943253/81129638414606681695789005144064",
+          "16666524306765829/162259276829213363391578010288128"
+        ],
+        "max_residual": 2.7755575615628914e-17,
+        "max_sum_bound": 2.0823207605842937e-16,
+        "max_residual_over_bound": 0.13329154730148668
+      }
+    },
+    {
+      "step": 100,
+      "external_bound": [
+        1.3090287918611837e-15,
+        7.852487248581629e-16,
+        9.262664902511128e-16,
+        8.014725603525854e-16
+      ],
+      "lab_bound": [
+        1.987632283617541e-15,
+        1.1821709299106367e-15,
+        1.4253866531474648e-15,
+        1.197545086839012e-15
+      ],
+      "external_status": "PASS",
+      "external_reason": "finite bound smaller than represented state scale",
+      "cross": {
+        "verdict": "PASS",
+        "reason": "residual contained in exact sum bound",
+        "raw_enclosure_violations": [],
+        "sum_bounds_q": [
+          "8358028782159291/2535301200456458802993406410752",
+          "9976002825073939/5070602400912917605986812821504",
+          "11924298075031237/5070602400912917605986812821504",
+          "5068111840658503/2535301200456458802993406410752"
+        ],
+        "max_residual": 1.942890293094024e-16,
+        "max_sum_bound": 3.2966610754787246e-15,
+        "max_residual_over_bound": 0.05893509367843909
+      }
+    },
+    {
+      "step": 1000,
+      "external_bound": [
+        6.663514800922983e-14,
+        2.776681643689558e-14,
+        5.4291676412494764e-14,
+        2.1389230045182186e-14
+      ],
+      "lab_bound": [
+        9.809123803068253e-14,
+        4.145482114354898e-14,
+        8.008267164233339e-14,
+        3.1945376246319235e-14
+      ],
+      "external_status": "PASS",
+      "external_reason": "finite bound smaller than represented state scale",
+      "cross": {
+        "verdict": "PASS",
+        "reason": "residual contained in exact sum bound",
+        "raw_enclosure_violations": [],
+        "sum_bounds_q": [
+          "13050968883557621/79228162514264337593543950336",
+          "21937212606907877/316912650057057350374175801344",
+          "10646232685436245/79228162514264337593543950336",
+          "16902411419589519/316912650057057350374175801344"
+        ],
+        "max_residual": 6.106226635438361e-16,
+        "max_sum_bound": 1.6472638603991235e-13,
+        "max_residual_over_bound": 0.004911842787543464
+      }
+    },
+    {
+      "step": 10000,
+      "external_bound": [
+        3.330519688001657e-11,
+        2.2416398594020564e-11,
+        6.3119036317769654e-12,
+        7.92005839530382e-12
+      ],
+      "lab_bound": [
+        4.8788781867170466e-11,
+        3.284711609289825e-11,
+        9.227315605289237e-12,
+        1.1583479571954321e-11
+      ],
+      "external_status": "PASS",
+      "external_reason": "finite bound smaller than represented state scale",
+      "cross": {
+        "verdict": "PASS",
+        "reason": "residual contained in exact sum bound",
+        "raw_enclosure_violations": [],
+        "sum_bounds_q": [
+          "12703427909423237/154742504910672534362390528",
+          "4275807346410779/77371252455336267181195264",
+          "19236621672797871/1237940039285380274899124224",
+          "3018026319673931/154742504910672534362390528"
+        ],
+        "max_residual": 9.63812363252714e-15,
+        "max_sum_bound": 8.209397874718703e-11,
+        "max_residual_over_bound": 0.00011740353896365867
+      }
+    },
+    {
+      "step": 50000,
+      "external_bound": [
+        3.0887995412589084e-09,
+        1.5321286376952305e-09,
+        2.056568504272319e-09,
+        1.3463062254976216e-09
+      ],
+      "lab_bound": [
+        4.536345738897592e-09,
+        2.2504649130632304e-09,
+        3.0209294052400288e-09,
+        1.9789616945934384e-09
+      ],
+      "external_status": "PASS",
+      "external_reason": "finite bound smaller than represented state scale",
+      "cross": {
+        "verdict": "PASS",
+        "reason": "residual contained in exact sum bound",
+        "raw_enclosure_violations": [],
+        "sum_bounds_q": [
+          "18436470014987637/2417851639229258349412352",
+          "18291500034478731/4835703278458516698824704",
+          "6138318321848781/1208925819614629174706176",
+          "2010001122867159/604462909807314587353088"
+        ],
+        "max_residual": 5.523359547510154e-15,
+        "max_sum_bound": 7.6251452801565e-09,
+        "max_residual_over_bound": 1.0878112893286504e-06
+      }
+    },
+    {
+      "step": 100000,
+      "external_bound": [
+        1.3027421467700707e-08,
+        1.0428994502352027e-08,
+        3.734460733670531e-08,
+        1.7212735463243598e-08
+      ],
+      "lab_bound": [
+        1.9227264020036484e-08,
+        1.5417577377200904e-08,
+        5.505887265599119e-08,
+        2.5392895247947694e-08
+      ],
+      "external_status": "PASS",
+      "external_reason": "finite bound smaller than represented state scale",
+      "cross": {
+        "verdict": "PASS",
+        "reason": "residual contained in exact sum bound",
+        "raw_enclosure_violations": [],
+        "sum_bounds_q": [
+          "2437095130604673/75557863725914323419136",
+          "15623294046858477/604462909807314587353088",
+          "6981809549088413/75557863725914323419136",
+          "12876761756931287/302231454903657293676544"
+        ],
+        "max_residual": 5.981326545168031e-15,
+        "max_sum_bound": 9.24034799926965e-08,
+        "max_residual_over_bound": 1.9651620962849125e-07
+      }
+    }
+  ],
+  "boundary_previous_step_forms_available": false
+}

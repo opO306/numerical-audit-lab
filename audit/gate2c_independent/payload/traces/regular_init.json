@@ -1,0 +1,451 @@
+{
+  "schema": "gate2c-operation-trace-producer-v1",
+  "kind": "init",
+  "label": "PRODUCER_OBSERVATION_NOT_INDEPENDENT_REFERENCE",
+  "V2_structure": [
+    [
+      "CONST",
+      "dt",
+      [],
+      "1/64"
+    ],
+    [
+      "CONST",
+      "half",
+      [],
+      "1/2"
+    ],
+    [
+      "CONST",
+      "gz",
+      [],
+      "0"
+    ],
+    [
+      "MUL",
+      "hhalf",
+      [
+        "dt",
+        "half"
+      ],
+      null
+    ],
+    [
+      "ADD",
+      "axi",
+      [
+        "gz",
+        "x"
+      ],
+      null
+    ],
+    [
+      "ADD",
+      "dbli",
+      [
+        "x",
+        "x"
+      ],
+      null
+    ],
+    [
+      "MUL",
+      "xyi",
+      [
+        "dbli",
+        "y"
+      ],
+      null
+    ],
+    [
+      "ADD",
+      "gxi",
+      [
+        "axi",
+        "xyi"
+      ],
+      null
+    ],
+    [
+      "MUL",
+      "xxi",
+      [
+        "x",
+        "x"
+      ],
+      null
+    ],
+    [
+      "MUL",
+      "yyi",
+      [
+        "y",
+        "y"
+      ],
+      null
+    ],
+    [
+      "SUB",
+      "diffi",
+      [
+        "xxi",
+        "yyi"
+      ],
+      null
+    ],
+    [
+      "ADD",
+      "ayi",
+      [
+        "gz",
+        "y"
+      ],
+      null
+    ],
+    [
+      "ADD",
+      "gyi",
+      [
+        "diffi",
+        "ayi"
+      ],
+      null
+    ],
+    [
+      "MUL",
+      "kx",
+      [
+        "gxi",
+        "hhalf"
+      ],
+      null
+    ],
+    [
+      "SUB",
+      "vhx",
+      [
+        "vx",
+        "kx"
+      ],
+      null
+    ],
+    [
+      "MUL",
+      "ky",
+      [
+        "gyi",
+        "hhalf"
+      ],
+      null
+    ],
+    [
+      "SUB",
+      "vhy",
+      [
+        "vy",
+        "ky"
+      ],
+      null
+    ]
+  ],
+  "V2_registers_bits": {
+    "x": "0000000000000000",
+    "y": "0000000000000000",
+    "vx": "3fd0000000000000",
+    "vy": "3fc0000000000000",
+    "dt": "3f90000000000000",
+    "half": "3fe0000000000000",
+    "gz": "0000000000000000",
+    "hhalf": "3f80000000000000",
+    "axi": "0000000000000000",
+    "dbli": "0000000000000000",
+    "xyi": "0000000000000000",
+    "gxi": "0000000000000000",
+    "xxi": "0000000000000000",
+    "yyi": "0000000000000000",
+    "diffi": "0000000000000000",
+    "ayi": "0000000000000000",
+    "gyi": "0000000000000000",
+    "kx": "0000000000000000",
+    "vhx": "3fd0000000000000",
+    "ky": "0000000000000000",
+    "vhy": "3fc0000000000000"
+  },
+  "V2_input_forms": {
+    "x": {
+      "coef_bits": [
+        "0000000000000000",
+        "0000000000000000",
+        "0000000000000000",
+        "0000000000000000"
+      ],
+      "box_bits": "0000000000000000"
+    },
+    "y": {
+      "coef_bits": [
+        "0000000000000000",
+        "0000000000000000",
+        "0000000000000000",
+        "0000000000000000"
+      ],
+      "box_bits": "0000000000000000"
+    },
+    "vx": {
+      "coef_bits": [
+        "0000000000000000",
+        "0000000000000000",
+        "0000000000000000",
+        "0000000000000000"
+      ],
+      "box_bits": "0000000000000000"
+    },
+    "vy": {
+      "coef_bits": [
+        "0000000000000000",
+        "0000000000000000",
+        "0000000000000000",
+        "0000000000000000"
+      ],
+      "box_bits": "0000000000000000"
+    }
+  },
+  "operations": [
+    {
+      "index": 0,
+      "op": "CONST",
+      "dst": "dt",
+      "operands": [],
+      "literal": "1/64",
+      "operand_bits": [],
+      "result_bits": "3f90000000000000"
+    },
+    {
+      "index": 1,
+      "op": "CONST",
+      "dst": "half",
+      "operands": [],
+      "literal": "1/2",
+      "operand_bits": [],
+      "result_bits": "3fe0000000000000"
+    },
+    {
+      "index": 2,
+      "op": "CONST",
+      "dst": "gz",
+      "operands": [],
+      "literal": "0",
+      "operand_bits": [],
+      "result_bits": "0000000000000000"
+    },
+    {
+      "index": 3,
+      "op": "MUL",
+      "dst": "hhalf",
+      "operands": [
+        "dt",
+        "half"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3f90000000000000",
+        "3fe0000000000000"
+      ],
+      "result_bits": "3f80000000000000"
+    },
+    {
+      "index": 4,
+      "op": "ADD",
+      "dst": "axi",
+      "operands": [
+        "gz",
+        "x"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "0000000000000000",
+        "0000000000000000"
+      ],
+      "result_bits": "0000000000000000"
+    },
+    {
+      "index": 5,
+      "op": "ADD",
+      "dst": "dbli",
+      "operands": [
+        "x",
+        "x"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "0000000000000000",
+        "0000000000000000"
+      ],
+      "result_bits": "0000000000000000"
+    },
+    {
+      "index": 6,
+      "op": "MUL",
+      "dst": "xyi",
+      "operands": [
+        "dbli",
+        "y"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "0000000000000000",
+        "0000000000000000"
+      ],
+      "result_bits": "0000000000000000"
+    },
+    {
+      "index": 7,
+      "op": "ADD",
+      "dst": "gxi",
+      "operands": [
+        "axi",
+        "xyi"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "0000000000000000",
+        "0000000000000000"
+      ],
+      "result_bits": "0000000000000000"
+    },
+    {
+      "index": 8,
+      "op": "MUL",
+      "dst": "xxi",
+      "operands": [
+        "x",
+        "x"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "0000000000000000",
+        "0000000000000000"
+      ],
+      "result_bits": "0000000000000000"
+    },
+    {
+      "index": 9,
+      "op": "MUL",
+      "dst": "yyi",
+      "operands": [
+        "y",
+        "y"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "0000000000000000",
+        "0000000000000000"
+      ],
+      "result_bits": "0000000000000000"
+    },
+    {
+      "index": 10,
+      "op": "SUB",
+      "dst": "diffi",
+      "operands": [
+        "xxi",
+        "yyi"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "0000000000000000",
+        "0000000000000000"
+      ],
+      "result_bits": "0000000000000000"
+    },
+    {
+      "index": 11,
+      "op": "ADD",
+      "dst": "ayi",
+      "operands": [
+        "gz",
+        "y"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "0000000000000000",
+        "0000000000000000"
+      ],
+      "result_bits": "0000000000000000"
+    },
+    {
+      "index": 12,
+      "op": "ADD",
+      "dst": "gyi",
+      "operands": [
+        "diffi",
+        "ayi"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "0000000000000000",
+        "0000000000000000"
+      ],
+      "result_bits": "0000000000000000"
+    },
+    {
+      "index": 13,
+      "op": "MUL",
+      "dst": "kx",
+      "operands": [
+        "gxi",
+        "hhalf"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "0000000000000000",
+        "3f80000000000000"
+      ],
+      "result_bits": "0000000000000000"
+    },
+    {
+      "index": 14,
+      "op": "SUB",
+      "dst": "vhx",
+      "operands": [
+        "vx",
+        "kx"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3fd0000000000000",
+        "0000000000000000"
+      ],
+      "result_bits": "3fd0000000000000"
+    },
+    {
+      "index": 15,
+      "op": "MUL",
+      "dst": "ky",
+      "operands": [
+        "gyi",
+        "hhalf"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "0000000000000000",
+        "3f80000000000000"
+      ],
+      "result_bits": "0000000000000000"
+    },
+    {
+      "index": 16,
+      "op": "SUB",
+      "dst": "vhy",
+      "operands": [
+        "vy",
+        "ky"
+      ],
+      "literal": null,
+      "operand_bits": [
+        "3fc0000000000000",
+        "0000000000000000"
+      ],
+      "result_bits": "3fc0000000000000"
+    }
+  ]
+}

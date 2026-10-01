@@ -1,0 +1,54 @@
+{
+  "schema": "git-lineage-reconstruction-v1",
+  "source_workspace": "D:\\numerical-audit-lab",
+  "recovered_checkout": "D:\\numerical-audit-lab-recovered-2026-10-01",
+  "original_workspace_had_git": false,
+  "source_bundle": "D:\\numerical-audit-lab\\numerical-audit-lab.bundle",
+  "source_bundle_sha256": "84e862a1cd5281ea7a73ca592f496703f7d2a875dc1f6887d76c64f833978f4e",
+  "bundle_ref_head": "2f2a2216f7455429fc36b06c919793ee9bebf781",
+  "bundle_verification": "complete history, sha1, verified",
+  "fsck_exit_code": 0,
+  "bundle_inventory_scope": [
+    "D:\\numerical-audit-lab",
+    "D:\\downloads",
+    "D:\\docs",
+    "D:\\lab",
+    "D:\\reports",
+    "C:\\Users\\zun24\\Downloads",
+    "C:\\Users\\zun24\\Documents",
+    "C:\\Users\\zun24\\OneDrive"
+  ],
+  "candidate_bundles_found": 1,
+  "zip_checked": {
+    "path": "C:\\Users\\zun24\\Downloads\\numerical-audit-lab.zip",
+    "sha256": "f2baaf65b43e015499dc6b3d79ff97f00380a0d7f1c25ad46820f6959d658d22",
+    "embedded_bundle_entries": 0
+  },
+  "commits_newest_first": [
+    {
+      "commit": "0ea95c18142898714cfc15e309999ef915de8672",
+      "subject": "Preserve frozen Gate 2C results as PROVISIONAL PASS pending independent audit"
+    },
+    {
+      "commit": "7b167b0a8adb355c80f1faf3d25520a5b6af2029",
+      "subject": "Restore frozen Gate 2C adapter, tests, and historical review snapshots"
+    },
+    {
+      "commit": "96e88632da09b64821d7e84c10ae40175b2f0ea7",
+      "subject": "Restore sealed Gate 2C plan as a distinct provenance stage"
+    },
+    {
+      "commit": "01f7fcb47fa7b6576895b02b4a9ea0b4228d7207",
+      "subject": "Record Gate 2B closure with byte-preserving raw seals"
+    },
+    {
+      "commit": "2f2a2216f7455429fc36b06c919793ee9bebf781",
+      "subject": "Gate 2B: analysis of the frozen gala fixture (PASS, answer LIMITED)"
+    }
+  ],
+  "history_limit": "restoration commits are made after measurements; not original preregistration Git evidence; no backdated commit dates",
+  "raw_seal_preservation": "explicit -text Git attributes; both working files and committed blobs hash-checked",
+  "adapter_modified": false,
+  "new_100000_step_execution": false,
+  "push_performed": false
+}

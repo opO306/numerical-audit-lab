@@ -1,0 +1,111 @@
+{
+  "wheel_record": {
+    "artifact": "gala-1.12.0-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl",
+    "sha256": "cc5f0cf3bc63a966a3c130b93f6c05026271fe7178492a02c6266c243b5fc2f0",
+    "source_url": "https://files.pythonhosted.org/packages/1c/88/5123d737a51013e56fda6a019f41be7483ed5188156fc4898c18fa5c3503/gala-1.12.0-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl",
+    "pypi_metadata_url": "https://pypi.org/pypi/gala/1.12.0/json",
+    "downloaded_for_static_audit": true,
+    "installed_or_executed": false,
+    "sigstore_chain_verified": false,
+    "bytes": 15044187
+  },
+  "distribution_file_binding": [
+    {
+      "path": "gala/_cconfig.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "4c09f803b2e518642d77b99cfa8023ebc3fddd049e9c4309998f464a507a63f6",
+      "matches_frozen_manifest": true
+    },
+    {
+      "path": "gala/dynamics/lyapunov/dop853_lyapunov.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "ef4dc4b394550bf780fc77ef9242681a54e6a92032270d821d521e2df1a5afbc",
+      "matches_frozen_manifest": true
+    },
+    {
+      "path": "gala/dynamics/mockstream/_coord.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "afb4a19068bc24a808aeb755db5498c2075c320bb6d108dde19345fb101c4531",
+      "matches_frozen_manifest": true
+    },
+    {
+      "path": "gala/dynamics/mockstream/_mockstream.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "57c3c79771f912d7903b3da20877760a761da5a1b99ae789c34c51271f332bee",
+      "matches_frozen_manifest": true
+    },
+    {
+      "path": "gala/dynamics/mockstream/df.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "b199c733ffc8ff3bc2326ac40b0349a80973ad29f8158287adcb0bd8e4b51763",
+      "matches_frozen_manifest": true
+    },
+    {
+      "path": "gala/dynamics/nbody/nbody.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "0275c8384eaa532965a0405693b2ecb8c6846f2349a6f8a71abd226ee0636976",
+      "matches_frozen_manifest": true
+    },
+    {
+      "path": "gala/integrate/cyintegrators/dop853.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "3686e4230fe692f09c3d24fd73ea61feacd4d11a4859b83f842e7fb6f584fa6d",
+      "matches_frozen_manifest": true
+    },
+    {
+      "path": "gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "a6ac98736304bb9f6a92e473bba45da10d9b5b99f8019e2ca15eb6a7f86234fc",
+      "matches_frozen_manifest": true
+    },
+    {
+      "path": "gala/integrate/cyintegrators/ruth4.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "137f4c04db4ee38880e7300856a8e0359363c570a118ae8a56b55818b539133f",
+      "matches_frozen_manifest": true
+    },
+    {
+      "path": "gala/potential/frame/builtin/frames.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "7fa38285de473698b0ea5f08ad5def9d598b410328a84916b18a70da5a976649",
+      "matches_frozen_manifest": true
+    },
+    {
+      "path": "gala/potential/frame/cframe.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "234e602690ddd9a18ff962cf1c41e4493597fe13b3c8322d606e9b5f836a2065",
+      "matches_frozen_manifest": true
+    },
+    {
+      "path": "gala/potential/hamiltonian/chamiltonian.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "0bb7d5ae0b58705bf4cdb29035e7e006c04b397f879107685a2f829c0729003f",
+      "matches_frozen_manifest": true
+    },
+    {
+      "path": "gala/potential/potential/builtin/cybuiltin.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "33d66d82c34c717560747ffbfca1d98f97432a0a671a0a210a0a225d8367ecaf",
+      "matches_frozen_manifest": true
+    },
+    {
+      "path": "gala/potential/potential/builtin/cytimeinterp.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "a46d002df5814f4e5e87a7a11a5d39b0fce7f056193e81bb4fdd07399824d831",
+      "matches_frozen_manifest": true
+    },
+    {
+      "path": "gala/potential/potential/ccompositepotential.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "9c2dd7d3f553f66669357c872060f9950d8ce10142cce1fae19e407527747942",
+      "matches_frozen_manifest": true
+    },
+    {
+      "path": "gala/potential/potential/cpotential.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "9bf30bb2ae0fe4f6ed6470511174f96d97d7d9e5eb590c4f60a553b6e1316783",
+      "matches_frozen_manifest": true
+    },
+    {
+      "path": "gala/potential/scf/_bfe.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "01450560558f56197d799f13dedabe5bcdb20970437272d274b98d2f2c1f02e3",
+      "matches_frozen_manifest": true
+    },
+    {
+      "path": "gala/potential/scf/_bfe_class.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "96fdaa0a5f5b976b8e05a81599c3ae79fc12247d14873cb50da912e5c218e3e0",
+      "matches_frozen_manifest": true
+    },
+    {
+      "path": "gala/potential/scf/_computecoeff.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "8eca07ea2c3a2dda4e101003974fd9dd56ddbf8ceeec88f86f15732a78592af1",
+      "matches_frozen_manifest": true
+    }
+  ],
+  "gala_installed_or_executed": false,
+  "independent_disassembly_reinterpretation_performed": false
+}
