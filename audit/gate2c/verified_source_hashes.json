@@ -1,0 +1,10 @@
+{
+  "scope": "corrected code snapshot saved during verification repeat; local history record not third-party attestation",
+  "files": {
+    "run_gate2c.py": "b1c4f024e4e4ccf7a0e433e064bb8a548e73c340fe9507cce89225c89ca2653a",
+    "lab/gate2c_checks.py": "493aacdb6cd8a41b7754a53015e839269aed90c94425258537e6c6bc68f735eb",
+    "benchmarks/gate2c/binary_replay.py": "12449c2c5e017566230ec858e46a2d1abe390e6628787f4435b89c32f14ed41c",
+    "tests/test_gate2c.py": "92c5fb3237eef77496888dcc3c341c2c3847567bfcdf588f4df884767e3ef6ac",
+    "tests/test_gate2c_sealed.py": "cfa5f8c8435678766a69e6eaeaef0eaaebf13d4bf9a36441030156e8b5d71cc7"
+  }
+}

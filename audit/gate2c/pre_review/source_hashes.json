@@ -1,0 +1,10 @@
+{
+  "scope": "code used for first full run; snapshot saved during run before review repairs",
+  "files": {
+    "run_gate2c.py": "320f46a773f921df8d1e4706d89a35a9a0a4746935fec4b8c1abf49bd27e878a",
+    "lab/gate2c_checks.py": "35fbcdea5651112cf78e80462b1c37695797873146cb4107084497a9f6558ee4",
+    "benchmarks/gate2c/binary_replay.py": "12449c2c5e017566230ec858e46a2d1abe390e6628787f4435b89c32f14ed41c",
+    "tests/test_gate2c.py": "61953196617dd78d4fc54457b5f8889d81053b2be45b973f13a2cb0eb40989df",
+    "tests/test_gate2c_sealed.py": "cfa5f8c8435678766a69e6eaeaef0eaaebf13d4bf9a36441030156e8b5d71cc7"
+  }
+}

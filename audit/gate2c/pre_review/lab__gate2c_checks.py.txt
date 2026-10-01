@@ -1,0 +1,127 @@
+"""Checker side: four latent error forms, exact cross sums, independent Fraction map.
+
+Does not import the calculator. Executor/structures are supplied by the runner.
+V2 itself remains frozen; this new adapter has not received independent audit approval.
+"""
+import hashlib
+import json
+import math
+from fractions import Fraction as Q
+from pathlib import Path
+
+from lab.gate2b_fixture import qval
+from lab.v2_bound import rebase, step_forms, zero_forms
+
+STATE=('x','y','vhx','vhy')
+LATENT_OUT=('x1','y1','vhx1','vhy1')
+OUTPUT=('x1','y1','vox','voy')
+PLAN_SEAL_SHA256='ddc6c9822fe5f7af4ff8f2d9e72c8ef7a6be0c3a91b478f5644d45ffbdfe31e8'
+
+
+def verify_seals(root=None):
+    root=Path(root) if root else Path(__file__).resolve().parents[1]
+    p=root/'audit/gate2c/plan_seal.json'
+    if hashlib.sha256(p.read_bytes()).hexdigest()!=PLAN_SEAL_SHA256:
+        raise RuntimeError('plan seal changed')
+    a=json.loads(p.read_text(encoding='utf-8'))
+    if any(a['implementation_files_present_at_seal'].values()):
+        raise RuntimeError('implementation preceded plan seal')
+    for doc in (a,json.loads((root/'audit/gate2b/closure_seal.json').read_text(encoding='utf-8'))):
+        for name,expected in doc['files'].items():
+            if hashlib.sha256((root/name).read_bytes()).hexdigest()!=expected:
+                raise RuntimeError(f'sealed input changed: {name}')
+    return {'plan_seal_sha256':PLAN_SEAL_SHA256,'inputs':'UNCHANGED'}
+
+
+class BinBound:
+    def __init__(self,init_structure,step_structure):
+        self.init_structure,self.step_structure=init_structure,step_structure
+        self.forms=None
+
+    def init(self,regs):
+        f=step_forms(self.init_structure,regs,dict(zip(('x','y','vx','vy'),zero_forms())))
+        self.forms,_=rebase([f[s] for s in STATE])
+
+    def step(self,regs):
+        if self.forms is None:
+            raise ValueError('BinBound requires init or explicit local zero forms')
+        out=step_forms(self.step_structure,regs,dict(zip(STATE,self.forms)))
+        E=[out[k].rad() for k in OUTPUT]
+        self.forms,internal_E=rebase([out[k] for k in LATENT_OUT])
+        if any(not math.isfinite(v) for v in internal_E):
+            raise ArithmeticError('nonfinite latent bound')
+        return E
+
+
+def output_status(state_bits,bounds):
+    if bounds is None:
+        return 'REFUSED','bound unavailable'
+    if any(not math.isfinite(v) for v in bounds):
+        return 'REFUSED','nonfinite output bound'
+    scale=max(abs(qval(v)) for v in state_bits)
+    if max(Q(v) for v in bounds)>=scale:
+        return 'REFUSED','bound >= represented state scale'
+    return 'PASS','finite bound smaller than represented state scale'
+
+
+def cross_check(a,b,e,f):
+    if e is None or f is None or any(not math.isfinite(v) for v in e+f):
+        return {'verdict':'REFUSED','reason':'bound unavailable or nonfinite','raw_enclosure_violations':[], 'sum_bounds_q':None}
+    sums=[Q(x)+Q(y) for x,y in zip(e,f)]
+    residual=[abs(qval(x)-qval(y)) for x,y in zip(a,b)]
+    bad=[i for i,(r,s) in enumerate(zip(residual,sums)) if r>s]
+    scale=max(abs(qval(v)) for v in a+b)
+    refused=max(sums)>=scale
+    return {'verdict':'REFUSED' if refused else ('FAIL' if bad else 'PASS'),
+            'reason':'sum bound >= represented state scale' if refused else ('residual exceeds exact sum bound' if bad else 'residual contained in exact sum bound'),
+            'raw_enclosure_violations':bad,'sum_bounds_q':[str(s) for s in sums],
+            'max_residual':float(max(residual)), 'max_sum_bound':float(max(sums)),
+            'max_residual_over_bound':float(max((r/s if s else (Q(0) if not r else Q(10**300))) for r,s in zip(residual,sums)))}
+
+
+def replay_comparison(t,rows):
+    initial=[rows[c][0] for c in range(4)]
+    regs=t.init(*initial)
+    st=(initial[0],initial[1],regs['vhx'],regs['vhy'])
+    first=None
+    for j in range(1,len(rows[0])):
+        regs=t.step(*st)
+        for c,k in enumerate(OUTPUT):
+            if first is None and regs[k]!=rows[c][j]:
+                first={'step':j,'component':c}
+        st=tuple(regs[k] for k in LATENT_OUT)
+    return {'first_mismatch':first,'steps_checked':len(rows[0])-1}
+
+
+def exact_latent_step(s):
+    """Independent exact mathematical map, with no replay program or V2 internals used."""
+    x,y,u,v=s
+    x,y=x+u/64,y+v/64
+    gx,gy=x+2*x*y,y+x*x-y*y
+    output=(x,y,u-gx/128,v-gy/128)
+    return output,(x,y,u-gx/64,v-gy/64)
+
+
+def exact_window(t,start,n=8):
+    st=tuple(start)
+    exact=tuple(qval(v) for v in st)
+    b=BinBound(t.init_structure,t.step_structure)
+    b.forms=zero_forms()
+    violations=[]
+    worst=Q(0)
+    for j in range(1,n+1):
+        regs=t.step(*st)
+        E=b.step(regs)
+        true,exact=exact_latent_step(exact)
+        for i,k in enumerate(OUTPUT):
+            r=abs(qval(regs[k])-true[i])
+            if r>Q(E[i]):
+                violations.append({'step':j,'kind':'output','component':i})
+            if E[i]:
+                worst=max(worst,r/Q(E[i]))
+        st=tuple(regs[k] for k in LATENT_OUT)
+        for i,f in enumerate(b.forms):
+            if abs(qval(st[i])-exact[i])>Q(f.rad()):
+                violations.append({'step':j,'kind':'internal','component':i})
+    return {'steps':n,'scope':'LOCAL_RESTART_FROM_REPRESENTED_LATENT_STATE',
+            'violations':len(violations),'details':violations,'max_actual_over_bound':float(worst)}
