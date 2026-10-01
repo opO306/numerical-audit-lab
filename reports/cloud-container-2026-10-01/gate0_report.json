@@ -1,0 +1,736 @@
+{
+  "deterministic_digest": "a063708446ab2905da1b403aed6c407acac945253ebb869c39b610258af09e06",
+  "deterministic": {
+    "criteria_document": "docs/GATE0_CRITERIA.md",
+    "benchmarks": {
+      "rump": {
+        "oracle": {
+          "value": "-54767/66192",
+          "approx": "-0.82739605994682137",
+          "angles": {
+            "literature": "-54767/66192",
+            "direct_rational": "-54767/66192",
+            "mpmath_200_digits": "-0.8273960599468213681411651"
+          }
+        },
+        "programs": {
+          "sequential": {
+            "runs": [
+              {
+                "profile": "binary64",
+                "value": "-1.1805916207174113e+21",
+                "halt": null,
+                "verdict": "INVALID",
+                "reason": "outside the rounding interval",
+                "steps_audited": 26,
+                "steps_rejected": 0,
+                "counts_for_criteria": true
+              },
+              {
+                "profile": "exact",
+                "value": "-0.82739605994682137",
+                "halt": null,
+                "verdict": "VALID",
+                "reason": "equals oracle",
+                "steps_audited": 26,
+                "steps_rejected": 0,
+                "counts_for_criteria": true
+              },
+              {
+                "profile": "FX(64,32)",
+                "value": null,
+                "halt": [
+                  3,
+                  "overflow"
+                ],
+                "verdict": "REFUSED",
+                "reason": "run halted; no value was claimed",
+                "steps_audited": 3,
+                "steps_rejected": 0,
+                "counts_for_criteria": false
+              },
+              {
+                "profile": "FX(128,96)",
+                "value": null,
+                "halt": [
+                  3,
+                  "overflow"
+                ],
+                "verdict": "REFUSED",
+                "reason": "run halted; no value was claimed",
+                "steps_audited": 3,
+                "steps_rejected": 0,
+                "counts_for_criteria": false
+              },
+              {
+                "profile": "FX(256,64)",
+                "value": "-0.82739605994682137",
+                "halt": null,
+                "verdict": "VALID",
+                "reason": "correctly rounded oracle",
+                "steps_audited": 26,
+                "steps_rejected": 0,
+                "counts_for_criteria": false
+              },
+              {
+                "profile": "FX(256,192)",
+                "value": null,
+                "halt": [
+                  4,
+                  "overflow"
+                ],
+                "verdict": "REFUSED",
+                "reason": "run halted; no value was claimed",
+                "steps_audited": 4,
+                "steps_rejected": 0,
+                "counts_for_criteria": false
+              }
+            ],
+            "injections": [
+              {
+                "name": "host and calculator round the oracle to the same binary64",
+                "expected": true,
+                "got": true,
+                "ok": true
+              },
+              {
+                "name": "claim: correctly rounded oracle",
+                "expected": "VALID",
+                "got": "VALID",
+                "ok": true
+              },
+              {
+                "name": "claim: oracle + 1 ulp",
+                "expected": "INVALID",
+                "got": "INVALID",
+                "ok": true
+              },
+              {
+                "name": "claim: oracle - 1 ulp",
+                "expected": "INVALID",
+                "got": "INVALID",
+                "ok": true
+              },
+              {
+                "name": "claim: exact oracle",
+                "expected": "VALID",
+                "got": "VALID",
+                "ok": true
+              },
+              {
+                "name": "claim: exact oracle + 1e-40",
+                "expected": "INVALID",
+                "got": "INVALID",
+                "ok": true
+              },
+              {
+                "name": "claim: halted run (no value)",
+                "expected": "REFUSED",
+                "got": "REFUSED",
+                "ok": true
+              },
+              {
+                "name": "oracle: 'literature' shifted by 1e-40",
+                "expected": "REFUSED",
+                "got": "REFUSED",
+                "ok": true
+              },
+              {
+                "name": "oracle: high-precision angle shifted by 1e-100 relative",
+                "expected": "REFUSED",
+                "got": "REFUSED",
+                "ok": true
+              },
+              {
+                "name": "oracle: only one exact derivation",
+                "expected": "REFUSED",
+                "got": "REFUSED",
+                "ok": true
+              },
+              {
+                "name": "binary64 steps: every step nudged +-1 unit is rejected (52/52)",
+                "expected": true,
+                "got": true,
+                "ok": true
+              },
+              {
+                "name": "exact steps: every step nudged +-1 unit is rejected (52/52)",
+                "expected": true,
+                "got": true,
+                "ok": true
+              }
+            ],
+            "informational": {
+              "mpmath_precision_sweep (same evaluation order)": {
+                "24_bits": "-6.338253001141147e+29",
+                "53_bits": "-1.1805916207174113e+21",
+                "64_bits": "5.7646075230342349e+17",
+                "113_bits": "1.1726039400531786",
+                "128_bits": "-0.82739605994682137"
+              }
+            }
+          },
+          "sum": {
+            "runs": [
+              {
+                "profile": "binary64",
+                "value": "-1.3906120635277419e+21",
+                "halt": null,
+                "verdict": "INVALID",
+                "reason": "outside the rounding interval",
+                "steps_audited": 24,
+                "steps_rejected": 0,
+                "counts_for_criteria": true
+              },
+              {
+                "profile": "exact",
+                "value": "-0.82739605994682137",
+                "halt": null,
+                "verdict": "VALID",
+                "reason": "equals oracle",
+                "steps_audited": 24,
+                "steps_rejected": 0,
+                "counts_for_criteria": true
+              },
+              {
+                "profile": "FX(64,32)",
+                "value": null,
+                "halt": [
+                  3,
+                  "overflow"
+                ],
+                "verdict": "REFUSED",
+                "reason": "run halted; no value was claimed",
+                "steps_audited": 3,
+                "steps_rejected": 0,
+                "counts_for_criteria": false
+              },
+              {
+                "profile": "FX(128,96)",
+                "value": null,
+                "halt": [
+                  3,
+                  "overflow"
+                ],
+                "verdict": "REFUSED",
+                "reason": "run halted; no value was claimed",
+                "steps_audited": 3,
+                "steps_rejected": 0,
+                "counts_for_criteria": false
+              },
+              {
+                "profile": "FX(256,64)",
+                "value": "-0.82739605994682137",
+                "halt": null,
+                "verdict": "VALID",
+                "reason": "correctly rounded oracle",
+                "steps_audited": 24,
+                "steps_rejected": 0,
+                "counts_for_criteria": false
+              },
+              {
+                "profile": "FX(256,192)",
+                "value": null,
+                "halt": [
+                  4,
+                  "overflow"
+                ],
+                "verdict": "REFUSED",
+                "reason": "run halted; no value was claimed",
+                "steps_audited": 4,
+                "steps_rejected": 0,
+                "counts_for_criteria": false
+              }
+            ],
+            "injections": [
+              {
+                "name": "host and calculator round the oracle to the same binary64",
+                "expected": true,
+                "got": true,
+                "ok": true
+              },
+              {
+                "name": "claim: correctly rounded oracle",
+                "expected": "VALID",
+                "got": "VALID",
+                "ok": true
+              },
+              {
+                "name": "claim: oracle + 1 ulp",
+                "expected": "INVALID",
+                "got": "INVALID",
+                "ok": true
+              },
+              {
+                "name": "claim: oracle - 1 ulp",
+                "expected": "INVALID",
+                "got": "INVALID",
+                "ok": true
+              },
+              {
+                "name": "claim: exact oracle",
+                "expected": "VALID",
+                "got": "VALID",
+                "ok": true
+              },
+              {
+                "name": "claim: exact oracle + 1e-40",
+                "expected": "INVALID",
+                "got": "INVALID",
+                "ok": true
+              },
+              {
+                "name": "claim: halted run (no value)",
+                "expected": "REFUSED",
+                "got": "REFUSED",
+                "ok": true
+              },
+              {
+                "name": "oracle: 'literature' shifted by 1e-40",
+                "expected": "REFUSED",
+                "got": "REFUSED",
+                "ok": true
+              },
+              {
+                "name": "oracle: high-precision angle shifted by 1e-100 relative",
+                "expected": "REFUSED",
+                "got": "REFUSED",
+                "ok": true
+              },
+              {
+                "name": "oracle: only one exact derivation",
+                "expected": "REFUSED",
+                "got": "REFUSED",
+                "ok": true
+              },
+              {
+                "name": "binary64 steps: every step nudged +-1 unit is rejected (48/48)",
+                "expected": true,
+                "got": true,
+                "ok": true
+              },
+              {
+                "name": "exact steps: every step nudged +-1 unit is rejected (48/48)",
+                "expected": true,
+                "got": true,
+                "ok": true
+              }
+            ],
+            "informational": {
+              "mpmath_precision_sweep (same evaluation order)": {
+                "24_bits": "-6.338253001141147e+29",
+                "53_bits": "-1.1805916207174113e+21",
+                "64_bits": "5.7646075230342349e+17",
+                "113_bits": "1.1726039400531786",
+                "128_bits": "-0.82739605994682137"
+              }
+            }
+          }
+        }
+      },
+      "muller": {
+        "oracle": {
+          "value": "2328306745375394431036/465661390253305305137",
+          "approx": "4.9999995578522583",
+          "angles": {
+            "closed_form": "2328306745375394431036/465661390253305305137",
+            "direct_rational": "2328306745375394431036/465661390253305305137",
+            "mpmath_400_digits": "4.999999557852258305867636"
+          }
+        },
+        "programs": {
+          "recurrence": {
+            "runs": [
+              {
+                "profile": "binary64",
+                "value": "100.0",
+                "halt": null,
+                "verdict": "INVALID",
+                "reason": "outside the rounding interval",
+                "steps_audited": 121,
+                "steps_rejected": 0,
+                "counts_for_criteria": true
+              },
+              {
+                "profile": "exact",
+                "value": "4.9999995578522583",
+                "halt": null,
+                "verdict": "VALID",
+                "reason": "equals oracle",
+                "steps_audited": 121,
+                "steps_rejected": 0,
+                "counts_for_criteria": true
+              },
+              {
+                "profile": "FX(64,32)",
+                "value": "100.0",
+                "halt": null,
+                "verdict": "INVALID",
+                "reason": "expected 21474834581, got 429496729600",
+                "steps_audited": 121,
+                "steps_rejected": 0,
+                "counts_for_criteria": false
+              },
+              {
+                "profile": "FX(128,96)",
+                "value": "100.00039026246617",
+                "halt": null,
+                "verdict": "INVALID",
+                "reason": "expected 396140777540768553710030881691, got 7922847171204526472154702357008",
+                "steps_audited": 121,
+                "steps_rejected": 0,
+                "counts_for_criteria": false
+              },
+              {
+                "profile": "FX(256,64)",
+                "value": "100.00000000000009",
+                "halt": null,
+                "verdict": "INVALID",
+                "reason": "expected 92233712212361524280, got 1844674407370956838863",
+                "steps_audited": 121,
+                "steps_rejected": 0,
+                "counts_for_criteria": false
+              },
+              {
+                "profile": "FX(256,192)",
+                "value": "4.9999995578522583",
+                "halt": null,
+                "verdict": "INVALID",
+                "reason": "expected 31385505901527047133638820454497652629960913050138500399516, got 31385505901527047133637058411318329180423360336344824154341",
+                "steps_audited": 121,
+                "steps_rejected": 0,
+                "counts_for_criteria": false
+              }
+            ],
+            "injections": [
+              {
+                "name": "host and calculator round the oracle to the same binary64",
+                "expected": true,
+                "got": true,
+                "ok": true
+              },
+              {
+                "name": "claim: correctly rounded oracle",
+                "expected": "VALID",
+                "got": "VALID",
+                "ok": true
+              },
+              {
+                "name": "claim: oracle + 1 ulp",
+                "expected": "INVALID",
+                "got": "INVALID",
+                "ok": true
+              },
+              {
+                "name": "claim: oracle - 1 ulp",
+                "expected": "INVALID",
+                "got": "INVALID",
+                "ok": true
+              },
+              {
+                "name": "claim: exact oracle",
+                "expected": "VALID",
+                "got": "VALID",
+                "ok": true
+              },
+              {
+                "name": "claim: exact oracle + 1e-40",
+                "expected": "INVALID",
+                "got": "INVALID",
+                "ok": true
+              },
+              {
+                "name": "claim: halted run (no value)",
+                "expected": "REFUSED",
+                "got": "REFUSED",
+                "ok": true
+              },
+              {
+                "name": "oracle: 'closed_form' shifted by 1e-40",
+                "expected": "REFUSED",
+                "got": "REFUSED",
+                "ok": true
+              },
+              {
+                "name": "oracle: high-precision angle shifted by 1e-100 relative",
+                "expected": "REFUSED",
+                "got": "REFUSED",
+                "ok": true
+              },
+              {
+                "name": "oracle: only one exact derivation",
+                "expected": "REFUSED",
+                "got": "REFUSED",
+                "ok": true
+              },
+              {
+                "name": "binary64 steps: every step nudged +-1 unit is rejected (242/242)",
+                "expected": true,
+                "got": true,
+                "ok": true
+              },
+              {
+                "name": "exact steps: every step nudged +-1 unit is rejected (242/242)",
+                "expected": true,
+                "got": true,
+                "ok": true
+              }
+            ],
+            "informational": {
+              "exact run equals closed form at every n <= 30": true,
+              "binary64 first n with |error| > 1e-3": 11,
+              "binary64 x_n at n = 10, 15, 20, 25, 30": {
+                "10": "4.9879092327957864",
+                "15": "168.93916767106458",
+                "20": "100.00001247862016",
+                "25": "100.00000000000389",
+                "30": "100.0"
+              },
+              "mpmath x_30 by precision": {
+                "53_bits": "100.0",
+                "113_bits": "98.241698648006385",
+                "200_bits": "4.9999995578522583",
+                "300_bits": "4.9999995578522583"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ported_hard_case_and_mutant_test": {
+      "command": "-m pytest -q -p no:cacheprovider tests/test_ported_hard_cases.py",
+      "returncode": 0,
+      "counts": {
+        "passed": 21
+      }
+    },
+    "independence": {
+      "static_violations": [],
+      "A_modules_loaded_at_runtime": []
+    },
+    "criteria": {
+      "G0-1": "PASS",
+      "G0-2": "PASS",
+      "G0-3": "PASS",
+      "G0-4": "PASS",
+      "G0-5": "PASS",
+      "G0-6": "NOT_JUDGED_HERE (designer's home-PC run decides; compare deterministic_digest)",
+      "G0-7": "RECORDED (not a pass/fail criterion)"
+    },
+    "benchmark_3": "PENDING: canonical summation/dot-product benchmark not selected (source must be verified)",
+    "gate0_overall": "INCOMPLETE (benchmark 3 pending, G0-6 pending)"
+  },
+  "costs": {
+    "rump": {
+      "oracle_seconds": 0.0003162699999847973,
+      "programs": {
+        "sequential": [
+          {
+            "profile": "binary64",
+            "wall_seconds": 0.0012370659999305644,
+            "peak_python_heap_bytes": 15287,
+            "op_count": {
+              "CONST": 7,
+              "MUL": 12,
+              "SUB": 3,
+              "DIV": 1,
+              "ADD": 3
+            }
+          },
+          {
+            "profile": "exact",
+            "wall_seconds": 0.0008205550000184303,
+            "peak_python_heap_bytes": 11703,
+            "op_count": {
+              "CONST": 7,
+              "MUL": 12,
+              "SUB": 3,
+              "DIV": 1,
+              "ADD": 3
+            }
+          },
+          {
+            "profile": "FX(64,32)",
+            "wall_seconds": 0.0005385590000059892,
+            "peak_python_heap_bytes": 11817,
+            "op_count": {
+              "CONST": 2,
+              "MUL": 2
+            }
+          },
+          {
+            "profile": "FX(128,96)",
+            "wall_seconds": 0.00047934200006238825,
+            "peak_python_heap_bytes": 11850,
+            "op_count": {
+              "CONST": 2,
+              "MUL": 2
+            }
+          },
+          {
+            "profile": "FX(256,64)",
+            "wall_seconds": 0.0005729450000444558,
+            "peak_python_heap_bytes": 11858,
+            "op_count": {
+              "CONST": 7,
+              "MUL": 12,
+              "SUB": 3,
+              "DIV": 1,
+              "ADD": 3
+            }
+          },
+          {
+            "profile": "FX(256,192)",
+            "wall_seconds": 0.0005087560000447411,
+            "peak_python_heap_bytes": 11787,
+            "op_count": {
+              "CONST": 2,
+              "MUL": 3
+            }
+          }
+        ],
+        "sum": [
+          {
+            "profile": "binary64",
+            "wall_seconds": 0.001039166999930785,
+            "peak_python_heap_bytes": 11063,
+            "op_count": {
+              "CONST": 7,
+              "MUL": 12,
+              "SUB": 3,
+              "DIV": 1,
+              "SUM": 1
+            }
+          },
+          {
+            "profile": "exact",
+            "wall_seconds": 0.0006703139999899577,
+            "peak_python_heap_bytes": 11047,
+            "op_count": {
+              "CONST": 7,
+              "MUL": 12,
+              "SUB": 3,
+              "DIV": 1,
+              "SUM": 1
+            }
+          },
+          {
+            "profile": "FX(64,32)",
+            "wall_seconds": 0.0004285520000166798,
+            "peak_python_heap_bytes": 11137,
+            "op_count": {
+              "CONST": 2,
+              "MUL": 2
+            }
+          },
+          {
+            "profile": "FX(128,96)",
+            "wall_seconds": 0.00043387400000938214,
+            "peak_python_heap_bytes": 11178,
+            "op_count": {
+              "CONST": 2,
+              "MUL": 2
+            }
+          },
+          {
+            "profile": "FX(256,64)",
+            "wall_seconds": 0.0005599480000455515,
+            "peak_python_heap_bytes": 11202,
+            "op_count": {
+              "CONST": 7,
+              "MUL": 12,
+              "SUB": 3,
+              "DIV": 1,
+              "SUM": 1
+            }
+          },
+          {
+            "profile": "FX(256,192)",
+            "wall_seconds": 0.0004146359999595006,
+            "peak_python_heap_bytes": 11139,
+            "op_count": {
+              "CONST": 2,
+              "MUL": 3
+            }
+          }
+        ]
+      }
+    },
+    "muller": {
+      "oracle_seconds": 0.000764032999995834,
+      "programs": {
+        "recurrence": [
+          {
+            "profile": "binary64",
+            "wall_seconds": 0.004427288999977463,
+            "peak_python_heap_bytes": 61639,
+            "op_count": {
+              "CONST": 5,
+              "DIV": 58,
+              "SUB": 58
+            }
+          },
+          {
+            "profile": "exact",
+            "wall_seconds": 0.00252705100001549,
+            "peak_python_heap_bytes": 60479,
+            "op_count": {
+              "CONST": 5,
+              "DIV": 58,
+              "SUB": 58
+            }
+          },
+          {
+            "profile": "FX(64,32)",
+            "wall_seconds": 0.0020396109999865075,
+            "peak_python_heap_bytes": 60553,
+            "op_count": {
+              "CONST": 5,
+              "DIV": 58,
+              "SUB": 58
+            }
+          },
+          {
+            "profile": "FX(128,96)",
+            "wall_seconds": 0.0021209579999776906,
+            "peak_python_heap_bytes": 60562,
+            "op_count": {
+              "CONST": 5,
+              "DIV": 58,
+              "SUB": 58
+            }
+          },
+          {
+            "profile": "FX(256,64)",
+            "wall_seconds": 0.003078487999914614,
+            "peak_python_heap_bytes": 60530,
+            "op_count": {
+              "CONST": 5,
+              "DIV": 58,
+              "SUB": 58
+            }
+          },
+          {
+            "profile": "FX(256,192)",
+            "wall_seconds": 0.0021266460000788356,
+            "peak_python_heap_bytes": 60579,
+            "op_count": {
+              "CONST": 5,
+              "DIV": 58,
+              "SUB": 58
+            }
+          }
+        ]
+      }
+    }
+  },
+  "machine": {
+    "system": "Linux",
+    "release": "6.18.44-fc-v50",
+    "machine": "x86_64",
+    "python": "3.11.15",
+    "mpmath": "1.3.0",
+    "cpu_count": 4
+  },
+  "total_wall_seconds": 19.174200321999933
+}

@@ -14,7 +14,7 @@
 
 | Gate | 내용 | 상태 |
 |---|---|---|
-| **Gate 0** | 계산기·채점기 자체 검사 (Rump, Muller, canonical summation/dot) — [기준](docs/GATE0_CRITERIA.md) | 진행 중 |
+| **Gate 0** | 계산기·채점기 자체 검사 (Rump, Muller, canonical summation/dot) — [기준](docs/GATE0_CRITERIA.md) | **INCOMPLETE** — 자동 조건 G0-1〜5 PASS(클라우드). 벤치마크 3 [선정 보류](docs/BENCHMARK3_SELECTION.md), G0-6(집 PC 완주) 미확인. [클라우드 보고서](reports/cloud-container-2026-10-01/GATE0_REPORT.md) |
 | Gate 1 | 작은 물리 benchmark 하나를 서로 다른 실패 원인을 잡는 여러 검사로 검증 | Gate 0 통과 후 |
 | Gate 2 | 공개 논문/시뮬레이션 재검증 → 공개 보고서 | Gate 0·1 통과 후 |
 
@@ -24,7 +24,7 @@
 
 ```bash
 pip install -r requirements.txt     # mpmath
-python run_gate0.py                 # reports/gate0_report.json, reports/GATE0_REPORT.md 생성
+python run_gate0.py                 # reports/latest/ 에 보고서 생성 (--out 으로 위치 변경)
 python -m pytest tests -q
 ```
 
@@ -37,9 +37,21 @@ python -m pytest tests -q
 | `lab/verdict.py` | VALID / INVALID / REFUSED 판정 틀 | A `c1b1_replay/types.py`의 일부를 발췌·축약 |
 | `lab/claim.py` | 최종값 주장 판정, 단계별 감사 | Lab 신규 |
 | `benchmarks/gate0/` | Gate 0 벤치마크 | Lab 신규 |
+| `tests/test_ported_hard_cases.py` | A의 hard-case 시험과 반올림 결함 10종 주입 시험 | A `tests/test_audit_numeric_hard_cases.py`의 import 경로만 바꿈 |
 
 ## 알려진 한계
 
 - 계산기에는 sin·cos·log가 없다. Gate 1 benchmark는 이 연산 범위 안에서 고르거나, Lab 쪽에서 연산을 추가하고 기록한다.
 - 정확한 분수 계산을 파이썬으로 하므로 느리다. 큰 문제에는 맞지 않는다.
 - CPU/GPU 동일성 실행기(`a_numeric_native/`)는 가져오지 않았다.
+
+## 집 PC에서 G0-6 확인하는 법
+
+```bash
+pip install -r requirements.txt
+python -m pytest -q
+python run_gate0.py --out reports/home-pc-YYYY-MM-DD
+```
+
+출력의 `deterministic_digest`를 [클라우드 보고서](reports/cloud-container-2026-10-01/GATE0_REPORT.md)의 값과 비교한다.
+같으면, 시간·메모리를 뺀 모든 판정과 값이 두 기계에서 같다는 뜻이다.
