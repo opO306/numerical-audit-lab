@@ -33,7 +33,8 @@ def test_correct_program_equals_both_independent_references(sc):
 @pytest.mark.parametrize("sc", list(SCENARIOS))
 @pytest.mark.parametrize("check", list(CHECKS))
 def test_no_false_alarm_on_the_correct_program(sc, check):
-    assert run_check(check, SCENARIOS[sc], sut("M0", EXACT)) == (False, run_check(check, SCENARIOS[sc], sut("M0"))[1])
+    detected, note = run_check(check, SCENARIOS[sc], sut("M0", EXACT))
+    assert detected is False, note
 
 
 def test_every_check_fires_on_some_bug(det):
