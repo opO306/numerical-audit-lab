@@ -1,0 +1,10 @@
+POST-HOC ONLY: machine_mapping read after independent raw-trace audit
+initial bits {'x': '0x0000000000000000', 'y': '0x0000000000000000', 'vx': '0x3fd0000000000000', 'vy': '0x3fc0000000000000', 'dt': '0x3f90000000000000', 'half': '0x3fe0000000000000', 'gz': '0x0000000000000000'}
+
+init: observed=14 mapping=14
+ELF address + opcode/kind + dynamic order + T_bin operand relation: PASS
+
+step: observed=22 mapping=22
+ELF address + opcode/kind + dynamic order + T_bin operand relation: PASS
+
+OVERALL PASS

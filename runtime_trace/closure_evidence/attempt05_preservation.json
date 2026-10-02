@@ -1,0 +1,61 @@
+{
+  "all_files_unchanged": true,
+  "matches_original_audit_zip": true,
+  "files": [
+    {
+      "path": "runtime_trace/artifacts/attempt-05/capture.json",
+      "bytes": 13929,
+      "sha256": "bbbe33af470f934136dd33414c0367b899f45c9c38de37ce9cd54c280e6caf93"
+    },
+    {
+      "path": "runtime_trace/artifacts/attempt-05/correspondence.json",
+      "bytes": 1481,
+      "sha256": "69688b2d057a582b20307cdc403cb35b34516469848f35540b49e14eecae63fa"
+    },
+    {
+      "path": "runtime_trace/artifacts/attempt-05/execution.json",
+      "bytes": 961,
+      "sha256": "02b4d4bd59f820e4dd5d79b880daf6347c236e2887377f4802ad748e6f4b55bf"
+    },
+    {
+      "path": "runtime_trace/artifacts/attempt-05/gdb.log",
+      "bytes": 37184,
+      "sha256": "152dce8c8bb8bf6235c5064a011b759726cde87971f82156780eb144fd62dc34"
+    },
+    {
+      "path": "runtime_trace/artifacts/attempt-05/harness_output.json",
+      "bytes": 467,
+      "sha256": "c47bb188333492bf7752ebaff07586b478db09093ff2973c4164a060b8b4bed1"
+    },
+    {
+      "path": "runtime_trace/artifacts/attempt-05/pytest.log",
+      "bytes": 101,
+      "sha256": "969676ec9509b4786c377108cf3245a219657938411344e82b5ded8f48c79f91"
+    },
+    {
+      "path": "runtime_trace/artifacts/attempt-05/timing.json",
+      "bytes": 555,
+      "sha256": "8c1c4b1e43f05d87003fd595af9e15030cd61c7fd041c027bd6a0659747d2d32"
+    },
+    {
+      "path": "runtime_trace/artifacts/attempt-05/trace.jsonl",
+      "bytes": 1667765,
+      "sha256": "fec0379874f2a3ae792f041d553dd34533f90b02ad9bcf9d43cb022ef03e149c"
+    },
+    {
+      "path": "runtime_trace/artifacts/attempt-05/validation.json",
+      "bytes": 1817,
+      "sha256": "cd3b92a8bc2b11e3d3787dbc9fb464f1df25d803b6a26f3b9c65a3809c7e70f6"
+    },
+    {
+      "path": "runtime_trace/artifacts/attempt-05/baseline/harness_output.json",
+      "bytes": 470,
+      "sha256": "88ca60a9e80cc5922b8b685630325d8e85ce9bab548d14816b1f353ec0932be1"
+    },
+    {
+      "path": "runtime_trace/artifacts/attempt-05/baseline/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

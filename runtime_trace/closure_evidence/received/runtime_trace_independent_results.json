@@ -1,0 +1,92 @@
+{
+  "attempt": "attempt-05",
+  "checks": {
+    "acquisition_source": "PASS",
+    "control_flow": "PASS",
+    "endpoint_fixture": "PASS",
+    "function_coverage": "PASS",
+    "integrity_linkage": "PASS",
+    "module_bytes_decode": "PARTIAL",
+    "provenance_exact_fp": "PASS",
+    "width_mxcsr_supported_fp": "PASS"
+  },
+  "errors": [],
+  "facts": {
+    "endpoint_bits": [
+      "0x3f70000000000000",
+      "0x3f60000000000000",
+      "0x3fcffeff00000000",
+      "0x3fbffefe80000000"
+    ],
+    "missing_module_records": 22,
+    "mxcsr_values": [
+      8096
+    ],
+    "opcodes": {
+      "add": 34,
+      "addsd": 12,
+      "call": 6,
+      "cmp": 24,
+      "cmpb": 2,
+      "endbr64": 2,
+      "imul": 2,
+      "jae": 2,
+      "jb": 8,
+      "je": 20,
+      "jge": 2,
+      "jle": 2,
+      "jmp": 12,
+      "jne": 6,
+      "lea": 20,
+      "mov": 67,
+      "movapd": 4,
+      "movb": 2,
+      "movq": 8,
+      "movsd": 32,
+      "movslq": 12,
+      "mulsd": 16,
+      "nop": 2,
+      "nopl": 4,
+      "nopw": 22,
+      "pop": 24,
+      "push": 24,
+      "ret": 8,
+      "shl": 2,
+      "sub": 4,
+      "subsd": 8,
+      "test": 14,
+      "vmovd": 2,
+      "vmovdqu": 4,
+      "vpbroadcastb": 2,
+      "xchg": 1,
+      "xor": 30
+    },
+    "pids": [
+      409
+    ],
+    "ptids": [
+      [
+        409,
+        409,
+        0
+      ]
+    ],
+    "record_count": 446,
+    "scalar_by_opcode": {
+      "addsd": 12,
+      "mulsd": 16,
+      "subsd": 8
+    },
+    "scalar_by_phase": {
+      "init": 14,
+      "step": 22
+    },
+    "scalar_fp_count": 36,
+    "verified_original_module_records": 424,
+    "zip_sha256": "91df4cfe0972ff2b048e87cb1c1f0fe9166392b66615bd90c8ce4e07860f7233"
+  },
+  "unresolved": [
+    "Original libc image for trace module hash(es) absent: 3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf"
+  ],
+  "verdict": "CONDITIONAL"
+}

@@ -70,3 +70,8 @@ audit/gate2c1/pre_delivery_revision/** -text
 reports/gate2c1-*/** -text
 audit/gate2c1/vendor/** -text
 audit/gate2c1/evidence/** -text
+
+# Runtime Trace closure: preserve received audit bytes and new raw evidence.
+runtime_trace/closure_evidence/** -text
+runtime_trace/frozen_binaries/** -text
+runtime_trace/artifacts/closure-fresh-01/** -text

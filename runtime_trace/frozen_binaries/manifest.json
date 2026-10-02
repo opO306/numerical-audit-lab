@@ -1,0 +1,10 @@
+{
+  "schema": "runtime-trace-frozen-binaries-v1",
+  "modules": {
+    "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf": "runtime_trace/frozen_binaries/libc.so.6",
+    "a6ac98736304bb9f6a92e473bba45da10d9b5b99f8019e2ca15eb6a7f86234fc": "audit/gate2c1/vendor/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so",
+    "33d66d82c34c717560747ffbfca1d98f97432a0a671a0a210a0a225d8367ecaf": "audit/gate2c1/vendor/gala/potential/potential/builtin/cybuiltin.cpython-312-x86_64-linux-gnu.so"
+  },
+  "libc_capture_provenance_path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+  "runtime_paths_are_provenance_only": true
+}

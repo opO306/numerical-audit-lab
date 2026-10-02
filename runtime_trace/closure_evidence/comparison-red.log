@@ -1,0 +1,536 @@
+FFFFFFFFF                                                                [100%]
+=================================== FAILURES ===================================
+________ test_aslr_relocation_is_accepted_without_comparing_runtime_pc _________
+
+old = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+fresh = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+old_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+fresh_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+
+    def compare(old, fresh, old_capture, fresh_capture):
+        # Import inside the test so the red run can state the missing closure check.
+        try:
+>           from runtime_trace.closure_check import compare_traces
+E           ModuleNotFoundError: No module named 'runtime_trace.closure_check'
+
+runtime_trace/tests/test_closure_comparison.py:21: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_aslr_relocation_is_accepted_without_comparing_runtime_pc():
+        rows, capture = comparison_inputs()
+        fresh = deepcopy(rows)
+        for row in fresh:
+            row["runtime_pc"] += 0x100000
+            row["module_load_base"] += 0x100000
+>       result = compare(rows, fresh, capture, deepcopy(capture))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+runtime_trace/tests/test_closure_comparison.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+old = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+fresh = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+old_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+fresh_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+
+    def compare(old, fresh, old_capture, fresh_capture):
+        # Import inside the test so the red run can state the missing closure check.
+        try:
+            from runtime_trace.closure_check import compare_traces
+        except ImportError:
+>           pytest.fail("ELF-relative closure comparison is not implemented")
+E           Failed: ELF-relative closure comparison is not implemented
+
+runtime_trace/tests/test_closure_comparison.py:23: Failed
+___ test_closure_comparison_rejects_changed_execution_evidence[elf_address] ____
+
+old = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+fresh = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+old_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+fresh_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+
+    def compare(old, fresh, old_capture, fresh_capture):
+        # Import inside the test so the red run can state the missing closure check.
+        try:
+>           from runtime_trace.closure_check import compare_traces
+E           ModuleNotFoundError: No module named 'runtime_trace.closure_check'
+
+runtime_trace/tests/test_closure_comparison.py:21: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+mutation = 'elf_address'
+
+    @pytest.mark.parametrize("mutation", ["elf_address", "elf_file_offset", "bytes", "module_sha256",
+                                         "scalar_operand", "scalar_result", "scalar_post_xmm", "endpoint"])
+    def test_closure_comparison_rejects_changed_execution_evidence(mutation):
+        rows, capture = comparison_inputs()
+        fresh, fresh_capture = deepcopy(rows), deepcopy(capture)
+        scalar = next(row for row in fresh if row["opcode"] == "mulsd")
+        if mutation in {"elf_address", "elf_file_offset"}:
+            fresh[0][mutation] += 1
+        elif mutation == "bytes":
+            fresh[0]["bytes"] = "90"
+        elif mutation == "module_sha256":
+            fresh[0]["module_sha256"] = "0" * 64
+        elif mutation == "scalar_operand":
+            scalar["operands"][0]["raw_bits"] = hex(int(scalar["operands"][0]["raw_bits"], 16) ^ 1)
+        elif mutation == "scalar_result":
+            scalar["result_bits"] = hex(int(scalar["result_bits"], 16) ^ 1)
+        elif mutation == "scalar_post_xmm":
+            name = scalar["operands"][-1]["register"]
+            scalar["post"]["xmm"][name] = hex(int(scalar["post"]["xmm"][name], 16) ^ 1)
+        elif mutation == "endpoint":
+            fresh_capture["regions"][-1]["end_state"]["q"] = "0x0"
+        with pytest.raises(ValueError):
+>           compare(rows, fresh, capture, fresh_capture)
+
+runtime_trace/tests/test_closure_comparison.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+old = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+fresh = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+old_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+fresh_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+
+    def compare(old, fresh, old_capture, fresh_capture):
+        # Import inside the test so the red run can state the missing closure check.
+        try:
+            from runtime_trace.closure_check import compare_traces
+        except ImportError:
+>           pytest.fail("ELF-relative closure comparison is not implemented")
+E           Failed: ELF-relative closure comparison is not implemented
+
+runtime_trace/tests/test_closure_comparison.py:23: Failed
+_ test_closure_comparison_rejects_changed_execution_evidence[elf_file_offset] __
+
+old = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+fresh = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+old_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+fresh_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+
+    def compare(old, fresh, old_capture, fresh_capture):
+        # Import inside the test so the red run can state the missing closure check.
+        try:
+>           from runtime_trace.closure_check import compare_traces
+E           ModuleNotFoundError: No module named 'runtime_trace.closure_check'
+
+runtime_trace/tests/test_closure_comparison.py:21: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+mutation = 'elf_file_offset'
+
+    @pytest.mark.parametrize("mutation", ["elf_address", "elf_file_offset", "bytes", "module_sha256",
+                                         "scalar_operand", "scalar_result", "scalar_post_xmm", "endpoint"])
+    def test_closure_comparison_rejects_changed_execution_evidence(mutation):
+        rows, capture = comparison_inputs()
+        fresh, fresh_capture = deepcopy(rows), deepcopy(capture)
+        scalar = next(row for row in fresh if row["opcode"] == "mulsd")
+        if mutation in {"elf_address", "elf_file_offset"}:
+            fresh[0][mutation] += 1
+        elif mutation == "bytes":
+            fresh[0]["bytes"] = "90"
+        elif mutation == "module_sha256":
+            fresh[0]["module_sha256"] = "0" * 64
+        elif mutation == "scalar_operand":
+            scalar["operands"][0]["raw_bits"] = hex(int(scalar["operands"][0]["raw_bits"], 16) ^ 1)
+        elif mutation == "scalar_result":
+            scalar["result_bits"] = hex(int(scalar["result_bits"], 16) ^ 1)
+        elif mutation == "scalar_post_xmm":
+            name = scalar["operands"][-1]["register"]
+            scalar["post"]["xmm"][name] = hex(int(scalar["post"]["xmm"][name], 16) ^ 1)
+        elif mutation == "endpoint":
+            fresh_capture["regions"][-1]["end_state"]["q"] = "0x0"
+        with pytest.raises(ValueError):
+>           compare(rows, fresh, capture, fresh_capture)
+
+runtime_trace/tests/test_closure_comparison.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+old = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+fresh = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+old_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+fresh_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+
+    def compare(old, fresh, old_capture, fresh_capture):
+        # Import inside the test so the red run can state the missing closure check.
+        try:
+            from runtime_trace.closure_check import compare_traces
+        except ImportError:
+>           pytest.fail("ELF-relative closure comparison is not implemented")
+E           Failed: ELF-relative closure comparison is not implemented
+
+runtime_trace/tests/test_closure_comparison.py:23: Failed
+______ test_closure_comparison_rejects_changed_execution_evidence[bytes] _______
+
+old = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+fresh = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+old_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+fresh_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+
+    def compare(old, fresh, old_capture, fresh_capture):
+        # Import inside the test so the red run can state the missing closure check.
+        try:
+>           from runtime_trace.closure_check import compare_traces
+E           ModuleNotFoundError: No module named 'runtime_trace.closure_check'
+
+runtime_trace/tests/test_closure_comparison.py:21: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+mutation = 'bytes'
+
+    @pytest.mark.parametrize("mutation", ["elf_address", "elf_file_offset", "bytes", "module_sha256",
+                                         "scalar_operand", "scalar_result", "scalar_post_xmm", "endpoint"])
+    def test_closure_comparison_rejects_changed_execution_evidence(mutation):
+        rows, capture = comparison_inputs()
+        fresh, fresh_capture = deepcopy(rows), deepcopy(capture)
+        scalar = next(row for row in fresh if row["opcode"] == "mulsd")
+        if mutation in {"elf_address", "elf_file_offset"}:
+            fresh[0][mutation] += 1
+        elif mutation == "bytes":
+            fresh[0]["bytes"] = "90"
+        elif mutation == "module_sha256":
+            fresh[0]["module_sha256"] = "0" * 64
+        elif mutation == "scalar_operand":
+            scalar["operands"][0]["raw_bits"] = hex(int(scalar["operands"][0]["raw_bits"], 16) ^ 1)
+        elif mutation == "scalar_result":
+            scalar["result_bits"] = hex(int(scalar["result_bits"], 16) ^ 1)
+        elif mutation == "scalar_post_xmm":
+            name = scalar["operands"][-1]["register"]
+            scalar["post"]["xmm"][name] = hex(int(scalar["post"]["xmm"][name], 16) ^ 1)
+        elif mutation == "endpoint":
+            fresh_capture["regions"][-1]["end_state"]["q"] = "0x0"
+        with pytest.raises(ValueError):
+>           compare(rows, fresh, capture, fresh_capture)
+
+runtime_trace/tests/test_closure_comparison.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+old = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+fresh = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+old_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+fresh_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+
+    def compare(old, fresh, old_capture, fresh_capture):
+        # Import inside the test so the red run can state the missing closure check.
+        try:
+            from runtime_trace.closure_check import compare_traces
+        except ImportError:
+>           pytest.fail("ELF-relative closure comparison is not implemented")
+E           Failed: ELF-relative closure comparison is not implemented
+
+runtime_trace/tests/test_closure_comparison.py:23: Failed
+__ test_closure_comparison_rejects_changed_execution_evidence[module_sha256] ___
+
+old = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+fresh = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+old_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+fresh_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+
+    def compare(old, fresh, old_capture, fresh_capture):
+        # Import inside the test so the red run can state the missing closure check.
+        try:
+>           from runtime_trace.closure_check import compare_traces
+E           ModuleNotFoundError: No module named 'runtime_trace.closure_check'
+
+runtime_trace/tests/test_closure_comparison.py:21: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+mutation = 'module_sha256'
+
+    @pytest.mark.parametrize("mutation", ["elf_address", "elf_file_offset", "bytes", "module_sha256",
+                                         "scalar_operand", "scalar_result", "scalar_post_xmm", "endpoint"])
+    def test_closure_comparison_rejects_changed_execution_evidence(mutation):
+        rows, capture = comparison_inputs()
+        fresh, fresh_capture = deepcopy(rows), deepcopy(capture)
+        scalar = next(row for row in fresh if row["opcode"] == "mulsd")
+        if mutation in {"elf_address", "elf_file_offset"}:
+            fresh[0][mutation] += 1
+        elif mutation == "bytes":
+            fresh[0]["bytes"] = "90"
+        elif mutation == "module_sha256":
+            fresh[0]["module_sha256"] = "0" * 64
+        elif mutation == "scalar_operand":
+            scalar["operands"][0]["raw_bits"] = hex(int(scalar["operands"][0]["raw_bits"], 16) ^ 1)
+        elif mutation == "scalar_result":
+            scalar["result_bits"] = hex(int(scalar["result_bits"], 16) ^ 1)
+        elif mutation == "scalar_post_xmm":
+            name = scalar["operands"][-1]["register"]
+            scalar["post"]["xmm"][name] = hex(int(scalar["post"]["xmm"][name], 16) ^ 1)
+        elif mutation == "endpoint":
+            fresh_capture["regions"][-1]["end_state"]["q"] = "0x0"
+        with pytest.raises(ValueError):
+>           compare(rows, fresh, capture, fresh_capture)
+
+runtime_trace/tests/test_closure_comparison.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+old = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+fresh = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+old_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+fresh_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+
+    def compare(old, fresh, old_capture, fresh_capture):
+        # Import inside the test so the red run can state the missing closure check.
+        try:
+            from runtime_trace.closure_check import compare_traces
+        except ImportError:
+>           pytest.fail("ELF-relative closure comparison is not implemented")
+E           Failed: ELF-relative closure comparison is not implemented
+
+runtime_trace/tests/test_closure_comparison.py:23: Failed
+__ test_closure_comparison_rejects_changed_execution_evidence[scalar_operand] __
+
+old = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+fresh = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+old_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+fresh_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+
+    def compare(old, fresh, old_capture, fresh_capture):
+        # Import inside the test so the red run can state the missing closure check.
+        try:
+>           from runtime_trace.closure_check import compare_traces
+E           ModuleNotFoundError: No module named 'runtime_trace.closure_check'
+
+runtime_trace/tests/test_closure_comparison.py:21: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+mutation = 'scalar_operand'
+
+    @pytest.mark.parametrize("mutation", ["elf_address", "elf_file_offset", "bytes", "module_sha256",
+                                         "scalar_operand", "scalar_result", "scalar_post_xmm", "endpoint"])
+    def test_closure_comparison_rejects_changed_execution_evidence(mutation):
+        rows, capture = comparison_inputs()
+        fresh, fresh_capture = deepcopy(rows), deepcopy(capture)
+        scalar = next(row for row in fresh if row["opcode"] == "mulsd")
+        if mutation in {"elf_address", "elf_file_offset"}:
+            fresh[0][mutation] += 1
+        elif mutation == "bytes":
+            fresh[0]["bytes"] = "90"
+        elif mutation == "module_sha256":
+            fresh[0]["module_sha256"] = "0" * 64
+        elif mutation == "scalar_operand":
+            scalar["operands"][0]["raw_bits"] = hex(int(scalar["operands"][0]["raw_bits"], 16) ^ 1)
+        elif mutation == "scalar_result":
+            scalar["result_bits"] = hex(int(scalar["result_bits"], 16) ^ 1)
+        elif mutation == "scalar_post_xmm":
+            name = scalar["operands"][-1]["register"]
+            scalar["post"]["xmm"][name] = hex(int(scalar["post"]["xmm"][name], 16) ^ 1)
+        elif mutation == "endpoint":
+            fresh_capture["regions"][-1]["end_state"]["q"] = "0x0"
+        with pytest.raises(ValueError):
+>           compare(rows, fresh, capture, fresh_capture)
+
+runtime_trace/tests/test_closure_comparison.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+old = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+fresh = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+old_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+fresh_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+
+    def compare(old, fresh, old_capture, fresh_capture):
+        # Import inside the test so the red run can state the missing closure check.
+        try:
+            from runtime_trace.closure_check import compare_traces
+        except ImportError:
+>           pytest.fail("ELF-relative closure comparison is not implemented")
+E           Failed: ELF-relative closure comparison is not implemented
+
+runtime_trace/tests/test_closure_comparison.py:23: Failed
+__ test_closure_comparison_rejects_changed_execution_evidence[scalar_result] ___
+
+old = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+fresh = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+old_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+fresh_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+
+    def compare(old, fresh, old_capture, fresh_capture):
+        # Import inside the test so the red run can state the missing closure check.
+        try:
+>           from runtime_trace.closure_check import compare_traces
+E           ModuleNotFoundError: No module named 'runtime_trace.closure_check'
+
+runtime_trace/tests/test_closure_comparison.py:21: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+mutation = 'scalar_result'
+
+    @pytest.mark.parametrize("mutation", ["elf_address", "elf_file_offset", "bytes", "module_sha256",
+                                         "scalar_operand", "scalar_result", "scalar_post_xmm", "endpoint"])
+    def test_closure_comparison_rejects_changed_execution_evidence(mutation):
+        rows, capture = comparison_inputs()
+        fresh, fresh_capture = deepcopy(rows), deepcopy(capture)
+        scalar = next(row for row in fresh if row["opcode"] == "mulsd")
+        if mutation in {"elf_address", "elf_file_offset"}:
+            fresh[0][mutation] += 1
+        elif mutation == "bytes":
+            fresh[0]["bytes"] = "90"
+        elif mutation == "module_sha256":
+            fresh[0]["module_sha256"] = "0" * 64
+        elif mutation == "scalar_operand":
+            scalar["operands"][0]["raw_bits"] = hex(int(scalar["operands"][0]["raw_bits"], 16) ^ 1)
+        elif mutation == "scalar_result":
+            scalar["result_bits"] = hex(int(scalar["result_bits"], 16) ^ 1)
+        elif mutation == "scalar_post_xmm":
+            name = scalar["operands"][-1]["register"]
+            scalar["post"]["xmm"][name] = hex(int(scalar["post"]["xmm"][name], 16) ^ 1)
+        elif mutation == "endpoint":
+            fresh_capture["regions"][-1]["end_state"]["q"] = "0x0"
+        with pytest.raises(ValueError):
+>           compare(rows, fresh, capture, fresh_capture)
+
+runtime_trace/tests/test_closure_comparison.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+old = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+fresh = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+old_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+fresh_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+
+    def compare(old, fresh, old_capture, fresh_capture):
+        # Import inside the test so the red run can state the missing closure check.
+        try:
+            from runtime_trace.closure_check import compare_traces
+        except ImportError:
+>           pytest.fail("ELF-relative closure comparison is not implemented")
+E           Failed: ELF-relative closure comparison is not implemented
+
+runtime_trace/tests/test_closure_comparison.py:23: Failed
+_ test_closure_comparison_rejects_changed_execution_evidence[scalar_post_xmm] __
+
+old = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+fresh = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+old_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+fresh_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+
+    def compare(old, fresh, old_capture, fresh_capture):
+        # Import inside the test so the red run can state the missing closure check.
+        try:
+>           from runtime_trace.closure_check import compare_traces
+E           ModuleNotFoundError: No module named 'runtime_trace.closure_check'
+
+runtime_trace/tests/test_closure_comparison.py:21: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+mutation = 'scalar_post_xmm'
+
+    @pytest.mark.parametrize("mutation", ["elf_address", "elf_file_offset", "bytes", "module_sha256",
+                                         "scalar_operand", "scalar_result", "scalar_post_xmm", "endpoint"])
+    def test_closure_comparison_rejects_changed_execution_evidence(mutation):
+        rows, capture = comparison_inputs()
+        fresh, fresh_capture = deepcopy(rows), deepcopy(capture)
+        scalar = next(row for row in fresh if row["opcode"] == "mulsd")
+        if mutation in {"elf_address", "elf_file_offset"}:
+            fresh[0][mutation] += 1
+        elif mutation == "bytes":
+            fresh[0]["bytes"] = "90"
+        elif mutation == "module_sha256":
+            fresh[0]["module_sha256"] = "0" * 64
+        elif mutation == "scalar_operand":
+            scalar["operands"][0]["raw_bits"] = hex(int(scalar["operands"][0]["raw_bits"], 16) ^ 1)
+        elif mutation == "scalar_result":
+            scalar["result_bits"] = hex(int(scalar["result_bits"], 16) ^ 1)
+        elif mutation == "scalar_post_xmm":
+            name = scalar["operands"][-1]["register"]
+            scalar["post"]["xmm"][name] = hex(int(scalar["post"]["xmm"][name], 16) ^ 1)
+        elif mutation == "endpoint":
+            fresh_capture["regions"][-1]["end_state"]["q"] = "0x0"
+        with pytest.raises(ValueError):
+>           compare(rows, fresh, capture, fresh_capture)
+
+runtime_trace/tests/test_closure_comparison.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+old = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+fresh = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+old_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+fresh_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+
+    def compare(old, fresh, old_capture, fresh_capture):
+        # Import inside the test so the red run can state the missing closure check.
+        try:
+            from runtime_trace.closure_check import compare_traces
+        except ImportError:
+>           pytest.fail("ELF-relative closure comparison is not implemented")
+E           Failed: ELF-relative closure comparison is not implemented
+
+runtime_trace/tests/test_closure_comparison.py:23: Failed
+_____ test_closure_comparison_rejects_changed_execution_evidence[endpoint] _____
+
+old = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+fresh = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+old_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+fresh_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+
+    def compare(old, fresh, old_capture, fresh_capture):
+        # Import inside the test so the red run can state the missing closure check.
+        try:
+>           from runtime_trace.closure_check import compare_traces
+E           ModuleNotFoundError: No module named 'runtime_trace.closure_check'
+
+runtime_trace/tests/test_closure_comparison.py:21: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+mutation = 'endpoint'
+
+    @pytest.mark.parametrize("mutation", ["elf_address", "elf_file_offset", "bytes", "module_sha256",
+                                         "scalar_operand", "scalar_result", "scalar_post_xmm", "endpoint"])
+    def test_closure_comparison_rejects_changed_execution_evidence(mutation):
+        rows, capture = comparison_inputs()
+        fresh, fresh_capture = deepcopy(rows), deepcopy(capture)
+        scalar = next(row for row in fresh if row["opcode"] == "mulsd")
+        if mutation in {"elf_address", "elf_file_offset"}:
+            fresh[0][mutation] += 1
+        elif mutation == "bytes":
+            fresh[0]["bytes"] = "90"
+        elif mutation == "module_sha256":
+            fresh[0]["module_sha256"] = "0" * 64
+        elif mutation == "scalar_operand":
+            scalar["operands"][0]["raw_bits"] = hex(int(scalar["operands"][0]["raw_bits"], 16) ^ 1)
+        elif mutation == "scalar_result":
+            scalar["result_bits"] = hex(int(scalar["result_bits"], 16) ^ 1)
+        elif mutation == "scalar_post_xmm":
+            name = scalar["operands"][-1]["register"]
+            scalar["post"]["xmm"][name] = hex(int(scalar["post"]["xmm"][name], 16) ^ 1)
+        elif mutation == "endpoint":
+            fresh_capture["regions"][-1]["end_state"]["q"] = "0x0"
+        with pytest.raises(ValueError):
+>           compare(rows, fresh, capture, fresh_capture)
+
+runtime_trace/tests/test_closure_comparison.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+old = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+fresh = [{'seq': 0, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 1, 'pid': 409, 'ptid': [409, 409, 0], 'p...'ptid': [409, 409, 0], 'phase': 'init', ...}, {'seq': 5, 'pid': 409, 'ptid': [409, 409, 0], 'phase': 'init', ...}, ...]
+old_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+fresh_capture = {'schema': 'gala-regular-1step-runtime-trace-v1', 'verdict': 'CAPTURED', 'reason': None, 'record_count': 446, ...}
+
+    def compare(old, fresh, old_capture, fresh_capture):
+        # Import inside the test so the red run can state the missing closure check.
+        try:
+            from runtime_trace.closure_check import compare_traces
+        except ImportError:
+>           pytest.fail("ELF-relative closure comparison is not implemented")
+E           Failed: ELF-relative closure comparison is not implemented
+
+runtime_trace/tests/test_closure_comparison.py:23: Failed
+=========================== short test summary info ============================
+FAILED runtime_trace/tests/test_closure_comparison.py::test_aslr_relocation_is_accepted_without_comparing_runtime_pc
+FAILED runtime_trace/tests/test_closure_comparison.py::test_closure_comparison_rejects_changed_execution_evidence[elf_address]
+FAILED runtime_trace/tests/test_closure_comparison.py::test_closure_comparison_rejects_changed_execution_evidence[elf_file_offset]
+FAILED runtime_trace/tests/test_closure_comparison.py::test_closure_comparison_rejects_changed_execution_evidence[bytes]
+FAILED runtime_trace/tests/test_closure_comparison.py::test_closure_comparison_rejects_changed_execution_evidence[module_sha256]
+FAILED runtime_trace/tests/test_closure_comparison.py::test_closure_comparison_rejects_changed_execution_evidence[scalar_operand]
+FAILED runtime_trace/tests/test_closure_comparison.py::test_closure_comparison_rejects_changed_execution_evidence[scalar_result]
+FAILED runtime_trace/tests/test_closure_comparison.py::test_closure_comparison_rejects_changed_execution_evidence[scalar_post_xmm]
+FAILED runtime_trace/tests/test_closure_comparison.py::test_closure_comparison_rejects_changed_execution_evidence[endpoint]
+9 failed in 1.26s

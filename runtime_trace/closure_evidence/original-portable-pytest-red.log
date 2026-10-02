@@ -1,0 +1,757 @@
+F...FFFFFF.FF.FF....................................                     [100%]
+=================================== FAILURES ===================================
+__________________________ test_real_capture_positive __________________________
+
+    def test_real_capture_positive():
+>       assert check(OUT,ROOT)["verdict"]=="PASS"
+               ^^^^^^^^^^^^^^^
+
+runtime_trace/tests/test_captured_mutations.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/correspondence.py:310: in check
+    decoded=disassembly_for_rows(rows,capture["modules"])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/correspondence.py:119: in disassembly_for_rows
+    image=Path(path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/pathlib.py:1021: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so')
+args = (), kwargs = {'mode': 'rb'}
+
+    def guarded_open(path, *args, **kwargs):
+        if str(path) in forbidden:
+            blocked.append(str(path))
+>           raise FileNotFoundError(f"recorded runtime path unavailable: {path}")
+E           FileNotFoundError: recorded runtime path unavailable: /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+
+runtime_trace/portable_pytest.py:23: FileNotFoundError
+_ test_actual_trace_mutations_refuse_pass[operand-memory/register def-use bits] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-7/test_actual_trace_mutations_re3')
+mutation = 'operand', reason = 'memory/register def-use bits'
+
+    @pytest.mark.parametrize("mutation,reason",[
+        ("missing","missing/reordered machine instruction"),("duplicate","missing/reordered machine instruction"),
+        ("reorder","missing/reordered machine instruction"),("operand","memory/register def-use bits"),
+        ("result","scalar result rounding"),("address","effective address"),
+        ("instruction_bytes","executed instruction byte correspondence"),("module_hash","record module hash identity"),
+        ("mxcsr","MXCSR control condition"),("thread","thread changed"),
+        ("endpoint","buffer endpoint not explained"),("fixture_output","harness output vs traced"),
+        ("boundary_pointer","boundary pointer vs actual ABI register"),
+        ("routing_width","integer extension operand widths"),
+    ])
+    def test_actual_trace_mutations_refuse_pass(tmp_path,mutation,reason):
+        capture,rows=load()
+        index=next(i for i,r in enumerate(rows) if r["phase"]=="step" and r["opcode"]=="mulsd" and int(r["operands"][0]["raw_bits"],16)!=0)
+        row=rows[index]
+        if mutation=="missing": rows.pop(index)
+        elif mutation=="duplicate": rows.insert(index,deepcopy(row))
+        elif mutation=="reorder":
+            rows[index],rows[index+1]=rows[index+1],rows[index]
+            for i,r in enumerate(rows):r["seq"]=i
+        elif mutation=="operand":row["operands"][0]["raw_bits"]=hex(int(row["operands"][0]["raw_bits"],16)^1)
+        elif mutation=="result":row["result_bits"]=hex(int(row["result_bits"],16)^1)
+        elif mutation=="address":row["operands"][0]["address"]+=0x10000000
+        elif mutation=="instruction_bytes":row["bytes"]="00"+row["bytes"][2:]
+        elif mutation=="module_hash":row["module_sha256"]="0"*64
+        elif mutation=="mxcsr":
+            # Change the whole region to keep linkage valid, then test its controls.
+            for r in rows:
+                for context in [r["pre"],r["post"]]:context["mxcsr"]|=1<<15
+        elif mutation=="thread":row["ptid"][1]+=1
+        elif mutation=="endpoint":capture["regions"][-1]["end_state"]["q"]="0x0"
+        elif mutation=="boundary_pointer":
+            capture["regions"][1]["pointers"]["latent"]+=0x10000000
+        elif mutation=="routing_width":
+            bad=next(r for r in rows if r["opcode"]=="movslq" and r["operands"][0]["kind"]=="memory")
+            bad["operands"][0]["width"]=8
+        if mutation in {"missing","duplicate"}:
+            # Keep count/sequence metadata self-consistent so actual PC linkage must
+            # detect the removed/duplicated occurrence rather than a hash/count check.
+            for i,r in enumerate(rows):r["seq"]=i
+            capture["regions"][-1]["end_seq"]=len(rows)
+        rehash(capture,rows,tmp_path)
+        if mutation=="fixture_output":
+            harness=json.loads((tmp_path/"harness_output.json").read_text())
+            harness["output_bits"][0]="0x0"
+            (tmp_path/"harness_output.json").write_text(json.dumps(harness))
+>       with pytest.raises(AuditError,match=reason):check(tmp_path,ROOT)
+                                                    ^^^^^^^^^^^^^^^^^^^^
+
+runtime_trace/tests/test_captured_mutations.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/correspondence.py:310: in check
+    decoded=disassembly_for_rows(rows,capture["modules"])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/correspondence.py:119: in disassembly_for_rows
+    image=Path(path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/pathlib.py:1021: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so')
+args = (), kwargs = {'mode': 'rb'}
+
+    def guarded_open(path, *args, **kwargs):
+        if str(path) in forbidden:
+            blocked.append(str(path))
+>           raise FileNotFoundError(f"recorded runtime path unavailable: {path}")
+E           FileNotFoundError: recorded runtime path unavailable: /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+
+runtime_trace/portable_pytest.py:23: FileNotFoundError
+____ test_actual_trace_mutations_refuse_pass[result-scalar result rounding] ____
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-7/test_actual_trace_mutations_re4')
+mutation = 'result', reason = 'scalar result rounding'
+
+    @pytest.mark.parametrize("mutation,reason",[
+        ("missing","missing/reordered machine instruction"),("duplicate","missing/reordered machine instruction"),
+        ("reorder","missing/reordered machine instruction"),("operand","memory/register def-use bits"),
+        ("result","scalar result rounding"),("address","effective address"),
+        ("instruction_bytes","executed instruction byte correspondence"),("module_hash","record module hash identity"),
+        ("mxcsr","MXCSR control condition"),("thread","thread changed"),
+        ("endpoint","buffer endpoint not explained"),("fixture_output","harness output vs traced"),
+        ("boundary_pointer","boundary pointer vs actual ABI register"),
+        ("routing_width","integer extension operand widths"),
+    ])
+    def test_actual_trace_mutations_refuse_pass(tmp_path,mutation,reason):
+        capture,rows=load()
+        index=next(i for i,r in enumerate(rows) if r["phase"]=="step" and r["opcode"]=="mulsd" and int(r["operands"][0]["raw_bits"],16)!=0)
+        row=rows[index]
+        if mutation=="missing": rows.pop(index)
+        elif mutation=="duplicate": rows.insert(index,deepcopy(row))
+        elif mutation=="reorder":
+            rows[index],rows[index+1]=rows[index+1],rows[index]
+            for i,r in enumerate(rows):r["seq"]=i
+        elif mutation=="operand":row["operands"][0]["raw_bits"]=hex(int(row["operands"][0]["raw_bits"],16)^1)
+        elif mutation=="result":row["result_bits"]=hex(int(row["result_bits"],16)^1)
+        elif mutation=="address":row["operands"][0]["address"]+=0x10000000
+        elif mutation=="instruction_bytes":row["bytes"]="00"+row["bytes"][2:]
+        elif mutation=="module_hash":row["module_sha256"]="0"*64
+        elif mutation=="mxcsr":
+            # Change the whole region to keep linkage valid, then test its controls.
+            for r in rows:
+                for context in [r["pre"],r["post"]]:context["mxcsr"]|=1<<15
+        elif mutation=="thread":row["ptid"][1]+=1
+        elif mutation=="endpoint":capture["regions"][-1]["end_state"]["q"]="0x0"
+        elif mutation=="boundary_pointer":
+            capture["regions"][1]["pointers"]["latent"]+=0x10000000
+        elif mutation=="routing_width":
+            bad=next(r for r in rows if r["opcode"]=="movslq" and r["operands"][0]["kind"]=="memory")
+            bad["operands"][0]["width"]=8
+        if mutation in {"missing","duplicate"}:
+            # Keep count/sequence metadata self-consistent so actual PC linkage must
+            # detect the removed/duplicated occurrence rather than a hash/count check.
+            for i,r in enumerate(rows):r["seq"]=i
+            capture["regions"][-1]["end_seq"]=len(rows)
+        rehash(capture,rows,tmp_path)
+        if mutation=="fixture_output":
+            harness=json.loads((tmp_path/"harness_output.json").read_text())
+            harness["output_bits"][0]="0x0"
+            (tmp_path/"harness_output.json").write_text(json.dumps(harness))
+>       with pytest.raises(AuditError,match=reason):check(tmp_path,ROOT)
+                                                    ^^^^^^^^^^^^^^^^^^^^
+
+runtime_trace/tests/test_captured_mutations.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/correspondence.py:310: in check
+    decoded=disassembly_for_rows(rows,capture["modules"])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/correspondence.py:119: in disassembly_for_rows
+    image=Path(path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/pathlib.py:1021: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so')
+args = (), kwargs = {'mode': 'rb'}
+
+    def guarded_open(path, *args, **kwargs):
+        if str(path) in forbidden:
+            blocked.append(str(path))
+>           raise FileNotFoundError(f"recorded runtime path unavailable: {path}")
+E           FileNotFoundError: recorded runtime path unavailable: /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+
+runtime_trace/portable_pytest.py:23: FileNotFoundError
+______ test_actual_trace_mutations_refuse_pass[address-effective address] ______
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-7/test_actual_trace_mutations_re5')
+mutation = 'address', reason = 'effective address'
+
+    @pytest.mark.parametrize("mutation,reason",[
+        ("missing","missing/reordered machine instruction"),("duplicate","missing/reordered machine instruction"),
+        ("reorder","missing/reordered machine instruction"),("operand","memory/register def-use bits"),
+        ("result","scalar result rounding"),("address","effective address"),
+        ("instruction_bytes","executed instruction byte correspondence"),("module_hash","record module hash identity"),
+        ("mxcsr","MXCSR control condition"),("thread","thread changed"),
+        ("endpoint","buffer endpoint not explained"),("fixture_output","harness output vs traced"),
+        ("boundary_pointer","boundary pointer vs actual ABI register"),
+        ("routing_width","integer extension operand widths"),
+    ])
+    def test_actual_trace_mutations_refuse_pass(tmp_path,mutation,reason):
+        capture,rows=load()
+        index=next(i for i,r in enumerate(rows) if r["phase"]=="step" and r["opcode"]=="mulsd" and int(r["operands"][0]["raw_bits"],16)!=0)
+        row=rows[index]
+        if mutation=="missing": rows.pop(index)
+        elif mutation=="duplicate": rows.insert(index,deepcopy(row))
+        elif mutation=="reorder":
+            rows[index],rows[index+1]=rows[index+1],rows[index]
+            for i,r in enumerate(rows):r["seq"]=i
+        elif mutation=="operand":row["operands"][0]["raw_bits"]=hex(int(row["operands"][0]["raw_bits"],16)^1)
+        elif mutation=="result":row["result_bits"]=hex(int(row["result_bits"],16)^1)
+        elif mutation=="address":row["operands"][0]["address"]+=0x10000000
+        elif mutation=="instruction_bytes":row["bytes"]="00"+row["bytes"][2:]
+        elif mutation=="module_hash":row["module_sha256"]="0"*64
+        elif mutation=="mxcsr":
+            # Change the whole region to keep linkage valid, then test its controls.
+            for r in rows:
+                for context in [r["pre"],r["post"]]:context["mxcsr"]|=1<<15
+        elif mutation=="thread":row["ptid"][1]+=1
+        elif mutation=="endpoint":capture["regions"][-1]["end_state"]["q"]="0x0"
+        elif mutation=="boundary_pointer":
+            capture["regions"][1]["pointers"]["latent"]+=0x10000000
+        elif mutation=="routing_width":
+            bad=next(r for r in rows if r["opcode"]=="movslq" and r["operands"][0]["kind"]=="memory")
+            bad["operands"][0]["width"]=8
+        if mutation in {"missing","duplicate"}:
+            # Keep count/sequence metadata self-consistent so actual PC linkage must
+            # detect the removed/duplicated occurrence rather than a hash/count check.
+            for i,r in enumerate(rows):r["seq"]=i
+            capture["regions"][-1]["end_seq"]=len(rows)
+        rehash(capture,rows,tmp_path)
+        if mutation=="fixture_output":
+            harness=json.loads((tmp_path/"harness_output.json").read_text())
+            harness["output_bits"][0]="0x0"
+            (tmp_path/"harness_output.json").write_text(json.dumps(harness))
+>       with pytest.raises(AuditError,match=reason):check(tmp_path,ROOT)
+                                                    ^^^^^^^^^^^^^^^^^^^^
+
+runtime_trace/tests/test_captured_mutations.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/correspondence.py:310: in check
+    decoded=disassembly_for_rows(rows,capture["modules"])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/correspondence.py:119: in disassembly_for_rows
+    image=Path(path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/pathlib.py:1021: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so')
+args = (), kwargs = {'mode': 'rb'}
+
+    def guarded_open(path, *args, **kwargs):
+        if str(path) in forbidden:
+            blocked.append(str(path))
+>           raise FileNotFoundError(f"recorded runtime path unavailable: {path}")
+E           FileNotFoundError: recorded runtime path unavailable: /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+
+runtime_trace/portable_pytest.py:23: FileNotFoundError
+_ test_actual_trace_mutations_refuse_pass[instruction_bytes-executed instruction byte correspondence] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-7/test_actual_trace_mutations_re6')
+mutation = 'instruction_bytes'
+reason = 'executed instruction byte correspondence'
+
+    @pytest.mark.parametrize("mutation,reason",[
+        ("missing","missing/reordered machine instruction"),("duplicate","missing/reordered machine instruction"),
+        ("reorder","missing/reordered machine instruction"),("operand","memory/register def-use bits"),
+        ("result","scalar result rounding"),("address","effective address"),
+        ("instruction_bytes","executed instruction byte correspondence"),("module_hash","record module hash identity"),
+        ("mxcsr","MXCSR control condition"),("thread","thread changed"),
+        ("endpoint","buffer endpoint not explained"),("fixture_output","harness output vs traced"),
+        ("boundary_pointer","boundary pointer vs actual ABI register"),
+        ("routing_width","integer extension operand widths"),
+    ])
+    def test_actual_trace_mutations_refuse_pass(tmp_path,mutation,reason):
+        capture,rows=load()
+        index=next(i for i,r in enumerate(rows) if r["phase"]=="step" and r["opcode"]=="mulsd" and int(r["operands"][0]["raw_bits"],16)!=0)
+        row=rows[index]
+        if mutation=="missing": rows.pop(index)
+        elif mutation=="duplicate": rows.insert(index,deepcopy(row))
+        elif mutation=="reorder":
+            rows[index],rows[index+1]=rows[index+1],rows[index]
+            for i,r in enumerate(rows):r["seq"]=i
+        elif mutation=="operand":row["operands"][0]["raw_bits"]=hex(int(row["operands"][0]["raw_bits"],16)^1)
+        elif mutation=="result":row["result_bits"]=hex(int(row["result_bits"],16)^1)
+        elif mutation=="address":row["operands"][0]["address"]+=0x10000000
+        elif mutation=="instruction_bytes":row["bytes"]="00"+row["bytes"][2:]
+        elif mutation=="module_hash":row["module_sha256"]="0"*64
+        elif mutation=="mxcsr":
+            # Change the whole region to keep linkage valid, then test its controls.
+            for r in rows:
+                for context in [r["pre"],r["post"]]:context["mxcsr"]|=1<<15
+        elif mutation=="thread":row["ptid"][1]+=1
+        elif mutation=="endpoint":capture["regions"][-1]["end_state"]["q"]="0x0"
+        elif mutation=="boundary_pointer":
+            capture["regions"][1]["pointers"]["latent"]+=0x10000000
+        elif mutation=="routing_width":
+            bad=next(r for r in rows if r["opcode"]=="movslq" and r["operands"][0]["kind"]=="memory")
+            bad["operands"][0]["width"]=8
+        if mutation in {"missing","duplicate"}:
+            # Keep count/sequence metadata self-consistent so actual PC linkage must
+            # detect the removed/duplicated occurrence rather than a hash/count check.
+            for i,r in enumerate(rows):r["seq"]=i
+            capture["regions"][-1]["end_seq"]=len(rows)
+        rehash(capture,rows,tmp_path)
+        if mutation=="fixture_output":
+            harness=json.loads((tmp_path/"harness_output.json").read_text())
+            harness["output_bits"][0]="0x0"
+            (tmp_path/"harness_output.json").write_text(json.dumps(harness))
+>       with pytest.raises(AuditError,match=reason):check(tmp_path,ROOT)
+                                                    ^^^^^^^^^^^^^^^^^^^^
+
+runtime_trace/tests/test_captured_mutations.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/correspondence.py:310: in check
+    decoded=disassembly_for_rows(rows,capture["modules"])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/correspondence.py:119: in disassembly_for_rows
+    image=Path(path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/pathlib.py:1021: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so')
+args = (), kwargs = {'mode': 'rb'}
+
+    def guarded_open(path, *args, **kwargs):
+        if str(path) in forbidden:
+            blocked.append(str(path))
+>           raise FileNotFoundError(f"recorded runtime path unavailable: {path}")
+E           FileNotFoundError: recorded runtime path unavailable: /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+
+runtime_trace/portable_pytest.py:23: FileNotFoundError
+_ test_actual_trace_mutations_refuse_pass[module_hash-record module hash identity] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-7/test_actual_trace_mutations_re7')
+mutation = 'module_hash', reason = 'record module hash identity'
+
+    @pytest.mark.parametrize("mutation,reason",[
+        ("missing","missing/reordered machine instruction"),("duplicate","missing/reordered machine instruction"),
+        ("reorder","missing/reordered machine instruction"),("operand","memory/register def-use bits"),
+        ("result","scalar result rounding"),("address","effective address"),
+        ("instruction_bytes","executed instruction byte correspondence"),("module_hash","record module hash identity"),
+        ("mxcsr","MXCSR control condition"),("thread","thread changed"),
+        ("endpoint","buffer endpoint not explained"),("fixture_output","harness output vs traced"),
+        ("boundary_pointer","boundary pointer vs actual ABI register"),
+        ("routing_width","integer extension operand widths"),
+    ])
+    def test_actual_trace_mutations_refuse_pass(tmp_path,mutation,reason):
+        capture,rows=load()
+        index=next(i for i,r in enumerate(rows) if r["phase"]=="step" and r["opcode"]=="mulsd" and int(r["operands"][0]["raw_bits"],16)!=0)
+        row=rows[index]
+        if mutation=="missing": rows.pop(index)
+        elif mutation=="duplicate": rows.insert(index,deepcopy(row))
+        elif mutation=="reorder":
+            rows[index],rows[index+1]=rows[index+1],rows[index]
+            for i,r in enumerate(rows):r["seq"]=i
+        elif mutation=="operand":row["operands"][0]["raw_bits"]=hex(int(row["operands"][0]["raw_bits"],16)^1)
+        elif mutation=="result":row["result_bits"]=hex(int(row["result_bits"],16)^1)
+        elif mutation=="address":row["operands"][0]["address"]+=0x10000000
+        elif mutation=="instruction_bytes":row["bytes"]="00"+row["bytes"][2:]
+        elif mutation=="module_hash":row["module_sha256"]="0"*64
+        elif mutation=="mxcsr":
+            # Change the whole region to keep linkage valid, then test its controls.
+            for r in rows:
+                for context in [r["pre"],r["post"]]:context["mxcsr"]|=1<<15
+        elif mutation=="thread":row["ptid"][1]+=1
+        elif mutation=="endpoint":capture["regions"][-1]["end_state"]["q"]="0x0"
+        elif mutation=="boundary_pointer":
+            capture["regions"][1]["pointers"]["latent"]+=0x10000000
+        elif mutation=="routing_width":
+            bad=next(r for r in rows if r["opcode"]=="movslq" and r["operands"][0]["kind"]=="memory")
+            bad["operands"][0]["width"]=8
+        if mutation in {"missing","duplicate"}:
+            # Keep count/sequence metadata self-consistent so actual PC linkage must
+            # detect the removed/duplicated occurrence rather than a hash/count check.
+            for i,r in enumerate(rows):r["seq"]=i
+            capture["regions"][-1]["end_seq"]=len(rows)
+        rehash(capture,rows,tmp_path)
+        if mutation=="fixture_output":
+            harness=json.loads((tmp_path/"harness_output.json").read_text())
+            harness["output_bits"][0]="0x0"
+            (tmp_path/"harness_output.json").write_text(json.dumps(harness))
+>       with pytest.raises(AuditError,match=reason):check(tmp_path,ROOT)
+                                                    ^^^^^^^^^^^^^^^^^^^^
+
+runtime_trace/tests/test_captured_mutations.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/correspondence.py:310: in check
+    decoded=disassembly_for_rows(rows,capture["modules"])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/correspondence.py:119: in disassembly_for_rows
+    image=Path(path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/pathlib.py:1021: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so')
+args = (), kwargs = {'mode': 'rb'}
+
+    def guarded_open(path, *args, **kwargs):
+        if str(path) in forbidden:
+            blocked.append(str(path))
+>           raise FileNotFoundError(f"recorded runtime path unavailable: {path}")
+E           FileNotFoundError: recorded runtime path unavailable: /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+
+runtime_trace/portable_pytest.py:23: FileNotFoundError
+____ test_actual_trace_mutations_refuse_pass[mxcsr-MXCSR control condition] ____
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-7/test_actual_trace_mutations_re8')
+mutation = 'mxcsr', reason = 'MXCSR control condition'
+
+    @pytest.mark.parametrize("mutation,reason",[
+        ("missing","missing/reordered machine instruction"),("duplicate","missing/reordered machine instruction"),
+        ("reorder","missing/reordered machine instruction"),("operand","memory/register def-use bits"),
+        ("result","scalar result rounding"),("address","effective address"),
+        ("instruction_bytes","executed instruction byte correspondence"),("module_hash","record module hash identity"),
+        ("mxcsr","MXCSR control condition"),("thread","thread changed"),
+        ("endpoint","buffer endpoint not explained"),("fixture_output","harness output vs traced"),
+        ("boundary_pointer","boundary pointer vs actual ABI register"),
+        ("routing_width","integer extension operand widths"),
+    ])
+    def test_actual_trace_mutations_refuse_pass(tmp_path,mutation,reason):
+        capture,rows=load()
+        index=next(i for i,r in enumerate(rows) if r["phase"]=="step" and r["opcode"]=="mulsd" and int(r["operands"][0]["raw_bits"],16)!=0)
+        row=rows[index]
+        if mutation=="missing": rows.pop(index)
+        elif mutation=="duplicate": rows.insert(index,deepcopy(row))
+        elif mutation=="reorder":
+            rows[index],rows[index+1]=rows[index+1],rows[index]
+            for i,r in enumerate(rows):r["seq"]=i
+        elif mutation=="operand":row["operands"][0]["raw_bits"]=hex(int(row["operands"][0]["raw_bits"],16)^1)
+        elif mutation=="result":row["result_bits"]=hex(int(row["result_bits"],16)^1)
+        elif mutation=="address":row["operands"][0]["address"]+=0x10000000
+        elif mutation=="instruction_bytes":row["bytes"]="00"+row["bytes"][2:]
+        elif mutation=="module_hash":row["module_sha256"]="0"*64
+        elif mutation=="mxcsr":
+            # Change the whole region to keep linkage valid, then test its controls.
+            for r in rows:
+                for context in [r["pre"],r["post"]]:context["mxcsr"]|=1<<15
+        elif mutation=="thread":row["ptid"][1]+=1
+        elif mutation=="endpoint":capture["regions"][-1]["end_state"]["q"]="0x0"
+        elif mutation=="boundary_pointer":
+            capture["regions"][1]["pointers"]["latent"]+=0x10000000
+        elif mutation=="routing_width":
+            bad=next(r for r in rows if r["opcode"]=="movslq" and r["operands"][0]["kind"]=="memory")
+            bad["operands"][0]["width"]=8
+        if mutation in {"missing","duplicate"}:
+            # Keep count/sequence metadata self-consistent so actual PC linkage must
+            # detect the removed/duplicated occurrence rather than a hash/count check.
+            for i,r in enumerate(rows):r["seq"]=i
+            capture["regions"][-1]["end_seq"]=len(rows)
+        rehash(capture,rows,tmp_path)
+        if mutation=="fixture_output":
+            harness=json.loads((tmp_path/"harness_output.json").read_text())
+            harness["output_bits"][0]="0x0"
+            (tmp_path/"harness_output.json").write_text(json.dumps(harness))
+>       with pytest.raises(AuditError,match=reason):check(tmp_path,ROOT)
+                                                    ^^^^^^^^^^^^^^^^^^^^
+
+runtime_trace/tests/test_captured_mutations.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/correspondence.py:310: in check
+    decoded=disassembly_for_rows(rows,capture["modules"])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/correspondence.py:119: in disassembly_for_rows
+    image=Path(path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/pathlib.py:1021: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so')
+args = (), kwargs = {'mode': 'rb'}
+
+    def guarded_open(path, *args, **kwargs):
+        if str(path) in forbidden:
+            blocked.append(str(path))
+>           raise FileNotFoundError(f"recorded runtime path unavailable: {path}")
+E           FileNotFoundError: recorded runtime path unavailable: /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+
+runtime_trace/portable_pytest.py:23: FileNotFoundError
+_ test_actual_trace_mutations_refuse_pass[endpoint-buffer endpoint not explained] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-7/test_actual_trace_mutations_re10')
+mutation = 'endpoint', reason = 'buffer endpoint not explained'
+
+    @pytest.mark.parametrize("mutation,reason",[
+        ("missing","missing/reordered machine instruction"),("duplicate","missing/reordered machine instruction"),
+        ("reorder","missing/reordered machine instruction"),("operand","memory/register def-use bits"),
+        ("result","scalar result rounding"),("address","effective address"),
+        ("instruction_bytes","executed instruction byte correspondence"),("module_hash","record module hash identity"),
+        ("mxcsr","MXCSR control condition"),("thread","thread changed"),
+        ("endpoint","buffer endpoint not explained"),("fixture_output","harness output vs traced"),
+        ("boundary_pointer","boundary pointer vs actual ABI register"),
+        ("routing_width","integer extension operand widths"),
+    ])
+    def test_actual_trace_mutations_refuse_pass(tmp_path,mutation,reason):
+        capture,rows=load()
+        index=next(i for i,r in enumerate(rows) if r["phase"]=="step" and r["opcode"]=="mulsd" and int(r["operands"][0]["raw_bits"],16)!=0)
+        row=rows[index]
+        if mutation=="missing": rows.pop(index)
+        elif mutation=="duplicate": rows.insert(index,deepcopy(row))
+        elif mutation=="reorder":
+            rows[index],rows[index+1]=rows[index+1],rows[index]
+            for i,r in enumerate(rows):r["seq"]=i
+        elif mutation=="operand":row["operands"][0]["raw_bits"]=hex(int(row["operands"][0]["raw_bits"],16)^1)
+        elif mutation=="result":row["result_bits"]=hex(int(row["result_bits"],16)^1)
+        elif mutation=="address":row["operands"][0]["address"]+=0x10000000
+        elif mutation=="instruction_bytes":row["bytes"]="00"+row["bytes"][2:]
+        elif mutation=="module_hash":row["module_sha256"]="0"*64
+        elif mutation=="mxcsr":
+            # Change the whole region to keep linkage valid, then test its controls.
+            for r in rows:
+                for context in [r["pre"],r["post"]]:context["mxcsr"]|=1<<15
+        elif mutation=="thread":row["ptid"][1]+=1
+        elif mutation=="endpoint":capture["regions"][-1]["end_state"]["q"]="0x0"
+        elif mutation=="boundary_pointer":
+            capture["regions"][1]["pointers"]["latent"]+=0x10000000
+        elif mutation=="routing_width":
+            bad=next(r for r in rows if r["opcode"]=="movslq" and r["operands"][0]["kind"]=="memory")
+            bad["operands"][0]["width"]=8
+        if mutation in {"missing","duplicate"}:
+            # Keep count/sequence metadata self-consistent so actual PC linkage must
+            # detect the removed/duplicated occurrence rather than a hash/count check.
+            for i,r in enumerate(rows):r["seq"]=i
+            capture["regions"][-1]["end_seq"]=len(rows)
+        rehash(capture,rows,tmp_path)
+        if mutation=="fixture_output":
+            harness=json.loads((tmp_path/"harness_output.json").read_text())
+            harness["output_bits"][0]="0x0"
+            (tmp_path/"harness_output.json").write_text(json.dumps(harness))
+>       with pytest.raises(AuditError,match=reason):check(tmp_path,ROOT)
+                                                    ^^^^^^^^^^^^^^^^^^^^
+
+runtime_trace/tests/test_captured_mutations.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/correspondence.py:310: in check
+    decoded=disassembly_for_rows(rows,capture["modules"])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/correspondence.py:119: in disassembly_for_rows
+    image=Path(path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/pathlib.py:1021: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so')
+args = (), kwargs = {'mode': 'rb'}
+
+    def guarded_open(path, *args, **kwargs):
+        if str(path) in forbidden:
+            blocked.append(str(path))
+>           raise FileNotFoundError(f"recorded runtime path unavailable: {path}")
+E           FileNotFoundError: recorded runtime path unavailable: /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+
+runtime_trace/portable_pytest.py:23: FileNotFoundError
+_ test_actual_trace_mutations_refuse_pass[fixture_output-harness output vs traced] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-7/test_actual_trace_mutations_re11')
+mutation = 'fixture_output', reason = 'harness output vs traced'
+
+    @pytest.mark.parametrize("mutation,reason",[
+        ("missing","missing/reordered machine instruction"),("duplicate","missing/reordered machine instruction"),
+        ("reorder","missing/reordered machine instruction"),("operand","memory/register def-use bits"),
+        ("result","scalar result rounding"),("address","effective address"),
+        ("instruction_bytes","executed instruction byte correspondence"),("module_hash","record module hash identity"),
+        ("mxcsr","MXCSR control condition"),("thread","thread changed"),
+        ("endpoint","buffer endpoint not explained"),("fixture_output","harness output vs traced"),
+        ("boundary_pointer","boundary pointer vs actual ABI register"),
+        ("routing_width","integer extension operand widths"),
+    ])
+    def test_actual_trace_mutations_refuse_pass(tmp_path,mutation,reason):
+        capture,rows=load()
+        index=next(i for i,r in enumerate(rows) if r["phase"]=="step" and r["opcode"]=="mulsd" and int(r["operands"][0]["raw_bits"],16)!=0)
+        row=rows[index]
+        if mutation=="missing": rows.pop(index)
+        elif mutation=="duplicate": rows.insert(index,deepcopy(row))
+        elif mutation=="reorder":
+            rows[index],rows[index+1]=rows[index+1],rows[index]
+            for i,r in enumerate(rows):r["seq"]=i
+        elif mutation=="operand":row["operands"][0]["raw_bits"]=hex(int(row["operands"][0]["raw_bits"],16)^1)
+        elif mutation=="result":row["result_bits"]=hex(int(row["result_bits"],16)^1)
+        elif mutation=="address":row["operands"][0]["address"]+=0x10000000
+        elif mutation=="instruction_bytes":row["bytes"]="00"+row["bytes"][2:]
+        elif mutation=="module_hash":row["module_sha256"]="0"*64
+        elif mutation=="mxcsr":
+            # Change the whole region to keep linkage valid, then test its controls.
+            for r in rows:
+                for context in [r["pre"],r["post"]]:context["mxcsr"]|=1<<15
+        elif mutation=="thread":row["ptid"][1]+=1
+        elif mutation=="endpoint":capture["regions"][-1]["end_state"]["q"]="0x0"
+        elif mutation=="boundary_pointer":
+            capture["regions"][1]["pointers"]["latent"]+=0x10000000
+        elif mutation=="routing_width":
+            bad=next(r for r in rows if r["opcode"]=="movslq" and r["operands"][0]["kind"]=="memory")
+            bad["operands"][0]["width"]=8
+        if mutation in {"missing","duplicate"}:
+            # Keep count/sequence metadata self-consistent so actual PC linkage must
+            # detect the removed/duplicated occurrence rather than a hash/count check.
+            for i,r in enumerate(rows):r["seq"]=i
+            capture["regions"][-1]["end_seq"]=len(rows)
+        rehash(capture,rows,tmp_path)
+        if mutation=="fixture_output":
+            harness=json.loads((tmp_path/"harness_output.json").read_text())
+            harness["output_bits"][0]="0x0"
+            (tmp_path/"harness_output.json").write_text(json.dumps(harness))
+>       with pytest.raises(AuditError,match=reason):check(tmp_path,ROOT)
+                                                    ^^^^^^^^^^^^^^^^^^^^
+
+runtime_trace/tests/test_captured_mutations.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/correspondence.py:310: in check
+    decoded=disassembly_for_rows(rows,capture["modules"])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/correspondence.py:119: in disassembly_for_rows
+    image=Path(path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/pathlib.py:1021: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so')
+args = (), kwargs = {'mode': 'rb'}
+
+    def guarded_open(path, *args, **kwargs):
+        if str(path) in forbidden:
+            blocked.append(str(path))
+>           raise FileNotFoundError(f"recorded runtime path unavailable: {path}")
+E           FileNotFoundError: recorded runtime path unavailable: /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+
+runtime_trace/portable_pytest.py:23: FileNotFoundError
+_ test_actual_trace_mutations_refuse_pass[routing_width-integer extension operand widths] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-7/test_actual_trace_mutations_re13')
+mutation = 'routing_width', reason = 'integer extension operand widths'
+
+    @pytest.mark.parametrize("mutation,reason",[
+        ("missing","missing/reordered machine instruction"),("duplicate","missing/reordered machine instruction"),
+        ("reorder","missing/reordered machine instruction"),("operand","memory/register def-use bits"),
+        ("result","scalar result rounding"),("address","effective address"),
+        ("instruction_bytes","executed instruction byte correspondence"),("module_hash","record module hash identity"),
+        ("mxcsr","MXCSR control condition"),("thread","thread changed"),
+        ("endpoint","buffer endpoint not explained"),("fixture_output","harness output vs traced"),
+        ("boundary_pointer","boundary pointer vs actual ABI register"),
+        ("routing_width","integer extension operand widths"),
+    ])
+    def test_actual_trace_mutations_refuse_pass(tmp_path,mutation,reason):
+        capture,rows=load()
+        index=next(i for i,r in enumerate(rows) if r["phase"]=="step" and r["opcode"]=="mulsd" and int(r["operands"][0]["raw_bits"],16)!=0)
+        row=rows[index]
+        if mutation=="missing": rows.pop(index)
+        elif mutation=="duplicate": rows.insert(index,deepcopy(row))
+        elif mutation=="reorder":
+            rows[index],rows[index+1]=rows[index+1],rows[index]
+            for i,r in enumerate(rows):r["seq"]=i
+        elif mutation=="operand":row["operands"][0]["raw_bits"]=hex(int(row["operands"][0]["raw_bits"],16)^1)
+        elif mutation=="result":row["result_bits"]=hex(int(row["result_bits"],16)^1)
+        elif mutation=="address":row["operands"][0]["address"]+=0x10000000
+        elif mutation=="instruction_bytes":row["bytes"]="00"+row["bytes"][2:]
+        elif mutation=="module_hash":row["module_sha256"]="0"*64
+        elif mutation=="mxcsr":
+            # Change the whole region to keep linkage valid, then test its controls.
+            for r in rows:
+                for context in [r["pre"],r["post"]]:context["mxcsr"]|=1<<15
+        elif mutation=="thread":row["ptid"][1]+=1
+        elif mutation=="endpoint":capture["regions"][-1]["end_state"]["q"]="0x0"
+        elif mutation=="boundary_pointer":
+            capture["regions"][1]["pointers"]["latent"]+=0x10000000
+        elif mutation=="routing_width":
+            bad=next(r for r in rows if r["opcode"]=="movslq" and r["operands"][0]["kind"]=="memory")
+            bad["operands"][0]["width"]=8
+        if mutation in {"missing","duplicate"}:
+            # Keep count/sequence metadata self-consistent so actual PC linkage must
+            # detect the removed/duplicated occurrence rather than a hash/count check.
+            for i,r in enumerate(rows):r["seq"]=i
+            capture["regions"][-1]["end_seq"]=len(rows)
+        rehash(capture,rows,tmp_path)
+        if mutation=="fixture_output":
+            harness=json.loads((tmp_path/"harness_output.json").read_text())
+            harness["output_bits"][0]="0x0"
+            (tmp_path/"harness_output.json").write_text(json.dumps(harness))
+>       with pytest.raises(AuditError,match=reason):check(tmp_path,ROOT)
+                                                    ^^^^^^^^^^^^^^^^^^^^
+
+runtime_trace/tests/test_captured_mutations.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/correspondence.py:310: in check
+    decoded=disassembly_for_rows(rows,capture["modules"])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/correspondence.py:119: in disassembly_for_rows
+    image=Path(path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/pathlib.py:1021: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so')
+args = (), kwargs = {'mode': 'rb'}
+
+    def guarded_open(path, *args, **kwargs):
+        if str(path) in forbidden:
+            blocked.append(str(path))
+>           raise FileNotFoundError(f"recorded runtime path unavailable: {path}")
+E           FileNotFoundError: recorded runtime path unavailable: /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+
+runtime_trace/portable_pytest.py:23: FileNotFoundError
+_______________ test_actual_numeric_source_requires_known_bytes ________________
+
+    def test_actual_numeric_source_requires_known_bytes():
+        capture,rows=load()
+>       decoded=disassembly_for_rows(rows,capture["modules"])
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+runtime_trace/tests/test_captured_mutations.py:91: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/correspondence.py:119: in disassembly_for_rows
+    image=Path(path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/pathlib.py:1021: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so')
+args = (), kwargs = {'mode': 'rb'}
+
+    def guarded_open(path, *args, **kwargs):
+        if str(path) in forbidden:
+            blocked.append(str(path))
+>           raise FileNotFoundError(f"recorded runtime path unavailable: {path}")
+E           FileNotFoundError: recorded runtime path unavailable: /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+
+runtime_trace/portable_pytest.py:23: FileNotFoundError
+=========================== short test summary info ============================
+FAILED runtime_trace/tests/test_captured_mutations.py::test_real_capture_positive
+FAILED runtime_trace/tests/test_captured_mutations.py::test_actual_trace_mutations_refuse_pass[operand-memory/register def-use bits]
+FAILED runtime_trace/tests/test_captured_mutations.py::test_actual_trace_mutations_refuse_pass[result-scalar result rounding]
+FAILED runtime_trace/tests/test_captured_mutations.py::test_actual_trace_mutations_refuse_pass[address-effective address]
+FAILED runtime_trace/tests/test_captured_mutations.py::test_actual_trace_mutations_refuse_pass[instruction_bytes-executed instruction byte correspondence]
+FAILED runtime_trace/tests/test_captured_mutations.py::test_actual_trace_mutations_refuse_pass[module_hash-record module hash identity]
+FAILED runtime_trace/tests/test_captured_mutations.py::test_actual_trace_mutations_refuse_pass[mxcsr-MXCSR control condition]
+FAILED runtime_trace/tests/test_captured_mutations.py::test_actual_trace_mutations_refuse_pass[endpoint-buffer endpoint not explained]
+FAILED runtime_trace/tests/test_captured_mutations.py::test_actual_trace_mutations_refuse_pass[fixture_output-harness output vs traced]
+FAILED runtime_trace/tests/test_captured_mutations.py::test_actual_trace_mutations_refuse_pass[routing_width-integer extension operand widths]
+FAILED runtime_trace/tests/test_captured_mutations.py::test_actual_numeric_source_requires_known_bytes
+11 failed, 41 passed in 1.64s
+{"forbidden_recorded_paths": ["/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so", "/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/potential/potential/builtin/cybuiltin.cpython-312-x86_64-linux-gnu.so", "/usr/lib/x86_64-linux-gnu/libc.so.6"], "blocked_read_attempts": ["/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so", "/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so", "/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so", "/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so", "/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so", "/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so", "/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so", "/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so", "/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so", "/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so", "/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so"], "pytest_exit_code": 1}

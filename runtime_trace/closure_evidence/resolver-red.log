@@ -1,0 +1,195 @@
+FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+_____ test_checker_uses_packaged_images_when_all_recorded_paths_are_absent _____
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-1/test_checker_uses_packaged_ima0')
+
+    def test_checker_uses_packaged_images_when_all_recorded_paths_are_absent(tmp_path):
+        portable_trace(tmp_path)
+        try:
+>           result = check(tmp_path, ROOT)
+                     ^^^^^^^^^^^^^^^^^^^^^
+
+runtime_trace/tests/test_frozen_resolver.py:32: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/correspondence.py:310: in check
+    decoded=disassembly_for_rows(rows,capture["modules"])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/correspondence.py:119: in disassembly_for_rows
+    image=Path(path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/pathlib.py:1021: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/unavailable/captured/module-2.so'), mode = 'rb'
+buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/unavailable/captured/module-2.so'
+
+/usr/lib/python3.12/pathlib.py:1015: FileNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-1/test_checker_uses_packaged_ima0')
+
+    def test_checker_uses_packaged_images_when_all_recorded_paths_are_absent(tmp_path):
+        portable_trace(tmp_path)
+        try:
+            result = check(tmp_path, ROOT)
+        except FileNotFoundError as exc:
+>           pytest.fail(f"checker reopened unavailable provenance path: {exc}")
+E           Failed: checker reopened unavailable provenance path: [Errno 2] No such file or directory: '/unavailable/captured/module-2.so'
+
+runtime_trace/tests/test_frozen_resolver.py:34: Failed
+_____ test_missing_packaged_libc_fails_closed_even_if_runtime_libc_exists ______
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-1/test_missing_packaged_libc_fai0')
+
+    def test_missing_packaged_libc_fails_closed_even_if_runtime_libc_exists(tmp_path):
+        root = packaged_root(tmp_path)
+        (root / "runtime_trace/frozen_binaries/libc.so.6").unlink()
+        with pytest.raises(AuditError, match="packaged module missing"):
+>           check(ROOT / "runtime_trace/artifacts/attempt-05", root)
+
+runtime_trace/tests/test_frozen_resolver.py:50: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/correspondence.py:316: in check
+    manifest=json.loads((root/"benchmarks/gate2b/fixtures/cloud-2026-10-01/manifest.json").read_text())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/pathlib.py:1029: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-otherside123/pytest-1/test_missing_packaged_libc_fai0/package/benchmarks/gate2b/fixtures/cloud-2026-10-01/manifest.json')
+mode = 'r', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/tmp/pytest-of-otherside123/pytest-1/test_missing_packaged_libc_fai0/package/benchmarks/gate2b/fixtures/cloud-2026-10-01/manifest.json'
+
+/usr/lib/python3.12/pathlib.py:1015: FileNotFoundError
+_____ test_corrupt_packaged_libc_fails_closed_even_if_runtime_libc_exists ______
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-1/test_corrupt_packaged_libc_fai0')
+
+    def test_corrupt_packaged_libc_fails_closed_even_if_runtime_libc_exists(tmp_path):
+        root = packaged_root(tmp_path)
+        image = root / "runtime_trace/frozen_binaries/libc.so.6"
+        data = bytearray(image.read_bytes())
+        data[-1] ^= 1
+        image.write_bytes(data)
+        with pytest.raises(AuditError, match="packaged module raw hash"):
+>           check(ROOT / "runtime_trace/artifacts/attempt-05", root)
+
+runtime_trace/tests/test_frozen_resolver.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/correspondence.py:316: in check
+    manifest=json.loads((root/"benchmarks/gate2b/fixtures/cloud-2026-10-01/manifest.json").read_text())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/pathlib.py:1029: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-otherside123/pytest-1/test_corrupt_packaged_libc_fai0/package/benchmarks/gate2b/fixtures/cloud-2026-10-01/manifest.json')
+mode = 'r', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/tmp/pytest-of-otherside123/pytest-1/test_corrupt_packaged_libc_fai0/package/benchmarks/gate2b/fixtures/cloud-2026-10-01/manifest.json'
+
+/usr/lib/python3.12/pathlib.py:1015: FileNotFoundError
+_______ test_unregistered_module_hash_does_not_fall_back_to_runtime_path _______
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-1/test_unregistered_module_hash_0')
+
+    def test_unregistered_module_hash_does_not_fall_back_to_runtime_path(tmp_path):
+        capture, rows = load()
+        path = next(path for path in capture["modules"] if path.endswith("libc.so.6"))
+        capture["modules"][path]["sha256"] = "0" * 64
+        for row in rows:
+            if row["module_path"] == path:
+                row["module_sha256"] = "0" * 64
+        rehash(capture, rows, tmp_path)
+>       with pytest.raises(AuditError, match="unpackaged module SHA-256"):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'unpackaged module SHA-256'
+E         Actual message: 'module raw hash'
+
+runtime_trace/tests/test_frozen_resolver.py:71: AssertionError
+___________________ test_manifest_cannot_escape_package_root ___________________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-1/test_manifest_cannot_escape_pa0')
+
+    def test_manifest_cannot_escape_package_root(tmp_path):
+        root = packaged_root(tmp_path)
+        manifest_path = root / "runtime_trace/frozen_binaries/manifest.json"
+        manifest = json.loads(manifest_path.read_text())
+        libc_hash = "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf"
+        manifest["modules"][libc_hash] = "../outside-libc.so.6"
+        manifest_path.write_text(json.dumps(manifest))
+        with pytest.raises(AuditError, match="packaged module path escapes root"):
+>           check(ROOT / "runtime_trace/artifacts/attempt-05", root)
+
+runtime_trace/tests/test_frozen_resolver.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/correspondence.py:316: in check
+    manifest=json.loads((root/"benchmarks/gate2b/fixtures/cloud-2026-10-01/manifest.json").read_text())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/pathlib.py:1029: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-otherside123/pytest-1/test_manifest_cannot_escape_pa0/package/benchmarks/gate2b/fixtures/cloud-2026-10-01/manifest.json')
+mode = 'r', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/tmp/pytest-of-otherside123/pytest-1/test_manifest_cannot_escape_pa0/package/benchmarks/gate2b/fixtures/cloud-2026-10-01/manifest.json'
+
+/usr/lib/python3.12/pathlib.py:1015: FileNotFoundError
+=========================== short test summary info ============================
+FAILED runtime_trace/tests/test_frozen_resolver.py::test_checker_uses_packaged_images_when_all_recorded_paths_are_absent
+FAILED runtime_trace/tests/test_frozen_resolver.py::test_missing_packaged_libc_fails_closed_even_if_runtime_libc_exists
+FAILED runtime_trace/tests/test_frozen_resolver.py::test_corrupt_packaged_libc_fails_closed_even_if_runtime_libc_exists
+FAILED runtime_trace/tests/test_frozen_resolver.py::test_unregistered_module_hash_does_not_fall_back_to_runtime_path
+FAILED runtime_trace/tests/test_frozen_resolver.py::test_manifest_cannot_escape_package_root
+5 failed in 2.31s

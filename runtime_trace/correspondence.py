@@ -23,6 +23,37 @@ def require(condition, reason):
     if not condition: raise AuditError(reason)
 
 
+class FrozenBinaryResolver:
+    """Resolve module hashes only within the evidence package, never runtime paths."""
+
+    def __init__(self, root=None):
+        self.root = (Path(root) if root is not None else Path(__file__).resolve().parents[1]).resolve()
+        manifest_path = self.root / "runtime_trace/frozen_binaries/manifest.json"
+        require(manifest_path.is_file(), "packaged module manifest missing")
+        manifest = json.loads(manifest_path.read_text())
+        require(manifest.get("schema") == "runtime-trace-frozen-binaries-v1", "packaged module manifest schema")
+        self.modules = manifest["modules"]
+        self.cache = {}
+
+    def resolve(self, digest):
+        require(digest in self.modules, f"unpackaged module SHA-256: {digest}")
+        if digest not in self.cache:
+            relative = Path(self.modules[digest])
+            path = (self.root / relative).resolve()
+            require(not relative.is_absolute() and path.is_relative_to(self.root), "packaged module path escapes root")
+            require(path.is_file(), f"packaged module missing: {digest}")
+            image = path.read_bytes()
+            require(hashlib.sha256(image).hexdigest() == digest, f"packaged module raw hash: {digest}")
+            self.cache[digest] = (path, image)
+        return self.cache[digest]
+
+
+def constant_image(origin, modules, resolver):
+    digest = origin["module_sha256"]
+    require(any(m["sha256"] == digest for m in modules.values()), "constant module absent from capture")
+    return resolver.resolve(digest)[1]
+
+
 def raw(text, width):
     return int(text,16).to_bytes(width,"little")
 
@@ -112,16 +143,16 @@ def file_offset(module_bytes, vaddr, length):
     raise AuditError("ELF instruction outside file-backed segment")
 
 
-def disassembly_for_rows(rows, modules):
+def disassembly_for_rows(rows, modules, root=None):
     decoded={}
+    resolver=FrozenBinaryResolver(root)
     for path in {r["module_path"] for r in rows}:
         module=modules[path]
-        image=Path(path).read_bytes()
-        require(hashlib.sha256(image).hexdigest()==module["sha256"],"module raw hash")
+        packaged_path,image=resolver.resolve(module["sha256"])
         occurrences=[r for r in rows if r["module_path"]==path]
         first=min(r["elf_address"] for r in occurrences)
         end=max(r["elf_address"]+len(bytes.fromhex(r["bytes"])) for r in occurrences)
-        listing=subprocess.check_output(["objdump","-d","--no-show-raw-insn",f"--start-address={first}",f"--stop-address={end}",path],text=True)
+        listing=subprocess.check_output(["objdump","-d","--no-show-raw-insn",f"--start-address={first}",f"--stop-address={end}",str(packaged_path)],text=True)
         wanted={r["elf_address"] for r in occurrences}
         for line in listing.splitlines():
             m=re.match(r"\s*([0-9a-f]+):\s+(.+)",line)
@@ -188,8 +219,9 @@ def verify_control_pc(record, reference):
     require(record["post_pc"]==expected,"observed PC disagrees with instruction occurrence")
 
 
-def verify_flow(rows, capture, decoded):
+def verify_flow(rows, capture, decoded, root=None):
     modules=capture["modules"]
+    resolver=FrozenBinaryResolver(root)
     for region in capture["regions"]:
         subset=rows[region["start_seq"]:region["end_seq"]]
         knowledge={}
@@ -242,8 +274,8 @@ def verify_flow(rows, capture, decoded):
                     if not all(key in knowledge for key in keys):
                         origin=operand.get("constant_origin")
                         require(origin is not None,"unknown numerical input source")
-                        image=next((Path(p).read_bytes() for p,m in modules.items() if m["sha256"]==origin["module_sha256"]),None)
-                        require(image is not None and image[origin["file_offset"]:origin["file_offset"]+8]==data,"ELF constant source bytes")
+                        image=constant_image(origin,modules,resolver)
+                        require(image[origin["file_offset"]:origin["file_offset"]+8]==data,"ELF constant source bytes")
                 verify_scalar(record)
             destination=ops[-1] if kind in {"ADD","SUB","MUL","MOVE","STACK","ZERO","ZERO_FILL"} else None
             exempt=set()
@@ -257,7 +289,7 @@ def verify_flow(rows, capture, decoded):
                 src_keys=operand_keys(ops[0]);source_known=[key in knowledge for key in src_keys]
                 if ops[0].get("constant_origin"):
                     origin=ops[0]["constant_origin"]
-                    image=next(Path(p).read_bytes() for p,m in modules.items() if m["sha256"]==origin["module_sha256"])
+                    image=constant_image(origin,modules,resolver)
                     require(image[origin["file_offset"]:origin["file_offset"]+len(result)]==raw(ops[0]["raw_bits"],len(result)),"constant load bytes")
                     source_known=[True]*len(result)
                 for i,(key,byte) in enumerate(zip(operand_keys(destination),result)):
@@ -307,8 +339,8 @@ def check(out,root):
         entry=rows[region["start_seq"]]["pre"]["gpr"]
         for name,register in [("q","rcx"),("full_v","r8"),("latent","r9")]:
             require(region["pointers"][name]==int(entry[register],16),"boundary pointer vs actual ABI register")
-    decoded=disassembly_for_rows(rows,capture["modules"])
-    verify_flow(rows,capture,decoded)
+    decoded=disassembly_for_rows(rows,capture["modules"],root)
+    verify_flow(rows,capture,decoded,root)
     output=json.loads((out/"harness_output.json").read_text())["output_bits"]
     endpoint=capture["regions"][-1]["end_state"]
     endpoint_bits=[f"0x{struct.unpack_from('<Q',raw(endpoint[name],16),8*i)[0]:016x}" for name in ["q","full_v"] for i in range(2)]

@@ -1,0 +1,13 @@
+{
+  "baseline_command": [
+    "/home/otherside123/venvs/gate2c1-trace/bin/python",
+    "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/harness.py"
+  ],
+  "baseline_return_code": 0,
+  "baseline_process_wall_seconds": 2.6064865609998833,
+  "gdb_process_wall_seconds": 4.692903685999909,
+  "process_wall_delta_seconds": 2.0864171250000254,
+  "traced_integrate_call_seconds": 0.7958363440000085,
+  "baseline_integrate_call_seconds": 0.0009649200001149438,
+  "scope": "one paired 1-step sample; includes GDB capture I/O; not a scaling estimate"
+}

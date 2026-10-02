@@ -1,0 +1,10 @@
+--- /mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/closure_evidence/received/runtime_trace_independent_audit.py	2026-10-02 17:23:32.443509100 +0900
++++ /mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/closure_evidence/auditor_checker_with_packaged_libc.py	2026-10-02 17:23:32.894013100 +0900
+@@ -255,6 +255,7 @@
+ 
+     # module bindings + independent disassembly
+     local={
++      '3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf':root/'runtime_trace/frozen_binaries/libc.so.6',
+       'a6ac98736304bb9f6a92e473bba45da10d9b5b99f8019e2ca15eb6a7f86234fc':root/'audit/gate2c1/vendor/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so',
+       '33d66d82c34c717560747ffbfca1d98f97432a0a671a0a210a0a225d8367ecaf':root/'audit/gate2c1/vendor/gala/potential/potential/builtin/cybuiltin.cpython-312-x86_64-linux-gnu.so'}
+     dis={h:objdump_map(p) for h,p in local.items()}

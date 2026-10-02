@@ -1,0 +1,75 @@
+[
+  {
+    "mutation": "scalar-kind-cloak-with-rehash",
+    "returncode": 1,
+    "verdict": "FAIL",
+    "errors": [
+      "opcode/kind semantic mismatch"
+    ],
+    "checks": {
+      "acquisition_source": "PASS",
+      "control_flow": "PASS",
+      "endpoint_fixture": "PASS",
+      "function_coverage": "PASS",
+      "integrity_linkage": "PASS",
+      "module_bytes_decode": "PARTIAL",
+      "provenance_exact_fp": "PASS",
+      "width_mxcsr_supported_fp": "FAIL"
+    }
+  },
+  {
+    "mutation": "paired-load-bias-shift-with-rehash",
+    "returncode": 1,
+    "verdict": "FAIL",
+    "errors": [
+      "file offset"
+    ],
+    "checks": {
+      "acquisition_source": "PASS",
+      "control_flow": "PASS",
+      "endpoint_fixture": "PASS",
+      "function_coverage": "PASS",
+      "integrity_linkage": "PASS",
+      "module_bytes_decode": "FAIL",
+      "provenance_exact_fp": "PASS",
+      "width_mxcsr_supported_fp": "PASS"
+    }
+  },
+  {
+    "mutation": "linkage-consistent-control-target-shift-with-rehash",
+    "returncode": 1,
+    "verdict": "FAIL",
+    "errors": [
+      "load bias",
+      "control-flow semantics at seq 210"
+    ],
+    "checks": {
+      "acquisition_source": "PASS",
+      "control_flow": "FAIL",
+      "endpoint_fixture": "PASS",
+      "function_coverage": "PASS",
+      "integrity_linkage": "PASS",
+      "module_bytes_decode": "FAIL",
+      "provenance_exact_fp": "PASS",
+      "width_mxcsr_supported_fp": "PASS"
+    }
+  },
+  {
+    "mutation": "scalar-upper-lane-mutation-with-rehash",
+    "returncode": 1,
+    "verdict": "FAIL",
+    "errors": [
+      "scalar upper lane changed"
+    ],
+    "checks": {
+      "acquisition_source": "PASS",
+      "control_flow": "PASS",
+      "endpoint_fixture": "PASS",
+      "function_coverage": "PASS",
+      "integrity_linkage": "PASS",
+      "module_bytes_decode": "PARTIAL",
+      "provenance_exact_fp": "FAIL",
+      "width_mxcsr_supported_fp": "PASS"
+    }
+  }
+]

@@ -1,0 +1,71 @@
+{
+  "verdict": "PASS",
+  "record_count": 446,
+  "scalar_fp_count": 36,
+  "opcode_histogram": {
+    "push": 24,
+    "movq": 8,
+    "mov": 67,
+    "sub": 4,
+    "call": 6,
+    "jmp": 12,
+    "movslq": 12,
+    "movsd": 32,
+    "imul": 2,
+    "test": 14,
+    "je": 20,
+    "xor": 30,
+    "add": 34,
+    "cmp": 24,
+    "lea": 20,
+    "endbr64": 2,
+    "vmovd": 2,
+    "jb": 8,
+    "vpbroadcastb": 2,
+    "jge": 2,
+    "vmovdqu": 4,
+    "ret": 8,
+    "movb": 2,
+    "shl": 2,
+    "nopw": 22,
+    "movapd": 4,
+    "mulsd": 16,
+    "addsd": 12,
+    "subsd": 8,
+    "jne": 6,
+    "jae": 2,
+    "cmpb": 2,
+    "pop": 24,
+    "jle": 2,
+    "xchg": 1,
+    "nopl": 4,
+    "nop": 2
+  },
+  "mxcsr_values": [
+    8096
+  ],
+  "fixture_bits_match": true,
+  "fixture_output_bits": [
+    "0x3f70000000000000",
+    "0x3f60000000000000",
+    "0x3fcffeff00000000",
+    "0x3fbffefe80000000"
+  ],
+  "machine_mapping_posthoc": {
+    "init": {
+      "runtime_scalar_occurrences": 14,
+      "mapping_arithmetic_rows": 14,
+      "order_address_kind_match": true
+    },
+    "step": {
+      "runtime_scalar_occurrences": 22,
+      "mapping_arithmetic_rows": 22,
+      "order_address_kind_match": true
+    }
+  },
+  "missing_occurrences": 0,
+  "duplicate_occurrences": 0,
+  "mapping_used_in_acquisition": false,
+  "scope": "draft correspondence checks for this captured regular one-step; not a formal execution certificate",
+  "checker_sha256": "757bd34e873f091e375b252c57e29f65b0fc10ae9ddb12b4c0d88233f78564b7"
+}

@@ -1,0 +1,26 @@
+{
+  "runtime_trace_independent_audit.py": {
+    "sha256": "efee93aa667460898b341d3eeec836c4fe6e95df968bafe87537518405e3f95a",
+    "bytes": 26314
+  },
+  "runtime_trace_independent_results.json": {
+    "sha256": "9a6ccc19d3e3726c53a413f3fb831fa935ca14a91bf693fca3cae831d9b8c04e",
+    "bytes": 1859
+  },
+  "runtime_trace_new_mutations.py": {
+    "sha256": "e907590a8626a0e7547f638f82c5dfa483abae3f783117b558d5b79ea2a512f1",
+    "bytes": 2746
+  },
+  "runtime_trace_new_mutation_results.json": {
+    "sha256": "64f738ecc9a5dec8c172a794e98325c2a3c2a95159481ff8452609c648d05c86",
+    "bytes": 1926
+  },
+  "runtime_trace_machine_mapping_posthoc.txt": {
+    "sha256": "c221cd941fc94094c0c9f70ce5c76f98ab7804c5b957cd690806e3f6f1df31f9",
+    "bytes": 500
+  },
+  "runtime_trace_pytest_local.log": {
+    "sha256": "37f6475f3d43c35bf2e490a943dcc1b9ddf870fd08e2c123d83d223e2d46a4f9",
+    "bytes": 51899
+  }
+}

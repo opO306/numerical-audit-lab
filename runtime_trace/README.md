@@ -2,6 +2,9 @@
 
 2026-10-02. **이 특정 실행의 machine instruction ↔ runtime record 대응 검사 PASS**.
 이는 checker 초안의 실행별 검사이며 범용 tracing 지원이나 formal execution certificate가 아니다.
+현재 독립 감사 판정은 **CONDITIONAL**이다. 원 libc 보존, SHA 기반 resolver,
+fresh 1-step 재수집과 기존 실행 비교를 완료한 [closure 보강 보고](CLOSURE_REPORT.md)가 있다.
+Major/Minor의 구현자 측 보강 검증은 통과했으며 같은 감사자의 재감사는 **PENDING**이다.
 시작 HEAD는 `2ab9c742ccf4f0f0862406e2145bde6cf1efdcc9`, 작업 branch는 `main`이다. Push하지 않는다.
 Gate 2C / Gate 2C.1의 봉인 코드·문서·증거와 audit ZIP을 수정하지 않는다.
 
