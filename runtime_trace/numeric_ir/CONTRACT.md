@@ -318,12 +318,16 @@ At step entry:
 
 - `q`, `full_v`, and `latent` are `COPY_BITS` values whose slices point to the
   actual init endpoint producers, after exact endpoint/start-bit equality is
-  checked.
+  checked. These edges are captured phase-boundary state links. They are not
+  observed copy instructions and do not prove that out-of-capture caller code
+  performed no same-bit writes.
 - `gradient` is a new scratch `LOAD_BITS` boundary even when its bits happen to
   equal the earlier gradient bits.
 - `xmm0` and `xmm1` are new declared caller boundary `LOAD_BITS` values.
 
-No between-region computation is inferred.
+Caller setup between init and step is outside the capture. No between-region
+computation or whole-caller execution provenance is inferred; the distinct
+step boundary value IDs preserve the new phase-boundary occurrence identity.
 
 ## Normalization
 
