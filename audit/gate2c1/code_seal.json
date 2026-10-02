@@ -1,0 +1,34 @@
+{
+  "schema": "gate2c1-code-seal-v1",
+  "recorded_at_utc": "2026-10-02T01:53:44.874752+00:00",
+  "method_commit": "eb2305c4a162b75e95228ee742264e8affedec07",
+  "full_result_measured": false,
+  "tests": {
+    "passed": 238,
+    "seconds": 26.07
+  },
+  "files": {
+    "audit/gate2c1/evidence/c_gradient.txt": "7631d85b07f3960cc170f91fef1f54419fc561f26393f2c3614b4efbb9e443e2",
+    "audit/gate2c1/independent/checker.py": "e2b5fc0376a5d1bf75c19839f4d0870666025697fff6e7cb4299fdc856fee51a",
+    "audit/gate2c1/machine_mapping.json": "771730ef9b8d5132dc5f38644eaaf40bff05bd788af890eae5e069f9d766d669",
+    "audit/gate2c1/vendor/gala-1.12.0-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl": "cc5f0cf3bc63a966a3c130b93f6c05026271fe7178492a02c6266c243b5fc2f0",
+    "audit/gate2c1/vendor/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so": "a6ac98736304bb9f6a92e473bba45da10d9b5b99f8019e2ca15eb6a7f86234fc",
+    "audit/gate2c1/vendor/gala/integrate/cyintegrators/leapfrog.pyx": "001e8ebf19a55c8a52690e905cbe9c2d62bf3418d844551dc85a6294d6206e17",
+    "audit/gate2c1/vendor/gala/potential/potential/builtin/cybuiltin.cpython-312-x86_64-linux-gnu.so": "33d66d82c34c717560747ffbfca1d98f97432a0a671a0a210a0a225d8367ecaf",
+    "audit/gate2c1/vendor/gala/potential/potential/builtin/cybuiltin.pyx": "0448e4b52ed9fe640629401279cbd93eaa863c0dc25ebccc73df69652156ca64",
+    "audit/gate2c1/vendor/gala/potential/potential/cpotential.pyx": "9c0dd74eb1feb8df1c5255cbe1a5775fdf1a2a4b621d9a2cc3987233d81e56d4",
+    "audit/gate2c1/vendor/gala/potential/potential/src/cpotential.cpp": "153b3edd82e490abccd21e720c1c1f24fbd2f84cd82ce50a557005b12ee625ba",
+    "benchmarks/gate2c1/__init__.py": "21300fe39a2f4786ee403805d999ca15b376499b66cff2b5490a5c10774bcc7e",
+    "benchmarks/gate2c1/binary_replay.py": "81cf5103740a6026c461736ab5b6f384a3005992a342edce0554d2c954d19f53",
+    "lab/gate2c1_artifacts.py": "f73066898d9ee2e9063d61d55cc66609117118612c7a96fff7f48ee6d135109f",
+    "lab/gate2c1_checks.py": "712364ec4077276bdefd6d524571993f171c0ebfd0a0f3f4d8a5356c96fb8c9b",
+    "lab/gate2c1_contract.py": "5ee1ed3eba6eb8464ac619654f99ba57d6a5b124a61a428d3e1e0bd9631125f7",
+    "run_gate2c1.py": "d327f2c42768232d58442d6312079dfda55eab2d7b663340f6990f5b3765a892",
+    "tests/test_gate2c1.py": "0629c6ed6afa985e015c7c9ca6ebcb7555e57481a1e7d9015ed76518c40826d6",
+    "tests/test_gate2c1_independent.py": "1f1b1e562c56b49f8f404e8434d938217c86df2c9d89eba94a5185323e1a0545",
+    "tests/test_gate2c1_package.py": "b74f64f3bece987bfa3f8a321f4e7372eef89a208e3efda6c11c5d8c9096ac6f",
+    "tests/test_gate2c1_sealed.py": "c0d9cf112fca18d7afde2856343a9ee35a86ec3085bb4cbead02010ad458832a",
+    "tools/gate2c1_package.py": "7d346d70ff295405499e6a4d1eee5e93ab48c42d1274f48137ba4620cd9fde6f",
+    "tools/gate2c1_profile_auditor.py": "9a375be9d9d31e432d31495cece7fea4e7b765f9ab5fc97a308c0bfad76f2bd7"
+  }
+}

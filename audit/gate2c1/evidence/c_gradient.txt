@@ -1,0 +1,806 @@
+
+D:\numerical-audit-lab-gate2c1-preflight-2026-10-02\gala\integrate\cyintegrators\leapfrog.cpython-312-x86_64-linux-gnu.so:	file format elf64-x86-64
+
+Disassembly of section .text:
+
+0000000000034880 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0>:
+   34880:      	pushq	%r15
+   34882:      	movq	%rdx, %r11
+   34885:      	pushq	%r14
+   34887:      	pushq	%r13
+   34889:      	pushq	%r12
+   3488b:      	pushq	%rbp
+   3488c:      	pushq	%rbx
+   3488d:      	subq	$0x78, %rsp
+   34891:      	movslq	(%rdi), %rcx
+   34894:      	movl	0x4(%rdi), %r14d
+   34898:      	movsd	%xmm0, 0x18(%rsp)
+   3489e:      	testl	%ecx, %ecx
+   348a0:      	je	0x34cfc <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x47c>
+   348a6:      	movq	0x10(%rdi), %rdx
+   348aa:      	movq	%rdi, %r12
+   348ad:      	movq	%rsi, %rbp
+   348b0:      	xorl	%eax, %eax
+   348b2:      	jmp	0x348c9 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x49>
+   348b4:      	nopw	%cs:(%rax,%rax)
+   348bf:      	nop
+   348c0:      	addq	$0x1, %rax
+   348c4:      	cmpq	%rcx, %rax
+   348c7:      	je	0x34920 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0xa0>
+   348c9:      	movl	(%rdx,%rax,4), %esi
+   348cc:      	testl	%esi, %esi
+   348ce:      	je	0x348c0 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x40>
+   348d0:      	movslq	%r14d, %rcx
+   348d3:      	movq	%rdx, 0x20(%rsp)
+   348d8:      	movl	$0x1, %r15d
+   348de:      	shlq	$0x3, %rcx
+   348e2:      	movq	%r11, 0x10(%rsp)
+   348e7:      	movq	%rcx, %rdi
+   348ea:      	movq	%rcx, 0x8(%rsp)
+   348ef:      	callq	0x6700 <malloc@plt>
+   348f4:      	movq	0x8(%rsp), %rdi
+   348f9:      	movq	%rax, %rbx
+   348fc:      	callq	0x6700 <malloc@plt>
+   34901:      	testl	%r14d, %r14d
+   34904:      	movq	0x8(%rsp), %rcx
+   34909:      	movq	0x10(%rsp), %r11
+   3490e:      	movq	0x20(%rsp), %rdx
+   34913:      	movq	%rax, %r13
+   34916:      	jne	0x34940 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0xc0>
+   34918:      	jmp	0x34955 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0xd5>
+   3491a:      	nopw	(%rax,%rax)
+   34920:      	xorl	%r13d, %r13d
+   34923:      	xorl	%ebx, %ebx
+   34925:      	xorl	%r15d, %r15d
+   34928:      	testl	%r14d, %r14d
+   3492b:      	je	0x34955 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0xd5>
+   3492d:      	movslq	%r14d, %rcx
+   34930:      	xorl	%r13d, %r13d
+   34933:      	xorl	%ebx, %ebx
+   34935:      	xorl	%r15d, %r15d
+   34938:      	leaq	(,%rcx,8), %rcx
+   34940:      	movq	%rcx, %rdx
+   34943:      	movq	%r11, %rdi
+   34946:      	xorl	%esi, %esi
+   34948:      	callq	0x6350 <memset@plt>
+   3494d:      	movq	0x10(%r12), %rdx
+   34952:      	movq	%rax, %r11
+   34955:      	leaq	0x8(%rbx), %rax
+   34959:      	movb	%r15b, 0x3f(%rsp)
+   3495e:      	xorl	%r10d, %r10d
+   34961:      	movq	%rax, 0x20(%rsp)
+   34966:      	movq	%r11, 0x10(%rsp)
+   3496b:      	jmp	0x349ca <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x14a>
+   3496d:      	nopl	(%rax)
+   34970:      	movq	0x40(%r12), %rax
+   34975:      	movq	0x58(%r12), %rdx
+   3497a:      	movq	%r10, 0x8(%rsp)
+   3497f:      	movl	$0x1, %ecx
+   34984:      	movq	0x10(%rsp), %r8
+   34989:      	movsd	0x18(%rsp), %xmm0
+   3498f:      	movq	%rbp, %rsi
+   34992:      	movq	(%rax,%r10,8), %rdi
+   34996:      	movq	0x28(%r12), %rax
+   3499b:      	movq	(%rdx,%r10,8), %r9
+   3499f:      	movl	%r14d, %edx
+   349a2:      	callq	*(%rax,%r10,8)
+   349a6:      	movq	0x8(%rsp), %r10
+   349ab:      	movslq	(%r12), %rax
+   349af:      	addq	$0x1, %r10
+   349b3:      	cmpq	%rax, %r10
+   349b6:      	jae	0x34bfc <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x37c>
+   349bc:      	nopl	(%rax)
+   349c0:      	movq	0x10(%r12), %rdx
+   349c5:      	movl	0x4(%r12), %r14d
+   349ca:      	movl	(%rdx,%r10,4), %eax
+   349ce:      	leaq	(,%r10,8), %r15
+   349d6:      	testl	%eax, %eax
+   349d8:      	je	0x34970 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0xf0>
+   349da:      	movq	0x50(%r12), %rax
+   349df:      	movq	(%rax,%r10,8), %rcx
+   349e3:      	testl	%r14d, %r14d
+   349e6:      	je	0x34aa0 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x220>
+   349ec:      	movslq	%r14d, %r8
+   349ef:      	xorl	%esi, %esi
+   349f1:      	movq	%rbx, %rdi
+   349f4:      	movq	%r10, 0x30(%rsp)
+   349f9:      	shlq	$0x3, %r8
+   349fd:      	movq	%rcx, 0x28(%rsp)
+   34a02:      	movq	%r8, %rdx
+   34a05:      	movq	%r8, 0x8(%rsp)
+   34a0a:      	callq	0x6350 <memset@plt>
+   34a0f:      	movq	0x8(%rsp), %rdx
+   34a14:      	xorl	%esi, %esi
+   34a16:      	movq	%r13, %rdi
+   34a19:      	callq	0x6350 <memset@plt>
+   34a1e:      	movq	0x48(%r12), %rax
+   34a23:      	testl	%r14d, %r14d
+   34a26:      	movq	0x28(%rsp), %rcx
+   34a2b:      	movq	0x30(%rsp), %r10
+   34a30:      	movq	(%rax,%r15), %rdx
+   34a34:      	jle	0x34aa0 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x220>
+   34a36:      	leal	-0x1(%r14), %eax
+   34a3a:      	movq	0x8(%rsp), %r8
+   34a3f:      	cmpl	$0x1, %eax
+   34a42:      	jbe	0x34cbd <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x43d>
+   34a48:      	leaq	0x8(%rdx), %rax
+   34a4c:      	cmpq	%rax, %rbx
+   34a4f:      	je	0x34cbd <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x43d>
+   34a55:      	movl	%r14d, %esi
+   34a58:      	xorl	%eax, %eax
+   34a5a:      	shrl	%esi
+   34a5c:      	shlq	$0x4, %rsi
+   34a60:      	movupd	(%rdx,%rax), %xmm4
+   34a65:      	movupd	(%rbp,%rax), %xmm0
+   34a6b:      	subpd	%xmm4, %xmm0
+   34a6f:      	movups	%xmm0, (%rbx,%rax)
+   34a73:      	addq	$0x10, %rax
+   34a77:      	cmpq	%rsi, %rax
+   34a7a:      	jne	0x34a60 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x1e0>
+   34a7c:      	movl	%r14d, %eax
+   34a7f:      	andl	$-0x2, %eax
+   34a82:      	testb	$0x1, %r14b
+   34a86:      	je	0x34aa0 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x220>
+   34a88:      	movsd	(%rbp,%rax,8), %xmm0
+   34a8e:      	subsd	(%rdx,%rax,8), %xmm0
+   34a93:      	movsd	%xmm0, (%rbx,%rax,8)
+   34a98:      	nopl	(%rax,%rax)
+   34aa0:      	movq	0x20(%rsp), %rax
+   34aa5:      	movq	%r10, 0x8(%rsp)
+   34aaa:      	subq	$0x30, %rsp
+   34aae:      	xorl	%edx, %edx
+   34ab0:      	movq	%rbx, 0x70(%rsp)
+   34ab5:      	movq	%rcx, %rdi
+   34ab8:      	movl	%r14d, %esi
+   34abb:      	movq	%r13, %r8
+   34abe:      	movq	%rax, 0x78(%rsp)
+   34ac3:      	leaq	0x10(%rbx), %rax
+   34ac7:      	movq	%rax, 0x80(%rsp)
+   34acf:      	leaq	0x18(%rbx), %rax
+   34ad3:      	movq	%rax, 0x88(%rsp)
+   34adb:      	leaq	0x20(%rbx), %rax
+   34adf:      	movq	%rax, 0x90(%rsp)
+   34ae7:      	leaq	0x28(%rbx), %rax
+   34aeb:      	movq	%rax, 0x98(%rsp)
+   34af3:      	movdqa	0x70(%rsp), %xmm0
+   34af9:      	movups	%xmm0, (%rsp)
+   34afd:      	movdqa	0x80(%rsp), %xmm0
+   34b06:      	movups	%xmm0, 0x10(%rsp)
+   34b0b:      	movdqa	0x90(%rsp), %xmm0
+   34b14:      	movups	%xmm0, 0x20(%rsp)
+   34b19:      	callq	0x34720 <_Z14apply_rotate_T10double6ptrPKdii.localalias>
+   34b1e:      	movq	0x40(%r12), %rax
+   34b23:      	movq	0x58(%r12), %rdx
+   34b28:      	addq	$0x30, %rsp
+   34b2c:      	movsd	0x18(%rsp), %xmm0
+   34b32:      	movl	$0x1, %ecx
+   34b37:      	movq	%rbx, %rsi
+   34b3a:      	movq	(%rax,%r15), %rdi
+   34b3e:      	movq	0x28(%r12), %rax
+   34b43:      	movq	(%rdx,%r15), %r9
+   34b47:      	movl	%r14d, %edx
+   34b4a:      	callq	*(%rax,%r15)
+   34b4e:      	movl	0x4(%r12), %eax
+   34b53:      	movsd	(%r13), %xmm0
+   34b59:      	movq	0x50(%r12), %rdx
+   34b5e:      	movq	0x8(%rsp), %r10
+   34b63:      	movapd	%xmm0, %xmm3
+   34b67:      	cmpl	$0x3, %eax
+   34b6a:      	movq	(%rdx,%r15), %rdx
+   34b6e:      	unpcklpd	%xmm3, %xmm3            # xmm3 = xmm3[0,0]
+   34b72:      	je	0x34c20 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x3a0>
+   34b78:      	cmpl	$0x2, %eax
+   34b7b:      	je	0x34c90 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x410>
+   34b81:      	movslq	%eax, %rdx
+   34b84:      	testq	%rdx, %rdx
+   34b87:      	je	0x349ab <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x12b>
+   34b8d:      	cmpl	$0x1, %eax
+   34b90:      	je	0x34cb6 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x436>
+   34b96:      	movq	%rdx, %rcx
+   34b99:      	movq	0x10(%rsp), %r11
+   34b9e:      	xorl	%eax, %eax
+   34ba0:      	shrq	%rcx
+   34ba3:      	shlq	$0x4, %rcx
+   34ba7:      	movupd	(%r11,%rax), %xmm5
+   34bad:      	movupd	(%r13,%rax), %xmm0
+   34bb4:      	addpd	%xmm5, %xmm0
+   34bb8:      	movups	%xmm0, (%r11,%rax)
+   34bbd:      	addq	$0x10, %rax
+   34bc1:      	cmpq	%rax, %rcx
+   34bc4:      	jne	0x34ba7 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x327>
+   34bc6:      	testb	$0x1, %dl
+   34bc9:      	je	0x349ab <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x12b>
+   34bcf:      	andq	$-0x2, %rdx
+   34bd3:      	movq	0x10(%rsp), %rax
+   34bd8:      	addq	$0x1, %r10
+   34bdc:      	leaq	(%rax,%rdx,8), %rax
+   34be0:      	movsd	(%rax), %xmm0
+   34be4:      	addsd	(%r13,%rdx,8), %xmm0
+   34beb:      	movsd	%xmm0, (%rax)
+   34bef:      	movslq	(%r12), %rax
+   34bf3:      	cmpq	%rax, %r10
+   34bf6:      	jb	0x349c0 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x140>
+   34bfc:      	movzbl	0x3f(%rsp), %r15d
+   34c02:      	testb	%r15b, %r15b
+   34c05:      	jne	0x34cde <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x45e>
+   34c0b:      	addq	$0x78, %rsp
+   34c0f:      	popq	%rbx
+   34c10:      	popq	%rbp
+   34c11:      	popq	%r12
+   34c13:      	popq	%r13
+   34c15:      	popq	%r14
+   34c17:      	popq	%r15
+   34c19:      	retq
+   34c1a:      	nopw	(%rax,%rax)
+   34c20:      	movupd	0x8(%r13), %xmm1
+   34c26:      	movupd	0x18(%rdx), %xmm6
+   34c2b:      	movupd	(%rdx), %xmm7
+   34c2f:      	mulsd	0x10(%rdx), %xmm0
+   34c34:      	movapd	%xmm1, %xmm2
+   34c38:      	mulpd	%xmm7, %xmm3
+   34c3c:      	unpcklpd	%xmm1, %xmm2            # xmm2 = xmm2[0],xmm1[0]
+   34c40:      	mulpd	%xmm6, %xmm2
+   34c44:      	movupd	0x30(%rdx), %xmm6
+   34c49:      	addpd	%xmm3, %xmm2
+   34c4d:      	movapd	%xmm1, %xmm3
+   34c51:      	unpckhpd	%xmm1, %xmm3            # xmm3 = xmm3[1],xmm1[1]
+   34c55:      	mulpd	%xmm6, %xmm3
+   34c59:      	addpd	%xmm3, %xmm2
+   34c5d:      	movups	%xmm2, (%r13)
+   34c62:      	movsd	0x28(%rdx), %xmm2
+   34c67:      	mulsd	%xmm1, %xmm2
+   34c6b:      	unpckhpd	%xmm1, %xmm1            # xmm1 = xmm1[1,1]
+   34c6f:      	mulsd	0x40(%rdx), %xmm1
+   34c74:      	addsd	%xmm2, %xmm0
+   34c78:      	addsd	%xmm1, %xmm0
+   34c7c:      	movsd	%xmm0, 0x10(%r13)
+   34c82:      	movslq	%eax, %rdx
+   34c85:      	jmp	0x34b96 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x316>
+   34c8a:      	nopw	(%rax,%rax)
+   34c90:      	movsd	0x8(%r13), %xmm0
+   34c96:      	movupd	0x10(%rdx), %xmm7
+   34c9b:      	movupd	(%rdx), %xmm1
+   34c9f:      	unpcklpd	%xmm0, %xmm0            # xmm0 = xmm0[0,0]
+   34ca3:      	mulpd	%xmm7, %xmm0
+   34ca7:      	mulpd	%xmm3, %xmm1
+   34cab:      	addpd	%xmm1, %xmm0
+   34caf:      	movups	%xmm0, (%r13)
+   34cb4:      	jmp	0x34c82 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x402>
+   34cb6:      	xorl	%edx, %edx
+   34cb8:      	jmp	0x34bd3 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x353>
+   34cbd:      	xorl	%eax, %eax
+   34cbf:      	nop
+   34cc0:      	movsd	(%rbp,%rax), %xmm0
+   34cc6:      	subsd	(%rdx,%rax), %xmm0
+   34ccb:      	movsd	%xmm0, (%rbx,%rax)
+   34cd0:      	addq	$0x8, %rax
+   34cd4:      	cmpq	%rax, %r8
+   34cd7:      	jne	0x34cc0 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x440>
+   34cd9:      	jmp	0x34aa0 <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x220>
+   34cde:      	movq	%rbx, %rdi
+   34ce1:      	callq	0x6640 <free@plt>
+   34ce6:      	addq	$0x78, %rsp
+   34cea:      	movq	%r13, %rdi
+   34ced:      	popq	%rbx
+   34cee:      	popq	%rbp
+   34cef:      	popq	%r12
+   34cf1:      	popq	%r13
+   34cf3:      	popq	%r14
+   34cf5:      	popq	%r15
+   34cf7:      	jmp	0x6640 <free@plt>
+   34cfc:      	testl	%r14d, %r14d
+   34cff:      	je	0x34c0b <_Z10c_gradientP11_CPotentialmdPdS1_.constprop.0+0x38b>
+   34d05:      	addq	$0x78, %rsp
+   34d09:      	movslq	%r14d, %rdx
+   34d0c:      	xorl	%esi, %esi
+   34d0e:      	movq	%r11, %rdi
+   34d11:      	popq	%rbx
+   34d12:      	shlq	$0x3, %rdx
+   34d16:      	popq	%rbp
+   34d17:      	popq	%r12
+   34d19:      	popq	%r13
+   34d1b:      	popq	%r14
+   34d1d:      	popq	%r15
+   34d1f:      	jmp	0x6350 <memset@plt>
+   34d24:      	nopw	%cs:(%rax,%rax)
+   34d2f:      	nop
+
+00000000000353f0 <_Z10c_gradientP11_CPotentialmdPdS1_>:
+   353f0:      	pushq	%r15
+   353f2:      	pushq	%r14
+   353f4:      	movq	%rsi, %r14
+   353f7:      	pushq	%r13
+   353f9:      	movq	%rcx, %r13
+   353fc:      	pushq	%r12
+   353fe:      	pushq	%rbp
+   353ff:      	pushq	%rbx
+   35400:      	subq	$0x48, %rsp
+   35404:      	movslq	0x4(%rdi), %rsi
+   35408:      	movslq	(%rdi), %rcx
+   3540b:      	movq	%rdx, 0x8(%rsp)
+   35410:      	movq	%rsi, %r15
+   35413:      	movsd	%xmm0, (%rsp)
+   35418:      	imulq	%r14, %rsi
+   3541c:      	testl	%ecx, %ecx
+   3541e:      	je	0x35b98 <_Z10c_gradientP11_CPotentialmdPdS1_+0x7a8>
+   35424:      	movq	0x10(%rdi), %rdx
+   35428:      	movq	%rdi, %rbx
+   3542b:      	xorl	%eax, %eax
+   3542d:      	jmp	0x3543d <_Z10c_gradientP11_CPotentialmdPdS1_+0x4d>
+   3542f:      	nop
+   35430:      	addq	$0x1, %rax
+   35434:      	cmpq	%rcx, %rax
+   35437:      	je	0x35670 <_Z10c_gradientP11_CPotentialmdPdS1_+0x280>
+   3543d:      	movl	(%rdx,%rax,4), %edi
+   35440:      	testl	%edi, %edi
+   35442:      	je	0x35430 <_Z10c_gradientP11_CPotentialmdPdS1_+0x40>
+   35444:      	leaq	(,%rsi,8), %rbp
+   3544c:      	movq	%rdx, 0x20(%rsp)
+   35451:      	movq	%rbp, %rdi
+   35454:      	movq	%rsi, 0x18(%rsp)
+   35459:      	callq	0x6700 <malloc@plt>
+   3545e:      	movq	%rbp, %rdi
+   35461:      	movq	%rax, 0x10(%rsp)
+   35466:      	callq	0x6700 <malloc@plt>
+   3546b:      	movq	0x18(%rsp), %rsi
+   35470:      	movq	0x20(%rsp), %rdx
+   35475:      	movq	%rax, %r12
+   35478:      	testq	%rsi, %rsi
+   3547b:      	je	0x35bc1 <_Z10c_gradientP11_CPotentialmdPdS1_+0x7d1>
+   35481:      	movq	%rbp, %rdx
+   35484:      	xorl	%esi, %esi
+   35486:      	movq	%r13, %rdi
+   35489:      	callq	0x6350 <memset@plt>
+   3548e:      	movb	$0x1, 0x3f(%rsp)
+   35493:      	movq	0x10(%rbx), %rdx
+   35497:      	leaq	(,%r14,8), %rax
+   3549f:      	xorl	%ebp, %ebp
+   354a1:      	movl	%r15d, %r10d
+   354a4:      	movq	%rax, 0x30(%rsp)
+   354a9:      	movq	%r14, %rax
+   354ac:      	shlq	$0x4, %rax
+   354b0:      	movq	%rax, 0x28(%rsp)
+   354b5:      	jmp	0x35502 <_Z10c_gradientP11_CPotentialmdPdS1_+0x112>
+   354b7:      	nopw	(%rax,%rax)
+   354c0:      	movq	0x40(%rbx), %rax
+   354c4:      	movq	0x58(%rbx), %rdx
+   354c8:      	movq	%r13, %r8
+   354cb:      	movq	%r14, %rcx
+   354ce:      	movq	0x8(%rsp), %rsi
+   354d3:      	movsd	(%rsp), %xmm0
+   354d8:      	movq	(%rax,%rbp,8), %rdi
+   354dc:      	movq	0x28(%rbx), %rax
+   354e0:      	movq	(%rdx,%rbp,8), %r9
+   354e4:      	movl	%r10d, %edx
+   354e7:      	callq	*(%rax,%rbp,8)
+   354ea:      	movslq	(%rbx), %rax
+   354ed:      	addq	$0x1, %rbp
+   354f1:      	cmpq	%rax, %rbp
+   354f4:      	jae	0x35650 <_Z10c_gradientP11_CPotentialmdPdS1_+0x260>
+   354fa:      	movq	0x10(%rbx), %rdx
+   354fe:      	movl	0x4(%rbx), %r10d
+   35502:      	movl	(%rdx,%rbp,4), %esi
+   35505:      	leaq	(,%rbp,8), %r15
+   3550d:      	testl	%esi, %esi
+   3550f:      	je	0x354c0 <_Z10c_gradientP11_CPotentialmdPdS1_+0xd0>
+   35511:      	movslq	%r10d, %rdx
+   35514:      	imulq	%r14, %rdx
+   35518:      	testq	%rdx, %rdx
+   3551b:      	je	0x3554b <_Z10c_gradientP11_CPotentialmdPdS1_+0x15b>
+   3551d:      	movq	0x10(%rsp), %rdi
+   35522:      	shlq	$0x3, %rdx
+   35526:      	xorl	%esi, %esi
+   35528:      	movl	%r10d, 0x20(%rsp)
+   3552d:      	movq	%rdx, 0x18(%rsp)
+   35532:      	callq	0x6350 <memset@plt>
+   35537:      	movq	0x18(%rsp), %rdx
+   3553c:      	xorl	%esi, %esi
+   3553e:      	movq	%r12, %rdi
+   35541:      	callq	0x6350 <memset@plt>
+   35546:      	movl	0x20(%rsp), %r10d
+   3554b:      	movq	0x50(%rbx), %rax
+   3554f:      	subq	$0x8, %rsp
+   35553:      	xorl	%r9d, %r9d
+   35556:      	movq	%r14, %r8
+   35559:      	movl	%r10d, %ecx
+   3555c:      	movq	(%rax,%r15), %rdx
+   35560:      	movq	0x48(%rbx), %rax
+   35564:      	movq	(%rax,%r15), %rsi
+   35568:      	pushq	0x18(%rsp)
+   3556c:      	movq	0x18(%rsp), %rdi
+   35571:      	movl	%r10d, 0x28(%rsp)
+   35576:      	callq	0x34de0 <_Z20apply_shift_rotate_NPKdS0_S0_imiPd.localalias>
+   3557b:      	movq	0x40(%rbx), %rax
+   3557f:      	popq	%rdx
+   35580:      	movq	%r12, %r8
+   35583:      	movq	0x58(%rbx), %rdx
+   35587:      	popq	%rcx
+   35588:      	movq	%r14, %rcx
+   3558b:      	movq	(%rax,%r15), %rdi
+   3558f:      	movq	0x28(%rbx), %rax
+   35593:      	movq	(%rdx,%r15), %r9
+   35597:      	movq	0x10(%rsp), %rsi
+   3559c:      	movl	0x18(%rsp), %edx
+   355a0:      	movsd	(%rsp), %xmm0
+   355a5:      	callq	*(%rax,%r15)
+   355a9:      	testq	%r14, %r14
+   355ac:      	je	0x354ea <_Z10c_gradientP11_CPotentialmdPdS1_+0xfa>
+   355b2:      	movq	0x50(%rbx), %rdx
+   355b6:      	movslq	0x4(%rbx), %rax
+   355ba:      	movq	(%rdx,%r15), %rdx
+   355be:      	cmpl	$0x3, %eax
+   355c1:      	je	0x356a0 <_Z10c_gradientP11_CPotentialmdPdS1_+0x2b0>
+   355c7:      	cmpl	$0x2, %eax
+   355ca:      	je	0x358f0 <_Z10c_gradientP11_CPotentialmdPdS1_+0x500>
+   355d0:      	imulq	%r14, %rax
+   355d4:      	testq	%rax, %rax
+   355d7:      	je	0x354ea <_Z10c_gradientP11_CPotentialmdPdS1_+0xfa>
+   355dd:      	cmpq	$0x1, %rax
+   355e1:      	je	0x35a49 <_Z10c_gradientP11_CPotentialmdPdS1_+0x659>
+   355e7:      	movq	%rax, %rcx
+   355ea:      	xorl	%edx, %edx
+   355ec:      	shrq	%rcx
+   355ef:      	shlq	$0x4, %rcx
+   355f3:      	nopw	%cs:(%rax,%rax)
+   355fe:      	nop
+   35600:      	movupd	(%r13,%rdx), %xmm0
+   35607:      	movupd	(%r12,%rdx), %xmm5
+   3560d:      	addpd	%xmm5, %xmm0
+   35611:      	movups	%xmm0, (%r13,%rdx)
+   35617:      	addq	$0x10, %rdx
+   3561b:      	cmpq	%rdx, %rcx
+   3561e:      	jne	0x35600 <_Z10c_gradientP11_CPotentialmdPdS1_+0x210>
+   35620:      	testb	$0x1, %al
+   35622:      	je	0x354ea <_Z10c_gradientP11_CPotentialmdPdS1_+0xfa>
+   35628:      	andq	$-0x2, %rax
+   3562c:      	leaq	(%r13,%rax,8), %rdx
+   35631:      	addq	$0x1, %rbp
+   35635:      	movsd	(%rdx), %xmm0
+   35639:      	addsd	(%r12,%rax,8), %xmm0
+   3563f:      	movslq	(%rbx), %rax
+   35642:      	movsd	%xmm0, (%rdx)
+   35646:      	cmpq	%rax, %rbp
+   35649:      	jb	0x354fa <_Z10c_gradientP11_CPotentialmdPdS1_+0x10a>
+   3564f:      	nop
+   35650:      	cmpb	$0x0, 0x3f(%rsp)
+   35655:      	jne	0x35a20 <_Z10c_gradientP11_CPotentialmdPdS1_+0x630>
+   3565b:      	addq	$0x48, %rsp
+   3565f:      	popq	%rbx
+   35660:      	popq	%rbp
+   35661:      	popq	%r12
+   35663:      	popq	%r13
+   35665:      	popq	%r14
+   35667:      	popq	%r15
+   35669:      	retq
+   3566a:      	nopw	(%rax,%rax)
+   35670:      	testq	%rsi, %rsi
+   35673:      	je	0x35b82 <_Z10c_gradientP11_CPotentialmdPdS1_+0x792>
+   35679:      	leaq	(,%rsi,8), %rdx
+   35681:      	movq	%r13, %rdi
+   35684:      	xorl	%esi, %esi
+   35686:      	xorl	%r12d, %r12d
+   35689:      	callq	0x6350 <memset@plt>
+   3568e:      	xorl	%eax, %eax
+   35690:      	movb	$0x0, 0x3f(%rsp)
+   35695:      	movq	%rax, 0x10(%rsp)
+   3569a:      	jmp	0x35493 <_Z10c_gradientP11_CPotentialmdPdS1_+0xa3>
+   3569f:      	nop
+   356a0:      	cmpq	$0x1, %r14
+   356a4:      	je	0x35a50 <_Z10c_gradientP11_CPotentialmdPdS1_+0x660>
+   356aa:      	movq	0x28(%rsp), %rsi
+   356af:      	movq	0x30(%rsp), %rdi
+   356b4:      	leaq	0x10(%r12), %r15
+   356b9:      	leaq	(%r12,%rsi), %rcx
+   356bd:      	leaq	0x10(%r12,%rdi), %r9
+   356c2:      	movq	%rcx, %r11
+   356c5:      	leaq	0x10(%r12,%rsi), %r8
+   356ca:      	subq	%rdi, %r11
+   356cd:      	cmpq	%r9, %rcx
+   356d0:      	movq	%r11, %rsi
+   356d3:      	setae	%r10b
+   356d7:      	leaq	0x48(%rdx), %r11
+   356db:      	cmpq	%r8, %rsi
+   356de:      	setae	%dil
+   356e2:      	orl	%edi, %r10d
+   356e5:      	cmpq	%r9, %r12
+   356e8:      	setae	%dil
+   356ec:      	cmpq	%r15, %rsi
+   356ef:      	setae	%r9b
+   356f3:      	orl	%r9d, %edi
+   356f6:      	andl	%r10d, %edi
+   356f9:      	cmpq	%r8, %r12
+   356fc:      	setae	%r9b
+   35700:      	cmpq	%r15, %rcx
+   35703:      	setae	%r8b
+   35707:      	orl	%r8d, %r9d
+   3570a:      	andl	%edi, %r9d
+   3570d:      	cmpq	%rcx, %rdx
+   35710:      	setae	%r8b
+   35714:      	cmpq	%r11, %rsi
+   35717:      	setae	%dil
+   3571b:      	orl	%r8d, %edi
+   3571e:      	andl	%r9d, %edi
+   35721:      	movq	0x28(%rsp), %r9
+   35726:      	leaq	(%rsi,%r9), %r8
+   3572a:      	cmpq	%r8, %rdx
+   3572d:      	setae	%r8b
+   35731:      	cmpq	%r11, %rcx
+   35734:      	setae	%r9b
+   35738:      	orl	%r9d, %r8d
+   3573b:      	testb	%r8b, %dil
+   3573e:      	je	0x35a50 <_Z10c_gradientP11_CPotentialmdPdS1_+0x660>
+   35744:      	cmpq	%r11, %r12
+   35747:      	setae	%dil
+   3574b:      	cmpq	%rsi, %rdx
+   3574e:      	setae	%r8b
+   35752:      	orb	%r8b, %dil
+   35755:      	je	0x35a50 <_Z10c_gradientP11_CPotentialmdPdS1_+0x660>
+   3575b:      	movsd	(%rdx), %xmm11
+   35760:      	movsd	0x18(%rdx), %xmm10
+   35766:      	movq	%r14, %r8
+   35769:      	xorl	%edi, %edi
+   3576b:      	movsd	0x30(%rdx), %xmm9
+   35771:      	movsd	0x8(%rdx), %xmm8
+   35777:      	shrq	%r8
+   3577a:      	movsd	0x20(%rdx), %xmm7
+   3577f:      	movsd	0x38(%rdx), %xmm6
+   35784:      	unpcklpd	%xmm11, %xmm11          # xmm11 = xmm11[0,0]
+   35789:      	unpcklpd	%xmm10, %xmm10          # xmm10 = xmm10[0,0]
+   3578e:      	movsd	0x10(%rdx), %xmm5
+   35793:      	movsd	0x28(%rdx), %xmm4
+   35798:      	unpcklpd	%xmm9, %xmm9            # xmm9 = xmm9[0,0]
+   3579d:      	unpcklpd	%xmm8, %xmm8            # xmm8 = xmm8[0,0]
+   357a2:      	movsd	0x40(%rdx), %xmm3
+   357a7:      	unpcklpd	%xmm7, %xmm7            # xmm7 = xmm7[0,0]
+   357ab:      	unpcklpd	%xmm6, %xmm6            # xmm6 = xmm6[0,0]
+   357af:      	shlq	$0x4, %r8
+   357b3:      	unpcklpd	%xmm5, %xmm5            # xmm5 = xmm5[0,0]
+   357b7:      	unpcklpd	%xmm4, %xmm4            # xmm4 = xmm4[0,0]
+   357bb:      	unpcklpd	%xmm3, %xmm3            # xmm3 = xmm3[0,0]
+   357bf:      	nop
+   357c0:      	movupd	(%r12,%rdi), %xmm0
+   357c6:      	movupd	(%rsi,%rdi), %xmm2
+   357cb:      	movupd	(%rcx,%rdi), %xmm1
+   357d0:      	movapd	%xmm0, %xmm12
+   357d5:      	movapd	%xmm2, %xmm13
+   357da:      	mulpd	%xmm10, %xmm13
+   357df:      	mulpd	%xmm11, %xmm12
+   357e4:      	addpd	%xmm13, %xmm12
+   357e9:      	movapd	%xmm1, %xmm13
+   357ee:      	mulpd	%xmm9, %xmm13
+   357f3:      	addpd	%xmm13, %xmm12
+   357f8:      	movapd	%xmm2, %xmm13
+   357fd:      	mulpd	%xmm7, %xmm13
+   35802:      	mulpd	%xmm4, %xmm2
+   35806:      	movups	%xmm12, (%r12,%rdi)
+   3580b:      	movapd	%xmm0, %xmm12
+   35810:      	mulpd	%xmm8, %xmm12
+   35815:      	mulpd	%xmm5, %xmm0
+   35819:      	addpd	%xmm13, %xmm12
+   3581e:      	movapd	%xmm1, %xmm13
+   35823:      	mulpd	%xmm6, %xmm13
+   35828:      	addpd	%xmm2, %xmm0
+   3582c:      	mulpd	%xmm3, %xmm1
+   35830:      	addpd	%xmm13, %xmm12
+   35835:      	addpd	%xmm1, %xmm0
+   35839:      	movups	%xmm12, (%rsi,%rdi)
+   3583e:      	movups	%xmm0, (%rcx,%rdi)
+   35842:      	addq	$0x10, %rdi
+   35846:      	cmpq	%rdi, %r8
+   35849:      	jne	0x357c0 <_Z10c_gradientP11_CPotentialmdPdS1_+0x3d0>
+   3584f:      	movq	%r14, %rcx
+   35852:      	andq	$-0x2, %rcx
+   35856:      	testb	$0x1, %r14b
+   3585a:      	je	0x35a40 <_Z10c_gradientP11_CPotentialmdPdS1_+0x650>
+   35860:      	movq	0x30(%rsp), %rsi
+   35865:      	leaq	(%r12,%rcx,8), %rdi
+   35869:      	movsd	(%rdx), %xmm3
+   3586d:      	movsd	(%rdi), %xmm0
+   35871:      	movsd	0x18(%rdx), %xmm4
+   35876:      	leaq	(%rdi,%rsi), %rcx
+   3587a:      	movsd	(%rcx), %xmm2
+   3587e:      	mulsd	%xmm0, %xmm3
+   35882:      	addq	%rcx, %rsi
+   35885:      	movsd	(%rsi), %xmm1
+   35889:      	mulsd	%xmm2, %xmm4
+   3588d:      	addsd	%xmm4, %xmm3
+   35891:      	movsd	0x30(%rdx), %xmm4
+   35896:      	mulsd	%xmm1, %xmm4
+   3589a:      	addsd	%xmm4, %xmm3
+   3589e:      	movsd	0x20(%rdx), %xmm4
+   358a3:      	mulsd	%xmm2, %xmm4
+   358a7:      	movsd	%xmm3, (%rdi)
+   358ab:      	movsd	0x8(%rdx), %xmm3
+   358b0:      	mulsd	0x28(%rdx), %xmm2
+   358b5:      	mulsd	%xmm0, %xmm3
+   358b9:      	mulsd	0x10(%rdx), %xmm0
+   358be:      	addsd	%xmm4, %xmm3
+   358c2:      	movsd	0x38(%rdx), %xmm4
+   358c7:      	addsd	%xmm2, %xmm0
+   358cb:      	mulsd	%xmm1, %xmm4
+   358cf:      	mulsd	0x40(%rdx), %xmm1
+   358d4:      	addsd	%xmm4, %xmm3
+   358d8:      	addsd	%xmm1, %xmm0
+   358dc:      	movsd	%xmm3, (%rcx)
+   358e0:      	movsd	%xmm0, (%rsi)
+   358e4:      	jmp	0x355d0 <_Z10c_gradientP11_CPotentialmdPdS1_+0x1e0>
+   358e9:      	nopl	(%rax)
+   358f0:      	cmpq	$0x1, %r14
+   358f4:      	je	0x35b14 <_Z10c_gradientP11_CPotentialmdPdS1_+0x724>
+   358fa:      	movq	0x30(%rsp), %r11
+   358ff:      	leaq	0x20(%rdx), %rdi
+   35903:      	leaq	(%r12,%r11), %rsi
+   35907:      	leaq	(%rsi,%r11), %rax
+   3590b:      	cmpq	%rax, %rdx
+   3590e:      	setae	%cl
+   35911:      	cmpq	%rdi, %rsi
+   35914:      	setae	%al
+   35917:      	orl	%eax, %ecx
+   35919:      	cmpq	%rsi, %rdx
+   3591c:      	setae	%al
+   3591f:      	cmpq	%rdi, %r12
+   35922:      	setae	%dil
+   35926:      	orl	%edi, %eax
+   35928:      	testb	%al, %cl
+   3592a:      	je	0x35b1d <_Z10c_gradientP11_CPotentialmdPdS1_+0x72d>
+   35930:      	leaq	0x10(%r12,%r11), %rax
+   35935:      	leaq	0x10(%r12), %rcx
+   3593a:      	cmpq	%rax, %r12
+   3593d:      	setae	%al
+   35940:      	cmpq	%rcx, %rsi
+   35943:      	setae	%cl
+   35946:      	orb	%cl, %al
+   35948:      	je	0x35b1d <_Z10c_gradientP11_CPotentialmdPdS1_+0x72d>
+   3594e:      	movsd	(%rdx), %xmm7
+   35952:      	movsd	0x10(%rdx), %xmm6
+   35957:      	movq	%r14, %rcx
+   3595a:      	xorl	%eax, %eax
+   3595c:      	movsd	0x8(%rdx), %xmm5
+   35961:      	movsd	0x18(%rdx), %xmm4
+   35966:      	shrq	%rcx
+   35969:      	unpcklpd	%xmm7, %xmm7            # xmm7 = xmm7[0,0]
+   3596d:      	unpcklpd	%xmm6, %xmm6            # xmm6 = xmm6[0,0]
+   35971:      	shlq	$0x4, %rcx
+   35975:      	unpcklpd	%xmm5, %xmm5            # xmm5 = xmm5[0,0]
+   35979:      	unpcklpd	%xmm4, %xmm4            # xmm4 = xmm4[0,0]
+   3597d:      	nopl	(%rax)
+   35980:      	movupd	(%r12,%rax), %xmm0
+   35986:      	movupd	(%rsi,%rax), %xmm1
+   3598b:      	movapd	%xmm0, %xmm2
+   3598f:      	movapd	%xmm1, %xmm3
+   35993:      	mulpd	%xmm7, %xmm2
+   35997:      	mulpd	%xmm6, %xmm3
+   3599b:      	mulpd	%xmm5, %xmm0
+   3599f:      	mulpd	%xmm4, %xmm1
+   359a3:      	addpd	%xmm3, %xmm2
+   359a7:      	addpd	%xmm1, %xmm0
+   359ab:      	movups	%xmm2, (%r12,%rax)
+   359b0:      	movups	%xmm0, (%rsi,%rax)
+   359b4:      	addq	$0x10, %rax
+   359b8:      	cmpq	%rax, %rcx
+   359bb:      	jne	0x35980 <_Z10c_gradientP11_CPotentialmdPdS1_+0x590>
+   359bd:      	movq	%r14, %rax
+   359c0:      	andq	$-0x2, %rax
+   359c4:      	testb	$0x1, %r14b
+   359c8:      	je	0x35a0d <_Z10c_gradientP11_CPotentialmdPdS1_+0x61d>
+   359ca:      	movq	0x30(%rsp), %rsi
+   359cf:      	leaq	(%r12,%rax,8), %rax
+   359d3:      	movsd	(%rdx), %xmm2
+   359d7:      	movsd	(%rax), %xmm0
+   359db:      	movsd	0x10(%rdx), %xmm3
+   359e0:      	leaq	(%rax,%rsi), %rcx
+   359e4:      	movsd	(%rcx), %xmm1
+   359e8:      	mulsd	%xmm0, %xmm2
+   359ec:      	mulsd	0x8(%rdx), %xmm0
+   359f1:      	mulsd	%xmm1, %xmm3
+   359f5:      	mulsd	0x18(%rdx), %xmm1
+   359fa:      	addsd	%xmm3, %xmm2
+   359fe:      	addsd	%xmm1, %xmm0
+   35a02:      	movsd	%xmm2, (%rax)
+   35a06:      	movsd	%xmm0, (%rcx)
+   35a0a:      	movq	%r14, %rax
+   35a0d:      	addq	%rax, %rax
+   35a10:      	jne	0x355e7 <_Z10c_gradientP11_CPotentialmdPdS1_+0x1f7>
+   35a16:      	jmp	0x354ea <_Z10c_gradientP11_CPotentialmdPdS1_+0xfa>
+   35a1b:      	nopl	(%rax,%rax)
+   35a20:      	movq	0x10(%rsp), %rdi
+   35a25:      	callq	0x6640 <free@plt>
+   35a2a:      	addq	$0x48, %rsp
+   35a2e:      	movq	%r12, %rdi
+   35a31:      	popq	%rbx
+   35a32:      	popq	%rbp
+   35a33:      	popq	%r12
+   35a35:      	popq	%r13
+   35a37:      	popq	%r14
+   35a39:      	popq	%r15
+   35a3b:      	jmp	0x6640 <free@plt>
+   35a40:      	leaq	(%rcx,%rcx,2), %rax
+   35a44:      	jmp	0x355e7 <_Z10c_gradientP11_CPotentialmdPdS1_+0x1f7>
+   35a49:      	xorl	%eax, %eax
+   35a4b:      	jmp	0x3562c <_Z10c_gradientP11_CPotentialmdPdS1_+0x23c>
+   35a50:      	movq	0x30(%rsp), %rsi
+   35a55:      	movsd	0x30(%rdx), %xmm8
+   35a5b:      	movq	%r12, %rcx
+   35a5e:      	movsd	0x20(%rdx), %xmm7
+   35a63:      	movsd	0x38(%rdx), %xmm6
+   35a68:      	movsd	0x28(%rdx), %xmm5
+   35a6d:      	movsd	0x40(%rdx), %xmm4
+   35a72:      	addq	%r12, %rsi
+   35a75:      	movq	0x28(%rsp), %rdi
+   35a7a:      	nopw	(%rax,%rax)
+   35a80:      	movsd	(%rcx), %xmm0
+   35a84:      	movsd	(%rcx,%r14,8), %xmm2
+   35a8a:      	movsd	(%rdx), %xmm3
+   35a8e:      	movsd	0x18(%rdx), %xmm9
+   35a94:      	movsd	(%rcx,%rdi), %xmm1
+   35a99:      	mulsd	%xmm2, %xmm9
+   35a9e:      	mulsd	%xmm0, %xmm3
+   35aa2:      	addsd	%xmm9, %xmm3
+   35aa7:      	movapd	%xmm1, %xmm9
+   35aac:      	mulsd	%xmm8, %xmm9
+   35ab1:      	addsd	%xmm9, %xmm3
+   35ab6:      	movapd	%xmm2, %xmm9
+   35abb:      	mulsd	%xmm7, %xmm9
+   35ac0:      	mulsd	%xmm5, %xmm2
+   35ac4:      	movsd	%xmm3, (%rcx)
+   35ac8:      	movsd	0x8(%rdx), %xmm3
+   35acd:      	mulsd	%xmm0, %xmm3
+   35ad1:      	mulsd	0x10(%rdx), %xmm0
+   35ad6:      	addsd	%xmm9, %xmm3
+   35adb:      	movapd	%xmm1, %xmm9
+   35ae0:      	mulsd	%xmm6, %xmm9
+   35ae5:      	addsd	%xmm2, %xmm0
+   35ae9:      	mulsd	%xmm4, %xmm1
+   35aed:      	addsd	%xmm9, %xmm3
+   35af2:      	addsd	%xmm1, %xmm0
+   35af6:      	movsd	%xmm3, (%rcx,%r14,8)
+   35afc:      	addq	$0x8, %rcx
+   35b00:      	movsd	%xmm0, -0x8(%rcx,%rdi)
+   35b06:      	cmpq	%rsi, %rcx
+   35b09:      	jne	0x35a80 <_Z10c_gradientP11_CPotentialmdPdS1_+0x690>
+   35b0f:      	jmp	0x355d0 <_Z10c_gradientP11_CPotentialmdPdS1_+0x1e0>
+   35b14:      	movq	0x30(%rsp), %rax
+   35b19:      	leaq	(%r12,%rax), %rsi
+   35b1d:      	movsd	(%rdx), %xmm7
+   35b21:      	movsd	0x10(%rdx), %xmm6
+   35b26:      	movq	%r12, %rax
+   35b29:      	movsd	0x8(%rdx), %xmm5
+   35b2e:      	movsd	0x18(%rdx), %xmm4
+   35b33:      	nopw	%cs:(%rax,%rax)
+   35b3e:      	nop
+   35b40:      	movsd	(%rax), %xmm1
+   35b44:      	movsd	(%rax,%r14,8), %xmm0
+   35b4a:      	movapd	%xmm6, %xmm2
+   35b4e:      	movapd	%xmm7, %xmm3
+   35b52:      	mulsd	%xmm0, %xmm2
+   35b56:      	mulsd	%xmm1, %xmm3
+   35b5a:      	mulsd	%xmm4, %xmm0
+   35b5e:      	mulsd	%xmm5, %xmm1
+   35b62:      	addsd	%xmm3, %xmm2
+   35b66:      	addsd	%xmm1, %xmm0
+   35b6a:      	movsd	%xmm2, (%rax)
+   35b6e:      	movsd	%xmm0, (%rax,%r14,8)
+   35b74:      	addq	$0x8, %rax
+   35b78:      	cmpq	%rax, %rsi
+   35b7b:      	jne	0x35b40 <_Z10c_gradientP11_CPotentialmdPdS1_+0x750>
+   35b7d:      	jmp	0x35a0a <_Z10c_gradientP11_CPotentialmdPdS1_+0x61a>
+   35b82:      	movb	$0x0, 0x3f(%rsp)
+   35b87:      	xorl	%r12d, %r12d
+   35b8a:      	movq	$0x0, 0x10(%rsp)
+   35b93:      	jmp	0x35497 <_Z10c_gradientP11_CPotentialmdPdS1_+0xa7>
+   35b98:      	testq	%rsi, %rsi
+   35b9b:      	je	0x3565b <_Z10c_gradientP11_CPotentialmdPdS1_+0x26b>
+   35ba1:      	addq	$0x48, %rsp
+   35ba5:      	leaq	(,%rsi,8), %rdx
+   35bad:      	movq	%r13, %rdi
+   35bb0:      	xorl	%esi, %esi
+   35bb2:      	popq	%rbx
+   35bb3:      	popq	%rbp
+   35bb4:      	popq	%r12
+   35bb6:      	popq	%r13
+   35bb8:      	popq	%r14
+   35bba:      	popq	%r15
+   35bbc:      	jmp	0x6350 <memset@plt>
+   35bc1:      	movb	$0x1, 0x3f(%rsp)
+   35bc6:      	jmp	0x35497 <_Z10c_gradientP11_CPotentialmdPdS1_+0xa7>
+   35bcb:      	nopl	(%rax,%rax)

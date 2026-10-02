@@ -65,3 +65,5 @@ tools/gate2b_disassembly_evidence.py -text
 
 # Gate 2C.1: received auditor artifacts are preserved as raw bytes.
 audit/gate2c1/prior_auditor/** -text
+audit/gate2c1/vendor/** -text
+audit/gate2c1/evidence/** -text

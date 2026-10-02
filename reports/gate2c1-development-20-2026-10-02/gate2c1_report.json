@@ -1,0 +1,244 @@
+{
+  "deterministic_digest": "3ffde150e671556bf8d8b4d3265bdb74585cd50bb5a55cabd52b453f6af24c10",
+  "deterministic": {
+    "plan": "docs/GATE2C1_PLAN.md",
+    "seal": {
+      "plan_seal_sha256": "d61dbaf1ab438ca2ac542e784edbb4b9656c4614cdf05116fdaedc56df783743",
+      "method_seal_sha256": "5be5e6f8541baf9c489a26a14007f77bca02da9f84019aca694ddc7f09a5974e",
+      "inputs": "UNCHANGED"
+    },
+    "N": 20,
+    "scope": "DEVELOPMENT_SHORT_RUN",
+    "known_matching_replay": "post-diagnostic knowledge from Gate 2B; not blind or independent discovery",
+    "certification_scope": "roundoff layer of same exact discrete map only",
+    "independent_audit": "NOT_PERFORMED",
+    "seal_failures": [],
+    "orbits": {
+      "regular": {
+        "N": 20,
+        "steps_measured": 20,
+        "replay": {
+          "label": "KNOWN_PREREQUISITE_NOT_BLIND_SUCCESS",
+          "first_mismatch": null,
+          "steps_checked": 20
+        },
+        "first_refused": null,
+        "certified_prefix": 20,
+        "bin_bound_unavailable_from": null,
+        "lab_bound_unavailable_from": null,
+        "abort": null,
+        "cross": {
+          "counts": {
+            "PASS": 20,
+            "FAIL": 0,
+            "REFUSED": 0
+          },
+          "first_refused": null,
+          "raw_enclosure_violation_count": 0,
+          "violation_examples": [],
+          "max_residual_over_bound_finite": 0.999999999999999
+        },
+        "exact_local_windows": {
+          "0": {
+            "steps": 8,
+            "scope": "LOCAL_RESTART_FROM_REPRESENTED_LATENT_STATE",
+            "violations": 0,
+            "details": [],
+            "max_actual_over_bound": 0.9999999999999994,
+            "artifact": {
+              "path": "exact/regular_0_8step.json",
+              "sha256": "28c2649a03c1639037c5c4dd08b7b4e5651fdd9c8799909e9de27507e39c2345"
+            }
+          },
+          "10": {
+            "steps": 8,
+            "scope": "LOCAL_RESTART_FROM_REPRESENTED_LATENT_STATE",
+            "violations": 0,
+            "details": [],
+            "max_actual_over_bound": 0.9999999999999991,
+            "artifact": {
+              "path": "exact/regular_10_8step.json",
+              "sha256": "cfa44db5757ed32f0630b985036ae3b02231de95fb9d8488d486a42ae0160d1c"
+            }
+          },
+          "12": {
+            "steps": 8,
+            "scope": "LOCAL_RESTART_FROM_REPRESENTED_LATENT_STATE",
+            "violations": 0,
+            "details": [],
+            "max_actual_over_bound": 0.9999999999999992,
+            "artifact": {
+              "path": "exact/regular_12_8step.json",
+              "sha256": "31f56d8a0ee6425c6ed5acc546aaeb8bb9545934ea7e5dd422259aca6c93fe44"
+            }
+          }
+        },
+        "marks": [
+          {
+            "step": 10,
+            "external_bound": [
+              1.4971845784478897e-17,
+              1.0264543758853003e-17,
+              5.551691831387405e-17,
+              3.418732764457449e-17
+            ],
+            "lab_bound": [
+              3.4645362148299076e-17,
+              1.5927870867780346e-17,
+              1.517843494754205e-16,
+              6.805031930259798e-17
+            ],
+            "external_status": "PASS",
+            "external_reason": "finite bound smaller than represented state scale",
+            "cross": {
+              "verdict": "PASS",
+              "reason": "residual contained in exact sum bound",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": [
+                "16101704554914525/324518553658426726783156020576256",
+                "16999849022913751/649037107316853453566312041152512",
+                "16818276898635017/81129638414606681695789005144064",
+                "16589006658368639/162259276829213363391578010288128"
+              ],
+              "max_residual": 2.7755575615628914e-17,
+              "max_sum_bound": 2.0730126778929453e-16,
+              "max_residual_over_bound": 0.13389004279433678
+            }
+          }
+        ],
+        "segments": [
+          {
+            "path": "segments/regular/000020.json",
+            "sha256": "ce9ef3866afe48ab460606bf2a17fe3e3f3b7199b75181ad127450c29aa44d27",
+            "coverage": [
+              1,
+              20
+            ]
+          }
+        ],
+        "refused_ranges": []
+      },
+      "chaotic": {
+        "N": 20,
+        "steps_measured": 20,
+        "replay": {
+          "label": "KNOWN_PREREQUISITE_NOT_BLIND_SUCCESS",
+          "first_mismatch": null,
+          "steps_checked": 20
+        },
+        "first_refused": null,
+        "certified_prefix": 20,
+        "bin_bound_unavailable_from": null,
+        "lab_bound_unavailable_from": null,
+        "abort": null,
+        "cross": {
+          "counts": {
+            "PASS": 20,
+            "FAIL": 0,
+            "REFUSED": 0
+          },
+          "first_refused": null,
+          "raw_enclosure_violation_count": 0,
+          "violation_examples": [],
+          "max_residual_over_bound_finite": 0.7229745961387141
+        },
+        "exact_local_windows": {
+          "0": {
+            "steps": 8,
+            "scope": "LOCAL_RESTART_FROM_REPRESENTED_LATENT_STATE",
+            "violations": 0,
+            "details": [],
+            "max_actual_over_bound": 0.9999999999999993,
+            "artifact": {
+              "path": "exact/chaotic_0_8step.json",
+              "sha256": "787cdcef1bc9665f6b3c65719552dc428ca559ec9b90e7476d6a3568e042d1c0"
+            }
+          },
+          "10": {
+            "steps": 8,
+            "scope": "LOCAL_RESTART_FROM_REPRESENTED_LATENT_STATE",
+            "violations": 0,
+            "details": [],
+            "max_actual_over_bound": 0.9999999999999992,
+            "artifact": {
+              "path": "exact/chaotic_10_8step.json",
+              "sha256": "c4271404fbe537904e661bf1ad5a03cf125eb614a62752b38955ddb69f77c07d"
+            }
+          },
+          "12": {
+            "steps": 8,
+            "scope": "LOCAL_RESTART_FROM_REPRESENTED_LATENT_STATE",
+            "violations": 0,
+            "details": [],
+            "max_actual_over_bound": 0.9999999999999992,
+            "artifact": {
+              "path": "exact/chaotic_12_8step.json",
+              "sha256": "377fbe88b3455ba724a0be9768103f818ac0edebbfb80f026e2d89f6d2054e63"
+            }
+          }
+        },
+        "marks": [
+          {
+            "step": 10,
+            "external_bound": [
+              3.6522434947104244e-17,
+              1.678934008777107e-17,
+              1.2449518790483903e-16,
+              6.527199294226437e-17
+            ],
+            "lab_bound": [
+              4.8375765961364516e-17,
+              2.8588470341482495e-17,
+              2.3057045800911237e-16,
+              1.2994630257141686e-16
+            ],
+            "external_status": "PASS",
+            "external_reason": "finite bound smaller than represented state scale",
+            "cross": {
+              "verdict": "PASS",
+              "reason": "residual contained in exact sum bound",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": [
+                "6887760341754703/81129638414606681695789005144064",
+                "14725941408687639/324518553658426726783156020576256",
+                "14403173733223823/40564819207303340847894502572032",
+                "1979748715867599/10141204801825835211973625643008"
+              ],
+              "max_residual": 1.6653345369377348e-16,
+              "max_sum_bound": 3.5506564591395143e-16,
+              "max_residual_over_bound": 0.46902158969818253
+            }
+          }
+        ],
+        "segments": [
+          {
+            "path": "segments/chaotic/000020.json",
+            "sha256": "4ea87ff4c53ce483c549702ecc02093c0bc187e51463ea6bad66ea1a5b727773",
+            "coverage": [
+              1,
+              20
+            ]
+          }
+        ],
+        "refused_ranges": []
+      }
+    },
+    "independence": {
+      "static_violations": [],
+      "A_modules_loaded": []
+    },
+    "gate_verdict": "PASS",
+    "utility": "LIMITED_HORIZON"
+  },
+  "costs_seconds": {
+    "regular": 0.28081899997778237,
+    "chaotic": 0.2670117999659851
+  },
+  "total_wall_seconds": 0.9726305000367574,
+  "peak_rss_bytes": 0,
+  "machine": {
+    "system": "Windows",
+    "machine": "AMD64",
+    "python": "3.12.7"
+  }
+}

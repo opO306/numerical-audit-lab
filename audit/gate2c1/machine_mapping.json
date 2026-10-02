@@ -1,0 +1,985 @@
+{
+  "schema": "gate2c1-three-layer-mapping-v1",
+  "branch": "array-gradient N=1, ndim=2, zero origin / identity rotation",
+  "routing_evidence": "audit/gate2c1/evidence/c_gradient.txt",
+  "machine_arithmetic_evidence": "benchmarks/gate2b/evidence/disassembly.txt",
+  "half_at_vaddr_3b360": "0x1.0000000000000p-1",
+  "phases": {
+    "init": [
+      {
+        "ordinal": 0,
+        "disassembly_address": null,
+        "instruction": null,
+        "kind": "load/initialization",
+        "T_bin": [
+          "CONST",
+          "dt",
+          [],
+          "1/64"
+        ],
+        "V2_trace": [
+          "CONST",
+          "dt",
+          [],
+          "1/64"
+        ]
+      },
+      {
+        "ordinal": 1,
+        "disassembly_address": null,
+        "instruction": null,
+        "kind": "load/initialization",
+        "T_bin": [
+          "CONST",
+          "half",
+          [],
+          "1/2"
+        ],
+        "V2_trace": [
+          "CONST",
+          "half",
+          [],
+          "1/2"
+        ]
+      },
+      {
+        "ordinal": 2,
+        "disassembly_address": null,
+        "instruction": null,
+        "kind": "load/initialization",
+        "T_bin": [
+          "CONST",
+          "gz",
+          [],
+          "0"
+        ],
+        "V2_trace": [
+          "CONST",
+          "gz",
+          [],
+          "0"
+        ]
+      },
+      {
+        "ordinal": 3,
+        "disassembly_address": "1cb85",
+        "instruction": "mulsd  %xmm0,%xmm2",
+        "kind": "arithmetic",
+        "T_bin": [
+          "MUL",
+          "xyi",
+          [
+            "y",
+            "x"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "MUL",
+          "xyi",
+          [
+            "y",
+            "x"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 4,
+        "disassembly_address": "1cb89",
+        "instruction": "addsd  %xmm0,%xmm3",
+        "kind": "arithmetic",
+        "T_bin": [
+          "ADD",
+          "axi",
+          [
+            "gz",
+            "x"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "ADD",
+          "axi",
+          [
+            "gz",
+            "x"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 5,
+        "disassembly_address": "1cb8d",
+        "instruction": "mulsd  %xmm0,%xmm0",
+        "kind": "arithmetic",
+        "T_bin": [
+          "MUL",
+          "xxi",
+          [
+            "x",
+            "x"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "MUL",
+          "xxi",
+          [
+            "x",
+            "x"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 6,
+        "disassembly_address": "1cb91",
+        "instruction": "addsd  %xmm2,%xmm2",
+        "kind": "arithmetic",
+        "T_bin": [
+          "ADD",
+          "dbli",
+          [
+            "xyi",
+            "xyi"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "ADD",
+          "dbli",
+          [
+            "xyi",
+            "xyi"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 7,
+        "disassembly_address": "1cb95",
+        "instruction": "addsd  %xmm3,%xmm2",
+        "kind": "arithmetic",
+        "T_bin": [
+          "ADD",
+          "gxi",
+          [
+            "dbli",
+            "axi"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "ADD",
+          "gxi",
+          [
+            "dbli",
+            "axi"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 8,
+        "disassembly_address": "1cba3",
+        "instruction": "mulsd  %xmm1,%xmm2",
+        "kind": "arithmetic",
+        "T_bin": [
+          "MUL",
+          "yyi",
+          [
+            "y",
+            "y"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "MUL",
+          "yyi",
+          [
+            "y",
+            "y"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 9,
+        "disassembly_address": "1cba7",
+        "instruction": "addsd  (%rdx,%rax,8),%xmm1",
+        "kind": "arithmetic",
+        "T_bin": [
+          "ADD",
+          "ayi",
+          [
+            "y",
+            "gz"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "ADD",
+          "ayi",
+          [
+            "y",
+            "gz"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 10,
+        "disassembly_address": "1cbac",
+        "instruction": "subsd  %xmm2,%xmm0",
+        "kind": "arithmetic",
+        "T_bin": [
+          "SUB",
+          "diffi",
+          [
+            "xxi",
+            "yyi"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "SUB",
+          "diffi",
+          [
+            "xxi",
+            "yyi"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 11,
+        "disassembly_address": "1cbb0",
+        "instruction": "addsd  %xmm1,%xmm0",
+        "kind": "arithmetic",
+        "T_bin": [
+          "ADD",
+          "gyi",
+          [
+            "diffi",
+            "ayi"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "ADD",
+          "gyi",
+          [
+            "diffi",
+            "ayi"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 12,
+        "disassembly_address": "15941",
+        "instruction": "mulsd  0x25a17(%rip),%xmm1        # 3b360 <_ZL9__pyx_k_c+0x13>",
+        "kind": "arithmetic",
+        "T_bin": [
+          "MUL",
+          "hhalf",
+          [
+            "dt",
+            "half"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "MUL",
+          "hhalf",
+          [
+            "dt",
+            "half"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 13,
+        "disassembly_address": "15993",
+        "instruction": "mulsd  %xmm1,%xmm2",
+        "kind": "arithmetic",
+        "T_bin": [
+          "MUL",
+          "kx",
+          [
+            "gxi",
+            "hhalf"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "MUL",
+          "kx",
+          [
+            "gxi",
+            "hhalf"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 14,
+        "disassembly_address": "15997",
+        "instruction": "subsd  %xmm2,%xmm0",
+        "kind": "arithmetic",
+        "T_bin": [
+          "SUB",
+          "vhx",
+          [
+            "vx",
+            "kx"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "SUB",
+          "vhx",
+          [
+            "vx",
+            "kx"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 15,
+        "disassembly_address": "15993",
+        "instruction": "mulsd  %xmm1,%xmm2",
+        "kind": "arithmetic",
+        "T_bin": [
+          "MUL",
+          "ky",
+          [
+            "gyi",
+            "hhalf"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "MUL",
+          "ky",
+          [
+            "gyi",
+            "hhalf"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 16,
+        "disassembly_address": "15997",
+        "instruction": "subsd  %xmm2,%xmm0",
+        "kind": "arithmetic",
+        "T_bin": [
+          "SUB",
+          "vhy",
+          [
+            "vy",
+            "ky"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "SUB",
+          "vhy",
+          [
+            "vy",
+            "ky"
+          ],
+          null
+        ]
+      }
+    ],
+    "step": [
+      {
+        "ordinal": 0,
+        "disassembly_address": null,
+        "instruction": null,
+        "kind": "load/initialization",
+        "T_bin": [
+          "CONST",
+          "dt",
+          [],
+          "1/64"
+        ],
+        "V2_trace": [
+          "CONST",
+          "dt",
+          [],
+          "1/64"
+        ]
+      },
+      {
+        "ordinal": 1,
+        "disassembly_address": null,
+        "instruction": null,
+        "kind": "load/initialization",
+        "T_bin": [
+          "CONST",
+          "half",
+          [],
+          "1/2"
+        ],
+        "V2_trace": [
+          "CONST",
+          "half",
+          [],
+          "1/2"
+        ]
+      },
+      {
+        "ordinal": 2,
+        "disassembly_address": null,
+        "instruction": null,
+        "kind": "load/initialization",
+        "T_bin": [
+          "CONST",
+          "gz",
+          [],
+          "0"
+        ],
+        "V2_trace": [
+          "CONST",
+          "gz",
+          [],
+          "0"
+        ]
+      },
+      {
+        "ordinal": 3,
+        "disassembly_address": "1580b",
+        "instruction": "mulsd  0x0(%rbp,%rax,8),%xmm1",
+        "kind": "arithmetic",
+        "T_bin": [
+          "MUL",
+          "dx",
+          [
+            "dt",
+            "vhx"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "MUL",
+          "dx",
+          [
+            "dt",
+            "vhx"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 4,
+        "disassembly_address": "15818",
+        "instruction": "addsd  (%r9),%xmm1",
+        "kind": "arithmetic",
+        "T_bin": [
+          "ADD",
+          "x1",
+          [
+            "dx",
+            "x"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "ADD",
+          "x1",
+          [
+            "dx",
+            "x"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 5,
+        "disassembly_address": "1580b",
+        "instruction": "mulsd  0x0(%rbp,%rax,8),%xmm1",
+        "kind": "arithmetic",
+        "T_bin": [
+          "MUL",
+          "dy",
+          [
+            "dt",
+            "vhy"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "MUL",
+          "dy",
+          [
+            "dt",
+            "vhy"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 6,
+        "disassembly_address": "15818",
+        "instruction": "addsd  (%r9),%xmm1",
+        "kind": "arithmetic",
+        "T_bin": [
+          "ADD",
+          "y1",
+          [
+            "dy",
+            "y"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "ADD",
+          "y1",
+          [
+            "dy",
+            "y"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 7,
+        "disassembly_address": "1cb85",
+        "instruction": "mulsd  %xmm0,%xmm2",
+        "kind": "arithmetic",
+        "T_bin": [
+          "MUL",
+          "xys",
+          [
+            "y1",
+            "x1"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "MUL",
+          "xys",
+          [
+            "y1",
+            "x1"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 8,
+        "disassembly_address": "1cb89",
+        "instruction": "addsd  %xmm0,%xmm3",
+        "kind": "arithmetic",
+        "T_bin": [
+          "ADD",
+          "axs",
+          [
+            "gz",
+            "x1"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "ADD",
+          "axs",
+          [
+            "gz",
+            "x1"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 9,
+        "disassembly_address": "1cb8d",
+        "instruction": "mulsd  %xmm0,%xmm0",
+        "kind": "arithmetic",
+        "T_bin": [
+          "MUL",
+          "xxs",
+          [
+            "x1",
+            "x1"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "MUL",
+          "xxs",
+          [
+            "x1",
+            "x1"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 10,
+        "disassembly_address": "1cb91",
+        "instruction": "addsd  %xmm2,%xmm2",
+        "kind": "arithmetic",
+        "T_bin": [
+          "ADD",
+          "dbls",
+          [
+            "xys",
+            "xys"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "ADD",
+          "dbls",
+          [
+            "xys",
+            "xys"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 11,
+        "disassembly_address": "1cb95",
+        "instruction": "addsd  %xmm3,%xmm2",
+        "kind": "arithmetic",
+        "T_bin": [
+          "ADD",
+          "gxs",
+          [
+            "dbls",
+            "axs"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "ADD",
+          "gxs",
+          [
+            "dbls",
+            "axs"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 12,
+        "disassembly_address": "1cba3",
+        "instruction": "mulsd  %xmm1,%xmm2",
+        "kind": "arithmetic",
+        "T_bin": [
+          "MUL",
+          "yys",
+          [
+            "y1",
+            "y1"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "MUL",
+          "yys",
+          [
+            "y1",
+            "y1"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 13,
+        "disassembly_address": "1cba7",
+        "instruction": "addsd  (%rdx,%rax,8),%xmm1",
+        "kind": "arithmetic",
+        "T_bin": [
+          "ADD",
+          "ays",
+          [
+            "y1",
+            "gz"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "ADD",
+          "ays",
+          [
+            "y1",
+            "gz"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 14,
+        "disassembly_address": "1cbac",
+        "instruction": "subsd  %xmm2,%xmm0",
+        "kind": "arithmetic",
+        "T_bin": [
+          "SUB",
+          "diffs",
+          [
+            "xxs",
+            "yys"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "SUB",
+          "diffs",
+          [
+            "xxs",
+            "yys"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 15,
+        "disassembly_address": "1cbb0",
+        "instruction": "addsd  %xmm1,%xmm0",
+        "kind": "arithmetic",
+        "T_bin": [
+          "ADD",
+          "gys",
+          [
+            "diffs",
+            "ays"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "ADD",
+          "gys",
+          [
+            "diffs",
+            "ays"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 16,
+        "disassembly_address": "15855",
+        "instruction": "mulsd  0x25b03(%rip),%xmm2        # 3b360 <_ZL9__pyx_k_c+0x13>",
+        "kind": "arithmetic",
+        "T_bin": [
+          "MUL",
+          "hhalf",
+          [
+            "dt",
+            "half"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "MUL",
+          "hhalf",
+          [
+            "dt",
+            "half"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 17,
+        "disassembly_address": "1588e",
+        "instruction": "mulsd  %xmm2,%xmm1",
+        "kind": "arithmetic",
+        "T_bin": [
+          "MUL",
+          "kx",
+          [
+            "gxs",
+            "hhalf"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "MUL",
+          "kx",
+          [
+            "gxs",
+            "hhalf"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 18,
+        "disassembly_address": "15892",
+        "instruction": "subsd  %xmm1,%xmm0",
+        "kind": "arithmetic",
+        "T_bin": [
+          "SUB",
+          "vox",
+          [
+            "vhx",
+            "kx"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "SUB",
+          "vox",
+          [
+            "vhx",
+            "kx"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 19,
+        "disassembly_address": "158a1",
+        "instruction": "mulsd  (%rdx),%xmm1",
+        "kind": "arithmetic",
+        "T_bin": [
+          "MUL",
+          "gdx",
+          [
+            "dt",
+            "gxs"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "MUL",
+          "gdx",
+          [
+            "dt",
+            "gxs"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 20,
+        "disassembly_address": "158ac",
+        "instruction": "subsd  %xmm1,%xmm0",
+        "kind": "arithmetic",
+        "T_bin": [
+          "SUB",
+          "vhx1",
+          [
+            "vhx",
+            "gdx"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "SUB",
+          "vhx1",
+          [
+            "vhx",
+            "gdx"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 21,
+        "disassembly_address": "1588e",
+        "instruction": "mulsd  %xmm2,%xmm1",
+        "kind": "arithmetic",
+        "T_bin": [
+          "MUL",
+          "ky",
+          [
+            "gys",
+            "hhalf"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "MUL",
+          "ky",
+          [
+            "gys",
+            "hhalf"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 22,
+        "disassembly_address": "15892",
+        "instruction": "subsd  %xmm1,%xmm0",
+        "kind": "arithmetic",
+        "T_bin": [
+          "SUB",
+          "voy",
+          [
+            "vhy",
+            "ky"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "SUB",
+          "voy",
+          [
+            "vhy",
+            "ky"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 23,
+        "disassembly_address": "158a1",
+        "instruction": "mulsd  (%rdx),%xmm1",
+        "kind": "arithmetic",
+        "T_bin": [
+          "MUL",
+          "gdy",
+          [
+            "dt",
+            "gys"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "MUL",
+          "gdy",
+          [
+            "dt",
+            "gys"
+          ],
+          null
+        ]
+      },
+      {
+        "ordinal": 24,
+        "disassembly_address": "158ac",
+        "instruction": "subsd  %xmm1,%xmm0",
+        "kind": "arithmetic",
+        "T_bin": [
+          "SUB",
+          "vhy1",
+          [
+            "vhy",
+            "gdy"
+          ],
+          null
+        ],
+        "V2_trace": [
+          "SUB",
+          "vhy1",
+          [
+            "vhy",
+            "gdy"
+          ],
+          null
+        ]
+      }
+    ]
+  }
+}
