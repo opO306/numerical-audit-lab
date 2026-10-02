@@ -1,0 +1,26 @@
+{
+  "command": [
+    "gdb",
+    "-q",
+    "-nx",
+    "-batch",
+    "-x",
+    "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/gdb_capture.py",
+    "--args",
+    "/home/otherside123/venvs/gate2c1-trace/bin/python",
+    "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/harness.py"
+  ],
+  "gdb_process_wall_seconds": 4.462998544999998,
+  "return_code": 0,
+  "environment_changes": {
+    "LD_BIND_NOW": "1"
+  },
+  "packages_installed": [],
+  "source_sha256_before_execution": {
+    "runtime_trace/run.py": "a7c66323b261fc2af9cd36f7e0472d50589b43983e1acf460bf7d0641cd0c2a8",
+    "runtime_trace/harness.py": "4928f88e4c6255cfbc3f68798648b543146fb5b13327490d331814f778a9fc26",
+    "runtime_trace/semantics.py": "d6797e279cdf2b85e91612426e4e2be3cac2fe2a837a4917fffa9530a5286331",
+    "runtime_trace/gdb_capture.py": "1e078c258d85c037e0aebebc1df11c6b301734b7b1709a81c123ea8bf77f449d"
+  },
+  "machine_mapping_used_during_acquisition": false
+}

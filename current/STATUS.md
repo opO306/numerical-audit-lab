@@ -54,4 +54,8 @@ README와 기존 상태 문서도 봉인 목록에 포함되어 있으므로 수
 감사 PASS의 범위는 기존 charter/result의 특정 frozen 실행과 동일 exact discrete map 사이 rounding layer이다.
 연속 물리 궤적, method error, gala 전체나 다른 입력·플랫폼·분기에 관한 인증으로 확대하지 않는다.
 
-다음 연구의 [Runtime Trace 첫 실험 계획](RUNTIME_TRACE_INITIAL_PLAN.md)은 DESIGN ONLY / NOT IMPLEMENTED이다.
+다음 연구의 [Runtime Trace 첫 실험 계획](RUNTIME_TRACE_INITIAL_PLAN.md)은 작성 당시의 DESIGN ONLY 기록으로 보존한다.
+2026-10-02 별도 승인된 **regular 1-step GDB Runtime Trace prototype은 구현·실행했고, 이 실행의 correspondence 검사는 PASS**다.
+현재 구현·실행 명령·trace schema·실패 시도·검사 결과는 [Runtime Trace README](../runtime_trace/README.md)에 모았다.
+최종 trace는 `runtime_trace/artifacts/attempt-05/`이며 실제 instruction 446개, scalar FP 산술 36개를 기록했다.
+Numeric IR / V2 연결과 10 / 100-step 실행은 아직 구현·실행하지 않았다. 이번 구현 작업은 push하지 않는다.

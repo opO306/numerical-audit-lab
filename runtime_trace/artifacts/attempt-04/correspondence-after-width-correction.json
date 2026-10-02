@@ -1,0 +1,5 @@
+{
+  "verdict": "FAIL",
+  "reason": "AuditError: integer extension operand widths",
+  "checker_sha256": "fd29e847f28c61df9ce4e289ab972ab6a5fdb9e86ff57895cb9f2980e3bb6b2a"
+}

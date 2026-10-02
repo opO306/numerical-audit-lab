@@ -1,0 +1,2 @@
+# Preserve acquisition and failure evidence bytes in Git.
+artifacts/** -text whitespace=cr-at-eol

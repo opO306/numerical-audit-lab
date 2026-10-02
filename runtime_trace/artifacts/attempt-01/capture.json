@@ -1,0 +1,114 @@
+{
+  "schema": "gala-regular-1step-runtime-trace-v1",
+  "verdict": "REFUSED",
+  "reason": "Refused: unsupported instruction: vmovd",
+  "record_count": 53,
+  "scalar_fp_count": 0,
+  "opcode_histogram": {
+    "push": 12,
+    "movq": 1,
+    "mov": 15,
+    "sub": 2,
+    "call": 2,
+    "jmp": 3,
+    "movslq": 2,
+    "movsd": 1,
+    "imul": 1,
+    "test": 3,
+    "je": 4,
+    "xor": 3,
+    "add": 1,
+    "cmp": 1,
+    "lea": 1,
+    "endbr64": 1
+  },
+  "regions": [],
+  "modules": {
+    "/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so": {
+      "path": "/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "a6ac98736304bb9f6a92e473bba45da10d9b5b99f8019e2ca15eb6a7f86234fc",
+      "load_base": 140736120496128,
+      "segments": [
+        {
+          "file_offset": 0,
+          "vaddr": 0,
+          "filesz": 22064,
+          "memsz": 22064,
+          "flags": 4
+        },
+        {
+          "file_offset": 24576,
+          "vaddr": 24576,
+          "filesz": 198605,
+          "memsz": 198605,
+          "flags": 5
+        },
+        {
+          "file_offset": 225280,
+          "vaddr": 225280,
+          "filesz": 33252,
+          "memsz": 33252,
+          "flags": 4
+        },
+        {
+          "file_offset": 260976,
+          "vaddr": 265072,
+          "filesz": 7304,
+          "memsz": 9344,
+          "flags": 6
+        }
+      ],
+      "wheel_member": "gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so"
+    },
+    "/usr/lib/x86_64-linux-gnu/libc.so.6": {
+      "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "sha256": "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf",
+      "load_base": 140737349943296,
+      "segments": [
+        {
+          "file_offset": 0,
+          "vaddr": 0,
+          "filesz": 160656,
+          "memsz": 160656,
+          "flags": 4
+        },
+        {
+          "file_offset": 163840,
+          "vaddr": 163840,
+          "filesz": 1605689,
+          "memsz": 1605689,
+          "flags": 5
+        },
+        {
+          "file_offset": 1773568,
+          "vaddr": 1773568,
+          "filesz": 319714,
+          "memsz": 319714,
+          "flags": 4
+        },
+        {
+          "file_offset": 2096224,
+          "vaddr": 2100320,
+          "filesz": 19048,
+          "memsz": 74032,
+          "flags": 6
+        }
+      ],
+      "wheel_member": null
+    }
+  },
+  "trace_sha256": "b7ff5945fc21fd9865b6a6936a59db51664d45b15db702a628684d975407acda",
+  "final_chain": "962349a40045d9c0f96b02e2759e5e8d248b4f73e32cfa47b89fb95754bff2a5",
+  "capture_wall_seconds": 2.8349767750000865,
+  "gdb_version": "15.1",
+  "gdb_python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "wheel_sha256": "cc5f0cf3bc63a966a3c130b93f6c05026271fe7178492a02c6266c243b5fc2f0",
+  "pending_uncompleted_instruction": {
+    "runtime_pc": 140737351554948,
+    "phase": "init",
+    "instruction": "vmovd  %esi,%xmm0",
+    "executed": false
+  },
+  "machine_mapping_read_by_tracer": false,
+  "scope": "regular init and one c_leapfrog_step including nested gradient and actual memset; caller outside these two regions excluded"
+}

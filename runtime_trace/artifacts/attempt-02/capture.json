@@ -1,0 +1,420 @@
+{
+  "schema": "gala-regular-1step-runtime-trace-v1",
+  "verdict": "REFUSED",
+  "reason": "Refused: unrecorded alias/write changed tracked bits",
+  "record_count": 191,
+  "scalar_fp_count": 14,
+  "opcode_histogram": {
+    "push": 12,
+    "movq": 2,
+    "mov": 32,
+    "sub": 2,
+    "call": 3,
+    "jmp": 5,
+    "movslq": 5,
+    "movsd": 13,
+    "imul": 1,
+    "test": 7,
+    "je": 8,
+    "xor": 12,
+    "add": 14,
+    "cmp": 10,
+    "lea": 5,
+    "endbr64": 1,
+    "vmovd": 1,
+    "jb": 3,
+    "vpbroadcastb": 1,
+    "jge": 1,
+    "vmovdqu": 2,
+    "ret": 4,
+    "movb": 1,
+    "shl": 1,
+    "nopw": 9,
+    "movapd": 2,
+    "mulsd": 6,
+    "addsd": 5,
+    "subsd": 3,
+    "jne": 4,
+    "jae": 1,
+    "cmpb": 1,
+    "pop": 12,
+    "jle": 1,
+    "xchg": 1
+  },
+  "regions": [
+    {
+      "phase": "init",
+      "entry_pc": 140736120584448,
+      "return_pc": 140736120698145,
+      "start_seq": 0,
+      "pointers": {
+        "q": 15565328,
+        "full_v": 15565344,
+        "latent": 42934672,
+        "gradient": 50310496
+      },
+      "start_state": {
+        "q": "0x00000000000000000000000000000000",
+        "full_v": "0x3fc00000000000003fd0000000000000",
+        "latent": "0x00000000000000000000000000000000",
+        "gradient": "0x00000000000000000000000000000000"
+      },
+      "mxcsr": 8096,
+      "threads": [
+        {
+          "ptid": [
+            3202,
+            3225,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3223,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3222,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3224,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3219,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3218,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3202,
+            0
+          ],
+          "name": "python",
+          "owner": true
+        },
+        {
+          "ptid": [
+            3202,
+            3207,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3205,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3206,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3220,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3210,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3226,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3208,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3211,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3217,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3212,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3215,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3221,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3209,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3214,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3213,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        },
+        {
+          "ptid": [
+            3202,
+            3216,
+            0
+          ],
+          "name": "python",
+          "owner": false
+        }
+      ],
+      "scheduler_locking": "Mode for locking scheduler during execution is \"on\".",
+      "end_seq": 191,
+      "end_state": {
+        "q": "0x00000000000000000000000000000000",
+        "full_v": "0x3fc00000000000003fd0000000000000",
+        "latent": "0x3fc00000000000003fd0000000000000",
+        "gradient": "0x00000000000000000000000000000000"
+      }
+    }
+  ],
+  "modules": {
+    "/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so": {
+      "path": "/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "a6ac98736304bb9f6a92e473bba45da10d9b5b99f8019e2ca15eb6a7f86234fc",
+      "load_base": 140736120496128,
+      "segments": [
+        {
+          "file_offset": 0,
+          "vaddr": 0,
+          "filesz": 22064,
+          "memsz": 22064,
+          "flags": 4
+        },
+        {
+          "file_offset": 24576,
+          "vaddr": 24576,
+          "filesz": 198605,
+          "memsz": 198605,
+          "flags": 5
+        },
+        {
+          "file_offset": 225280,
+          "vaddr": 225280,
+          "filesz": 33252,
+          "memsz": 33252,
+          "flags": 4
+        },
+        {
+          "file_offset": 260976,
+          "vaddr": 265072,
+          "filesz": 7304,
+          "memsz": 9344,
+          "flags": 6
+        }
+      ],
+      "wheel_member": "gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so"
+    },
+    "/usr/lib/x86_64-linux-gnu/libc.so.6": {
+      "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "sha256": "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf",
+      "load_base": 140737349943296,
+      "segments": [
+        {
+          "file_offset": 0,
+          "vaddr": 0,
+          "filesz": 160656,
+          "memsz": 160656,
+          "flags": 4
+        },
+        {
+          "file_offset": 163840,
+          "vaddr": 163840,
+          "filesz": 1605689,
+          "memsz": 1605689,
+          "flags": 5
+        },
+        {
+          "file_offset": 1773568,
+          "vaddr": 1773568,
+          "filesz": 319714,
+          "memsz": 319714,
+          "flags": 4
+        },
+        {
+          "file_offset": 2096224,
+          "vaddr": 2100320,
+          "filesz": 19048,
+          "memsz": 74032,
+          "flags": 6
+        }
+      ],
+      "wheel_member": null
+    },
+    "/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/potential/potential/builtin/cybuiltin.cpython-312-x86_64-linux-gnu.so": {
+      "path": "/home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/potential/potential/builtin/cybuiltin.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "33d66d82c34c717560747ffbfca1d98f97432a0a671a0a210a0a225d8367ecaf",
+      "load_base": 140736778539008,
+      "segments": [
+        {
+          "file_offset": 0,
+          "vaddr": 0,
+          "filesz": 45960,
+          "memsz": 45960,
+          "flags": 4
+        },
+        {
+          "file_offset": 49152,
+          "vaddr": 49152,
+          "filesz": 408073,
+          "memsz": 408073,
+          "flags": 5
+        },
+        {
+          "file_offset": 458752,
+          "vaddr": 458752,
+          "filesz": 57923,
+          "memsz": 57923,
+          "flags": 4
+        },
+        {
+          "file_offset": 518000,
+          "vaddr": 522096,
+          "filesz": 21576,
+          "memsz": 26912,
+          "flags": 6
+        },
+        {
+          "file_offset": 4337664,
+          "vaddr": 552960,
+          "filesz": 15160,
+          "memsz": 15160,
+          "flags": 6
+        },
+        {
+          "file_offset": 4354048,
+          "vaddr": 569344,
+          "filesz": 13216,
+          "memsz": 13216,
+          "flags": 6
+        }
+      ],
+      "wheel_member": "gala/potential/potential/builtin/cybuiltin.cpython-312-x86_64-linux-gnu.so"
+    }
+  },
+  "trace_sha256": "05e5fb2a67c2c16a2b9ef5eee69be5fa4cf94883bbd3077e77c901ff6c434b14",
+  "final_chain": "db8b3e61024586b2995aed630fab10d95686a56c49e645c3b5f41eaf7630f799",
+  "capture_wall_seconds": 3.4109983190001003,
+  "gdb_version": "15.1",
+  "gdb_python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "wheel_sha256": "cc5f0cf3bc63a966a3c130b93f6c05026271fe7178492a02c6266c243b5fc2f0",
+  "pending_uncompleted_instruction": {
+    "runtime_pc": 140736120584064,
+    "phase": "step",
+    "instruction": "push   %r15",
+    "executed": false
+  },
+  "machine_mapping_read_by_tracer": false,
+  "scope": "regular init and one c_leapfrog_step including nested gradient and actual memset; caller outside these two regions excluded"
+}

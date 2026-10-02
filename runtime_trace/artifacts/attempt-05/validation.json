@@ -1,0 +1,49 @@
+{
+  "sealed_reference_head": "bb436647ee76a0bd73dfd108f4db8d295a17d61f",
+  "sealed_files_checked_byte_for_byte": 644,
+  "sealed_files_changed": [],
+  "zip_sha256": {
+    "D:\\numerical-audit-lab-recovered-2026-10-01\\current\\gate2c1-independent-audit-evidence-2026-10-02.zip": "527ebcc2f8fcd64615a4c20438487d7e5cd5aa1f954627cab91d15e7e0d577c9",
+    "D:/numerical-audit-lab-gate2c1-audit-delivery-2026-10-02/gate2c1-complete-audit-2026-10-02.zip": "b3adbc940d7c819a87f2366bb36c10a0e67597976bb9b85f3c50503ef85c261d"
+  },
+  "acquisition_source_hash_matches": {
+    "runtime_trace/run.py": true,
+    "runtime_trace/harness.py": true,
+    "runtime_trace/semantics.py": true,
+    "runtime_trace/gdb_capture.py": true
+  },
+  "checker_source_hash_matches": true,
+  "baseline_bits_match": true,
+  "test_command": "/home/otherside123/venvs/gate2c1-trace/bin/python -m pytest runtime_trace/tests -q",
+  "pytest_log": "pytest.log",
+  "pytest_result": "52 passed in 2.78s; no skips",
+  "core_repository_code_modified": false,
+  "full_pytest_n6_run": false,
+  "push_performed": false,
+  "test_development_history": [
+    {
+      "result": "31 passed",
+      "stage": "initial units before attempt-04"
+    },
+    {
+      "result": "42 passed / 3 failed",
+      "stage": "initial actual-trace mutation tests; incorrect expected diagnostic match"
+    },
+    {
+      "result": "46 passed",
+      "stage": "corrected mutation injection before integer-width review"
+    },
+    {
+      "result": "36 passed",
+      "stage": "units before final attempt-05"
+    },
+    {
+      "result": "51 passed",
+      "stage": "final capture tests before adding routing-width mutation"
+    },
+    {
+      "result": "52 passed",
+      "stage": "final tests including routing-width mutation"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "command": [
+    "gdb",
+    "-q",
+    "-nx",
+    "-batch",
+    "-x",
+    "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/gdb_capture.py",
+    "--args",
+    "/home/otherside123/venvs/gate2c1-trace/bin/python",
+    "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/harness.py"
+  ],
+  "gdb_process_wall_seconds": 4.083081329000379,
+  "return_code": 0,
+  "environment_changes": {
+    "LD_BIND_NOW": "1"
+  },
+  "packages_installed": [],
+  "machine_mapping_used_during_acquisition": false
+}
