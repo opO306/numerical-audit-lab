@@ -31,9 +31,11 @@ def compare_normalized(old: dict, fresh: dict) -> dict:
 
     old_normalized = normalize(old)
     fresh_normalized = normalize(fresh)
-    if old_normalized != fresh_normalized:
+    old_bytes = canonical_json(old_normalized)
+    fresh_bytes = canonical_json(fresh_normalized)
+    if old_bytes != fresh_bytes:
         raise NormalizationMismatch("normalized Numeric IR mismatch")
-    digest = hashlib.sha256(canonical_json(old_normalized)).hexdigest()
+    digest = hashlib.sha256(old_bytes).hexdigest()
     return {
         "verdict": "PASS",
         "normalized_numeric_sha256": digest,

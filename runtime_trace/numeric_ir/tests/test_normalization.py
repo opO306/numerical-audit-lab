@@ -76,6 +76,21 @@ def test_compare_normalized_rejects_changed_provenance_edge():
         compare_normalized(old, fresh)
 
 
+@pytest.mark.parametrize("replacement", [False, 0.0])
+def test_compare_normalized_distinguishes_integer_from_bool_and_float(replacement):
+    old = {
+        "schema": "runtime-trace-numeric-ir-regular-1step-v1",
+        "source": {},
+        "operations": [{"ir_sequence": 0}],
+        "values": [],
+    }
+    fresh = copy.deepcopy(old)
+    fresh["operations"][0]["ir_sequence"] = replacement
+
+    with pytest.raises(NormalizationMismatch, match="normalized Numeric IR mismatch"):
+        compare_normalized(old, fresh)
+
+
 def test_old_then_fresh_are_checked_independently_before_normalized_comparison(
     attempt05, fresh, repo_root
 ):

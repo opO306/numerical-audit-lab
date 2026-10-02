@@ -131,6 +131,20 @@ def _raw_bytes(value: object, width: int, reason: str) -> bytes:
     return int(text, 16).to_bytes(width, "little")
 
 
+def _nullable_integer(
+    value: object, reason: str, *, minimum: int | None = None
+) -> int | None:
+    if value is None:
+        return None
+    return _integer(value, reason, minimum=minimum)
+
+
+def _sha256_text(value: object, reason: str) -> str:
+    text = _text(value, reason)
+    _require(bool(re.fullmatch(r"[0-9a-f]{64}", text)), reason)
+    return text
+
+
 def _source_paths(source: Path) -> tuple[Path, Path]:
     path = Path(source)
     if path.is_dir():
@@ -201,6 +215,119 @@ def _validate_storage(storage: object, where: str) -> dict:
     return result
 
 
+def _validate_source_metadata(source: dict) -> None:
+    _text(source.get("capture_schema"), "source capture schema")
+    _sha256_text(source.get("trace_sha256"), "source trace SHA-256")
+    _sha256_text(source.get("final_chain"), "source final chain")
+    _integer(source.get("record_count"), "source record count integer", minimum=0)
+    _integer(source.get("scalar_fp_count"), "source scalar count integer", minimum=0)
+    module_sha256s = _sequence(source.get("module_sha256s"), "source module SHA-256 array")
+    for index, digest in enumerate(module_sha256s):
+        _sha256_text(digest, f"source module SHA-256 {index}")
+    regions = _sequence(source.get("regions"), "source regions array")
+    region_keys = {"phase", "start_seq", "end_seq", "start_state", "end_state", "mxcsr"}
+    for index, region_value in enumerate(regions):
+        region = _mapping(region_value, f"source region {index} object")
+        _require(set(region) == region_keys, f"source region {index} fields")
+        _require(region.get("phase") in {"init", "step"}, f"source region {index} phase")
+        start = _integer(
+            region.get("start_seq"), f"source region {index} start sequence integer", minimum=0
+        )
+        end = _integer(
+            region.get("end_seq"), f"source region {index} end sequence integer", minimum=0
+        )
+        _require(start < end, f"source region {index} sequence range")
+        _integer(region.get("mxcsr"), f"source region {index} MXCSR integer", minimum=0)
+        for state_name in ("start_state", "end_state"):
+            state = _mapping(region.get(state_name), f"source region {index} {state_name}")
+            _require(set(state) == set(BOUNDARIES), f"source region {index} {state_name} fields")
+            for name in BOUNDARIES:
+                _raw_bytes(state[name], 16, f"source region {index} {state_name} {name}")
+    _sha256_text(
+        source.get("normalized_numeric_sha256"), "source normalized Numeric IR SHA-256"
+    )
+    diagnostic = _mapping(source.get("diagnostic"), "source diagnostic object")
+    _require(
+        set(diagnostic) == {"source_path", "runtime_addresses_excluded_from_normalization"},
+        "source diagnostic fields",
+    )
+    _text(diagnostic.get("source_path"), "source diagnostic path")
+    _require(
+        diagnostic.get("runtime_addresses_excluded_from_normalization") is True,
+        "runtime address normalization declaration",
+    )
+
+
+def _validate_producer(value_id: str, producer_kind: object, producer_value: object) -> dict:
+    producer = _mapping(producer_value, f"value {value_id} producer object")
+    role = _text(producer.get("role"), f"value {value_id} producer role")
+    common = {"role", "trace_sequence", "operand_index", "phase"}
+    if role == "boundary":
+        _require(
+            set(producer) == common | {"boundary"},
+            f"value {value_id} boundary producer fields",
+        )
+        _require(
+            producer_kind in {"LOAD_BITS", "COPY_BITS"},
+            f"value {value_id} boundary producer kind",
+        )
+        _require(producer.get("phase") in {"init", "step"}, f"value {value_id} producer phase")
+        _require(
+            producer.get("boundary") in {*BOUNDARIES, "xmm0", "xmm1"},
+            f"value {value_id} boundary name",
+        )
+        _require(producer.get("trace_sequence") is None, f"value {value_id} boundary trace null")
+        _require(producer.get("operand_index") is None, f"value {value_id} boundary operand null")
+        return producer
+    if role == "constant_read":
+        _require(
+            set(producer) == common | {"module_sha256", "file_offset"},
+            f"value {value_id} constant producer fields",
+        )
+        _require(producer_kind == "CONST_BITS", f"value {value_id} constant producer kind")
+        _sha256_text(producer.get("module_sha256"), f"value {value_id} constant module SHA-256")
+        _integer(producer.get("file_offset"), f"value {value_id} constant file offset", minimum=0)
+    elif role == "arithmetic_result":
+        _require(
+            set(producer) == common | {"operation_kind"},
+            f"value {value_id} arithmetic producer fields",
+        )
+        _require(
+            producer_kind == "ARITHMETIC_RESULT",
+            f"value {value_id} arithmetic producer kind",
+        )
+        _require(
+            producer.get("operation_kind") in set(ARITHMETIC_KINDS.values()),
+            f"value {value_id} arithmetic operation kind",
+        )
+    elif role in {
+        "copy_result",
+        "arithmetic_destination_pre_read",
+        "arithmetic_source_read",
+    }:
+        _require(set(producer) == common, f"value {value_id} copy producer fields")
+        _require(producer_kind == "COPY_BITS", f"value {value_id} copy producer kind")
+    elif role in {
+        "zero_extend",
+        "zero_upper",
+        "integer_zero",
+        "zero_result",
+        "instruction_zero",
+    }:
+        _require(set(producer) == common, f"value {value_id} zero producer fields")
+        _require(producer_kind == "ZERO_BITS", f"value {value_id} zero producer kind")
+    else:
+        _fail(f"value {value_id} producer role")
+    _require(producer.get("phase") in {"init", "step"}, f"value {value_id} producer phase")
+    _integer(
+        producer.get("trace_sequence"), f"value {value_id} producer trace sequence integer", minimum=0
+    )
+    _integer(
+        producer.get("operand_index"), f"value {value_id} producer operand index integer", minimum=0
+    )
+    return producer
+
+
 def _validate_ir_shape(ir: object) -> dict:
     document = _mapping(ir, "Numeric IR document must be an object")
     _require(
@@ -210,13 +337,45 @@ def _validate_ir_shape(ir: object) -> dict:
     _require(document.get("schema") == SCHEMA, "Numeric IR schema")
     source = _mapping(document.get("source"), "Numeric IR source object")
     _require(set(source) == SOURCE_KEYS, "Numeric IR source fields")
+    _validate_source_metadata(source)
     operations = _sequence(document.get("operations"), "Numeric IR operations array")
     values = _sequence(document.get("values"), "Numeric IR values array")
     for index, operation_value in enumerate(operations):
         operation = _mapping(operation_value, f"operation {index} object")
         _require(set(operation) == OPERATION_KEYS, f"operation {index} fields")
+        _integer(operation.get("ir_sequence"), f"operation {index} IR sequence integer", minimum=0)
+        _integer(
+            operation.get("trace_sequence"),
+            f"operation {index} trace sequence integer",
+            minimum=0,
+        )
+        _sha256_text(operation.get("module_sha256"), f"operation {index} module SHA-256")
+        elf_address = _integer(
+            operation.get("elf_address"), f"operation {index} ELF address integer", minimum=0
+        )
+        _require(elf_address < 1 << 64, f"operation {index} ELF address range")
+        instruction_bytes = _text(
+            operation.get("instruction_bytes"), f"operation {index} instruction bytes"
+        )
+        _require(
+            bool(re.fullmatch(r"[0-9a-f]{2,30}", instruction_bytes))
+            and len(instruction_bytes) % 2 == 0,
+            f"operation {index} instruction bytes",
+        )
+        _text(operation.get("opcode"), f"operation {index} opcode")
+        _require(
+            operation.get("operation_kind") in set(ARITHMETIC_KINDS.values()),
+            f"operation {index} kind",
+        )
+        for field in ("input0_value_id", "input1_value_id", "output_value_id"):
+            _text(operation.get(field), f"operation {index} {field}")
+        for field in ("input0_raw_bits", "input1_raw_bits", "output_raw_bits"):
+            _raw_bytes(operation.get(field), 8, f"operation {index} {field}")
+        _integer(operation.get("mxcsr"), f"operation {index} MXCSR integer", minimum=0)
+        _require(operation.get("phase") in {"init", "step"}, f"operation {index} phase")
+        _integer(operation.get("step"), f"operation {index} step integer", minimum=0)
     seen_ids: set[str] = set()
-    seen_producers: set[str] = set()
+    seen_producers: set[bytes] = set()
     value_by_id: dict[str, dict] = {}
     for index, value_value in enumerate(values):
         value = _mapping(value_value, f"value {index} object")
@@ -224,8 +383,8 @@ def _validate_ir_shape(ir: object) -> dict:
         value_id = _text(value.get("value_id"), f"value {index} ID")
         _require(value_id not in seen_ids, f"duplicate value ID: {value_id}")
         seen_ids.add(value_id)
-        producer = _mapping(value.get("producer"), f"value {value_id} producer object")
-        producer_identity = json.dumps(producer, sort_keys=True, separators=(",", ":"))
+        producer = _validate_producer(value_id, value.get("producer_kind"), value.get("producer"))
+        producer_identity = canonical_json(producer)
         _require(
             producer_identity not in seen_producers,
             f"duplicate producer identity: {value_id}",
@@ -261,6 +420,20 @@ def _validate_ir_shape(ir: object) -> dict:
             )
             part_width = _integer(
                 part.get("width"), f"value {value_id} slice width", minimum=1
+            )
+            slice_trace = _nullable_integer(
+                part.get("trace_sequence"),
+                f"value {value_id} slice trace sequence integer or null",
+                minimum=0,
+            )
+            slice_operand = _nullable_integer(
+                part.get("source_operand_index"),
+                f"value {value_id} slice operand index integer or null",
+                minimum=0,
+            )
+            _require(
+                (slice_trace is None) == (slice_operand is None),
+                f"value {value_id} slice occurrence null pairing",
             )
             _require(
                 destination_offset + part_width <= width,
@@ -449,9 +622,17 @@ def _validate_capture_and_rows(capture: dict, rows: list[dict], stream: bytes) -
         _require(row.get("chain") == chain, f"trace hash chain mismatch at row {index}")
     _require(capture.get("final_chain") == chain, "capture final chain mismatch")
     scalar_count = sum(row["kind"] in {"ADD", "SUB", "MUL"} for row in rows)
-    _require(capture.get("scalar_fp_count") == scalar_count, "capture scalar count metadata")
+    captured_scalar_count = _integer(
+        capture.get("scalar_fp_count"), "capture scalar count integer", minimum=0
+    )
+    _require(captured_scalar_count == scalar_count, "capture scalar count metadata")
+    histogram = _mapping(capture.get("opcode_histogram"), "capture opcode histogram object")
+    for opcode, count in histogram.items():
+        _text(opcode, "capture opcode histogram key")
+        _integer(count, f"capture opcode histogram count for {opcode}", minimum=0)
     _require(
-        capture.get("opcode_histogram") == dict(Counter(row["opcode"] for row in rows)),
+        canonical_json(histogram)
+        == canonical_json(dict(Counter(row["opcode"] for row in rows))),
         "capture opcode histogram metadata",
     )
 
@@ -1152,7 +1333,7 @@ def check(ir: dict, source: Path, root: Path | None = None) -> dict:
     reconstruction = _Reconstruction(rows, capture, decoded)
     operations, values = reconstruction.run()
     _require(
-        document["operations"] == operations,
+        canonical_json(document["operations"]) == canonical_json(operations),
         "operation reconstruction mismatch (coverage/order/identity/kind/bits/value IDs)",
     )
     expected_ids = {value["value_id"] for value in values}
@@ -1162,14 +1343,17 @@ def check(ir: dict, source: Path, root: Path | None = None) -> dict:
     _require(not extra, f"unregistered extra value: {extra[0] if extra else ''}")
     _require(not missing, f"missing reconstructed value: {missing[0] if missing else ''}")
     _require(
-        document["values"] == values,
+        canonical_json(document["values"]) == canonical_json(values),
         "value/provenance reconstruction mismatch (producer/storage/byte lanes/edges)",
     )
 
     expected_source = _expected_source(capture, rows, stream, document)
     source_metadata = document["source"]
     for field, expected in expected_source.items():
-        _require(source_metadata.get(field) == expected, f"source metadata mismatch: {field}")
+        _require(
+            canonical_json(source_metadata.get(field)) == canonical_json(expected),
+            f"source metadata mismatch: {field}",
+        )
     diagnostic = _mapping(source_metadata.get("diagnostic"), "source diagnostic object")
     _require(
         set(diagnostic) == {"source_path", "runtime_addresses_excluded_from_normalization"},

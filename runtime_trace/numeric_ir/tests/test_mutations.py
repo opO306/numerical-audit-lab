@@ -203,22 +203,24 @@ def test_provenance_cycle_has_dedicated_refusal(attempt05, repo_root):
 def test_unregistered_extra_value_is_rejected(attempt05, repo_root):
     candidate = translate(attempt05, root=repo_root)
     attacked = copy.deepcopy(candidate)
+    module_sha256 = attacked["source"]["module_sha256s"][0]
     attacked["values"].append(
         {
             "value_id": "v:rogue:root",
-            "producer_kind": "LOAD_BITS",
+            "producer_kind": "CONST_BITS",
             "raw_bits": "0x0000000000000000",
             "width": 8,
             "producer": {
-                "role": "boundary",
+                "role": "constant_read",
                 "phase": "init",
-                "boundary": "rogue",
-                "trace_sequence": None,
-                "operand_index": None,
+                "trace_sequence": 999,
+                "operand_index": 0,
+                "module_sha256": module_sha256,
+                "file_offset": 0,
             },
             "storage": {
-                "space": "register",
-                "name": "v31",
+                "space": "elf",
+                "name": module_sha256,
                 "byte_offset": 0,
                 "width": 8,
             },
@@ -252,4 +254,118 @@ def test_duplicate_producer_identity_is_rejected(attempt05, repo_root):
     _repair_normalized_hash(attacked)
 
     with pytest.raises(IRCheckError, match="duplicate producer identity"):
+        check(attacked, attempt05, root=repo_root)
+
+
+def test_rehashed_bool_substitutions_from_review_are_rejected(
+    attempt05, repo_root
+):
+    candidate = translate(attempt05, root=repo_root)
+    attacked = copy.deepcopy(candidate)
+    attacked["operations"][0]["ir_sequence"] = False
+    _value(attacked, "v:r1:copy")["producer"]["operand_index"] = True
+    attacked["source"]["regions"][0]["start_seq"] = False
+    _repair_normalized_hash(attacked)
+
+    with pytest.raises(IRCheckError, match="integer|sequence|operand"):
+        check(attacked, attempt05, root=repo_root)
+
+
+def _float_operation_sequence(ir: dict) -> None:
+    ir["operations"][0]["trace_sequence"] = 104.0
+
+
+def _float_operation_mxcsr(ir: dict) -> None:
+    ir["operations"][0]["mxcsr"] = 8096.0
+
+
+def _bool_operation_step(ir: dict) -> None:
+    ir["operations"][0]["step"] = False
+
+
+def _float_constant_file_offset(ir: dict) -> None:
+    _value(ir, "v:r139:o0:const")["producer"]["file_offset"] = 242528.0
+
+
+def _bool_producer_operand_index(ir: dict) -> None:
+    _value(ir, "v:r1:copy")["producer"]["operand_index"] = True
+
+
+def _float_producer_trace_sequence(ir: dict) -> None:
+    _value(ir, "v:r1:copy")["producer"]["trace_sequence"] = 1.0
+
+
+def _float_slice_trace_sequence(ir: dict) -> None:
+    _value(ir, "v:r104:arithmetic-source-read")["source_slices"][0][
+        "trace_sequence"
+    ] = 104.0
+
+
+def _bool_slice_operand_index(ir: dict) -> None:
+    _value(ir, "v:r104:arithmetic-source-read")["source_slices"][0][
+        "source_operand_index"
+    ] = False
+
+
+def _bool_boundary_producer_nullable_trace(ir: dict) -> None:
+    _value(ir, "v:boundary:init:q")["producer"]["trace_sequence"] = False
+
+
+def _bool_boundary_slice_nullable_trace(ir: dict) -> None:
+    _value(ir, "v:boundary:step:q")["source_slices"][0]["trace_sequence"] = False
+
+
+def _float_source_record_count(ir: dict) -> None:
+    ir["source"]["record_count"] = 446.0
+
+
+def _float_source_scalar_count(ir: dict) -> None:
+    ir["source"]["scalar_fp_count"] = 36.0
+
+
+def _bool_source_region_start(ir: dict) -> None:
+    ir["source"]["regions"][0]["start_seq"] = False
+
+
+def _float_source_region_end(ir: dict) -> None:
+    ir["source"]["regions"][0]["end_seq"] = 191.0
+
+
+def _float_source_region_mxcsr(ir: dict) -> None:
+    ir["source"]["regions"][0]["mxcsr"] = 8096.0
+
+
+TYPE_CONFUSION_ATTACKS = [
+    ("operation-trace-float", _float_operation_sequence),
+    ("operation-mxcsr-float", _float_operation_mxcsr),
+    ("operation-step-bool", _bool_operation_step),
+    ("constant-file-offset-float", _float_constant_file_offset),
+    ("producer-operand-bool", _bool_producer_operand_index),
+    ("producer-trace-float", _float_producer_trace_sequence),
+    ("slice-trace-float", _float_slice_trace_sequence),
+    ("slice-operand-bool", _bool_slice_operand_index),
+    ("boundary-producer-null-bool", _bool_boundary_producer_nullable_trace),
+    ("boundary-slice-null-bool", _bool_boundary_slice_nullable_trace),
+    ("source-record-count-float", _float_source_record_count),
+    ("source-scalar-count-float", _float_source_scalar_count),
+    ("source-region-start-bool", _bool_source_region_start),
+    ("source-region-end-float", _float_source_region_end),
+    ("source-region-mxcsr-float", _float_source_region_mxcsr),
+]
+
+
+@pytest.mark.parametrize(
+    ("attack_name", "mutate"),
+    TYPE_CONFUSION_ATTACKS,
+    ids=[name for name, _ in TYPE_CONFUSION_ATTACKS],
+)
+def test_rehashed_bool_and_integral_float_substitutions_are_rejected(
+    attempt05, repo_root, attack_name, mutate
+):
+    candidate = translate(attempt05, root=repo_root)
+    attacked = copy.deepcopy(candidate)
+    mutate(attacked)
+    _repair_normalized_hash(attacked)
+
+    with pytest.raises(IRCheckError):
         check(attacked, attempt05, root=repo_root)
