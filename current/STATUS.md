@@ -55,7 +55,19 @@ README와 기존 상태 문서도 봉인 목록에 포함되어 있으므로 수
 연속 물리 궤적, method error, gala 전체나 다른 입력·플랫폼·분기에 관한 인증으로 확대하지 않는다.
 
 다음 연구의 [Runtime Trace 첫 실험 계획](RUNTIME_TRACE_INITIAL_PLAN.md)은 작성 당시의 DESIGN ONLY 기록으로 보존한다.
-2026-10-02 별도 승인된 **regular 1-step GDB Runtime Trace prototype은 구현·실행했고, 이 실행의 correspondence 검사는 PASS**다.
-현재 구현·실행 명령·trace schema·실패 시도·검사 결과는 [Runtime Trace README](../runtime_trace/README.md)에 모았다.
-최종 trace는 `runtime_trace/artifacts/attempt-05/`이며 실제 instruction 446개, scalar FP 산술 36개를 기록했다.
-Numeric IR / V2 연결과 10 / 100-step 실행은 아직 구현·실행하지 않았다. 이번 구현 작업은 push하지 않는다.
+**Runtime Trace regular 1-step = CLOSED / PASS.**
+최종 [closure 독립 재감사 보고서](RUNTIME_TRACE_CLOSURE_REAUDIT_REPORT.md)와
+[원 evidence ZIP](runtime_trace_closure_reaudit_evidence.zip)을 원 bytes로 보존했다.
+대상 commit은 `736b55198947bd3c8cecc024a12af156459cfa02`, parent는
+`d408a07774bee44728d41d9a598b6d8142808075`다. A1/A2/A3/A15 PASS,
+Critical 0 / Major 0 / Minor 0 / closure 범위 UNRESOLVED 0이며 기존 Major/Minor는 CLOSED다.
+libc 22/22 및 전체 executable 446/446 binding, 절대경로 의존 제거, fresh artifact와 old/fresh 비교,
+관련 combined tests 316/316을 재감사자가 확인했다. 재감사 환경에서는 세 번째 live GDB acquisition을 실행하지 못했고,
+fresh acquisition은 보고서 R6의 artifact-review fallback에 따른 PASS다.
+
+PASS는 **frozen gala 1.12.0 / regular orbit / 1-step / machine execution ↔ runtime trace correspondence**에 한정한다.
+Numeric IR, V2 automatic connection, 10/100-step, 긴 궤적, 범용 x86 tracer 및 물리 정확성의 PASS가 아니다.
+기존 attempt-05, closure evidence, frozen binaries와 과거 감사 결과를 보존한다.
+첫 Numeric IR 입력은 `runtime_trace/artifacts/attempt-05/trace.jsonl`이며 fresh는 별도 교차검증 입력이다.
+이번 승인 범위는 **Runtime Trace → Numeric IR regular 1-step prototype**까지이며 V2 연결과 확대 실행은 하지 않는다.
+현재 구현·실행 명령·trace schema는 [Runtime Trace README](../runtime_trace/README.md)에 있다. Push하지 않는다.

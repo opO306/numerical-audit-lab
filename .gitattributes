@@ -75,3 +75,5 @@ audit/gate2c1/evidence/** -text
 runtime_trace/closure_evidence/** -text
 runtime_trace/frozen_binaries/** -text
 runtime_trace/artifacts/closure-fresh-01/** -text
+current/RUNTIME_TRACE_CLOSURE_REAUDIT_REPORT.md -text
+current/runtime_trace_closure_reaudit_evidence.zip -text
