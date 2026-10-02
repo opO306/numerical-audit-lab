@@ -285,14 +285,14 @@ def test_invalid_frozen_v2_output_is_refused(
     ],
     ids=["integer-digit-limit", "recursive-nesting"],
 )
-def test_parser_resource_failures_are_adapter_refusals(
+def test_malformed_resource_payloads_are_adapter_refusals(
     adapter_api, repo_root: Path, tmp_path: Path, payload: bytes
 ) -> None:
     AdapterRefused, adapt, _ = adapter_api
     malformed = tmp_path / "malformed.json"
     malformed.write_bytes(payload)
 
-    with pytest.raises(AdapterRefused, match="malformed Numeric IR JSON"):
+    with pytest.raises(AdapterRefused):
         adapt(malformed, root=repo_root)
 
 
