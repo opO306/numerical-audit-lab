@@ -1,0 +1,2219 @@
+{
+  "deterministic_digest": "aedc69466aabeca697ed177d5a84ee7ae88b5d6ffb91211abd9b2bd00c2650f3",
+  "deterministic": {
+    "plan": "docs/GATE2C1_PLAN.md",
+    "seal": {
+      "plan_seal_sha256": "d61dbaf1ab438ca2ac542e784edbb4b9656c4614cdf05116fdaedc56df783743",
+      "method_seal_sha256": "5be5e6f8541baf9c489a26a14007f77bca02da9f84019aca694ddc7f09a5974e",
+      "inputs": "UNCHANGED"
+    },
+    "N": 100000,
+    "scope": "FULL_FROZEN_FORWARD_EXPERIMENT",
+    "known_matching_replay": "post-diagnostic knowledge from Gate 2B; not blind or independent discovery",
+    "certification_scope": "roundoff layer of same exact discrete map only",
+    "independent_audit": "NOT_PERFORMED",
+    "seal_failures": [],
+    "orbits": {
+      "regular": {
+        "N": 100000,
+        "steps_measured": 100000,
+        "replay": {
+          "label": "KNOWN_PREREQUISITE_NOT_BLIND_SUCCESS",
+          "first_mismatch": null,
+          "steps_checked": 100000
+        },
+        "first_refused": null,
+        "certified_prefix": 100000,
+        "bin_bound_unavailable_from": null,
+        "lab_bound_unavailable_from": null,
+        "abort": null,
+        "cross": {
+          "counts": {
+            "PASS": 100000,
+            "FAIL": 0,
+            "REFUSED": 0
+          },
+          "first_refused": null,
+          "raw_enclosure_violation_count": 0,
+          "violation_examples": [],
+          "max_residual_over_bound_finite": 0.999999999999999
+        },
+        "exact_local_windows": {
+          "0": {
+            "steps": 8,
+            "scope": "LOCAL_RESTART_FROM_REPRESENTED_LATENT_STATE",
+            "violations": 0,
+            "details": [],
+            "max_actual_over_bound": 0.9999999999999994,
+            "artifact": {
+              "path": "exact/regular_0_8step.json",
+              "sha256": "28c2649a03c1639037c5c4dd08b7b4e5651fdd9c8799909e9de27507e39c2345"
+            }
+          },
+          "50000": {
+            "steps": 8,
+            "scope": "LOCAL_RESTART_FROM_REPRESENTED_LATENT_STATE",
+            "violations": 0,
+            "details": [],
+            "max_actual_over_bound": 0.9999999999999992,
+            "artifact": {
+              "path": "exact/regular_50000_8step.json",
+              "sha256": "89202798fa9c5a3b417356a9fd3041aeb7a6c9160bccd5f110aa34ddda7bcb47"
+            }
+          },
+          "99992": {
+            "steps": 8,
+            "scope": "LOCAL_RESTART_FROM_REPRESENTED_LATENT_STATE",
+            "violations": 0,
+            "details": [],
+            "max_actual_over_bound": 0.9999999999999993,
+            "artifact": {
+              "path": "exact/regular_99992_8step.json",
+              "sha256": "e7ffa0b8d9cd67c9fad37a8ee8b0ce2acf4138e5305dd55c1c3493f1640f10d4"
+            }
+          }
+        },
+        "marks": [
+          {
+            "step": 10,
+            "external_bound": [
+              1.4971845784478897e-17,
+              1.0264543758853003e-17,
+              5.551691831387405e-17,
+              3.418732764457449e-17
+            ],
+            "lab_bound": [
+              3.4645362148299076e-17,
+              1.5927870867780346e-17,
+              1.517843494754205e-16,
+              6.805031930259798e-17
+            ],
+            "external_status": "PASS",
+            "external_reason": "finite bound smaller than represented state scale",
+            "cross": {
+              "verdict": "PASS",
+              "reason": "residual contained in exact sum bound",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": [
+                "16101704554914525/324518553658426726783156020576256",
+                "16999849022913751/649037107316853453566312041152512",
+                "16818276898635017/81129638414606681695789005144064",
+                "16589006658368639/162259276829213363391578010288128"
+              ],
+              "max_residual": 2.7755575615628914e-17,
+              "max_sum_bound": 2.0730126778929453e-16,
+              "max_residual_over_bound": 0.13389004279433678
+            }
+          },
+          {
+            "step": 100,
+            "external_bound": [
+              1.3090287918611837e-15,
+              7.852487248581629e-16,
+              9.262664902511128e-16,
+              8.014725603525854e-16
+            ],
+            "lab_bound": [
+              1.9697434941722002e-15,
+              1.1741275613994316e-15,
+              1.4213057005776686e-15,
+              1.1901315079547383e-15
+            ],
+            "external_status": "PASS",
+            "external_reason": "finite bound smaller than represented state scale",
+            "cross": {
+              "verdict": "PASS",
+              "reason": "residual contained in exact sum bound",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": [
+                "4156337656401903/1267650600228229401496703205376",
+                "9935218101389595/5070602400912917605986812821504",
+                "11903605187132817/5070602400912917605986812821504",
+                "5049316185213525/2535301200456458802993406410752"
+              ],
+              "max_residual": 1.942890293094024e-16,
+              "max_sum_bound": 3.278772286033384e-15,
+              "max_residual_over_bound": 0.05925664009575082
+            }
+          },
+          {
+            "step": 1000,
+            "external_bound": [
+              6.663514800922973e-14,
+              2.7766816436895593e-14,
+              5.429167641249461e-14,
+              2.1389230045182113e-14
+            ],
+            "lab_bound": [
+              9.8020218258065e-14,
+              4.141871008589487e-14,
+              7.998823378258916e-14,
+              3.192371133690585e-14
+            ],
+            "external_status": "PASS",
+            "external_reason": "finite bound smaller than represented state scale",
+            "cross": {
+              "verdict": "PASS",
+              "reason": "residual contained in exact sum bound",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": [
+                "13045342117470945/79228162514264337593543950336",
+                "21925768555930353/316912650057057350374175801344",
+                "5319375273668459/39614081257132168796771975168",
+                "8447772767867027/158456325028528675187087900672"
+              ],
+              "max_residual": 6.106226635438361e-16,
+              "max_sum_bound": 1.6465536626729472e-13,
+              "max_residual_over_bound": 0.004914406500606057
+            }
+          },
+          {
+            "step": 10000,
+            "external_bound": [
+              3.3305196880018614e-11,
+              2.2416398594021995e-11,
+              6.311903631777684e-12,
+              7.920058395304031e-12
+            ],
+            "lab_bound": [
+              4.878180691284061e-11,
+              3.284679872486589e-11,
+              9.226907420915078e-12,
+              1.1583458486969096e-11
+            ],
+            "external_status": "PASS",
+            "external_reason": "finite bound smaller than represented state scale",
+            "cross": {
+              "verdict": "PASS",
+              "reason": "residual contained in exact sum bound",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": [
+                "12702348587518913/154742504910672534362390528",
+                "17103131164994947/309485009821345068724781056",
+                "19236116365018579/1237940039285380274899124224",
+                "1509011528465267/77371252455336267181195264"
+              ],
+              "max_residual": 9.63812363252714e-15,
+              "max_sum_bound": 8.208700379285921e-11,
+              "max_residual_over_bound": 0.00011741351477327966
+            }
+          },
+          {
+            "step": 50000,
+            "external_bound": [
+              3.088799541267959e-09,
+              1.5321286377001257e-09,
+              2.056568504278362e-09,
+              1.3463062255017821e-09
+            ],
+            "lab_bound": [
+              4.5363207119302114e-09,
+              2.250436631961804e-09,
+              3.0209236129328227e-09,
+              1.9789599137158105e-09
+            ],
+            "external_status": "PASS",
+            "external_reason": "finite bound smaller than represented state scale",
+            "cross": {
+              "verdict": "PASS",
+              "reason": "residual contained in exact sum bound",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": [
+                "9218204751757707/1208925819614629174706176",
+                "18291363275487517/4835703278458516698824704",
+                "12276622638772701/2417851639229258349412352",
+                "16080000371161607/4835703278458516698824704"
+              ],
+              "max_residual": 5.523359547510154e-15,
+              "max_sum_bound": 7.625120253198171e-09,
+              "max_residual_over_bound": 1.0878125302819499e-06
+            }
+          },
+          {
+            "step": 100000,
+            "external_bound": [
+              1.3027421468136101e-08,
+              1.0428994502764853e-08,
+              3.734460733781927e-08,
+              1.721273546378657e-08
+            ],
+            "lab_bound": [
+              1.9222900496761766e-08,
+              1.5417334467663668e-08,
+              5.505880158768243e-08,
+              2.538680535816424e-08
+            ],
+            "external_status": "PASS",
+            "external_reason": "finite bound smaller than represented state scale",
+            "cross": {
+              "verdict": "PASS",
+              "reason": "residual contained in exact sum bound",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": [
+                "4873530864281229/151115727451828646838272",
+                "15623147217302317/604462909807314587353088",
+                "13963608358805985/151115727451828646838272",
+                "6437460600422967/151115727451828646838272"
+              ],
+              "max_residual": 5.981326545168031e-15,
+              "max_sum_bound": 9.240340892550169e-08,
+              "max_residual_over_bound": 1.9651805652831476e-07
+            }
+          }
+        ],
+        "segments": [
+          {
+            "path": "segments/regular/001000.json",
+            "sha256": "2c1424decc89ff0453a3ef3a2df3b382912face535a95cc75e42aa15af393bab",
+            "coverage": [
+              1,
+              1000
+            ]
+          },
+          {
+            "path": "segments/regular/002000.json",
+            "sha256": "7a90e0509e0cf2142d068548dc981522619f1f5f6b55d5e6399401d0b36f93fe",
+            "coverage": [
+              1001,
+              2000
+            ]
+          },
+          {
+            "path": "segments/regular/003000.json",
+            "sha256": "0ee4b708bed94c7184126f8a0881bba5e7b32084c1a790744be2181c83cd9802",
+            "coverage": [
+              2001,
+              3000
+            ]
+          },
+          {
+            "path": "segments/regular/004000.json",
+            "sha256": "5e47f1d57054efac86a6f3b7c71d51c6b0344150b12a6e728f2ade05353de83b",
+            "coverage": [
+              3001,
+              4000
+            ]
+          },
+          {
+            "path": "segments/regular/005000.json",
+            "sha256": "8606392c656e5cfd1c717c89b6723bd177535f82e9641aec36c66575100d4f1d",
+            "coverage": [
+              4001,
+              5000
+            ]
+          },
+          {
+            "path": "segments/regular/006000.json",
+            "sha256": "309023c278f6292e8b1f9a1f13e2fe164abfdc90bfde848829dda7eeafa7632d",
+            "coverage": [
+              5001,
+              6000
+            ]
+          },
+          {
+            "path": "segments/regular/007000.json",
+            "sha256": "b8d6d18923de81f8773f33ce19247379b9bb2b3dd2c13c9848a4d8caeb8512ef",
+            "coverage": [
+              6001,
+              7000
+            ]
+          },
+          {
+            "path": "segments/regular/008000.json",
+            "sha256": "da6d787707aa3d22bded851322932c9de039222b70b28524cef8fb9820fe6632",
+            "coverage": [
+              7001,
+              8000
+            ]
+          },
+          {
+            "path": "segments/regular/009000.json",
+            "sha256": "f54ee8e5a721d61c02f3fa3ea27654b676ddd78be5bdd8b0a137c32dbf28f3cb",
+            "coverage": [
+              8001,
+              9000
+            ]
+          },
+          {
+            "path": "segments/regular/010000.json",
+            "sha256": "a3b55f62fbd97a06b9f201d0738a5f4317efae9727157b0f6211b8d7bebdfa58",
+            "coverage": [
+              9001,
+              10000
+            ]
+          },
+          {
+            "path": "segments/regular/011000.json",
+            "sha256": "47e67d5aff26ddfbdb5d1f04545d7d6770eb034d1ba3dc0383507bb8da7882b7",
+            "coverage": [
+              10001,
+              11000
+            ]
+          },
+          {
+            "path": "segments/regular/012000.json",
+            "sha256": "97f44f07a07f268b7d26f61abc8e717e26b1ddc4374b3e21dc77a1c44faa68e1",
+            "coverage": [
+              11001,
+              12000
+            ]
+          },
+          {
+            "path": "segments/regular/013000.json",
+            "sha256": "fba0bad9128c1197cd44a4500ff05af5aea656c7ff34b48416f65bcbaecb0665",
+            "coverage": [
+              12001,
+              13000
+            ]
+          },
+          {
+            "path": "segments/regular/014000.json",
+            "sha256": "2c9a6702f97478820f9c2afef54da83e4664cd8ad6b574da069b2b35f05c53ab",
+            "coverage": [
+              13001,
+              14000
+            ]
+          },
+          {
+            "path": "segments/regular/015000.json",
+            "sha256": "020c3fae103288a20d3d4fbec58948ecd3d43b8d36a146680f86c6d8a87815f6",
+            "coverage": [
+              14001,
+              15000
+            ]
+          },
+          {
+            "path": "segments/regular/016000.json",
+            "sha256": "6d881976b703fa6f8908682e55606c72cff0f2b51db33c4c4f9092a381820fe5",
+            "coverage": [
+              15001,
+              16000
+            ]
+          },
+          {
+            "path": "segments/regular/017000.json",
+            "sha256": "5738e294b127796a123f3e172032027ee0b0c1ddf08ec873a47c517515d9e238",
+            "coverage": [
+              16001,
+              17000
+            ]
+          },
+          {
+            "path": "segments/regular/018000.json",
+            "sha256": "c1c922eff1ce73d10f39febf2be92033456d7929d662d727c167aac7598ed88a",
+            "coverage": [
+              17001,
+              18000
+            ]
+          },
+          {
+            "path": "segments/regular/019000.json",
+            "sha256": "891dc07ab3a873529906ee71fba7cdd53215d62e03ed0f17f98d6b64c80c95c9",
+            "coverage": [
+              18001,
+              19000
+            ]
+          },
+          {
+            "path": "segments/regular/020000.json",
+            "sha256": "b4e3994fd33cfe4bf67ec728e9df194c0d87a46e27451480c3d4d33379414d24",
+            "coverage": [
+              19001,
+              20000
+            ]
+          },
+          {
+            "path": "segments/regular/021000.json",
+            "sha256": "8bd24a13b281cd00c9b29cb033a46422decb67a1f2e76a04efe5ce1d753e5dab",
+            "coverage": [
+              20001,
+              21000
+            ]
+          },
+          {
+            "path": "segments/regular/022000.json",
+            "sha256": "8d333fe6e871e8186511e38349c85e6d569b8ff9a2b761103f64bcdef21b1ceb",
+            "coverage": [
+              21001,
+              22000
+            ]
+          },
+          {
+            "path": "segments/regular/023000.json",
+            "sha256": "909dee80514ce824c3ae7a8581f4b521d641b669ac554f922a67517324a95a72",
+            "coverage": [
+              22001,
+              23000
+            ]
+          },
+          {
+            "path": "segments/regular/024000.json",
+            "sha256": "836e40493369525ec8fc84f35934b727545b04a4f393591f4bb6a0986d1c8f62",
+            "coverage": [
+              23001,
+              24000
+            ]
+          },
+          {
+            "path": "segments/regular/025000.json",
+            "sha256": "6711c5c93569203aea27cec7f10f49bcce6ae66adf9806a2f3a1cd832126f233",
+            "coverage": [
+              24001,
+              25000
+            ]
+          },
+          {
+            "path": "segments/regular/026000.json",
+            "sha256": "f59b19b78efcc8b6c41061ef52535e018e3ee961efaff56af079d1dfb10085ff",
+            "coverage": [
+              25001,
+              26000
+            ]
+          },
+          {
+            "path": "segments/regular/027000.json",
+            "sha256": "b86410b6901af2f96f74a361a6353ccc63e55d7ef16f4e80b944005adb6fd2ed",
+            "coverage": [
+              26001,
+              27000
+            ]
+          },
+          {
+            "path": "segments/regular/028000.json",
+            "sha256": "4f06d67ddce43a4be2eca48c3bb3951ca93cfefeb75e90fedbe1f28149902e05",
+            "coverage": [
+              27001,
+              28000
+            ]
+          },
+          {
+            "path": "segments/regular/029000.json",
+            "sha256": "abe344940164a65dbce426b8570d60c7b04753493571067860746865faf9b400",
+            "coverage": [
+              28001,
+              29000
+            ]
+          },
+          {
+            "path": "segments/regular/030000.json",
+            "sha256": "3b1f150269ea906b6f61953fe11da0e9035dc99dc1a28ba1a6b379d531d970de",
+            "coverage": [
+              29001,
+              30000
+            ]
+          },
+          {
+            "path": "segments/regular/031000.json",
+            "sha256": "44b515dace2af869e063ae6662c7bf0855604c8487c4fd9f11e0fa43ef5472c3",
+            "coverage": [
+              30001,
+              31000
+            ]
+          },
+          {
+            "path": "segments/regular/032000.json",
+            "sha256": "889bfb55b9e6948318ac8dc6f66f689910c021dbe42edd67cecd17f95a5ed69b",
+            "coverage": [
+              31001,
+              32000
+            ]
+          },
+          {
+            "path": "segments/regular/033000.json",
+            "sha256": "e742dc9b6648725993ccd9fe2a0cc15c52ffb635db9d0f2bb17547ab3872b8b4",
+            "coverage": [
+              32001,
+              33000
+            ]
+          },
+          {
+            "path": "segments/regular/034000.json",
+            "sha256": "04dafe262f11a90836427a1dc1be42ef687b7b49d33034ad045ba70540f0665d",
+            "coverage": [
+              33001,
+              34000
+            ]
+          },
+          {
+            "path": "segments/regular/035000.json",
+            "sha256": "63145869c36d94ae83fffd94634603e65bd7ca03e589e71ad530afc28ed43550",
+            "coverage": [
+              34001,
+              35000
+            ]
+          },
+          {
+            "path": "segments/regular/036000.json",
+            "sha256": "aca809d484dbd14862bb08fd2c736c750ab8f432a8eca21453d070ab4c275d7e",
+            "coverage": [
+              35001,
+              36000
+            ]
+          },
+          {
+            "path": "segments/regular/037000.json",
+            "sha256": "b71a990ebb6858aca0200226172e3b921ffa0175d795207221bfcd456eb56860",
+            "coverage": [
+              36001,
+              37000
+            ]
+          },
+          {
+            "path": "segments/regular/038000.json",
+            "sha256": "054dd1522ad97b97c0d95cc974949d7593ae3857efa782120c3e83a4ad5ddd9d",
+            "coverage": [
+              37001,
+              38000
+            ]
+          },
+          {
+            "path": "segments/regular/039000.json",
+            "sha256": "bc9e62515c1742f6bed36e2c9d52c5978b9232f5aa293ed7e55df158ab771fb4",
+            "coverage": [
+              38001,
+              39000
+            ]
+          },
+          {
+            "path": "segments/regular/040000.json",
+            "sha256": "de5e256503c749060e7c2397994153fbb5353041556313a9300c6638fdc1a65a",
+            "coverage": [
+              39001,
+              40000
+            ]
+          },
+          {
+            "path": "segments/regular/041000.json",
+            "sha256": "cdbd2d59fbae4521bc6184bc3e351441f51b085119d1d38972839b73438277ed",
+            "coverage": [
+              40001,
+              41000
+            ]
+          },
+          {
+            "path": "segments/regular/042000.json",
+            "sha256": "291bf1de2964b916a5bbe9e07a9799c211b4c6accba4bb34578394fc99d37ad6",
+            "coverage": [
+              41001,
+              42000
+            ]
+          },
+          {
+            "path": "segments/regular/043000.json",
+            "sha256": "3aa35a068877aa3f1e1c06515a710e4adb695cb10f8862b5e6231cff1a6f1e78",
+            "coverage": [
+              42001,
+              43000
+            ]
+          },
+          {
+            "path": "segments/regular/044000.json",
+            "sha256": "8d8f6fc8e9e438ef0cb744b254fc5f135e907f39506fad47205f3ac302501260",
+            "coverage": [
+              43001,
+              44000
+            ]
+          },
+          {
+            "path": "segments/regular/045000.json",
+            "sha256": "59e59310a1e64fd842bbce8d37bda3b24260eacf90bbec6d30269b66193b785e",
+            "coverage": [
+              44001,
+              45000
+            ]
+          },
+          {
+            "path": "segments/regular/046000.json",
+            "sha256": "7531e518e52304c173c18a186a52a4b5dbc1c598f46a2f0c5ce0eda0317d1699",
+            "coverage": [
+              45001,
+              46000
+            ]
+          },
+          {
+            "path": "segments/regular/047000.json",
+            "sha256": "f7ca153110e4f70185e6a72c67cb03db0cd98e8d300638c8c3a2a8b6d546820e",
+            "coverage": [
+              46001,
+              47000
+            ]
+          },
+          {
+            "path": "segments/regular/048000.json",
+            "sha256": "5c9df5f182a5c48d5db741ab81eb9aa225f2278f8121b7beebab360b379b05f6",
+            "coverage": [
+              47001,
+              48000
+            ]
+          },
+          {
+            "path": "segments/regular/049000.json",
+            "sha256": "7b12d47637d59efbe7fd087fd796a7a60dc7a809ca0739cae50f08f914e2ce8c",
+            "coverage": [
+              48001,
+              49000
+            ]
+          },
+          {
+            "path": "segments/regular/050000.json",
+            "sha256": "3098d558cd7ccf5d5faade942049065f1f0c7f768cf9387b379b4a9f8e1922e0",
+            "coverage": [
+              49001,
+              50000
+            ]
+          },
+          {
+            "path": "segments/regular/051000.json",
+            "sha256": "b50afdb48e3e8c7c336f15720ad22f534c2b6d277bb0ad42539e962d762288ac",
+            "coverage": [
+              50001,
+              51000
+            ]
+          },
+          {
+            "path": "segments/regular/052000.json",
+            "sha256": "21f069e1903f8f46da875767374f35773a4b4b0b8a96bc95f1e0aaa7d2025c1d",
+            "coverage": [
+              51001,
+              52000
+            ]
+          },
+          {
+            "path": "segments/regular/053000.json",
+            "sha256": "56342c3837d9c491d7b3998bcd2a3dcfac6809fa2a2c83c275e3337394d4d8d3",
+            "coverage": [
+              52001,
+              53000
+            ]
+          },
+          {
+            "path": "segments/regular/054000.json",
+            "sha256": "57afca8b20eff397127b0eb1427cdb383aaf4ef829596c4c0ee2af483f41fce0",
+            "coverage": [
+              53001,
+              54000
+            ]
+          },
+          {
+            "path": "segments/regular/055000.json",
+            "sha256": "35735aa30a5c2e958c5f570e865fc82dab4860fe7d32ed835eb9ec8f9a184add",
+            "coverage": [
+              54001,
+              55000
+            ]
+          },
+          {
+            "path": "segments/regular/056000.json",
+            "sha256": "e4c797f5493e6ec762f1c531a3f7da4a68d9ef5c61e2894918717a3387b9fbd6",
+            "coverage": [
+              55001,
+              56000
+            ]
+          },
+          {
+            "path": "segments/regular/057000.json",
+            "sha256": "9565981e0e92747a886d6f66ddf89702c038bbee36e1d445489fbd47602148b3",
+            "coverage": [
+              56001,
+              57000
+            ]
+          },
+          {
+            "path": "segments/regular/058000.json",
+            "sha256": "8ad5b357302565ca2c5d109cbc49970208e0f5b39c4dcb1360ba87e9fef060b1",
+            "coverage": [
+              57001,
+              58000
+            ]
+          },
+          {
+            "path": "segments/regular/059000.json",
+            "sha256": "2da4eac6f9a5f143617904786601000e47e4f3c3202e87c888c11bccd6d183fe",
+            "coverage": [
+              58001,
+              59000
+            ]
+          },
+          {
+            "path": "segments/regular/060000.json",
+            "sha256": "1c9368bb2f1a1174bc2e19af606bb572ffcc613b8fc511979b98590dd0df4a9c",
+            "coverage": [
+              59001,
+              60000
+            ]
+          },
+          {
+            "path": "segments/regular/061000.json",
+            "sha256": "7c50244995eead018bedbf8430ddcaa3c947f837162ed19a7eaed7769a1bb3fa",
+            "coverage": [
+              60001,
+              61000
+            ]
+          },
+          {
+            "path": "segments/regular/062000.json",
+            "sha256": "f5f327df6bcbbd48b265417848be9618a9939a1a117e8a87bb809b0b709e16fd",
+            "coverage": [
+              61001,
+              62000
+            ]
+          },
+          {
+            "path": "segments/regular/063000.json",
+            "sha256": "f8d5e9e94e2d8ed305400d40819b570504403e500c16343176cef4cbe6fa2fdd",
+            "coverage": [
+              62001,
+              63000
+            ]
+          },
+          {
+            "path": "segments/regular/064000.json",
+            "sha256": "69066f010f8b3a918aa9ac317101655281491bb3449c92aeeb20f478fd0ee6e8",
+            "coverage": [
+              63001,
+              64000
+            ]
+          },
+          {
+            "path": "segments/regular/065000.json",
+            "sha256": "75fba6f59c44e18dca31e3ef19cedeba9b50f0d805bbae91f0e37b3ef72c26d6",
+            "coverage": [
+              64001,
+              65000
+            ]
+          },
+          {
+            "path": "segments/regular/066000.json",
+            "sha256": "1ace4c664c4bca0d0bce942113831e9e8c4a6e61f3567f55d7262edbff815018",
+            "coverage": [
+              65001,
+              66000
+            ]
+          },
+          {
+            "path": "segments/regular/067000.json",
+            "sha256": "ad45f4a017f2eb80f102c36e1cc877fab162e067f3504e10cf77a7c8a48721cc",
+            "coverage": [
+              66001,
+              67000
+            ]
+          },
+          {
+            "path": "segments/regular/068000.json",
+            "sha256": "7efc577332696141b672a7ec6c138a1d0799406b99776ca399e434c035a3cf7e",
+            "coverage": [
+              67001,
+              68000
+            ]
+          },
+          {
+            "path": "segments/regular/069000.json",
+            "sha256": "ce76349f10b112529222108474dc07e68a4b042257f84942bb748e66b20facab",
+            "coverage": [
+              68001,
+              69000
+            ]
+          },
+          {
+            "path": "segments/regular/070000.json",
+            "sha256": "8d669e3074b1c29cc9967eb80b34874ac5e7e13078314d4decb2ddb587d797a5",
+            "coverage": [
+              69001,
+              70000
+            ]
+          },
+          {
+            "path": "segments/regular/071000.json",
+            "sha256": "028fe470ef108fe53ee0f5c80be9607409c359e11ec7315232068a3eca50ac02",
+            "coverage": [
+              70001,
+              71000
+            ]
+          },
+          {
+            "path": "segments/regular/072000.json",
+            "sha256": "c7115f2037d927baea49f7654274a846761dad7a3d2b86e7bf06dd429b310b52",
+            "coverage": [
+              71001,
+              72000
+            ]
+          },
+          {
+            "path": "segments/regular/073000.json",
+            "sha256": "3052239238d7e96e8809aa16750be38b48e6d472a12565ed469cdbdf149ed074",
+            "coverage": [
+              72001,
+              73000
+            ]
+          },
+          {
+            "path": "segments/regular/074000.json",
+            "sha256": "459d4d45a43ebb26e62b8539911f6068147e932aabb3a08105ba544d74d89b55",
+            "coverage": [
+              73001,
+              74000
+            ]
+          },
+          {
+            "path": "segments/regular/075000.json",
+            "sha256": "7c2acc0405f86ba043e87e97b8d88d1f1d3b5f141d7e9f1fce4a9393a7e8306e",
+            "coverage": [
+              74001,
+              75000
+            ]
+          },
+          {
+            "path": "segments/regular/076000.json",
+            "sha256": "9060a6e1b40a30da6658e2f6b44c4057a3d54048e484d975c9cf1a3ba0389324",
+            "coverage": [
+              75001,
+              76000
+            ]
+          },
+          {
+            "path": "segments/regular/077000.json",
+            "sha256": "5700aff66dabeb33e5737075f754f6f8e30410c981097d346516122dc735cfba",
+            "coverage": [
+              76001,
+              77000
+            ]
+          },
+          {
+            "path": "segments/regular/078000.json",
+            "sha256": "97b234550c793e31d7ffdf4085c9e6213fa0078fa9c476bfff19c31614547492",
+            "coverage": [
+              77001,
+              78000
+            ]
+          },
+          {
+            "path": "segments/regular/079000.json",
+            "sha256": "73b6e3212a30d304418f5c42465cfd8c2ca653d190ab645fcf2158f082de4e3e",
+            "coverage": [
+              78001,
+              79000
+            ]
+          },
+          {
+            "path": "segments/regular/080000.json",
+            "sha256": "24039b5b03e0743eae64ce3a0bfa326b5e93e583a1e096d04fca1ac703180ffe",
+            "coverage": [
+              79001,
+              80000
+            ]
+          },
+          {
+            "path": "segments/regular/081000.json",
+            "sha256": "9c5fb021e7e3a1c37241798eea74ae56691ff9e1b0795754efcadf0165095fc9",
+            "coverage": [
+              80001,
+              81000
+            ]
+          },
+          {
+            "path": "segments/regular/082000.json",
+            "sha256": "861bf2ee5ea9987d7e6660761e947cae9622317f32048e07dfae02106a0da6df",
+            "coverage": [
+              81001,
+              82000
+            ]
+          },
+          {
+            "path": "segments/regular/083000.json",
+            "sha256": "1be03fca2d1c929400a04943588cf0377ced29533d90a00d3f42601aaefa802c",
+            "coverage": [
+              82001,
+              83000
+            ]
+          },
+          {
+            "path": "segments/regular/084000.json",
+            "sha256": "6af01c3977df4dc2384f7c60ec7d7e87df751f0ba32fdedd7f3c7b4b3aabbe5f",
+            "coverage": [
+              83001,
+              84000
+            ]
+          },
+          {
+            "path": "segments/regular/085000.json",
+            "sha256": "d52ef55573a38da6b684cd98a550aac033ef80f4d006f3e349719809fa9daa28",
+            "coverage": [
+              84001,
+              85000
+            ]
+          },
+          {
+            "path": "segments/regular/086000.json",
+            "sha256": "d13a9511577031e76566c070fdb1247bb2da1a4eb83ae6e2eaba0d7c3714db64",
+            "coverage": [
+              85001,
+              86000
+            ]
+          },
+          {
+            "path": "segments/regular/087000.json",
+            "sha256": "638ca13f23fcdcbbb826262ed5a82a17482720e723374664b6f7380d51098841",
+            "coverage": [
+              86001,
+              87000
+            ]
+          },
+          {
+            "path": "segments/regular/088000.json",
+            "sha256": "84bdb9ec9ca6cdcf147ab026de8294a7c36c93bee517ed3120b39e5940526be6",
+            "coverage": [
+              87001,
+              88000
+            ]
+          },
+          {
+            "path": "segments/regular/089000.json",
+            "sha256": "0c31de9fe7fefee8d45b0349132e6d8c4a5bc27df2af23b48bed0e412ee22876",
+            "coverage": [
+              88001,
+              89000
+            ]
+          },
+          {
+            "path": "segments/regular/090000.json",
+            "sha256": "e413d0fcc28241cba2f43124669988e120ec6e63eda3ca5fc0b2af972c08e76f",
+            "coverage": [
+              89001,
+              90000
+            ]
+          },
+          {
+            "path": "segments/regular/091000.json",
+            "sha256": "a868dd8c3d2e1940581445040d22f24c73106612855ccb2f52104fa85252d8d6",
+            "coverage": [
+              90001,
+              91000
+            ]
+          },
+          {
+            "path": "segments/regular/092000.json",
+            "sha256": "d49750971cb09d223a99229d3c4bd846171cf2a18e7d4d4e0c05f65fcd3cb344",
+            "coverage": [
+              91001,
+              92000
+            ]
+          },
+          {
+            "path": "segments/regular/093000.json",
+            "sha256": "d0231f0b0ce32f8f5d7e12cdd6281da63b2ff29c68beb75cfe45048fb3b4c8ff",
+            "coverage": [
+              92001,
+              93000
+            ]
+          },
+          {
+            "path": "segments/regular/094000.json",
+            "sha256": "ffc9f67922956d030ddc00a0351f7367cf975c1087ec85ea777c28740cc2a46d",
+            "coverage": [
+              93001,
+              94000
+            ]
+          },
+          {
+            "path": "segments/regular/095000.json",
+            "sha256": "876b5da126b0ebf398533ade3fd7c61d9eee90acaf9d5e6c2e694d102adff148",
+            "coverage": [
+              94001,
+              95000
+            ]
+          },
+          {
+            "path": "segments/regular/096000.json",
+            "sha256": "ff00c628f5710d7c19808bfc40fa2474822352313242c9ab77137db26067022b",
+            "coverage": [
+              95001,
+              96000
+            ]
+          },
+          {
+            "path": "segments/regular/097000.json",
+            "sha256": "24fcd901beba5421beb436d9edab2d587c2ccd3e023fe1378570acf4e9618fc4",
+            "coverage": [
+              96001,
+              97000
+            ]
+          },
+          {
+            "path": "segments/regular/098000.json",
+            "sha256": "83a18b63deab6c9700f78305e4fc9c3de94eb20e3a7e3b2ae054fa70073f02c5",
+            "coverage": [
+              97001,
+              98000
+            ]
+          },
+          {
+            "path": "segments/regular/099000.json",
+            "sha256": "be20c88d173d6210f0641bbb956e83b84949fe7f4749e5c8ea6d72e845d3c5ea",
+            "coverage": [
+              98001,
+              99000
+            ]
+          },
+          {
+            "path": "segments/regular/100000.json",
+            "sha256": "93d6e3ec095aeb4393a03f77e4aeda0111daad6334a162c8bebdb91f6ecf1e7e",
+            "coverage": [
+              99001,
+              100000
+            ]
+          }
+        ],
+        "refused_ranges": []
+      },
+      "chaotic": {
+        "N": 100000,
+        "steps_measured": 100000,
+        "replay": {
+          "label": "KNOWN_PREREQUISITE_NOT_BLIND_SUCCESS",
+          "first_mismatch": null,
+          "steps_checked": 100000
+        },
+        "first_refused": {
+          "step": 13907,
+          "reason": "bound >= represented state scale"
+        },
+        "certified_prefix": 13906,
+        "bin_bound_unavailable_from": {
+          "step": 13953,
+          "reason": "ArithmeticError: nonfinite latent bound"
+        },
+        "lab_bound_unavailable_from": {
+          "step": 13735,
+          "reason": "nonfinite Lab bound"
+        },
+        "abort": null,
+        "cross": {
+          "counts": {
+            "PASS": 13662,
+            "FAIL": 0,
+            "REFUSED": 86338
+          },
+          "first_refused": {
+            "step": 13663,
+            "reason": "sum bound >= represented state scale"
+          },
+          "raw_enclosure_violation_count": 0,
+          "violation_examples": [],
+          "max_residual_over_bound_finite": 0.7229745961387141
+        },
+        "exact_local_windows": {
+          "0": {
+            "steps": 8,
+            "scope": "LOCAL_RESTART_FROM_REPRESENTED_LATENT_STATE",
+            "violations": 0,
+            "details": [],
+            "max_actual_over_bound": 0.9999999999999993,
+            "artifact": {
+              "path": "exact/chaotic_0_8step.json",
+              "sha256": "787cdcef1bc9665f6b3c65719552dc428ca559ec9b90e7476d6a3568e042d1c0"
+            }
+          },
+          "50000": {
+            "steps": 8,
+            "scope": "LOCAL_RESTART_FROM_REPRESENTED_LATENT_STATE",
+            "violations": 0,
+            "details": [],
+            "max_actual_over_bound": 0.999999999999999,
+            "artifact": {
+              "path": "exact/chaotic_50000_8step.json",
+              "sha256": "27df1201a0888c8c6a1355c9a8044313be2f03ff4ac90463b611793c0fc1d9bc"
+            }
+          },
+          "99992": {
+            "steps": 8,
+            "scope": "LOCAL_RESTART_FROM_REPRESENTED_LATENT_STATE",
+            "violations": 0,
+            "details": [],
+            "max_actual_over_bound": 0.9999999999999992,
+            "artifact": {
+              "path": "exact/chaotic_99992_8step.json",
+              "sha256": "c38765b6e04077324fb5680fe8b1c9854ca33e2e22929424726f117da01aeed9"
+            }
+          }
+        },
+        "marks": [
+          {
+            "step": 10,
+            "external_bound": [
+              3.6522434947104244e-17,
+              1.678934008777107e-17,
+              1.2449518790483903e-16,
+              6.527199294226437e-17
+            ],
+            "lab_bound": [
+              4.8375765961364516e-17,
+              2.8588470341482495e-17,
+              2.3057045800911237e-16,
+              1.2994630257141686e-16
+            ],
+            "external_status": "PASS",
+            "external_reason": "finite bound smaller than represented state scale",
+            "cross": {
+              "verdict": "PASS",
+              "reason": "residual contained in exact sum bound",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": [
+                "6887760341754703/81129638414606681695789005144064",
+                "14725941408687639/324518553658426726783156020576256",
+                "14403173733223823/40564819207303340847894502572032",
+                "1979748715867599/10141204801825835211973625643008"
+              ],
+              "max_residual": 1.6653345369377348e-16,
+              "max_sum_bound": 3.5506564591395143e-16,
+              "max_residual_over_bound": 0.46902158969818253
+            }
+          },
+          {
+            "step": 100,
+            "external_bound": [
+              3.4188172266612234e-15,
+              2.2638755952817803e-15,
+              2.4375349219430708e-15,
+              2.4378651275551966e-15
+            ],
+            "lab_bound": [
+              4.783367053100424e-15,
+              3.0325072459202052e-15,
+              3.3987294817728572e-15,
+              3.3966192572432294e-15
+            ],
+            "external_status": "PASS",
+            "external_reason": "finite bound smaller than represented state scale",
+            "cross": {
+              "verdict": "PASS",
+              "reason": "residual contained in exact sum bound",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": [
+                "20795007650844799/2535301200456458802993406410752",
+                "1639151095627/309485009821345068724781056",
+                "14796688148922291/2535301200456458802993406410752",
+                "14792175264823913/2535301200456458802993406410752"
+              ],
+              "max_residual": 3.885780586188048e-16,
+              "max_sum_bound": 8.202184279761648e-15,
+              "max_residual_over_bound": 0.06660023971119594
+            }
+          },
+          {
+            "step": 1000,
+            "external_bound": [
+              1.0856960404128691e-12,
+              7.848524728231806e-13,
+              7.117802981148248e-13,
+              3.5533280740315754e-13
+            ],
+            "lab_bound": [
+              1.5756005584881607e-12,
+              1.1365620097213122e-12,
+              1.0196119519921468e-12,
+              5.030153665861514e-13
+            ],
+            "external_status": "PASS",
+            "external_reason": "finite bound smaller than represented state scale",
+            "cross": {
+              "verdict": "PASS",
+              "reason": "residual contained in exact sum bound",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": [
+                "13178102464774359/4951760157141521099596496896",
+                "594648980001157/309485009821345068724781056",
+                "17146878320926619/9903520314283042199192993792",
+                "17001337155661753/19807040628566084398385987584"
+              ],
+              "max_residual": 1.9595436384634013e-14,
+              "max_sum_bound": 2.66129659890103e-12,
+              "max_residual_over_bound": 0.009409785852528201
+            }
+          },
+          {
+            "step": 10000,
+            "external_bound": [
+              6.05895227600835e-06,
+              1.2232003538209148e-06,
+              1.0971692511869278e-05,
+              8.781911067008195e-06
+            ],
+            "lab_bound": [
+              8.904304176581644e-06,
+              1.800607476456093e-06,
+              1.6124567867569526e-05,
+              1.290687731839403e-05
+            ],
+            "external_status": "PASS",
+            "external_reason": "finite bound smaller than represented state scale",
+            "cross": {
+              "verdict": "PASS",
+              "reason": "residual contained in exact sum bound",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": [
+                "4416373796643371/295147905179352825856",
+                "7139764374169463/2361183241434822606848",
+                "7997404489185659/295147905179352825856",
+                "6401400457829745/295147905179352825856"
+              ],
+              "max_residual": 9.58917032167772e-08,
+              "max_sum_bound": 2.7096260379438804e-05,
+              "max_residual_over_bound": 0.00353925716880758
+            }
+          },
+          {
+            "step": 13663,
+            "external_bound": [
+              0.06106871346614534,
+              0.027887765002878557,
+              0.04764670034745616,
+              0.03827755751897529
+            ],
+            "lab_bound": [
+              0.339038516136996,
+              0.2585220574313828,
+              0.321930451901574,
+              0.27222565445903385
+            ],
+            "external_status": "PASS",
+            "external_reason": "finite bound smaller than represented state scale",
+            "cross": {
+              "verdict": "REFUSED",
+              "reason": "sum bound >= represented state scale",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": [
+                "7207691080595795/18014398509481984",
+                "82552010853772117/288230376151711744",
+                "6657710100613525/18014398509481984",
+                "44748228792368131/144115188075855872"
+              ],
+              "max_residual": 2.0859847749743476e-05,
+              "max_sum_bound": 0.4001072296031413,
+              "max_residual_over_bound": 5.213564316354383e-05
+            }
+          },
+          {
+            "step": 13735,
+            "external_bound": [
+              0.04817354712822329,
+              0.08826788174188185,
+              0.08487152306872701,
+              0.06499603615043228
+            ],
+            "lab_bound": null,
+            "external_status": "PASS",
+            "external_reason": "finite bound smaller than represented state scale",
+            "cross": {
+              "verdict": "REFUSED",
+              "reason": "bound unavailable or nonfinite",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": null
+            }
+          },
+          {
+            "step": 13907,
+            "external_bound": [
+              0.5985504166814083,
+              0.6217598506909849,
+              0.6546082346006533,
+              0.6506052402839381
+            ],
+            "lab_bound": null,
+            "external_status": "REFUSED",
+            "external_reason": "bound >= represented state scale",
+            "cross": {
+              "verdict": "REFUSED",
+              "reason": "bound unavailable or nonfinite",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": null
+            }
+          },
+          {
+            "step": 13953,
+            "external_bound": null,
+            "lab_bound": null,
+            "external_status": "REFUSED",
+            "external_reason": "bound unavailable",
+            "cross": {
+              "verdict": "REFUSED",
+              "reason": "bound unavailable or nonfinite",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": null
+            }
+          },
+          {
+            "step": 50000,
+            "external_bound": null,
+            "lab_bound": null,
+            "external_status": "REFUSED",
+            "external_reason": "bound unavailable",
+            "cross": {
+              "verdict": "REFUSED",
+              "reason": "bound unavailable or nonfinite",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": null
+            }
+          },
+          {
+            "step": 100000,
+            "external_bound": null,
+            "lab_bound": null,
+            "external_status": "REFUSED",
+            "external_reason": "bound unavailable",
+            "cross": {
+              "verdict": "REFUSED",
+              "reason": "bound unavailable or nonfinite",
+              "raw_enclosure_violations": [],
+              "sum_bounds_q": null
+            }
+          }
+        ],
+        "segments": [
+          {
+            "path": "segments/chaotic/001000.json",
+            "sha256": "65f629c03269130af65fa1ea1d5eab3aaf859badea4301c00713674e1abf3717",
+            "coverage": [
+              1,
+              1000
+            ]
+          },
+          {
+            "path": "segments/chaotic/002000.json",
+            "sha256": "45e8737568c1e4eeb52e0ca38c036b152a815134af9ad762b45fd2b160147047",
+            "coverage": [
+              1001,
+              2000
+            ]
+          },
+          {
+            "path": "segments/chaotic/003000.json",
+            "sha256": "e9bae6e20a1cd7babb95972b8e81036b2e9b2d7b296fa13988d376cdf751d208",
+            "coverage": [
+              2001,
+              3000
+            ]
+          },
+          {
+            "path": "segments/chaotic/004000.json",
+            "sha256": "0a20da592cafe2ab6f3946f45a116cd2edf91febec8f6b754ac4c15d0402e2d2",
+            "coverage": [
+              3001,
+              4000
+            ]
+          },
+          {
+            "path": "segments/chaotic/005000.json",
+            "sha256": "79f311475e6c631d0fe251d7d83d57124b02c27086dcd77f14613bbf05f8ce98",
+            "coverage": [
+              4001,
+              5000
+            ]
+          },
+          {
+            "path": "segments/chaotic/006000.json",
+            "sha256": "52303ab23aed8c31154bf345949deef78366096279c5c511e1d14b636bb6a923",
+            "coverage": [
+              5001,
+              6000
+            ]
+          },
+          {
+            "path": "segments/chaotic/007000.json",
+            "sha256": "57448097f55c2f82b918540cf79e9649d7e476a66396cf5fad624f273268f783",
+            "coverage": [
+              6001,
+              7000
+            ]
+          },
+          {
+            "path": "segments/chaotic/008000.json",
+            "sha256": "c82d1514c84c083a1106af82adc415980809de724f5123efc7953a7fd1e475b2",
+            "coverage": [
+              7001,
+              8000
+            ]
+          },
+          {
+            "path": "segments/chaotic/009000.json",
+            "sha256": "fd31fce8be1814a069dc83551032559964d70c46a2c80e0a64591fc92cea034d",
+            "coverage": [
+              8001,
+              9000
+            ]
+          },
+          {
+            "path": "segments/chaotic/010000.json",
+            "sha256": "af3f921086d573aaf6fa61e50d712c6853d89ab7be557b1acb28bbfa72871b15",
+            "coverage": [
+              9001,
+              10000
+            ]
+          },
+          {
+            "path": "segments/chaotic/011000.json",
+            "sha256": "eeda3d6337e1c92b5e9b175f12141e759b263b20e705e1309e3bb4b8be7710a0",
+            "coverage": [
+              10001,
+              11000
+            ]
+          },
+          {
+            "path": "segments/chaotic/012000.json",
+            "sha256": "efe203129a75e44ce36a9c475fecbfa5d564f97d62181fc87b126341e16b7c71",
+            "coverage": [
+              11001,
+              12000
+            ]
+          },
+          {
+            "path": "segments/chaotic/013000.json",
+            "sha256": "420685f6aafe705c083f1ce946906675756e776687e461d22e6776bbe770f69e",
+            "coverage": [
+              12001,
+              13000
+            ]
+          },
+          {
+            "path": "segments/chaotic/014000.json",
+            "sha256": "ad2cd4698dc91a5c17835fce59005a058132e34260d6d4e0cf10e4f71dceddc1",
+            "coverage": [
+              13001,
+              14000
+            ]
+          },
+          {
+            "path": "segments/chaotic/015000.json",
+            "sha256": "254449c1e3ac67cfea55f7060fda08bb15e8df3610b9d2148e6ba2f9d6ffa823",
+            "coverage": [
+              14001,
+              15000
+            ]
+          },
+          {
+            "path": "segments/chaotic/016000.json",
+            "sha256": "3ed90bab7b63cb5b8728b70a3b753028bd72df459ca48c145fc7092f7606a67f",
+            "coverage": [
+              15001,
+              16000
+            ]
+          },
+          {
+            "path": "segments/chaotic/017000.json",
+            "sha256": "c0510a3eb7a0eb4c0c97712c456450a1696dd199ef6b0732a74c5c10f4d1f277",
+            "coverage": [
+              16001,
+              17000
+            ]
+          },
+          {
+            "path": "segments/chaotic/018000.json",
+            "sha256": "2ff92fb52cbd16084759439d47477cc3c718478a71d79b7d2cdfd6e2505d816d",
+            "coverage": [
+              17001,
+              18000
+            ]
+          },
+          {
+            "path": "segments/chaotic/019000.json",
+            "sha256": "d3611e34997ecac72fbc749acef5f9e6453dc70391d547098d0dac76a6908972",
+            "coverage": [
+              18001,
+              19000
+            ]
+          },
+          {
+            "path": "segments/chaotic/020000.json",
+            "sha256": "4ddace7d498e5b666eb441fc6063e1b1ea55e1af3a4ce26eaa67fc05d61b17ba",
+            "coverage": [
+              19001,
+              20000
+            ]
+          },
+          {
+            "path": "segments/chaotic/021000.json",
+            "sha256": "e598b2619fcbadf8ddfd110016e1af2fedc6372ac33005290af21bfa05fbc419",
+            "coverage": [
+              20001,
+              21000
+            ]
+          },
+          {
+            "path": "segments/chaotic/022000.json",
+            "sha256": "256a13bdd5e4859553b36fbfd5cd2abe52a919b4b5b2dc707f5b7e63f717cc5e",
+            "coverage": [
+              21001,
+              22000
+            ]
+          },
+          {
+            "path": "segments/chaotic/023000.json",
+            "sha256": "07dad93dc57fbc81b0f722358905b9dacab2e23e625c375699ab9c4a986d5973",
+            "coverage": [
+              22001,
+              23000
+            ]
+          },
+          {
+            "path": "segments/chaotic/024000.json",
+            "sha256": "c2d87bab6b63270abba175d3646aa61f0c91ac5ef80c7cfdb0015f61f0a4f38b",
+            "coverage": [
+              23001,
+              24000
+            ]
+          },
+          {
+            "path": "segments/chaotic/025000.json",
+            "sha256": "151f5a54e8144aa4cf79ac5ba04d231b0680ca16d019b245143caaeedb0ca51b",
+            "coverage": [
+              24001,
+              25000
+            ]
+          },
+          {
+            "path": "segments/chaotic/026000.json",
+            "sha256": "7df864095e4712e3b770977d242d3871355ee3c6f6b4032121dd89f60222ed03",
+            "coverage": [
+              25001,
+              26000
+            ]
+          },
+          {
+            "path": "segments/chaotic/027000.json",
+            "sha256": "d8ac7865b4c733fa6b2e7922e54169f3af0aff1b891d3a2bc3c69cbcd35172b3",
+            "coverage": [
+              26001,
+              27000
+            ]
+          },
+          {
+            "path": "segments/chaotic/028000.json",
+            "sha256": "828af83e79766fc3d64206ab319e2a15b3008fde4064fc80dd342f07bccdb2ed",
+            "coverage": [
+              27001,
+              28000
+            ]
+          },
+          {
+            "path": "segments/chaotic/029000.json",
+            "sha256": "aab0ced1f3cbb3c758bdaeb5ffd0897df46135bf15feae2e7dc8373c8611a531",
+            "coverage": [
+              28001,
+              29000
+            ]
+          },
+          {
+            "path": "segments/chaotic/030000.json",
+            "sha256": "37ed54812d836172af18d09ec78b2ea7d2e311f9ab166ab5438dddff8348ea6c",
+            "coverage": [
+              29001,
+              30000
+            ]
+          },
+          {
+            "path": "segments/chaotic/031000.json",
+            "sha256": "2f7e6a7efd47d3a632c36b478783ccf594250b844aac884aa33e09ce9038793c",
+            "coverage": [
+              30001,
+              31000
+            ]
+          },
+          {
+            "path": "segments/chaotic/032000.json",
+            "sha256": "64a7541fdf99734f2c79e3cc6ef5fa2673b3bc950232638554195cff54e8f210",
+            "coverage": [
+              31001,
+              32000
+            ]
+          },
+          {
+            "path": "segments/chaotic/033000.json",
+            "sha256": "3ef2817454315baf3752b1b89ebaada3b1b9d2ac15e6664a8a0300921fa16cad",
+            "coverage": [
+              32001,
+              33000
+            ]
+          },
+          {
+            "path": "segments/chaotic/034000.json",
+            "sha256": "b235ec90d1f88709b72b20095099d397f4eb58a0f29cbc4e0ebc1e951dc99146",
+            "coverage": [
+              33001,
+              34000
+            ]
+          },
+          {
+            "path": "segments/chaotic/035000.json",
+            "sha256": "110fa2872cff7c0a44fcf9b07fb7ebbca9839641c1e5e48d2d373f18dd89aa98",
+            "coverage": [
+              34001,
+              35000
+            ]
+          },
+          {
+            "path": "segments/chaotic/036000.json",
+            "sha256": "bd642eeb1549b79bf990251f75487c542f1a70534fe62e4c5e7c949ac8d4ff38",
+            "coverage": [
+              35001,
+              36000
+            ]
+          },
+          {
+            "path": "segments/chaotic/037000.json",
+            "sha256": "1a8734db68c53431420c99c8b9ff974d7bb7351ef38fdbe2f4ea3f9efc20abdf",
+            "coverage": [
+              36001,
+              37000
+            ]
+          },
+          {
+            "path": "segments/chaotic/038000.json",
+            "sha256": "7abad4106b21527204d36781492116f2e0853a6ccb1e07e34b4d29a3770cfb64",
+            "coverage": [
+              37001,
+              38000
+            ]
+          },
+          {
+            "path": "segments/chaotic/039000.json",
+            "sha256": "ffebb4fff33bda70489aedd78594b4cf8d03d2e31b26727b641ba4874c401b42",
+            "coverage": [
+              38001,
+              39000
+            ]
+          },
+          {
+            "path": "segments/chaotic/040000.json",
+            "sha256": "6e446d7b6d811bbde17f424234da3da95cefa3bd62f57e21449c78f89709ea44",
+            "coverage": [
+              39001,
+              40000
+            ]
+          },
+          {
+            "path": "segments/chaotic/041000.json",
+            "sha256": "8b1e638ff597f96f59bfcbe08b01700f37537c3bead01af3090b1c02d22d24ba",
+            "coverage": [
+              40001,
+              41000
+            ]
+          },
+          {
+            "path": "segments/chaotic/042000.json",
+            "sha256": "544de7e67738fe1a943b1f679684ac7cc06dbbe4bc5a7fb6374f5b6c589f29d9",
+            "coverage": [
+              41001,
+              42000
+            ]
+          },
+          {
+            "path": "segments/chaotic/043000.json",
+            "sha256": "f4751f38c1aaff464f305167754ae307c395a58caaeea44dc2bcff7c578c3215",
+            "coverage": [
+              42001,
+              43000
+            ]
+          },
+          {
+            "path": "segments/chaotic/044000.json",
+            "sha256": "af1bf6c348a85fd180f944a38068c298646dcee99b9ecc17db74b4cbe59d45e7",
+            "coverage": [
+              43001,
+              44000
+            ]
+          },
+          {
+            "path": "segments/chaotic/045000.json",
+            "sha256": "353885cdfcb542ca2bee9a378686c046a58fa18bc523e5b3e37f26918b79a069",
+            "coverage": [
+              44001,
+              45000
+            ]
+          },
+          {
+            "path": "segments/chaotic/046000.json",
+            "sha256": "1061b541180cead94ed2355985e100e0b47f82b2a819c52f71498df9cef932fd",
+            "coverage": [
+              45001,
+              46000
+            ]
+          },
+          {
+            "path": "segments/chaotic/047000.json",
+            "sha256": "97dbb6820a997a13dcb26aa558a8291f2f01b349d5e7a02c3f784eba5a9fd19c",
+            "coverage": [
+              46001,
+              47000
+            ]
+          },
+          {
+            "path": "segments/chaotic/048000.json",
+            "sha256": "b3fd6315a767431e28eb8815e6bffa5a4e596496bc333530a2c90571ad9645c5",
+            "coverage": [
+              47001,
+              48000
+            ]
+          },
+          {
+            "path": "segments/chaotic/049000.json",
+            "sha256": "a07c59f71cbc6997089d496ce7644e37f8e19a992dd0bacc960bf8ff5659a5db",
+            "coverage": [
+              48001,
+              49000
+            ]
+          },
+          {
+            "path": "segments/chaotic/050000.json",
+            "sha256": "fe22f1e4ce178cb4fe6f3646d9f95e1d248432be64e852a5ec79992079153949",
+            "coverage": [
+              49001,
+              50000
+            ]
+          },
+          {
+            "path": "segments/chaotic/051000.json",
+            "sha256": "1fa6da29c32480338158fdbbe4c1ecd3f48be6353de92967c26f8c2609892a70",
+            "coverage": [
+              50001,
+              51000
+            ]
+          },
+          {
+            "path": "segments/chaotic/052000.json",
+            "sha256": "b31a280ce5d02cff67894c361739ef859272d0f2e0aa65216e0fe55639ffb66a",
+            "coverage": [
+              51001,
+              52000
+            ]
+          },
+          {
+            "path": "segments/chaotic/053000.json",
+            "sha256": "a99348645c72b758a6273940561eeafd410246c399d0c101816a6c6fa785686a",
+            "coverage": [
+              52001,
+              53000
+            ]
+          },
+          {
+            "path": "segments/chaotic/054000.json",
+            "sha256": "86c671ae108a1db3e6712b2ecf6c8742b7960a3e3647e10dc9e524c98d7add7a",
+            "coverage": [
+              53001,
+              54000
+            ]
+          },
+          {
+            "path": "segments/chaotic/055000.json",
+            "sha256": "b170b9b70cc4315e6d879254cee75101eac70939fa50dccc9821130fba2eb387",
+            "coverage": [
+              54001,
+              55000
+            ]
+          },
+          {
+            "path": "segments/chaotic/056000.json",
+            "sha256": "45c41eb191d21f819688ef007df146a0203a9773d2fed0f157c2e8982a9fef02",
+            "coverage": [
+              55001,
+              56000
+            ]
+          },
+          {
+            "path": "segments/chaotic/057000.json",
+            "sha256": "6eeafab67c4b28d7e9712e378c105990e8fc4dea873f041849d1b38f253a93f0",
+            "coverage": [
+              56001,
+              57000
+            ]
+          },
+          {
+            "path": "segments/chaotic/058000.json",
+            "sha256": "0bb602c9fe010f1ad662381f78b0223069ea2acd04a272746bece6195e42f0ee",
+            "coverage": [
+              57001,
+              58000
+            ]
+          },
+          {
+            "path": "segments/chaotic/059000.json",
+            "sha256": "2687fc5de28749293806c87c2cca8fc2c57fb0f94227934f422a1cc116dbc5ec",
+            "coverage": [
+              58001,
+              59000
+            ]
+          },
+          {
+            "path": "segments/chaotic/060000.json",
+            "sha256": "77378c34eedafe37dc0791c7d1fe07184556b949c0599edfa18826f585d32d51",
+            "coverage": [
+              59001,
+              60000
+            ]
+          },
+          {
+            "path": "segments/chaotic/061000.json",
+            "sha256": "7d706f170c6b88d2ae8be1940647dd8889758f7f876858234743b802e70c7fce",
+            "coverage": [
+              60001,
+              61000
+            ]
+          },
+          {
+            "path": "segments/chaotic/062000.json",
+            "sha256": "8e3c832234170b865f4afcdac422d6cfc8e989b6c81b97da8df1ad243321caa3",
+            "coverage": [
+              61001,
+              62000
+            ]
+          },
+          {
+            "path": "segments/chaotic/063000.json",
+            "sha256": "939cf798fa350cb6653dc66392d7966252dc81cd2f9e9e4ad353208370a27768",
+            "coverage": [
+              62001,
+              63000
+            ]
+          },
+          {
+            "path": "segments/chaotic/064000.json",
+            "sha256": "efaced4de39c6abb91abbfc33426559e31c4f88cb77dd98e7fd5268f2fe43cc3",
+            "coverage": [
+              63001,
+              64000
+            ]
+          },
+          {
+            "path": "segments/chaotic/065000.json",
+            "sha256": "b6a6cc078bf4efc77b529a01851a002bc43fb3409c35026ced3d2e56d0312803",
+            "coverage": [
+              64001,
+              65000
+            ]
+          },
+          {
+            "path": "segments/chaotic/066000.json",
+            "sha256": "001a2187a4ca698a435dddb867e98d847b9103cfbf81a2e98873d5741d639130",
+            "coverage": [
+              65001,
+              66000
+            ]
+          },
+          {
+            "path": "segments/chaotic/067000.json",
+            "sha256": "63ecb8483d9bc8f3c1aa3660c964d731d138935bd155e280928303c58bffd4c9",
+            "coverage": [
+              66001,
+              67000
+            ]
+          },
+          {
+            "path": "segments/chaotic/068000.json",
+            "sha256": "413887e7d0fa5109c2fc9bfc0110903bb83792495715c0b8286742675a9cf46a",
+            "coverage": [
+              67001,
+              68000
+            ]
+          },
+          {
+            "path": "segments/chaotic/069000.json",
+            "sha256": "9d1182ed9a5795f52e17f10596d3a83bb23e501bf59ca5f22e194db565f6ad74",
+            "coverage": [
+              68001,
+              69000
+            ]
+          },
+          {
+            "path": "segments/chaotic/070000.json",
+            "sha256": "537f30e9865fbd1d3af43c2e4f991d1f31c0dfb4fe717d232c8846a28d648ada",
+            "coverage": [
+              69001,
+              70000
+            ]
+          },
+          {
+            "path": "segments/chaotic/071000.json",
+            "sha256": "2fd47888e626501488d90d6f6c79a6c505e419e16a0eeca1781c8ae81cb34f96",
+            "coverage": [
+              70001,
+              71000
+            ]
+          },
+          {
+            "path": "segments/chaotic/072000.json",
+            "sha256": "a4ed1c4b580ec5b9ba30ccfe7bf8f3132e40293ec9ecfb1baefd7d2d3855e410",
+            "coverage": [
+              71001,
+              72000
+            ]
+          },
+          {
+            "path": "segments/chaotic/073000.json",
+            "sha256": "23dd6c9697f2c3e4a51f461102aeca28f93111a650c290fca7ff2b7d2b4d848e",
+            "coverage": [
+              72001,
+              73000
+            ]
+          },
+          {
+            "path": "segments/chaotic/074000.json",
+            "sha256": "026669bf8dbde9a8e85dec693748d9a7b6e761aa0e09d6ff93c26a5d7b08a445",
+            "coverage": [
+              73001,
+              74000
+            ]
+          },
+          {
+            "path": "segments/chaotic/075000.json",
+            "sha256": "57144ee8549e1468bef3d013b2ab2998c210f2e2b2041889b6f90f946b0ed2f9",
+            "coverage": [
+              74001,
+              75000
+            ]
+          },
+          {
+            "path": "segments/chaotic/076000.json",
+            "sha256": "cab0b52c2ce9a796ef7c1c9429fadfcce7955a802edb3167e8d7c0b5bbc84083",
+            "coverage": [
+              75001,
+              76000
+            ]
+          },
+          {
+            "path": "segments/chaotic/077000.json",
+            "sha256": "26a8846118075848053c98e71886ffa5d9dca1e496c7e25e32b1767405d362ae",
+            "coverage": [
+              76001,
+              77000
+            ]
+          },
+          {
+            "path": "segments/chaotic/078000.json",
+            "sha256": "5a5d5c374c1d522a0102f3e64b444bd375fa92b906b7d45719a5277ad676dd18",
+            "coverage": [
+              77001,
+              78000
+            ]
+          },
+          {
+            "path": "segments/chaotic/079000.json",
+            "sha256": "48dab8b6df4e187650da426ba006e41a449bb6ad17b2ae7d270e62fc0603248e",
+            "coverage": [
+              78001,
+              79000
+            ]
+          },
+          {
+            "path": "segments/chaotic/080000.json",
+            "sha256": "592adf42a8d1b68b75808b650dddcaec04f5534e88daaf7dd7fb6a72d5206eca",
+            "coverage": [
+              79001,
+              80000
+            ]
+          },
+          {
+            "path": "segments/chaotic/081000.json",
+            "sha256": "260f3315bf8786c4bc26638c005a784eff36d8f3a6509f00b53f269a1f68416d",
+            "coverage": [
+              80001,
+              81000
+            ]
+          },
+          {
+            "path": "segments/chaotic/082000.json",
+            "sha256": "dbd657fbf016f80b178604be9339dfafebe2b6c7ccfd1f66a3a348790b399cef",
+            "coverage": [
+              81001,
+              82000
+            ]
+          },
+          {
+            "path": "segments/chaotic/083000.json",
+            "sha256": "0c239310759dbda61d9ea5946668796219d4ce8edf704908ae0a13274ad6bd04",
+            "coverage": [
+              82001,
+              83000
+            ]
+          },
+          {
+            "path": "segments/chaotic/084000.json",
+            "sha256": "12b0ee9dbf946f4b8a7b7d33b1643b235f171a34d240498488ce97111aa7c793",
+            "coverage": [
+              83001,
+              84000
+            ]
+          },
+          {
+            "path": "segments/chaotic/085000.json",
+            "sha256": "259707d82987cde478cdb7fb724e4a8e2fa0d9e2c2da55905dc5d1fbe8474b92",
+            "coverage": [
+              84001,
+              85000
+            ]
+          },
+          {
+            "path": "segments/chaotic/086000.json",
+            "sha256": "4c819ccf33d9e4d93647af1314f35482b7f44d45bc2df2e3810d4886a1774a25",
+            "coverage": [
+              85001,
+              86000
+            ]
+          },
+          {
+            "path": "segments/chaotic/087000.json",
+            "sha256": "3f4d04e04bb843a0030e326ecfe87806d67f59fecdad5b6e62e5f517582ff6a4",
+            "coverage": [
+              86001,
+              87000
+            ]
+          },
+          {
+            "path": "segments/chaotic/088000.json",
+            "sha256": "7708986ab202f500c80b667f3569b544bb88d80469b4f7e593064f3bddcfbb07",
+            "coverage": [
+              87001,
+              88000
+            ]
+          },
+          {
+            "path": "segments/chaotic/089000.json",
+            "sha256": "e08d9a284d69e27cea18c6d95ccc95ef9a37f8decd522c3b81769767bdaa4248",
+            "coverage": [
+              88001,
+              89000
+            ]
+          },
+          {
+            "path": "segments/chaotic/090000.json",
+            "sha256": "d6754c2f27c5968e9b8f7fb2f9b720f820b2af0ccbc9388a3ed97068da1a1420",
+            "coverage": [
+              89001,
+              90000
+            ]
+          },
+          {
+            "path": "segments/chaotic/091000.json",
+            "sha256": "e70c64feddf478fbede691d2dae4f63c884c3a7e4110c952c84be2b1047d9cdb",
+            "coverage": [
+              90001,
+              91000
+            ]
+          },
+          {
+            "path": "segments/chaotic/092000.json",
+            "sha256": "52529e57a1b28f4fc9febdbc87f6ddb87b94fbbc2d20e5a5f7bee7978915d6ab",
+            "coverage": [
+              91001,
+              92000
+            ]
+          },
+          {
+            "path": "segments/chaotic/093000.json",
+            "sha256": "df985448ff36e31b7a582369a0236cadc81a1e9fa82b5be138b1d0d3f5352652",
+            "coverage": [
+              92001,
+              93000
+            ]
+          },
+          {
+            "path": "segments/chaotic/094000.json",
+            "sha256": "4cf74c07789285e8a142e39ecbac87c4c92c33f0ffab3234e74bf916f6d04a68",
+            "coverage": [
+              93001,
+              94000
+            ]
+          },
+          {
+            "path": "segments/chaotic/095000.json",
+            "sha256": "39512aadfdb1e4841d87bc4d94bceafbbdf5a8a6ed7c6d171de4827d932b4b16",
+            "coverage": [
+              94001,
+              95000
+            ]
+          },
+          {
+            "path": "segments/chaotic/096000.json",
+            "sha256": "962681f991066d768bd2a42a8af74153b1adc53dee0ed18da48bed79bfc754c7",
+            "coverage": [
+              95001,
+              96000
+            ]
+          },
+          {
+            "path": "segments/chaotic/097000.json",
+            "sha256": "b2bad0d0b96d23070da2bd9192a5fa24d846cb8c54f9a38f72dd490c0e237f0f",
+            "coverage": [
+              96001,
+              97000
+            ]
+          },
+          {
+            "path": "segments/chaotic/098000.json",
+            "sha256": "5953902ec7a6fc2ba3c10394262149e589ef43c459977c35e01ee4db5966eeac",
+            "coverage": [
+              97001,
+              98000
+            ]
+          },
+          {
+            "path": "segments/chaotic/099000.json",
+            "sha256": "b2fffcad7ad4fab96de6b47f23399d1e3e6a78e9d46b7f7c99675c48e236febb",
+            "coverage": [
+              98001,
+              99000
+            ]
+          },
+          {
+            "path": "segments/chaotic/100000.json",
+            "sha256": "e20b82115f03e70c6c846b428cbd76a2f8a513ad53437a237c7e90da07e8ddce",
+            "coverage": [
+              99001,
+              100000
+            ]
+          }
+        ],
+        "refused_ranges": [
+          {
+            "kind": "CROSS",
+            "start": 13663,
+            "end": 13734,
+            "reason": "sum bound >= represented state scale"
+          },
+          {
+            "kind": "CROSS",
+            "start": 13735,
+            "end": 100000,
+            "reason": "bound unavailable or nonfinite"
+          },
+          {
+            "kind": "V2",
+            "start": 13907,
+            "end": 13952,
+            "reason": "bound >= represented state scale"
+          },
+          {
+            "kind": "V2",
+            "start": 13953,
+            "end": 100000,
+            "reason": "ArithmeticError: nonfinite latent bound"
+          }
+        ]
+      }
+    },
+    "independence": {
+      "static_violations": [],
+      "A_modules_loaded": []
+    },
+    "gate_verdict": "PASS",
+    "utility": "LONG_REGULAR_PREFIX"
+  },
+  "costs_seconds": {
+    "regular": 255.20606560003944,
+    "chaotic": 61.7079372999724
+  },
+  "total_wall_seconds": 317.15115529997274,
+  "peak_rss_bytes": 0,
+  "machine": {
+    "system": "Windows",
+    "machine": "AMD64",
+    "python": "3.12.7"
+  }
+}
