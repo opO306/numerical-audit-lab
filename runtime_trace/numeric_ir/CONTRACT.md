@@ -354,6 +354,8 @@ sources separately.
 Before emitting IR, translation verifies decoded capture/row/region object
 shape and integer ranges, raw trace hash and hash chain, capture completeness,
 exact sequence and region linkage, pairwise-disjoint 16-byte boundary ranges,
+region-entry `rcx`/`r8`/`r9`/`rsp` and `xmm0`/`xmm1` availability, canonical
+pre/post register availability and capacity for every register operand,
 pre/post machine state linkage, supported instruction forms, scalar widths,
 finite inputs and results, MXCSR controls, packaged module hashes, executable
 mapping, ELF instruction bytes and independent decode, effective addresses,

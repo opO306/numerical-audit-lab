@@ -291,6 +291,71 @@ def test_valid_json_trace_row_with_wrong_shape_is_refused(
         translate(source, root=repo_root)
 
 
+def test_missing_region_entry_abi_register_is_cli_refused(
+    tmp_path, attempt05, repo_root
+):
+    source = _clone_source(tmp_path, attempt05)
+    rows = _rows(source)
+    del rows[0]["pre"]["gpr"]["rcx"]
+    _resign(source, rows)
+
+    reason = "region init entry missing ABI register rcx"
+    with pytest.raises(ConversionRefused, match=reason):
+        translate(source, root=repo_root)
+    completed = _run_cli(source, tmp_path / "missing-abi-out", repo_root)
+    assert completed.returncode == 2
+    assert "Traceback" not in completed.stderr
+    assert reason in json.loads(completed.stderr)["reason"]
+
+
+@pytest.mark.parametrize(
+    ("collection", "register", "reason"),
+    [
+        ("gpr", "rsp", "region init entry missing ABI register rsp"),
+        ("xmm", "xmm0", "region init entry missing XMM boundary xmm0"),
+    ],
+)
+def test_missing_region_entry_stack_or_xmm_boundary_is_cli_refused(
+    tmp_path, attempt05, repo_root, collection, register, reason
+):
+    source = _clone_source(tmp_path, attempt05)
+    rows = _rows(source)
+    del rows[0]["pre"][collection][register]
+    _resign(source, rows)
+
+    with pytest.raises(ConversionRefused, match=reason):
+        translate(source, root=repo_root)
+    completed = _run_cli(source, tmp_path / f"missing-{register}-out", repo_root)
+    assert completed.returncode == 2
+    assert "Traceback" not in completed.stderr
+    assert reason in json.loads(completed.stderr)["reason"]
+
+
+@pytest.mark.parametrize(
+    ("row_index", "operand_index", "register", "reason"),
+    [
+        (0, 0, "r99", "trace row 0 pre missing canonical register r99"),
+        (1, 0, "xmm31", "trace row 1 pre missing vector register xmm31"),
+    ],
+)
+def test_unavailable_operand_context_register_is_cli_refused(
+    tmp_path, attempt05, repo_root, row_index, operand_index, register, reason
+):
+    source = _clone_source(tmp_path, attempt05)
+    rows = _rows(source)
+    rows[row_index]["operands"][operand_index]["register"] = register
+    _resign(source, rows)
+
+    with pytest.raises(ConversionRefused, match=reason):
+        translate(source, root=repo_root)
+    completed = _run_cli(
+        source, tmp_path / f"missing-operand-{register}-out", repo_root
+    )
+    assert completed.returncode == 2
+    assert "Traceback" not in completed.stderr
+    assert reason in json.loads(completed.stderr)["reason"]
+
+
 @pytest.mark.parametrize(
     ("field", "value", "reason"),
     [

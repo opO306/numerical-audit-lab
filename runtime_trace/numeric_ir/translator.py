@@ -135,6 +135,44 @@ def _validate_context_shape(context: object, row_index: int, label: str) -> None
     )
 
 
+def _canonical_gpr_name(register: str) -> str:
+    if re.fullmatch(r"r\d+[dwb]", register):
+        return register[:-1]
+    if register.startswith("e"):
+        return "r" + register[1:]
+    if register in {"al", "bl", "cl", "dl"}:
+        return "r" + register[0] + "x"
+    if register in {"sil", "dil", "bpl", "spl"}:
+        return "r" + register[:-1]
+    if register.startswith("r"):
+        return register
+    return "r" + register
+
+
+def _validate_context_register(
+    context: dict, register: str, width: int, label: str
+) -> None:
+    vector = re.fullmatch(r"(xmm|ymm|zmm)\d+", register)
+    if vector is not None:
+        capacity = {"xmm": 16, "ymm": 32, "zmm": 64}[vector.group(1)]
+        _require(width <= capacity, f"{label} vector register {register} width")
+        raw_bits = context["xmm"].get(register)
+        if raw_bits is None:
+            raw_bits = context["extra_vectors"].get(register)
+        _require(raw_bits is not None, f"{label} missing vector register {register}")
+        _require(
+            len(raw_bits) == 2 + 2 * capacity,
+            f"{label} vector register {register} width",
+        )
+        return
+    _require(width <= 8, f"{label} GPR {register} width")
+    canonical = _canonical_gpr_name(register)
+    _require(
+        canonical in context["gpr"],
+        f"{label} missing canonical register {canonical}",
+    )
+
+
 def _validate_operand_shape(operand: object, row_index: int, operand_index: int) -> None:
     label = f"trace row {row_index} operand {operand_index}"
     operand = _object(operand, f"{label} must be an object")
@@ -239,6 +277,17 @@ def _validate_row_shape(row: object, row_index: int, row_count: int) -> None:
         _raw(row["result_bits"], row["operands"][-1]["width"])
     _validate_context_shape(row["pre"], row_index, "pre")
     _validate_context_shape(row["post"], row_index, "post")
+    for operand in row["operands"]:
+        if operand["kind"] != "register":
+            continue
+        _validate_context_register(
+            row["pre"], operand["register"], operand["width"],
+            f"trace row {row_index} pre",
+        )
+        _validate_context_register(
+            row["post"], operand["register"], operand["width"],
+            f"trace row {row_index} post",
+        )
     _object(
         row["changed_gpr_results"],
         f"trace row {row_index} changed_gpr_results must be an object",
@@ -564,11 +613,30 @@ def _validate_regions(capture: dict, rows: list[dict]) -> list[dict]:
             _raw(region["end_state"][name], 16)
         _check_mxcsr(region.get("mxcsr"))
         first = rows[region["start_seq"]]
+        for register in ("rcx", "r8", "r9", "rsp"):
+            _require(
+                register in first["pre"]["gpr"],
+                f"region {region['phase']} entry missing ABI register {register}",
+            )
+        for register in ("xmm0", "xmm1"):
+            _require(
+                register in first["pre"]["xmm"]
+                or register in first["pre"]["extra_vectors"],
+                f"region {region['phase']} entry missing XMM boundary {register}",
+            )
+            _validate_context_register(
+                first["pre"], register, 8, f"region {region['phase']} entry"
+            )
         for name, register in (("q", "rcx"), ("full_v", "r8"), ("latent", "r9")):
             _require(
                 region["pointers"][name] == int(first["pre"]["gpr"][register], 16),
                 f"{name} boundary pointer disagrees with ABI register",
             )
+    for record in rows:
+        _require(
+            set(record["pre"]["gpr"]) == set(record["post"]["gpr"]),
+            f"trace row {record['seq']} pre/post GPR register set mismatch",
+        )
     for name in ("q", "full_v", "latent"):
         _require(
             regions[0]["end_state"][name] == regions[1]["start_state"][name],
