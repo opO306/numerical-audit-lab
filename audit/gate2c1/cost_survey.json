@@ -1,0 +1,1128 @@
+{
+  "schema": "gate2c1-received-auditor-cost-survey-v1",
+  "source_path": "audit/gate2c1/prior_auditor/g2c_regular.py",
+  "source_sha256": "f5294f6535d85d7a1e5e89ef4da285dd3102f352b0cde390697cb9d89eeed9da",
+  "source_bytes_changed": false,
+  "filesystem_binding": "D:\\numerical-audit-lab-recovered-2026-10-01",
+  "environment": {
+    "python": "3.12.7",
+    "system": "Windows-11-10.0.26200-SP0"
+  },
+  "runs": [
+    {
+      "steps": 128,
+      "wall_seconds_profiled": 0.7619644000078551,
+      "top_cumulative": [
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\audit\\gate2c1\\prior_auditor\\g2c_regular.py",
+          "line": 57,
+          "function": "orbit",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.0074435000000000005,
+          "cumulative_seconds": 0.7584641000000001
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 155,
+          "function": "rebase",
+          "primitive_calls": 257,
+          "calls": 257,
+          "self_seconds": 0.007189500000000001,
+          "cumulative_seconds": 0.4108624
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 142,
+          "function": "radii",
+          "primitive_calls": 257,
+          "calls": 257,
+          "self_seconds": 0.0056679,
+          "cumulative_seconds": 0.37476210000000004
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 613,
+          "function": "forward",
+          "primitive_calls": 112835,
+          "calls": 112835,
+          "self_seconds": 0.0439251,
+          "cumulative_seconds": 0.30165970000000003
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 73,
+          "function": "step_forms",
+          "primitive_calls": 257,
+          "calls": 257,
+          "self_seconds": 0.0188186,
+          "cumulative_seconds": 0.2592409
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.sum>",
+          "primitive_calls": 2056,
+          "calls": 6168,
+          "self_seconds": 0.0124954,
+          "cumulative_seconds": 0.1755597
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 126,
+          "function": "_inverse",
+          "primitive_calls": 257,
+          "calls": 257,
+          "self_seconds": 0.022047900000000002,
+          "cumulative_seconds": 0.16981220000000002
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 742,
+          "function": "_mul",
+          "primitive_calls": 47814,
+          "calls": 47814,
+          "self_seconds": 0.0454419,
+          "cumulative_seconds": 0.10375880000000001
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 60,
+          "function": "_mul",
+          "primitive_calls": 3078,
+          "calls": 3078,
+          "self_seconds": 0.024080800000000003,
+          "cumulative_seconds": 0.0818749
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 186,
+          "function": "__new__",
+          "primitive_calls": 39036,
+          "calls": 39036,
+          "self_seconds": 0.0383258,
+          "cumulative_seconds": 0.0783384
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method math.gcd>",
+          "primitive_calls": 216212,
+          "calls": 216212,
+          "self_seconds": 0.07658190000000001,
+          "cumulative_seconds": 0.07658190000000001
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 710,
+          "function": "_add",
+          "primitive_calls": 28137,
+          "calls": 28137,
+          "self_seconds": 0.029637,
+          "cumulative_seconds": 0.06989490000000001
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 317,
+          "function": "_from_coprime_ints",
+          "primitive_calls": 136708,
+          "calls": 136708,
+          "self_seconds": 0.0517695,
+          "cumulative_seconds": 0.06967040000000001
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 726,
+          "function": "_sub",
+          "primitive_calls": 32772,
+          "calls": 32772,
+          "self_seconds": 0.0340724,
+          "cumulative_seconds": 0.06303360000000001
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 149,
+          "function": "<genexpr>",
+          "primitive_calls": 20560,
+          "calls": 20560,
+          "self_seconds": 0.005841300000000001,
+          "cumulative_seconds": 0.0542942
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 26,
+          "function": "up_q",
+          "primitive_calls": 7957,
+          "calls": 7957,
+          "self_seconds": 0.008478900000000001,
+          "cumulative_seconds": 0.05243370000000001
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 20,
+          "function": "up",
+          "primitive_calls": 172416,
+          "calls": 172416,
+          "self_seconds": 0.0291093,
+          "cumulative_seconds": 0.0456572
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.isinstance>",
+          "primitive_calls": 191895,
+          "calls": 191895,
+          "self_seconds": 0.0261651,
+          "cumulative_seconds": 0.0444777
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 31,
+          "function": "rnd_err",
+          "primitive_calls": 53368,
+          "calls": 53368,
+          "self_seconds": 0.017501700000000002,
+          "cumulative_seconds": 0.037380300000000005
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\audit\\gate2c1\\prior_auditor\\g2c_regular.py",
+          "line": 11,
+          "function": "load",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.0052319,
+          "cumulative_seconds": 0.032618600000000005
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.abs>",
+          "primitive_calls": 109557,
+          "calls": 126758,
+          "self_seconds": 0.014712900000000001,
+          "cumulative_seconds": 0.0316737
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\independent_checker\\oracle.py",
+          "line": 34,
+          "function": "value",
+          "primitive_calls": 8469,
+          "calls": 8469,
+          "self_seconds": 0.0054797000000000005,
+          "cumulative_seconds": 0.029291400000000002
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 50,
+          "function": "_lin",
+          "primitive_calls": 3080,
+          "calls": 3080,
+          "self_seconds": 0.010984800000000001,
+          "cumulative_seconds": 0.027095
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method __new__ of type object at 0x00007FFC6F5638F0>",
+          "primitive_calls": 175744,
+          "calls": 175744,
+          "self_seconds": 0.0232462,
+          "cumulative_seconds": 0.0232462
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 150,
+          "function": "<genexpr>",
+          "primitive_calls": 5140,
+          "calls": 5140,
+          "self_seconds": 0.0023312000000000003,
+          "cumulative_seconds": 0.0195447
+        }
+      ],
+      "top_self": [
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method math.gcd>",
+          "primitive_calls": 216212,
+          "calls": 216212,
+          "self_seconds": 0.07658190000000001,
+          "cumulative_seconds": 0.07658190000000001
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 317,
+          "function": "_from_coprime_ints",
+          "primitive_calls": 136708,
+          "calls": 136708,
+          "self_seconds": 0.0517695,
+          "cumulative_seconds": 0.06967040000000001
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 742,
+          "function": "_mul",
+          "primitive_calls": 47814,
+          "calls": 47814,
+          "self_seconds": 0.0454419,
+          "cumulative_seconds": 0.10375880000000001
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 613,
+          "function": "forward",
+          "primitive_calls": 112835,
+          "calls": 112835,
+          "self_seconds": 0.0439251,
+          "cumulative_seconds": 0.30165970000000003
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 186,
+          "function": "__new__",
+          "primitive_calls": 39036,
+          "calls": 39036,
+          "self_seconds": 0.0383258,
+          "cumulative_seconds": 0.0783384
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 726,
+          "function": "_sub",
+          "primitive_calls": 32772,
+          "calls": 32772,
+          "self_seconds": 0.0340724,
+          "cumulative_seconds": 0.06303360000000001
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 710,
+          "function": "_add",
+          "primitive_calls": 28137,
+          "calls": 28137,
+          "self_seconds": 0.029637,
+          "cumulative_seconds": 0.06989490000000001
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 20,
+          "function": "up",
+          "primitive_calls": 172416,
+          "calls": 172416,
+          "self_seconds": 0.0291093,
+          "cumulative_seconds": 0.0456572
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.isinstance>",
+          "primitive_calls": 191895,
+          "calls": 191895,
+          "self_seconds": 0.0261651,
+          "cumulative_seconds": 0.0444777
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 60,
+          "function": "_mul",
+          "primitive_calls": 3078,
+          "calls": 3078,
+          "self_seconds": 0.024080800000000003,
+          "cumulative_seconds": 0.0818749
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method __new__ of type object at 0x00007FFC6F5638F0>",
+          "primitive_calls": 175744,
+          "calls": 175744,
+          "self_seconds": 0.0232462,
+          "cumulative_seconds": 0.0232462
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 126,
+          "function": "_inverse",
+          "primitive_calls": 257,
+          "calls": 257,
+          "self_seconds": 0.022047900000000002,
+          "cumulative_seconds": 0.16981220000000002
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 73,
+          "function": "step_forms",
+          "primitive_calls": 257,
+          "calls": 257,
+          "self_seconds": 0.0188186,
+          "cumulative_seconds": 0.2592409
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 31,
+          "function": "rnd_err",
+          "primitive_calls": 53368,
+          "calls": 53368,
+          "self_seconds": 0.017501700000000002,
+          "cumulative_seconds": 0.037380300000000005
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method _struct.unpack>",
+          "primitive_calls": 19501,
+          "calls": 19501,
+          "self_seconds": 0.017109000000000003,
+          "cumulative_seconds": 0.017109000000000003
+        }
+      ]
+    },
+    {
+      "steps": 512,
+      "wall_seconds_profiled": 2.8353353000129573,
+      "top_cumulative": [
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\audit\\gate2c1\\prior_auditor\\g2c_regular.py",
+          "line": 57,
+          "function": "orbit",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.023506700000000002,
+          "cumulative_seconds": 2.8316739
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 155,
+          "function": "rebase",
+          "primitive_calls": 1025,
+          "calls": 1025,
+          "self_seconds": 0.027747200000000003,
+          "cumulative_seconds": 1.6003071000000002
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 142,
+          "function": "radii",
+          "primitive_calls": 1025,
+          "calls": 1025,
+          "self_seconds": 0.0218718,
+          "cumulative_seconds": 1.4609376
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 613,
+          "function": "forward",
+          "primitive_calls": 453059,
+          "calls": 453059,
+          "self_seconds": 0.1718403,
+          "cumulative_seconds": 1.1770153
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 73,
+          "function": "step_forms",
+          "primitive_calls": 1025,
+          "calls": 1025,
+          "self_seconds": 0.07289380000000001,
+          "cumulative_seconds": 1.0021387000000002
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.sum>",
+          "primitive_calls": 8200,
+          "calls": 24600,
+          "self_seconds": 0.049114700000000004,
+          "cumulative_seconds": 0.6803174000000001
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 126,
+          "function": "_inverse",
+          "primitive_calls": 1025,
+          "calls": 1025,
+          "self_seconds": 0.0871194,
+          "cumulative_seconds": 0.6670214
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 742,
+          "function": "_mul",
+          "primitive_calls": 192198,
+          "calls": 192198,
+          "self_seconds": 0.1772233,
+          "cumulative_seconds": 0.4034595
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 60,
+          "function": "_mul",
+          "primitive_calls": 12294,
+          "calls": 12294,
+          "self_seconds": 0.0933943,
+          "cumulative_seconds": 0.31754930000000003
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 186,
+          "function": "__new__",
+          "primitive_calls": 155772,
+          "calls": 155772,
+          "self_seconds": 0.14781570000000002,
+          "cumulative_seconds": 0.29988760000000003
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method math.gcd>",
+          "primitive_calls": 869012,
+          "calls": 869012,
+          "self_seconds": 0.2986807,
+          "cumulative_seconds": 0.2986807
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 710,
+          "function": "_add",
+          "primitive_calls": 112233,
+          "calls": 112233,
+          "self_seconds": 0.11667690000000001,
+          "cumulative_seconds": 0.2726862
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 317,
+          "function": "_from_coprime_ints",
+          "primitive_calls": 548356,
+          "calls": 548356,
+          "self_seconds": 0.19974,
+          "cumulative_seconds": 0.26857190000000003
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 726,
+          "function": "_sub",
+          "primitive_calls": 132228,
+          "calls": 132228,
+          "self_seconds": 0.13393380000000002,
+          "cumulative_seconds": 0.2470861
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 149,
+          "function": "<genexpr>",
+          "primitive_calls": 82000,
+          "calls": 82000,
+          "self_seconds": 0.0226623,
+          "cumulative_seconds": 0.2091857
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 26,
+          "function": "up_q",
+          "primitive_calls": 31765,
+          "calls": 31765,
+          "self_seconds": 0.032973800000000004,
+          "cumulative_seconds": 0.2032905
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 20,
+          "function": "up",
+          "primitive_calls": 688512,
+          "calls": 688512,
+          "self_seconds": 0.1130786,
+          "cumulative_seconds": 0.17673280000000002
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.isinstance>",
+          "primitive_calls": 768663,
+          "calls": 768663,
+          "self_seconds": 0.1009777,
+          "cumulative_seconds": 0.1718936
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 31,
+          "function": "rnd_err",
+          "primitive_calls": 213112,
+          "calls": 213112,
+          "self_seconds": 0.06804170000000001,
+          "cumulative_seconds": 0.14517860000000002
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.abs>",
+          "primitive_calls": 437493,
+          "calls": 506150,
+          "self_seconds": 0.0568707,
+          "cumulative_seconds": 0.12171430000000001
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\independent_checker\\oracle.py",
+          "line": 34,
+          "function": "value",
+          "primitive_calls": 33813,
+          "calls": 33813,
+          "self_seconds": 0.0209492,
+          "cumulative_seconds": 0.1116294
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 50,
+          "function": "_lin",
+          "primitive_calls": 12296,
+          "calls": 12296,
+          "self_seconds": 0.042433700000000005,
+          "cumulative_seconds": 0.104854
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method __new__ of type object at 0x00007FFC6F5638F0>",
+          "primitive_calls": 704128,
+          "calls": 704128,
+          "self_seconds": 0.0893013,
+          "cumulative_seconds": 0.0893013
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 150,
+          "function": "<genexpr>",
+          "primitive_calls": 20500,
+          "calls": 20500,
+          "self_seconds": 0.0089394,
+          "cumulative_seconds": 0.07523250000000001
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 933,
+          "function": "_richcmp",
+          "primitive_calls": 43029,
+          "calls": 43029,
+          "self_seconds": 0.034323700000000006,
+          "cumulative_seconds": 0.07501980000000001
+        }
+      ],
+      "top_self": [
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method math.gcd>",
+          "primitive_calls": 869012,
+          "calls": 869012,
+          "self_seconds": 0.2986807,
+          "cumulative_seconds": 0.2986807
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 317,
+          "function": "_from_coprime_ints",
+          "primitive_calls": 548356,
+          "calls": 548356,
+          "self_seconds": 0.19974,
+          "cumulative_seconds": 0.26857190000000003
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 742,
+          "function": "_mul",
+          "primitive_calls": 192198,
+          "calls": 192198,
+          "self_seconds": 0.1772233,
+          "cumulative_seconds": 0.4034595
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 613,
+          "function": "forward",
+          "primitive_calls": 453059,
+          "calls": 453059,
+          "self_seconds": 0.1718403,
+          "cumulative_seconds": 1.1770153
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 186,
+          "function": "__new__",
+          "primitive_calls": 155772,
+          "calls": 155772,
+          "self_seconds": 0.14781570000000002,
+          "cumulative_seconds": 0.29988760000000003
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 726,
+          "function": "_sub",
+          "primitive_calls": 132228,
+          "calls": 132228,
+          "self_seconds": 0.13393380000000002,
+          "cumulative_seconds": 0.2470861
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 710,
+          "function": "_add",
+          "primitive_calls": 112233,
+          "calls": 112233,
+          "self_seconds": 0.11667690000000001,
+          "cumulative_seconds": 0.2726862
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 20,
+          "function": "up",
+          "primitive_calls": 688512,
+          "calls": 688512,
+          "self_seconds": 0.1130786,
+          "cumulative_seconds": 0.17673280000000002
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.isinstance>",
+          "primitive_calls": 768663,
+          "calls": 768663,
+          "self_seconds": 0.1009777,
+          "cumulative_seconds": 0.1718936
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 60,
+          "function": "_mul",
+          "primitive_calls": 12294,
+          "calls": 12294,
+          "self_seconds": 0.0933943,
+          "cumulative_seconds": 0.31754930000000003
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method __new__ of type object at 0x00007FFC6F5638F0>",
+          "primitive_calls": 704128,
+          "calls": 704128,
+          "self_seconds": 0.0893013,
+          "cumulative_seconds": 0.0893013
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 126,
+          "function": "_inverse",
+          "primitive_calls": 1025,
+          "calls": 1025,
+          "self_seconds": 0.0871194,
+          "cumulative_seconds": 0.6670214
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 73,
+          "function": "step_forms",
+          "primitive_calls": 1025,
+          "calls": 1025,
+          "self_seconds": 0.07289380000000001,
+          "cumulative_seconds": 1.0021387000000002
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 31,
+          "function": "rnd_err",
+          "primitive_calls": 213112,
+          "calls": 213112,
+          "self_seconds": 0.06804170000000001,
+          "cumulative_seconds": 0.14517860000000002
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method math.nextafter>",
+          "primitive_calls": 690564,
+          "calls": 690564,
+          "self_seconds": 0.0640069,
+          "cumulative_seconds": 0.0640069
+        }
+      ]
+    },
+    {
+      "steps": 1024,
+      "wall_seconds_profiled": 5.771798400033731,
+      "top_cumulative": [
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\audit\\gate2c1\\prior_auditor\\g2c_regular.py",
+          "line": 57,
+          "function": "orbit",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.0470527,
+          "cumulative_seconds": 5.7687659
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 155,
+          "function": "rebase",
+          "primitive_calls": 2049,
+          "calls": 2049,
+          "self_seconds": 0.0566897,
+          "cumulative_seconds": 3.2595703
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 142,
+          "function": "radii",
+          "primitive_calls": 2049,
+          "calls": 2049,
+          "self_seconds": 0.0443257,
+          "cumulative_seconds": 2.9759699000000004
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 613,
+          "function": "forward",
+          "primitive_calls": 906691,
+          "calls": 906691,
+          "self_seconds": 0.35108160000000005,
+          "cumulative_seconds": 2.4028449000000003
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 73,
+          "function": "step_forms",
+          "primitive_calls": 2049,
+          "calls": 2049,
+          "self_seconds": 0.1511817,
+          "cumulative_seconds": 2.0537539000000002
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.sum>",
+          "primitive_calls": 16392,
+          "calls": 49176,
+          "self_seconds": 0.10076230000000001,
+          "cumulative_seconds": 1.3788112000000001
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 126,
+          "function": "_inverse",
+          "primitive_calls": 2049,
+          "calls": 2049,
+          "self_seconds": 0.1776935,
+          "cumulative_seconds": 1.3671238000000001
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 742,
+          "function": "_mul",
+          "primitive_calls": 384710,
+          "calls": 384710,
+          "self_seconds": 0.36149190000000003,
+          "cumulative_seconds": 0.8210271
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 60,
+          "function": "_mul",
+          "primitive_calls": 24582,
+          "calls": 24582,
+          "self_seconds": 0.1943505,
+          "cumulative_seconds": 0.6510122
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 186,
+          "function": "__new__",
+          "primitive_calls": 311420,
+          "calls": 311420,
+          "self_seconds": 0.2996181,
+          "cumulative_seconds": 0.6175024
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method math.gcd>",
+          "primitive_calls": 1739412,
+          "calls": 1739412,
+          "self_seconds": 0.6058945,
+          "cumulative_seconds": 0.6058945
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 710,
+          "function": "_add",
+          "primitive_calls": 224361,
+          "calls": 224361,
+          "self_seconds": 0.23831950000000002,
+          "cumulative_seconds": 0.5551545
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 317,
+          "function": "_from_coprime_ints",
+          "primitive_calls": 1097220,
+          "calls": 1097220,
+          "self_seconds": 0.4083696,
+          "cumulative_seconds": 0.549382
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 726,
+          "function": "_sub",
+          "primitive_calls": 264836,
+          "calls": 264836,
+          "self_seconds": 0.2767601,
+          "cumulative_seconds": 0.5098258
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 149,
+          "function": "<genexpr>",
+          "primitive_calls": 163920,
+          "calls": 163920,
+          "self_seconds": 0.045808,
+          "cumulative_seconds": 0.42142060000000003
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 26,
+          "function": "up_q",
+          "primitive_calls": 63509,
+          "calls": 63509,
+          "self_seconds": 0.0670667,
+          "cumulative_seconds": 0.41410090000000005
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 20,
+          "function": "up",
+          "primitive_calls": 1376640,
+          "calls": 1376640,
+          "self_seconds": 0.22919360000000003,
+          "cumulative_seconds": 0.3587134
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.isinstance>",
+          "primitive_calls": 1537687,
+          "calls": 1537687,
+          "self_seconds": 0.2039898,
+          "cumulative_seconds": 0.3484871
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 31,
+          "function": "rnd_err",
+          "primitive_calls": 426104,
+          "calls": 426104,
+          "self_seconds": 0.1389151,
+          "cumulative_seconds": 0.2956302
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.abs>",
+          "primitive_calls": 874741,
+          "calls": 1012006,
+          "self_seconds": 0.1155053,
+          "cumulative_seconds": 0.2473479
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\independent_checker\\oracle.py",
+          "line": 34,
+          "function": "value",
+          "primitive_calls": 67605,
+          "calls": 67605,
+          "self_seconds": 0.0426922,
+          "cumulative_seconds": 0.22844460000000003
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 50,
+          "function": "_lin",
+          "primitive_calls": 24584,
+          "calls": 24584,
+          "self_seconds": 0.0871349,
+          "cumulative_seconds": 0.2139714
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method __new__ of type object at 0x00007FFC6F5638F0>",
+          "primitive_calls": 1408640,
+          "calls": 1408640,
+          "self_seconds": 0.1826287,
+          "cumulative_seconds": 0.1826287
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 933,
+          "function": "_richcmp",
+          "primitive_calls": 86037,
+          "calls": 86037,
+          "self_seconds": 0.07006470000000001,
+          "cumulative_seconds": 0.1528661
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 150,
+          "function": "<genexpr>",
+          "primitive_calls": 40980,
+          "calls": 40980,
+          "self_seconds": 0.018155900000000003,
+          "cumulative_seconds": 0.1517204
+        }
+      ],
+      "top_self": [
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method math.gcd>",
+          "primitive_calls": 1739412,
+          "calls": 1739412,
+          "self_seconds": 0.6058945,
+          "cumulative_seconds": 0.6058945
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 317,
+          "function": "_from_coprime_ints",
+          "primitive_calls": 1097220,
+          "calls": 1097220,
+          "self_seconds": 0.4083696,
+          "cumulative_seconds": 0.549382
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 742,
+          "function": "_mul",
+          "primitive_calls": 384710,
+          "calls": 384710,
+          "self_seconds": 0.36149190000000003,
+          "cumulative_seconds": 0.8210271
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 613,
+          "function": "forward",
+          "primitive_calls": 906691,
+          "calls": 906691,
+          "self_seconds": 0.35108160000000005,
+          "cumulative_seconds": 2.4028449000000003
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 186,
+          "function": "__new__",
+          "primitive_calls": 311420,
+          "calls": 311420,
+          "self_seconds": 0.2996181,
+          "cumulative_seconds": 0.6175024
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 726,
+          "function": "_sub",
+          "primitive_calls": 264836,
+          "calls": 264836,
+          "self_seconds": 0.2767601,
+          "cumulative_seconds": 0.5098258
+        },
+        {
+          "file": "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\fractions.py",
+          "line": 710,
+          "function": "_add",
+          "primitive_calls": 224361,
+          "calls": 224361,
+          "self_seconds": 0.23831950000000002,
+          "cumulative_seconds": 0.5551545
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 20,
+          "function": "up",
+          "primitive_calls": 1376640,
+          "calls": 1376640,
+          "self_seconds": 0.22919360000000003,
+          "cumulative_seconds": 0.3587134
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.isinstance>",
+          "primitive_calls": 1537687,
+          "calls": 1537687,
+          "self_seconds": 0.2039898,
+          "cumulative_seconds": 0.3484871
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 60,
+          "function": "_mul",
+          "primitive_calls": 24582,
+          "calls": 24582,
+          "self_seconds": 0.1943505,
+          "cumulative_seconds": 0.6510122
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method __new__ of type object at 0x00007FFC6F5638F0>",
+          "primitive_calls": 1408640,
+          "calls": 1408640,
+          "self_seconds": 0.1826287,
+          "cumulative_seconds": 0.1826287
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 126,
+          "function": "_inverse",
+          "primitive_calls": 2049,
+          "calls": 2049,
+          "self_seconds": 0.1776935,
+          "cumulative_seconds": 1.3671238000000001
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 73,
+          "function": "step_forms",
+          "primitive_calls": 2049,
+          "calls": 2049,
+          "self_seconds": 0.1511817,
+          "cumulative_seconds": 2.0537539000000002
+        },
+        {
+          "file": "D:\\numerical-audit-lab-recovered-2026-10-01\\lab\\v2_bound.py",
+          "line": 31,
+          "function": "rnd_err",
+          "primitive_calls": 426104,
+          "calls": 426104,
+          "self_seconds": 0.1389151,
+          "cumulative_seconds": 0.2956302
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method math.nextafter>",
+          "primitive_calls": 1380737,
+          "calls": 1380737,
+          "self_seconds": 0.1302599,
+          "cumulative_seconds": 0.1302599
+        }
+      ]
+    }
+  ],
+  "inverse_input_observer_128steps": {
+    "inverse_calls": 257,
+    "max_numerator_bits": 53,
+    "max_denominator_bits": 145,
+    "all_inverse_matrix_inputs_float": true
+  },
+  "total_wall_seconds": 10.402491399960127,
+  "historical_regular_stdout_or_profile_available": false,
+  "historical_runtime_cause_established": false,
+  "new_gate2c1_horizon_measured": false,
+  "new_100000_step_execution": false
+}

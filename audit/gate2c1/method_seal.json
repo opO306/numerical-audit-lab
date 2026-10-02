@@ -1,0 +1,12 @@
+{
+  "schema": "gate2c1-method-seal-v1",
+  "recorded_at_utc": "2026-10-02T01:37:10.015034+00:00",
+  "plan_commit": "d87b06a2017a62a8ab8be12dfb981c9d82fdaaf0",
+  "gate2c1_horizon_or_cross_measured": false,
+  "files": {
+    "docs/GATE2C1_VERIFICATION_METHOD.md": "89b99dcdbee5b26ac41dd0a0f0b46b841431e2dd8e65d4d291bd2aae3d7ed493",
+    "audit/gate2c1/cost_survey.json": "74ad17af7801c68f499edcaa09ae6ad623d3619719d538ec5a1cd0c7be0c4bfa",
+    "tools/gate2c1_profile_auditor.py": "9a375be9d9d31e432d31495cece7fea4e7b765f9ab5fc97a308c0bfad76f2bd7",
+    "audit/gate2c1/plan_seal.json": "d61dbaf1ab438ca2ac542e784edbb4b9656c4614cdf05116fdaedc56df783743"
+  }
+}
