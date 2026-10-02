@@ -9,6 +9,7 @@ import sys
 import pytest
 
 from runtime_trace.numeric_ir.schema import canonical_json, normalized_document
+from runtime_trace.numeric_ir import translator as translator_module
 from runtime_trace.numeric_ir.translator import (
     ConversionRefused,
     translate,
@@ -89,6 +90,77 @@ def _value_by_producer(ir: dict, sequence: int, role: str) -> dict:
     )
 
 
+ARITHMETIC_OPCODE_KINDS = {
+    "addsd": "ADD_BINARY64",
+    "subsd": "SUB_BINARY64",
+    "mulsd": "MUL_BINARY64",
+}
+
+
+def _expected_operation_tuples(source: Path) -> list[tuple]:
+    expected = []
+    for row in _rows(source):
+        opcode = row["instruction"].split("#", 1)[0].strip().split()[0]
+        if opcode not in ARITHMETIC_OPCODE_KINDS:
+            continue
+        source_operand, destination_operand = row["operands"]
+        expected.append(
+            (
+                row["seq"],
+                ARITHMETIC_OPCODE_KINDS[opcode],
+                opcode,
+                row["module_sha256"],
+                row["elf_address"],
+                row["bytes"],
+                destination_operand["raw_bits"],
+                source_operand["raw_bits"],
+                row["result_bits"],
+                row["phase"],
+                row["step"],
+            )
+        )
+    return expected
+
+
+def _actual_operation_tuples(ir: dict) -> list[tuple]:
+    return [
+        (
+            operation["trace_sequence"],
+            operation["operation_kind"],
+            operation["opcode"],
+            operation["module_sha256"],
+            operation["elf_address"],
+            operation["instruction_bytes"],
+            operation["input0_raw_bits"],
+            operation["input1_raw_bits"],
+            operation["output_raw_bits"],
+            operation["phase"],
+            operation["step"],
+        )
+        for operation in ir["operations"]
+    ]
+
+
+def _run_cli(source: Path, out: Path, repo_root: Path) -> subprocess.CompletedProcess:
+    return subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "runtime_trace.numeric_ir.translator",
+            "--source",
+            str(source),
+            "--out",
+            str(out),
+            "--root",
+            str(repo_root),
+        ],
+        cwd=repo_root,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+
+
 def test_translates_each_scalar_occurrence_and_preserves_destination_source_order(
     attempt05, repo_root
 ):
@@ -96,8 +168,11 @@ def test_translates_each_scalar_occurrence_and_preserves_destination_source_orde
 
     assert ir["schema"] == "runtime-trace-numeric-ir-regular-1step-v1"
     assert set(ir) >= {"schema", "source", "operations", "values"}
-    assert len(ir["operations"]) == 36
-    assert [op["ir_sequence"] for op in ir["operations"]] == list(range(36))
+    expected = _expected_operation_tuples(attempt05)
+    assert _actual_operation_tuples(ir) == expected
+    assert [op["ir_sequence"] for op in ir["operations"]] == list(
+        range(len(expected))
+    )
     assert all(set(op) == OPERATION_KEYS for op in ir["operations"])
 
     operation = next(op for op in ir["operations"] if op["trace_sequence"] == 139)
@@ -182,6 +257,99 @@ def test_trace_raw_hash_mismatch_is_refused(tmp_path, attempt05, repo_root):
 
     with pytest.raises(ConversionRefused, match="trace raw hash"):
         translate(source, root=repo_root)
+
+
+def test_valid_json_capture_with_wrong_top_level_shape_is_cli_refused(
+    tmp_path, attempt05, repo_root
+):
+    source = _clone_source(tmp_path, attempt05)
+    (source / "capture.json").write_text("[]\n")
+
+    with pytest.raises(ConversionRefused, match="capture JSON object"):
+        translate(source, root=repo_root)
+    completed = _run_cli(source, tmp_path / "wrong-shape-out", repo_root)
+    assert completed.returncode == 2
+    assert "Traceback" not in completed.stderr
+    refusal = json.loads(completed.stderr)
+    assert refusal["verdict"] == "REFUSED"
+    assert "capture JSON object" in refusal["reason"]
+
+
+def test_valid_json_trace_row_with_wrong_shape_is_refused(
+    tmp_path, attempt05, repo_root
+):
+    source = _clone_source(tmp_path, attempt05)
+    lines = (source / "trace.jsonl").read_bytes().splitlines()
+    lines[0] = b"[]"
+    stream = b"\n".join(lines) + b"\n"
+    (source / "trace.jsonl").write_bytes(stream)
+    capture = json.loads((source / "capture.json").read_text())
+    capture["trace_sha256"] = hashlib.sha256(stream).hexdigest()
+    (source / "capture.json").write_text(json.dumps(capture) + "\n")
+
+    with pytest.raises(ConversionRefused, match="trace row 0.*object"):
+        translate(source, root=repo_root)
+
+
+@pytest.mark.parametrize(
+    ("field", "value", "reason"),
+    [
+        ("start_seq", 447, "region 0 sequence range"),
+        ("end_seq", -1, "region 0 sequence range"),
+    ],
+)
+def test_out_of_range_region_sequence_is_cli_refused(
+    tmp_path, attempt05, repo_root, field, value, reason
+):
+    source = _clone_source(tmp_path, attempt05)
+    capture = json.loads((source / "capture.json").read_text())
+    capture["regions"][0][field] = value
+    (source / "capture.json").write_text(json.dumps(capture) + "\n")
+
+    with pytest.raises(ConversionRefused, match=reason):
+        translate(source, root=repo_root)
+    completed = _run_cli(source, tmp_path / f"range-{field}-out", repo_root)
+    assert completed.returncode == 2
+    assert "Traceback" not in completed.stderr
+    assert reason in json.loads(completed.stderr)["reason"]
+
+
+def test_out_of_range_boundary_pointer_is_refused(tmp_path, attempt05, repo_root):
+    source = _clone_source(tmp_path, attempt05)
+    capture = json.loads((source / "capture.json").read_text())
+    capture["regions"][0]["pointers"]["gradient"] = 1 << 64
+    (source / "capture.json").write_text(json.dumps(capture) + "\n")
+
+    with pytest.raises(ConversionRefused, match="boundary pointer range"):
+        translate(source, root=repo_root)
+
+
+@pytest.mark.parametrize("gradient_offset", [0, 8])
+def test_overlapping_boundary_ranges_are_refused(
+    tmp_path, attempt05, repo_root, gradient_offset
+):
+    source = _clone_source(tmp_path, attempt05)
+    capture = json.loads((source / "capture.json").read_text())
+    for region in capture["regions"]:
+        region["pointers"]["gradient"] = region["pointers"]["q"] + gradient_offset
+    (source / "capture.json").write_text(json.dumps(capture) + "\n")
+
+    with pytest.raises(ConversionRefused, match="ambiguous boundary memory alias"):
+        translate(source, root=repo_root)
+
+
+@pytest.mark.parametrize(
+    ("pointers", "address", "width"),
+    [
+        ({"q": 0x1000, "gradient": 0x1008}, 0x1008, 8),
+        ({"q": 0x1000, "full_v": 0x1010}, 0x1008, 16),
+    ],
+)
+def test_boundary_storage_resolution_defensively_rejects_multiple_matches(
+    pointers, address, width
+):
+    with pytest.raises(ConversionRefused, match="ambiguous boundary memory alias"):
+        translator_module._resolve_boundary_storage(pointers, address, width)
 
 
 def test_sequence_gap_is_refused_even_after_hashes_are_recomputed(
@@ -289,7 +457,7 @@ def test_translation_does_not_require_mapping_file(
 ):
     assert not (root_without_mapping / "audit/gate2c1/machine_mapping.json").exists()
     ir = translate(attempt05, root=root_without_mapping)
-    assert len(ir["operations"]) == 36
+    assert _actual_operation_tuples(ir) == _expected_operation_tuples(attempt05)
 
 
 def test_translation_succeeds_when_mapping_file_access_is_denied(
@@ -301,7 +469,7 @@ def test_translation_succeeds_when_mapping_file_access_is_denied(
     mapping.chmod(0)
     try:
         ir = translate(attempt05, root=root_without_mapping)
-        assert len(ir["operations"]) == 36
+        assert _actual_operation_tuples(ir) == _expected_operation_tuples(attempt05)
     finally:
         mapping.chmod(0o600)
 
@@ -325,7 +493,7 @@ def test_directory_api_is_exclusive_and_never_leaves_partial_ir(
     assert json.loads((out / "numeric_ir.json").read_text()) == ir
     report = json.loads((out / "conversion_report.json").read_text())
     assert report["verdict"] == "CONVERTED"
-    assert report["operation_count"] == 36
+    assert report["operation_count"] == len(_expected_operation_tuples(attempt05))
     assert report["value_count"] == len(ir["values"])
     with pytest.raises(FileExistsError):
         translate_to_directory(attempt05, out, root=repo_root)
@@ -338,6 +506,23 @@ def test_directory_api_is_exclusive_and_never_leaves_partial_ir(
     with pytest.raises(ConversionRefused):
         translate_to_directory(refused_source, refused_out, root=repo_root)
     assert not refused_out.exists()
+
+
+def test_directory_output_cleans_up_on_ordinary_report_publish_failure(
+    tmp_path, attempt05, repo_root, monkeypatch
+):
+    out = tmp_path / "failed-output"
+    original_replace = Path.replace
+
+    def fail_report_publish(path, target):
+        if path.name == "conversion_report.json":
+            raise OSError("injected report publish failure")
+        return original_replace(path, target)
+
+    monkeypatch.setattr(Path, "replace", fail_report_publish)
+    with pytest.raises(OSError, match="injected report publish failure"):
+        translate_to_directory(attempt05, out, root=repo_root)
+    assert not out.exists()
 
 
 def test_canonical_json_is_stable_and_has_no_diagnostic_source_fields(
@@ -357,23 +542,7 @@ def test_module_cli_creates_output_without_runtime_warning(
     tmp_path, attempt05, repo_root
 ):
     out = tmp_path / "cli-output"
-    completed = subprocess.run(
-        [
-            sys.executable,
-            "-m",
-            "runtime_trace.numeric_ir.translator",
-            "--source",
-            str(attempt05),
-            "--out",
-            str(out),
-            "--root",
-            str(repo_root),
-        ],
-        cwd=repo_root,
-        text=True,
-        capture_output=True,
-        check=False,
-    )
+    completed = _run_cli(attempt05, out, repo_root)
 
     assert completed.returncode == 0
     assert completed.stderr == ""

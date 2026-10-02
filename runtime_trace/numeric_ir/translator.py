@@ -14,6 +14,7 @@ import json
 from pathlib import Path
 import re
 import shutil
+import subprocess
 import sys
 import tempfile
 from typing import Iterable
@@ -73,6 +74,305 @@ def _check_mxcsr(value: object) -> None:
     _require(value & 0x1F80 == 0x1F80, "unsupported MXCSR exception masks")
 
 
+def _integer_in_range(value: object, minimum: int, maximum: int, reason: str) -> int:
+    _require(type(value) is int and minimum <= value <= maximum, reason)
+    return value
+
+
+def _hex_digest(value: object, reason: str) -> str:
+    _require(
+        isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value) is not None,
+        reason,
+    )
+    return value
+
+
+def _object(value: object, reason: str) -> dict:
+    _require(isinstance(value, dict), reason)
+    return value
+
+
+def _required_keys(value: dict, keys: set[str], reason: str) -> None:
+    missing = sorted(keys - value.keys())
+    _require(not missing, f"{reason}: missing {','.join(missing)}")
+
+
+def _validate_context_shape(context: object, row_index: int, label: str) -> None:
+    context = _object(context, f"trace row {row_index} {label} must be an object")
+    _required_keys(
+        context,
+        {"gpr", "xmm", "extra_vectors", "mxcsr", "eflags"},
+        f"trace row {row_index} {label}",
+    )
+    gpr = _object(context["gpr"], f"trace row {row_index} {label}.gpr must be an object")
+    xmm = _object(context["xmm"], f"trace row {row_index} {label}.xmm must be an object")
+    extra = _object(
+        context["extra_vectors"],
+        f"trace row {row_index} {label}.extra_vectors must be an object",
+    )
+    _require("rip" in gpr, f"trace row {row_index} {label}.gpr missing rip")
+    for name, raw_bits in gpr.items():
+        _require(
+            isinstance(name, str)
+            and isinstance(raw_bits, str)
+            and re.fullmatch(r"0x[0-9a-f]{16}", raw_bits) is not None,
+            f"trace row {row_index} {label}.gpr shape",
+        )
+    for collection_name, registers in (("xmm", xmm), ("extra_vectors", extra)):
+        for name, raw_bits in registers.items():
+            _require(
+                isinstance(name, str)
+                and isinstance(raw_bits, str)
+                and re.fullmatch(r"0x[0-9a-f]+", raw_bits) is not None
+                and (len(raw_bits) - 2) % 2 == 0,
+                f"trace row {row_index} {label}.{collection_name} shape",
+            )
+    _integer_in_range(
+        context["mxcsr"], 0, (1 << 32) - 1, f"trace row {row_index} MXCSR range"
+    )
+    _integer_in_range(
+        context["eflags"], 0, (1 << 64) - 1, f"trace row {row_index} eflags range"
+    )
+
+
+def _validate_operand_shape(operand: object, row_index: int, operand_index: int) -> None:
+    label = f"trace row {row_index} operand {operand_index}"
+    operand = _object(operand, f"{label} must be an object")
+    _required_keys(
+        operand, {"kind", "width", "access", "raw_bits", "origins"}, label
+    )
+    _require(
+        operand["kind"] in {"register", "memory", "immediate", "code_address"},
+        f"{label} kind",
+    )
+    width = _integer_in_range(operand["width"], 1, 64, f"{label} width range")
+    _require(
+        operand["access"] in {"read", "write", "read_write", "control"},
+        f"{label} access",
+    )
+    _raw(operand["raw_bits"], width)
+    _require(
+        isinstance(operand["origins"], list) and len(operand["origins"]) == width,
+        f"{label} origins shape",
+    )
+    _require(
+        all(origin is None or isinstance(origin, str) for origin in operand["origins"]),
+        f"{label} origins type",
+    )
+    if operand["kind"] == "register":
+        _require(isinstance(operand.get("register"), str), f"{label} register name")
+    if operand["kind"] == "memory":
+        address = _integer_in_range(
+            operand.get("address"), 0, (1 << 64) - 1, f"{label} address range"
+        )
+        _require(address + width <= 1 << 64, f"{label} address range")
+    if "constant_origin" in operand:
+        origin = _object(operand["constant_origin"], f"{label} constant origin object")
+        _required_keys(origin, {"module_sha256", "file_offset"}, f"{label} constant origin")
+        _hex_digest(origin["module_sha256"], f"{label} constant module SHA-256")
+        _integer_in_range(
+            origin["file_offset"], 0, (1 << 64) - 1, f"{label} constant offset range"
+        )
+
+
+def _validate_row_shape(row: object, row_index: int, row_count: int) -> None:
+    row = _object(row, f"trace row {row_index} must be an object")
+    required = {
+        "seq", "pid", "ptid", "phase", "step", "symbol", "module_path",
+        "module_sha256", "module_load_base", "runtime_pc", "elf_address",
+        "elf_file_offset", "mapping", "bytes", "instruction", "opcode", "kind",
+        "operands", "pre", "post", "post_pc", "changed_gpr_results", "chain",
+    }
+    _required_keys(row, required, f"trace row {row_index}")
+    _integer_in_range(row["seq"], 0, max(0, row_count - 1), f"trace row {row_index} seq range")
+    _integer_in_range(row["pid"], 1, (1 << 63) - 1, f"trace row {row_index} pid range")
+    _require(
+        isinstance(row["ptid"], list)
+        and len(row["ptid"]) == 3
+        and all(type(item) is int and 0 <= item < 1 << 63 for item in row["ptid"]),
+        f"trace row {row_index} ptid shape",
+    )
+    _require(row["phase"] in {"init", "step"}, f"trace row {row_index} phase")
+    _integer_in_range(row["step"], 0, 1, f"trace row {row_index} step range")
+    for field in ("symbol", "module_path", "instruction", "opcode", "kind"):
+        _require(isinstance(row[field], str), f"trace row {row_index} {field} type")
+    _hex_digest(row["module_sha256"], f"trace row {row_index} module SHA-256")
+    _hex_digest(row["chain"], f"trace row {row_index} chain shape")
+    for field in (
+        "module_load_base", "runtime_pc", "elf_address", "elf_file_offset", "post_pc"
+    ):
+        _integer_in_range(
+            row[field], 0, (1 << 64) - 1, f"trace row {row_index} {field} range"
+        )
+    _require(
+        isinstance(row["bytes"], str)
+        and re.fullmatch(r"[0-9a-f]{2,30}", row["bytes"]) is not None
+        and len(row["bytes"]) % 2 == 0,
+        f"trace row {row_index} instruction bytes shape",
+    )
+    mapping = _object(row["mapping"], f"trace row {row_index} mapping object")
+    _required_keys(
+        mapping, {"start", "end", "perms", "file_offset", "path"},
+        f"trace row {row_index} mapping",
+    )
+    start = _integer_in_range(
+        mapping["start"], 0, (1 << 64) - 1, f"trace row {row_index} mapping start"
+    )
+    end = _integer_in_range(
+        mapping["end"], 1, 1 << 64, f"trace row {row_index} mapping end"
+    )
+    _require(start < end, f"trace row {row_index} mapping range")
+    _integer_in_range(
+        mapping["file_offset"], 0, (1 << 64) - 1,
+        f"trace row {row_index} mapping file offset",
+    )
+    _require(
+        isinstance(mapping["perms"], str) and isinstance(mapping["path"], str),
+        f"trace row {row_index} mapping strings",
+    )
+    _require(isinstance(row["operands"], list), f"trace row {row_index} operands list")
+    for operand_index, operand in enumerate(row["operands"]):
+        _validate_operand_shape(operand, row_index, operand_index)
+    if row["kind"] in ARITHMETIC_KINDS | {"MOVE", "STACK", "ZERO", "ZERO_FILL"}:
+        _require(bool(row["operands"]), f"trace row {row_index} destination operand")
+        _require("result_bits" in row, f"trace row {row_index} missing result_bits")
+        _raw(row["result_bits"], row["operands"][-1]["width"])
+    _validate_context_shape(row["pre"], row_index, "pre")
+    _validate_context_shape(row["post"], row_index, "post")
+    _object(
+        row["changed_gpr_results"],
+        f"trace row {row_index} changed_gpr_results must be an object",
+    )
+
+
+def _validate_module_shape(modules: object) -> None:
+    modules = _object(modules, "capture modules must be an object")
+    _require(bool(modules), "capture modules must not be empty")
+    for module_path, module_value in modules.items():
+        _require(isinstance(module_path, str), "capture module path type")
+        module = _object(module_value, f"capture module {module_path} must be an object")
+        _required_keys(
+            module, {"path", "sha256", "load_base", "segments", "wheel_member"},
+            f"capture module {module_path}",
+        )
+        _require(module["path"] == module_path, f"capture module path identity: {module_path}")
+        _hex_digest(module["sha256"], f"capture module SHA-256: {module_path}")
+        _integer_in_range(
+            module["load_base"], 0, (1 << 64) - 1,
+            f"capture module load base: {module_path}",
+        )
+        _require(isinstance(module["segments"], list), f"capture module segments: {module_path}")
+        for segment_index, segment_value in enumerate(module["segments"]):
+            segment = _object(
+                segment_value,
+                f"capture module segment {segment_index}: {module_path}",
+            )
+            _required_keys(
+                segment, {"file_offset", "vaddr", "filesz", "memsz", "flags"},
+                f"capture module segment {segment_index}: {module_path}",
+            )
+            for field in ("file_offset", "vaddr", "filesz", "memsz", "flags"):
+                _integer_in_range(
+                    segment[field], 0, (1 << 64) - 1,
+                    f"capture module segment {field} range: {module_path}",
+                )
+            _require(
+                segment["filesz"] <= segment["memsz"],
+                f"capture module segment file/memory size: {module_path}",
+            )
+        _require(
+            module["wheel_member"] is None or isinstance(module["wheel_member"], str),
+            f"capture module wheel member: {module_path}",
+        )
+
+
+def _validate_region_shape(region_value: object, region_index: int, row_count: int) -> None:
+    region = _object(region_value, f"region {region_index} must be an object")
+    _required_keys(
+        region,
+        {
+            "phase", "entry_pc", "return_pc", "start_seq", "end_seq", "pointers",
+            "start_state", "end_state", "mxcsr",
+        },
+        f"region {region_index}",
+    )
+    _require(region["phase"] in {"init", "step"}, f"region {region_index} phase")
+    start_seq = _integer_in_range(
+        region["start_seq"], 0, row_count, f"region {region_index} sequence range"
+    )
+    end_seq = _integer_in_range(
+        region["end_seq"], 0, row_count, f"region {region_index} sequence range"
+    )
+    _require(start_seq < end_seq, f"region {region_index} sequence range")
+    _integer_in_range(
+        region["entry_pc"], 0, (1 << 64) - 1, f"region {region_index} entry PC range"
+    )
+    _integer_in_range(
+        region["return_pc"], 0, (1 << 64) - 1, f"region {region_index} return PC range"
+    )
+    pointers = _object(region["pointers"], f"region {region_index} pointers object")
+    state_names = {"q", "full_v", "latent", "gradient"}
+    _require(set(pointers) == state_names, f"region {region_index} boundary pointer names")
+    for name, pointer in pointers.items():
+        pointer = _integer_in_range(
+            pointer, 0, (1 << 64) - 1, "boundary pointer range"
+        )
+        _require(pointer + 16 <= 1 << 64, "boundary pointer range")
+    for state_field in ("start_state", "end_state"):
+        state = _object(region[state_field], f"region {region_index} {state_field} object")
+        _require(set(state) == state_names, f"region {region_index} {state_field} names")
+        for raw_bits in state.values():
+            _raw(raw_bits, 16)
+    _integer_in_range(
+        region["mxcsr"], 0, (1 << 32) - 1, f"region {region_index} MXCSR range"
+    )
+
+
+def _validate_decoded_shape(capture: dict, rows: list[dict]) -> None:
+    _required_keys(
+        capture,
+        {
+            "schema", "verdict", "record_count", "scalar_fp_count",
+            "opcode_histogram", "regions", "modules", "trace_sha256", "final_chain",
+            "pending_uncompleted_instruction", "machine_mapping_read_by_tracer",
+        },
+        "capture",
+    )
+    _integer_in_range(
+        capture["record_count"], 0, (1 << 63) - 1, "capture record count range"
+    )
+    _integer_in_range(
+        capture["scalar_fp_count"], 0, capture["record_count"],
+        "capture scalar count range",
+    )
+    _require(isinstance(capture["opcode_histogram"], dict), "capture opcode histogram object")
+    for opcode, count in capture["opcode_histogram"].items():
+        _require(isinstance(opcode, str), "capture opcode histogram key")
+        _integer_in_range(count, 0, capture["record_count"], "capture opcode count range")
+    _hex_digest(capture["trace_sha256"], "capture trace SHA-256 shape")
+    _hex_digest(capture["final_chain"], "capture final chain shape")
+    _require(
+        type(capture["machine_mapping_read_by_tracer"]) is bool,
+        "capture mapping-read flag type",
+    )
+    _require(isinstance(capture["regions"], list), "capture regions must be a list")
+    _validate_module_shape(capture["modules"])
+    for row_index, row in enumerate(rows):
+        _validate_row_shape(row, row_index, len(rows))
+        module = capture["modules"].get(row["module_path"])
+        _require(module is not None, f"trace row {row_index} unknown module path")
+        _require(
+            row["module_sha256"] == module["sha256"],
+            f"trace row {row_index} module SHA-256 identity",
+        )
+        _require(
+            row["module_load_base"] == module["load_base"],
+            f"trace row {row_index} module load base identity",
+        )
+    for region_index, region in enumerate(capture["regions"]):
+        _validate_region_shape(region, region_index, len(rows))
+
+
 def _source_paths(source: Path) -> tuple[Path, Path]:
     source = Path(source)
     if source.is_dir():
@@ -103,6 +403,8 @@ def _read_source(source: Path) -> tuple[Path, bytes, dict, list[dict]]:
         capture = json.loads(capture_path.read_text())
     except (OSError, UnicodeError, json.JSONDecodeError) as exc:
         raise ConversionRefused(f"raw trace/capture read failed: {exc}") from exc
+    _require(isinstance(capture, dict), "capture JSON object required")
+    _hex_digest(capture.get("trace_sha256"), "capture trace SHA-256 shape")
     _require(
         hashlib.sha256(stream).hexdigest() == capture.get("trace_sha256"),
         "trace raw hash mismatch",
@@ -113,6 +415,7 @@ def _read_source(source: Path) -> tuple[Path, bytes, dict, list[dict]]:
         raise ConversionRefused(
             f"trace JSON decoding failed after hash verification: {exc}"
         ) from exc
+    _validate_decoded_shape(capture, rows)
     return trace_path, stream, capture, rows
 
 
@@ -203,7 +506,12 @@ def _independent_raw_checks(rows: list[dict], capture: dict, root: Path) -> dict
         correspondence.verify_linkage(rows, capture["regions"], capture["record_count"])
         decoded = correspondence.disassembly_for_rows(rows, capture["modules"], root)
         for record in rows:
-            reference = decoded[record["module_path"], record["elf_address"]]
+            decode_key = (record["module_path"], record["elf_address"])
+            _require(
+                decode_key in decoded,
+                f"independent disassembly missing instruction at record {record['seq']}",
+            )
+            reference = decoded[decode_key]
             try:
                 opcode, kind, _, width = decode(reference)
             except DecodeRefused as exc:
@@ -224,7 +532,7 @@ def _independent_raw_checks(rows: list[dict], capture: dict, root: Path) -> dict
         return decoded
     except ConversionRefused:
         raise
-    except (KeyError, OSError, ValueError, correspondence.AuditError) as exc:
+    except (OSError, subprocess.SubprocessError, correspondence.AuditError) as exc:
         message = str(exc)
         if "executed instruction byte correspondence" in message:
             message = "module instruction bytes mismatch"
@@ -239,6 +547,17 @@ def _validate_regions(capture: dict, rows: list[dict]) -> list[dict]:
         "region phase order mismatch",
     )
     for region in regions:
+        pointers = region["pointers"]
+        names = sorted(pointers)
+        for index, left_name in enumerate(names):
+            left = pointers[left_name]
+            for right_name in names[index + 1 :]:
+                right = pointers[right_name]
+                _require(
+                    left + 16 <= right or right + 16 <= left,
+                    "ambiguous boundary memory alias: "
+                    f"{left_name} overlaps {right_name} in {region['phase']}",
+                )
         for name in ("q", "full_v", "latent", "gradient"):
             _require(name in region.get("pointers", {}), f"missing {name} boundary pointer")
             _raw(region["start_state"][name], 16)
@@ -274,6 +593,29 @@ def _slice_storage(storage: dict, offset: int, width: int) -> dict:
         storage["byte_offset"] + offset,
         width,
     )
+
+
+def _resolve_boundary_storage(
+    pointers: dict[str, int], address: int, width: int
+) -> dict | None:
+    end = address + width
+    intersections = [
+        (name, base)
+        for name, base in pointers.items()
+        if address < base + 16 and base < end
+    ]
+    _require(
+        len(intersections) <= 1,
+        "ambiguous boundary memory alias during storage resolution",
+    )
+    if not intersections:
+        return None
+    name, base = intersections[0]
+    _require(
+        base <= address and end <= base + 16,
+        "ambiguous boundary memory alias: operand partially overlaps boundary",
+    )
+    return _storage("buffer", name, address - base, width)
 
 
 @dataclass(frozen=True)
@@ -339,9 +681,11 @@ class _Dataflow:
             return _storage("register", keys[0][1], keys[0][2], width)
         if operand["kind"] == "memory":
             address = operand["address"]
-            for name, base in self.region["pointers"].items():
-                if base <= address and address + width <= base + 16:
-                    return _storage("buffer", name, address - base, width)
+            boundary = _resolve_boundary_storage(
+                self.region["pointers"], address, width
+            )
+            if boundary is not None:
+                return boundary
             relative = address - self.entry_rsp
             if abs(relative) <= 1 << 20:
                 return _storage("stack", self.phase, relative, width)
@@ -552,7 +896,7 @@ class _Dataflow:
         )
         try:
             _, image = self.binary_resolver.resolve(digest)
-        except (OSError, ValueError, correspondence.AuditError) as exc:
+        except (OSError, correspondence.AuditError) as exc:
             raise ConversionRefused(str(exc)) from exc
         width = operand["width"]
         data = _raw(operand["raw_bits"], width)
@@ -942,7 +1286,7 @@ def translate(source: Path, root: Path | None = None) -> dict:
 def translate_to_directory(
     source: Path, out: Path, root: Path | None = None
 ) -> dict:
-    """Translate and atomically create a new output directory."""
+    """Translate, exclusively create a new directory, and publish its report last."""
 
     out = Path(out)
     if out.exists():
@@ -971,13 +1315,16 @@ def translate_to_directory(
         )
         out.mkdir()
         try:
-            for child in temporary.iterdir():
-                child.replace(out / child.name)
+            (temporary / "numeric_ir.json").replace(out / "numeric_ir.json")
+            # Completion marker: readers must require this file as well as the IR.
+            (temporary / "conversion_report.json").replace(
+                out / "conversion_report.json"
+            )
             temporary.rmdir()
-        except BaseException:
+        except Exception:
             shutil.rmtree(out, ignore_errors=True)
             raise
-    except BaseException:
+    except Exception:
         shutil.rmtree(temporary, ignore_errors=True)
         raise
     return document

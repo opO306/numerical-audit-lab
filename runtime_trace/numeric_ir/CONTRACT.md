@@ -35,9 +35,18 @@ walking upward to `runtime_trace/frozen_binaries/manifest.json`.
 
 `translate` returns an in-memory document and writes nothing.
 `translate_to_directory` translates first, then exclusively creates `out` and
-writes `numeric_ir.json` plus `conversion_report.json`. Existing `out` raises
-`FileExistsError`. A refused conversion raises `ConversionRefused(ValueError)`
-and does not leave `out` or a successful partial IR file.
+writes `numeric_ir.json` followed by `conversion_report.json`. Existing `out`
+raises `FileExistsError`. A refused conversion raises
+`ConversionRefused(ValueError)` before `out` is created. Ordinary Python
+exceptions during publication trigger best-effort cleanup of the newly reserved
+directory.
+
+This is not an OS-level atomic publication guarantee. Abrupt process or system
+termination can leave an incomplete directory, including `numeric_ir.json`
+without a report. `conversion_report.json` is deliberately published last as
+the completion marker. Readers must require both files and accept the directory
+as successful only when the report has `verdict: CONVERTED` and its source and
+normalized hashes agree with `numeric_ir.json`.
 
 The module CLI is:
 
@@ -242,6 +251,11 @@ Supported spaces are:
 Runtime PCs, load bases, PIDs, process memory addresses, module paths, and
 absolute stack addresses are never serialized into operations or values.
 
+The four 16-byte buffer ranges must be pairwise disjoint in each region. A
+memory operand that intersects a buffer range must fit completely inside
+exactly one buffer. Multiple intersections or a partial intersection are an
+ambiguous boundary alias and refuse conversion.
+
 ### Source-slice objects
 
 Every source slice has exactly:
@@ -337,13 +351,14 @@ sources separately.
 
 ## Refusal requirements
 
-Before emitting IR, translation verifies raw trace hash and hash chain,
-capture completeness, exact sequence and region linkage, pre/post machine
-state linkage, supported instruction forms, scalar widths, finite inputs and
-results, MXCSR controls, packaged module hashes, executable mapping, ELF
-instruction bytes and independent decode, effective addresses, copy/zero
-results, scalar arithmetic results, origin agreement with reconstructed byte
-state, buffer endpoints, and init-to-step state linkage.
+Before emitting IR, translation verifies decoded capture/row/region object
+shape and integer ranges, raw trace hash and hash chain, capture completeness,
+exact sequence and region linkage, pairwise-disjoint 16-byte boundary ranges,
+pre/post machine state linkage, supported instruction forms, scalar widths,
+finite inputs and results, MXCSR controls, packaged module hashes, executable
+mapping, ELF instruction bytes and independent decode, effective addresses,
+copy/zero results, scalar arithmetic results, origin agreement with
+reconstructed byte state, buffer endpoints, and init-to-step state linkage.
 
 Any missing or ambiguous scalar byte producer, unknown opcode/form, raw-bit or
 width mismatch, sequence defect, nonfinite scalar, unsupported MXCSR, module
@@ -363,4 +378,6 @@ operation_count
 value_count
 ```
 
-Only a successful conversion creates this report.
+This report is moved into the output directory after `numeric_ir.json` and is
+the completion marker. A directory without both files is incomplete and must
+not be treated as a successful conversion.
