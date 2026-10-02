@@ -80,3 +80,7 @@ current/runtime_trace_closure_reaudit_evidence.zip -text
 
 # Numeric IR v1: preserve generated evidence bytes.
 runtime_trace/numeric_ir/artifacts/** -text
+
+# Numeric IR independent audit: immutable received bytes.
+current/NUMERIC_IR_REGULAR_1STEP_INDEPENDENT_AUDIT_2026-10-02.md -text
+current/numeric-ir-regular-1step-independent-audit-evidence-2026-10-02.zip -text

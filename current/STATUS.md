@@ -69,12 +69,20 @@ PASS는 **frozen gala 1.12.0 / regular orbit / 1-step / machine execution ↔ ru
 Numeric IR, V2 automatic connection, 10/100-step, 긴 궤적, 범용 x86 tracer 및 물리 정확성의 PASS가 아니다.
 기존 attempt-05, closure evidence, frozen binaries와 과거 감사 결과를 보존한다.
 첫 Numeric IR 입력은 `runtime_trace/artifacts/attempt-05/trace.jsonl`이며 fresh는 별도 교차검증 입력이다.
-이번 승인 범위는 **Runtime Trace → Numeric IR regular 1-step prototype**까지이며 V2 연결과 확대 실행은 하지 않는다.
+당시 승인 범위는 **Runtime Trace → Numeric IR regular 1-step prototype**까지였다.
 현재 구현·실행 명령·trace schema는 [Runtime Trace README](../runtime_trace/README.md)에 있다. Push하지 않는다.
 
 ## Runtime Trace → Numeric IR regular 1-step prototype
 
-**구현 및 별도 checker 검증 PASS — Numeric IR 외부 독립 재감사는 미수행.**
+**Runtime Trace → Numeric IR regular 1-step = CLOSED / PASS.**
+2026-10-02 수령한 [외부 독립 감사 보고서](NUMERIC_IR_REGULAR_1STEP_INDEPENDENT_AUDIT_2026-10-02.md)와
+[원 evidence ZIP](numeric-ir-regular-1step-independent-audit-evidence-2026-10-02.zip)을 원 bytes로 보존한다.
+감사 대상 HEAD는 `d679c8ba32d98e6076708b2b70b93c4eb37f5a49`이며 A1–A12 PASS,
+Critical 0 / Major 0 / Minor 0 / UNRESOLVED 0, Final PASS다.
+PASS 범위는 **frozen gala 1.12.0 / regular orbit / init + 1-step / audited Runtime Trace ↔ Numeric IR**다.
+보고서 SHA-256은 `bee5681667f8ece088cc3c66dba9b02468f7fb871d26ff6f29667f9d03916189`,
+evidence ZIP SHA-256은 `acb9b5294096338b090612616acd4c09562f6420d9a30cd8fdf6ea18e0f10224`다.
+
 첫 입력은 audited attempt-05로 고정했다. 기존 closure-fresh-01은 별도 변환·검사했다.
 두 source 모두 scalar arithmetic 36개 ↔ IR arithmetic 36개, value node 254개,
 누락/중복/extra/재배열 0이며 전체 producer/storage/byte-slice를 포함한 normalized IR이 일치한다.
@@ -84,5 +92,11 @@ Numeric IR, V2 automatic connection, 10/100-step, 긴 궤적, 범용 x86 tracer 
 
 정확한 scope·입력 hash·결과·한계·명령은 [Numeric IR 결과](../runtime_trace/numeric_ir/README.md)에 한 곳으로 기록했다.
 phase-boundary COPY는 캡처된 endpoint/start의 상태 연결이며 캡처 밖 caller의 실행 증명이 아니다.
-이 구현 판정은 기존 Runtime Trace 독립 재감사 PASS를 상속한 외부 감사 판정이 아니다.
-V2 연결, 10/100-step, 일반 x86/FP 확장 및 물리 인증으로 확대하지 않는다. Push하지 않았다.
+이번 독립 감사는 machine bytes를 별도로 decode하고 전체 value/provenance를 재구성하여 현재 frozen trace를 검증했다.
+production translator/checker의 shared decoder에 관한 PASS를 미래 instruction form으로 확대하지 않는다.
+감사자가 별도 snapshot에서 새로 재현한 시험은 plugin autoload를 끄고 전용 94 / 전체 관련 410 PASS다.
+V2 연결, 10/100-step, 일반 x86/FP 확장 및 물리 인증의 PASS가 아니다.
+
+다음 승인 범위는 **audited Numeric IR → frozen V2 operation layer regular init + 1-step prototype**다.
+frozen V2와 감사 완료된 Numeric IR 및 Runtime Trace를 수정하지 않는다. 새 adapter의 상태는 구현·checker 검증과
+외부 독립 감사를 구분하여 기록한다. Push하지 않는다.
