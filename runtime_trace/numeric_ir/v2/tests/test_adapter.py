@@ -5,6 +5,8 @@ import hashlib
 import json
 import math
 import shutil
+import subprocess
+import sys
 from collections import Counter
 from pathlib import Path
 
@@ -273,3 +275,64 @@ def test_invalid_frozen_v2_output_is_refused(
     expected = "output linkage missing" if mode == "missing" else "invalid Form"
     with pytest.raises(AdapterRefused, match=expected):
         adapt(audited_ir_path, root=repo_root)
+
+
+@pytest.mark.parametrize(
+    "payload",
+    [
+        b'{"schema":' + (b"9" * 5000) + b"}",
+        (b"[" * 20000) + (b"]" * 20000),
+    ],
+    ids=["integer-digit-limit", "recursive-nesting"],
+)
+def test_parser_resource_failures_are_adapter_refusals(
+    adapter_api, repo_root: Path, tmp_path: Path, payload: bytes
+) -> None:
+    AdapterRefused, adapt, _ = adapter_api
+    malformed = tmp_path / "malformed.json"
+    malformed.write_bytes(payload)
+
+    with pytest.raises(AdapterRefused, match="malformed Numeric IR JSON"):
+        adapt(malformed, root=repo_root)
+
+
+@pytest.mark.parametrize(
+    "payload",
+    [
+        b'{"schema":' + (b"9" * 5000) + b"}",
+        (b"[" * 20000) + (b"]" * 20000),
+    ],
+    ids=["integer-digit-limit", "recursive-nesting"],
+)
+def test_cli_resource_parse_failure_is_json_refused_without_traceback_or_output(
+    repo_root: Path, tmp_path: Path, payload: bytes
+) -> None:
+    malformed = tmp_path / "resource-failure.json"
+    malformed.write_bytes(payload)
+    out = tmp_path / "must-not-exist"
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "runtime_trace.numeric_ir.v2.adapter",
+            "--ir",
+            str(malformed),
+            "--out",
+            str(out),
+            "--root",
+            str(repo_root),
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 2
+    assert result.stdout == ""
+    assert "Traceback" not in result.stderr
+    refusal = json.loads(result.stderr)
+    assert refusal["verdict"] == "REFUSED"
+    assert "malformed Numeric IR JSON" in refusal["reason"]
+    assert not out.exists()

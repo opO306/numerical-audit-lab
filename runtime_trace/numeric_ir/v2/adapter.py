@@ -149,7 +149,7 @@ def _read_json(path: Path) -> tuple[dict, bytes]:
         value = json.loads(raw, object_pairs_hook=_strict_pairs)
     except AdapterRefused:
         raise
-    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+    except (UnicodeDecodeError, ValueError, RecursionError) as exc:
         _refuse(f"malformed Numeric IR JSON: {exc}")
     if type(value) is not dict:
         _refuse("Numeric IR top level must be an object")
