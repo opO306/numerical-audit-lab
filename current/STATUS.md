@@ -71,3 +71,18 @@ Numeric IR, V2 automatic connection, 10/100-step, 긴 궤적, 범용 x86 tracer 
 첫 Numeric IR 입력은 `runtime_trace/artifacts/attempt-05/trace.jsonl`이며 fresh는 별도 교차검증 입력이다.
 이번 승인 범위는 **Runtime Trace → Numeric IR regular 1-step prototype**까지이며 V2 연결과 확대 실행은 하지 않는다.
 현재 구현·실행 명령·trace schema는 [Runtime Trace README](../runtime_trace/README.md)에 있다. Push하지 않는다.
+
+## Runtime Trace → Numeric IR regular 1-step prototype
+
+**구현 및 별도 checker 검증 PASS — Numeric IR 외부 독립 재감사는 미수행.**
+첫 입력은 audited attempt-05로 고정했다. 기존 closure-fresh-01은 별도 변환·검사했다.
+두 source 모두 scalar arithmetic 36개 ↔ IR arithmetic 36개, value node 254개,
+누락/중복/extra/재배열 0이며 전체 producer/storage/byte-slice를 포함한 normalized IR이 일치한다.
+재해시한 IR 공격 19종, raw kind-label 재서명 공격, 타입 혼동 회귀 18개를 검사했다.
+새 artifact 생성 뒤 전체 관련 pytest는 **410 passed in 103.63s**다.
+기존 증거 141개 파일의 SHA-256·size는 보존 검사 PASS다.
+
+정확한 scope·입력 hash·결과·한계·명령은 [Numeric IR 결과](../runtime_trace/numeric_ir/README.md)에 한 곳으로 기록했다.
+phase-boundary COPY는 캡처된 endpoint/start의 상태 연결이며 캡처 밖 caller의 실행 증명이 아니다.
+이 구현 판정은 기존 Runtime Trace 독립 재감사 PASS를 상속한 외부 감사 판정이 아니다.
+V2 연결, 10/100-step, 일반 x86/FP 확장 및 물리 인증으로 확대하지 않는다. Push하지 않았다.

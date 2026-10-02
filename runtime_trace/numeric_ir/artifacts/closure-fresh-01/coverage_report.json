@@ -1,0 +1,35 @@
+{
+  "arithmetic_input_edges": 72,
+  "copy_slice_edges": 140,
+  "duplicate": 0,
+  "exact_ordered_occurrence_list_equal": true,
+  "extra": 0,
+  "full_machine_records": 446,
+  "ir_arithmetic_nodes": 36,
+  "ir_sha256": "c34576f87bd4abc5bdc5fc2f67e68251ec30d5659776ade984fd15ab2bcb5296",
+  "missing": 0,
+  "normalized_numeric_sha256": "1ba19c48b8f812ad91ccaf8ebe5d930f6d510967f0589f8e91affcbc16bdd8f2",
+  "operations_by_kind": {
+    "ADD_BINARY64": 12,
+    "MUL_BINARY64": 16,
+    "SUB_BINARY64": 8
+  },
+  "operations_by_phase": {
+    "init": 14,
+    "step": 22
+  },
+  "provenance_edges_total": 212,
+  "reorder": 0,
+  "runtime_arithmetic_occurrences": 36,
+  "schema": "numeric-ir-generated-coverage-v1",
+  "source_trace_sha256": "e0bd088e844561ef6752b6498d734e32d94d20ae0abbfc7853b0fd85504cad86",
+  "value_nodes": 254,
+  "values_by_kind": {
+    "ARITHMETIC_RESULT": 36,
+    "CONST_BITS": 2,
+    "COPY_BITS": 135,
+    "LOAD_BITS": 9,
+    "ZERO_BITS": 72
+  },
+  "verdict": "PASS"
+}

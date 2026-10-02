@@ -77,3 +77,6 @@ runtime_trace/frozen_binaries/** -text
 runtime_trace/artifacts/closure-fresh-01/** -text
 current/RUNTIME_TRACE_CLOSURE_REAUDIT_REPORT.md -text
 current/runtime_trace_closure_reaudit_evidence.zip -text
+
+# Numeric IR v1: preserve generated evidence bytes.
+runtime_trace/numeric_ir/artifacts/** -text

@@ -1,0 +1,8 @@
+{
+  "normalized_numeric_sha256": "1ba19c48b8f812ad91ccaf8ebe5d930f6d510967f0589f8e91affcbc16bdd8f2",
+  "operation_count": 36,
+  "schema": "runtime-trace-numeric-ir-check-report-v1",
+  "source_trace_sha256": "fec0379874f2a3ae792f041d553dd34533f90b02ad9bcf9d43cb022ef03e149c",
+  "value_count": 254,
+  "verdict": "PASS"
+}
