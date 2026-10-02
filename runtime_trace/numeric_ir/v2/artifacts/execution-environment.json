@@ -1,0 +1,11 @@
+{
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "python_executable": "/home/otherside123/venvs/gate2c1-trace/bin/python",
+  "pytest_disable_plugin_autoload": "1",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "float_radix": 2,
+  "float_mant_dig": 53,
+  "double_bytes": 8,
+  "new_acquisition": false
+}

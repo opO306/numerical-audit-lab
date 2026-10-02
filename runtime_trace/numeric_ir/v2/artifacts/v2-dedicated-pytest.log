@@ -1,0 +1,36 @@
+Integration collection fix
+
+Repository:
+  /mnt/d/numerical-audit-lab-recovered-2026-10-01
+
+Starting HEAD:
+  6b3ea1e8fae23c4f20d023cbbe3ad55429a33dbe
+
+Reason:
+  The exact combined pytest command collected existing Numeric IR tests and the new
+  V2 tests into one import mode. Three duplicate Python module basenames collided:
+  test_checker.py, test_mutations.py and test_normalization.py.
+
+Change (git mv only; contents preserved):
+  runtime_trace/numeric_ir/v2/tests/test_checker.py
+    -> runtime_trace/numeric_ir/v2/tests/test_v2_checker.py
+  runtime_trace/numeric_ir/v2/tests/test_mutations.py
+    -> runtime_trace/numeric_ir/v2/tests/test_v2_mutations.py
+  runtime_trace/numeric_ir/v2/tests/test_normalization.py
+    -> runtime_trace/numeric_ir/v2/tests/test_v2_normalization.py
+
+Reference scan:
+  rg found no runtime or test references to the old module paths/basenames.
+
+Command:
+  PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
+  /home/otherside123/venvs/gate2c1-trace/bin/python -m pytest \
+  runtime_trace/numeric_ir/v2/tests -q
+
+Result:
+  ................................................................. [100%]
+  65 passed in 4.60s
+
+Skipped: 0
+Xfailed: 0
+Production changes: none

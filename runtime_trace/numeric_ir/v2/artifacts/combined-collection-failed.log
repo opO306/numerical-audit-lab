@@ -1,0 +1,29 @@
+
+==================================== ERRORS ====================================
+______ ERROR collecting runtime_trace/numeric_ir/v2/tests/test_checker.py ______
+import file mismatch:
+imported module 'test_checker' has this __file__ attribute:
+  /mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/numeric_ir/tests/test_checker.py
+which is not the same as the test file we want to collect:
+  /mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/numeric_ir/v2/tests/test_checker.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+_____ ERROR collecting runtime_trace/numeric_ir/v2/tests/test_mutations.py _____
+import file mismatch:
+imported module 'test_mutations' has this __file__ attribute:
+  /mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/numeric_ir/tests/test_mutations.py
+which is not the same as the test file we want to collect:
+  /mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/numeric_ir/v2/tests/test_mutations.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+___ ERROR collecting runtime_trace/numeric_ir/v2/tests/test_normalization.py ___
+import file mismatch:
+imported module 'test_normalization' has this __file__ attribute:
+  /mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/numeric_ir/tests/test_normalization.py
+which is not the same as the test file we want to collect:
+  /mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/numeric_ir/v2/tests/test_normalization.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+=========================== short test summary info ============================
+ERROR runtime_trace/numeric_ir/v2/tests/test_checker.py
+ERROR runtime_trace/numeric_ir/v2/tests/test_mutations.py
+ERROR runtime_trace/numeric_ir/v2/tests/test_normalization.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 3 errors during collection !!!!!!!!!!!!!!!!!!!!
+3 errors in 3.77s

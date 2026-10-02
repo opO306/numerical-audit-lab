@@ -100,3 +100,35 @@ V2 연결, 10/100-step, 일반 x86/FP 확장 및 물리 인증의 PASS가 아니
 다음 승인 범위는 **audited Numeric IR → frozen V2 operation layer regular init + 1-step prototype**다.
 frozen V2와 감사 완료된 Numeric IR 및 Runtime Trace를 수정하지 않는다. 새 adapter의 상태는 구현·checker 검증과
 외부 독립 감사를 구분하여 기록한다. Push하지 않는다.
+
+## Numeric IR → frozen V2 regular init + 1-step — 2026-10-03
+
+**Numeric IR → V2 regular 1-step = IMPLEMENTED / CHECKER PASS.**
+**INDEPENDENT AUDIT PENDING.** 외부 독립 감사 전에는 CLOSED / PASS로 올리지 않는다.
+선행 Runtime Trace → Numeric IR의 위 CLOSED / PASS는 별도 범위로 유지한다.
+
+첫 audited attempt-05 Numeric IR의 출력 파일을 생성·검사한 뒤 closure-fresh-01을 별도로
+통과시켰다. 각 입력은 IR arithmetic 36개 ↔ 실제 frozen V2 arithmetic 36개,
+ADD 12 / SUB 8 / MUL 16, value 254개 / state binding 176개 / boundary 12개다.
+독립 checker는 adapter 핵심 함수를 사용하지 않고 전체 대응을 재구성했으며 두 출력 모두 PASS다.
+Missing/duplicate/extra/reorder는 모두 0이고, 같은 raw bits의 다른 dynamic value ID를 유지한다.
+Boundary는 captured root 9개와 handoff COPY 3개이며 `trace_sequence=null`인 COPY를 산술로 만들지 않는다.
+
+전체 normalized correspondence는 EQUAL이며 SHA-256은
+`1493fd071d6be290bb4736fdd36b8723334793c308896998b5c7cf88b9a690a6`다.
+17개 semantic mutation과 completion hash까지 수리한 CLI 공격을 모두 거부했다.
+새 전용 테스트 65 PASS, 요청한 전체 통합 테스트 **475 passed in 104.09s**, skip/xfail 0이다.
+WSL Python 3.12.3, `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1`로 실행했다.
+첫 통합 collection error는 새 테스트 모듈 3개를 이름만 바꿔 해결했고 실패 로그를 보존했다.
+
+Frozen V2 source/interface/계약, 기존 Trace와 Numeric IR은 변경하지 않았다.
+요청된 상태·Git attributes 변경을 제외한 기존 tracked 파일 759개의 원본 SHA/size 보존 검사 PASS다.
+V2에 전달한 center는 IR 원본 bits이며 실제 V2 계산은 error Form 전파다.
+Boundary의 Form 전달은 선언된 IR 모델이며 캡처 밖 caller 실행·rounding·error continuity 증명이 아니다.
+이 prototype은 정확히 두 감사된 IR byte identity에 한정한다.
+10/100-step, chaotic/long trajectory, horizon, V2.1, 새 bound, 범용 opcode 및 물리 인증은 수행하지 않았다.
+
+입력 hash, 실제 output/checker/비교, mutation/pytest, 재현 명령과 한계는
+[V2 연결 구현 보고](../runtime_trace/numeric_ir/v2/README.md)에 기록했다.
+로컬 브랜치는 `numeric-ir-v2-regular-1step`, 시작 HEAD는
+`d679c8ba32d98e6076708b2b70b93c4eb37f5a49`다. Push하지 않았다.

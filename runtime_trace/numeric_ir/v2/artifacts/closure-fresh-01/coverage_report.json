@@ -1,0 +1,22 @@
+{
+  "boundary_classifications": {
+    "CAPTURED_INPUT_ROOT": 9,
+    "CAPTURED_STATE_HANDOFF": 3
+  },
+  "boundary_count": 12,
+  "duplicate": 0,
+  "extra": 0,
+  "ir_arithmetic_count": 36,
+  "ir_value_count": 254,
+  "missing": 0,
+  "operation_kinds": {
+    "ADD": 12,
+    "MUL": 16,
+    "SUB": 8
+  },
+  "reorder": 0,
+  "source": "closure-fresh-01",
+  "state_binding_count": 176,
+  "v2_arithmetic_count": 36,
+  "verdict": "PASS"
+}

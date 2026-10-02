@@ -1,0 +1,83 @@
+{
+  "actual_pytest_totals": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 475
+  },
+  "files": {
+    "attempt-05/checker_report.json": {
+      "bytes": 631,
+      "sha256": "b897421678e3b9b77bc9070229c3d3a2838fac757100c4e93fd17ca6f21e3f72"
+    },
+    "attempt-05/completion_report.json": {
+      "bytes": 425,
+      "sha256": "7b8a937048ba369c506a1b836e2792c6f89f169fda0b7b5d56ffe4af16554d76"
+    },
+    "attempt-05/correspondence.json": {
+      "bytes": 221823,
+      "sha256": "3edd42937e58c7655dc951d3683802ffddd5ae7cbfda27c5793d6cb42c7d35f3"
+    },
+    "attempt-05/coverage_report.json": {
+      "bytes": 421,
+      "sha256": "12adbb17ff61c3b9aee2bb0c2ec50677244e35d5525206e296cc634393e0adc3"
+    },
+    "closure-fresh-01/checker_report.json": {
+      "bytes": 631,
+      "sha256": "c24112fa7f472d0f73e9e12566d0a7f7aefb7a5a130a0a78be6a0abb41a6f3b2"
+    },
+    "closure-fresh-01/completion_report.json": {
+      "bytes": 425,
+      "sha256": "ea61583c0b604bffb2fc7e48fa4d9ec743b3c71f0924a2aafb64559153341245"
+    },
+    "closure-fresh-01/correspondence.json": {
+      "bytes": 221835,
+      "sha256": "a692db2f6f3b5b9a45de71cf8516fef4c8d2cdc8b173c6cdb20259c5812c572f"
+    },
+    "closure-fresh-01/coverage_report.json": {
+      "bytes": 427,
+      "sha256": "ce6bc50876808dc06f21cccd5bcbcb2ddd4558b6675e9f112a3ee236c79067a4"
+    },
+    "combined-collection-failed.log": {
+      "bytes": 2030,
+      "sha256": "793bd3a9677bef3f7e57395fc2f8027238dde07c79efbd2467884c7a79e5f77a"
+    },
+    "combined-collection-failed.xml": {
+      "bytes": 2005,
+      "sha256": "8cc14bc722b24c322fd2417c1862ed78ae35bde764c8b6264bfdf80d20073742"
+    },
+    "combined-pytest.log": {
+      "bytes": 600,
+      "sha256": "d63fee64a14eb3ec2c431e203294891260e17d73418bdb2cf4c63ac1fb7cefb7"
+    },
+    "combined-pytest.xml": {
+      "bytes": 65097,
+      "sha256": "6341fca1b9d6a022af4b24b1f40c3a623f0feebe09c0626250614183d6d91d05"
+    },
+    "execution-environment.json": {
+      "bytes": 379,
+      "sha256": "13bf3b712435359f73f730e4586344c0c3fcb67d6b50496a5ab606d6740b1950"
+    },
+    "integration.log": {
+      "bytes": 2215,
+      "sha256": "4fa74bd414019eb98fd021a184aec7424d2e46f5ad008608eb92d806055c0fc8"
+    },
+    "mutation-results.json": {
+      "bytes": 3932,
+      "sha256": "0d950ce49ca588cf8dc1198b9fd309f9cf3a6280312e7e937f28d98a0dcf063d"
+    },
+    "normalized_comparison.json": {
+      "bytes": 177,
+      "sha256": "dfbfc5488302e0c8803d0526d4b3ba3390e9f48a35af7729f8d6be6de1fe651d"
+    },
+    "protected-after.json": {
+      "bytes": 75,
+      "sha256": "c5e23040fde070176396c9835e1d2c851e7f43f9cda1dd332dbcb2c2589f7538"
+    },
+    "v2-dedicated-pytest.log": {
+      "bytes": 1180,
+      "sha256": "0f0e2fd7cd63bda3ec8835def9d2fd6ebf7a2472a9397ce7242f27e2c726af8a"
+    }
+  },
+  "schema": "numeric-ir-v2-artifact-manifest-v1"
+}

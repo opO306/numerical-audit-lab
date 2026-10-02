@@ -1,0 +1,19 @@
+{
+  "boundary_count": 12,
+  "correspondence_sha256": "a692db2f6f3b5b9a45de71cf8516fef4c8d2cdc8b173c6cdb20259c5812c572f",
+  "ir_to_v2_duplicate": 0,
+  "ir_to_v2_extra": 0,
+  "ir_to_v2_missing": 0,
+  "ir_to_v2_reorder": 0,
+  "operation_count": 36,
+  "operation_kind_counts": {
+    "ADD": 12,
+    "MUL": 16,
+    "SUB": 8
+  },
+  "schema": "numeric-ir-frozen-v2-check-report-v1",
+  "source_normalized_numeric_sha256": "1ba19c48b8f812ad91ccaf8ebe5d930f6d510967f0589f8e91affcbc16bdd8f2",
+  "source_numeric_ir_sha256": "c34576f87bd4abc5bdc5fc2f67e68251ec30d5659776ade984fd15ab2bcb5296",
+  "state_binding_count": 176,
+  "verdict": "PASS"
+}

@@ -84,3 +84,8 @@ runtime_trace/numeric_ir/artifacts/** -text
 # Numeric IR independent audit: immutable received bytes.
 current/NUMERIC_IR_REGULAR_1STEP_INDEPENDENT_AUDIT_2026-10-02.md -text
 current/numeric-ir-regular-1step-independent-audit-evidence-2026-10-02.zip -text
+
+# Numeric IR to frozen V2: preserve generated evidence bytes.
+runtime_trace/numeric_ir/v2/artifacts/** -text
+# Raw PowerShell logs contain CRLF; retain bytes and recognize CR at EOL.
+runtime_trace/numeric_ir/v2/artifacts/*.log whitespace=cr-at-eol

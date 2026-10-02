@@ -1,0 +1,89 @@
+{
+  "schema": "numeric-ir-v2-mutation-test-results-v1",
+  "source_log": "combined-pytest.xml",
+  "interpretation": "Each passing behavioral rejection test observed its expected failure/refusal; this is executed test evidence, not an independent audit.",
+  "environment": {
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+  },
+  "test_count": 19,
+  "passed": 19,
+  "nonpass": 0,
+  "tests": [
+    {
+      "test_id": "runtime_trace.numeric_ir.v2.tests.test_v2_mutations::test_checker_rejects_coordinated_semantic_attack[mutate_add_to_mul]",
+      "outcome": "passed"
+    },
+    {
+      "test_id": "runtime_trace.numeric_ir.v2.tests.test_v2_mutations::test_checker_rejects_coordinated_semantic_attack[mutate_delete_operation]",
+      "outcome": "passed"
+    },
+    {
+      "test_id": "runtime_trace.numeric_ir.v2.tests.test_v2_mutations::test_checker_rejects_coordinated_semantic_attack[mutate_duplicate_operation]",
+      "outcome": "passed"
+    },
+    {
+      "test_id": "runtime_trace.numeric_ir.v2.tests.test_v2_mutations::test_checker_rejects_coordinated_semantic_attack[mutate_reorder_operations]",
+      "outcome": "passed"
+    },
+    {
+      "test_id": "runtime_trace.numeric_ir.v2.tests.test_v2_mutations::test_checker_rejects_coordinated_semantic_attack[mutate_swap_operand_identities]",
+      "outcome": "passed"
+    },
+    {
+      "test_id": "runtime_trace.numeric_ir.v2.tests.test_v2_mutations::test_checker_rejects_coordinated_semantic_attack[mutate_same_bits_distinct_dynamic_id]",
+      "outcome": "passed"
+    },
+    {
+      "test_id": "runtime_trace.numeric_ir.v2.tests.test_v2_mutations::test_checker_rejects_coordinated_semantic_attack[mutate_result_value_id]",
+      "outcome": "passed"
+    },
+    {
+      "test_id": "runtime_trace.numeric_ir.v2.tests.test_v2_mutations::test_checker_rejects_coordinated_semantic_attack[mutate_operand_bits]",
+      "outcome": "passed"
+    },
+    {
+      "test_id": "runtime_trace.numeric_ir.v2.tests.test_v2_mutations::test_checker_rejects_coordinated_semantic_attack[mutate_trace_sequence]",
+      "outcome": "passed"
+    },
+    {
+      "test_id": "runtime_trace.numeric_ir.v2.tests.test_v2_mutations::test_checker_rejects_coordinated_semantic_attack[mutate_boundary_copy_as_arithmetic]",
+      "outcome": "passed"
+    },
+    {
+      "test_id": "runtime_trace.numeric_ir.v2.tests.test_v2_mutations::test_checker_rejects_coordinated_semantic_attack[mutate_hide_arithmetic_as_initialization]",
+      "outcome": "passed"
+    },
+    {
+      "test_id": "runtime_trace.numeric_ir.v2.tests.test_v2_mutations::test_checker_rejects_coordinated_semantic_attack[mutate_extra_operation]",
+      "outcome": "passed"
+    },
+    {
+      "test_id": "runtime_trace.numeric_ir.v2.tests.test_v2_mutations::test_checker_rejects_coordinated_semantic_attack[mutate_state_coefficient]",
+      "outcome": "passed"
+    },
+    {
+      "test_id": "runtime_trace.numeric_ir.v2.tests.test_v2_mutations::test_checker_rejects_coordinated_semantic_attack[mutate_state_box]",
+      "outcome": "passed"
+    },
+    {
+      "test_id": "runtime_trace.numeric_ir.v2.tests.test_v2_mutations::test_checker_rejects_coordinated_semantic_attack[mutate_output_state_link]",
+      "outcome": "passed"
+    },
+    {
+      "test_id": "runtime_trace.numeric_ir.v2.tests.test_v2_mutations::test_checker_rejects_coordinated_semantic_attack[mutate_boundary_classification]",
+      "outcome": "passed"
+    },
+    {
+      "test_id": "runtime_trace.numeric_ir.v2.tests.test_v2_mutations::test_checker_rejects_coordinated_semantic_attack[mutate_hidden_arithmetic_root]",
+      "outcome": "passed"
+    },
+    {
+      "test_id": "runtime_trace.numeric_ir.v2.tests.test_v2_mutations::test_checker_rejects_noncanonical_form_hex",
+      "outcome": "passed"
+    },
+    {
+      "test_id": "runtime_trace.numeric_ir.v2.tests.test_v2_mutations::test_checker_rejects_overflowing_form_hex_as_explicit_check_error",
+      "outcome": "passed"
+    }
+  ]
+}

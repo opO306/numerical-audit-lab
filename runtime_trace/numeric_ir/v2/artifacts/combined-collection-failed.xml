@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="3" failures="0" skipped="0" tests="3" time="3.743" timestamp="2026-10-03T00:57:28.077367+09:00" hostname="localhost"><testcase classname="" name="runtime_trace.numeric_ir.v2.tests.test_checker" time="0.000"><error message="collection failure">import file mismatch:
+imported module 'test_checker' has this __file__ attribute:
+  /mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/numeric_ir/tests/test_checker.py
+which is not the same as the test file we want to collect:
+  /mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/numeric_ir/v2/tests/test_checker.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules</error></testcase><testcase classname="" name="runtime_trace.numeric_ir.v2.tests.test_mutations" time="0.000"><error message="collection failure">import file mismatch:
+imported module 'test_mutations' has this __file__ attribute:
+  /mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/numeric_ir/tests/test_mutations.py
+which is not the same as the test file we want to collect:
+  /mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/numeric_ir/v2/tests/test_mutations.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules</error></testcase><testcase classname="" name="runtime_trace.numeric_ir.v2.tests.test_normalization" time="0.000"><error message="collection failure">import file mismatch:
+imported module 'test_normalization' has this __file__ attribute:
+  /mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/numeric_ir/tests/test_normalization.py
+which is not the same as the test file we want to collect:
+  /mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/numeric_ir/v2/tests/test_normalization.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules</error></testcase></testsuite></testsuites>
