@@ -1,0 +1,39 @@
+........................................................................ [ 15%]
+........................................................................ [ 30%]
+........................................................................ [ 45%]
+........................................................................ [ 60%]
+........................................................................ [ 75%]
+.....................................................................F.. [ 90%]
+...............................................                          [100%]
+=================================== FAILURES ===================================
+___ test_parser_resource_failures_are_adapter_refusals[integer-digit-limit] ____
+
+adapter_api = (<class 'runtime_trace.numeric_ir.v2.adapter.AdapterRefused'>, <function adapt at 0x7c9eca0b7ba0>, <function adapt_to_directory at 0x7c9eca0b7ec0>)
+repo_root = PosixPath('/mnt/d/numerical-audit-lab-recovered-2026-10-01')
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-1/test_parser_resource_failures_0')
+payload = b'{"schema":9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999...999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999}'
+
+    @pytest.mark.parametrize(
+        "payload",
+        [
+            b'{"schema":' + (b"9" * 5000) + b"}",
+            (b"[" * 20000) + (b"]" * 20000),
+        ],
+        ids=["integer-digit-limit", "recursive-nesting"],
+    )
+    def test_parser_resource_failures_are_adapter_refusals(
+        adapter_api, repo_root: Path, tmp_path: Path, payload: bytes
+    ) -> None:
+        AdapterRefused, adapt, _ = adapter_api
+        malformed = tmp_path / "malformed.json"
+        malformed.write_bytes(payload)
+    
+>       with pytest.raises(AdapterRefused, match="malformed Numeric IR JSON"):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'malformed Numeric IR JSON'
+E         Actual message: 'Numeric IR keys are malformed'
+
+runtime_trace/numeric_ir/v2/tests/test_adapter.py:295: AssertionError
+=========================== short test summary info ============================
+FAILED runtime_trace/numeric_ir/v2/tests/test_adapter.py::test_parser_resource_failures_are_adapter_refusals[integer-digit-limit]
+1 failed, 478 passed in 106.44s (0:01:46)

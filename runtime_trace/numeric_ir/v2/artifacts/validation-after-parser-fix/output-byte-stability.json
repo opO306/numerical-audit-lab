@@ -1,0 +1,14 @@
+{
+  "original_manifest_payloads_unchanged": 18,
+  "sources": {
+    "attempt-05": {
+      "correspondence_sha256": "3edd42937e58c7655dc951d3683802ffddd5ae7cbfda27c5793d6cb42c7d35f3",
+      "verdict": "BYTE_IDENTICAL"
+    },
+    "closure-fresh-01": {
+      "correspondence_sha256": "a692db2f6f3b5b9a45de71cf8516fef4c8d2cdc8b173c6cdb20259c5812c572f",
+      "verdict": "BYTE_IDENTICAL"
+    }
+  },
+  "verdict": "PASS"
+}

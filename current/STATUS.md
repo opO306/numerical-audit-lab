@@ -117,9 +117,14 @@ Boundary는 captured root 9개와 handoff COPY 3개이며 `trace_sequence=null`�
 전체 normalized correspondence는 EQUAL이며 SHA-256은
 `1493fd071d6be290bb4736fdd36b8723334793c308896998b5c7cf88b9a690a6`다.
 17개 semantic mutation과 completion hash까지 수리한 CLI 공격을 모두 거부했다.
-새 전용 테스트 65 PASS, 요청한 전체 통합 테스트 **475 passed in 104.09s**, skip/xfail 0이다.
+최종 전용 테스트 **69 passed in 5.84s**, 요청한 전체 통합 테스트 **479 passed in 103.62s**, skip/xfail 0이다.
 WSL Python 3.12.3, `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1`로 실행했다.
 첫 통합 collection error는 새 테스트 모듈 3개를 이름만 바꿔 해결했고 실패 로그를 보존했다.
+최종 코드 검토에서 발견한 adapter JSON 자원 제한 오류는 명시적 REFUSED로 수정하고
+public/별도 CLI 회귀 시험 4개를 추가했다. 수정 후 통합의 과도한 direct-test 오류 문구 실패도
+시험에서 바로잡았다. 두 실패 실행, 초기 475 PASS evidence와 모든 기존 correspondence는 보존했다.
+정상 출력 재생성 bytes는 두 source 모두 기존 파일과 동일하고 독립 checker PASS / normalized EQUAL이다.
+수정 후 최종 검증은 새 `validation-after-parser-fix` 디렉터리에 저장했다.
 
 Frozen V2 source/interface/계약, 기존 Trace와 Numeric IR은 변경하지 않았다.
 요청된 상태·Git attributes 변경을 제외한 기존 tracked 파일 759개의 원본 SHA/size 보존 검사 PASS다.

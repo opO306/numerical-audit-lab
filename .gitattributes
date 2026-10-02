@@ -89,3 +89,5 @@ current/numeric-ir-regular-1step-independent-audit-evidence-2026-10-02.zip -text
 runtime_trace/numeric_ir/v2/artifacts/** -text
 # Raw PowerShell logs contain CRLF; retain bytes and recognize CR at EOL.
 runtime_trace/numeric_ir/v2/artifacts/*.log whitespace=cr-at-eol
+# Raw failure excerpts retain the source indentation on blank lines.
+runtime_trace/numeric_ir/v2/artifacts/validation-after-parser-fix/first-post-fix-combined-failed.* whitespace=-blank-at-eol

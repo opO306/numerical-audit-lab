@@ -92,21 +92,38 @@ label/IR byte hash 및 원 IR source의 trace hash/chain/diagnostic만 제거한
 
 ## 재현 명령과 evidence
 
-새 전용 V2 suite는 **65 passed in 4.60s**, 요청된 전체 통합 suite는
-**475 passed in 104.09s**다. Skip/xfail 0이며 WSL Python 3.12.3에서
+최종 전용 V2 suite는 **69 passed in 5.84s**, 요청된 전체 통합 suite는
+**479 passed in 103.62s**다. Skip/xfail 0이며 WSL Python 3.12.3에서
 `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1`로 새로 실행한 결과다.
 첫 통합 실행은 기존 Numeric IR와 새 V2 테스트 모듈 이름 3개가 겹쳐 collection error로
 중단됐다. 새 테스트 파일만 100% rename하여 해결했고 product/test 내용은 바꾸지 않았다.
 [첫 실패 로그](artifacts/combined-collection-failed.log)도 보존한다.
 
+초기 65/475 PASS evidence는 그대로 보존했다. 최종 코드 검토에서 adapter의 JSON 자원
+제한 오류가 REFUSED 대신 traceback으로 끝나는 결함을 발견해 parser 경계의
+ValueError/RecursionError를 AdapterRefused로 처리하고 회귀 시험 4개를 추가했다.
+5,000자리 정수와 깊이 20,000 배열을 public API와 실제 별도 CLI에서 검사한다.
+전역 정수·재귀 제한은 변경하지 않았다. 첫 수정 후 통합 실행의 478 PASS / 1 FAIL은
+이미 AdapterRefused인 사유를 direct test가 너무 좁은 오류 문구로 검사한 실패였다.
+기존 benchmark가 정수 제한을 해제한 환경에도 public 계약을 검사하도록 시험만 바로잡았다.
+별도 CLI는 exit 2 / JSON REFUSED / traceback·stdout·출력 디렉터리 없음까지 유지한다.
+해당 실패 [log](artifacts/validation-after-parser-fix/first-post-fix-combined-failed.log)와
+[XML](artifacts/validation-after-parser-fix/first-post-fix-combined-failed.xml)도 보존했다.
+
+수정 후 두 source를 다시 생성한 결과 기존 correspondence와 **BYTE_IDENTICAL**이고,
+두 저장 파일을 독립 checker로 다시 통과시켰다. Normalized 비교도 기존 EQUAL/hash와 같다.
+[byte stability](artifacts/validation-after-parser-fix/output-byte-stability.json)는 초기 manifest의
+18개 payload가 모두 그대로임도 확인한다. 이전 저장 artifact는 재작성하지 않고 수정 후
+검증만 `validation-after-parser-fix` 새 디렉터리에 기록했다.
+
 요청된 12종을 포함한 **17개 semantic mutation을 모두 거부**했다.
 수리한 dense sequence, operand/state/Form 참조, 같은 bits의 다른 dynamic ID,
 boundary/산술 위장 공격을 포함한다. 별도 실제 CLI 시험에서는 correspondence와
 completion SHA를 함께 다시 계산한 공격도 semantic FAIL이었다.
-과대 Form hex와 5,000자리 JSON 정수도 traceback 없이 명시적 FAIL로 처리한다.
-[mutation 결과](artifacts/mutation-results.json)는 실제 전체 JUnit에서 뽑은 17개 semantic
+Checker의 과대 Form hex와 JSON 정수 오류는 traceback 없이 명시적 FAIL로 처리한다.
+[최종 mutation 결과](artifacts/validation-after-parser-fix/mutation-results.json)는 실제 전체 JUnit에서 뽑은 17개 semantic
 공격과 2개 malformed Form 검사, 총 19개 behavioral rejection 테스트의 실행 기록이다.
-CLI와 JSON/type/publication 회귀 시험은 전체 65개 V2 suite에 포함된다.
+CLI와 JSON/type/publication 및 adapter parser 회귀 시험은 최종 69개 V2 suite에 포함된다.
 
 새 output directory와 새 report 파일을 사용한다. 기존 저장 artifact를 수동 편집하지 않는다.
 
@@ -123,11 +140,14 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -m pytest \
   runtime_trace/numeric_ir/v2/tests -q
 ```
 
-환경과 실제 실행 결과는 [execution environment](artifacts/execution-environment.json),
-[통합 실행 로그](artifacts/integration.log), [전체 pytest 로그](artifacts/combined-pytest.log),
-[JUnit 원본](artifacts/combined-pytest.xml), [mutation 결과](artifacts/mutation-results.json)에 보존한다.
-전용 실행은 [V2 pytest 로그](artifacts/v2-dedicated-pytest.log), 새 파일의 SHA/size는
-[artifact manifest](artifacts/artifact_manifest.json)에서 확인한다.
+환경은 [execution environment](artifacts/execution-environment.json), 최초 생성은
+[통합 실행 로그](artifacts/integration.log)에 보존한다. 최종 실행은
+[전체 pytest 로그](artifacts/validation-after-parser-fix/combined-pytest.log),
+[JUnit 원본](artifacts/validation-after-parser-fix/combined-pytest.xml),
+[V2 pytest 로그](artifacts/validation-after-parser-fix/v2-dedicated-pytest.log)에 있다.
+새 검증 파일의 SHA/size와 실제 479-test totals는
+[최종 validation manifest](artifacts/validation-after-parser-fix/manifest.json), 최초 18개 payload는
+[원 artifact manifest](artifacts/artifact_manifest.json)에서 확인한다.
 세부 API, schema, 실패·publication 계약은 [CONTRACT](CONTRACT.md)에 있다.
 
 ## Git 및 남은 한계

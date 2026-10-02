@@ -1,0 +1,55 @@
+{
+  "actual_pytest_totals": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 479
+  },
+  "files": {
+    "attempt-05-checker-report.json": {
+      "bytes": 631,
+      "sha256": "b897421678e3b9b77bc9070229c3d3a2838fac757100c4e93fd17ca6f21e3f72"
+    },
+    "closure-fresh-01-checker-report.json": {
+      "bytes": 631,
+      "sha256": "c24112fa7f472d0f73e9e12566d0a7f7aefb7a5a130a0a78be6a0abb41a6f3b2"
+    },
+    "combined-pytest.log": {
+      "bytes": 592,
+      "sha256": "2264247f88048b20c49559463fbb3ce3f5011acf1fe7a249b488bd89bbc47e2a"
+    },
+    "combined-pytest.xml": {
+      "bytes": 65801,
+      "sha256": "ec52c057fd0b63e34dc7c4c5df74911091a699f7a33263bfb245aa583616bd69"
+    },
+    "first-post-fix-combined-failed.log": {
+      "bytes": 2383,
+      "sha256": "d7e72d2438ba05f004bd8eb965b54b1c2ee7151b38f2aa802c5568df418e9e1b"
+    },
+    "first-post-fix-combined-failed.xml": {
+      "bytes": 67412,
+      "sha256": "6f58fc0960fe260ea0171f35d481f635151bb60c6ff41523f1cb41b6d8b659d1"
+    },
+    "mutation-results.json": {
+      "bytes": 3872,
+      "sha256": "5d5122dec9e9cace2e50dd1ee16d9d37336ad18dd51b35cbeba3c305c6b07b6f"
+    },
+    "normalized_comparison.json": {
+      "bytes": 177,
+      "sha256": "dfbfc5488302e0c8803d0526d4b3ba3390e9f48a35af7729f8d6be6de1fe651d"
+    },
+    "output-byte-stability.json": {
+      "bytes": 415,
+      "sha256": "e640300fb67c491b2728569e277b97c21cbe0a598b1c5d4912b5e59181ce0409"
+    },
+    "protected-after.json": {
+      "bytes": 75,
+      "sha256": "c5e23040fde070176396c9835e1d2c851e7f43f9cda1dd332dbcb2c2589f7538"
+    },
+    "v2-dedicated-pytest.log": {
+      "bytes": 99,
+      "sha256": "885f471ef9fd9f2b6c6475cc144e6452118df3635fcaa766144a7e09d74677d7"
+    }
+  },
+  "schema": "numeric-ir-v2-post-fix-validation-manifest-v1"
+}
