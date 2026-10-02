@@ -62,3 +62,6 @@ tests/test_gate2c_sealed.py -text
 tests/test_v2_sealed.py -text
 tools/gate2b_capture_gala.py -text
 tools/gate2b_disassembly_evidence.py -text
+
+# Gate 2C.1: received auditor artifacts are preserved as raw bytes.
+audit/gate2c1/prior_auditor/** -text
