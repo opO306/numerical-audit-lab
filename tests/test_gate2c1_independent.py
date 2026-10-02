@@ -37,9 +37,10 @@ def test_trace_opcode_and_value_mutants_rejected(tmp_path):
     from benchmarks.gate2c1.binary_replay import BinaryReplay
     t=BinaryReplay();regs=t.init(*(ind.bits(v) for v in (0.,0.,.25,.125)))
     records=t.trace('init',regs);p=tmp_path/'trace.json'
-    p.write_text(json.dumps({'operations':records}));ind.compare_trace(p,ind.INIT,regs)
-    records[3]['op']='ADD';p.write_text(json.dumps({'operations':records}))
+    def dump():p.write_text(json.dumps({'phase':'init','v2_input_forms':ind.bf(ind.zero_forms()),'operations':records}))
+    dump();ind.compare_trace(p,ind.INIT,regs)
+    records[3]['op']='ADD';dump()
     with pytest.raises(ValueError):ind.compare_trace(p,ind.INIT,regs)
     records=t.trace('init',regs);records[4]['result_bits']='3ff0000000000000'
-    p.write_text(json.dumps({'operations':records}))
+    dump()
     with pytest.raises(ValueError):ind.compare_trace(p,ind.INIT,regs)

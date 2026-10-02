@@ -9,7 +9,7 @@
   },
   "files": {
     "audit/gate2c1/evidence/c_gradient.txt": "7631d85b07f3960cc170f91fef1f54419fc561f26393f2c3614b4efbb9e443e2",
-    "audit/gate2c1/independent/checker.py": "f80d07ca596f6b7a5982142058ba9ed353d6d4b08371bccda492dd480681c68b",
+    "audit/gate2c1/independent/checker.py": "e2b5fc0376a5d1bf75c19839f4d0870666025697fff6e7cb4299fdc856fee51a",
     "audit/gate2c1/machine_mapping.json": "771730ef9b8d5132dc5f38644eaaf40bff05bd788af890eae5e069f9d766d669",
     "audit/gate2c1/vendor/gala-1.12.0-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl": "cc5f0cf3bc63a966a3c130b93f6c05026271fe7178492a02c6266c243b5fc2f0",
     "audit/gate2c1/vendor/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so": "a6ac98736304bb9f6a92e473bba45da10d9b5b99f8019e2ca15eb6a7f86234fc",
@@ -25,22 +25,10 @@
     "lab/gate2c1_contract.py": "5ee1ed3eba6eb8464ac619654f99ba57d6a5b124a61a428d3e1e0bd9631125f7",
     "run_gate2c1.py": "d327f2c42768232d58442d6312079dfda55eab2d7b663340f6990f5b3765a892",
     "tests/test_gate2c1.py": "0629c6ed6afa985e015c7c9ca6ebcb7555e57481a1e7d9015ed76518c40826d6",
-    "tests/test_gate2c1_independent.py": "a3c8d1f2089f83aae26da62bf0aed9a65b2b11380b8347e229a70e8d9123bed6",
+    "tests/test_gate2c1_independent.py": "1f1b1e562c56b49f8f404e8434d938217c86df2c9d89eba94a5185323e1a0545",
     "tests/test_gate2c1_package.py": "b74f64f3bece987bfa3f8a321f4e7372eef89a208e3efda6c11c5d8c9096ac6f",
     "tests/test_gate2c1_sealed.py": "c0d9cf112fca18d7afde2856343a9ee35a86ec3085bb4cbead02010ad458832a",
-    "tools/gate2c1_package.py": "7e582303650a98b2126335e1501ab856f9e0b9e87292667d3e754e7f8f8964b0",
-    "tools/gate2c1_profile_auditor.py": "9a375be9d9d31e432d31495cece7fea4e7b765f9ab5fc97a308c0bfad76f2bd7",
-    "tests/test_gate2c1_review_regressions.py": "211d14b27be09c2cb69de90a7ad0a67ad1cb5f1ea3abeb39cec4a8276368435d",
-    "audit/gate2c1/IMPLEMENTATION_REVIEW.md": "508c2cb50b86eb2aa4ee76603e8850bc5d0f32c16479029a146eddd536f4ae97"
-  },
-  "producer_measured_under_prior_code_commit": "0f2fc62",
-  "producer_prior_code_seal_sha256": "8bc8500a0248c20f062437075fd7d23a32bc7fca0dbea9e105ee9918dfb2ffc9",
-  "independent_full_run_started": false,
-  "review": "5 Major and 2 Minor evidence handling findings repaired before independent full run; numeric producer unchanged",
-  "validation": {
-    "command": "python -m pytest -q",
-    "passed": 244,
-    "wall_seconds": 24.89,
-    "review_regressions_red": 6
+    "tools/gate2c1_package.py": "7d346d70ff295405499e6a4d1eee5e93ab48c42d1274f48137ba4620cd9fde6f",
+    "tools/gate2c1_profile_auditor.py": "9a375be9d9d31e432d31495cece7fea4e7b765f9ab5fc97a308c0bfad76f2bd7"
   }
 }
