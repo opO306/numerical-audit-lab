@@ -1,0 +1,14 @@
+{
+  "schema": "numeric-ir-frozen-v2-audited-input-pins-v1",
+  "numeric_ir": {
+    "bbb912c041cb47cf2f3814d416a298c3c6469c35a47c9b7cda629c11415586ba": {
+      "label": "attempt-05",
+      "normalized_numeric_sha256": "1ba19c48b8f812ad91ccaf8ebe5d930f6d510967f0589f8e91affcbc16bdd8f2"
+    },
+    "c34576f87bd4abc5bdc5fc2f67e68251ec30d5659776ade984fd15ab2bcb5296": {
+      "label": "closure-fresh-01",
+      "normalized_numeric_sha256": "1ba19c48b8f812ad91ccaf8ebe5d930f6d510967f0589f8e91affcbc16bdd8f2"
+    }
+  },
+  "frozen_v2_lf_sha256": "48b91d0c45fd7f62dd09df4db28756e6f82c6bd464a040dc60ac1c924ed99780"
+}
