@@ -2,7 +2,7 @@
   "schema": "gate2c1-code-seal-v1",
   "recorded_at_utc": "2026-10-02T01:53:44.874752+00:00",
   "method_commit": "eb2305c4a162b75e95228ee742264e8affedec07",
-  "full_result_measured": true,
+  "full_result_measured": false,
   "tests": {
     "passed": 238,
     "seconds": 26.07
@@ -26,29 +26,21 @@
     "run_gate2c1.py": "d327f2c42768232d58442d6312079dfda55eab2d7b663340f6990f5b3765a892",
     "tests/test_gate2c1.py": "0629c6ed6afa985e015c7c9ca6ebcb7555e57481a1e7d9015ed76518c40826d6",
     "tests/test_gate2c1_independent.py": "a3c8d1f2089f83aae26da62bf0aed9a65b2b11380b8347e229a70e8d9123bed6",
-    "tests/test_gate2c1_package.py": "2d7ce2f13583177cfbcb7515284a278af9fd64be62c002677ec102a7889fbef8",
+    "tests/test_gate2c1_package.py": "b74f64f3bece987bfa3f8a321f4e7372eef89a208e3efda6c11c5d8c9096ac6f",
     "tests/test_gate2c1_sealed.py": "c0d9cf112fca18d7afde2856343a9ee35a86ec3085bb4cbead02010ad458832a",
-    "tools/gate2c1_package.py": "616a3ca238bfe40b87e5aa37e890678493225380c1e95d942d5c9bb4a891863d",
+    "tools/gate2c1_package.py": "7e582303650a98b2126335e1501ab856f9e0b9e87292667d3e754e7f8f8964b0",
     "tools/gate2c1_profile_auditor.py": "9a375be9d9d31e432d31495cece7fea4e7b765f9ab5fc97a308c0bfad76f2bd7",
     "tests/test_gate2c1_review_regressions.py": "211d14b27be09c2cb69de90a7ad0a67ad1cb5f1ea3abeb39cec4a8276368435d",
-    "audit/gate2c1/IMPLEMENTATION_REVIEW.md": "508c2cb50b86eb2aa4ee76603e8850bc5d0f32c16479029a146eddd536f4ae97",
-    "tests/test_gate2c1_delivery_manifest.py": "0ad5167f42792a2e7aaedec1e951e8ea734987de9f16c9e228036434d3976928",
-    "audit/gate2c1/DELIVERY_REVIEW.md": "0de5fd5dfa36d4d75c6d660aa800830a9e5f942fc9a8c00f6b5f953f0a48f0a0",
-    "audit/gate2c1/REVIEW_OUTCOME.md": "fdcc5c390d3b62700d90084b07e05fbc69a94aba888e1e01f134a5fc767f4738"
+    "audit/gate2c1/IMPLEMENTATION_REVIEW.md": "508c2cb50b86eb2aa4ee76603e8850bc5d0f32c16479029a146eddd536f4ae97"
   },
   "producer_measured_under_prior_code_commit": "0f2fc62",
   "producer_prior_code_seal_sha256": "8bc8500a0248c20f062437075fd7d23a32bc7fca0dbea9e105ee9918dfb2ffc9",
-  "independent_full_run_started": true,
+  "independent_full_run_started": false,
   "review": "5 Major and 2 Minor evidence handling findings repaired before independent full run; numeric producer unchanged",
   "validation": {
     "command": "python -m pytest -q",
-    "passed": 250,
-    "wall_seconds": 24.92,
-    "review_regressions_red": 6,
-    "manifest_attack_regressions_red": 5,
-    "delivery_archive_rule": "committed HEAD bytes; all seals checked in archive during actual build"
-  },
-  "independent_reproduction_commit": "5504237",
-  "independent_execution_code_seal_sha256": "d7e8adae7778de0b8d801174807a76b386f76d4f007dc18b24169d9a5a84878c",
-  "revision_scope": "delivery package verifier only, after completed reproduction; numerical source and result bytes unchanged"
+    "passed": 244,
+    "wall_seconds": 24.89,
+    "review_regressions_red": 6
+  }
 }

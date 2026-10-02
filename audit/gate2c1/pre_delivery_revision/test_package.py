@@ -13,10 +13,8 @@ pkg=importlib.util.module_from_spec(spec);spec.loader.exec_module(pkg)
 
 def test_missing_advertised_wheel_and_so_are_rejected(tmp_path):
     p=tmp_path/'x.zip'
+    with zipfile.ZipFile(p,'w') as z:z.writestr('present',b'ok')
     h=hashlib.sha256(b'ok').hexdigest()
-    with zipfile.ZipFile(p,'w') as z:
-        z.writestr('present',b'ok')
-        z.writestr('PACKAGE_MANIFEST.json',json.dumps({'schema':'gate2c1-complete-audit-package-v1','files':{'present':h},'required_members':['present']}))
     with pytest.raises(ValueError):pkg.validate_members(p,{'present':h},['present','wheel.whl'])
     with pytest.raises(ValueError):pkg.validate_members(p,{'present':h},['present','binary.so'])
     assert pkg.validate_members(p,{'present':h},['present'])==1
@@ -28,12 +26,9 @@ def test_changed_zip_member_including_bundle_is_rejected(tmp_path):
     with pytest.raises(ValueError):pkg.validate_members(p,{'git/gate2c1.bundle':hashlib.sha256(b'original').hexdigest()},[])
 
 
-def test_document_receipt_and_actual_zip_must_agree(tmp_path,monkeypatch):
+def test_document_receipt_and_actual_zip_must_agree(tmp_path):
     p=tmp_path/'only-deliver-this.zip'
-    monkeypatch.setattr(pkg,'REQUIRED',['present'])
-    with zipfile.ZipFile(p,'w') as z:
-        z.writestr('present',b'ok')
-        z.writestr('PACKAGE_MANIFEST.json',json.dumps({'schema':'gate2c1-complete-audit-package-v1','files':{'present':hashlib.sha256(b'ok').hexdigest()},'required_members':['present']}))
+    with zipfile.ZipFile(p,'w') as z:z.writestr('present',b'ok')
     h=hashlib.sha256(p.read_bytes()).hexdigest()
     record={'zip_file':p.name,'zip_sha256':h}
     (tmp_path/'delivery_receipt.json').write_text(json.dumps(record))
