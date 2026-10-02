@@ -357,6 +357,36 @@ def test_unavailable_operand_context_register_is_cli_refused(
 
 
 @pytest.mark.parametrize(
+    ("row_index", "register", "assembly_fragment"),
+    [
+        (13, "rsp", "(%rsp)"),
+        (38, "rax", "(%rdx,%rax,4)"),
+    ],
+)
+def test_missing_implicit_effective_address_gpr_is_cli_refused(
+    tmp_path, attempt05, repo_root, row_index, register, assembly_fragment
+):
+    source = _clone_source(tmp_path, attempt05)
+    rows = _rows(source)
+    assert assembly_fragment in rows[row_index]["instruction"]
+    del rows[row_index]["pre"]["gpr"][register]
+    del rows[row_index]["post"]["gpr"][register]
+    _resign(source, rows)
+
+    reason = (
+        f"trace row {row_index} pre missing captured canonical GPRs: {register}"
+    )
+    with pytest.raises(ConversionRefused, match=reason):
+        translate(source, root=repo_root)
+    completed = _run_cli(
+        source, tmp_path / f"missing-effective-address-{register}-out", repo_root
+    )
+    assert completed.returncode == 2
+    assert "Traceback" not in completed.stderr
+    assert reason in json.loads(completed.stderr)["reason"]
+
+
+@pytest.mark.parametrize(
     ("field", "value", "reason"),
     [
         ("start_seq", 447, "region 0 sequence range"),

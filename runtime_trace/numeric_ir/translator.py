@@ -20,6 +20,7 @@ import tempfile
 from typing import Iterable
 
 from runtime_trace import correspondence
+from runtime_trace.semantics import GPRS
 from runtime_trace.semantics import Refused as DecodeRefused
 from runtime_trace.semantics import decode
 
@@ -33,6 +34,7 @@ IR_KINDS = {
     "MUL": "MUL_BINARY64",
 }
 CAPTURE_SCHEMA = "gala-regular-1step-runtime-trace-v1"
+CAPTURED_CANONICAL_GPRS = frozenset(full for _, full in GPRS.values())
 
 
 class ConversionRefused(ValueError):
@@ -643,6 +645,19 @@ def _validate_regions(capture: dict, rows: list[dict]) -> list[dict]:
             f"{name} init-to-step boundary mismatch",
         )
     return regions
+
+
+def _validate_complete_gpr_contexts(rows: list[dict]) -> None:
+    for record in rows:
+        for label in ("pre", "post"):
+            missing = sorted(
+                CAPTURED_CANONICAL_GPRS - record[label]["gpr"].keys()
+            )
+            _require(
+                not missing,
+                f"trace row {record['seq']} {label} missing captured canonical "
+                f"GPRs: {','.join(missing)}",
+            )
 
 
 def _storage(space: str, name: str, byte_offset: int, width: int) -> dict:
@@ -1311,6 +1326,7 @@ def translate(source: Path, root: Path | None = None) -> dict:
     _validate_capture_and_chain(stream, capture, rows)
     _validate_early_record_contract(rows)
     regions = _validate_regions(capture, rows)
+    _validate_complete_gpr_contexts(rows)
     _independent_raw_checks(rows, capture, resolved_root)
     operations, values = _Dataflow(rows, capture, resolved_root).run(regions)
 
