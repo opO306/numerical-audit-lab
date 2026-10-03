@@ -28,7 +28,7 @@ EXECUTION_SCHEMA = "caller-transition-execution-v2"
 SEAL_SCHEMA = "caller-transition-acquisition-seal-v1"
 IR_SCHEMA = "runtime-trace-numeric-ir-regular-1step-v1"
 CORRESPONDENCE_SCHEMA = "numeric-ir-frozen-v2-regular-1step-v1"
-REPORT_SCHEMA = "gala-caller-transition-independent-checker-v2"
+REPORT_SCHEMA = "gala-caller-transition-independent-checker-v3"
 
 SOURCE_RECEIPTS = {
     "runtime_trace/caller_transition/__init__.py": "3729bd7cadae1870f61c52ef8bdf8962f0ecbb596ac54cab3818767a4a4f7c96",
@@ -733,6 +733,100 @@ def _validate_memory_observations(rows: list[dict[str, Any]], decoded: dict[int,
     return {"count": count, "rooted_bytes": len(shadow)}
 
 
+def _validate_sequence_receipts(
+    capture: dict[str, Any], transition: dict[str, Any], rows: list[dict[str, Any]]
+) -> None:
+    """Reject stale sequence/count wrappers before instruction semantics."""
+    count = len(rows)
+    _require(capture.get("record_count") == count, "SEQUENCE_RECEIPT", "capture record_count is stale")
+    capture_counts = capture.get("counts")
+    readproof = transition.get("readproof")
+    transition_capture = transition.get("capture")
+    _require(isinstance(capture_counts, dict) and capture_counts.get("rows") == count,
+             "SEQUENCE_RECEIPT", "capture row count is stale")
+    _require(isinstance(readproof, dict) and readproof.get("rows") == count,
+             "SEQUENCE_RECEIPT", "transition readproof row count is stale")
+    _require(isinstance(transition_capture, dict) and transition_capture.get("record_count") == count,
+             "SEQUENCE_RECEIPT", "transition capture record_count is stale")
+
+    actual_counts = {
+        "pre_memory_observations": sum(len(row.get("pre_memory_observations", [])) for row in rows),
+        "pre_memory_observation_failures": sum(
+            observation.get("status") != "OK"
+            for row in rows for observation in row.get("pre_memory_observations", [])
+        ),
+        "possible_memory_writes": sum(len(row.get("possible_memory_writes", [])) for row in rows),
+        "same_value_writes": sum(
+            write.get("value_changed") is False
+            for row in rows for write in row.get("possible_memory_writes", [])
+        ),
+        "indirect_memory_controls": sum(
+            _parse_assembly(row.get("assembly", ""))[0] in {"jmp", "call"}
+            and bool(_parse_assembly(row.get("assembly", ""))[1])
+            and _parse_assembly(row.get("assembly", ""))[1][0].startswith("*")
+            for row in rows
+        ),
+        "returns": sum(_parse_assembly(row.get("assembly", ""))[0] == "ret" for row in rows),
+        "pops": sum(_parse_assembly(row.get("assembly", ""))[0] == "pop" for row in rows),
+        "leaves": sum(_parse_assembly(row.get("assembly", ""))[0] == "leave" for row in rows),
+    }
+    for key, value in actual_counts.items():
+        _require(capture_counts.get(key) == value and readproof.get(key) == value,
+                 "SEQUENCE_RECEIPT", f"stale {key} receipt")
+
+    def sequence(number: Any, location: str) -> int:
+        _require(isinstance(number, int) and 0 <= number < count,
+                 "SEQUENCE_RECEIPT", f"out-of-range sequence at {location}: {number!r}")
+        _require(rows[number].get("sequence") == number,
+                 "SEQUENCE_RECEIPT", f"sequence does not select retained row at {location}")
+        return number
+
+    first_return = capture.get("first_step_return")
+    _require(isinstance(first_return, dict), "SEQUENCE_RECEIPT", "first return receipt missing")
+    sequence(first_return.get("instruction_sequence"), "capture.first_step_return")
+    second_entry = capture.get("second_step_entry")
+    sources = second_entry.get("argument_sources") if isinstance(second_entry, dict) else None
+    _require(isinstance(sources, dict), "SEQUENCE_RECEIPT", "argument source receipts missing")
+    for role in ("t", "dt"):
+        receipt = sources.get(role)
+        _require(isinstance(receipt, dict), "SEQUENCE_RECEIPT", f"{role} receipt missing")
+        seq = sequence(receipt.get("instruction_sequence"), f"capture.argument_sources.{role}")
+        _require(receipt.get("assembly") == rows[seq].get("assembly"),
+                 "SEQUENCE_RECEIPT", f"{role} receipt selects wrong retained row")
+
+    bindings = transition.get("bindings")
+    _require(isinstance(bindings, dict), "SEQUENCE_RECEIPT", "transition bindings missing")
+    for role, list_key in (("time", "source_instruction_sequences"), ("dt", "caller_change_sequences")):
+        binding = bindings.get(role)
+        _require(isinstance(binding, dict), "SEQUENCE_RECEIPT", f"{role} binding missing")
+        receipt = binding.get("actual_source_receipt")
+        _require(isinstance(receipt, dict), "SEQUENCE_RECEIPT", f"{role} source receipt missing")
+        seq = sequence(receipt.get("instruction_sequence"), f"bindings.{role}.actual_source_receipt")
+        declared = binding.get(list_key)
+        _require(declared == [seq], "SEQUENCE_RECEIPT", f"{role} sequence list is stale")
+
+    final_observations = readproof.get("final_abi_source_observations")
+    _require(isinstance(final_observations, list), "SEQUENCE_RECEIPT", "final ABI observations missing")
+    for index, item in enumerate(final_observations):
+        _require(isinstance(item, dict), "SEQUENCE_RECEIPT", "malformed final ABI observation")
+        sequence(item.get("sequence"), f"readproof.final_abi_source_observations[{index}]")
+
+    write_set = transition.get("write_set")
+    _require(isinstance(write_set, dict), "SEQUENCE_RECEIPT", "write-set receipt missing")
+    for field in ("gradient_writes", "save_all_copy_candidates"):
+        items = write_set.get(field)
+        _require(isinstance(items, list), "SEQUENCE_RECEIPT", f"{field} receipt missing")
+        for index, item in enumerate(items):
+            _require(isinstance(item, dict), "SEQUENCE_RECEIPT", f"malformed {field} receipt")
+            sequence(item.get("sequence"), f"write_set.{field}[{index}]")
+    gradient = bindings.get("gradient")
+    _require(isinstance(gradient, dict), "SEQUENCE_RECEIPT", "gradient binding missing")
+    gradient_sequences = gradient.get("write_sequences")
+    _require(isinstance(gradient_sequences, list), "SEQUENCE_RECEIPT", "gradient sequence list missing")
+    for index, number in enumerate(gradient_sequences):
+        sequence(number, f"bindings.gradient.write_sequences[{index}]")
+
+
 def _condition_taken(mnemonic: str, eflags: int) -> bool:
     cf, zf, sf, of = bool(eflags & 1), bool(eflags & 0x40), bool(eflags & 0x80), bool(eflags & 0x800)
     return {"ja": not cf and not zf, "jb": cf, "jbe": cf or zf, "je": zf,
@@ -813,9 +907,12 @@ def _validate_register_semantics(rows: list[dict[str, Any]], decoded: dict[int, 
         elif base == "lea" and len(operands) == 2:
             _set_register(expected, operands[1], _effective_address(row, operands[0]))
         elif base == "movsd" and len(operands) == 2 and operands[1].startswith("%xmm"):
-            old = _reg_value(row["pre"], operands[1])[0]
             value = _source_value(row, operands[0], 8)
-            _set_register(expected, operands[1], (old & ~((1 << 64) - 1)) | value)
+            if _is_memory_operand(operands[0]):
+                _set_register(expected, operands[1], value)
+            else:
+                old = _reg_value(row["pre"], operands[1])[0]
+                _set_register(expected, operands[1], (old & ~((1 << 64) - 1)) | value)
         elif base == "vmovd" and len(operands) == 2:
             _set_register(expected, operands[1], _source_value(row, operands[0], 4))
         elif base == "vpbroadcastb" and len(operands) == 2:
@@ -906,6 +1003,332 @@ def _validate_register_semantics(rows: list[dict[str, Any]], decoded: dict[int, 
                  "FLAG_SEMANTICS", f"defined flags mismatch at sequence {sequence}")
         _require(expected["mxcsr"] == row["post"]["mxcsr"] and expected["segment_bases"] == row["post"]["segment_bases"],
                  "REGISTER_SEMANTICS", f"control state mismatch at sequence {sequence}")
+
+
+def _origin(kind: str, **fields: Any) -> dict[str, Any]:
+    return {"kind": kind, **fields}
+
+
+def _origin_has_role(value: Any, role: str) -> bool:
+    if isinstance(value, dict):
+        return value.get("role") == role or any(_origin_has_role(item, role) for item in value.values())
+    if isinstance(value, list):
+        return any(_origin_has_role(item, role) for item in value)
+    return False
+
+
+def _require_origin_role(value: dict[str, Any], role: str, location: str) -> None:
+    _require(_origin_has_role(value, role), "ABI_PROVENANCE",
+             f"{location} does not derive from authenticated {role} root")
+
+
+def _compact_origins(origins: list[dict[str, Any]]) -> Any:
+    unique: list[dict[str, Any]] = []
+    for item in origins:
+        if not any(item == prior for prior in unique):
+            unique.append(item)
+    return unique[0] if len(unique) == 1 else unique
+
+
+def _origin_register(state: dict[str, Any], operand: str, width: int) -> dict[str, Any]:
+    name = operand.strip().lstrip("%")
+    if name.startswith("xmm"):
+        lanes = state["xmm"][name]
+        return lanes["low64"] if width <= 8 else _origin(
+            "Copy", sequence=state["sequence"], source=[lanes["low64"], lanes["high64"]]
+        )
+    _require(name in ALIASES, "ABI_PROVENANCE", f"unsupported origin register %{name}")
+    return state["gpr"][ALIASES[name][0]]
+
+
+def _origin_memory_load(
+    row: dict[str, Any], operand: str, width: int, memory: dict[int, dict[str, Any]]
+) -> dict[str, Any]:
+    address = _effective_address(row, operand)
+    cells = [memory.get(address + offset) for offset in range(width)]
+    _require(all(isinstance(cell, dict) for cell in cells), "ABI_PROVENANCE",
+             f"origin memory gap at sequence {row['sequence']} address {address:#x}")
+    return _origin(
+        "Load", sequence=row["sequence"], address=address, width=width,
+        memory_origin=_compact_origins([cell for cell in cells if isinstance(cell, dict)]),
+    )
+
+
+def _origin_source(
+    row: dict[str, Any], operand: str, width: int, state: dict[str, Any],
+    memory: dict[int, dict[str, Any]],
+) -> dict[str, Any]:
+    text = operand.strip().removeprefix("*")
+    if text.startswith("$"):
+        return _origin("InstructionResult", sequence=row["sequence"], opcode="immediate", literal=text)
+    if text.startswith("%") and not _is_memory_operand(text):
+        return _origin_register(state, text, width)
+    if _is_memory_operand(text):
+        return _origin_memory_load(row, text, width, memory)
+    _refuse("ABI_PROVENANCE", f"unknown origin source at sequence {row['sequence']}: {operand}")
+
+
+def _set_gpr_origin(
+    state: dict[str, Any], operand: str, source: dict[str, Any], sequence: int, opcode: str
+) -> None:
+    name = operand.strip().lstrip("%")
+    _require(name in ALIASES, "ABI_PROVENANCE", f"unsupported origin destination %{name}")
+    canonical, width = ALIASES[name]
+    if width in {8, 16}:
+        source = _origin(
+            "InstructionResult", sequence=sequence, opcode=f"{opcode}:partial-{width}",
+            operand_origins=[state["gpr"][canonical], source],
+        )
+    state["gpr"][canonical] = source
+
+
+def _memory_role_roots(
+    capture: dict[str, Any], rows: list[dict[str, Any]]
+) -> dict[tuple[int, int, bytes], str]:
+    second = capture["second_step_entry"]["abi"]
+    specifications = {
+        718: ("time", int(second["t_bits"], 16), 8),
+        721: ("gradient", second["pointers"]["gradient"], 8),
+        722: ("cpotential", second["cpointer"], 8),
+        723: ("dt", int(second["dt_bits"], 16), 8),
+        724: ("half_ndim", second["half_ndim"], 4),
+        725: ("n", second["n"], 8),
+        726: ("full_v", second["pointers"]["full_v"], 8),
+    }
+    roots: dict[tuple[int, int, bytes], str] = {}
+    for sequence, (role, expected, width) in specifications.items():
+        _require(sequence < len(rows), "ABI_PROVENANCE", f"missing final ABI source row {sequence}")
+        observations = rows[sequence].get("pre_memory_observations", [])
+        _require(len(observations) == 1, "ABI_PROVENANCE", f"ambiguous final ABI source row {sequence}")
+        observation = observations[0]
+        address = _integer(observation.get("address"), "ABI_PROVENANCE", "source address")
+        raw = bytes.fromhex(observation.get("bytes_hex", ""))
+        _require(len(raw) == width and int.from_bytes(raw, "little") == expected,
+                 "ABI_PROVENANCE", f"authenticated {role} source bits mismatch")
+        roots[(address, width, raw)] = role
+    return roots
+
+
+def _validate_origin_semantics(
+    case: str, capture: dict[str, Any], rows: list[dict[str, Any]], decoded: dict[int, str]
+) -> dict[str, dict[str, Any]]:
+    """Propagate origin expressions independently of producer provenance claims."""
+    first = capture["first_step_entry"]["abi"]
+    first_context = rows[0]["pre"]
+    q_pointer = first["pointers"]["q"]
+    latent_pointer = first["pointers"]["latent"]
+    _require(_reg_value(first_context, "%r15")[0] == q_pointer,
+             "ABI_PROVENANCE", "initial r15 is not authenticated q")
+    _require(_reg_value(first_context, "%r14")[0] == latent_pointer,
+             "ABI_PROVENANCE", "initial r14 is not authenticated latent")
+
+    state: dict[str, Any] = {
+        "sequence": 0,
+        "gpr": {},
+        "xmm": {},
+        "eflags": _origin("AuthenticatedContext", case=case, boundary="first-return", field="eflags"),
+        "mxcsr": _origin("AuthenticatedContext", case=case, boundary="first-return", field="mxcsr"),
+    }
+    for name in GPRS:
+        role = "q" if name == "r15" else "latent" if name == "r14" else None
+        state["gpr"][name] = _origin(
+            "AuthenticatedContext", case=case, boundary="first-return", field=f"gpr.{name}",
+            **({"role": role} if role else {}),
+        )
+    for name in first_context["xmm"]:
+        state["xmm"][name] = {
+            "low64": _origin("AuthenticatedContext", case=case, boundary="first-return", field=f"xmm.{name}.low64"),
+            "high64": _origin("AuthenticatedContext", case=case, boundary="first-return", field=f"xmm.{name}.high64"),
+        }
+
+    role_roots = _memory_role_roots(capture, rows)
+    memory: dict[int, dict[str, Any]] = {}
+    final_state: dict[str, Any] | None = None
+    final_stack_origin: dict[str, Any] | None = None
+
+    for row in rows:
+        sequence = row["sequence"]
+        state["sequence"] = sequence
+        mnemonic, operands = _parse_assembly(decoded[sequence])
+        base = mnemonic.removeprefix("lock ")
+
+        for observation in row.get("pre_memory_observations", []):
+            address = observation["address"]
+            raw = bytes.fromhex(observation["bytes_hex"])
+            role = role_roots.get((address, len(raw), raw))
+            root = _origin(
+                "AuthenticatedMemoryRoot", case=case, address=address,
+                captured_before_sequence=sequence, width=len(raw),
+                **({"role": role} if role else {}),
+            )
+            for offset in range(len(raw)):
+                memory.setdefault(address + offset, root)
+
+        if sequence == rows[-1]["sequence"]:
+            final_state = copy.deepcopy(state)
+            rsp = _reg_value(row["pre"], "%rsp")[0]
+            cells = [memory.get(rsp + offset) for offset in range(8)]
+            _require(all(isinstance(cell, dict) for cell in cells), "ABI_PROVENANCE", "final stack origin missing")
+            final_stack_origin = _compact_origins([cell for cell in cells if isinstance(cell, dict)])
+
+        destination_register: str | None = None
+        destination_origin: dict[str, Any] | None = None
+        exchange_store_origin: dict[str, Any] | None = None
+        width = _operand_width(base, operands) if operands and base not in {
+            "call", "jmp", "ret", "push", "pop", "leave", "endbr64", "nop", "nopw",
+            "ja", "jb", "jbe", "je", "jge", "jle", "jne",
+        } else 0
+
+        if base in {"mov", "movb", "movw", "movl", "movq", "movzbl"} and len(operands) == 2 and operands[1].startswith("%") and not _is_memory_operand(operands[1]):
+            source_width = 1 if base == "movzbl" else width // 8
+            destination_register = operands[1]
+            destination_origin = _origin("Copy", sequence=sequence, source=_origin_source(row, operands[0], source_width, state, memory))
+            _set_gpr_origin(state, destination_register, destination_origin, sequence, base)
+        elif base == "lea" and len(operands) == 2:
+            dependencies = []
+            for register in re.findall(r"%([a-z0-9]+)", operands[0]):
+                if register in ALIASES:
+                    dependencies.append(state["gpr"][ALIASES[register][0]])
+            destination_origin = _origin("InstructionResult", sequence=sequence, opcode="lea", operand_origins=dependencies)
+            _set_gpr_origin(state, operands[1], destination_origin, sequence, base)
+        elif base == "movsd" and len(operands) == 2 and operands[1].startswith("%xmm"):
+            source = _origin_source(row, operands[0], 8, state, memory)
+            destination = operands[1].lstrip("%")
+            state["xmm"][destination]["low64"] = source if source.get("kind") == "Load" else _origin("Copy", sequence=sequence, source=source)
+            if _is_memory_operand(operands[0]):
+                state["xmm"][destination]["high64"] = _origin(
+                    "InstructionResult", sequence=sequence, opcode="legacy-movsd-zero-upper", operand_origins=[]
+                )
+        elif base == "vmovd" and len(operands) == 2:
+            source = _origin_source(row, operands[0], 4, state, memory)
+            destination = operands[1].lstrip("%")
+            state["xmm"][destination] = {
+                "low64": _origin("InstructionResult", sequence=sequence, opcode="vmovd-low", operand_origins=[source]),
+                "high64": _origin("InstructionResult", sequence=sequence, opcode="vmovd-zero-upper", operand_origins=[]),
+            }
+        elif base == "vpbroadcastb" and len(operands) == 2:
+            source = _origin_source(row, operands[0], 1, state, memory)
+            broadcast = _origin("InstructionResult", sequence=sequence, opcode="vpbroadcastb", operand_origins=[source])
+            state["xmm"][operands[1].lstrip("%")] = {"low64": broadcast, "high64": broadcast}
+        elif base == "pop":
+            source = _origin_memory_load(row, "(%rsp)", 8, memory)
+            _set_gpr_origin(state, operands[0], source, sequence, base)
+            state["gpr"]["rsp"] = _origin("Arithmetic", sequence=sequence, opcode="pop-rsp", operand_origins=[state["gpr"]["rsp"]])
+        elif base == "leave":
+            source = _origin_memory_load(row, "(%rbp)", 8, memory)
+            old_rbp = state["gpr"]["rbp"]
+            state["gpr"]["rbp"] = source
+            state["gpr"]["rsp"] = _origin("Arithmetic", sequence=sequence, opcode="leave-rsp", operand_origins=[old_rbp])
+        elif base == "ret":
+            state["gpr"]["rsp"] = _origin("Arithmetic", sequence=sequence, opcode="ret-rsp", operand_origins=[state["gpr"]["rsp"]])
+        elif base in {"push", "call"}:
+            state["gpr"]["rsp"] = _origin("Arithmetic", sequence=sequence, opcode=f"{base}-rsp", operand_origins=[state["gpr"]["rsp"]])
+        elif base in {"add", "addb", "addw", "addl", "addq", "sub", "subb", "subw", "subl", "subq",
+                      "and", "andb", "andw", "andl", "andq", "or", "orb", "orw", "orl", "orq",
+                      "xor", "xorb", "xorw", "xorl", "xorq", "shl", "shlb", "shlw", "shll", "shlq",
+                      "shr", "shrb", "shrw", "shrl", "shrq"} and len(operands) == 2:
+            left = _origin_source(row, operands[1], width // 8, state, memory)
+            right = _origin_source(row, operands[0], 1 if base.startswith(("shl", "shr")) else width // 8, state, memory)
+            result = _origin("Arithmetic", sequence=sequence, opcode=base, operand_origins=[left, right])
+            if operands[1].startswith("%"):
+                _set_gpr_origin(state, operands[1], result, sequence, base)
+            state["eflags"] = result
+        elif base in {"cmp", "cmpb", "cmpw", "cmpl", "cmpq", "test", "testb", "testw", "testl", "testq"}:
+            state["eflags"] = _origin(
+                "Arithmetic", sequence=sequence, opcode=base,
+                operand_origins=[
+                    _origin_source(row, operands[1], width // 8, state, memory),
+                    _origin_source(row, operands[0], width // 8, state, memory),
+                ],
+            )
+        elif base == "setne":
+            _set_gpr_origin(state, operands[0], _origin("InstructionResult", sequence=sequence, opcode="setne", operand_origins=[state["eflags"]]), sequence, base)
+        elif base == "xchg" and _is_memory_operand(operands[1]):
+            exchange_store_origin = _origin_source(row, operands[0], width // 8, state, memory)
+            source = _origin_memory_load(row, operands[1], width // 8, memory)
+            _set_gpr_origin(state, operands[0], source, sequence, base)
+        elif base == "cmpxchg" and _is_memory_operand(operands[1]):
+            memory_source = _origin_memory_load(row, operands[1], width // 8, memory)
+            exchange_store_origin = _origin_source(row, operands[0], width // 8, state, memory)
+            accumulator_name = "%eax" if width == 32 else "%rax"
+            accumulator = _reg_value(row["pre"], accumulator_name)[0] & ((1 << width) - 1)
+            memory_value = _source_value(row, operands[1], width // 8)
+            state["eflags"] = _origin("Arithmetic", sequence=sequence, opcode="cmpxchg", operand_origins=[state["gpr"]["rax"], memory_source])
+            if accumulator != memory_value:
+                _set_gpr_origin(state, accumulator_name, memory_source, sequence, base)
+        elif base in {"jmp", "ja", "jb", "jbe", "je", "jge", "jle", "jne", "endbr64", "nop", "nopw"}:
+            pass
+        elif base in {"mov", "movb", "movw", "movl", "movq", "movsd", "vmovdqu", "movdqu"} and len(operands) == 2 and _is_memory_operand(operands[1]):
+            pass
+        else:
+            _refuse("ABI_PROVENANCE", f"unsupported origin semantics at sequence {sequence}: {decoded[sequence]}")
+
+        for write in row.get("possible_memory_writes", []):
+            address = write["address"]
+            size = write["size"]
+            if base == "push":
+                source = _origin_source(row, operands[0], size, state, memory)
+            elif base == "call":
+                source = _origin("InstructionResult", sequence=sequence, opcode="call-return-address", operand_origins=[state["gpr"]["rip"]])
+            elif base in {"mov", "movb", "movw", "movl", "movq", "movsd", "vmovdqu", "movdqu"}:
+                source = _origin_source(row, operands[0], size, state, memory)
+            elif base in {"add", "addb", "addw", "addl", "addq", "sub", "subb", "subw", "subl", "subq", "and", "andb", "andw", "andl", "andq"}:
+                source = _origin("Arithmetic", sequence=sequence, opcode=base, operand_origins=[
+                    _origin_memory_load(row, operands[1], size, memory),
+                    _origin_source(row, operands[0], size, state, memory),
+                ])
+            elif base == "xchg":
+                _require(exchange_store_origin is not None, "ABI_PROVENANCE", "xchg source origin absent")
+                source = exchange_store_origin
+            elif base == "cmpxchg":
+                accumulator_name = "%eax" if size == 4 else "%rax"
+                accumulator = _reg_value(row["pre"], accumulator_name)[0] & ((1 << (size * 8)) - 1)
+                memory_value = _source_value(row, operands[1], size)
+                _require(exchange_store_origin is not None, "ABI_PROVENANCE", "cmpxchg source origin absent")
+                source = exchange_store_origin if accumulator == memory_value else _origin_memory_load(row, operands[1], size, memory)
+            else:
+                _refuse("ABI_PROVENANCE", f"unsupported write origin at sequence {sequence}: {decoded[sequence]}")
+            stored = _origin("Store", sequence=sequence, address=address, source_origin=source)
+            for offset in range(size):
+                memory[address + offset] = stored
+
+        control_operands: list[dict[str, Any]] = []
+        if base == "ret":
+            control_operands.append(_origin_memory_load(row, "(%rsp)", 8, memory))
+        elif base in {"jmp", "call"} and operands and operands[0].startswith("*"):
+            control_operands.append(_origin_source(row, operands[0], 8, state, memory))
+        elif base in {"ja", "jb", "jbe", "je", "jge", "jle", "jne"}:
+            control_operands.append(state["eflags"])
+        state["gpr"]["rip"] = _origin("InstructionResult", sequence=sequence, opcode=f"control:{base}", operand_origins=control_operands)
+
+    _require(final_state is not None and final_stack_origin is not None,
+             "ABI_PROVENANCE", "final ABI origin snapshot absent")
+    final = final_state
+    chains = {
+        "rcx_q": {"role": "q", "origin": final["gpr"]["rcx"]},
+        "r8_full_v": {"role": "full_v", "origin": final["gpr"]["r8"]},
+        "r9_latent": {"role": "latent", "origin": final["gpr"]["r9"]},
+        "stack_gradient": {"role": "gradient", "origin": final_stack_origin},
+        "xmm0_time": {"role": "time", "origin": final["xmm"]["xmm0"]["low64"]},
+        "xmm1_dt": {"role": "dt", "origin": final["xmm"]["xmm1"]["low64"]},
+        "rdi_cpotential": {"role": "cpotential", "origin": final["gpr"]["rdi"]},
+        "rsi_n": {"role": "n", "origin": final["gpr"]["rsi"]},
+        "rdx_half_ndim": {"role": "half_ndim", "origin": final["gpr"]["rdx"]},
+    }
+    expected_tops = {
+        "rcx_q": ("Copy", 719), "r8_full_v": ("Copy", 726),
+        "r9_latent": ("Copy", 720), "stack_gradient": ("Store", 721),
+        "xmm0_time": ("Load", 718), "xmm1_dt": ("Load", 723),
+        "rdi_cpotential": ("Copy", 722), "rsi_n": ("Copy", 725),
+        "rdx_half_ndim": ("Copy", 724),
+    }
+    for name, item in chains.items():
+        origin = item["origin"]
+        kind, sequence = expected_tops[name]
+        _require(origin.get("kind") == kind and origin.get("sequence") == sequence,
+                 "ABI_PROVENANCE", f"{name} final origin shape mismatch")
+        _require_origin_role(origin, item["role"], name)
+    return chains
 
 
 def _validate_control(rows: list[dict[str, Any]], decoded: dict[int, str], load_bases: dict[str, int]) -> None:
@@ -1314,6 +1737,7 @@ def _check_bundle_with_pins(
              and set(module_pinset.get("modules", {})) == MODULE_SHA256S,
              "MODULE_SET", "module pinset differs from literal module set")
     load_bases = {sha: metadata[2] for sha, metadata in modules.items()}
+    _validate_sequence_receipts(capture, transition, rows)
     _validate_control(rows, decoded, load_bases)
     writes = _validate_recorded_writes(rows, decoded)
     memory_summary = _validate_memory_observations(rows, decoded)
@@ -1343,6 +1767,7 @@ def _check_bundle_with_pins(
     _require(readproof.get("final_abi_source_observations") == final_observations,
              "ABI_PROVENANCE", "final ABI observation receipt mismatch")
     first_abi, first_return, second_abi = _validate_boundary_and_abi(capture, rows, decoded, writes)
+    abi_origin_chains = _validate_origin_semantics(pins.case, capture, rows, decoded)
     _validate_source_receipts(root_path, capture_directory, execution)
 
     expected_ir_relative, expected_corr_relative = pins.ir_path, pins.correspondence_path
@@ -1531,6 +1956,8 @@ def _check_bundle_with_pins(
         "gradient_write_sequences": [write["sequence"] for write in gradient_writes],
         "time_source_receipt": time_receipt,
         "dt_source_receipt": dt_receipt,
+        "abi_origin_chains": abi_origin_chains,
+        "origin_provenance_complete": True,
         "thread_count": thread_count,
         "second_step_body_instructions_executed": controlled["second_step_body_instructions_executed"],
         "unknown_instruction_effects_refused": True,

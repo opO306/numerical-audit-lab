@@ -1,0 +1,1 @@
+{"actual_input_hashes":{"input/fixture.json":"17c6557fb84f07a13866e111e9a03a6b419dce425cdc66547bd0ea6b242be14c"},"expected_refusal_code":"ABI_PROVENANCE","name":"same-bits-wrong-origin-role","schema":"gala-caller-transition-checker-fix2-mutation-receipt-v1","trust_mode":"UNIT_STRUCTURED_FIXTURE"}

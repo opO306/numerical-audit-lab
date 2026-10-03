@@ -168,7 +168,7 @@ def test_same_value_protected_store_omission_is_refused(tmp_path: Path) -> None:
     def mutate(rows: list[dict]) -> None:
         rows[715]["possible_memory_writes"] = []
 
-    _assert_refused(_raw_case(tmp_path, mutate), {"WRITE_SET"})
+    _assert_refused(_raw_case(tmp_path, mutate), {"SEQUENCE_RECEIPT"})
 
 
 def test_incomplete_gradient_zero_coverage_is_refused(tmp_path: Path) -> None:

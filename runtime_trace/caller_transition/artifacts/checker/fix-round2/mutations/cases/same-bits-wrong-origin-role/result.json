@@ -1,0 +1,1 @@
+{"actual_input_hashes":{"input/fixture.json":"17c6557fb84f07a13866e111e9a03a6b419dce425cdc66547bd0ea6b242be14c"},"code":"ABI_PROVENANCE","reason":"xmm0_time does not derive from authenticated time root","schema":"gala-caller-transition-checker-fix2-mutation-result-v1","trust_mode":"UNIT_STRUCTURED_FIXTURE","verdict":"REFUSED"}

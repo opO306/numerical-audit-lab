@@ -107,7 +107,7 @@ def _remap_receipts(bundle: dict, mapping: dict[int, int]) -> None:
     visit(bundle["transition"])
 
 
-def test_dense_repaired_deletion_reaches_control_semantics(tmp_path: Path) -> None:
+def test_fix1_deletion_fixture_is_exposed_as_stale_before_semantics(tmp_path: Path) -> None:
     def mutate(bundle: dict) -> None:
         rows = bundle["rows"]
         old = [row["sequence"] for row in rows]
@@ -119,10 +119,10 @@ def test_dense_repaired_deletion_reaches_control_semantics(tmp_path: Path) -> No
             row["sequence"] = index
         _remap_receipts(bundle, mapping)
 
-    _refused(_rebuild(tmp_path, mutate), "TRACE_CONTROL_TARGET")
+    _refused(_rebuild(tmp_path, mutate), "SEQUENCE_RECEIPT")
 
 
-def test_dense_repaired_reorder_reaches_control_semantics(tmp_path: Path) -> None:
+def test_fix1_reorder_fixture_is_exposed_as_stale_before_semantics(tmp_path: Path) -> None:
     def mutate(bundle: dict) -> None:
         rows = bundle["rows"]
         rows[104], rows[105] = rows[105], rows[104]
@@ -139,7 +139,7 @@ def test_dense_repaired_reorder_reaches_control_semantics(tmp_path: Path) -> Non
             row["sequence"] = index
         _remap_receipts(bundle, mapping)
 
-    _refused(_rebuild(tmp_path, mutate), "TRACE_CONTROL_TARGET")
+    _refused(_rebuild(tmp_path, mutate), "SEQUENCE_RECEIPT")
 
 
 def test_repaired_indirect_target_bytes_reach_control_semantics(tmp_path: Path) -> None:
@@ -178,7 +178,7 @@ def test_missing_required_memory_read_is_refused(tmp_path: Path) -> None:
     def mutate(bundle: dict) -> None:
         bundle["rows"][718]["pre_memory_observations"] = []
 
-    _refused(_rebuild(tmp_path, mutate), "MEMORY_OBSERVATION")
+    _refused(_rebuild(tmp_path, mutate), "SEQUENCE_RECEIPT")
 
 
 def test_gradient_push_uses_observed_source_bytes(tmp_path: Path) -> None:
