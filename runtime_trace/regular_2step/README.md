@@ -112,3 +112,29 @@ Forms for ADD/SUB/MUL; this does not establish native nonzero-coefficient
 caller coverage. This is an internal implementation/checker result, never a
 new external audit closure. General step templates and induction require a
 separate design decision after this narrow two-step result.
+
+## Validation and final audit delivery
+
+Task 3 validation receipts are under `artifacts/validation/`. The authoritative
+final runs are `final-new-63`, `final-caller-101`, and `final-regular-479`; older
+Task 3 logs preserve wrapper/exit-receipt failures and are not the final PASS
+receipts. `mutation_replay.json` enumerates the only allowed replay differences:
+the 17 private TEST_ONLY capture-directory paths. `source_test_map.json` and
+`protected_baseline.json` record source identity, physical LOC and baseline
+byte/blob preservation.
+
+After Task 3 and whole-branch review, build the final package once from the
+reviewed clean HEAD into a new exclusive destination:
+
+```bash
+PY=/home/otherside123/venvs/gate2c1-trace/bin/python
+$PY -m runtime_trace.regular_2step.delivery \
+  --history /mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03 \
+  --out /mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/final-delivery
+$PY -m runtime_trace.regular_2step.delivery \
+  --verify /mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/final-delivery
+```
+
+The build refuses an existing destination, dirty tree or wrong branch. It
+contains no push operation. The controller records the authorized push and
+remote-ref verification only after the package has been sealed and verified.

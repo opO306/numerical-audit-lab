@@ -1,0 +1,315 @@
+{
+  "documentation": [
+    {
+      "all_functions": null,
+      "bytes": 8139,
+      "path": "runtime_trace/regular_2step/README.md",
+      "physical_lines": 140,
+      "sha256": "6e6cdad1115c6fdce0035dad4510a1052aeb2753a0073a173ab20c6d3168d455",
+      "top_level_functions": null
+    },
+    {
+      "all_functions": null,
+      "bytes": 10729,
+      "path": "runtime_trace/regular_2step/CONTRACT.md",
+      "physical_lines": 189,
+      "sha256": "6982ae0ed8a058c3032e9bfe85d974cd6dbc51ae188d60836561bf030528cabc",
+      "top_level_functions": null
+    }
+  ],
+  "loc_definition": "physical splitlines including blank/comment lines",
+  "production": [
+    {
+      "all_functions": 0,
+      "bytes": 64,
+      "path": "runtime_trace/regular_2step/__init__.py",
+      "physical_lines": 1,
+      "sha256": "9d517b7911f258e2b819407100e440da52d192148f067fae11542da76aa80bc8",
+      "top_level_functions": 0
+    },
+    {
+      "all_functions": 10,
+      "bytes": 19067,
+      "path": "runtime_trace/regular_2step/acquire.py",
+      "physical_lines": 371,
+      "sha256": "d7495aad611c3feb61e28fe8137ae71781f9883dbe427f2d26d8acc491b118c1",
+      "top_level_functions": 10
+    },
+    {
+      "all_functions": 15,
+      "bytes": 22400,
+      "path": "runtime_trace/regular_2step/checker.py",
+      "physical_lines": 370,
+      "sha256": "1c6c4ab6920a0dcf3ea21b9e90832e00262480d28e4d9c269e67642ad75c05ee",
+      "top_level_functions": 14
+    },
+    {
+      "all_functions": 17,
+      "bytes": 24266,
+      "path": "runtime_trace/regular_2step/delivery.py",
+      "physical_lines": 475,
+      "sha256": "d418d932e5e21e769b97fc860745a8960f04a0bf5b2b78bb519f3a4b560aac8e",
+      "top_level_functions": 17
+    },
+    {
+      "all_functions": 4,
+      "bytes": 2954,
+      "path": "runtime_trace/regular_2step/form_oracle.py",
+      "physical_lines": 73,
+      "sha256": "624e09e4ad2a18d8e028c7f36f8311c1c55804c83a25921ae3f45ee3fde83135",
+      "top_level_functions": 3
+    },
+    {
+      "all_functions": 19,
+      "bytes": 20293,
+      "path": "runtime_trace/regular_2step/gdb_acquire.py",
+      "physical_lines": 409,
+      "sha256": "50c1ac59092a3069df6705ab325be725e9efea5bedd8916b52adbfe420329691",
+      "top_level_functions": 1
+    },
+    {
+      "all_functions": 4,
+      "bytes": 8592,
+      "path": "runtime_trace/regular_2step/mutations.py",
+      "physical_lines": 165,
+      "sha256": "d47796945f589efd9df57d507afbed3f802c40854f808446f12a7093a5904741",
+      "top_level_functions": 4
+    },
+    {
+      "all_functions": 2,
+      "bytes": 6793,
+      "path": "runtime_trace/regular_2step/producer.py",
+      "physical_lines": 119,
+      "sha256": "52778e9944cbaab348cbf3a3c7c2cd9b16a90cd7cb039aa5edadeebccaadcd6f",
+      "top_level_functions": 2
+    },
+    {
+      "all_functions": 10,
+      "bytes": 2467,
+      "path": "runtime_trace/regular_2step/schema.py",
+      "physical_lines": 74,
+      "sha256": "c72710d43fd8ed737fcdb68ad3325f176faea78481173a0ce7496965ac4feab1",
+      "top_level_functions": 10
+    },
+    {
+      "all_functions": 28,
+      "bytes": 42407,
+      "path": "runtime_trace/regular_2step/structure.py",
+      "physical_lines": 756,
+      "sha256": "956378c31ed5e7e809c72f6dfdff95e7802874e4b5b6831117ed2a8b1d5b19e0",
+      "top_level_functions": 27
+    }
+  ],
+  "production_totals": {
+    "files": 10,
+    "physical_lines": 2813,
+    "task1_lines": 1537,
+    "task2_lines": 801,
+    "task3_delivery_lines": 475
+  },
+  "schema": "regular-2step-final-source-test-map-v1",
+  "semantic_checker_function_counts": {
+    "delivery_functions_excluded_from_semantic_checker_count": true,
+    "task1_structure_functions": 28,
+    "task2_checker_all_functions": 15,
+    "task2_form_oracle_all_functions": 4,
+    "task2_proof_related_entry_functions": [
+      "graph",
+      "trusted_case",
+      "prefix_structure",
+      "context",
+      "expected_forms",
+      "final_lanes",
+      "chain_document",
+      "_check",
+      "check_ieee",
+      "module_operand",
+      "check_control_ea"
+    ]
+  },
+  "task1_bounded_reuse": {
+    "boundary": "lower bound for exact selected/direct named definitions; transitive helper modules are named in reports but not counted",
+    "counted_lines": 891,
+    "definition_only_prefixes": [
+      {
+        "class_boundary": "Capture",
+        "path": "runtime_trace/gdb_capture.py",
+        "selected_ast_node_lines": 361,
+        "selected_top_level_nodes": 22
+      },
+      {
+        "class_boundary": "Acquisition",
+        "path": "runtime_trace/caller_transition/gdb_acquire_reads.py",
+        "selected_ast_node_lines": 411,
+        "selected_top_level_nodes": 28
+      }
+    ],
+    "direct_named_spans": [
+      {
+        "named_definition_lines": 73,
+        "names": [
+          "ReadsRefused",
+          "required_reads"
+        ],
+        "path": "runtime_trace/caller_transition/read_effects.py"
+      },
+      {
+        "named_definition_lines": 46,
+        "names": [
+          "possible_writes"
+        ],
+        "path": "runtime_trace/caller_transition/write_effects_reads.py"
+      }
+    ],
+    "module_count": 4
+  },
+  "task2_named_reuse": {
+    "module_count": 8,
+    "named_definition_lines": 1621,
+    "received_audit_definition_prefix_lines": 238,
+    "reuse": [
+      {
+        "module_lines": 1445,
+        "named_entry_spans": [
+          {
+            "lines": 4,
+            "name": "_ByteRef"
+          },
+          {
+            "lines": 605,
+            "name": "_Dataflow"
+          }
+        ],
+        "path": "runtime_trace/numeric_ir/translator.py",
+        "sha256": "c94b7403a770ff74b91629c218048c7285ab720e5c104df14ce59af765b45340"
+      },
+      {
+        "module_lines": 668,
+        "named_entry_spans": [
+          {
+            "lines": 11,
+            "name": "_load_pins"
+          },
+          {
+            "lines": 18,
+            "name": "_verify_frozen"
+          },
+          {
+            "lines": 99,
+            "name": "_Execution"
+          }
+        ],
+        "path": "runtime_trace/numeric_ir/v2/adapter.py",
+        "sha256": "6c92e302d45ce661693cb46326960126dc4859bb341c0d3df89ac987577c3aa4"
+      },
+      {
+        "module_lines": 30,
+        "named_entry_spans": [
+          {
+            "lines": 5,
+            "name": "form_document"
+          }
+        ],
+        "path": "runtime_trace/numeric_ir/v2/schema.py",
+        "sha256": "e73ad8a520a7802befad75d56c9b8f90fdd53a39b1105def5c794d262da67fa4"
+      },
+      {
+        "module_lines": 1411,
+        "named_entry_spans": [
+          {
+            "lines": 511,
+            "name": "_Reconstruction"
+          },
+          {
+            "lines": 56,
+            "name": "check"
+          }
+        ],
+        "path": "runtime_trace/numeric_ir/checker.py",
+        "sha256": "1cb3de6f274be7cc88f14375158e23633703fa152a9a98f89151968bb41fdaf9"
+      },
+      {
+        "module_lines": 384,
+        "named_entry_spans": [
+          {
+            "lines": 26,
+            "name": "disassembly_for_rows"
+          },
+          {
+            "lines": 99,
+            "name": "verify_flow"
+          }
+        ],
+        "path": "runtime_trace/correspondence.py",
+        "sha256": "757bd34e873f091e375b252c57e29f65b0fc10ae9ddb12b4c0d88233f78564b7"
+      },
+      {
+        "module_lines": 2043,
+        "named_entry_spans": [
+          {
+            "lines": 20,
+            "name": "check_transition"
+          }
+        ],
+        "path": "runtime_trace/caller_transition/checker.py",
+        "sha256": "8c1915ed19e9fb1cefd757d8a2ff8c475193ed581fa272784dabcd89e5e125a4"
+      },
+      {
+        "module_lines": 756,
+        "named_entry_spans": [
+          {
+            "lines": 129,
+            "name": "compare"
+          }
+        ],
+        "path": "runtime_trace/regular_2step/structure.py",
+        "sha256": "956378c31ed5e7e809c72f6dfdff95e7802874e4b5b6831117ed2a8b1d5b19e0"
+      },
+      {
+        "module_lines": 178,
+        "named_entry_spans": [
+          {
+            "lines": 12,
+            "name": "Form"
+          },
+          {
+            "lines": 26,
+            "name": "step_forms"
+          }
+        ],
+        "path": "lab/v2_bound.py",
+        "sha256": "48b91d0c45fd7f62dd09df4db28756e6f82c6bd464a040dc60ac1c924ed99780"
+      }
+    ]
+  },
+  "test_totals": {
+    "files": 3,
+    "physical_lines": 736
+  },
+  "tests": [
+    {
+      "all_functions": 32,
+      "bytes": 22952,
+      "path": "runtime_trace/regular_2step/tests/test_acquisition_structure.py",
+      "physical_lines": 514,
+      "sha256": "6fc0ab0d6476167df09fa9b82a9b943df32625f1816849a5613059d5ebd2eea5",
+      "top_level_functions": 31
+    },
+    {
+      "all_functions": 13,
+      "bytes": 10558,
+      "path": "runtime_trace/regular_2step/tests/test_step2_chain.py",
+      "physical_lines": 206,
+      "sha256": "e38fc7a2bff7b9a2799722dced7455037c976946b0897285b497b1b4d0ab4782",
+      "top_level_functions": 13
+    },
+    {
+      "all_functions": 1,
+      "bytes": 901,
+      "path": "runtime_trace/regular_2step/tests/test_step2_mutations.py",
+      "physical_lines": 16,
+      "sha256": "1e6b8313aa53507d2642e177b5169de75e82d2e27541192ee42291d0bd0b6743",
+      "top_level_functions": 1
+    }
+  ]
+}

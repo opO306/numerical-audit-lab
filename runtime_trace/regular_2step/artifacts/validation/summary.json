@@ -1,0 +1,310 @@
+{
+  "all_tasks_actual_pytest_seconds": 1930.85,
+  "before_task3_actual_pytest_seconds": 973.94,
+  "environment": {
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+    "PYTHONPATH": ".",
+    "platform": "WSL Ubuntu-24.04",
+    "python": "/home/otherside123/venvs/gate2c1-trace/bin/python"
+  },
+  "extra_evidence": {
+    "mutation_replay.json": {
+      "bytes": 7407,
+      "sha256": "3c48cb27d7239557605d66fb58235b1cc281aedd885ff3f1e2128a4f6ec5bf4c"
+    },
+    "protected_baseline.json": {
+      "bytes": 1460,
+      "sha256": "80980f8d4b8c841229d60ecd51c4fe8f79648897e302421e1028baed5005ac20"
+    },
+    "source_test_map-generation-failed-empty.json": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "source_test_map.json": {
+      "bytes": 9155,
+      "sha256": "df551074df2b5ba4c2cb93554ed0b615b5e4167dea5fe947b64e902b3e340c92"
+    }
+  },
+  "final": {
+    "all_exit_zero": true,
+    "caller": 101,
+    "distinct_tests": 643,
+    "errors": 0,
+    "failures": 0,
+    "new": 63,
+    "pytest_seconds": 429.48,
+    "regular": 479,
+    "skips": 0
+  },
+  "final_delivery_helper_executed": false,
+  "full_local_n6": "NOT RUN: no frozen/core/old source changed",
+  "push_executed": false,
+  "renamed_log_copy_double_counted": false,
+  "runs": [
+    {
+      "disposition": "pytest PASS but outer wrapper failed; preserved, not final",
+      "exit_receipt": null,
+      "files": {
+        "exit": {
+          "bytes": 2,
+          "sha256": "e16f1596201850fd4a63680b27f603cb64e67176159be3d8ed78a4403fdb1700"
+        },
+        "log": {
+          "bytes": 111,
+          "sha256": "e09e2a83fb336965e3a0eb50d204c4452e0350184a6ee64f1f8c0b0a74437e4b"
+        },
+        "time": {
+          "bytes": 34,
+          "sha256": "5cdc943fb39f759dcd2a8fbd3c43a4cafcf94decbb86fc3389925d1465add68c"
+        },
+        "xml": {
+          "bytes": 10653,
+          "sha256": "8eaf50d1723e3b129e8b844f8beff0ca813df8b568adb953ec78797828cf2eae"
+        }
+      },
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 63,
+        "time": 167.531
+      },
+      "name": "new-63-wrapper-failure",
+      "pytest_seconds": 167.54,
+      "tests": 63,
+      "time_receipt": {
+        "real": 181.23,
+        "sys": 25.68,
+        "user": 110.15
+      }
+    },
+    {
+      "disposition": "pytest PASS/JUnit complete but empty exit receipt; preserved, not final",
+      "exit_receipt": null,
+      "files": {
+        "exit": {
+          "bytes": 1,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+        },
+        "log": {
+          "bytes": 111,
+          "sha256": "ed21bda788efb8c2e971044b8978edba96733705d0fc4bdb86830fe0ccb728e1"
+        },
+        "time": {
+          "bytes": 34,
+          "sha256": "dac860e79049b4f3b6a442f3af56260a623b09ba7894863ebb7985d7e3d26b27"
+        },
+        "xml": {
+          "bytes": 10653,
+          "sha256": "fac36b53a1c965e333633ed6d2eac103b5695d34c22032a02d07a297a4e8d763"
+        }
+      },
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 63,
+        "time": 167.021
+      },
+      "name": "new-63",
+      "pytest_seconds": 167.03,
+      "tests": 63,
+      "time_receipt": {
+        "real": 175.3,
+        "sys": 26.18,
+        "user": 103.93
+      }
+    },
+    {
+      "disposition": "authoritative final exit-0 receipt",
+      "exit_receipt": "0",
+      "files": {
+        "exit": {
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        },
+        "log": {
+          "bytes": 111,
+          "sha256": "da1c1b764be7233da01cb182da6c6a065e426e95bfec879ad7f5099873d10b2c"
+        },
+        "time": {
+          "bytes": 41,
+          "sha256": "ac78e89cfa0b14c0d0ecd212636f7bbb4a97864c5484c70c10cb34ea401761ac"
+        },
+        "xml": {
+          "bytes": 10653,
+          "sha256": "d5e96edad2d03e227ad8addff49bfd0a70ff9a51548266f1baa7ebc56a1e2fd1"
+        }
+      },
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 63,
+        "time": 165.047
+      },
+      "name": "final-new-63",
+      "pytest_seconds": 165.06,
+      "tests": 63,
+      "time_receipt": {
+        "exit": 0,
+        "real": 177.68,
+        "sys": 25.57,
+        "user": 106.63
+      }
+    },
+    {
+      "disposition": "pytest PASS/JUnit complete but empty exit receipt; preserved, not final",
+      "exit_receipt": null,
+      "files": {
+        "exit": {
+          "bytes": 1,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+        },
+        "log": {
+          "bytes": 191,
+          "sha256": "02b43012b48560fbbf127e78535382b9f83a6f8a0d1575b892568e30f6691b46"
+        },
+        "time": {
+          "bytes": 31,
+          "sha256": "807f2dbaddbf8e9c0520686ce5618491218d24b7372a1a05d1bb71fb9f760be2"
+        },
+        "xml": {
+          "bytes": 17699,
+          "sha256": "ad14c17f056c0ba6f64b7131fe6e0b51029f4ad36b2d14ce7f01b63ff612f71d"
+        }
+      },
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 101,
+        "time": 60.023
+      },
+      "name": "caller-101",
+      "pytest_seconds": 60.04,
+      "tests": 101,
+      "time_receipt": {
+        "real": 65.06,
+        "sys": 4.75,
+        "user": 14.15
+      }
+    },
+    {
+      "disposition": "authoritative final exit-0 receipt",
+      "exit_receipt": "0",
+      "files": {
+        "exit": {
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        },
+        "log": {
+          "bytes": 191,
+          "sha256": "7408fc6a1cee0a8b36ca26213b251b5edce806dc75c7e6a695988343f20996d6"
+        },
+        "time": {
+          "bytes": 38,
+          "sha256": "3b7bcb2c3403619ffd18ad61149a2303f7ba39a81a40fdc8fa36d877cfe3597c"
+        },
+        "xml": {
+          "bytes": 17699,
+          "sha256": "051ee496e904768cf4a4ea754d2d54562ab6f37d31726461b20d857d1aac28da"
+        }
+      },
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 101,
+        "time": 60.594
+      },
+      "name": "final-caller-101",
+      "pytest_seconds": 60.61,
+      "tests": 101,
+      "time_receipt": {
+        "exit": 0,
+        "real": 66.06,
+        "sys": 5.19,
+        "user": 14.3
+      }
+    },
+    {
+      "disposition": "pytest PASS/JUnit complete but empty exit receipt; preserved, not final",
+      "exit_receipt": null,
+      "files": {
+        "exit": {
+          "bytes": 1,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+        },
+        "log": {
+          "bytes": 592,
+          "sha256": "d61efb8d89b7e4aafa4eb1cf56d5d82101ae693da47fc32d73d11015962d4176"
+        },
+        "time": {
+          "bytes": 33,
+          "sha256": "3cd4f8f31280865e4b35b927f64aea0af36d41b378891facffe49543d4c8016f"
+        },
+        "xml": {
+          "bytes": 65802,
+          "sha256": "df5c9bd3ba7a713b64872900a1a1bf0fdad90f62b0ba1fe68ca03598d6414bc1"
+        }
+      },
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 479,
+        "time": 132.802
+      },
+      "name": "regular-479",
+      "pytest_seconds": 132.82,
+      "tests": 479,
+      "time_receipt": {
+        "real": 143.36,
+        "sys": 11.02,
+        "user": 51.18
+      }
+    },
+    {
+      "disposition": "authoritative final exit-0 receipt",
+      "exit_receipt": "0",
+      "files": {
+        "exit": {
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        },
+        "log": {
+          "bytes": 592,
+          "sha256": "76ac00fec639fc3a04987388754fe6158fc8caabb9e258dc0fa19e66890f9381"
+        },
+        "time": {
+          "bytes": 40,
+          "sha256": "d40fa8d8ba513eaad9ac5ac0b93c2d30ef31bd6357f00b3cdbd6e2a5e062cf3f"
+        },
+        "xml": {
+          "bytes": 65803,
+          "sha256": "1fd87e4661c6ee4bb1872bee2f5bd0ec325ea276631c5a86bd50c9b22950af3d"
+        }
+      },
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 479,
+        "time": 203.785
+      },
+      "name": "final-regular-479",
+      "pytest_seconds": 203.81,
+      "tests": 479,
+      "time_receipt": {
+        "exit": 0,
+        "real": 219.78,
+        "sys": 13.36,
+        "user": 78.13
+      }
+    }
+  ],
+  "schema": "regular-2step-task3-validation-v1",
+  "task3_all_actual_pytest_seconds": 956.91,
+  "verdict": "PASS"
+}

@@ -1,0 +1,188 @@
+{
+  "schema": "regular-2step-implementation-cost-v1",
+  "timing": {
+    "request_utc": "2026-10-03T08:10:08.864Z",
+    "measured_implementation_origin_utc": "2026-10-03T08:13:18Z",
+    "report_seal_utc": "2026-10-03T12:23:09.0418217Z",
+    "measured_elapsed_seconds": 14991.041822,
+    "request_to_report_seconds": 15180.177822,
+    "definition": "elapsed workflow wall time through the pre-commit report seal; includes execution, review and handoff waits and is not CPU or active coding time"
+  },
+  "new_code": {
+    "loc_definition": "physical splitlines including blank/comment lines",
+    "production_python_files": 10,
+    "production_python_lines": 2813,
+    "task1_production_lines": 1537,
+    "task2_production_lines": 801,
+    "task3_delivery_lines": 475,
+    "test_python_files": 3,
+    "test_python_lines": 736,
+    "readme_lines": 140,
+    "contract_lines": 189,
+    "source_map": "artifacts/validation/source_test_map.json"
+  },
+  "bounded_reuse": {
+    "task1_selected_or_direct_named_definition_lines": 891,
+    "task1_counted_modules": 4,
+    "task1_boundary": "exact AST-selected definition prefixes plus directly imported named read/write definitions; transitive modules are named but not counted",
+    "task2_named_definition_lines": 1621,
+    "task2_named_modules": 8,
+    "received_independent_audit_definition_prefix_lines": 238,
+    "bounded_total_lines": 2750,
+    "origin_entries": 13,
+    "not_a_claim": "not every line in each reused module executed and reused lines are not new LOC"
+  },
+  "native_acquisition": {
+    "total_executions": 15,
+    "failures": 5,
+    "successes": 10,
+    "authoritative_current_captures": 2,
+    "task1_original": {
+      "executions": 9,
+      "failures": 3
+    },
+    "task1_fix1": {
+      "executions": 4,
+      "failures": 2
+    },
+    "task1_fix2": {
+      "executions": 2,
+      "failures": 0
+    },
+    "task2": {
+      "executions": 0,
+      "failures": 0
+    },
+    "task3": {
+      "executions": 0,
+      "failures": 0
+    }
+  },
+  "semantic_checker_functions": {
+    "task1_structure_total": 28,
+    "task2_checker_total": 15,
+    "task2_form_oracle_total": 4,
+    "total_function_definitions_in_proof_checker_files": 47,
+    "delivery_functions_excluded": true,
+    "capability_groups": [
+      "receipt, seal, source-pin, process and harness validation",
+      "raw row continuity, ELF bytes, objdump, control and operation/storage topology",
+      "process-local protected-role handoff, caller corridor and antecedent binding",
+      "fresh acquisition distinction without ASLR inference",
+      "full PT_LOAD module operand identity and closed observed CONTROL effective addresses",
+      "complete graph, storage and dynamic-occurrence identity reconstruction",
+      "exact-rational IEEE-754 and independent Form/state/boundary propagation",
+      "lower-component and REGULAR_2STEP_CHAIN_V1 semantic composition",
+      "separate semantic, hash and public-trust refusal"
+    ]
+  },
+  "pytest": {
+    "before_task3_actual_observed_seconds": 973.94,
+    "task3_actual_observed_seconds": 956.91,
+    "overall_actual_observed_seconds": 1930.85,
+    "final_accepted_regression_seconds": 429.48,
+    "task3_runs": [
+      {
+        "name": "new-63-wrapper-failure",
+        "tests": 63,
+        "pytest_seconds": 167.54,
+        "pytest_result": "PASS",
+        "outer_result": "FAILED wrapper exit receipt",
+        "counted_once": true
+      },
+      {
+        "name": "new-63-empty-exit-receipt",
+        "tests": 63,
+        "pytest_seconds": 167.03,
+        "pytest_result": "PASS by log/JUnit",
+        "outer_result": "exit file empty; not final receipt",
+        "counted_once": true
+      },
+      {
+        "name": "final-new-63",
+        "tests": 63,
+        "pytest_seconds": 165.06,
+        "exit_code": 0,
+        "junit_failures": 0,
+        "junit_errors": 0,
+        "junit_skips": 0,
+        "counted_once": true
+      },
+      {
+        "name": "caller-101-empty-exit-receipt",
+        "tests": 101,
+        "pytest_seconds": 60.04,
+        "pytest_result": "PASS by log/JUnit",
+        "outer_result": "exit file empty; not final receipt",
+        "counted_once": true
+      },
+      {
+        "name": "final-caller-101",
+        "tests": 101,
+        "pytest_seconds": 60.61,
+        "exit_code": 0,
+        "junit_failures": 0,
+        "junit_errors": 0,
+        "junit_skips": 0,
+        "counted_once": true
+      },
+      {
+        "name": "regular-479-empty-exit-receipt",
+        "tests": 479,
+        "pytest_seconds": 132.82,
+        "pytest_result": "PASS by log/JUnit",
+        "outer_result": "exit file empty; not final receipt",
+        "counted_once": true
+      },
+      {
+        "name": "final-regular-479",
+        "tests": 479,
+        "pytest_seconds": 203.81,
+        "exit_code": 0,
+        "junit_failures": 0,
+        "junit_errors": 0,
+        "junit_skips": 0,
+        "counted_once": true
+      }
+    ],
+    "copy_accounting": "renaming the first new-63 log/XML/time/exit to wrapper-failure was a move, not another pytest execution and is not double-counted"
+  },
+  "mutation_replay": {
+    "wall_seconds": 111.15,
+    "exit_code": 0,
+    "semantic_refusals": 15,
+    "controls": [
+      "HASH",
+      "TRUST"
+    ],
+    "common_files": 273,
+    "byte_equal_common_files": 256,
+    "private_path_only_repair_files": 17,
+    "report": "artifacts/validation/mutation_replay.json"
+  },
+  "failure_history": {
+    "preserved_roots": [
+      "attempt-history/task1-attempt-*",
+      "attempt-history/task1-fix1-attempt-*",
+      "attempt-history/task1-fix2-attempt-*",
+      "attempt-history/task2-attempt-*",
+      "attempt-history/task2-fix1-attempt-*",
+      "workflow/task-*-report.md and task-*-review.md",
+      "runtime_trace/regular_2step/artifacts/validation/*wrapper-failure* and *empty-exit*"
+    ],
+    "known_receipt_limits": [
+      "Task2 attempts 01-05 did not separately capture Python exit codes",
+      "Task2 fix1 had a preserved PowerShell parser failure before numerical execution",
+      "Task3 first wrapper failed after a 63-test PASS and three next wrappers left empty exit files",
+      "Task3 source-map first generation failed before map creation because PYTHONPATH was absent"
+    ]
+  },
+  "scaling_design_issue": {
+    "triggered": true,
+    "reason": "2813 new production Python physical lines exceeds the user-defined thousands-of-lines trigger",
+    "disposition": "stop at two steps; review a regular transition template or induction architecture before any 3-step or N-step expansion",
+    "not_proven": "this result does not mathematically prove that the current per-step method cannot scale"
+  },
+  "push": "AUTHORIZED / NOT YET EXECUTED AT REPORT SEAL",
+  "independent_audit": "PENDING"
+}

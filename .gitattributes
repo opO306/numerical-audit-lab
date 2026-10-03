@@ -104,3 +104,5 @@ runtime_trace/caller_transition/frozen_modules/** -text
 # Received Caller external audit and regular two-step evidence: raw bytes.
 current/caller-external-audit-2026-10-03/** -text
 runtime_trace/regular_2step/artifacts/** -text
+current/REGULAR_2STEP_RECEIVED_AUDIT_IDENTITY.json -text
+runtime_trace/regular_2step/COST_REPORT.json -text

@@ -1,0 +1,20 @@
+{
+  "schema": "regular-2step-received-caller-audit-identity-v1",
+  "received_material": {
+    "report": {
+      "bytes": 12542,
+      "path": "current/caller-external-audit-2026-10-03/REPORT.md",
+      "sha256": "b63f721c897e275c41d8bed2597025b9bb1d9846318e03a7c452e4b1add6d946"
+    },
+    "zip": {
+      "bytes": 4488673,
+      "path": "current/caller-external-audit-2026-10-03/received-evidence.zip",
+      "sha256": "534dce362247406e5798e88a5edd97b5864898d25d19127c58748f88a15854de"
+    }
+  },
+  "scope": "Caller Transition / Error-Continuity Gate only; two immutable audited acquisitions",
+  "target_head": "43f1e9b21a014520facb5a545846d648eb67b288",
+  "verdict": "PASS",
+  "new_regular_2step_chain_external_audit": "PENDING",
+  "identity_is_not_an_extension_of_external_scope": true
+}

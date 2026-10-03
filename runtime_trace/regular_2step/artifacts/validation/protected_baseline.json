@@ -1,0 +1,34 @@
+{
+  "authorized_metadata_delta": [
+    ".gitattributes"
+  ],
+  "baseline_files": 1488,
+  "baseline_head": "43f1e9b21a014520facb5a545846d648eb67b288",
+  "byte_and_blob_preserved": 1487,
+  "mismatches": [],
+  "pinned": [
+    {
+      "actual_sha256": "cc5f0cf3bc63a966a3c130b93f6c05026271fe7178492a02c6266c243b5fc2f0",
+      "expected_sha256": "cc5f0cf3bc63a966a3c130b93f6c05026271fe7178492a02c6266c243b5fc2f0",
+      "match": true,
+      "path": "audit/gate2c1/vendor/gala-1.12.0-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl"
+    },
+    {
+      "actual_sha256": "a6ac98736304bb9f6a92e473bba45da10d9b5b99f8019e2ca15eb6a7f86234fc",
+      "expected_sha256": "a6ac98736304bb9f6a92e473bba45da10d9b5b99f8019e2ca15eb6a7f86234fc",
+      "match": true,
+      "path": "audit/gate2c1/vendor/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so"
+    },
+    {
+      "actual_sha256": "48b91d0c45fd7f62dd09df4db28756e6f82c6bd464a040dc60ac1c924ed99780",
+      "expected_sha256": "48b91d0c45fd7f62dd09df4db28756e6f82c6bd464a040dc60ac1c924ed99780",
+      "match": true,
+      "path": "lab/v2_bound.py"
+    }
+  ],
+  "received_audit_report_sha256": "b63f721c897e275c41d8bed2597025b9bb1d9846318e03a7c452e4b1add6d946",
+  "received_audit_zip_sha256": "534dce362247406e5798e88a5edd97b5864898d25d19127c58748f88a15854de",
+  "schema": "regular-2step-protected-baseline-v1",
+  "tested_head": "5bc993f56dc7a135c5632d92f11a31fd52aab6ac",
+  "verdict": "PASS"
+}
