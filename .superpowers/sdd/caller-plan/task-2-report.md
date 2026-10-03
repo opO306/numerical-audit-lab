@@ -268,8 +268,9 @@ Date: 2026-10-03
 
 Implementation base: `6ceaa3460e77dc855ddac03bd4ad78d65a16e21d`
 
-Implementation/evidence commit:
-`85716d5adffc04f712e5afbb80594a71d0286969`
+Implementation/evidence commits:
+`85716d5adffc04f712e5afbb80594a71d0286969` and
+`38dcc6f52d30278e3af98a8f989d34d4577eeef7`
 
 Task result: **DONE** for the scoped Task 2 fix. This addendum supersedes the
 historical acceptance claims above for the old v1 acquisitions and old
@@ -381,15 +382,15 @@ Both public CLI runs returned `CHECKER_PASS`:
 
 Key output hashes:
 
-- checker source: `5c69aae0679841aa2f7adc2d78294ef3beaaa0bd5a9825e1483fd6ab3010e0bd`;
-- accepted-case tests: `d5258b0296d0cdb60d64d0513488a928e7a22a63faf38fef28cba03c970a79a6`;
+- checker source: `fbdea1a42f8422e4393f28ffc9c0b6f0c7ccdf608ce369128b5737a941cc276c`;
+- accepted-case tests: `9a3c4ed34d46d960339a747ab121c488bdf8303acb9586fec50b4883ad75d6c6`;
 - prior mutation tests: `5ed0b03bce30dba430dccfdfe2c83338cf8562f5288435d85f967f8ab4bd2818`;
 - fix mutation tests: `509a0d7cb13c6ca037a251ac908d42e1e9a18e4c37f1a5150ba59017cb004ba7`;
-- audited checker report: `a53de0d53155544fdd3bcef84dbcb9801ac2cd00d1b1aa6c7ebf58b793d4ff99`;
-- fresh checker report: `010c4e23d782bff755ba2df206261519d65b477cad7d51615b43ca09219bcabe`;
+- audited checker report: `35a8f4662c676a15582dec5ba36bd5c6e5a9ee87af12cc85ce955dae9cda514f`;
+- fresh checker report: `6cec65c3c3e6a730a9628875ff5fd638e3844cc0c11209f758ac6f2daa161f82`;
 - mutation manifest: `b5c0805e31b21274ddc28ead02e77ef52f60bc97c904e443bdf579188a71a14b`;
-- dedicated pytest log: `d7f9c80756bc589007d972b605bc67aa2a7560a206dccc0c610d92bb92827a9e`;
-- dedicated JUnit: `97d45b85d5dc567b3e98490ee52d91559a2fff0501579931ec0207485818c8b7`.
+- dedicated pytest log: `7b7632d73f03707c1bb9a6edc3c9e6a53c93291200d622ac37a76a3cd372e108`;
+- dedicated JUnit: `845ceb57cb92b265d515fe5d271a1065a48fe7556d4553204012c43f59bc3e61`.
 
 ## Mutation evidence
 
@@ -418,12 +419,12 @@ Exact CLI, mutation-generator, py_compile, and pytest commands are saved in
 dedicated command used frozen Python and produced:
 
 ```text
-........................................................................ [ 80%]
-..................                                                       [100%]
-90 passed in 28.50s
+........................................................................ [ 79%]
+...................                                                      [100%]
+91 passed in 25.82s
 ```
 
-JUnit records 90 tests, 0 failures, 0 errors, and 0 skips in 28.483 seconds.
+JUnit records 91 tests, 0 failures, 0 errors, and 0 skips in 25.803 seconds.
 `py_compile` exited 0. Both public CLI stderr files and mutation-generator
 stderr are empty. The execution receipt records hashes for checker/tests,
 reports, manifest, test log/JUnit, pin audit, baseline audit, and commands.
@@ -477,13 +478,18 @@ All fix-round1 failed runs are preserved under
   incorrectly accepted;
 - `task2-fix1-red-03`: semantic RED showing indirect/RET/ABI mutations were
   initially accepted;
+- `task2-fix1-red-04`: a missing per-row FS base originally raised `KeyError`;
+  the checker now refuses it as `SEGMENT_BASE`;
 - `task2-fix1-exitcode-command-error-01`: the accidental file produced by an
   incorrect PowerShell `Set-Content` argument order; moved out of tree intact.
 
 The successful intermediate dedicated suite is preserved in
-`task2-fix1-suite-attempt-01` (`89 passed in 36.92s`). Earlier Task2 failure
-and probe directories are enumerated in the historical report section above
-and remain unchanged.
+`task2-fix1-suite-attempt-01` (`89 passed in 36.92s`). The reports and logs
+immediately before the segment-base regression were preserved in
+`task2-fix1-pre-segment-base-final-01`; final public-CLI regeneration receipts
+were preserved in `task2-fix1-final-cli-regeneration-01`. Earlier Task2
+failure and probe directories are enumerated in the historical report section
+above and remain unchanged.
 
 ## Self-review and remaining limits
 
