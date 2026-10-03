@@ -1,0 +1,248 @@
+{
+  "early_exit_code_limit": "Attempts01-05 did not separately capture Python exit; wrapper exit0 after printing full failed pytest log.",
+  "entries": [
+    {
+      "command_receipt": null,
+      "directory": "task2-attempt-01-red",
+      "log": "pytest.log",
+      "log_sha256": "e467c024434ca77153537e5921e1e368f320fbce007fcc6922369f61988b4a5d",
+      "pytest_seconds": 0.47
+    },
+    {
+      "command_receipt": null,
+      "directory": "task2-attempt-02-behavior",
+      "log": "pytest.log",
+      "log_sha256": "c6a7fe7ac0656fa1b3ed318ea911ea7b65efc1ba9f7f1fd4b5a19375c96b99d9",
+      "pytest_seconds": 12.11
+    },
+    {
+      "command_receipt": null,
+      "directory": "task2-attempt-03-prefix",
+      "log": "pytest.log",
+      "log_sha256": "4732868c1c08f3ba0d66e72b126469d063aa59ac7f04fd59cae63ec656b7ffe1",
+      "pytest_seconds": 11.43
+    },
+    {
+      "command_receipt": null,
+      "directory": "task2-attempt-04-entry",
+      "log": "pytest.log",
+      "log_sha256": "9f29a8e59fccca27cf2bc59218e1a2843cabf8abd60df2bd85faf0471dd9d994",
+      "pytest_seconds": 23.4
+    },
+    {
+      "command_receipt": null,
+      "directory": "task2-attempt-05-protocol-red",
+      "log": "pytest.log",
+      "log_sha256": "b25ee891f453aca6eefb4ca0a6bc76e63d79b893f1670d5ed4e3bdaaaec8f875",
+      "pytest_seconds": 22.27
+    },
+    {
+      "command_receipt": {
+        "exit_code": 0,
+        "started": "2026-10-03T10:40:13.6903121Z",
+        "wall_seconds": 168.9965594
+      },
+      "directory": "task2-attempt-06-green",
+      "log": "pytest.log",
+      "log_sha256": "285781a054be7b6f5a9541eff5b07eb7b5693240250f5c6e76fcbec46e123876",
+      "pytest_seconds": 159.81
+    },
+    {
+      "command_receipt": {
+        "command": "python -m runtime_trace.regular_2step.producer --root . --capture runtime_trace/regular_2step/artifacts/fresh-03 --out runtime_trace/regular_2step/artifacts/derived/fresh",
+        "exit_code": 0,
+        "started": "2026-10-03T10:43:43.4127354Z",
+        "wall_seconds": 14.2593381
+      },
+      "directory": "task2-attempt-07-cli-fresh",
+      "log": "producer.log",
+      "log_sha256": "752258b406a75737f431c224e0193dba3e5c244447ee0f27d741232da865b8be"
+    },
+    {
+      "command_receipt": {
+        "command": "python -m runtime_trace.regular_2step.producer --root . --capture runtime_trace/regular_2step/artifacts/known-03 --out runtime_trace/regular_2step/artifacts/derived/known",
+        "exit_code": 0,
+        "started": "2026-10-03T10:43:43.4128715Z",
+        "wall_seconds": 14.2652895
+      },
+      "directory": "task2-attempt-07-cli-known",
+      "log": "producer.log",
+      "log_sha256": "056c20dbbe08553bb788ccbd2b306bd41e5692be6a2e2d8e10d7f6a973c617e8"
+    },
+    {
+      "command_receipt": {
+        "command": "python -m runtime_trace.regular_2step.checker --root . --capture runtime_trace/regular_2step/artifacts/fresh-03 --derived runtime_trace/regular_2step/artifacts/derived/fresh",
+        "exit_code": 0,
+        "started": "2026-10-03T10:45:22.5210530Z",
+        "wall_seconds": 5.7474131
+      },
+      "directory": "task2-attempt-08-check-fresh",
+      "log": "checker.log",
+      "log_sha256": "752258b406a75737f431c224e0193dba3e5c244447ee0f27d741232da865b8be"
+    },
+    {
+      "command_receipt": {
+        "command": "python -m runtime_trace.regular_2step.checker --root . --capture runtime_trace/regular_2step/artifacts/known-03 --derived runtime_trace/regular_2step/artifacts/derived/known",
+        "exit_code": 0,
+        "started": "2026-10-03T10:45:22.5211855Z",
+        "wall_seconds": 5.7587738
+      },
+      "directory": "task2-attempt-08-check-known",
+      "log": "checker.log",
+      "log_sha256": "056c20dbbe08553bb788ccbd2b306bd41e5692be6a2e2d8e10d7f6a973c617e8"
+    },
+    {
+      "command_receipt": {
+        "exit_code": 1,
+        "started": "2026-10-03T10:53:50.0312007Z",
+        "wall_seconds": 5.9455623
+      },
+      "directory": "task2-attempt-09-constant-red",
+      "log": "pytest.log",
+      "log_sha256": "bbf4a2736adc652ffa7bf67492ad1c2f3438d7fd8666f8377d98cacb264a69d2",
+      "pytest_seconds": 0.89
+    },
+    {
+      "command_receipt": {
+        "exit_code": 0,
+        "started": "2026-10-03T10:54:50.7559839Z",
+        "wall_seconds": 171.0835821
+      },
+      "directory": "task2-attempt-11-final-green",
+      "log": "pytest.log",
+      "log_sha256": "58a950d0a6f8118456dd2d7e66d141787cd60c98c6991e43419d9dcc849f22e3",
+      "pytest_seconds": 156.44
+    },
+    {
+      "command_receipt": {
+        "command": "python -m runtime_trace.regular_2step.producer --root . --capture runtime_trace/regular_2step/artifacts/fresh-03 --out runtime_trace/regular_2step/artifacts/derived/fresh",
+        "exit_code": 0,
+        "started": "2026-10-03T10:56:19.3585013Z",
+        "wall_seconds": 12.5477161
+      },
+      "directory": "task2-attempt-12-cli-fresh",
+      "log": "producer.log",
+      "log_sha256": "dd831357a2104bf2c5c5c526cf9268ff44eee259d0cce93651748d429aabe2ab"
+    },
+    {
+      "command_receipt": {
+        "command": "python -m runtime_trace.regular_2step.producer --root . --capture runtime_trace/regular_2step/artifacts/known-03 --out runtime_trace/regular_2step/artifacts/derived/known",
+        "exit_code": 0,
+        "started": "2026-10-03T10:56:19.3484485Z",
+        "wall_seconds": 12.5518993
+      },
+      "directory": "task2-attempt-12-cli-known",
+      "log": "producer.log",
+      "log_sha256": "5c8e352ea1031f22187b445faec0f33a0015969f01f8b453db081a4c7f92fac5"
+    },
+    {
+      "command_receipt": {
+        "exit_code": 1,
+        "started": "2026-10-03T10:57:58.5445050Z",
+        "wall_seconds": 39.7848491
+      },
+      "directory": "task2-attempt-13-boolean-red",
+      "log": "pytest.log",
+      "log_sha256": "33d38b7a8df5d84e0eb3b629561010414e83fc88e196e4583b6ede0d94d59c29",
+      "pytest_seconds": 34.14
+    },
+    {
+      "command_receipt": {
+        "exit_code": 0,
+        "started": "2026-10-03T10:59:15.3216058Z",
+        "wall_seconds": 157.927001
+      },
+      "directory": "task2-attempt-14-type-green",
+      "log": "pytest.log",
+      "log_sha256": "d7ebd1a1692a8696181d81d46cb3d20771874fa8fb5c8ed0f11012660e4c6f67",
+      "pytest_seconds": 143.72
+    },
+    {
+      "command_receipt": {
+        "command": "python -m runtime_trace.regular_2step.checker --root . --capture runtime_trace/regular_2step/artifacts/fresh-03 --derived runtime_trace/regular_2step/artifacts/derived/fresh",
+        "exit_code": 0,
+        "started": "2026-10-03T11:00:23.1291650Z",
+        "wall_seconds": 6.7069372
+      },
+      "directory": "task2-attempt-15-check-fresh",
+      "log": "checker.log",
+      "log_sha256": "dd831357a2104bf2c5c5c526cf9268ff44eee259d0cce93651748d429aabe2ab"
+    },
+    {
+      "command_receipt": {
+        "command": "python -m runtime_trace.regular_2step.checker --root . --capture runtime_trace/regular_2step/artifacts/known-03 --derived runtime_trace/regular_2step/artifacts/derived/known",
+        "exit_code": 0,
+        "started": "2026-10-03T11:00:23.1291788Z",
+        "wall_seconds": 6.6703603
+      },
+      "directory": "task2-attempt-15-check-known",
+      "log": "checker.log",
+      "log_sha256": "5c8e352ea1031f22187b445faec0f33a0015969f01f8b453db081a4c7f92fac5"
+    }
+  ],
+  "mutation_copy_bytes": 104251893,
+  "mutation_copy_files": 273,
+  "pytest_elapsed_total_seconds": 564.68,
+  "valid_artifacts_unchanged_after_type_comparison": [
+    {
+      "case": "known",
+      "file": "chain.json",
+      "sha256": "d8ae999ec2f01ebb7a3be2547452e51429ab55eedd6855f793cbf8fc51cf00ad"
+    },
+    {
+      "case": "known",
+      "file": "checker_report.json",
+      "sha256": "611036bd082533bd4a32aae9db5f9c2e1cfe58a4ea04d41c77c6e10c82e39f6f"
+    },
+    {
+      "case": "known",
+      "file": "components.json",
+      "sha256": "441b5198909d35ad046a473106843936e5767ac2ff690cbbc6d1360a199eeeda"
+    },
+    {
+      "case": "known",
+      "file": "endpoint.json",
+      "sha256": "653bb2ccf527f9d1323d5ca96bfeb44d37a1f1ca9bc6d2d4a9571030f1eeebf6"
+    },
+    {
+      "case": "known",
+      "file": "numeric_ir.json",
+      "sha256": "7ed21ab23490ece117f82f1290647209f7eca4aa5524ab157d8b5fe38c8b0a69"
+    },
+    {
+      "case": "known",
+      "file": "v2_correspondence.json",
+      "sha256": "89afa7e1712d62cbd726999afe7724a3f94dd13868ab34fec0c70a8982fb3b70"
+    },
+    {
+      "case": "fresh",
+      "file": "chain.json",
+      "sha256": "6ef0041f8004b1ad0852179bf3cc522c05a9e95dccdb0947538da97c3cc26467"
+    },
+    {
+      "case": "fresh",
+      "file": "checker_report.json",
+      "sha256": "a10571ead28f5c38d879e8011048044f94bda3e6b912712ac1fa1f6651c9f14d"
+    },
+    {
+      "case": "fresh",
+      "file": "components.json",
+      "sha256": "b72428961c6b3238e02b5d8ea8f02e4785af567559d3aa993fe11215f8f6ce1b"
+    },
+    {
+      "case": "fresh",
+      "file": "endpoint.json",
+      "sha256": "980042c2f3ea603d1af8557c201c8a3f646512344a23283c6f96539ee223e2e7"
+    },
+    {
+      "case": "fresh",
+      "file": "numeric_ir.json",
+      "sha256": "92d4ef8681de35f57bd0b8860c6fb037e2bff8881d11580a417065de30bc4be2"
+    },
+    {
+      "case": "fresh",
+      "file": "v2_correspondence.json",
+      "sha256": "ebd927beecc124f1a244bd381b7c40db13c1bc77e0fff01a321764be7773d48a"
+    }
+  ]
+}
