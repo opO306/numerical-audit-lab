@@ -300,6 +300,13 @@ def _is_memory_operand(operand: str) -> bool:
     return "(" in value or value.startswith(("%fs:", "%gs:"))
 
 
+def _segment_base(row: dict[str, Any], segment: str) -> int:
+    state = row.get("pre")
+    bases = state.get("segment_bases") if isinstance(state, dict) else None
+    _require(isinstance(bases, dict), "SEGMENT_BASE", "segment base state missing")
+    return _hex_int(bases.get(f"{segment}_base"), "SEGMENT_BASE", f"{segment}_base")
+
+
 def _effective_address(row: dict[str, Any], operand: str) -> int:
     value = operand.strip().removeprefix("*")
     segment = None
@@ -312,7 +319,7 @@ def _effective_address(row: dict[str, Any], operand: str) -> int:
             _refuse("UNKNOWN_INSTRUCTION_EFFECT", f"unsupported memory operand: {operand}")
         if address & (1 << 63):
             address -= 1 << 64
-        base = 0 if segment is None else _hex_int(row["pre"]["segment_bases"][f"{segment}_base"], "TRACE_STATE", f"{segment}_base")
+        base = 0 if segment is None else _segment_base(row, segment)
         return (base + address) & ((1 << 64) - 1)
     match = _MEMORY.fullmatch(value)
     if match is None:
@@ -330,7 +337,7 @@ def _effective_address(row: dict[str, Any], operand: str) -> int:
     if index_name:
         address += _reg_value(row["pre"], index_name)[0] * int(match.group("scale") or "1")
     if segment is not None:
-        address += _hex_int(row["pre"]["segment_bases"][f"{segment}_base"], "TRACE_STATE", f"{segment}_base")
+        address += _segment_base(row, segment)
     return address & ((1 << 64) - 1)
 
 

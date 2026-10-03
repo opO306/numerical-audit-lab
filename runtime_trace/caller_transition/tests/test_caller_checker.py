@@ -101,3 +101,19 @@ def test_old_v1_case_is_refused_as_superseded() -> None:
         check_transition(capture, transition, root=ROOT)
 
     assert caught.value.code == "SUPERSEDED_EVIDENCE"
+
+
+def test_missing_fs_base_refuses_instead_of_crashing() -> None:
+    row = {
+        "sequence": 369,
+        "pc": 0x1000,
+        "instruction_bytes": "64",
+        "pre": {
+            "gpr": {"rdi": "0x0000000000000001", "rsp": "0x0000000000003000"},
+            "segment_bases": {},
+        },
+        "possible_memory_writes": [],
+    }
+    with pytest.raises(CheckerRefused) as caught:
+        derive_possible_write_effects(row, "mov %rdi,%fs:0xfffffffffffffff8")
+    assert caught.value.code == "SEGMENT_BASE"
