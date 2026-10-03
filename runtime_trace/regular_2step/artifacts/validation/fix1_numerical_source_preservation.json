@@ -1,0 +1,97 @@
+{
+  "all_match": true,
+  "base_head": "036bf07024fde7ca498d3b37d157b90960e7a5d2",
+  "existing_numerical_regression_tests": 643,
+  "file_count": 12,
+  "files": [
+    {
+      "base_sha256": "9d517b7911f258e2b819407100e440da52d192148f067fae11542da76aa80bc8",
+      "bytes": 64,
+      "current_sha256": "9d517b7911f258e2b819407100e440da52d192148f067fae11542da76aa80bc8",
+      "match": true,
+      "path": "runtime_trace/regular_2step/__init__.py"
+    },
+    {
+      "base_sha256": "d7495aad611c3feb61e28fe8137ae71781f9883dbe427f2d26d8acc491b118c1",
+      "bytes": 19067,
+      "current_sha256": "d7495aad611c3feb61e28fe8137ae71781f9883dbe427f2d26d8acc491b118c1",
+      "match": true,
+      "path": "runtime_trace/regular_2step/acquire.py"
+    },
+    {
+      "base_sha256": "1c6c4ab6920a0dcf3ea21b9e90832e00262480d28e4d9c269e67642ad75c05ee",
+      "bytes": 22400,
+      "current_sha256": "1c6c4ab6920a0dcf3ea21b9e90832e00262480d28e4d9c269e67642ad75c05ee",
+      "match": true,
+      "path": "runtime_trace/regular_2step/checker.py"
+    },
+    {
+      "base_sha256": "624e09e4ad2a18d8e028c7f36f8311c1c55804c83a25921ae3f45ee3fde83135",
+      "bytes": 2954,
+      "current_sha256": "624e09e4ad2a18d8e028c7f36f8311c1c55804c83a25921ae3f45ee3fde83135",
+      "match": true,
+      "path": "runtime_trace/regular_2step/form_oracle.py"
+    },
+    {
+      "base_sha256": "50c1ac59092a3069df6705ab325be725e9efea5bedd8916b52adbfe420329691",
+      "bytes": 20293,
+      "current_sha256": "50c1ac59092a3069df6705ab325be725e9efea5bedd8916b52adbfe420329691",
+      "match": true,
+      "path": "runtime_trace/regular_2step/gdb_acquire.py"
+    },
+    {
+      "base_sha256": "d47796945f589efd9df57d507afbed3f802c40854f808446f12a7093a5904741",
+      "bytes": 8592,
+      "current_sha256": "d47796945f589efd9df57d507afbed3f802c40854f808446f12a7093a5904741",
+      "match": true,
+      "path": "runtime_trace/regular_2step/mutations.py"
+    },
+    {
+      "base_sha256": "52778e9944cbaab348cbf3a3c7c2cd9b16a90cd7cb039aa5edadeebccaadcd6f",
+      "bytes": 6793,
+      "current_sha256": "52778e9944cbaab348cbf3a3c7c2cd9b16a90cd7cb039aa5edadeebccaadcd6f",
+      "match": true,
+      "path": "runtime_trace/regular_2step/producer.py"
+    },
+    {
+      "base_sha256": "c72710d43fd8ed737fcdb68ad3325f176faea78481173a0ce7496965ac4feab1",
+      "bytes": 2467,
+      "current_sha256": "c72710d43fd8ed737fcdb68ad3325f176faea78481173a0ce7496965ac4feab1",
+      "match": true,
+      "path": "runtime_trace/regular_2step/schema.py"
+    },
+    {
+      "base_sha256": "956378c31ed5e7e809c72f6dfdff95e7802874e4b5b6831117ed2a8b1d5b19e0",
+      "bytes": 42407,
+      "current_sha256": "956378c31ed5e7e809c72f6dfdff95e7802874e4b5b6831117ed2a8b1d5b19e0",
+      "match": true,
+      "path": "runtime_trace/regular_2step/structure.py"
+    },
+    {
+      "base_sha256": "6fc0ab0d6476167df09fa9b82a9b943df32625f1816849a5613059d5ebd2eea5",
+      "bytes": 22952,
+      "current_sha256": "6fc0ab0d6476167df09fa9b82a9b943df32625f1816849a5613059d5ebd2eea5",
+      "match": true,
+      "path": "runtime_trace/regular_2step/tests/test_acquisition_structure.py"
+    },
+    {
+      "base_sha256": "e38fc7a2bff7b9a2799722dced7455037c976946b0897285b497b1b4d0ab4782",
+      "bytes": 10558,
+      "current_sha256": "e38fc7a2bff7b9a2799722dced7455037c976946b0897285b497b1b4d0ab4782",
+      "match": true,
+      "path": "runtime_trace/regular_2step/tests/test_step2_chain.py"
+    },
+    {
+      "base_sha256": "1e6b8313aa53507d2642e177b5169de75e82d2e27541192ee42291d0bd0b6743",
+      "bytes": 901,
+      "current_sha256": "1e6b8313aa53507d2642e177b5169de75e82d2e27541192ee42291d0bd0b6743",
+      "match": true,
+      "path": "runtime_trace/regular_2step/tests/test_step2_mutations.py"
+    }
+  ],
+  "reason": "no numerical source or behavior changed",
+  "rerun": false,
+  "schema": "regular-2step-task3-fix1-numerical-source-preservation-v1",
+  "scope": "all pre-fix regular_2step production/test Python except delivery.py; new delivery-guard test is separate",
+  "verdict": "PASS"
+}

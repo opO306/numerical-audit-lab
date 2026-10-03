@@ -138,3 +138,35 @@ $PY -m runtime_trace.regular_2step.delivery \
 The build refuses an existing destination, dirty tree or wrong branch. It
 contains no push operation. The controller records the authorized push and
 remote-ref verification only after the package has been sealed and verified.
+
+The helper also refuses until the final commit archive matches every
+production/test Python path and SHA-256 in
+`artifacts/validation/source_test_map.json`. Documentation entries in that map
+are byte-pinned as well. After the scoped Task-3 fix review and fresh
+whole-branch review both approve that exact commit, the controller creates
+`.superpowers/sdd/2026-10-03-regular-2step/final-reviewed-tested-head.json` with
+this schema:
+
+```json
+{
+  "schema": "regular-2step-final-reviewed-tested-head-v1",
+  "git_head": "<40-hex reviewed and tested HEAD>",
+  "source_test_map": {
+    "path": "runtime_trace/regular_2step/artifacts/validation/source_test_map.json",
+    "sha256": "<hash of the committed map>"
+  },
+  "reviews": [
+    {"path": "task-3-review.md", "sha256": "<hash>", "disposition": "HISTORICAL_NEEDS_FIXES"},
+    {"path": "task-3-fix1-review.md", "sha256": "<hash>", "disposition": "APPROVED"},
+    {"path": "whole-branch-review.md", "sha256": "<hash>", "disposition": "APPROVED"}
+  ],
+  "review_gate": "APPROVED"
+}
+```
+
+The initial `task-3-review.md` remains required historical evidence but cannot
+satisfy either approval. The helper requires exact hashes for that report, the
+approved `task-3-fix1-review.md`, and approved `whole-branch-review.md`, plus
+the exact current HEAD and committed source-map hash, before it creates a stage
+directory or ZIP. The controller generates this ignored workflow receipt only
+after both approvals; no placeholder receipt is accepted.

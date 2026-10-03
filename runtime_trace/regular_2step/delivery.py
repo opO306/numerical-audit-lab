@@ -52,6 +52,7 @@ REQUIRED_TRACKED = {
     "runtime_trace/regular_2step/COST_REPORT.json",
     "runtime_trace/regular_2step/delivery.py",
     "runtime_trace/regular_2step/artifacts/validation/summary.json",
+    "runtime_trace/regular_2step/artifacts/validation/source_test_map.json",
     "runtime_trace/regular_2step/artifacts/validation/protected_baseline.json",
     "runtime_trace/regular_2step/artifacts/validation/mutation_replay.json",
     "runtime_trace/regular_2step/artifacts/derived/known/chain.json",
@@ -60,13 +61,22 @@ REQUIRED_TRACKED = {
     "docs/superpowers/specs/2026-10-03-regular-2step-design.md",
     "docs/superpowers/plans/2026-10-03-regular-2step.md",
 }
+SOURCE_TEST_MAP = "runtime_trace/regular_2step/artifacts/validation/source_test_map.json"
+REVIEWED_TESTED_RECEIPT = "final-reviewed-tested-head.json"
+REQUIRED_REVIEW_DISPOSITIONS = {
+    "task-3-review.md": "HISTORICAL_NEEDS_FIXES",
+    "task-3-fix1-review.md": "APPROVED",
+    "whole-branch-review.md": "APPROVED",
+}
 REQUIRED_WORKFLOW = {
     "task-1-brief.md", "task-1-report.md", "task-1-review.md",
     "task-1-fix1-report.md", "task-1-fix1-review.md",
     "task-1-fix2-report.md", "task-1-fix2-review.md",
     "task-2-brief.md", "task-2-report.md", "task-2-review.md",
     "task-2-fix1-report.md", "task-2-fix1-review.md",
-    "task-3-brief.md", "task-3-context.md", "task-3-report.md", "progress.md",
+    "task-3-brief.md", "task-3-context.md", "task-3-report.md", "task-3-review.md",
+    "task-3-fix1-report.md", "task-3-fix1-review.md", "whole-branch-review.md",
+    REVIEWED_TESTED_RECEIPT, "progress.md",
 }
 AUDIT_HOOK = r'''import json, os, sys
 _fd = os.open(os.environ["REGULAR2_AUDIT_LOG"], os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o600)
@@ -92,6 +102,10 @@ def _hook(event, args):
         _record({"event": "SUBPROCESS", "argv": rendered})
 sys.addaudithook(_hook)
 '''
+
+
+class SealRefused(ValueError):
+    """The final reviewed/tested HEAD binding is absent or inconsistent."""
 
 
 def sha_bytes(data: bytes) -> str:
@@ -237,6 +251,113 @@ def tracked_source_map(root: Path, head: str) -> dict:
             "files": entries, "count": len(entries)}
 
 
+def _is_new_package_python(relative: str) -> bool:
+    package = "runtime_trace/regular_2step/"
+    if not relative.startswith(package) or not relative.endswith(".py"):
+        return False
+    suffix = relative[len(package):]
+    return "/" not in suffix or (suffix.startswith("tests/") and "/" not in suffix[6:])
+
+
+def validate_reviewed_tested_seal(committed: dict[str, bytes], workflow: Path,
+                                  head: str) -> dict:
+    """Bind current archive bytes to tested sources and both completed reviews."""
+    if SOURCE_TEST_MAP not in committed:
+        raise SealRefused("saved source map is absent from committed archive")
+    map_raw = committed[SOURCE_TEST_MAP]
+    try:
+        source_map = json.loads(map_raw)
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise SealRefused("saved source map is invalid") from error
+    if source_map.get("schema") != "regular-2step-final-source-test-map-v1":
+        raise SealRefused("saved source map schema mismatch")
+
+    expected = {}
+    sections = ("production", "tests", "documentation")
+    for section in sections:
+        entries = source_map.get(section)
+        if not isinstance(entries, list):
+            raise SealRefused(f"saved source map section is invalid: {section}")
+        for identity in entries:
+            relative = identity.get("path") if isinstance(identity, dict) else None
+            if not isinstance(relative, str) or relative in expected:
+                raise SealRefused("saved source map has invalid or duplicate path")
+            expected[relative] = identity
+
+    expected_python = {
+        identity["path"] for section in ("production", "tests")
+        for identity in source_map[section]
+    }
+    actual_python = {relative for relative in committed if _is_new_package_python(relative)}
+    if expected_python != actual_python:
+        raise SealRefused("tested Python path set differs from current archive")
+
+    checked = []
+    for relative, identity in sorted(expected.items()):
+        raw = committed.get(relative)
+        if raw is None:
+            raise SealRefused(f"mapped source is absent from current archive: {relative}")
+        actual = {"sha256": sha_bytes(raw), "bytes": len(raw),
+                  "physical_lines": len(raw.splitlines())}
+        if any(identity.get(key) != value for key, value in actual.items()):
+            raise SealRefused(f"source identity differs from saved tested map: {relative}")
+        checked.append({"path": relative, **actual})
+
+    receipt_path = workflow / REVIEWED_TESTED_RECEIPT
+    if not receipt_path.is_file():
+        raise SealRefused(f"reviewed/tested HEAD receipt is absent: {REVIEWED_TESTED_RECEIPT}")
+    try:
+        receipt_raw = receipt_path.read_bytes()
+        receipt = json.loads(receipt_raw)
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise SealRefused("reviewed/tested HEAD receipt is invalid") from error
+    if receipt.get("schema") != "regular-2step-final-reviewed-tested-head-v1":
+        raise SealRefused("reviewed/tested HEAD receipt schema mismatch")
+    if receipt.get("git_head") != head:
+        raise SealRefused("reviewed/tested HEAD receipt HEAD mismatch")
+    map_pin = receipt.get("source_test_map")
+    if map_pin != {"path": SOURCE_TEST_MAP, "sha256": sha_bytes(map_raw)}:
+        raise SealRefused("reviewed/tested HEAD source-map identity mismatch")
+    if receipt.get("review_gate") != "APPROVED":
+        raise SealRefused("reviewed/tested HEAD receipt is not approved")
+
+    reviews = receipt.get("reviews")
+    if not isinstance(reviews, list):
+        raise SealRefused("review inventory is invalid")
+    by_path = {}
+    for item in reviews:
+        relative = item.get("path") if isinstance(item, dict) else None
+        if not isinstance(relative, str) or relative in by_path:
+            raise SealRefused("review inventory has invalid or duplicate path")
+        by_path[relative] = item
+    if set(by_path) != set(REQUIRED_REVIEW_DISPOSITIONS):
+        raise SealRefused("review inventory does not contain the exact required gates")
+    review_identity = []
+    for relative, disposition in REQUIRED_REVIEW_DISPOSITIONS.items():
+        review_path = workflow / relative
+        if not review_path.is_file():
+            raise SealRefused(f"required review file is absent: {relative}")
+        raw = review_path.read_bytes()
+        expected_item = {"path": relative, "sha256": sha_bytes(raw),
+                         "disposition": disposition}
+        if by_path[relative] != expected_item:
+            raise SealRefused(f"review identity or disposition mismatch: {relative}")
+        review_identity.append(expected_item)
+    return {
+        "schema": "regular-2step-reviewed-tested-seal-verification-v1",
+        "git_head": head,
+        "source_test_map": map_pin,
+        "source_test_map_entries": checked,
+        "tested_python_files": len(expected_python),
+        "mapped_documentation_files": len(source_map["documentation"]),
+        "receipt": {"path": REVIEWED_TESTED_RECEIPT,
+                    "sha256": sha_bytes(receipt_raw)},
+        "reviews": review_identity,
+        "review_gate": "APPROVED",
+        "verdict": "PASS",
+    }
+
+
 def add_file(zout: zipfile.ZipFile, manifest: dict, source: Path, arcname: str) -> None:
     data = source.read_bytes()
     if arcname in manifest:
@@ -312,6 +433,8 @@ def build(out: Path, history: Path) -> dict:
     workflow_names = {path.name for path in WORKFLOW.iterdir() if path.is_file()}
     if not REQUIRED_WORKFLOW <= workflow_names:
         raise ValueError(f"required workflow records absent: {sorted(REQUIRED_WORKFLOW - workflow_names)}")
+    committed = archive_files(head, ROOT)
+    reviewed_tested = validate_reviewed_tested_seal(committed, WORKFLOW, head)
     protected = verify_baseline(ROOT, history, head)
     source_map = tracked_source_map(ROOT, head)
 
@@ -404,6 +527,7 @@ def build(out: Path, history: Path) -> dict:
         }
         write_json(stage / "protected_baseline.json", protected)
         write_json(stage / "tested_source_map.json", source_map)
+        write_json(stage / "reviewed_tested_head_verification.json", reviewed_tested)
         write_json(stage / "recovery_verification.json", recovery)
 
         out.mkdir(parents=True)
@@ -415,6 +539,8 @@ def build(out: Path, history: Path) -> dict:
             add_file(archive, members, bundle, "git/regular-2step-all.bundle")
             add_file(archive, members, stage / "protected_baseline.json", "verification/protected_baseline.json")
             add_file(archive, members, stage / "tested_source_map.json", "verification/tested_source_map.json")
+            add_file(archive, members, stage / "reviewed_tested_head_verification.json",
+                     "verification/reviewed_tested_head_verification.json")
             add_file(archive, members, stage / "recovery_verification.json", "verification/recovery_verification.json")
             add_tree(archive, members, WORKFLOW, "workflow")
             add_tree(archive, members, history, "attempt-history", excluded=[out])
@@ -423,6 +549,8 @@ def build(out: Path, history: Path) -> dict:
                 "branch": branch, "baseline_head": BASELINE_HEAD,
                 "members": members, "payload_member_count": len(members),
                 "regular_2step_status": "IMPLEMENTED / CHECKER PASS / INDEPENDENT AUDIT PENDING",
+                "reviewed_tested_head_gate": "PASS",
+                "reviewed_tested_receipt_sha256": reviewed_tested["receipt"]["sha256"],
                 "push": "AUTHORIZED / NOT YET EXECUTED AT PACKAGE SEAL",
             }
             archive.writestr("PACKAGE_MANIFEST.json",
@@ -435,6 +563,8 @@ def build(out: Path, history: Path) -> dict:
             "snapshot_sha256": recovery["snapshot_sha256"], "bundle_sha256": recovery["bundle_sha256"],
             "bare_recovery_fsck": "PASS", "baseline_ancestry": "PASS",
             "relocated_known_checker": "CHECKER_PASS", "relocated_fresh_checker": "CHECKER_PASS",
+            "reviewed_tested_head_gate": "PASS",
+            "reviewed_tested_receipt_sha256": reviewed_tested["receipt"]["sha256"],
             "push": "AUTHORIZED / NOT YET EXECUTED AT PACKAGE SEAL",
             "independent_audit": "PENDING",
         }

@@ -1,0 +1,16 @@
+
+==================================== ERRORS ====================================
+__ ERROR collecting runtime_trace/regular_2step/tests/test_delivery_guards.py __
+ImportError while importing test module '/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_2step/tests/test_delivery_guards.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/regular_2step/tests/test_delivery_guards.py:7: in <module>
+    from runtime_trace.regular_2step.delivery import (
+E   ImportError: cannot import name 'REVIEWED_TESTED_RECEIPT' from 'runtime_trace.regular_2step.delivery' (/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_2step/delivery.py)
+=========================== short test summary info ============================
+ERROR runtime_trace/regular_2step/tests/test_delivery_guards.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.57s

@@ -11,13 +11,13 @@
   "new_code": {
     "loc_definition": "physical splitlines including blank/comment lines",
     "production_python_files": 10,
-    "production_python_lines": 2813,
+    "production_python_lines": 2943,
     "task1_production_lines": 1537,
     "task2_production_lines": 801,
-    "task3_delivery_lines": 475,
-    "test_python_files": 3,
-    "test_python_lines": 736,
-    "readme_lines": 140,
+    "task3_delivery_lines": 605,
+    "test_python_files": 4,
+    "test_python_lines": 866,
+    "readme_lines": 172,
     "contract_lines": 189,
     "source_map": "artifacts/validation/source_test_map.json"
   },
@@ -78,8 +78,8 @@
   },
   "pytest": {
     "before_task3_actual_observed_seconds": 973.94,
-    "task3_actual_observed_seconds": 956.91,
-    "overall_actual_observed_seconds": 1930.85,
+    "task3_actual_observed_seconds": 958.52,
+    "overall_actual_observed_seconds": 1932.46,
     "final_accepted_regression_seconds": 429.48,
     "task3_runs": [
       {
@@ -143,6 +143,39 @@
         "junit_errors": 0,
         "junit_skips": 0,
         "counted_once": true
+      },
+      {
+        "name": "fix1-api-red",
+        "tests": 0,
+        "errors": 1,
+        "pytest_seconds": 0.57,
+        "pytest_result": "collection error",
+        "time_receipt_exit_code": 2,
+        "outer_result": "bootstrap ImportError; separate exit file empty after wrapper quoting defect",
+        "classification": "API RED, not behavioral guard failure",
+        "counted_once": true
+      },
+      {
+        "name": "fix1-focused-7",
+        "tests": 7,
+        "pytest_seconds": 0.52,
+        "exit_code": 0,
+        "junit_failures": 0,
+        "junit_errors": 0,
+        "junit_skips": 0,
+        "disposition": "intermediate GREEN before final package-manifest fields",
+        "counted_once": true
+      },
+      {
+        "name": "fix1-final-focused-7",
+        "tests": 7,
+        "pytest_seconds": 0.52,
+        "exit_code": 0,
+        "junit_failures": 0,
+        "junit_errors": 0,
+        "junit_skips": 0,
+        "disposition": "authoritative final focused GREEN after final helper source change",
+        "counted_once": true
       }
     ],
     "copy_accounting": "renaming the first new-63 log/XML/time/exit to wrapper-failure was a move, not another pytest execution and is not double-counted"
@@ -174,15 +207,41 @@
       "Task2 attempts 01-05 did not separately capture Python exit codes",
       "Task2 fix1 had a preserved PowerShell parser failure before numerical execution",
       "Task3 first wrapper failed after a 63-test PASS and three next wrappers left empty exit files",
-      "Task3 source-map first generation failed before map creation because PYTHONPATH was absent"
+      "Task3 source-map first generation failed before map creation because PYTHONPATH was absent",
+      "Task3 fix1 API RED was a collection ImportError; time receipt has exit 2 but wrapper quoting left its separate exit file empty"
     ]
   },
   "scaling_design_issue": {
     "triggered": true,
-    "reason": "2813 new production Python physical lines exceeds the user-defined thousands-of-lines trigger",
+    "reason": "2943 new production Python physical lines exceeds the user-defined thousands-of-lines trigger",
     "disposition": "stop at two steps; review a regular transition template or induction architecture before any 3-step or N-step expansion",
     "not_proven": "this result does not mathematically prove that the current per-step method cannot scale"
   },
   "push": "AUTHORIZED / NOT YET EXECUTED AT REPORT SEAL",
-  "independent_audit": "PENDING"
+  "independent_audit": "PENDING",
+  "task3_fix1": {
+    "measured_origin_utc": "2026-10-03T12:49:48.237226Z",
+    "report_seal_utc": "2026-10-03T12:53:34.245416Z",
+    "new_native_acquisitions": 0,
+    "focused_guard_tests": 7,
+    "focused_guard_executions": 2,
+    "focused_guard_pytest_seconds": 1.04,
+    "authoritative_final_focused_pytest_seconds": 0.52,
+    "bootstrap_api_red_pytest_seconds": 0.57,
+    "existing_643_numerical_tests_rerun": false,
+    "reason_not_rerun": "no numerical source or behavior changed",
+    "guard_coverage": [
+      "accepted exact frozen binding",
+      "changed source hash refusal",
+      "changed Python path-set refusal",
+      "reviewed HEAD mismatch refusal",
+      "missing approved review refusal",
+      "review hash mismatch refusal",
+      "historical NeedsFixes review cannot substitute for approvals"
+    ],
+    "final_receipt_schema": "regular-2step-final-reviewed-tested-head-v1",
+    "final_receipt_filename": "final-reviewed-tested-head.json",
+    "final_receipt_owner": "root after scoped Task3 fix review and fresh whole-branch approval",
+    "final_receipt_present_at_fix_report": false
+  }
 }

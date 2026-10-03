@@ -81,19 +81,19 @@ delta. The wheel, leapfrog `.so` and `lab/v2_bound.py` pins match. Old 01/02 raw
 captures, Task 1/2 failed and superseded attempts, historical reports and original
 external audit bytes remain preserved.
 
-New package production code is 2,813 physical lines: Task 1 1,537, Task 2 801,
-Task 3 delivery 475. Tests are 736 physical lines. The exact source/test hashes,
+New package production code is 2,943 physical lines: Task 1 1,537, Task 2 801,
+Task 3 delivery 605. Tests are 866 physical lines across four files. The exact source/test hashes,
 line counts and function counts are in `artifacts/validation/source_test_map.json`.
 Bounded reuse counts 891 exact Task-1 selected/direct definition lines, 1,621
 Task-2 named definition lines and a separate 238-line received audit definition
 prefix. These counts do not claim every line of a reused module executed.
 
 There were 15 actual native acquisitions, 5 failures and 10 successes; Task 2
-and Task 3 added none. Total actual observed pytest time is 1,930.85s, including
+and Task 3 added none. Total actual observed pytest time is 1,932.46s, including
 all failed/superseded runs and the seven Task-3 executions, without counting a
 renamed log twice. Detailed origins and each run are in `COST_REPORT.json`.
 
-The 2,813 production lines trigger the user's thousands-of-lines scaling rule.
+The 2,943 production lines trigger the user's thousands-of-lines scaling rule.
 This does not prove the method mathematically unscalable, but it requires a
 separate regular transition template/induction design review before any 3-step
 or N-step extension. No such extension is implemented here.
@@ -118,6 +118,30 @@ review and fresh whole-branch review must finish first. Push is authorized but
 has not been executed at this report seal; the controller will run the helper at
 the reviewed clean HEAD, verify the ZIP/bundle/recovery, then push and save the
 actual remote-ref receipt outside the pre-push ZIP.
+
+Task-3 review found two delivery seal defects: a later clean commit could be
+mapped without comparison to the tested source map, and the helper did not
+require the Task-3/whole-branch review outputs. Fix round 1 now compares the
+actual commit archive to the exact production/test Python path and hash set in
+the saved test-time source map, and checks its documentation entries. It also
+requires `task-3-review.md` as historical NeedsFixes evidence plus an approved
+`task-3-fix1-review.md`, approved `whole-branch-review.md`, and a controller-made
+`final-reviewed-tested-head.json`. That receipt binds exact HEAD, committed
+source-map hash, review hashes and dispositions. Validation occurs before any
+temporary stage or final output directory is created. Presence of the original
+NeedsFixes review alone cannot satisfy the gate.
+
+The authoritative final focused fix suite has 7 PASS in 0.52s with exit 0 and
+clean JUnit. It covers
+the accepted binding and refusal of changed source bytes, changed Python path
+set, wrong reviewed HEAD, missing review, changed review hash, and attempted use
+of only the historical NeedsFixes report. The preceding 0.57s RED was a
+collection-time ImportError because the new API did not exist, not a behavioral
+acceptance failure; its pytest exit 2 remains in the time receipt, while a shell
+quoting defect left the separate exit file empty. An earlier 7 PASS in 0.52s is
+retained as an intermediate GREEN because final manifest fields changed helper
+source afterward. Existing 643 numerical tests and all numerical sources remain
+unchanged, so they were not rerun.
 
 ## Reading boundary
 

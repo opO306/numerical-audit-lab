@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="0.550" timestamp="2026-10-03T21:50:20.679689+09:00" hostname="localhost"><testcase classname="" name="runtime_trace.regular_2step.tests.test_delivery_guards" time="0.000"><error message="collection failure">ImportError while importing test module '/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_2step/tests/test_delivery_guards.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/regular_2step/tests/test_delivery_guards.py:7: in &lt;module&gt;
+    from runtime_trace.regular_2step.delivery import (
+E   ImportError: cannot import name 'REVIEWED_TESTED_RECEIPT' from 'runtime_trace.regular_2step.delivery' (/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_2step/delivery.py)</error></testcase></testsuite></testsuites>

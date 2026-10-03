@@ -2,10 +2,10 @@
   "documentation": [
     {
       "all_functions": null,
-      "bytes": 8139,
+      "bytes": 9622,
       "path": "runtime_trace/regular_2step/README.md",
-      "physical_lines": 140,
-      "sha256": "6e6cdad1115c6fdce0035dad4510a1052aeb2753a0073a173ab20c6d3168d455",
+      "physical_lines": 172,
+      "sha256": "de5c93eca75302bc8cbe73c38f42e01bc5c630ecaf053c07bc5a69da23bca84e",
       "top_level_functions": null
     },
     {
@@ -44,12 +44,12 @@
       "top_level_functions": 14
     },
     {
-      "all_functions": 17,
-      "bytes": 24266,
+      "all_functions": 19,
+      "bytes": 30786,
       "path": "runtime_trace/regular_2step/delivery.py",
-      "physical_lines": 475,
-      "sha256": "d418d932e5e21e769b97fc860745a8960f04a0bf5b2b78bb519f3a4b560aac8e",
-      "top_level_functions": 17
+      "physical_lines": 605,
+      "sha256": "c5f4dee4770d15aea45b52f00473ca4d27370cebbcb04c096e3d018633f0f662",
+      "top_level_functions": 19
     },
     {
       "all_functions": 4,
@@ -102,10 +102,10 @@
   ],
   "production_totals": {
     "files": 10,
-    "physical_lines": 2813,
+    "physical_lines": 2943,
     "task1_lines": 1537,
     "task2_lines": 801,
-    "task3_delivery_lines": 475
+    "task3_delivery_lines": 605
   },
   "schema": "regular-2step-final-source-test-map-v1",
   "semantic_checker_function_counts": {
@@ -283,8 +283,8 @@
     ]
   },
   "test_totals": {
-    "files": 3,
-    "physical_lines": 736
+    "files": 4,
+    "physical_lines": 866
   },
   "tests": [
     {
@@ -294,6 +294,14 @@
       "physical_lines": 514,
       "sha256": "6fc0ab0d6476167df09fa9b82a9b943df32625f1816849a5613059d5ebd2eea5",
       "top_level_functions": 31
+    },
+    {
+      "all_functions": 10,
+      "bytes": 5011,
+      "path": "runtime_trace/regular_2step/tests/test_delivery_guards.py",
+      "physical_lines": 130,
+      "sha256": "491408eaf5c895b895c340d1ba98bdc9cbe1516b22eb0ad7ff16be0d577b76cb",
+      "top_level_functions": 10
     },
     {
       "all_functions": 13,

@@ -10,7 +10,7 @@ Form의 ADD/SUB/MUL을 비교했지만 실제 caller carry에서 nonzero coeffic
 
 3-step, 일반 N-step, trajectory correctness, 누적 오차, shadowing, observable/physical
 accuracy, cross-machine 또는 ASLR 다양성은 주장하지 않는다. 현재 새 production Python이
-2,813 physical lines에 달해 사용자가 지정한 수천 줄 scaling trigger를 충족한다. 따라서
+2,943 physical lines에 달해 사용자가 지정한 수천 줄 scaling trigger를 충족한다. 따라서
 이 2-step 전달 뒤 3-step으로 바로 확장하지 않고 regular transition template/induction
 설계를 별도 문제로 검토해야 한다. 이것은 확장 불가능성의 수학적 증명이 아니다.
 
@@ -74,3 +74,16 @@ report SHA-256은 `b63f721c897e275c41d8bed2597025b9bb1d9846318e03a7c452e4b1add6d
 captured absolute module path 접근을 거부한 relocated known/fresh public checker를 검증한다.
 Push는 사용자에게 승인됐지만 이 상태 문서 seal 시점에는 아직 실행하지 않았다. Controller가
 최종 package 검증 후 실제 push와 remote ref 검증 영수증을 ZIP 밖에 남긴다.
+
+Task 3 최초 검토의 두 Important finding은 delivery seal gate에 관한 것이었다. 현재 helper는
+commit archive의 새 package Python/test 경로 집합과 hash를 저장된 test-time source map과
+정확히 비교하고, 문서 hash도 검사한다. 또한 최초 `task-3-review.md`는
+`HISTORICAL_NEEDS_FIXES`로만 보존하며, 별도 `task-3-fix1-review.md`와
+`whole-branch-review.md`가 각각 `APPROVED`이고 그 파일 hash, source-map hash, 정확한 HEAD가
+controller의 `final-reviewed-tested-head.json`에 결합돼야 stage/ZIP 생성 전 gate를 통과한다.
+이 최종 receipt는 두 검토가 실제 승인된 뒤 root가 생성하므로 현재는 존재하지 않는다.
+
+새 delivery guard 집중 검증은 7 passed in 0.52s, exit 0, JUnit failure/error/skip 0이다.
+변경된 source byte/path 집합, 다른 HEAD, 누락·변경된 review, 과거 NeedsFixes review만 있는
+경우를 모두 거부한다. 기존 643개 수치 회귀와 수치 source는 바뀌지 않아 재실행하지 않았다.
+따라서 final helper/ZIP/bundle/recovery/path audit와 push는 계속 미실행 상태다.

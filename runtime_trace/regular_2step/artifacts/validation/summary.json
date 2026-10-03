@@ -1,5 +1,5 @@
 {
-  "all_tasks_actual_pytest_seconds": 1930.85,
+  "all_tasks_actual_pytest_seconds": 1932.46,
   "before_task3_actual_pytest_seconds": 973.94,
   "environment": {
     "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
@@ -8,6 +8,10 @@
     "python": "/home/otherside123/venvs/gate2c1-trace/bin/python"
   },
   "extra_evidence": {
+    "fix1_numerical_source_preservation.json": {
+      "bytes": 4019,
+      "sha256": "f8c5731705200849b8a89f4faf21e8eadd701fa644f96001ba6f3313087f1944"
+    },
     "mutation_replay.json": {
       "bytes": 7407,
       "sha256": "3c48cb27d7239557605d66fb58235b1cc281aedd885ff3f1e2128a4f6ec5bf4c"
@@ -21,8 +25,8 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     "source_test_map.json": {
-      "bytes": 9155,
-      "sha256": "df551074df2b5ba4c2cb93554ed0b615b5e4167dea5fe947b64e902b3e340c92"
+      "bytes": 9436,
+      "sha256": "b2032f5b5a6504f2335bedb0cdb238f7181bce12c623d8fe4ed453f9a8e0218d"
     }
   },
   "final": {
@@ -37,6 +41,125 @@
     "skips": 0
   },
   "final_delivery_helper_executed": false,
+  "fix1": {
+    "bootstrap_api_red": {
+      "classification": "bootstrap API RED: collection ImportError before guard behavior",
+      "errors": 1,
+      "exit_receipt": null,
+      "files": {
+        "exit": {
+          "bytes": 1,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+        },
+        "log": {
+          "bytes": 1149,
+          "sha256": "ef6f2e990375c9bb2f31cbfbc199c02cc9f2a25be4ce8e8617679855b6989e0c"
+        },
+        "time": {
+          "bytes": 74,
+          "sha256": "2e6b89946425bd1340819103b550b920e28aa5cb7cdc904e2a5812814ffcdf1d"
+        },
+        "xml": {
+          "bytes": 1146,
+          "sha256": "cc1c0a2509b3e98247cb031e6865d744a4312063c96469f390ca86bb65f54804"
+        }
+      },
+      "junit": {
+        "errors": 1,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 1
+      },
+      "name": "fix1-api-red",
+      "pytest_seconds": 0.57,
+      "time_receipt": {
+        "exit": 2,
+        "real": 0.89,
+        "sys": 0.12,
+        "user": 0.21
+      },
+      "wrapper_failure": "PowerShell expanded PIPESTATUS; separate exit file empty; time receipt records pytest exit 2"
+    },
+    "combined_current_test_inventory": 650,
+    "existing_numerical_regression_tests": 643,
+    "existing_numerical_sources_changed": false,
+    "final_focused_green": {
+      "disposition": "authoritative final focused delivery-guard GREEN",
+      "exit_receipt": "0",
+      "files": {
+        "exit": {
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        },
+        "log": {
+          "bytes": 98,
+          "sha256": "3d368ba43f0aad60365b9ab3dacfcdcd223774618d864a5e1377e1dd6be19bc8"
+        },
+        "time": {
+          "bytes": 36,
+          "sha256": "b67dc85c740e10224b6e051969896921626622d8190964108e0bd03d74c5fe72"
+        },
+        "xml": {
+          "bytes": 1234,
+          "sha256": "b8d066daacba4e739530bbc5f884b4fb998ad370a19a580b050ae06cca8cef1f"
+        }
+      },
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 7,
+        "time": 0.509
+      },
+      "name": "fix1-final-focused-7",
+      "pytest_seconds": 0.52,
+      "tests": 7,
+      "time_receipt": {
+        "exit": 0,
+        "real": 0.87,
+        "sys": 0.12,
+        "user": 0.17
+      }
+    },
+    "intermediate_focused_green": {
+      "disposition": "intermediate focused GREEN before final manifest fields",
+      "exit_receipt": "0",
+      "files": {
+        "exit": {
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        },
+        "log": {
+          "bytes": 98,
+          "sha256": "3d368ba43f0aad60365b9ab3dacfcdcd223774618d864a5e1377e1dd6be19bc8"
+        },
+        "time": {
+          "bytes": 36,
+          "sha256": "5256f909c30aeadecf5353446f89df13e3e94d450327afe6054bafba2c718173"
+        },
+        "xml": {
+          "bytes": 1234,
+          "sha256": "2faeb4dd01f3ac57ae7b74504995ec785dab825c79234ee9102ced65257c9761"
+        }
+      },
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 7,
+        "time": 0.502
+      },
+      "name": "fix1-focused-7",
+      "pytest_seconds": 0.52,
+      "tests": 7,
+      "time_receipt": {
+        "exit": 0,
+        "real": 0.86,
+        "sys": 0.07,
+        "user": 0.21
+      }
+    }
+  },
   "full_local_n6": "NOT RUN: no frozen/core/old source changed",
   "push_executed": false,
   "renamed_log_copy_double_counted": false,
@@ -305,6 +428,6 @@
     }
   ],
   "schema": "regular-2step-task3-validation-v1",
-  "task3_all_actual_pytest_seconds": 956.91,
+  "task3_all_actual_pytest_seconds": 958.52,
   "verdict": "PASS"
 }

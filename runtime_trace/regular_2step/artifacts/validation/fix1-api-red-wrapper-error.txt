@@ -1,0 +1,2 @@
+bash: line 1: exit: : numeric argument required
+Disposition: pytest collection exited 2 after a bootstrap ImportError; PowerShell expanded the wrapper's PIPESTATUS expression, so the separate pytest.exit file is empty. The /usr/bin/time receipt retains exit 2. This is not a behavioral guard failure.
