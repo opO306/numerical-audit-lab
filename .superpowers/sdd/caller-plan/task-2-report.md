@@ -388,7 +388,7 @@ Key output hashes:
 - audited checker report: `a53de0d53155544fdd3bcef84dbcb9801ac2cd00d1b1aa6c7ebf58b793d4ff99`;
 - fresh checker report: `010c4e23d782bff755ba2df206261519d65b477cad7d51615b43ca09219bcabe`;
 - mutation manifest: `b5c0805e31b21274ddc28ead02e77ef52f60bc97c904e443bdf579188a71a14b`;
-- dedicated pytest log: `57a1a4a051763fbd1439f2faf319d0b63d78ef94d86e9858cf5194f59bee6ab4`;
+- dedicated pytest log: `d7f9c80756bc589007d972b605bc67aa2a7560a206dccc0c610d92bb92827a9e`;
 - dedicated JUnit: `97d45b85d5dc567b3e98490ee52d91559a2fff0501579931ec0207485818c8b7`.
 
 ## Mutation evidence
