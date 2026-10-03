@@ -259,3 +259,245 @@ or result was written there.
 - Integration: no checker blocker remains. Broader suites, package/docs updates,
   and the final protected-file comparison are intentionally deferred to the
   root-owned integration step.
+
+---
+
+# Task 2 fix round 1 addendum: read-proof control and ABI semantics
+
+Date: 2026-10-03
+
+Implementation base: `6ceaa3460e77dc855ddac03bd4ad78d65a16e21d`
+
+Implementation/evidence commit:
+`85716d5adffc04f712e5afbb80594a71d0286969`
+
+Task result: **DONE** for the scoped Task 2 fix. This addendum supersedes the
+historical acceptance claims above for the old v1 acquisitions and old
+`artifacts/checker/final` reports. Those bytes remain preserved history. The
+accepted inputs and outputs for this fix are the two `*-readproof-01` raw
+acquisitions, `producer-fix-round2`, and `artifacts/checker/fix-round1`.
+
+This remains an author-side independent checker run. It does not perform or
+claim a new external audit of the endpoint Forms, second-body execution,
+trajectory closure, accumulated error, or physical accuracy.
+
+## Review-finding disposition
+
+| Finding | Disposition and evidence |
+|---|---|
+| C1 indirect/RET targets | Closed for every observed instruction. The checker derives all 16 indirect control targets from independently validated 8-byte pre-memory observations, all 23 RET targets from the pre-RET stack bytes, and every conditional branch from pre-EFLAGS plus the decoded direct target. Repaired source-byte attacks refuse as `TRACE_CONTROL_TARGET`. |
+| C2 memory/register/final ABI def-use | Closed for this observed corridor. A byte shadow roots all 219 required observations, checks write preimages, and carries 111 writes. The checker executes every observed GPR/XMM/control-state instruction family, compares the complete post register state, and compares all architecturally defined flag bits. The final `rdi/rsi/rdx/xmm0/xmm1/rcx/r8/r9/[rsp]` argument values are therefore established from observed memory or prior register definitions through the final call. Repaired t/dt/q/full-v/latent/gradient/C-potential/n/half-dimension attacks reach and fail semantic checks. |
+| I1 dense deletion/reorder | Closed. The saved attacks remove old sequence 106 or swap old 104/105, densely renumber rows, remap every schema-declared sequence receipt, repair row chains, trace/capture/seal/transition hashes, and repair claimed adjacency. Both pass structural integrity and refuse at `TRACE_CONTROL_TARGET`, not `TRACE_SEQUENCE`. |
+| I2 immutable identities/execution receipt | Closed. Production uses literal case/path, transition, acquisition seal, exact sealed-file set, capture, execution, trace/final-chain, structured process identity, module/load-base, wheel, exact 11-source map, and antecedent IR/correspondence pins transcribed from the approved handoff. The handoff is not a runtime input. Public API/CLI expose no trust override; old v1 inputs refuse as `SUPERSEDED_EVIDENCE`. A coherent local repin through the public path refuses as `TRUST_PATH`. |
+
+## Literal trust handoff
+
+The fully read authoritative handoff was
+`.superpowers/sdd/caller-plan/task-2-fix1-pin-handoff.json`, SHA-256
+`39687ceef0d767869a3b958067ac2921e84e4c66f30eab2c484f345e63f1ad81`.
+`verification/literal-pin-audit.json` independently compared the source
+constants with that handoff and records `all_exact: true` for both cases, the
+11-source map, the three module hashes, and the wheel hash.
+
+The production interface is only:
+
+```python
+check_transition(capture_dir, transition_path, *, root=None, objdump="objdump")
+```
+
+It selects one of the two literal tables by exact resolved production paths.
+The private `_check_bundle_with_pins` hook is used only by tests and the saved
+mutation generator with in-memory `TrustedCasePins`. It is absent from the CLI
+and public signature. Test injection changes only acquisition blob pins so a
+repaired mutation can reach the semantic core; literal source/module/wheel/
+antecedent identity pins remain fixed. Results label this mode
+`TEST_ONLY_IN_MEMORY_ACQUISITION_PINS` and never represent it as production
+verification.
+
+The structured process identities are retained as JSON objects:
+
+- audited read-proof: boot
+  `ad2a0c22-e8d1-466b-8bbf-31c2cf4f54cd`, PID 394, start tick 12881;
+- fresh read-proof: the same boot, PID 449, start tick 13968.
+
+Root's separately supplied
+`D:/numerical-audit-lab-caller-continuity-delivery-2026-10-03/readproof-root-verification.json`
+records PASS for 39 raw/Git files and independently derived counts. It is
+treated as the immutable handoff review, not as checker semantic proof.
+
+## Independent algorithm and actual coverage
+
+The checker still imports only standard-library modules and invokes external
+GNU `objdump`; it does not import producer, acquisition, read/write effect,
+module-resolver, old checker/adapter, or Form-evaluator proof logic.
+
+1. It verifies the literal trust table and exact acquisition file set before
+   parsing semantic claims. It authenticates `execution.json` by literal SHA,
+   the acquisition seal, capture/transition receipts, exact source/module
+   sets, and structured process identity.
+2. Its ELF64 parser and GNU objdump path independently check every module,
+   load base, address, offset, instruction byte, and decoded assembly for all
+   728 rows.
+3. It derives the exact observation grammar. The 219 observations decompose
+   into 123 explicit reads, 30 implicit POPs, 23 implicit RETs, 16 indirect
+   controls, 16 read-modify-write reads, 10 implicit LEAVEs, and one final ABI
+   stack observation. Missing, extra, wrong-width, failed, or wrong-address
+   observations refuse.
+4. Effective addresses use pre-GPR/RIP plus the per-row FS/GS bases. This
+   independently includes the previously omitted FS-relative writes at
+   sequences 369, 374, and 457. The derived total is 111 writes, of which 21
+   are same-value stores.
+5. A byte shadow checks every redundant observation and known write preimage,
+   then applies each validated write. It refuses disagreement rather than
+   choosing one source.
+6. The corridor-specific interpreter covers the actual `mov/movl/movq`,
+   `movzbl`, `lea`, call/push/pop/leave/ret, add/sub/and/or/xor/shl/shr,
+   cmp/test/setne, locked cmpxchg, xchg, `movsd`, `vmovd`, `vmovdqu`,
+   `vpbroadcastb`, endbr/nop, and actual branch forms. It compares all GPRs,
+   all XMM registers, MXCSR, FS/GS bases, and defined flag results after each
+   row. Architectural undefined AF for logical/shift instructions and OF for
+   multi-bit shifts are deliberately excluded; every defined flag bit is
+   checked.
+7. Final ABI provenance is established through sequence 718 time memory load,
+   719 q copy from r15, 720 latent copy from r14, 721 observed-memory gradient
+   push and validated stack write, 722 C-potential load, 723 dt load, 724
+   half-dimension load, 725 n load, 726 full-v load, and the direct call at
+   727 including its return-address stack write and entry gradient observation.
+8. Existing IR/COPY/Form, carry no-overwrite, pointer identity, exact-zero
+   gradient coverage, fresh-root, basis-namespace, and no-second-body checks
+   remain in force against the literal-pinned antecedents.
+
+Unsupported decode/read/write/register forms refuse. This is an exact
+corridor-specific x86-64 interpreter, not a general x86 emulator.
+
+## Normal results and hashes
+
+Both public CLI runs returned `CHECKER_PASS`:
+
+| Case | PID | capture SHA-256 | trace SHA-256 | transition SHA-256 | rows / reads / writes / same | indirect / RET | shadow bytes | body |
+|---|---:|---|---|---|---|---|---:|---:|
+| `audited-attempt-05-readproof-01` | 394 | `9ae29bee14c2d42265dbf353a1e55caa78012c16210fa7c5b6bf8e84cd8c9157` | `64f5f8caaf00cbd691ad24bdb8fa59fd6f50bbf4036d8671895fd27ac7766877` | `526132b3ec1d1efcb06c05dd4ac803cd818074b63b47bec1a381ac38b4aa0f59` | 728 / 219 / 111 / 21 | 16 / 23 | 726 | 0 |
+| `fresh-closure-fresh-01-readproof-01` | 449 | `ebb9a05557a28a58afa8835d74e4f473048b2bcc554fc5e8f18c1fdb715ab185` | `0f195ce50ae247394bd95bda00a5de304e180752df69284405c80c112b4ad9b5` | `01ca255ece2fef51fe4737deb42a005d6ea5ba39a2ed79c9f8eab66f9eac61f7` | 728 / 219 / 111 / 21 | 16 / 23 | 726 | 0 |
+
+Key output hashes:
+
+- checker source: `5c69aae0679841aa2f7adc2d78294ef3beaaa0bd5a9825e1483fd6ab3010e0bd`;
+- accepted-case tests: `d5258b0296d0cdb60d64d0513488a928e7a22a63faf38fef28cba03c970a79a6`;
+- prior mutation tests: `5ed0b03bce30dba430dccfdfe2c83338cf8562f5288435d85f967f8ab4bd2818`;
+- fix mutation tests: `509a0d7cb13c6ca037a251ac908d42e1e9a18e4c37f1a5150ba59017cb004ba7`;
+- audited checker report: `a53de0d53155544fdd3bcef84dbcb9801ac2cd00d1b1aa6c7ebf58b793d4ff99`;
+- fresh checker report: `010c4e23d782bff755ba2df206261519d65b477cad7d51615b43ca09219bcabe`;
+- mutation manifest: `b5c0805e31b21274ddc28ead02e77ef52f60bc97c904e443bdf579188a71a14b`;
+- dedicated pytest log: `57a1a4a051763fbd1439f2faf319d0b63d78ef94d86e9858cf5194f59bee6ab4`;
+- dedicated JUnit: `97d45b85d5dc567b3e98490ee52d91559a2fff0501579931ec0207485818c8b7`.
+
+## Mutation evidence
+
+`artifacts/checker/fix-round1/mutations/manifest.json` records 35/35
+`REFUSED`. It includes all prior semantic classes plus:
+
+- indirect target and RET stack-source byte changes;
+- time, dt, C-potential, half-dimension, n, full-v and gradient source bytes;
+- q/latent register def-use propagation attacks;
+- TLS destination rebinding and required-read omission;
+- dense repaired deletion/reorder with every wrapper/receipt rebuilt;
+- exact source, module, structured process identity, and antecedent pin attacks;
+- a coherent public repin that fails rigid production trust.
+
+Each raw semantic case saves a mutation receipt with repaired trace,
+final-chain, capture, execution, seal, and transition hashes. Each transition
+case saves its mutated transition. Results save the trust mode, completed
+stages, exact refusal code, and reason. The external generator source is
+preserved at
+`D:/numerical-audit-lab-caller-continuity-delivery-2026-10-03/task2-fix1-mutation-generator.py`.
+
+## Commands and verification
+
+Exact CLI, mutation-generator, py_compile, and pytest commands are saved in
+`artifacts/checker/fix-round1/verification/commands.md`. The final authorized
+dedicated command used frozen Python and produced:
+
+```text
+........................................................................ [ 80%]
+..................                                                       [100%]
+90 passed in 28.50s
+```
+
+JUnit records 90 tests, 0 failures, 0 errors, and 0 skips in 28.483 seconds.
+`py_compile` exited 0. Both public CLI stderr files and mutation-generator
+stderr are empty. The execution receipt records hashes for checker/tests,
+reports, manifest, test log/JUnit, pin audit, baseline audit, and commands.
+
+The 93-file protected baseline was independently rehashed after outputs and
+records `all_unchanged: true` in
+`verification/protected-baseline-verification.json`. This is the scoped
+Task2 preservation check; root still owns the final combined suite and package
+preservation audit.
+
+## Changed and read files
+
+Changed source/tests:
+
+- `runtime_trace/caller_transition/checker.py`;
+- `runtime_trace/caller_transition/tests/test_caller_checker.py`;
+- `runtime_trace/caller_transition/tests/test_caller_mutations.py`;
+- `runtime_trace/caller_transition/tests/test_caller_fix1_mutations.py`.
+
+New evidence is exclusively below
+`runtime_trace/caller_transition/artifacts/checker/fix-round1/`: two reports,
+35 mutation case/result directories plus manifest, and verification receipts.
+This addendum is the only plan/report edit. README, current/STATUS,
+`.gitattributes`, all raw/producer/acquisition sources, historical
+`artifacts/checker/final`, and Task1 evidence were not edited.
+
+Fully read for the fix:
+
+- `task-2-fix1-brief.md`, original `task-2-brief.md`, full
+  `task-2-review.md`, `task-2-fix1-evidence-requirements.md`, and
+  `task-2-fix1-design.md`;
+- `task-2-fix1-pin-handoff.json`;
+- Task1 `task-1-readproof-report.md` and `task-1-readproof-review.md`;
+- root `readproof-root-verification.json` and the 93-file preservation
+  baseline;
+- both v2 raw capture/execution/seal/module/source/trace inputs, both accepted
+  producer-fix-round2 transitions, and the frozen IR/correspondence data;
+- the existing checker and all three Task2 checker/mutation test modules.
+
+Producer/acquisition helper source names were read only as fixed hash receipts;
+their proof algorithms were not imported or reused.
+
+## Failed and intermediate outputs outside the repository
+
+All fix-round1 failed runs are preserved under
+`D:/numerical-audit-lab-caller-continuity-delivery-2026-10-03`:
+
+- `task2-fix1-red-01`: first v2/public-path RED, including one test-fixture
+  path error;
+- `task2-fix1-red-02`: corrected RED showing v2 schema refusal and v1 being
+  incorrectly accepted;
+- `task2-fix1-red-03`: semantic RED showing indirect/RET/ABI mutations were
+  initially accepted;
+- `task2-fix1-exitcode-command-error-01`: the accidental file produced by an
+  incorrect PowerShell `Set-Content` argument order; moved out of tree intact.
+
+The successful intermediate dedicated suite is preserved in
+`task2-fix1-suite-attempt-01` (`89 passed in 36.92s`). Earlier Task2 failure
+and probe directories are enumerated in the historical report section above
+and remain unchanged.
+
+## Self-review and remaining limits
+
+- The literal pin audit is exact and production has no file/env/argument trust
+  override. Private pin injection remains an underscore-prefixed test hook.
+- The two accepted processes are independent only within the same boot/machine.
+- GNU objdump AT&T syntax is an external decoding boundary; bytes, operands,
+  and actual post-state are independently checked, and unseen forms refuse.
+- Undefined x86 flags are not asserted. Defined flags and all recorded GPR/XMM,
+  MXCSR, and segment bases are checked.
+- Memory shadow roots are the authenticated live observations and captured
+  write preimages. No post-hoc old read was invented.
+- Form semantics remain conditional on the literal-pinned external antecedent;
+  this checker does not create a new external audit.
+- The scoped implementation has no known blocker. Fresh independent re-review,
+  the broader combined suite, integration docs, and final package audit remain
+  root-owned.
