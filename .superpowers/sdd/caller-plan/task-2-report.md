@@ -507,3 +507,222 @@ above and remain unchanged.
 - The scoped implementation has no known blocker. Fresh independent re-review,
   the broader combined suite, integration docs, and final package audit remain
   root-owned.
+
+# Task 2 fix round 2 addendum: complete ABI origins and repaired receipts
+
+Date: 2026-10-03
+
+Implementation base: `5dac56db67b0311b342e92a722916b1fa1c201e4`
+
+Implementation/evidence commit:
+`bc2de9b2816d014a659d1892b37fdfb941f83184`
+
+Task result: **DONE** for the scoped fix-round-2 implementation. This addendum
+supersedes the fix-round-1 C2/I1 and saved-input claims. It does not supersede
+the literal acquisition pins, raw read-proof evidence, antecedent hashes, or
+the C1/I2 controls. It does not claim a new external audit or closure beyond
+the prospective second-step entry.
+
+## Review finding disposition
+
+- **C2 MOVSD and missing origin graph — addressed.** Legacy memory-form
+  `movsd m64,xmm` now replaces the low 64 bits and clears bits 127:64. The
+  reviewer's repaired 728-row attack, with upper value
+  `0x1122334455667788` carried through actual rows 615, 636, 657, and 678,
+  now refuses at `REGISTER_SEMANTICS` on row 615. Register-source legacy MOVSD
+  retains the destination upper lane as required.
+- **C2 final ABI provenance — addressed.** The checker propagates explicit
+  value origins independently of producer claims and serializes nine final ABI
+  chains in each normal report. Correct numeric bits with a `dt` root claimed
+  as `time` refuse at `ABI_PROVENANCE`.
+- **I1 deletion/reorder — addressed.** Sequence/count receipt validation runs
+  before control, memory, register, and provenance semantics. Superseded sparse
+  remaps refuse at `SEQUENCE_RECEIPT`. Fully repaired deletion and reorder
+  bundles use maps computed from the retained order, update every declared
+  sequence and count receipt, pass the receipt preflight, and then refuse at
+  `TRACE_CONTROL_TARGET`.
+- **Important saved-input gap — addressed.** Five full mutated raw bundles,
+  their transition inputs, receipts, results, and the checked-in generator are
+  committed. The unit origin attack includes its complete structured fixture.
+- **C1/I2 — retained.** Actual indirect/RET control checking, literal source,
+  module, acquisition, process, and antecedent pins, and the absence of a
+  public/CLI trust override remain in force. Production input pin values did
+  not change.
+
+## Value and origin algorithm
+
+The pre-existing numeric interpreter remains the authority for recorded GPR,
+XMM, flags, MXCSR, segment-base, memory-write, and control-state equality. The
+origin interpreter is a second track over those already authenticated values.
+It seeds `AuthenticatedContext` nodes at the first-return boundary and
+`AuthenticatedMemoryRoot` nodes from exact live pre-memory observations. A
+stack root receives an ABI role only when its exact derived address, width, and
+bytes equal the authenticated role value.
+
+The origin engine handles every instruction family present in the 728-row
+corridor. It emits `Load`, `Store`, `Copy`, `Arithmetic`, and
+`InstructionResult` nodes for explicit/implicit loads and stores, register
+copies, partial-register writes, arithmetic and flags, stack operations,
+XMM/VEX operations, and every control transfer. It retains per-lane XMM
+origins, including explicit zero origins for memory-form MOVSD upper 64 bits
+and VMOVD upper bits. Unknown origin, source, destination, or write forms fail
+closed as `ABI_PROVENANCE`.
+
+At pre-call row 727, the independently derived normal chains are:
+
+- `rcx/q`: `Copy(719) <- Load(539) <- Store(522) <- Load(360) <- Store(54)
+  <- AuthenticatedContext(first-return,r15,q)`;
+- `r8/full_v`: `Copy(726) <- Load(726) <- AuthenticatedMemoryRoot(full_v)`;
+- `r9/latent`: `Copy(720) <- Load(582) <- Store(450) <- Load(359) <-
+  Store(55) <- AuthenticatedContext(first-return,r14,latent)`;
+- `[rsp]/gradient`: `Store(721) <- Load(721) <-
+  AuthenticatedMemoryRoot(gradient)`;
+- `xmm0.low64/time`: `Load(718) <- AuthenticatedMemoryRoot(time)`;
+- `xmm1.low64/dt`: `Load(723) <- AuthenticatedMemoryRoot(dt)`;
+- `rdi/cpotential`, `rsi/n`, and `rdx/half_ndim`: `Copy(722/725/724) <-
+  Load(722/725/724) <-` their exact authenticated memory roots.
+
+These origin chains supplement rather than replace the existing terminal COPY,
+dynamic value/state identity, Form-ancestor/shared-basis, component-memory,
+fresh-gradient, time-schedule, and dt entry-root checks.
+
+## Receipt preflight and mutation construction
+
+`_validate_sequence_receipts` checks capture and transition record counts,
+all nine independently counted row/read/write/control totals, every scalar
+`sequence`/`*_sequence`, every `*_sequences` list, final ABI observation
+references, gradient write references, and save-all candidate references.
+Each reference must select a retained dense row. This phase executes after
+pinned ELF decode and before semantic execution.
+
+The fix-round-2 generator builds `old_sequence -> new_sequence` only after
+deletion or reordering. It recursively remaps the schema-declared sequence
+fields, independently recomputes row/read/write/control counts, rebuilds every
+row chain, trace/final chain, capture, file hash, acquisition seal, transition
+authentication receipt, and in-memory test pins. The two repaired attacks
+record `receipt_preflight: PASSED`; the two intentionally stale controls record
+`receipt_preflight: REFUSED`.
+
+## Changed and read files
+
+The implementation commit changes exactly 90 files: 85 new files entirely
+under `runtime_trace/caller_transition/artifacts/checker/fix-round2/`, plus:
+
+- `runtime_trace/caller_transition/checker.py`;
+- `runtime_trace/caller_transition/generate_checker_fix2_mutations.py`;
+- `runtime_trace/caller_transition/tests/test_caller_mutations.py`;
+- `runtime_trace/caller_transition/tests/test_caller_fix1_mutations.py`;
+- `runtime_trace/caller_transition/tests/test_caller_fix2_mutations.py`.
+
+The 85 evidence files comprise two normal reports; five complete 9-file raw
+mutation copies plus their transition/receipt/result files; one structured
+origin fixture plus receipt/result; one mutation manifest; and 19 verification
+files (commands, CLI/generator/test/pycompile stdout/stderr and exit codes,
+JUnit, execution receipt, and the protected baseline audit). No read-proof raw,
+producer, old checker artifact, acquisition source, README, current/STATUS, or
+attribute file was edited.
+
+Inputs fully read or structurally parsed for this round were
+`task-2-fix2-brief.md`, the full `task-2-fix1-review.md`, the C2/I1/origin and
+mutation sections of `task-2-fix1-design.md`, the existing checker and all
+Task-2 checker tests, both read-proof captures/traces and accepted transitions,
+the prior Task-2 report, and the root-supplied 177-file preservation baseline.
+Producer/acquisition helper algorithms were not imported into the checker.
+
+## Evidence paths and hashes
+
+Normal reports:
+
+- audited: `artifacts/checker/fix-round2/audited-attempt-05-readproof-01/checker_report.json`,
+  SHA-256 `a3964850e39643fe2dd503883773a35952f1412b3e3e8f267487d0be6bc03f36`;
+- fresh: `artifacts/checker/fix-round2/fresh-closure-fresh-01-readproof-01/checker_report.json`,
+  SHA-256 `50ae61b76b2b9efc38edb3d554b8cc7df30a1383345ee271b9c8fa223cb1c923`.
+
+Both say `CHECKER_PASS`, schema
+`gala-caller-transition-independent-checker-v3`, 728 decoded rows, 219 reads,
+111 writes, 21 same-value writes, 16 indirect controls, 23 returns, zero
+second-body instructions, and nine authenticated ABI origin chains.
+
+Key source/evidence SHA-256 values:
+
+- checker: `8c1915ed19e9fb1cefd757d8a2ff8c475193ed581fa272784dabcd89e5e125a4`;
+- generator: `c435f52d976d22b93c3060b8537a45fe670d8eea662a4d77266128c9be972d5d`;
+- fix2 tests: `b54d98ef166fadae9ccee60c440daf2d7683c14a196f2ca407b476ea7d4e1541`;
+- mutation manifest: `579a7bf163a51efd0778f8b60cbc6e6abce767d0299f2b14bfa99e9fe1e89f45`;
+- dedicated log: `8d3919a9d4fb9b307e145f799f40aff0d2c9d4a018183f8cd176fc7f947c2370`;
+- JUnit: `38dce38e2abb6564f65f8f379c0b7968c2424018ead4a7d94a40acdc0f487029`;
+- protected-177 audit: `46002c5bf9ad214aa0a43d387e7e03b56ed04d0f43abdf9381e753754db88e28`.
+
+The mutation manifest contains six committed cases, all `REFUSED`:
+
+- `movsd-memory-upper64` -> `REGISTER_SEMANTICS`;
+- `dense-deletion-stale-receipts` -> `SEQUENCE_RECEIPT`;
+- `dense-deletion-fully-repaired` -> `TRACE_CONTROL_TARGET`;
+- `dense-reorder-stale-receipts` -> `SEQUENCE_RECEIPT`;
+- `dense-reorder-fully-repaired` -> `TRACE_CONTROL_TARGET`;
+- `same-bits-wrong-origin-role` -> `ABI_PROVENANCE`.
+
+Every result contains the SHA-256 map of its actual committed input files. A
+fresh exclusive replay under `task2-fix2-generator-final-replay-01` produced a
+byte-identical manifest.
+
+## Commands and verification
+
+Exact commands are saved in
+`artifacts/checker/fix-round2/verification/commands.md`. Frozen Python produced:
+
+```text
+........................................................................ [ 72%]
+...........................                                              [100%]
+99 passed in 33.69s
+```
+
+JUnit records 99 tests, 0 failures, 0 errors, 0 skips, and 33.673 seconds.
+`py_compile`, both public CLI runs, mutation generation, and the suite all
+exited 0. Their stderr files are empty. The execution receipt hashes checker,
+generator, tests, accepted raw/seal/capture/execution/transition inputs,
+normal reports, mutation manifest, commands, logs, and preservation audit.
+
+The root-provided baseline
+`D:/numerical-audit-lab-caller-continuity-delivery-2026-10-03/checker-fix1-completed-evidence-baseline.json`
+has SHA-256 `4dcc2713e6720c4467f4cc7d64de00f163ce5f8cac285b9ffbf414612e8d1ad7`.
+All 177 listed files rehashed unchanged after generation and testing.
+
+## Preserved failed and intermediate outputs
+
+All round-2 diagnostic directories are exclusive and retained under
+`D:/numerical-audit-lab-caller-continuity-delivery-2026-10-03`:
+
+- `task2-fix2-red-01`: initial RED, 4 failed and 1 passed;
+- `task2-fix2-intermediate-01`: MOVSD/receipt fixes green, origin reports still
+  absent, 2 failed and 3 passed;
+- `task2-fix2-origin-green-attempt-01`: first origin run exposed the expected
+  full-v top-node shape mismatch, 2 failed and 3 passed;
+- `task2-fix2-focused-green-01`: broader intermediate run exposed 10 old tests
+  whose unrepaired receipts now correctly failed preflight, 10 failed and 33
+  passed;
+- `task2-fix2-generator-attempt-01`: successful first six-case generator run;
+- `task2-fix2-generator-final-replay-01`: successful byte-identical final
+  generator replay.
+
+The small diagnostic source `inspect-fix2-reorder.py` is also retained there;
+it identified the superseded sparse reorder helper's empty time sequence list.
+No failed or intermediate output was overwritten or committed as a normal
+result.
+
+## Self-review and remaining limits
+
+- Origin nodes explain byte/register derivation over authenticated observations
+  and independently validated execution. They do not create native Form objects
+  or replace the frozen external Form audit.
+- The two accepted acquisitions remain separate processes from one machine and
+  boot. No cross-machine claim is made.
+- GNU objdump AT&T output remains the external decode boundary. Every observed
+  family is closed; unseen origin/value/control forms refuse.
+- Undefined flag bits remain excluded according to the existing opcode masks.
+  This change adds no new floating-point arithmetic semantics.
+- The second native body, second V2 block, trajectories, accumulated error,
+  physical accuracy, and external-audit closure remain outside scope.
+- The scoped implementation has no known evidence or opcode blocker. The root
+  owner retains the combined suite, integration documentation/package checks,
+  and the original reviewer's scoped re-review.
