@@ -69,6 +69,10 @@ def test_fresh_capture_is_controlled_stop_with_complete_raw_contract(case):
     assert capture["second_step_entry"]["abi"]["t_bits"] == "0x3fa0000000000000"
     assert capture["second_step_entry"]["abi"]["dt_bits"] == "0x3f90000000000000"
     assert capture["old_capture_continuation_present"] is False
+    first_pointers = capture["first_step_entry"]["abi"]["pointers"]
+    second_pointers = capture["second_step_entry"]["abi"]["pointers"]
+    for component in ["q", "full_v", "latent", "gradient"]:
+        assert second_pointers[component] == first_pointers[component]
     for boundary in ["first_step_entry", "first_step_return", "second_step_entry"]:
         inventory = capture[boundary]["thread_inventory"]
         assert sum(item["selected_owner"] for item in inventory) == 1

@@ -15,6 +15,16 @@ Two fresh processes are preserved under `artifacts/`:
 Both stop under debugger control before the first second-step body
 instruction.  `CONTROLLED_STOP` is not normal harness completion.
 
+The accepted corrected producer outputs for the later independent checker are:
+
+- `artifacts/producer-fix-round1/audited-attempt-05/transition.json`;
+- `artifacts/producer-fix-round1/fresh-closure-fresh-01/transition.json`.
+
+Each sits beside its `summary.json` and references the original raw acquisition
+by capture and trace SHA-256.  The transition and summary files directly under
+the two acquisition directories are preserved pre-fix history: they predate
+the capture-label and first/second pointer-identity gates and are superseded.
+
 Run a new exclusive acquisition with the frozen WSL interpreter:
 
 ```bash
@@ -29,7 +39,7 @@ Produce the conditional binding from raw evidence:
 /home/otherside123/venvs/gate2c1-trace/bin/python \
   -m runtime_trace.caller_transition.producer \
   --evidence EVIDENCE_DIRECTORY --antecedent attempt-05 \
-  --out EVIDENCE_DIRECTORY/transition.json --root .
+  --out NEW_EXCLUSIVE_OUTPUT_DIRECTORY/transition.json --root .
 ```
 
 Task-1 tests are under `tests/`.  No status here claims checker PASS or

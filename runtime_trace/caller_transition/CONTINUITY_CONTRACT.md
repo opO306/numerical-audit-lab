@@ -103,3 +103,9 @@ evidence is deterministic.  `summary.json` is a normal concise receipt and
 must not be used instead of the raw evidence.  The later independent checker
 must decode the pinned module bytes with GNU objdump and derive the write set
 and bindings independently; it must not import this producer decoder.
+
+For Task 2, the accepted producer outputs are the two transitions under
+`artifacts/producer-fix-round1/`.  Their `pointer_identity` receipts record the
+first-step and second-entry addresses for q, full_v, latent, and gradient.
+The older transitions stored directly with each acquisition are immutable,
+superseded history and are not checker inputs.

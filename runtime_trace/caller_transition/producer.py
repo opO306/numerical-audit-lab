@@ -89,6 +89,11 @@ def produce(evidence, label, output, root=None):
         rows = validate_trace_bytes(capture, trace_raw)
     except (OSError, json.JSONDecodeError, CaptureRefused, KeyError, TypeError) as exc:
         raise ProducerRefused(str(exc)) from exc
+    capture_label = capture.get("antecedent_label")
+    if capture_label != label:
+        raise ProducerRefused(
+            f"capture antecedent label mismatch: requested {label!r}, captured {capture_label!r}"
+        )
     if capture.get("unknown_effects_refused") is not True:
         raise ProducerRefused("unknown effects were not refused")
     paths = ANTECEDENTS[label]
@@ -99,6 +104,18 @@ def produce(evidence, label, output, root=None):
     pointers = capture["first_step_entry"]["abi"]["pointers"]
     first_bits = capture["first_step_return"]["post_component_bits"]
     second = capture["second_step_entry"]["abi"]
+    second_pointers = second["pointers"]
+    pointer_identity = {}
+    for component in ["q", "full_v", "latent", "gradient"]:
+        first_address = pointers[component]
+        second_address = second_pointers[component]
+        if second_address != first_address:
+            raise ProducerRefused(f"second-entry {component} pointer identity")
+        pointer_identity[component] = {
+            "first_step_address": first_address,
+            "second_step_address": second_address,
+            "same_memory_region": True,
+        }
     for binding in carry:
         component, index = binding["component"], binding["byte_offset"] // 8
         if first_bits[component][index] != binding["center_bits"]:
@@ -146,14 +163,15 @@ def produce(evidence, label, output, root=None):
         "producer": {"source_sha256": _sha(Path(__file__).read_bytes()),
             "capture_contract_sha256": _sha((Path(__file__).parent / "capture_contract.py").read_bytes()),
             "imports_or_executes_second_v2_block": False},
-        "antecedent": {"label": label, "numeric_ir_path": paths["numeric_ir"],
+        "antecedent": {"label": label, "capture_label": capture_label,
+            "requested_label_matches_capture": True, "numeric_ir_path": paths["numeric_ir"],
             "numeric_ir_sha256": _sha(numeric_raw), "correspondence_path": paths["correspondence"],
             "correspondence_sha256": _sha(correspondence_raw),
             "relation": "fresh execution endpoint linked to distinct externally audited antecedent"},
         "capture": {"capture_sha256": _sha((evidence / "capture.json").read_bytes()),
             "trace_sha256": _sha(trace_raw), "record_count": len(rows),
             "inferior_pid": capture["inferior_pid"], "controlled_stop_receipt": capture["controlled_stop_receipt"]},
-        "bindings": {"carry": carry,
+        "bindings": {"pointer_identity": pointer_identity, "carry": carry,
             "gradient": {"root_kind": "FRESH_EXACT_ZERO", "center_bits": ["0x0000000000000000"] * 2,
                 "form": {"coef": ["0x0.0p+0"] * 4, "box": "0x0.0p+0"},
                 "write_sequences": sorted({item["sequence"] for item in gradient_writes}),
