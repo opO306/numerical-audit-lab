@@ -9,22 +9,113 @@ x86-64 write/control effects, and traverses the frozen IR data as data.
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 import re
 import struct
 import subprocess
 import sys
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable
 
 
-CAPTURE_SCHEMA = "gala-caller-transition-capture-v1"
-ROW_SCHEMA = "gala-caller-transition-instruction-v1"
-TRANSITION_SCHEMA = "gala-caller-transition-v1"
+CAPTURE_SCHEMA = "gala-caller-transition-capture-v2"
+ROW_SCHEMA = "gala-caller-transition-instruction-v2"
+TRANSITION_SCHEMA = "gala-caller-transition-v2"
+EXECUTION_SCHEMA = "caller-transition-execution-v2"
+SEAL_SCHEMA = "caller-transition-acquisition-seal-v1"
 IR_SCHEMA = "runtime-trace-numeric-ir-regular-1step-v1"
 CORRESPONDENCE_SCHEMA = "numeric-ir-frozen-v2-regular-1step-v1"
-REPORT_SCHEMA = "gala-caller-transition-independent-checker-v1"
+REPORT_SCHEMA = "gala-caller-transition-independent-checker-v2"
+
+SOURCE_RECEIPTS = {
+    "runtime_trace/caller_transition/__init__.py": "3729bd7cadae1870f61c52ef8bdf8962f0ecbb596ac54cab3818767a4a4f7c96",
+    "runtime_trace/caller_transition/frozen_modules/manifest.json": "060b4df8ca0506827016bf63859511a27864f7fd43d4322fdc2896324bdc28eb",
+    "runtime_trace/caller_transition/gdb_acquire_reads.py": "00da02b2459289bfcba3635049f27f7d29324c261c7e174e144cea99acc3335b",
+    "runtime_trace/caller_transition/module_resolver.py": "0593b66711df2820e57e647d129af601e7cef8dada1b1fac3b79e5439aed029a",
+    "runtime_trace/caller_transition/read_effects.py": "5d595f6d520ecf0a7e48a01d254abf53d8ac356ad2133656f63c927550ece85a",
+    "runtime_trace/caller_transition/run_acquisition_reads.py": "68e6c03358b526e92f0ff36261939781ad06cc9c70d2a5a972cbca35bde0f306",
+    "runtime_trace/caller_transition/write_effects.py": "0917f62f2ae3f083d3c271522df2b6574023e476cfd24e29239b5e6017bb6b5e",
+    "runtime_trace/caller_transition/write_effects_reads.py": "d051fbde85df19472ccc9403477adfcaebf7ca4561096cb72030bbb8926c908e",
+    "runtime_trace/harness.py": "4928f88e4c6255cfbc3f68798648b543146fb5b13327490d331814f778a9fc26",
+    "runtime_trace/harness_nsteps2.py": "a9125c7199a73e11dde7780ab833e44d444122b3c7c49e297ea1ea2155777c99",
+    "runtime_trace/semantics.py": "d6797e279cdf2b85e91612426e4e2be3cac2fe2a837a4917fffa9530a5286331",
+}
+MODULE_SHA256S = {
+    "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf",
+    "a6ac98736304bb9f6a92e473bba45da10d9b5b99f8019e2ca15eb6a7f86234fc",
+    "e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+}
+MODULE_LOAD_BASES = {
+    "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf": 140737349943296,
+    "a6ac98736304bb9f6a92e473bba45da10d9b5b99f8019e2ca15eb6a7f86234fc": 140736120496128,
+    "e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f": 0,
+}
+WHEEL_SHA256 = "cc5f0cf3bc63a966a3c130b93f6c05026271fe7178492a02c6266c243b5fc2f0"
+
+
+@dataclass(frozen=True)
+class TrustedCasePins:
+    case: str
+    label: str
+    capture_directory: str
+    transition_path: str
+    transition_sha256: str
+    seal_sha256: str
+    capture_sha256: str
+    execution_sha256: str
+    trace_sha256: str
+    trace_final_chain: str
+    process_identity: dict[str, Any]
+    sealed_files: dict[str, str]
+    ir_path: str
+    ir_sha256: str
+    correspondence_path: str
+    correspondence_sha256: str
+
+
+def _case_pins(case: str, label: str, transition_sha256: str, seal_sha256: str,
+               capture_sha256: str, execution_sha256: str, trace_sha256: str,
+               final_chain: str, pid: int, start_ticks: int,
+               sealed_files: dict[str, str], ir_path: str, ir_sha256: str,
+               correspondence_path: str, correspondence_sha256: str) -> TrustedCasePins:
+    return TrustedCasePins(
+        case, label, f"runtime_trace/caller_transition/artifacts/{case}",
+        f"runtime_trace/caller_transition/artifacts/producer-fix-round2/{case}/transition.json",
+        transition_sha256, seal_sha256, capture_sha256, execution_sha256,
+        trace_sha256, final_chain,
+        {"linux_boot_id": "ad2a0c22-e8d1-466b-8bbf-31c2cf4f54cd", "pid": pid,
+         "proc_stat_start_time_ticks": start_ticks}, sealed_files, ir_path,
+        ir_sha256, correspondence_path, correspondence_sha256,
+    )
+
+
+_PRODUCTION_CASE_PINS = {
+    "audited-attempt-05-readproof-01": _case_pins(
+        "audited-attempt-05-readproof-01", "attempt-05",
+        "526132b3ec1d1efcb06c05dd4ac803cd818074b63b47bec1a381ac38b4aa0f59",
+        "ece7e1a54b681bea33c948a467eec9df2bf029cb7d386276fbc67c9819641627",
+        "9ae29bee14c2d42265dbf353a1e55caa78012c16210fa7c5b6bf8e84cd8c9157",
+        "f0b0fe461031a402bc2cdbfa962afde4846c29280a6d6ebb76222de2a15d1e62",
+        "64f5f8caaf00cbd691ad24bdb8fa59fd6f50bbf4036d8671895fd27ac7766877",
+        "547800c2b2c7a7374c779a25b5eada1131b4a5f70ea46beb977f637295770404", 394, 12881,
+        {"caller_trace.jsonl":"64f5f8caaf00cbd691ad24bdb8fa59fd6f50bbf4036d8671895fd27ac7766877","capture.json":"9ae29bee14c2d42265dbf353a1e55caa78012c16210fa7c5b6bf8e84cd8c9157","execution.json":"f0b0fe461031a402bc2cdbfa962afde4846c29280a6d6ebb76222de2a15d1e62","first_step_disassembly.txt":"e1f03c4dcdc20aabe2496152914e549deebebbd39f2b119fed2e6e96c9cb0ed1","gdb.log":"91317a0faee26f0e66e080eb40ef23e9c9b26242d98818eae2f20b49c4a59ea5","harness_diff.json":"b71b84d1cdec37eb31cc6aca9af5f3cde3d9cb0863143cf5ba9f0bd938140f29","module_pinset.json":"0ceaf7fbfdfaae5edce9b912f3bc1af4f38058f2b8dea1f74b0d33893eee4387","source_pinset.json":"9c074226e62ee7ddb44744ac20fed0fd08bb74b62230bbf988a162bf779bf1ae"},
+        "runtime_trace/numeric_ir/artifacts/attempt-05/numeric_ir.json", "bbb912c041cb47cf2f3814d416a298c3c6469c35a47c9b7cda629c11415586ba",
+        "runtime_trace/numeric_ir/v2/artifacts/attempt-05/correspondence.json", "3edd42937e58c7655dc951d3683802ffddd5ae7cbfda27c5793d6cb42c7d35f3"),
+    "fresh-closure-fresh-01-readproof-01": _case_pins(
+        "fresh-closure-fresh-01-readproof-01", "closure-fresh-01",
+        "01ca255ece2fef51fe4737deb42a005d6ea5ba39a2ed79c9f8eab66f9eac61f7",
+        "7ca5c4be32793f54a52e5a5dd9089684e1f60a1d82f3984b014b7ea967df4d0e",
+        "ebb9a05557a28a58afa8835d74e4f473048b2bcc554fc5e8f18c1fdb715ab185",
+        "6f32d21122efeccb5f482bdfadd2b0b8c7b2682c75cd907e8505b0fc28569027",
+        "0f195ce50ae247394bd95bda00a5de304e180752df69284405c80c112b4ad9b5",
+        "f09a81a91e8cf866c900252d14569d384f4a421c5540df136d6228c67ccd1f73", 449, 13968,
+        {"caller_trace.jsonl":"0f195ce50ae247394bd95bda00a5de304e180752df69284405c80c112b4ad9b5","capture.json":"ebb9a05557a28a58afa8835d74e4f473048b2bcc554fc5e8f18c1fdb715ab185","execution.json":"6f32d21122efeccb5f482bdfadd2b0b8c7b2682c75cd907e8505b0fc28569027","first_step_disassembly.txt":"e1f03c4dcdc20aabe2496152914e549deebebbd39f2b119fed2e6e96c9cb0ed1","gdb.log":"91b9c392a698ded4c4d4f7a6f4cdff2aa3ac3549c12fa650e43178b1901276f5","harness_diff.json":"b71b84d1cdec37eb31cc6aca9af5f3cde3d9cb0863143cf5ba9f0bd938140f29","module_pinset.json":"0ceaf7fbfdfaae5edce9b912f3bc1af4f38058f2b8dea1f74b0d33893eee4387","source_pinset.json":"9c074226e62ee7ddb44744ac20fed0fd08bb74b62230bbf988a162bf779bf1ae"},
+        "runtime_trace/numeric_ir/artifacts/closure-fresh-01/numeric_ir.json", "c34576f87bd4abc5bdc5fc2f67e68251ec30d5659776ade984fd15ab2bcb5296",
+        "runtime_trace/numeric_ir/v2/artifacts/closure-fresh-01/correspondence.json", "a692db2f6f3b5b9a45de71cf8516fef4c8d2cdc8b173c6cdb20259c5812c572f"),
+}
 
 ANTECEDENTS = {
     "attempt-05": (
@@ -204,8 +295,26 @@ _MEMORY = re.compile(
 )
 
 
+def _is_memory_operand(operand: str) -> bool:
+    value = operand.strip()
+    return "(" in value or value.startswith(("%fs:", "%gs:"))
+
+
 def _effective_address(row: dict[str, Any], operand: str) -> int:
-    match = _MEMORY.fullmatch(operand.strip())
+    value = operand.strip().removeprefix("*")
+    segment = None
+    if value.startswith(("%fs:", "%gs:")):
+        segment, value = value[1:3], value[4:]
+    if "(" not in value:
+        try:
+            address = int(value, 0)
+        except ValueError:
+            _refuse("UNKNOWN_INSTRUCTION_EFFECT", f"unsupported memory operand: {operand}")
+        if address & (1 << 63):
+            address -= 1 << 64
+        base = 0 if segment is None else _hex_int(row["pre"]["segment_bases"][f"{segment}_base"], "TRACE_STATE", f"{segment}_base")
+        return (base + address) & ((1 << 64) - 1)
+    match = _MEMORY.fullmatch(value)
     if match is None:
         _refuse("UNKNOWN_INSTRUCTION_EFFECT", f"unsupported memory operand: {operand}")
     displacement_text = match.group("disp")
@@ -220,6 +329,8 @@ def _effective_address(row: dict[str, Any], operand: str) -> int:
     index_name = match.group("index")
     if index_name:
         address += _reg_value(row["pre"], index_name)[0] * int(match.group("scale") or "1")
+    if segment is not None:
+        address += _hex_int(row["pre"]["segment_bases"][f"{segment}_base"], "TRACE_STATE", f"{segment}_base")
     return address & ((1 << 64) - 1)
 
 
@@ -227,10 +338,20 @@ def _source_value(row: dict[str, Any], operand: str, size: int) -> int | None:
     operand = operand.strip()
     if operand.startswith("$"):
         return int(operand[1:], 0) & ((1 << (size * 8)) - 1)
+    if _is_memory_operand(operand):
+        wanted = operand.strip().removeprefix("*")
+        matches = [item for item in row.get("pre_memory_observations", [])
+                   if str(item.get("operand", "")).removeprefix("*") == wanted
+                   and item.get("size") == size and item.get("status") == "OK"]
+        _require(len(matches) == 1, "MEMORY_SOURCE", f"missing/duplicate memory source at sequence {row.get('sequence')}: {operand}")
+        try:
+            raw = bytes.fromhex(matches[0]["bytes_hex"])
+        except (KeyError, TypeError, ValueError):
+            _refuse("MEMORY_SOURCE", f"malformed memory source at sequence {row.get('sequence')}")
+        _require(len(raw) == size, "MEMORY_SOURCE", f"memory source width mismatch at sequence {row.get('sequence')}")
+        return int.from_bytes(raw, "little")
     if operand.startswith("%"):
         return _reg_value(row["pre"], operand)[0] & ((1 << (size * 8)) - 1)
-    if "(" in operand:
-        return None
     _refuse("UNKNOWN_INSTRUCTION_EFFECT", f"unsupported source operand: {operand}")
 
 
@@ -301,7 +422,7 @@ def derive_possible_write_effects(row: dict, decoded_assembly: str) -> list[dict
         return []
     if base == "pop" and operands and "(" not in operands[-1]:
         return []
-    memory_destination = bool(operands and "(" in operands[-1])
+    memory_destination = bool(operands and _is_memory_operand(operands[-1]))
     if memory_destination:
         if base not in explicit_writers:
             if base in read_only:
@@ -320,11 +441,14 @@ def derive_possible_write_effects(row: dict, decoded_assembly: str) -> list[dict
         mask = (1 << (size * 8)) - 1
         source_value = _source_value(row, source, size) if source else None
         before: int | None = None
-        recorded = row.get("possible_memory_writes")
-        if isinstance(recorded, list) and len(recorded) == 1:
-            before_text = recorded[0].get("before_bits")
-            if isinstance(before_text, str) and re.fullmatch(rf"0x[0-9a-f]{{{size * 2}}}", before_text):
-                before = int(before_text, 16)
+        observations = [item for item in row.get("pre_memory_observations", [])
+                        if str(item.get("operand", "")).removeprefix("*") == operands[-1].removeprefix("*")
+                        and item.get("size") == size and item.get("status") == "OK"]
+        if observations:
+            _require(len(observations) == 1, "MEMORY_SOURCE", f"duplicate destination read at sequence {row.get('sequence')}")
+            raw = bytes.fromhex(observations[0]["bytes_hex"])
+            _require(len(raw) == size, "MEMORY_SOURCE", f"destination read width mismatch at sequence {row.get('sequence')}")
+            before = int.from_bytes(raw, "little")
         if base.startswith(("mov", "vmov")):
             if source_value is not None:
                 effect["expected_after_bits"] = _bits(source_value, size)
@@ -359,7 +483,7 @@ def derive_possible_write_effects(row: dict, decoded_assembly: str) -> list[dict
         return [effect]
     if base in explicit_writers | read_only | control_or_stack_read:
         return []
-    if any("(" in operand for operand in operands):
+    if any(_is_memory_operand(operand) for operand in operands):
         _refuse("UNKNOWN_INSTRUCTION_EFFECT", f"unknown memory effect: {decoded_assembly}")
     _refuse("UNKNOWN_INSTRUCTION_EFFECT", f"unsupported decoded instruction: {decoded_assembly}")
 
@@ -475,6 +599,8 @@ def _resolve_modules(
         by_sha[sha] = metadata
     used = {row.get("module_sha256") for row in rows}
     _require(all(isinstance(value, str) for value in used), "ELF_INTEGRITY", "row module SHA missing")
+    _require(set(by_sha) == MODULE_SHA256S and used <= MODULE_SHA256S and set(entries) == MODULE_SHA256S,
+             "MODULE_SET", "module set differs from literal three-module pin")
     resolved: dict[str, tuple[Path, list[dict[str, int]], int]] = {}
     decoded_by_sequence: dict[int, str] = {}
     for sha in sorted(used):
@@ -518,12 +644,269 @@ def _direct_target(assembly: str, load_base: int) -> int | None:
     return None if match is None else load_base + int(match.group(1), 16)
 
 
+def _expected_observations(row: dict[str, Any], assembly: str) -> list[tuple[str, str, int]]:
+    mnemonic, operands = _parse_assembly(assembly)
+    base = mnemonic.removeprefix("lock ")
+    if base == "ret":
+        expected = [("IMPLICIT_RET", "(%rsp)", 8)]
+    elif base == "pop":
+        expected = [("IMPLICIT_POP", "(%rsp)", 8)]
+    elif base == "leave":
+        expected = [("IMPLICIT_LEAVE", "(%rbp)", 8)]
+    else:
+        expected = []
+        for index, operand in enumerate(operands):
+            if not _is_memory_operand(operand):
+                continue
+            destination = index == len(operands) - 1
+            pure_store = destination and base.startswith(("mov", "vmov"))
+            if base in {"lea", "nop", "nopw"} or pure_store:
+                continue
+            if base in {"jmp", "call"} and operand.startswith("*"):
+                kind, size = "INDIRECT_CONTROL", 8
+            elif base == "push":
+                kind, size = "EXPLICIT", 8
+            elif destination and base not in {"cmp", "cmpb", "cmpw", "cmpl", "cmpq", "test", "testb", "testw", "testl", "testq"}:
+                kind, size = "READ_MODIFY_WRITE", _operand_width(base, operands) // 8
+            else:
+                kind, size = "EXPLICIT", _operand_width(base, operands) // 8
+            expected.append((kind, operand, size))
+    if row["sequence"] == 727:
+        expected.append(("ABI_STACK_ARGUMENT", "(%rsp)", 8))
+    return expected
+
+
+def _validate_memory_observations(rows: list[dict[str, Any]], decoded: dict[int, str]) -> dict[str, int]:
+    shadow: dict[int, int] = {}
+    count = 0
+    for row in rows:
+        _require(row["pre"].get("segment_bases") == row["post"].get("segment_bases"),
+                 "SEGMENT_BASE", f"segment base changed at sequence {row['sequence']}")
+        bases = row["pre"].get("segment_bases")
+        _require(isinstance(bases, dict) and set(bases) == {"fs_base", "gs_base"},
+                 "SEGMENT_BASE", f"missing FS/GS bases at sequence {row['sequence']}")
+        observations = row.get("pre_memory_observations")
+        _require(isinstance(observations, list), "MEMORY_OBSERVATION", "observation list missing")
+        expected_observations = _expected_observations(row, decoded[row["sequence"]])
+        actual_observations = [(item.get("kind"), item.get("operand"), item.get("size")) for item in observations]
+        _require(actual_observations == expected_observations, "MEMORY_OBSERVATION",
+                 f"read observation set mismatch at sequence {row['sequence']}")
+        for observation in observations:
+            count += 1
+            _require(isinstance(observation, dict) and observation.get("status") == "OK"
+                     and observation.get("timing") == "PRE_INSTRUCTION",
+                     "MEMORY_OBSERVATION", f"failed/non-pre observation at sequence {row['sequence']}")
+            size = _integer(observation.get("size"), "MEMORY_OBSERVATION", "observation size")
+            operand = observation.get("operand")
+            _require(isinstance(operand, str) and observation.get("address") == _effective_address(row, operand),
+                     "MEMORY_OBSERVATION", f"observation address mismatch at sequence {row['sequence']}")
+            try:
+                raw = bytes.fromhex(observation.get("bytes_hex", ""))
+            except (TypeError, ValueError):
+                _refuse("MEMORY_OBSERVATION", f"bad observation bytes at sequence {row['sequence']}")
+            _require(len(raw) == size, "MEMORY_OBSERVATION", f"observation width mismatch at sequence {row['sequence']}")
+            address = observation["address"]
+            for offset, byte in enumerate(raw):
+                if address + offset in shadow:
+                    _require(shadow[address + offset] == byte, "MEMORY_SHADOW", f"observed byte disagrees with prior write at sequence {row['sequence']}")
+                shadow[address + offset] = byte
+        for write in row.get("possible_memory_writes", []):
+            address = _integer(write.get("address"), "WRITE_SET", "write address")
+            size = _integer(write.get("size"), "WRITE_SET", "write size")
+            try:
+                before = int(write["before_bits"], 16).to_bytes(size, "little")
+                after = int(write["after_bits"], 16).to_bytes(size, "little")
+            except (KeyError, TypeError, ValueError, OverflowError):
+                _refuse("WRITE_SET", f"malformed write bytes at sequence {row['sequence']}")
+            for offset, byte in enumerate(before):
+                if address + offset in shadow:
+                    _require(shadow[address + offset] == byte, "MEMORY_SHADOW", f"write preimage disagrees with shadow at sequence {row['sequence']}")
+            for offset, byte in enumerate(after):
+                shadow[address + offset] = byte
+    return {"count": count, "rooted_bytes": len(shadow)}
+
+
+def _condition_taken(mnemonic: str, eflags: int) -> bool:
+    cf, zf, sf, of = bool(eflags & 1), bool(eflags & 0x40), bool(eflags & 0x80), bool(eflags & 0x800)
+    return {"ja": not cf and not zf, "jb": cf, "jbe": cf or zf, "je": zf,
+            "jne": not zf, "jge": sf == of, "jle": zf or sf != of}[mnemonic]
+
+
+def _operand_width(mnemonic: str, operands: list[str]) -> int:
+    base = mnemonic.removeprefix("lock ")
+    special = {"movsd": 64, "vmovd": 32, "vmovdqu": 128, "movdqu": 128,
+               "movzbl": 8, "setne": 8}
+    if base in special:
+        return special[base]
+    if base.endswith(("b", "w", "l", "q")) and base not in {
+        "mov", "add", "sub", "and", "or", "xor", "cmp", "test", "shl", "shr",
+        "call", "jmp", "ret", "push", "pop",
+    }:
+        return {"b": 8, "w": 16, "l": 32, "q": 64}[base[-1]]
+    for operand in reversed(operands):
+        name = operand.strip().lstrip("%")
+        if name in ALIASES:
+            return ALIASES[name][1]
+    _refuse("UNKNOWN_INSTRUCTION_EFFECT", f"cannot derive operand width: {mnemonic} {operands}")
+
+
+def _set_register(state: dict[str, Any], operand: str, value: int) -> None:
+    name = operand.strip().lstrip("%")
+    if name.startswith("xmm"):
+        state["xmm"][name] = _bits(value, 16)
+        return
+    _require(name in ALIASES, "UNKNOWN_INSTRUCTION_EFFECT", f"unsupported destination %{name}")
+    canonical, width = ALIASES[name]
+    mask = (1 << width) - 1
+    old = int(state["gpr"][canonical], 16)
+    if width == 32:
+        result = value & mask
+    else:
+        result = (old & ~mask) | (value & mask)
+    state["gpr"][canonical] = _bits(result, 8)
+
+
+def _parity(value: int) -> bool:
+    return (value & 0xFF).bit_count() % 2 == 0
+
+
+def _flags_result(old: int, left: int, right: int, result: int, width: int, operation: str) -> int:
+    mask = (1 << width) - 1
+    sign = 1 << (width - 1)
+    result &= mask
+    flags = old & ~(1 | 4 | 16 | 64 | 128 | 0x800)
+    if operation == "sub":
+        cf = (left & mask) < (right & mask)
+        of = bool(((left ^ right) & (left ^ result) & sign))
+        af = bool((left ^ right ^ result) & 0x10)
+    elif operation == "add":
+        cf = (left & mask) + (right & mask) > mask
+        of = bool((~(left ^ right) & (left ^ result) & sign))
+        af = bool((left ^ right ^ result) & 0x10)
+    else:
+        cf = of = af = False
+    return flags | cf | (_parity(result) << 2) | (af << 4) | ((result == 0) << 6) | (bool(result & sign) << 7) | (of << 11)
+
+
+def _validate_register_semantics(rows: list[dict[str, Any]], decoded: dict[int, str]) -> None:
+    for row in rows:
+        sequence = row["sequence"]
+        mnemonic, operands = _parse_assembly(decoded[sequence])
+        base = mnemonic.removeprefix("lock ")
+        expected = copy.deepcopy(row["pre"])
+        expected["gpr"]["rip"] = _bits(row["next_pc"], 8)
+        flag_mask = (1 << 64) - 1
+        width = None
+        if base in {"mov", "movb", "movw", "movl", "movq"} and len(operands) == 2 and operands[1].startswith("%") and not _is_memory_operand(operands[1]):
+            width = _operand_width(base, operands)
+            value = _source_value(row, operands[0], width // 8)
+            _set_register(expected, operands[1], value)
+        elif base == "movzbl" and len(operands) == 2:
+            _set_register(expected, operands[1], _source_value(row, operands[0], 1))
+        elif base == "lea" and len(operands) == 2:
+            _set_register(expected, operands[1], _effective_address(row, operands[0]))
+        elif base == "movsd" and len(operands) == 2 and operands[1].startswith("%xmm"):
+            old = _reg_value(row["pre"], operands[1])[0]
+            value = _source_value(row, operands[0], 8)
+            _set_register(expected, operands[1], (old & ~((1 << 64) - 1)) | value)
+        elif base == "vmovd" and len(operands) == 2:
+            _set_register(expected, operands[1], _source_value(row, operands[0], 4))
+        elif base == "vpbroadcastb" and len(operands) == 2:
+            byte = _source_value(row, operands[0], 1)
+            _set_register(expected, operands[1], int.from_bytes(bytes([byte]) * 16, "little"))
+        elif base == "pop":
+            value = _source_value(row, "(%rsp)", 8)
+            _set_register(expected, operands[0], value)
+            expected["gpr"]["rsp"] = _bits(_reg_value(row["pre"], "%rsp")[0] + 8, 8)
+        elif base == "leave":
+            value = _source_value(row, "(%rbp)", 8)
+            _set_register(expected, "%rbp", value)
+            expected["gpr"]["rsp"] = _bits(_reg_value(row["pre"], "%rbp")[0] + 8, 8)
+        elif base == "ret":
+            expected["gpr"]["rsp"] = _bits(_reg_value(row["pre"], "%rsp")[0] + 8, 8)
+        elif base in {"push", "call"}:
+            expected["gpr"]["rsp"] = _bits(_reg_value(row["pre"], "%rsp")[0] - 8, 8)
+        elif base in {"add", "addb", "addw", "addl", "addq", "sub", "subb", "subw", "subl", "subq",
+                      "and", "andb", "andw", "andl", "andq", "or", "orb", "orw", "orl", "orq",
+                      "xor", "xorb", "xorw", "xorl", "xorq"} and len(operands) == 2:
+            width = _operand_width(base, operands)
+            left = _source_value(row, operands[1], width // 8)
+            right = _source_value(row, operands[0], width // 8)
+            if base.startswith("add"): result, op = left + right, "add"
+            elif base.startswith("sub"): result, op = left - right, "sub"
+            elif base.startswith("and"): result, op = left & right, "logic"
+            elif base.startswith("or"): result, op = left | right, "logic"
+            else: result, op = left ^ right, "logic"
+            if operands[1].startswith("%"):
+                _set_register(expected, operands[1], result)
+            expected["eflags"] = _flags_result(row["pre"]["eflags"], left, right, result, width, op)
+            if op == "logic":
+                flag_mask &= ~0x10
+        elif base in {"cmp", "cmpb", "cmpw", "cmpl", "cmpq", "test", "testb", "testw", "testl", "testq"}:
+            width = _operand_width(base, operands)
+            left = _source_value(row, operands[1], width // 8)
+            right = _source_value(row, operands[0], width // 8)
+            if base.startswith("cmp"):
+                result, op = left - right, "sub"
+            else:
+                result, op = left & right, "logic"
+            expected["eflags"] = _flags_result(row["pre"]["eflags"], left, right, result, width, op)
+            if op == "logic":
+                flag_mask &= ~0x10
+        elif base in {"shl", "shlb", "shlw", "shll", "shlq", "shr", "shrb", "shrw", "shrl", "shrq"}:
+            width = _operand_width(base, operands)
+            value = _source_value(row, operands[1], width // 8)
+            count = _source_value(row, operands[0], 1) & (0x3F if width == 64 else 0x1F)
+            if count:
+                mask = (1 << width) - 1
+                if base.startswith("shl"):
+                    result = (value << count) & mask
+                    cf = bool((value >> (width - count)) & 1)
+                    of = bool((result >> (width - 1)) & 1) ^ cf if count == 1 else False
+                else:
+                    result = value >> count
+                    cf = bool((value >> (count - 1)) & 1)
+                    of = bool(value & (1 << (width - 1))) if count == 1 else False
+                _set_register(expected, operands[1], result)
+                flags = row["pre"]["eflags"] & ~(1 | 4 | 64 | 128 | 0x800)
+                expected["eflags"] = flags | cf | (_parity(result) << 2) | ((result == 0) << 6) | (bool(result & (1 << (width - 1))) << 7) | (of << 11)
+                flag_mask &= ~0x10
+                if count != 1:
+                    flag_mask &= ~0x800
+        elif base == "setne":
+            _set_register(expected, operands[0], 0 if row["pre"]["eflags"] & 0x40 else 1)
+        elif base == "xchg" and _is_memory_operand(operands[1]):
+            width = _operand_width(base, operands)
+            _set_register(expected, operands[0], _source_value(row, operands[1], width // 8))
+        elif base == "cmpxchg" and _is_memory_operand(operands[1]):
+            width = _operand_width(base, operands)
+            memory = _source_value(row, operands[1], width // 8)
+            accumulator = _reg_value(row["pre"], "%eax" if width == 32 else "%rax")[0]
+            result = accumulator - memory
+            expected["eflags"] = _flags_result(row["pre"]["eflags"], accumulator, memory, result, width, "sub")
+            if (accumulator & ((1 << width) - 1)) != memory:
+                _set_register(expected, "%eax" if width == 32 else "%rax", memory)
+        elif base in {"jmp", "ja", "jb", "jbe", "je", "jge", "jle", "jne", "endbr64", "nop", "nopw"}:
+            pass
+        elif (base in {"mov", "movb", "movw", "movl", "movq", "movsd", "vmovdqu", "movdqu"}
+              and len(operands) == 2 and _is_memory_operand(operands[1])):
+            pass
+        else:
+            _refuse("UNKNOWN_INSTRUCTION_EFFECT", f"unsupported register semantics at sequence {sequence}: {decoded[sequence]}")
+        _require(expected["gpr"] == row["post"]["gpr"] and expected["xmm"] == row["post"]["xmm"],
+                 "REGISTER_SEMANTICS", f"register result mismatch at sequence {sequence}")
+        _require(((expected["eflags"] ^ row["post"]["eflags"]) & flag_mask) == 0,
+                 "FLAG_SEMANTICS", f"defined flags mismatch at sequence {sequence}")
+        _require(expected["mxcsr"] == row["post"]["mxcsr"] and expected["segment_bases"] == row["post"]["segment_bases"],
+                 "REGISTER_SEMANTICS", f"control state mismatch at sequence {sequence}")
+
+
 def _validate_control(rows: list[dict[str, Any]], decoded: dict[int, str], load_bases: dict[str, int]) -> None:
     conditional = {"ja", "jb", "jbe", "je", "jge", "jle", "jne"}
     for index, row in enumerate(rows):
         sequence = row["sequence"]
         assembly = decoded[sequence]
-        mnemonic, _operands = _parse_assembly(assembly)
+        mnemonic, operands = _parse_assembly(assembly)
         base = mnemonic.removeprefix("lock ")
         length = len(bytes.fromhex(row["instruction_bytes"]))
         fallthrough = row["pc"] + length
@@ -532,15 +915,27 @@ def _validate_control(rows: list[dict[str, Any]], decoded: dict[int, str], load_
         _require(row["post"]["gpr"]["rip"] == _bits(next_pc, 8), "TRACE_STATE", f"post RIP mismatch at sequence {sequence}")
         target = _direct_target(assembly, load_bases[row["module_sha256"]])
         if base in conditional:
-            _require(target is not None and next_pc in {fallthrough, target}, "TRACE_CONTROL", f"conditional flow mismatch at sequence {sequence}")
+            _require(target is not None, "TRACE_CONTROL_TARGET", f"conditional target absent at sequence {sequence}")
+            expected = target if _condition_taken(base, _integer(row["pre"].get("eflags"), "TRACE_STATE", "eflags")) else fallthrough
+            _require(next_pc == expected, "TRACE_CONTROL_TARGET", f"conditional target mismatch at sequence {sequence}")
         elif base == "jmp":
-            if target is not None:
-                _require(next_pc == target, "TRACE_CONTROL", f"direct jump mismatch at sequence {sequence}")
+            if target is None:
+                _require(len(operands) == 1, "TRACE_CONTROL_TARGET", "indirect jump operand count")
+                expected = _source_value(row, operands[0].removeprefix("*"), 8)
+                _require(next_pc == expected, "TRACE_CONTROL_TARGET", f"indirect jump mismatch at sequence {sequence}")
+            else:
+                _require(next_pc == target, "TRACE_CONTROL_TARGET", f"direct jump mismatch at sequence {sequence}")
         elif base == "call":
-            if target is not None:
-                _require(next_pc == target, "TRACE_CONTROL", f"direct call mismatch at sequence {sequence}")
+            if target is None:
+                _require(len(operands) == 1, "TRACE_CONTROL_TARGET", "indirect call operand count")
+                expected = _source_value(row, operands[0].removeprefix("*"), 8)
+                _require(next_pc == expected, "TRACE_CONTROL_TARGET", f"indirect call mismatch at sequence {sequence}")
+            else:
+                _require(next_pc == target, "TRACE_CONTROL_TARGET", f"direct call mismatch at sequence {sequence}")
             _require(_reg_value(row["post"], "%rsp")[0] == (_reg_value(row["pre"], "%rsp")[0] - 8) & ((1 << 64) - 1), "TRACE_CONTROL", f"call RSP mismatch at sequence {sequence}")
         elif base == "ret":
+            expected = _source_value(row, "(%rsp)", 8)
+            _require(next_pc == expected, "TRACE_CONTROL_TARGET", f"return target mismatch at sequence {sequence}")
             _require(_reg_value(row["post"], "%rsp")[0] == (_reg_value(row["pre"], "%rsp")[0] + 8) & ((1 << 64) - 1), "TRACE_CONTROL", f"ret RSP mismatch at sequence {sequence}")
         elif base == "push":
             _require(next_pc == fallthrough and _reg_value(row["post"], "%rsp")[0] == (_reg_value(row["pre"], "%rsp")[0] - 8) & ((1 << 64) - 1), "TRACE_CONTROL", f"push mismatch at sequence {sequence}")
@@ -549,7 +944,7 @@ def _validate_control(rows: list[dict[str, Any]], decoded: dict[int, str], load_
         elif base == "leave":
             _require(next_pc == fallthrough and _reg_value(row["post"], "%rsp")[0] == (_reg_value(row["pre"], "%rbp")[0] + 8) & ((1 << 64) - 1), "TRACE_CONTROL", f"leave mismatch at sequence {sequence}")
         else:
-            _require(next_pc == fallthrough, "TRACE_CONTROL", f"sequential flow mismatch at sequence {sequence}")
+            _require(next_pc == fallthrough, "TRACE_CONTROL_TARGET", f"sequential flow mismatch at sequence {sequence}")
         if index + 1 < len(rows):
             _require(next_pc == rows[index + 1]["pc"], "TRACE_FLOW", f"flow gap after sequence {sequence}")
 
@@ -657,7 +1052,7 @@ def _derive_scalar_load(rows: list[dict[str, Any]], decoded: dict[int, str], des
         "instruction_sequence": row["sequence"],
         "assembly": row["assembly"],
         "source_memory_address": _effective_address(row, source_operand),
-        "source_bits": _bits(_reg_value(row["post"], destination)[0], 8),
+        "source_bits": _bits(_source_value(row, source_operand, 8), 8),
         "source_operand": source_operand,
         "destination_register": destination.lstrip("%"),
     }
@@ -776,13 +1171,18 @@ def _validate_boundary_and_abi(
     controlled = capture.get("controlled_stop_receipt")
     _require(isinstance(controlled, dict), "CAPTURE_BOUNDARY", "controlled-stop receipt missing")
     _require(controlled.get("stop_pc") == second_abi.get("entry_pc") and controlled.get("before_second_step_body") is True and controlled.get("second_step_body_instructions_executed") == 0 and controlled.get("inferior_terminated_by_debugger") is True and controlled.get("harness_completed_normally") is False, "CAPTURE_BOUNDARY", "invalid controlled-stop receipt")
-    _require(capture.get("old_capture_continuation_present") is False, "CAPTURE_BOUNDARY", "historical continuation falsely claimed")
+    _require(capture.get("old_capture_continuation_present") is not True, "CAPTURE_BOUNDARY", "historical continuation falsely claimed")
     return first_abi, first_return, second_abi
 
 
 def _validate_source_receipts(root: Path, capture_dir: Path, execution: dict[str, Any]) -> None:
     source_hashes = execution.get("source_sha256_before_execution")
-    _require(isinstance(source_hashes, dict), "SOURCE_INTEGRITY", "execution source hashes missing")
+    _require(source_hashes == SOURCE_RECEIPTS, "SOURCE_SET", "execution source hashes differ from literal source set")
+    _require(execution.get("source_receipt_key_set") == sorted(SOURCE_RECEIPTS), "SOURCE_SET", "source receipt key set mismatch")
+    source_pinset = _load_json(capture_dir / "source_pinset.json")
+    _require(source_pinset.get("files") == SOURCE_RECEIPTS
+             and source_pinset.get("exact_key_set") == sorted(SOURCE_RECEIPTS),
+             "SOURCE_SET", "source pinset differs from literal source set")
     for relative, expected_hash in source_hashes.items():
         _require(isinstance(relative, str) and isinstance(expected_hash, str), "SOURCE_INTEGRITY", "bad execution source receipt")
         path = (root / relative).resolve()
@@ -802,14 +1202,15 @@ def _validate_source_receipts(root: Path, capture_dir: Path, execution: dict[str
     _require(old_bytes.count(b"n_steps=1") == 1 and new_path.read_bytes() == expected_new, "SOURCE_INTEGRITY", "harness is not the one-token sibling")
     wheel_path = root / "audit" / "gate2c1" / "vendor" / "gala-1.12.0-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl"
     wheel_sha = _sha_file(wheel_path)
-    _require(wheel_sha == "cc5f0cf3bc63a966a3c130b93f6c05026271fe7178492a02c6266c243b5fc2f0" and execution.get("frozen_wheel_sha256") == wheel_sha, "SOURCE_INTEGRITY", "frozen wheel identity mismatch")
+    _require(wheel_sha == WHEEL_SHA256 and execution.get("frozen_wheel_sha256") == wheel_sha, "SOURCE_INTEGRITY", "frozen wheel identity mismatch")
     environment = execution.get("environment")
     _require(isinstance(environment, dict) and environment.get("python") == "3.12.3" and environment.get("packages", {}).get("gala") == "1.12.0", "SOURCE_INTEGRITY", "frozen Python/Gala version mismatch")
 
 
-def check_transition(
+def _check_bundle_with_pins(
     capture_dir: Path | str,
     transition_path: Path | str,
+    pins: TrustedCasePins,
     *,
     root: Path | str | None = None,
     objdump: str = "objdump",
@@ -822,6 +1223,20 @@ def check_transition(
     capture_path = capture_directory / "capture.json"
     trace_path = capture_directory / "caller_trace.jsonl"
     execution_path = capture_directory / "execution.json"
+    seal_path = capture_directory / "acquisition_seal.json"
+    _require(_sha_file(transition_file) == pins.transition_sha256, "TRUST_TRANSITION", "transition does not match immutable pin")
+    _require(_sha_file(seal_path) == pins.seal_sha256, "TRUST_SEAL", "acquisition seal does not match immutable pin")
+    seal = _load_json(seal_path)
+    _require(seal.get("schema") == SEAL_SCHEMA and seal.get("antecedent_label") == pins.label,
+             "TRUST_SEAL", "seal schema/label mismatch")
+    _require(seal.get("sealed_files") == pins.sealed_files
+             and seal.get("exact_file_name_set") == sorted(pins.sealed_files)
+             and seal.get("file_count") == len(pins.sealed_files),
+             "TRUST_FILE_SET", "sealed file set differs from immutable pin")
+    actual_names = sorted(path.name for path in capture_directory.iterdir() if path.is_file() and path.name != "acquisition_seal.json")
+    _require(actual_names == sorted(pins.sealed_files), "TRUST_FILE_SET", "raw acquisition file set differs")
+    for name, expected_sha in pins.sealed_files.items():
+        _require(_sha_file(capture_directory / name) == expected_sha, "TRUST_FILE_HASH", f"sealed file mismatch: {name}")
     transition = _load_json(transition_file)
     antecedent = transition.get("antecedent")
     _require(isinstance(antecedent, dict), "TRANSITION_STRUCTURE", "antecedent missing")
@@ -838,30 +1253,100 @@ def check_transition(
     _require(capture.get("schema") == CAPTURE_SCHEMA and capture.get("verdict") == "CONTROLLED_STOP", "CAPTURE_INTEGRITY", "wrong capture schema/verdict")
     _require(capture.get("antecedent_label") == label == antecedent.get("capture_label"), "ANTECEDENT_IDENTITY", "capture/transition label mismatch")
     _require(antecedent.get("requested_label_matches_capture") is True, "ANTECEDENT_IDENTITY", "label-equality receipt missing")
-    _require(execution.get("antecedent_label") == label and execution.get("inferior_pid") == capture.get("inferior_pid"), "ANTECEDENT_IDENTITY", "execution identity mismatch")
+    _require(execution.get("schema") == EXECUTION_SCHEMA, "EXECUTION_AUTH", "wrong execution schema")
+    _require(execution.get("memory_observation_policy_id") == "all-explicit-and-implicit-control-stack-v1"
+             and execution.get("segment_base_policy_id") == "per-row-fs-gs-base-v1"
+             and execution.get("pre_memory_observation_failures") == 0,
+             "EXECUTION_AUTH", "execution read/segment policy mismatch")
+    _require(set(execution.get("frozen_module_sha256_set", [])) == MODULE_SHA256S
+             and execution.get("frozen_module_manifest_sha256") == SOURCE_RECEIPTS["runtime_trace/caller_transition/frozen_modules/manifest.json"]
+             and execution.get("frozen_wheel_sha256") == WHEEL_SHA256,
+             "MODULE_SET", "execution module/wheel pins differ from literals")
+    _require(capture.get("memory_observation_policy_id") == execution.get("memory_observation_policy_id")
+             and capture.get("segment_base_policy_id") == execution.get("segment_base_policy_id")
+             and capture.get("failed_pre_memory_observations") == [],
+             "EXECUTION_AUTH", "capture read/segment policy mismatch")
+    _require(execution.get("process_identity") == pins.process_identity
+             and capture.get("process_identity") == pins.process_identity
+             and transition.get("capture", {}).get("process_identity") == pins.process_identity,
+             "EXECUTION_AUTH", "structured process identity mismatch")
+    _require(execution.get("antecedent_label") == label and execution.get("inferior_pid") == capture.get("inferior_pid") == pins.process_identity["pid"], "ANTECEDENT_IDENTITY", "execution identity mismatch")
     _require(execution.get("harness_completed_normally") is False, "CAPTURE_BOUNDARY", "normal completion falsely claimed")
     _require(capture.get("gdb_version") == "15.1" and capture.get("wheel_sha256") == execution.get("frozen_wheel_sha256"), "SOURCE_INTEGRITY", "frozen GDB/wheel receipt mismatch")
     transition_capture = transition.get("capture")
     _require(isinstance(transition_capture, dict), "CAPTURE_INTEGRITY", "capture receipt missing")
     capture_sha = _sha_bytes(capture_bytes)
     trace_sha = _sha_bytes(trace_bytes)
-    _require(transition_capture.get("capture_sha256") == capture_sha, "CAPTURE_INTEGRITY", "capture hash mismatch")
-    _require(transition_capture.get("trace_sha256") == trace_sha == capture.get("trace_sha256"), "CAPTURE_INTEGRITY", "trace hash mismatch")
+    _require(capture_sha == pins.capture_sha256 and _sha_file(execution_path) == pins.execution_sha256,
+             "EXECUTION_AUTH", "capture/execution immutable hash mismatch")
+    _require(trace_sha == pins.trace_sha256 and capture.get("final_chain") == pins.trace_final_chain,
+             "TRACE_INTEGRITY", "trace immutable hash/final-chain mismatch")
+    authentication = transition.get("authentication")
+    _require(isinstance(authentication, dict), "CAPTURE_INTEGRITY", "authentication receipt missing")
+    _require(authentication.get("capture_sha256") == capture_sha
+             and authentication.get("execution_sha256") == pins.execution_sha256
+             and authentication.get("trace_sha256") == trace_sha == capture.get("trace_sha256")
+             and authentication.get("final_chain") == pins.trace_final_chain
+             and authentication.get("seal_sha256") == pins.seal_sha256
+             and authentication.get("sealed_file_name_set") == sorted(pins.sealed_files),
+             "CAPTURE_INTEGRITY", "transition authentication mismatch")
+    _require(authentication.get("acquisition_directory") == pins.capture_directory
+             and authentication.get("capture_path") == f"{pins.capture_directory}/capture.json"
+             and authentication.get("execution_path") == f"{pins.capture_directory}/execution.json"
+             and authentication.get("trace_path") == f"{pins.capture_directory}/caller_trace.jsonl"
+             and authentication.get("seal_path") == f"{pins.capture_directory}/acquisition_seal.json"
+             and authentication.get("antecedent_pinset") == {"numeric_ir": pins.ir_sha256, "correspondence": pins.correspondence_sha256},
+             "CAPTURE_INTEGRITY", "authenticated path/antecedent identity mismatch")
     _validate_trace_structure(capture, transition_capture, rows)
     thread_count = _validate_threads(capture, rows)
     modules, decoded = _resolve_modules(root_path, capture, rows, objdump)
+    _require({sha: item[2] for sha, item in modules.items()} == MODULE_LOAD_BASES,
+             "MODULE_SET", "module load bases differ from immutable handoff")
+    module_pinset = _load_json(capture_directory / "module_pinset.json")
+    _require(set(module_pinset.get("exact_sha256_set", [])) == MODULE_SHA256S
+             and set(module_pinset.get("modules", {})) == MODULE_SHA256S,
+             "MODULE_SET", "module pinset differs from literal module set")
     load_bases = {sha: metadata[2] for sha, metadata in modules.items()}
     _validate_control(rows, decoded, load_bases)
     writes = _validate_recorded_writes(rows, decoded)
+    memory_summary = _validate_memory_observations(rows, decoded)
+    _validate_register_semantics(rows, decoded)
+    actual_counts = {
+        "rows": len(rows),
+        "pre_memory_observations": memory_summary["count"],
+        "pre_memory_observation_failures": 0,
+        "possible_memory_writes": len(writes),
+        "same_value_writes": sum(write["value_changed"] is False for write in writes),
+        "indirect_memory_controls": sum(1 for row in rows if _parse_assembly(decoded[row["sequence"]])[0] in {"jmp", "call"} and _parse_assembly(decoded[row["sequence"]])[1][0].startswith("*")),
+        "returns": sum(1 for row in rows if _parse_assembly(decoded[row["sequence"]])[0] == "ret"),
+        "pops": sum(1 for row in rows if _parse_assembly(decoded[row["sequence"]])[0] == "pop"),
+        "leaves": sum(1 for row in rows if _parse_assembly(decoded[row["sequence"]])[0] == "leave"),
+    }
+    _require(capture.get("counts") == actual_counts, "EVIDENCE_COUNTS", "capture counts are not independently reproduced")
+    readproof = transition.get("readproof")
+    _require(isinstance(readproof, dict) and all(readproof.get(key) == value for key, value in actual_counts.items())
+             and readproof.get("required_memory_observations_complete") is True
+             and readproof.get("segment_bases_complete") is True,
+             "EVIDENCE_COUNTS", "transition readproof counts/policies mismatch")
+    final_observations = []
+    for sequence in (718, 721, 722, 723, 724, 725, 726, 727):
+        _require(sequence < len(rows), "ABI_PROVENANCE", "final ABI sequence absent")
+        for observation in rows[sequence]["pre_memory_observations"]:
+            final_observations.append({"sequence": sequence, **observation})
+    _require(readproof.get("final_abi_source_observations") == final_observations,
+             "ABI_PROVENANCE", "final ABI observation receipt mismatch")
     first_abi, first_return, second_abi = _validate_boundary_and_abi(capture, rows, decoded, writes)
     _validate_source_receipts(root_path, capture_directory, execution)
 
-    expected_ir_relative, expected_corr_relative = ANTECEDENTS[label]
+    expected_ir_relative, expected_corr_relative = pins.ir_path, pins.correspondence_path
     ir_path = _safe_source(root_path, antecedent.get("numeric_ir_path"), expected_ir_relative)
     correspondence_path = _safe_source(root_path, antecedent.get("correspondence_path"), expected_corr_relative)
     ir_sha = _sha_file(ir_path)
     correspondence_sha = _sha_file(correspondence_path)
-    _require(antecedent.get("numeric_ir_sha256") == ir_sha and antecedent.get("correspondence_sha256") == correspondence_sha, "SOURCE_INTEGRITY", "antecedent hash mismatch")
+    _require(ir_sha == pins.ir_sha256 and correspondence_sha == pins.correspondence_sha256
+             and antecedent.get("numeric_ir_sha256") == ir_sha
+             and antecedent.get("correspondence_sha256") == correspondence_sha,
+             "ANTECEDENT_PIN", "antecedent hash mismatch")
     ir = _load_json(ir_path)
     correspondence = _load_json(correspondence_path)
     _require(ir.get("schema") == IR_SCHEMA and correspondence.get("schema") == CORRESPONDENCE_SCHEMA, "SOURCE_INTEGRITY", "IR/correspondence schema mismatch")
@@ -1018,6 +1503,10 @@ def check_transition(
         "decoded_instruction_count": len(decoded),
         "possible_write_count": len(writes),
         "same_value_write_count": same_value_count,
+        "pre_memory_observation_count": memory_summary["count"],
+        "memory_shadow_rooted_byte_count": memory_summary["rooted_bytes"],
+        "indirect_control_count": sum(1 for row in rows if _parse_assembly(decoded[row["sequence"]])[0] in {"jmp", "call"} and _parse_assembly(decoded[row["sequence"]])[1][0].startswith("*")),
+        "return_count": sum(1 for row in rows if _parse_assembly(decoded[row["sequence"]])[0] == "ret"),
         "carry_binding_count": len(derived_carry),
         "terminal_bindings": [
             {
@@ -1049,6 +1538,28 @@ def check_transition(
             "no trajectory, accumulated-error, physical-accuracy, or external-audit closure claim",
         ],
     }
+
+
+def check_transition(
+    capture_dir: Path | str,
+    transition_path: Path | str,
+    *,
+    root: Path | str | None = None,
+    objdump: str = "objdump",
+) -> dict[str, Any]:
+    """Public rigid path: only the two literal-pinned v2 acquisitions are accepted."""
+
+    root_path = Path(root).resolve() if root is not None else Path(__file__).resolve().parents[2]
+    capture = Path(capture_dir).resolve()
+    transition = Path(transition_path).resolve()
+    for pins in _PRODUCTION_CASE_PINS.values():
+        if capture == (root_path / pins.capture_directory).resolve() and transition == (root_path / pins.transition_path).resolve():
+            return _check_bundle_with_pins(capture, transition, pins, root=root_path, objdump=objdump)
+    if (capture / "capture.json").is_file():
+        candidate = _load_json(capture / "capture.json")
+        if candidate.get("schema") == "gala-caller-transition-capture-v1":
+            _refuse("SUPERSEDED_EVIDENCE", "v1 caller acquisitions are superseded")
+    _refuse("TRUST_PATH", "capture/transition path is not a literal production case")
 
 
 def check_to_directory(

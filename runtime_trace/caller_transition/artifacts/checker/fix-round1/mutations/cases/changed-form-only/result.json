@@ -1,0 +1,1 @@
+{"code":"FORM_BINDING","completed_stages":["test acquisition repin","literal identity pins retained"],"input_receipt":{"transition_sha256":"8cda22ca173dd8793bcb61f781ff00f1d5c0e1b75912cbb13a81eddd9230a6ee"},"name":"changed-form-only","reason":"Form mismatch for full_v[0]","trust_mode":"TEST_ONLY_IN_MEMORY_ACQUISITION_PINS","verdict":"REFUSED"}

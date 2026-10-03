@@ -1,0 +1,1 @@
+{"all_exact":true,"checks":[{"case":"audited-attempt-05-readproof-01","exact":true},{"case":"fresh-closure-fresh-01-readproof-01","exact":true},{"exact":true,"name":"source_receipts"},{"exact":true,"name":"module_sha256s"},{"exact":true,"name":"wheel"}],"handoff_sha256":"39687ceef0d767869a3b958067ac2921e84e4c66f30eab2c484f345e63f1ad81"}

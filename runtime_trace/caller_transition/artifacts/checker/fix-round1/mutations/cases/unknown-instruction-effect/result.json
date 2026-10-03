@@ -1,0 +1,1 @@
+{"code":"UNKNOWN_INSTRUCTION_EFFECT","completed_stages":[],"name":"unknown-instruction-effect","reason":"unknown memory-destination effect at sequence 9: stosq  %rax,(%rdi)","trust_mode":"UNIT_CLOSED_DECODER","verdict":"REFUSED"}

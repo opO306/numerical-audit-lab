@@ -1,0 +1,1 @@
+{"code":"CARRY_SET","completed_stages":["test acquisition repin","literal identity pins retained"],"input_receipt":{"transition_sha256":"6bd63cc4e52953f3d64c9d9d15321d2e59074ac76d1bf50b80886098e25a30d4"},"name":"component-swap","reason":"carry order/identity mismatch at lane 0","trust_mode":"TEST_ONLY_IN_MEMORY_ACQUISITION_PINS","verdict":"REFUSED"}

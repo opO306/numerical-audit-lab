@@ -1,0 +1,1 @@
+{"code":"ANTECEDENT_PIN","completed_stages":["test acquisition repin","literal identity pins retained"],"input_receipt":{"transition_sha256":"6e40b8f17b94af55342fd3bea2deb2288365aab59c6db48db8e717266362bf97"},"name":"antecedent-coherent-local-repin","reason":"antecedent hash mismatch","trust_mode":"TEST_ONLY_IN_MEMORY_ACQUISITION_PINS","verdict":"REFUSED"}

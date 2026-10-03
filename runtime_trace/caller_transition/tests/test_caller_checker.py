@@ -17,15 +17,15 @@ ROOT = Path(__file__).resolve().parents[3]
 CALLER = ROOT / "runtime_trace" / "caller_transition"
 
 CASES = (
-    ("audited-attempt-05", "attempt-05"),
-    ("fresh-closure-fresh-01", "closure-fresh-01"),
+    ("audited-attempt-05-readproof-01", "attempt-05"),
+    ("fresh-closure-fresh-01-readproof-01", "closure-fresh-01"),
 )
 
 
 def _paths(case: str) -> tuple[Path, Path]:
     return (
         CALLER / "artifacts" / case,
-        CALLER / "artifacts" / "producer-fix-round1" / case / "transition.json",
+        CALLER / "artifacts" / "producer-fix-round2" / case / "transition.json",
     )
 
 
@@ -40,8 +40,11 @@ def test_checker_accepts_controlled_stop_and_reports_independently_derived_count
     assert report["verdict"] == "CHECKER_PASS"
     assert report["antecedent_label"] == label
     assert report["record_count"] == 728
-    assert report["possible_write_count"] == 108
-    assert report["same_value_write_count"] == 20
+    assert report["possible_write_count"] == 111
+    assert report["same_value_write_count"] == 21
+    assert report["pre_memory_observation_count"] == 219
+    assert report["indirect_control_count"] == 16
+    assert report["return_count"] == 23
     assert report["carry_binding_count"] == 6
     assert report["gradient_zero_coverage_bytes"] == 16
     assert report["second_step_body_instructions_executed"] == 0
@@ -61,7 +64,7 @@ def test_two_accepted_cases_are_distinct_process_acquisitions() -> None:
 
 
 def test_unknown_antecedent_is_refused_before_semantic_binding(tmp_path: Path) -> None:
-    capture_dir, transition_path = _paths("audited-attempt-05")
+    capture_dir, transition_path = _paths("audited-attempt-05-readproof-01")
     transition = json.loads(transition_path.read_text(encoding="utf-8"))
     transition["antecedent"]["label"] = "unknown-case"
     transition["antecedent"]["capture_label"] = "unknown-case"
@@ -72,7 +75,7 @@ def test_unknown_antecedent_is_refused_before_semantic_binding(tmp_path: Path) -
     with pytest.raises(CheckerRefused) as caught:
         check_transition(capture_dir, mutated, root=ROOT)
 
-    assert caught.value.code == "UNSUPPORTED_ANTECEDENT"
+    assert caught.value.code == "TRUST_PATH"
 
 
 def test_unknown_memory_effect_refuses_closed() -> None:
@@ -88,3 +91,13 @@ def test_unknown_memory_effect_refuses_closed() -> None:
         derive_possible_write_effects(row, "stosq  %rax,(%rdi)")
 
     assert caught.value.code == "UNKNOWN_INSTRUCTION_EFFECT"
+
+
+def test_old_v1_case_is_refused_as_superseded() -> None:
+    capture = CALLER / "artifacts" / "audited-attempt-05"
+    transition = CALLER / "artifacts" / "producer-fix-round1" / "audited-attempt-05" / "transition.json"
+
+    with pytest.raises(CheckerRefused) as caught:
+        check_transition(capture, transition, root=ROOT)
+
+    assert caught.value.code == "SUPERSEDED_EVIDENCE"

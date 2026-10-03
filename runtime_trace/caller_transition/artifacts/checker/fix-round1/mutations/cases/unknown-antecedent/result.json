@@ -1,0 +1,1 @@
+{"code":"UNSUPPORTED_ANTECEDENT","completed_stages":["test acquisition repin","literal identity pins retained"],"input_receipt":{"transition_sha256":"ce8dd390fa01c39cfdb393777daf36b790aa999feb107da461875f79a3b9acf0"},"name":"unknown-antecedent","reason":"unsupported antecedent: unknown-case","trust_mode":"TEST_ONLY_IN_MEMORY_ACQUISITION_PINS","verdict":"REFUSED"}

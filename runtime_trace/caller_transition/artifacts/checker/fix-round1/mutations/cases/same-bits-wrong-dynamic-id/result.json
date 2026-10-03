@@ -1,0 +1,1 @@
+{"code":"CARRY_BINDING","completed_stages":["test acquisition repin","literal identity pins retained"],"input_receipt":{"transition_sha256":"f51f0b79e5c55109e4376606c683af66c43b5563539f0442837f97197018726c"},"name":"same-bits-wrong-dynamic-id","reason":"endpoint_memory_value_id mismatch for q[0]","trust_mode":"TEST_ONLY_IN_MEMORY_ACQUISITION_PINS","verdict":"REFUSED"}

@@ -1,0 +1,1 @@
+{"code":"DT_PROVENANCE","completed_stages":["test acquisition repin","literal identity pins retained"],"input_receipt":{"transition_sha256":"30e3a8aa353be5ed805d7d536a3bf1edef3a8dae4c96d06770f00ebc4950ccc0"},"name":"wrong-dt-provenance","reason":"dt transition binding mismatch","trust_mode":"TEST_ONLY_IN_MEMORY_ACQUISITION_PINS","verdict":"REFUSED"}

@@ -4,22 +4,30 @@ import copy
 import hashlib
 import json
 import shutil
+from dataclasses import replace
 from pathlib import Path
 from typing import Callable
 
 import pytest
 
-from runtime_trace.caller_transition.checker import CheckerRefused, check_transition
+from runtime_trace.caller_transition.checker import (
+    CheckerRefused,
+    _PRODUCTION_CASE_PINS,
+    _check_bundle_with_pins,
+    check_transition,
+)
+from runtime_trace.caller_transition.tests.test_caller_fix1_mutations import _rebuild
 
 
 ROOT = Path(__file__).resolve().parents[3]
 CALLER = ROOT / "runtime_trace" / "caller_transition"
-BASE_CAPTURE = CALLER / "artifacts" / "audited-attempt-05"
+CASE = "audited-attempt-05-readproof-01"
+BASE_CAPTURE = CALLER / "artifacts" / CASE
 BASE_TRANSITION = (
     CALLER
     / "artifacts"
-    / "producer-fix-round1"
-    / "audited-attempt-05"
+    / "producer-fix-round2"
+    / CASE
     / "transition.json"
 )
 
@@ -30,59 +38,29 @@ def _canonical(value: object) -> bytes:
 
 def _transition_case(
     tmp_path: Path, mutate: Callable[[dict], None]
-) -> tuple[Path, Path]:
+) -> tuple[Path, Path, object]:
     transition = json.loads(BASE_TRANSITION.read_text(encoding="utf-8"))
     mutate(transition)
     path = tmp_path / "transition.json"
     path.write_bytes(_canonical(transition))
-    return BASE_CAPTURE, path
+    pins = replace(_PRODUCTION_CASE_PINS[CASE], transition_sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+    return BASE_CAPTURE, path, pins
 
 
 def _raw_case(
     tmp_path: Path, mutate: Callable[[list[dict]], None]
-) -> tuple[Path, Path]:
-    capture_dir = tmp_path / "capture"
-    shutil.copytree(BASE_CAPTURE, capture_dir)
-    rows = [
-        json.loads(line)
-        for line in (capture_dir / "caller_trace.jsonl")
-        .read_text(encoding="utf-8")
-        .splitlines()
-    ]
-    mutate(rows)
-
-    previous = rows[0]["previous_chain"]
-    for row in rows:
-        row["previous_chain"] = previous
-        unsigned = {key: value for key, value in row.items() if key != "record_chain"}
-        row["record_chain"] = hashlib.sha256(_canonical(unsigned)).hexdigest()
-        previous = row["record_chain"]
-    trace_bytes = b"".join(_canonical(row) + b"\n" for row in rows)
-    (capture_dir / "caller_trace.jsonl").write_bytes(trace_bytes)
-
-    capture_path = capture_dir / "capture.json"
-    capture = json.loads(capture_path.read_text(encoding="utf-8"))
-    capture["record_count"] = len(rows)
-    capture["trace_sha256"] = hashlib.sha256(trace_bytes).hexdigest()
-    capture["final_chain"] = previous
-    capture_path.write_bytes(_canonical(capture))
-
-    transition = json.loads(BASE_TRANSITION.read_text(encoding="utf-8"))
-    transition["capture"]["record_count"] = len(rows)
-    transition["capture"]["trace_sha256"] = capture["trace_sha256"]
-    transition["capture"]["capture_sha256"] = hashlib.sha256(
-        capture_path.read_bytes()
-    ).hexdigest()
-    transition_path = tmp_path / "transition.json"
-    transition_path.write_bytes(_canonical(transition))
-    return capture_dir, transition_path
+) -> tuple[Path, Path, object]:
+    return _rebuild(tmp_path, lambda bundle: mutate(bundle["rows"]))
 
 
 def _assert_refused(
-    paths: tuple[Path, Path], expected_codes: set[str]
+    paths: tuple, expected_codes: set[str]
 ) -> CheckerRefused:
     with pytest.raises(CheckerRefused) as caught:
-        check_transition(*paths, root=ROOT)
+        if len(paths) == 3:
+            _check_bundle_with_pins(*paths, root=ROOT)
+        else:
+            check_transition(*paths, root=ROOT)
     assert caught.value.code in expected_codes
     return caught.value
 
@@ -140,13 +118,13 @@ def test_other_acquisition_boundary_is_refused() -> None:
     fresh_transition = (
         CALLER
         / "artifacts"
-        / "producer-fix-round1"
-        / "fresh-closure-fresh-01"
+        / "producer-fix-round2"
+        / "fresh-closure-fresh-01-readproof-01"
         / "transition.json"
     )
     _assert_refused(
         (BASE_CAPTURE, fresh_transition),
-        {"ANTECEDENT_IDENTITY", "CAPTURE_INTEGRITY"},
+        {"TRUST_PATH"},
     )
 
 

@@ -1,0 +1,1 @@
+{"code":"TIME_PROVENANCE","completed_stages":["test acquisition repin","literal identity pins retained"],"input_receipt":{"transition_sha256":"6e9bff9826d8a1429e1956127903c8f8f2de50e365193d17bfff3adb88f96347"},"name":"wrong-time-provenance","reason":"time transition binding mismatch","trust_mode":"TEST_ONLY_IN_MEMORY_ACQUISITION_PINS","verdict":"REFUSED"}

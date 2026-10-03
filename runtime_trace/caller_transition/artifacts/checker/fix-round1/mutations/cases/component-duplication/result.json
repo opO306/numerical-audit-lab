@@ -1,0 +1,1 @@
+{"code":"CARRY_SET","completed_stages":["test acquisition repin","literal identity pins retained"],"input_receipt":{"transition_sha256":"b0f8ae6edbb812040fa69860f91e033958f81b49a0fc8955ce6db789dcc2e1f8"},"name":"component-duplication","reason":"carry set must contain six lanes","trust_mode":"TEST_ONLY_IN_MEMORY_ACQUISITION_PINS","verdict":"REFUSED"}
