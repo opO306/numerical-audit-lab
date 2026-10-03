@@ -15,7 +15,8 @@ SOURCE_MAP_PATH = "runtime_trace/regular_2step/artifacts/validation/source_test_
 REVIEW_DISPOSITIONS = {
     "task-3-review.md": "HISTORICAL_NEEDS_FIXES",
     "task-3-fix1-review.md": "APPROVED",
-    "whole-branch-review.md": "APPROVED",
+    "whole-branch-review.md": "HISTORICAL_NEEDS_FIXES",
+    "whole-branch-fix1-review.md": "APPROVED",
 }
 
 
@@ -55,7 +56,8 @@ def _fixture(tmp_path):
     reviews = {
         "task-3-review.md": b"Assessment: Needs fixes\n",
         "task-3-fix1-review.md": b"Assessment: APPROVED\n",
-        "whole-branch-review.md": b"Assessment: APPROVED\n",
+        "whole-branch-review.md": b"Assessment: Needs fixes\n",
+        "whole-branch-fix1-review.md": b"Assessment: APPROVED\n",
     }
     for name, raw in reviews.items():
         (workflow / name).write_bytes(raw)
@@ -127,4 +129,26 @@ def test_old_needs_fixes_review_cannot_substitute_for_approvals(tmp_path):
     receipt["reviews"] = [receipt["reviews"][0]]
     receipt_path.write_text(json.dumps(receipt) + "\n")
     with pytest.raises(SealRefused, match="review inventory"):
+        validate_reviewed_tested_seal(committed, workflow, head)
+
+
+def test_whole_branch_fix_report_and_review_are_required():
+    from runtime_trace.regular_2step.delivery import REQUIRED_WORKFLOW
+    assert {'whole-branch-fix1-report.md', 'whole-branch-fix1-review.md'} <= REQUIRED_WORKFLOW
+
+
+def test_missing_whole_branch_fix_approval_is_refused(tmp_path):
+    committed, workflow, head = _fixture(tmp_path)
+    (workflow / 'whole-branch-fix1-review.md').unlink()
+    with pytest.raises(SealRefused, match='review file'):
+        validate_reviewed_tested_seal(committed, workflow, head)
+
+
+def test_historical_whole_branch_cannot_be_relabelled_approved(tmp_path):
+    committed, workflow, head = _fixture(tmp_path)
+    receipt_path = workflow / REVIEWED_TESTED_RECEIPT
+    receipt = json.loads(receipt_path.read_text())
+    next(r for r in receipt['reviews'] if r['path'] == 'whole-branch-review.md')['disposition'] = 'APPROVED'
+    receipt_path.write_text(json.dumps(receipt) + '\n')
+    with pytest.raises(SealRefused, match='disposition'):
         validate_reviewed_tested_seal(committed, workflow, head)

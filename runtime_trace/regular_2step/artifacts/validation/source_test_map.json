@@ -2,10 +2,10 @@
   "documentation": [
     {
       "all_functions": null,
-      "bytes": 9622,
+      "bytes": 11128,
       "path": "runtime_trace/regular_2step/README.md",
-      "physical_lines": 172,
-      "sha256": "de5c93eca75302bc8cbe73c38f42e01bc5c630ecaf053c07bc5a69da23bca84e",
+      "physical_lines": 193,
+      "sha256": "7b609c967c92d84bbe7988918d2d9952cbc1395958514b5f8168e838917c6124",
       "top_level_functions": null
     },
     {
@@ -37,19 +37,19 @@
     },
     {
       "all_functions": 15,
-      "bytes": 22400,
+      "bytes": 23447,
       "path": "runtime_trace/regular_2step/checker.py",
-      "physical_lines": 370,
-      "sha256": "1c6c4ab6920a0dcf3ea21b9e90832e00262480d28e4d9c269e67642ad75c05ee",
+      "physical_lines": 385,
+      "sha256": "7ba6c687855bc3c3bb0673b0f4f6956e3cd297679741d3547dd7852e3fdf4bf5",
       "top_level_functions": 14
     },
     {
-      "all_functions": 19,
-      "bytes": 30786,
+      "all_functions": 20,
+      "bytes": 31286,
       "path": "runtime_trace/regular_2step/delivery.py",
-      "physical_lines": 605,
-      "sha256": "c5f4dee4770d15aea45b52f00473ca4d27370cebbcb04c096e3d018633f0f662",
-      "top_level_functions": 19
+      "physical_lines": 619,
+      "sha256": "349c5b66d85d44593ad78c9fe7d945328ddc2f681b51b28f1d21d804678939c9",
+      "top_level_functions": 20
     },
     {
       "all_functions": 4,
@@ -102,10 +102,10 @@
   ],
   "production_totals": {
     "files": 10,
-    "physical_lines": 2943,
+    "physical_lines": 2972,
     "task1_lines": 1537,
-    "task2_lines": 801,
-    "task3_delivery_lines": 605
+    "task2_lines": 816,
+    "task3_delivery_lines": 619
   },
   "schema": "regular-2step-final-source-test-map-v1",
   "semantic_checker_function_counts": {
@@ -166,6 +166,11 @@
   "task2_named_reuse": {
     "module_count": 8,
     "named_definition_lines": 1621,
+    "origin_classification": {
+      "boundary": "1621 includes 129 lines of new Task1 structure.compare; not all pre-existing externally audited source",
+      "intra_stage_task1_structure_compare_lines": 129,
+      "pre_existing_named_definition_lines": 1492
+    },
     "received_audit_definition_prefix_lines": 238,
     "reuse": [
       {
@@ -283,8 +288,8 @@
     ]
   },
   "test_totals": {
-    "files": 4,
-    "physical_lines": 866
+    "files": 5,
+    "physical_lines": 1033
   },
   "tests": [
     {
@@ -296,12 +301,20 @@
       "top_level_functions": 31
     },
     {
-      "all_functions": 10,
-      "bytes": 5011,
+      "all_functions": 13,
+      "bytes": 6186,
       "path": "runtime_trace/regular_2step/tests/test_delivery_guards.py",
-      "physical_lines": 130,
-      "sha256": "491408eaf5c895b895c340d1ba98bdc9cbe1516b22eb0ad7ff16be0d577b76cb",
-      "top_level_functions": 10
+      "physical_lines": 154,
+      "sha256": "108f7a313c4c2d7f51a4667dca4ae5487b557d16e643dcd83bc7448d1b2ad91d",
+      "top_level_functions": 13
+    },
+    {
+      "all_functions": 5,
+      "bytes": 7201,
+      "path": "runtime_trace/regular_2step/tests/test_portability.py",
+      "physical_lines": 143,
+      "sha256": "0cf74fe4ce5aa6350ee0cebc1c88540d34048a01253bf5f2888870609bfd3bea",
+      "top_level_functions": 5
     },
     {
       "all_functions": 13,

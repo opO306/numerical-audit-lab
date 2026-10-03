@@ -4,7 +4,7 @@ import copy
 import hashlib
 import json
 from collections import Counter
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 from runtime_trace import correspondence as raw_checker
 from runtime_trace.numeric_ir import checker as graph_checker
@@ -147,6 +147,21 @@ def context(capture_dir, root, test_pins=None):
     old = caller_checker._PRODUCTION_CASE_PINS[pins['caller']]
     require(capture['antecedent_binding']['antecedent_capture_path'] == old.capture_directory + '/capture.json', 'selected caller lineage (stale or mixed evidence)')
     structural = structure.compare(capture_dir, root)
+    if capture['case'] == 'fresh':
+        # Ruling 5: this one locator records acquisition provenance, not the
+        # current extraction root. compare() has validated the sealed reference
+        # and all known/fresh identity/hash/process joins before this conversion.
+        relative_text = capture['distinct_from']['capture_path']
+        relative = PurePosixPath(relative_text)
+        require(not relative.is_absolute() and '..' not in relative.parts and
+                str(relative) == relative_text, 'noncanonical known provenance reference')
+        require(structural['distinct_from_known_path'] == str((root / relative_text).resolve()),
+                'resolved known provenance reference mismatch')
+        cwd_text = load(capture_dir / 'execution.json')['cwd']
+        cwd = PurePosixPath(cwd_text)
+        require(cwd.is_absolute() and '..' not in cwd.parts and str(cwd) == cwd_text,
+                'noncanonical acquisition provenance cwd')
+        structural['distinct_from_known_path'] = str(cwd / relative)
     rows = [json.loads(line) for line in (capture_dir / 'trace.jsonl').read_bytes().splitlines()]
     caller_report = caller_checker.check_transition(root / old.capture_directory, root / old.transition_path, root=root)
     transition = load(root / old.transition_path)

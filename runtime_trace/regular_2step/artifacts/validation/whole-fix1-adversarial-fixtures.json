@@ -1,0 +1,86 @@
+{
+  "fixtures": [
+    {
+      "directory": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/whole-fix1-attempt-02-covering/pytest-tmp/test_repaired_lower_component_0",
+      "files": {
+        "derived/chain.json": {
+          "bytes": 15813,
+          "sha256": "61d287178f35e665fc90c32682e272d25b89958d94e4d2fcf916b6c014986d64"
+        },
+        "derived/checker_report.json": {
+          "bytes": 453,
+          "sha256": "7a11dbf214db3ca90dcdd4a44dea008d5b5bb88bdb676bab071ad5356bff64f4"
+        },
+        "derived/components.json": {
+          "bytes": 11350,
+          "sha256": "633353f737cf453f568488f185b225596249f524381e9bcca86ab58f257c236a"
+        },
+        "derived/endpoint.json": {
+          "bytes": 3843,
+          "sha256": "980042c2f3ea603d1af8557c201c8a3f646512344a23283c6f96539ee223e2e7"
+        },
+        "derived/numeric_ir.json": {
+          "bytes": 102303,
+          "sha256": "92d4ef8681de35f57bd0b8860c6fb037e2bff8881d11580a417065de30bc4be2"
+        },
+        "derived/v2_correspondence.json": {
+          "bytes": 95584,
+          "sha256": "ebd927beecc124f1a244bd381b7c40db13c1bc77e0fff01a321764be7773d48a"
+        },
+        "result.json": {
+          "bytes": 160,
+          "sha256": "de497fd5283fd91b126cb2ef298a5662b31b219f4ca0dba309e8b92e2d95bf76"
+        }
+      },
+      "result": {
+        "reason": "lower component semantic receipt mismatch",
+        "schema": "regular-2step-checker-report-v1",
+        "stage": "SEMANTIC",
+        "test_trust_mode": false,
+        "verdict": "REFUSED"
+      }
+    },
+    {
+      "directory": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/whole-fix1-attempt-02-covering/pytest-tmp/test_repaired_lower_component_1",
+      "files": {
+        "derived/chain.json": {
+          "bytes": 15813,
+          "sha256": "49bbd767fc141b03abe6672c6f1f76d99ba25f9dedaa2af8ea2e90d2e56ed585"
+        },
+        "derived/checker_report.json": {
+          "bytes": 453,
+          "sha256": "7a11dbf214db3ca90dcdd4a44dea008d5b5bb88bdb676bab071ad5356bff64f4"
+        },
+        "derived/components.json": {
+          "bytes": 11376,
+          "sha256": "ce140f304f7aeea080b83ebf5598bc84a14f59734bceb49134ebcbc5c6094953"
+        },
+        "derived/endpoint.json": {
+          "bytes": 3843,
+          "sha256": "980042c2f3ea603d1af8557c201c8a3f646512344a23283c6f96539ee223e2e7"
+        },
+        "derived/numeric_ir.json": {
+          "bytes": 102303,
+          "sha256": "92d4ef8681de35f57bd0b8860c6fb037e2bff8881d11580a417065de30bc4be2"
+        },
+        "derived/v2_correspondence.json": {
+          "bytes": 95584,
+          "sha256": "ebd927beecc124f1a244bd381b7c40db13c1bc77e0fff01a321764be7773d48a"
+        },
+        "result.json": {
+          "bytes": 160,
+          "sha256": "de497fd5283fd91b126cb2ef298a5662b31b219f4ca0dba309e8b92e2d95bf76"
+        }
+      },
+      "result": {
+        "reason": "lower component semantic receipt mismatch",
+        "schema": "regular-2step-checker-report-v1",
+        "stage": "SEMANTIC",
+        "test_trust_mode": false,
+        "verdict": "REFUSED"
+      }
+    }
+  ],
+  "inputs_remain_in_exclusive_attempt": true,
+  "schema": "regular-2step-whole-fix1-fixtures-v1"
+}

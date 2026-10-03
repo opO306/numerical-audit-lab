@@ -23,6 +23,8 @@ import tempfile
 from typing import Iterable
 import zipfile
 
+from .structure import _frozen_modules
+
 
 ROOT = Path(__file__).resolve().parents[2]
 BASELINE_HEAD = "43f1e9b21a014520facb5a545846d648eb67b288"
@@ -66,7 +68,8 @@ REVIEWED_TESTED_RECEIPT = "final-reviewed-tested-head.json"
 REQUIRED_REVIEW_DISPOSITIONS = {
     "task-3-review.md": "HISTORICAL_NEEDS_FIXES",
     "task-3-fix1-review.md": "APPROVED",
-    "whole-branch-review.md": "APPROVED",
+    "whole-branch-review.md": "HISTORICAL_NEEDS_FIXES",
+    "whole-branch-fix1-review.md": "APPROVED",
 }
 REQUIRED_WORKFLOW = {
     "task-1-brief.md", "task-1-report.md", "task-1-review.md",
@@ -76,6 +79,7 @@ REQUIRED_WORKFLOW = {
     "task-2-fix1-report.md", "task-2-fix1-review.md",
     "task-3-brief.md", "task-3-context.md", "task-3-report.md", "task-3-review.md",
     "task-3-fix1-report.md", "task-3-fix1-review.md", "whole-branch-review.md",
+    "whole-branch-fix1-report.md", "whole-branch-fix1-review.md",
     REVIEWED_TESTED_RECEIPT, "progress.md",
 }
 AUDIT_HOOK = r'''import json, os, sys
@@ -122,6 +126,19 @@ def sha_file(path: Path) -> str:
 
 def read_json(path: Path):
     return json.loads(path.read_bytes())
+
+
+def relocated_module_paths(capture: dict, root: Path) -> tuple[list[str], list[str]]:
+    """Use actual capture provenance and the unchanged verified manifest union."""
+    frozen = _frozen_modules(Path(root).resolve())
+    denied, required = set(), set()
+    for module in capture['modules'].values():
+        digest = module['sha256']
+        if digest not in frozen:
+            raise SealRefused(f'unregistered frozen module: {digest}')
+        denied.add(module['path'])
+        required.add(str(frozen[digest][0]))
+    return sorted(denied), sorted(required)
 
 
 def write_json(path: Path, value) -> None:
@@ -467,10 +484,7 @@ def build(out: Path, history: Path) -> dict:
             capture_dir = relocated / f"runtime_trace/regular_2step/artifacts/{case}-03"
             derived_dir = relocated / f"runtime_trace/regular_2step/artifacts/derived/{case}"
             capture_doc = read_json(capture_dir / "capture.json")
-            denied_module_paths = sorted({module["captured_path"]
-                                          for module in capture_doc["modules"].values()})
-            resolver_paths = sorted({str((relocated / module["resolver_path"]).resolve())
-                                     for module in capture_doc["modules"].values()})
+            denied_module_paths, resolver_paths = relocated_module_paths(capture_doc, relocated)
             audit_log = stage / f"{case}-path-audit.jsonl"
             env = dict(os.environ)
             env.update({

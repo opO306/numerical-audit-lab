@@ -1,5 +1,5 @@
 {
-  "all_tasks_actual_pytest_seconds": 1932.46,
+  "all_tasks_actual_pytest_seconds": 2206.37,
   "before_task3_actual_pytest_seconds": 973.94,
   "environment": {
     "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
@@ -25,8 +25,16 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     "source_test_map.json": {
-      "bytes": 9436,
-      "sha256": "b2032f5b5a6504f2335bedb0cdb238f7181bce12c623d8fe4ed453f9a8e0218d"
+      "bytes": 9981,
+      "sha256": "d925d2363553227d4d203daa850936700d95d079e1e0d1ffe0fc6afa5a379468"
+    },
+    "whole-fix1-mutation-replay.json": {
+      "bytes": 8469,
+      "sha256": "cc8b6980172760de4bfaf6046d6ebcba49e09817eb7fa9b2f009c82b6a706ac5"
+    },
+    "whole-fix1-public-fresh.json": {
+      "bytes": 4442,
+      "sha256": "2cf8e034ca85a69b764d9748f19e373434cb771abffa1b4b3083f10a9e8064fd"
     }
   },
   "final": {
@@ -429,5 +437,29 @@
   ],
   "schema": "regular-2step-task3-validation-v1",
   "task3_all_actual_pytest_seconds": 958.52,
-  "verdict": "PASS"
+  "verdict": "PASS",
+  "whole_branch_fix1": {
+    "covering_tests": 37,
+    "current_combined_test_inventory": 661,
+    "current_run": {
+      "delivery_guards": 10,
+      "portability": 8,
+      "task2_chain_mutations": 19
+    },
+    "errors": 0,
+    "exit_code": 0,
+    "failures": 0,
+    "first_run": "GREEN; no RED execution claimed",
+    "mutation_replay": "15 SEMANTIC + HASH/TRUST; all17 result bytes unchanged",
+    "new_distinct_tests": 11,
+    "public_fresh": "CHECKER_PASS / PUBLIC TRUST / unchanged committed inputs",
+    "pytest_seconds": 273.91,
+    "retained_previous_evidence": {
+      "caller": 101,
+      "regular": 479,
+      "task1": 44
+    },
+    "skips": 0,
+    "source_map_entries": 17
+  }
 }

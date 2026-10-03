@@ -3,21 +3,23 @@
   "timing": {
     "request_utc": "2026-10-03T08:10:08.864Z",
     "measured_implementation_origin_utc": "2026-10-03T08:13:18Z",
-    "report_seal_utc": "2026-10-03T12:23:09.0418217Z",
-    "measured_elapsed_seconds": 14991.041822,
-    "request_to_report_seconds": 15180.177822,
-    "definition": "elapsed workflow wall time through the pre-commit report seal; includes execution, review and handoff waits and is not CPU or active coding time"
+    "report_seal_utc": "2026-10-03T13:34:29.590380+00:00",
+    "measured_elapsed_seconds": 19271.59038,
+    "request_to_report_seconds": 19460.72638,
+    "definition": "as-of-report workflow wall time through whole-branch fix report seal; includes execution/review/handoff waits, not CPU or active coding time; root final receipt will separately measure through verified push/clean state",
+    "first_task3_report_seal_utc": "2026-10-03T12:23:09.0418217Z",
+    "first_task3_measured_elapsed_seconds": 14991.041822
   },
   "new_code": {
     "loc_definition": "physical splitlines including blank/comment lines",
     "production_python_files": 10,
-    "production_python_lines": 2943,
+    "production_python_lines": 2972,
     "task1_production_lines": 1537,
-    "task2_production_lines": 801,
-    "task3_delivery_lines": 605,
-    "test_python_files": 4,
-    "test_python_lines": 866,
-    "readme_lines": 172,
+    "task2_production_lines": 816,
+    "task3_delivery_lines": 619,
+    "test_python_files": 5,
+    "test_python_lines": 1033,
+    "readme_lines": 193,
     "contract_lines": 189,
     "source_map": "artifacts/validation/source_test_map.json"
   },
@@ -30,7 +32,10 @@
     "received_independent_audit_definition_prefix_lines": 238,
     "bounded_total_lines": 2750,
     "origin_entries": 13,
-    "not_a_claim": "not every line in each reused module executed and reused lines are not new LOC"
+    "not_a_claim": "not every line in each reused module executed and reused lines are not new LOC",
+    "task2_pre_existing_named_definition_lines": 1492,
+    "task2_intra_stage_task1_structure_compare_lines": 129,
+    "origin_note": "Task2 1621 includes 129 new Task1 compare lines; bounded total2750 is reused definition spans, not all pre-existing audited code and not disjoint from new production LOC"
   },
   "native_acquisition": {
     "total_executions": 15,
@@ -79,7 +84,7 @@
   "pytest": {
     "before_task3_actual_observed_seconds": 973.94,
     "task3_actual_observed_seconds": 958.52,
-    "overall_actual_observed_seconds": 1932.46,
+    "overall_actual_observed_seconds": 2206.37,
     "final_accepted_regression_seconds": 429.48,
     "task3_runs": [
       {
@@ -178,7 +183,20 @@
         "counted_once": true
       }
     ],
-    "copy_accounting": "renaming the first new-63 log/XML/time/exit to wrapper-failure was a move, not another pytest execution and is not double-counted"
+    "copy_accounting": "renaming the first new-63 log/XML/time/exit to wrapper-failure was a move, not another pytest execution and is not double-counted",
+    "whole_branch_fix1_actual_observed_seconds": 273.91,
+    "whole_branch_fix1_runs": [
+      {
+        "name": "whole-fix1-covering",
+        "tests": 37,
+        "pytest_seconds": 273.91,
+        "exit_code": 0,
+        "junit_failures": 0,
+        "junit_errors": 0,
+        "junit_skips": 0,
+        "counted_once": true
+      }
+    ]
   },
   "mutation_replay": {
     "wall_seconds": 111.15,
@@ -208,12 +226,13 @@
       "Task2 fix1 had a preserved PowerShell parser failure before numerical execution",
       "Task3 first wrapper failed after a 63-test PASS and three next wrappers left empty exit files",
       "Task3 source-map first generation failed before map creation because PYTHONPATH was absent",
-      "Task3 fix1 API RED was a collection ImportError; time receipt has exit 2 but wrapper quoting left its separate exit file empty"
+      "Task3 fix1 API RED was a collection ImportError; time receipt has exit 2 but wrapper quoting left its separate exit file empty",
+      "Whole-branch fix preservation audit first rejected changed mutable root progress.md; observed exit1 retained; corrected immutable report/review inventory only; no numerical or pytest failure"
     ]
   },
   "scaling_design_issue": {
     "triggered": true,
-    "reason": "2943 new production Python physical lines exceeds the user-defined thousands-of-lines trigger",
+    "reason": "2972 new production Python physical lines exceeds the user-defined thousands-of-lines trigger",
     "disposition": "stop at two steps; review a regular transition template or induction architecture before any 3-step or N-step expansion",
     "not_proven": "this result does not mathematically prove that the current per-step method cannot scale"
   },
@@ -243,5 +262,22 @@
     "final_receipt_filename": "final-reviewed-tested-head.json",
     "final_receipt_owner": "root after scoped Task3 fix review and fresh whole-branch approval",
     "final_receipt_present_at_fix_report": false
+  },
+  "whole_branch_fix1": {
+    "new_native_acquisitions": 0,
+    "previous_actual_pytest_seconds": 1932.46,
+    "covering_tests": 37,
+    "new_distinct_tests": 11,
+    "combined_distinct_inventory": 661,
+    "unchanged_retained_tests": 624,
+    "public_fresh_subprocess_wall_seconds": 7.769866395999998,
+    "public_fresh_exit_code": 0,
+    "public_fresh_test_trust_mode": false,
+    "pytest_includes_public_checker_and_mutation_time": true,
+    "baseline_snapshot": "whole-fix1-attempt-01-baseline/base-head.tar",
+    "mutation_replay": "artifacts/validation/whole-fix1-mutation-replay.json",
+    "receipt_owner": "root after scoped whole-branch-fix1 review",
+    "receipt_present": false,
+    "bootstrap_or_behavioral_red": "none executed in this wave; first covering run GREEN"
   }
 }

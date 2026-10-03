@@ -44,7 +44,7 @@ Authoritative completion hashes are:
 - known: `f44d2edfca32d6b7fc14429a818a16995da9f6e5e869cfdf22e5da2872e91401`
 - fresh: `bcf9b24f5e62394a74508b97f2881d9b4d172e7f9a23e700cefc0cd2bb78429b`
 
-## Final regression and mutation replay
+## Earlier accepted regression and mutation replay
 
 All final commands used `/home/otherside123/venvs/gate2c1-trace/bin/python`,
 Ubuntu-24.04, `PYTHONPATH=.` and `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1`.
@@ -53,7 +53,7 @@ Ubuntu-24.04, `PYTHONPATH=.` and `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1`.
 - `runtime_trace/caller_transition/tests`: 101 passed in 60.61s, exit 0.
 - `tests runtime_trace/tests runtime_trace/numeric_ir/tests runtime_trace/numeric_ir/v2/tests`:
   479 passed in 203.81s, exit 0.
-- Each final JUnit has failure 0, error 0, skip 0. Final distinct total is 643.
+- Each final JUnit has failure 0, error 0, skip 0. That historical numerical distinct total is 643.
 
 The first new-suite wrapper completed 63 tests in 167.54s, then failed while
 trying to execute an invalid numeric `exit`; it is preserved as a wrapper
@@ -81,19 +81,20 @@ delta. The wheel, leapfrog `.so` and `lab/v2_bound.py` pins match. Old 01/02 raw
 captures, Task 1/2 failed and superseded attempts, historical reports and original
 external audit bytes remain preserved.
 
-New package production code is 2,943 physical lines: Task 1 1,537, Task 2 801,
-Task 3 delivery 605. Tests are 866 physical lines across four files. The exact source/test hashes,
+New package production code is 2,972 physical lines: Task 1 1,537, Task 2 816,
+Task 3 delivery 619. Tests are 1,033 physical lines across five files. The exact source/test hashes,
 line counts and function counts are in `artifacts/validation/source_test_map.json`.
 Bounded reuse counts 891 exact Task-1 selected/direct definition lines, 1,621
-Task-2 named definition lines and a separate 238-line received audit definition
-prefix. These counts do not claim every line of a reused module executed.
+Task-2 named definition lines (including 129 lines of new Task-1 structure.compare,
+so only 1,492 are pre-existing named spans) and a separate 238-line received audit
+definition prefix. These counts do not claim every line of a reused module executed.
 
 There were 15 actual native acquisitions, 5 failures and 10 successes; Task 2
-and Task 3 added none. Total actual observed pytest time is 1,932.46s, including
-all failed/superseded runs and the seven Task-3 executions, without counting a
-renamed log twice. Detailed origins and each run are in `COST_REPORT.json`.
+and Task 3 added none. Total actual observed pytest time is 2206.37s, including
+all failed/superseded runs and this 273.91s covering run, without counting a
+renamed log or the nested checker/mutation execution twice. Detailed origins and each run are in `COST_REPORT.json`.
 
-The 2,943 production lines trigger the user's thousands-of-lines scaling rule.
+The 2,972 production lines trigger the user's thousands-of-lines scaling rule.
 This does not prove the method mathematically unscalable, but it requires a
 separate regular transition template/induction design review before any 3-step
 or N-step extension. No such extension is implemented here.
@@ -114,34 +115,48 @@ The helper also packages the complete tracked snapshot, attempt history,
 workflow briefs/reports/reviews/ledger/probes and final manifest, then verifies
 unique ZIP members, CRC, SHA-256 and sizes. It performs no GDB/native acquisition
 and no network operation. It has deliberately **not** been executed yet: Task 3
-review and fresh whole-branch review must finish first. Push is authorized but
+fix review is approved and the scoped whole-branch fix review must finish first. Push is authorized but
 has not been executed at this report seal; the controller will run the helper at
 the reviewed clean HEAD, verify the ZIP/bundle/recovery, then push and save the
 actual remote-ref receipt outside the pre-push ZIP.
 
-Task-3 review found two delivery seal defects: a later clean commit could be
-mapped without comparison to the tested source map, and the helper did not
-require the Task-3/whole-branch review outputs. Fix round 1 now compares the
-actual commit archive to the exact production/test Python path and hash set in
-the saved test-time source map, and checks its documentation entries. It also
-requires `task-3-review.md` as historical NeedsFixes evidence plus an approved
-`task-3-fix1-review.md`, approved `whole-branch-review.md`, and a controller-made
-`final-reviewed-tested-head.json`. That receipt binds exact HEAD, committed
-source-map hash, review hashes and dispositions. Validation occurs before any
-temporary stage or final output directory is created. Presence of the original
-NeedsFixes review alone cannot satisfy the gate.
+The initial Task-3 source/review seal defects were repaired and approved in its
+scoped fix review. The whole-branch review then found actual module-schema and
+fresh-locator portability defects. The single combined final fix uses captured
+`path` for deny paths and the unchanged verified `_frozen_modules` manifest union
+for packaged ELF/objdump targets. Unknown SHA and escaping paths refuse.
 
-The authoritative final focused fix suite has 7 PASS in 0.52s with exit 0 and
-clean JUnit. It covers
-the accepted binding and refusal of changed source bytes, changed Python path
-set, wrong reviewed HEAD, missing review, changed review hash, and attempted use
-of only the historical NeedsFixes report. The preceding 0.57s RED was a
-collection-time ImportError because the new API did not exist, not a behavioral
-acceptance failure; its pytest exit 2 remains in the time receipt, while a shell
-quoting defect left the separate exit file empty. An earlier 7 PASS in 0.52s is
-retained as an intermediate GREEN because final manifest fields changed helper
-source afterward. Existing 643 numerical tests and all numerical sources remain
-unchanged, so they were not rerun.
+After unchanged source-pinned structural verification, Task-2 context constructs
+only the fresh known locator from sealed original `execution.cwd` plus canonical
+relative `distinct_from.capture_path`; current-root resolution is checked first.
+The final complete-document comparison remains exact for every field including
+this historical locator. Producer code is unchanged and consumes this same
+context; checker does not import producer. Raw/derived/completion and Task-1
+source bytes stay unchanged.
+
+The current delivery gate requires four review hashes/dispositions: historical
+`task-3-review.md` and `whole-branch-review.md` as HISTORICAL_NEEDS_FIXES, plus
+APPROVED `task-3-fix1-review.md` and `whole-branch-fix1-review.md`. Both fix reports
+are mandatory inventory. Root will bind these to actual final HEAD/source map
+only after scoped final approval; its final receipt is absent now.
+
+Current covering validation: **37 passed in 273.91s**, exit 0, zero JUnit
+failures/errors/skips. Task2 chain/mutations 19 + delivery guards 10 + portability 8.
+The unchanged committed fresh artifacts pass the normal PUBLIC checker subprocess
+in a distinct snapshot, with original-checkout/captured-module accesses denied,
+all four relocated ELF reads and objdump targets observed, and private trust
+false. Wrong locator and unrelated metadata fixtures with repaired enclosing
+hashes refuse semantically. All 15 saved semantic refusals plus HASH/TRUST results
+are byte-identical on the current checker; the 17 private path differences are
+enumerated in `artifacts/validation/whole-fix1-mutation-replay.json`. Inputs and
+outputs remain in the exclusive retained attempt directory. No RED is claimed;
+this wave's first and only covering pytest run was GREEN.
+
+Current distinct inventory is 661: retained Task1 44 + Caller 101 + regular 479,
+plus current Task2 19 + guards 10 + portability 8. Eleven tests are new; unaffected
+Task1/Caller/regular suites were not rerun. Current map has 17 source/test/doc
+entries. The final delivery helper, ZIP, bundle recovery and push remain root
+owned and unexecuted; this focused public relocation test is not final delivery.
 
 ## Reading boundary
 
@@ -151,6 +166,14 @@ report and the relevant Task-1/Task-2 source metrics/run summaries. Fully read
 or implemented: delivery helper, current regular README/contract, generated
 validation summaries and mutation comparison. Machine-parsed/hashed rather than
 line-by-line prose: 1,488 baseline files, 273 replay files, complete raw traces,
-JUnit XML, all source maps and attempt inventories. The final package, bare
-recovery and relocated path audit remain unexecuted until review; no result for
-those is claimed here.
+JUnit XML, all source maps and attempt inventories. The final package and bare recovery remain unexecuted until scoped review.
+The focused public fresh snapshot path audit described above did execute; it
+does not establish the future final bundle/ZIP result.
+
+Final-fix reading boundary: fully read the combined fix brief, whole-branch
+review, latest Task-3 fix report/review, delivery/checker/producer and covering
+tests, plus exact relevant structure/manifest resolver definitions. Current
+captures, hashes, JUnit, source maps and preserved bytes were machine-inspected.
+A preservation harness first included the mutable root progress ledger and
+refused its changed hash; that attempt is retained and the immutable-report
+inventory was corrected. No numerical or pytest failure occurred in this wave.

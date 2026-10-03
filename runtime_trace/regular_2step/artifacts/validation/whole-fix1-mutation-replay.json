@@ -1,0 +1,137 @@
+{
+  "allowed_differences": [
+    {
+      "after": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/whole-fix1-attempt-02-covering/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/01/capture",
+      "before": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-05-final-green/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/01/capture",
+      "class": 1,
+      "json_pointer": "/test_pins/capture_directory"
+    },
+    {
+      "after": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/whole-fix1-attempt-02-covering/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/02/capture",
+      "before": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-05-final-green/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/02/capture",
+      "class": 2,
+      "json_pointer": "/test_pins/capture_directory"
+    },
+    {
+      "after": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/whole-fix1-attempt-02-covering/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/03/capture",
+      "before": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-05-final-green/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/03/capture",
+      "class": 3,
+      "json_pointer": "/test_pins/capture_directory"
+    },
+    {
+      "after": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/whole-fix1-attempt-02-covering/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/04/capture",
+      "before": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-05-final-green/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/04/capture",
+      "class": 4,
+      "json_pointer": "/test_pins/capture_directory"
+    },
+    {
+      "after": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/whole-fix1-attempt-02-covering/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/05/capture",
+      "before": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-05-final-green/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/05/capture",
+      "class": 5,
+      "json_pointer": "/test_pins/capture_directory"
+    },
+    {
+      "after": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/whole-fix1-attempt-02-covering/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/06/capture",
+      "before": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-05-final-green/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/06/capture",
+      "class": 6,
+      "json_pointer": "/test_pins/capture_directory"
+    },
+    {
+      "after": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/whole-fix1-attempt-02-covering/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/07/capture",
+      "before": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-05-final-green/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/07/capture",
+      "class": 7,
+      "json_pointer": "/test_pins/capture_directory"
+    },
+    {
+      "after": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/whole-fix1-attempt-02-covering/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/08/capture",
+      "before": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-05-final-green/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/08/capture",
+      "class": 8,
+      "json_pointer": "/test_pins/capture_directory"
+    },
+    {
+      "after": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/whole-fix1-attempt-02-covering/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/09/capture",
+      "before": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-05-final-green/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/09/capture",
+      "class": 9,
+      "json_pointer": "/test_pins/capture_directory"
+    },
+    {
+      "after": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/whole-fix1-attempt-02-covering/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/10/capture",
+      "before": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-05-final-green/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/10/capture",
+      "class": 10,
+      "json_pointer": "/test_pins/capture_directory"
+    },
+    {
+      "after": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/whole-fix1-attempt-02-covering/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/11/capture",
+      "before": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-05-final-green/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/11/capture",
+      "class": 11,
+      "json_pointer": "/test_pins/capture_directory"
+    },
+    {
+      "after": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/whole-fix1-attempt-02-covering/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/12/capture",
+      "before": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-05-final-green/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/12/capture",
+      "class": 12,
+      "json_pointer": "/test_pins/capture_directory"
+    },
+    {
+      "after": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/whole-fix1-attempt-02-covering/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/13/capture",
+      "before": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-05-final-green/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/13/capture",
+      "class": 13,
+      "json_pointer": "/test_pins/capture_directory"
+    },
+    {
+      "after": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/whole-fix1-attempt-02-covering/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/14/capture",
+      "before": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-05-final-green/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/14/capture",
+      "class": 14,
+      "json_pointer": "/test_pins/capture_directory"
+    },
+    {
+      "after": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/whole-fix1-attempt-02-covering/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/15/capture",
+      "before": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-05-final-green/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/15/capture",
+      "class": 15,
+      "json_pointer": "/test_pins/capture_directory"
+    },
+    {
+      "after": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/whole-fix1-attempt-02-covering/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/16/capture",
+      "before": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-05-final-green/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/16/capture",
+      "class": 16,
+      "json_pointer": "/test_pins/capture_directory"
+    },
+    {
+      "after": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/whole-fix1-attempt-02-covering/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/17/capture",
+      "before": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-05-final-green/pytest-tmp/test_all_fifteen_saved_semanti0/mutations/17/capture",
+      "class": 17,
+      "json_pointer": "/test_pins/capture_directory"
+    }
+  ],
+  "byte_equal_common_files": 256,
+  "common_files": 273,
+  "control_stages": [
+    "HASH",
+    "TRUST"
+  ],
+  "forbidden_difference_classes": [
+    "arithmetic",
+    "dynamic ID",
+    "bits",
+    "result verdict/stage",
+    "repair hashes",
+    "seal/hash inputs",
+    "other metadata"
+  ],
+  "manifest_byte_equal": true,
+  "normalized_tree_sha256": "cddbe8cc6943609e2779c2819328b1e26ac45d5e0e54cab1dfd8e637cc0968cd",
+  "original_files": 274,
+  "original_only_files": [
+    "copy_receipt.json"
+  ],
+  "original_tree": "runtime_trace/regular_2step/artifacts/mutations",
+  "path_only_changed_repair_files": 17,
+  "replay_files": 273,
+  "replay_only_files": [],
+  "replay_tree": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/whole-fix1-attempt-02-covering/pytest-tmp/test_all_fifteen_saved_semanti0/mutations",
+  "result_files_byte_equal": 17,
+  "schema": "regular-2step-mutation-replay-v1",
+  "semantic_refusals": 15,
+  "substantive_payload_result_repair_hash_bytes_equal": true,
+  "verdict": "PASS"
+}

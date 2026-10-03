@@ -123,7 +123,7 @@ the 17 private TEST_ONLY capture-directory paths. `source_test_map.json` and
 `protected_baseline.json` record source identity, physical LOC and baseline
 byte/blob preservation.
 
-After Task 3 and whole-branch review, build the final package once from the
+After the approved Task-3 fix review and scoped whole-branch fix review, build the final package once from the
 reviewed clean HEAD into a new exclusive destination:
 
 ```bash
@@ -142,8 +142,8 @@ remote-ref verification only after the package has been sealed and verified.
 The helper also refuses until the final commit archive matches every
 production/test Python path and SHA-256 in
 `artifacts/validation/source_test_map.json`. Documentation entries in that map
-are byte-pinned as well. After the scoped Task-3 fix review and fresh
-whole-branch review both approve that exact commit, the controller creates
+are byte-pinned as well. After the scoped Task-3 fix review and scoped
+whole-branch fix review approve the final changes, the controller creates
 `.superpowers/sdd/2026-10-03-regular-2step/final-reviewed-tested-head.json` with
 this schema:
 
@@ -158,15 +158,36 @@ this schema:
   "reviews": [
     {"path": "task-3-review.md", "sha256": "<hash>", "disposition": "HISTORICAL_NEEDS_FIXES"},
     {"path": "task-3-fix1-review.md", "sha256": "<hash>", "disposition": "APPROVED"},
-    {"path": "whole-branch-review.md", "sha256": "<hash>", "disposition": "APPROVED"}
+    {"path": "whole-branch-review.md", "sha256": "<hash>", "disposition": "HISTORICAL_NEEDS_FIXES"},
+    {"path": "whole-branch-fix1-review.md", "sha256": "<hash>", "disposition": "APPROVED"}
   ],
   "review_gate": "APPROVED"
 }
 ```
 
-The initial `task-3-review.md` remains required historical evidence but cannot
-satisfy either approval. The helper requires exact hashes for that report, the
-approved `task-3-fix1-review.md`, and approved `whole-branch-review.md`, plus
-the exact current HEAD and committed source-map hash, before it creates a stage
-directory or ZIP. The controller generates this ignored workflow receipt only
-after both approvals; no placeholder receipt is accepted.
+The original `task-3-review.md` and `whole-branch-review.md` remain byte-preserved
+historical NeedsFixes evidence. The exact four-item inventory requires those two
+historical dispositions and APPROVED `task-3-fix1-review.md` and
+`whole-branch-fix1-review.md`. Both fix reports are mandatory workflow records.
+Root creates the ignored final receipt only after the scoped final review; no
+placeholder is used. It binds the actual final HEAD and committed source-map
+hash to all four review hashes before stage/ZIP creation.
+
+The delivery path audit uses actual captured `module.path` only for the denied
+provenance list. Required packaged reads and objdump paths come from the existing
+`structure._frozen_modules` verified union of raw/Caller manifests. All four
+captured SHA values must resolve below the relocated root; unknown hashes,
+escaping paths and altered module bytes refuse.
+
+The one `components.structure.distinct_from_known_path` field is historical
+acquisition provenance. After unchanged `structure.compare` has validated the
+sealed known/fresh reference and its identity/hash/process joins, Task-2 context
+requires its current-root resolution to match and constructs the expected
+historical locator from sealed `execution.cwd` plus the canonical relative
+`distinct_from.capture_path`. It does not open that historical absolute path.
+Every field of the resulting components document is compared strictly, including
+this locator; a repaired wrong locator refuses. The producer already consumes
+this context and therefore emits the same stable provenance in another root.
+Original raw evidence, derived outputs, completion hashes, acquisition sources
+and CONTRACT remain unchanged. The public fresh relocation test consumes the
+existing copied committed inputs, with no private trust mode or regeneration.
