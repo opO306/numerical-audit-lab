@@ -2,11 +2,13 @@ import copy
 import hashlib
 import json
 from pathlib import Path
+import shutil
 
 import pytest
 
 from runtime_trace.regular_2step.acquire import (
     AcquisitionRefused,
+    SOURCE_PATHS,
     bind_antecedent,
     definition_only_nodes,
     prove_exact_harness,
@@ -17,10 +19,66 @@ from runtime_trace.regular_2step.structure import (
     check_harness_output,
     check_process_local_handoff,
     compare_caller_corridor,
+    compare,
+    compare_pair,
     compare_step_structures,
     normalize_decoded_instruction,
     validate_receipt_files,
 )
+
+
+ROOT = Path(__file__).resolve().parents[3]
+ARTIFACTS = ROOT / "runtime_trace/regular_2step/artifacts"
+
+
+def _canonical_file(path, value):
+    path.write_text(json.dumps(value, sort_keys=True, separators=(",", ":")) + "\n",
+                    encoding="utf-8")
+
+
+def _repair_seal(directory):
+    seal_path = directory / "acquisition_seal.json"
+    seal = json.loads(seal_path.read_text(encoding="utf-8"))
+    for name in seal["sealed_files"]:
+        seal["sealed_files"][name] = hashlib.sha256((directory / name).read_bytes()).hexdigest()
+    _canonical_file(seal_path, seal)
+
+
+def _repaired_copy(tmp_path, case="known"):
+    destination = tmp_path / case
+    shutil.copytree(ARTIFACTS / f"{case}-02", destination)
+    return destination
+
+
+def _rewrite_trace_chain(directory, mutate):
+    rows = [json.loads(line) for line in (directory / "trace.jsonl").read_text(
+        encoding="utf-8").splitlines()]
+    mutate(rows)
+    chain = "0" * 64
+    with (directory / "trace.jsonl").open("w", encoding="utf-8", newline="\n") as stream:
+        for row in rows:
+            unsigned = {key: value for key, value in row.items() if key != "chain"}
+            chain = hashlib.sha256(bytes.fromhex(chain) + json.dumps(
+                unsigned, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+            row["chain"] = chain
+            stream.write(json.dumps(row, separators=(",", ":")) + "\n")
+    capture_path = directory / "capture.json"
+    capture = json.loads(capture_path.read_text(encoding="utf-8"))
+    capture["trace_sha256"] = hashlib.sha256((directory / "trace.jsonl").read_bytes()).hexdigest()
+    capture["final_chain"] = chain
+    acquisition_id = hashlib.sha256((json.dumps({"case": capture["case"],
+        "process_identity": capture["process_identity"],
+        "trace_sha256": capture["trace_sha256"]}, sort_keys=True,
+        separators=(",", ":")) + "\n").encode()).hexdigest()
+    capture["acquisition_id"] = acquisition_id
+    capture["process_local_handoff"]["from_acquisition_id"] = acquisition_id
+    capture["process_local_handoff"]["to_acquisition_id"] = acquisition_id
+    _canonical_file(capture_path, capture)
+    _repair_seal(directory)
+    seal_path = directory / "acquisition_seal.json"
+    seal = json.loads(seal_path.read_text(encoding="utf-8"))
+    seal["acquisition_id"] = acquisition_id
+    _canonical_file(seal_path, seal)
 
 
 def _row(seq, elf_address, opcode, kind, operand_address=None, post_elf_address=None):
@@ -80,14 +138,23 @@ def _valid_capture():
             "harness_completed_normally": True,
             "inherited_stale_n_steps_metadata": True,
         },
+        "regions": [{"occurrence": "step2", "end_state": {
+            "q": bits["q"], "full_v": bits["full_v"]}}],
         "process_local_handoff": {
             "from_acquisition_id": "acq-good",
             "to_acquisition_id": "acq-good",
             "from_occurrence": "step1-return",
             "to_occurrence": "step2-entry",
             "same_process": True,
-            "roles": {name: {"from_bits": value, "to_bits": value, "equal": True}
-                      for name, value in bits.items()},
+            "roles": {name: {"from_bits": value, "to_bits": value, "equal": True,
+                              "from_pointer": index, "to_pointer": index}
+                      for index, (name, value) in enumerate(bits.items(), 1)},
+            "gradient_boundary": {"pointer": 4, "step1_pointer": 4,
+                "from_bits": ["0x0000000000000005", "0x0000000000000006"],
+                "to_bits": ["0x0000000000000000"] * 2, "exact_zero": True,
+                "caller_reset_write_required": True,
+                "entry_stack_observation": {"status": "OK", "timing": "FUNCTION_ENTRY",
+                    "size": 8, "bytes_hex": (4).to_bytes(8, "little").hex()}},
         },
     }
 
@@ -95,7 +162,8 @@ def _valid_capture():
 def test_harness_requires_normal_completion_and_two_observed_native_calls():
     capture = _valid_capture()
     harness = {"orbit": "regular", "n_steps": 1, "dt_bits": "0x3f90000000000000",
-               "output_bits": ["0x0"] * 4}
+               "output_bits": ["0x0000000000000001", "0x0000000000000002",
+                               "0x0000000000000003", "0x0000000000000004"]}
     check_harness_output(harness, capture)
     capture["harness_binding"]["executed_native_step_calls"] = 1
     with pytest.raises(StructureRefused, match="two observed native step calls"):
@@ -106,17 +174,28 @@ def test_harness_rejects_malformed_inherited_metadata_receipt():
     capture = _valid_capture()
     capture["harness_binding"]["inherited_stale_n_steps_metadata"] = False
     harness = {"orbit": "regular", "n_steps": 1, "dt_bits": "0x3f90000000000000",
-               "output_bits": ["0x0"] * 4}
+               "output_bits": ["0x0000000000000001", "0x0000000000000002",
+                               "0x0000000000000003", "0x0000000000000004"]}
     with pytest.raises(StructureRefused, match="stale inherited metadata"):
         check_harness_output(harness, capture)
 
 
 def test_receipt_rejects_altered_sealed_file(tmp_path: Path):
     payload = b"actual trace\n"
-    (tmp_path / "trace.jsonl").write_bytes(payload)
+    for name in ["trace.jsonl", "capture.json", "execution.json", "source_pinset.json",
+                 "harness_output.json", "gdb.log"]:
+        (tmp_path / name).write_bytes(payload)
     seal = {
         "schema": "regular-2step-acquisition-seal-v1",
-        "sealed_files": {"trace.jsonl": hashlib.sha256(payload).hexdigest()},
+        "acquisition_id": "test",
+        "sealed_files": {name: hashlib.sha256(payload).hexdigest() for name in
+                         ["trace.jsonl", "capture.json", "execution.json", "source_pinset.json",
+                          "harness_output.json", "gdb.log"]},
+        "sealed_file_name_set": sorted(["trace.jsonl", "capture.json", "execution.json",
+                                        "source_pinset.json", "harness_output.json", "gdb.log"]),
+        "final_required_file_name_set": sorted(["trace.jsonl", "capture.json", "execution.json",
+            "source_pinset.json", "harness_output.json", "gdb.log", "acquisition_seal.json",
+            "structure_report.json"]),
     }
     (tmp_path / "acquisition_seal.json").write_text(json.dumps(seal), encoding="utf-8")
     validate_receipt_files(tmp_path)
@@ -176,6 +255,7 @@ def test_antecedent_binding_uses_roles_bits_and_provenance_without_continuation(
         "q": ["0x1", "0x2"],
         "full_v": ["0x3", "0x4"],
         "latent": ["0x5", "0x6"],
+        "gradient": ["0x0000000000000000", "0x0000000000000000"],
     }
     capture = {
         "acquisition_id": "new-acq",
@@ -183,6 +263,10 @@ def test_antecedent_binding_uses_roles_bits_and_provenance_without_continuation(
                              "proc_stat_start_time_ticks": 200},
         "regions": [{"occurrence": "init"}, {"occurrence": "step1"},
                     {"occurrence": "step2", "start_state": role_bits,
+                     "pointers": {"gradient": 0x1000},
+                     "entry_stack_observations": {"gradient_pointer": {
+                         "status": "OK", "timing": "FUNCTION_ENTRY", "size": 8,
+                         "bytes_hex": (0x1000).to_bytes(8, "little").hex()}},
                      "t_bits": "0x7", "dt_bits": "0x8"}],
     }
     antecedent = {
@@ -191,7 +275,8 @@ def test_antecedent_binding_uses_roles_bits_and_provenance_without_continuation(
         "process_identity": {"linux_boot_id": "boot", "pid": 10,
                              "proc_stat_start_time_ticks": 100},
         "second_step_entry": {
-            "abi": {"component_bits": {**role_bits, "gradient": ["0x0", "0x0"]},
+            "abi": {"component_bits": role_bits,
+                    "stack_argument_observations": {"gradient": {"status": "OK"}},
                     "t_bits": "0x7", "dt_bits": "0x8"},
             "argument_sources": {
                 "t": {"source_bits": "0x7", "instruction_sequence": 1},
@@ -284,3 +369,119 @@ def test_caller_corridor_refuses_any_component_write_even_same_value():
     new = [_caller_row(address=0x1008, changed=False)]
     with pytest.raises(StructureRefused, match="protected component overlap"):
         compare_caller_corridor(new, old, {"q": (0x1000, 0x1010)})
+
+
+@pytest.mark.parametrize("field", ["q", "full_v", "latent", "gradient", "t", "dt"])
+def test_repaired_seal_rejects_each_boundary_field_mutation(tmp_path: Path, field):
+    directory = _repaired_copy(tmp_path)
+    capture_path = directory / "capture.json"
+    capture = json.loads(capture_path.read_text(encoding="utf-8"))
+    step2 = capture["regions"][2]
+    if field in {"q", "full_v", "latent", "gradient"}:
+        step2["start_state"][field][0] = "0x0000000000000001"
+    else:
+        step2[f"{field}_bits"] = "0x0000000000000001"
+    _canonical_file(capture_path, capture)
+    _repair_seal(directory)
+    with pytest.raises(StructureRefused):
+        compare(directory, ROOT)
+
+
+def test_repaired_seal_rejects_bogus_antecedent_digest(tmp_path: Path):
+    directory = _repaired_copy(tmp_path)
+    capture_path = directory / "capture.json"
+    capture = json.loads(capture_path.read_text(encoding="utf-8"))
+    capture["antecedent_binding"]["antecedent_capture_sha256"] = "0" * 64
+    _canonical_file(capture_path, capture)
+    _repair_seal(directory)
+    with pytest.raises(StructureRefused, match="antecedent capture hash"):
+        compare(directory, ROOT)
+
+
+def test_repaired_seal_rejects_unbound_harness_endpoint(tmp_path: Path):
+    directory = _repaired_copy(tmp_path)
+    harness_path = directory / "harness_output.json"
+    harness = json.loads(harness_path.read_text(encoding="utf-8"))
+    harness["output_bits"] = ["0x00000000deadbeef"] * 4
+    _canonical_file(harness_path, harness)
+    _repair_seal(directory)
+    with pytest.raises(StructureRefused, match="step2 final endpoint"):
+        compare(directory, ROOT)
+
+
+def test_repaired_seal_rejects_shrunk_source_pinset(tmp_path: Path):
+    directory = _repaired_copy(tmp_path)
+    pin_path = directory / "source_pinset.json"
+    pinset = json.loads(pin_path.read_text(encoding="utf-8"))
+    only = SOURCE_PATHS[0]
+    pinset["files"] = {only: pinset["files"][only]}
+    pinset["exact_key_set"] = [only]
+    _canonical_file(pin_path, pinset)
+    execution_path = directory / "execution.json"
+    execution = json.loads(execution_path.read_text(encoding="utf-8"))
+    execution["source_pinset_sha256"] = hashlib.sha256(pin_path.read_bytes()).hexdigest()
+    execution["source_sha256_before_execution"] = pinset["files"]
+    _canonical_file(execution_path, execution)
+    capture_path = directory / "capture.json"
+    capture = json.loads(capture_path.read_text(encoding="utf-8"))
+    capture["source_pinset_sha256"] = hashlib.sha256(pin_path.read_bytes()).hexdigest()
+    capture["execution_sha256"] = hashlib.sha256(execution_path.read_bytes()).hexdigest()
+    _canonical_file(capture_path, capture)
+    _repair_seal(directory)
+    with pytest.raises(StructureRefused, match="source pin exact key set"):
+        compare(directory, ROOT)
+
+
+def test_repaired_seal_rejects_missing_fresh_distinct_binding(tmp_path: Path):
+    directory = _repaired_copy(tmp_path, "fresh")
+    capture_path = directory / "capture.json"
+    capture = json.loads(capture_path.read_text(encoding="utf-8"))
+    capture.pop("distinct_from")
+    _canonical_file(capture_path, capture)
+    _repair_seal(directory)
+    with pytest.raises(StructureRefused, match="fresh distinct-from binding"):
+        compare(directory, ROOT)
+
+
+@pytest.mark.parametrize("mutation,diagnostic", [
+    ("runtime_pc", "runtime PC/load base/ELF address"),
+    ("pre_rip", "body PRE rip/runtime PC"),
+    ("post_rip", "body POST rip/next PC"),
+    ("mapping", "body executable mapping membership"),
+])
+def test_repaired_chain_rejects_row_address_contradictions(tmp_path: Path, mutation, diagnostic):
+    directory = _repaired_copy(tmp_path)
+    def alter(rows):
+        row = rows[200]
+        if mutation == "runtime_pc":
+            row["runtime_pc"] += 1
+        elif mutation == "pre_rip":
+            row["pre"]["gpr"]["rip"] = "0x0000000000000001"
+        elif mutation == "post_rip":
+            row["post"]["gpr"]["rip"] = "0x0000000000000001"
+        else:
+            row["mapping"]["start"] = row["runtime_pc"] + 1
+    _rewrite_trace_chain(directory, alter)
+    with pytest.raises(StructureRefused, match=diagnostic):
+        compare(directory, ROOT)
+
+
+def test_repaired_seal_rejects_normal_exit_event_mutation(tmp_path: Path):
+    directory = _repaired_copy(tmp_path)
+    capture_path, execution_path = directory / "capture.json", directory / "execution.json"
+    capture = json.loads(capture_path.read_text(encoding="utf-8"))
+    execution = json.loads(execution_path.read_text(encoding="utf-8"))
+    capture["gdb_exit_event"]["exit_code"] = 9
+    execution["gdb_exit_event"]["exit_code"] = 9
+    _canonical_file(execution_path, execution)
+    capture["execution_sha256"] = hashlib.sha256(execution_path.read_bytes()).hexdigest()
+    _canonical_file(capture_path, capture)
+    _repair_seal(directory)
+    with pytest.raises(StructureRefused, match="sealed GDB normal exit"):
+        compare(directory, ROOT)
+
+
+def test_authoritative_pair_replay_requires_distinct_known_and_fresh():
+    report = compare_pair(ARTIFACTS / "known-02", ARTIFACTS / "fresh-02", ROOT)
+    assert report["verdict"] == "PAIR_REUSE_PROVEN"
+    assert report["runtime_address_equality_required_across_processes"] is False

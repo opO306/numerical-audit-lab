@@ -46,8 +46,12 @@ raw rows, frozen files, hashes, roles, and a new `objdump` result independently.
 
 ## Paths and exact final file set
 
-Each successful `runtime_trace/regular_2step/artifacts/{known-01,fresh-01}/`
-directory contains exactly:
+The authoritative captures are
+`runtime_trace/regular_2step/artifacts/{known-02,fresh-02}/`.  The complete
+`known-01` and `fresh-01` directories are immutable historical Task-1 evidence;
+they remain byte-for-byte preserved under their original source pins, but are
+superseded because the strengthened checker and exit-event acquisition source
+have different hashes.  Each authoritative directory contains exactly:
 
 - `trace.jsonl`
 - `capture.json`
@@ -113,7 +117,11 @@ state, and entry stack observations.  Component state maps each of `q`,
 
 `process_local_handoff` binds step1 return to step2 entry inside one
 `acquisition_id`.  It records `q/full_v/latent` from/to bits and pointers.
-Equal bits with a different acquisition ID are rejected.
+It also binds the unchanged process-local gradient pointer to the actual
+function-entry stack observation, requires the caller corridor's observed
+write transition from the step1 gradient bits to exact zero, and requires both
+step2 gradient lanes to be exact zero.  Equal bits with a different acquisition
+ID are rejected.
 
 `caller_corridor` records its half-open global row range, the step1-RET post PC,
 step2 entry PC/ABI, start/end component bits, actual `t`/`dt` load provenance,
@@ -127,9 +135,11 @@ a same-process internal instantiation check; it does not expand the external
 Caller audit beyond its two old acquisitions.
 
 `antecedent_binding` points to the immutable caller capture and its SHA-256.  It
-compares `q/full_v/latent`, `t`, and `dt` by logical role and exact bits, retains
-the old caller instruction-sequence provenance for `t` and `dt`, records both
-process identities as distinct, denies any address-equality claim, and sets
+compares `q/full_v/latent/gradient`, `t`, and `dt` by logical role and exact
+bits, requires exact-zero gradient, retains the old caller provenance and the
+new process's actual source rows for `t` and `dt`, and binds the new gradient
+pointer to its stack observation.  It records both process identities as
+distinct, denies any cross-process address-equality claim, and sets
 `old_capture_continuation_claimed=false`.
 
 ## Other receipt schemas
@@ -137,7 +147,9 @@ process identities as distinct, denies any address-equality claim, and sets
 `execution.json` uses `regular-2step-execution-v1` and records the exact command,
 cwd, launcher/inferior identity, return code, wall time, environment/package
 versions, source pins, harness source proof, normal completion, and that no
-machine mapping was read during acquisition.
+machine mapping was read during acquisition.  Normal completion requires a
+GDB exited event with exit code zero, the original inferior PID, the selected
+inferior becoming zero, and the matching sealed `exited normally` transcript.
 
 `source_pinset.json` uses `regular-2step-source-pinset-v1`; `files` and
 `exact_key_set` cover every reused acquisition source and new launcher/GDB/
@@ -156,4 +168,15 @@ offset, an independent `objdump` decode, identical step1/step2 module-relative
 instruction/byte order, identical control targets, and identical normalized
 operation/storage roles.  Runtime addresses and value bits are not used as a
 substitute for structure.  The report separately retains step1/step2 `t`, `dt`,
-gradient-start differences, and the final endpoint bits.
+gradient-start differences, and the final endpoint bits.  Every raw row must
+also satisfy runtime-PC/load-base/ELF-address equality, PRE/POST RIP equality,
+executable mapping membership, and continuity within each fully traced region
+and across the step1/caller/step2 seams.  The harness output must be canonical
+64-bit hex and exactly equal step2's final q/full_v endpoint.
+
+Fresh acquisition requires `--distinct-from` naming the authoritative known
+capture.  The sealed fresh receipt binds the known capture hash, acquisition
+ID, trace hash, and process identity and proves all three differ from fresh.
+`structure.compare_pair` replays both complete captures.  It compares logical
+roles, bits, and provenance across processes and never requires ASLR runtime
+addresses to match.

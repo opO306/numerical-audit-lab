@@ -115,6 +115,7 @@ class Regular2StepCapture(BaseCapture):
         self.row_extras = None
         self.process_identity = None
         self.harness_completed_normally = False
+        self.gdb_exit_event = None
         self.pre_memory_observation_count = 0
         self.possible_memory_write_count = 0
         self.corridor = None
@@ -332,11 +333,23 @@ class Regular2StepCapture(BaseCapture):
         init_breakpoint.delete()
         step_breakpoint.delete()
         gdb.execute("set scheduler-locking off")
-        gdb.execute("continue", to_string=True)
+        inferior_pid = gdb.selected_inferior().pid
+        event_record = {"observed": False, "inferior_pid": inferior_pid, "exit_code": None}
+        def record_exit(event):
+            event_record["observed"] = True
+            event_record["exit_code"] = getattr(event, "exit_code", None)
+        gdb.events.exited.connect(record_exit)
+        try:
+            gdb.execute("continue", to_string=True)
+        finally:
+            gdb.events.exited.disconnect(record_exit)
         if not (OUT / "harness_output.json").is_file():
             raise Refused("harness did not complete")
-        if gdb.selected_inferior().pid != 0:
-            raise Refused("inferior did not exit normally after capture")
+        event_record["selected_inferior_pid_after_exit"] = gdb.selected_inferior().pid
+        if (event_record["observed"] is not True or event_record["exit_code"] != 0 or
+                event_record["selected_inferior_pid_after_exit"] != 0):
+            raise Refused("GDB did not observe normal zero-code inferior exit")
+        self.gdb_exit_event = event_record
         self.harness_completed_normally = True
 
     def result(self, verdict, reason=None):
@@ -357,6 +370,7 @@ class Regular2StepCapture(BaseCapture):
                 "process_identity": self.process_identity,
                 "caller_corridor": self.corridor,
                 "harness_completed_normally": self.harness_completed_normally,
+                "gdb_exit_event": self.gdb_exit_event,
                 "pre_memory_observation_count": self.pre_memory_observation_count,
                 "possible_memory_write_count": self.possible_memory_write_count,
                 "definition_only_reuse": {"source_path": str(BASE_SOURCE),

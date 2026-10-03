@@ -113,11 +113,13 @@ def bind_antecedent(capture, antecedent, antecedent_path):
     old_entry = antecedent.get("second_step_entry", {})
     old_abi = old_entry.get("abi", {})
     roles = {}
-    for name in ("q", "full_v", "latent"):
+    for name in ("q", "full_v", "latent", "gradient"):
         old_bits = old_abi.get("component_bits", {}).get(name)
         new_bits = step2.get("start_state", {}).get(name)
         if old_bits != new_bits:
             raise AcquisitionRefused(f"antecedent role bits differ: {name}")
+        if name == "gradient" and new_bits != ["0x0000000000000000"] * 2:
+            raise AcquisitionRefused("step2 gradient is not exact zero")
         roles[name] = {"antecedent_bits": old_bits, "new_process_bits": new_bits,
                        "equal": True, "address_equality_claimed": False}
     provenance = old_entry.get("argument_sources", {})
@@ -126,6 +128,17 @@ def bind_antecedent(capture, antecedent, antecedent_path):
         new_bits = step2.get(f"{name}_bits")
         if old_bits != new_bits or provenance.get(name, {}).get("source_bits") != old_bits:
             raise AcquisitionRefused(f"antecedent {name} provenance")
+    old_gradient_observation = old_abi.get("stack_argument_observations", {}).get("gradient")
+    new_gradient_observation = step2.get("entry_stack_observations", {}).get("gradient_pointer")
+    new_gradient_pointer = step2.get("pointers", {}).get("gradient")
+    expected_pointer_bytes = (new_gradient_pointer.to_bytes(8, "little").hex()
+                              if isinstance(new_gradient_pointer, int) else None)
+    if (old_gradient_observation is None or new_gradient_observation is None or
+            new_gradient_observation.get("status") != "OK" or
+            new_gradient_observation.get("timing") != "FUNCTION_ENTRY" or
+            new_gradient_observation.get("size") != 8 or
+            new_gradient_observation.get("bytes_hex") != expected_pointer_bytes):
+        raise AcquisitionRefused("gradient pointer provenance")
     path = Path(antecedent_path)
     path_digest = hashlib.sha256(path.read_bytes()).hexdigest() if path.is_file() else None
     return {
@@ -140,6 +153,12 @@ def bind_antecedent(capture, antecedent, antecedent_path):
         "arguments": {name: {"antecedent": provenance[name],
                              "new_entry_bits": step2[f"{name}_bits"], "equal": True}
                       for name in ("t", "dt")},
+        "gradient_pointer_provenance": {
+            "antecedent": old_gradient_observation,
+            "new_process": new_gradient_observation,
+            "new_process_pointer": new_gradient_pointer,
+            "address_equality_claimed": False,
+        },
         "old_capture_continuation_claimed": False,
         "statement": "A new process reproduces the audited logical boundary; the stopped old process did not resume.",
     }
@@ -197,10 +216,25 @@ def _process_local_handoff(capture):
         roles[name] = {"from_bits": before, "to_bits": after, "equal": True,
                        "from_pointer": step1["pointers"][name],
                        "to_pointer": step2["pointers"][name]}
+        if roles[name]["from_pointer"] != roles[name]["to_pointer"]:
+            raise AcquisitionRefused(f"process-local handoff pointer differs: {name}")
+    gradient_pointer = step2["pointers"]["gradient"]
+    if (step1["pointers"]["gradient"] != gradient_pointer or
+            step2["start_state"]["gradient"] != ["0x0000000000000000"] * 2):
+        raise AcquisitionRefused("process-local gradient pointer/exact-zero entry")
+    gradient_observation = step2["entry_stack_observations"]["gradient_pointer"]
+    if gradient_observation.get("bytes_hex") != gradient_pointer.to_bytes(8, "little").hex():
+        raise AcquisitionRefused("process-local gradient stack provenance")
     acquisition_id = capture["acquisition_id"]
     return {"from_acquisition_id": acquisition_id, "to_acquisition_id": acquisition_id,
             "from_occurrence": "step1-return", "to_occurrence": "step2-entry",
-            "same_process": True, "roles": roles}
+            "same_process": True, "roles": roles,
+            "gradient_boundary": {"pointer": gradient_pointer,
+                "step1_pointer": step1["pointers"]["gradient"],
+                "from_bits": step1["end_state"]["gradient"],
+                "to_bits": step2["start_state"]["gradient"],
+                "entry_stack_observation": gradient_observation,
+                "exact_zero": True, "caller_reset_write_required": True}}
 
 
 def main(argv=None):
@@ -210,6 +244,10 @@ def main(argv=None):
     parser.add_argument("--antecedent", required=True)
     parser.add_argument("--distinct-from")
     args = parser.parse_args(argv)
+    if args.case == "fresh" and not args.distinct_from:
+        raise SystemExit("REFUSED: fresh acquisition requires --distinct-from known capture")
+    if args.case == "known" and args.distinct_from:
+        raise SystemExit("REFUSED: known acquisition must not declare --distinct-from")
     if platform.system() != "Linux" or platform.machine() != "x86_64":
         raise SystemExit("REFUSED: Linux x86_64 required")
     expected_python = Path("/home/otherside123/venvs/gate2c1-trace/bin/python").resolve()
@@ -251,6 +289,7 @@ def main(argv=None):
         "process_wall_seconds": time.perf_counter() - started,
         "environment_changes": changes, "harness_completed_normally":
             pending.get("harness_completed_normally", False),
+        "gdb_exit_event": pending.get("gdb_exit_event"),
         "environment": {"python": platform.python_version(), "gdb": pending.get("gdb_version"),
                         "kernel": platform.release(), "platform": platform.platform(),
                         "packages": {name: metadata.version(name)
@@ -296,8 +335,10 @@ def main(argv=None):
         stored_other_path = (str(other_path.relative_to(root)).replace("\\", "/")
                              if root in other_path.parents else str(other_path))
         capture["distinct_from"] = {"capture_path": stored_other_path,
+                                    "capture_sha256": _sha(other_path / "capture.json"),
                                     "acquisition_id": other["acquisition_id"],
                                     "process_identity": other["process_identity"],
+                                    "trace_sha256": other["trace_sha256"],
                                     "distinct": True}
     _write_exclusive(out / "capture.json", capture)
     pending_path.unlink()
