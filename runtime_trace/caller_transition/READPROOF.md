@@ -8,7 +8,7 @@ Accepted raw acquisitions:
 - `artifacts/audited-attempt-05-readproof-01/`
 - `artifacts/fresh-closure-fresh-01-readproof-01/`
 
-Accepted producer outputs for the next Task 2 repair:
+Accepted producer outputs for the current rigid checker:
 
 - `artifacts/producer-fix-round2/audited-attempt-05-readproof-01/transition.json`
 - `artifacts/producer-fix-round2/fresh-closure-fresh-01-readproof-01/transition.json`
@@ -32,8 +32,21 @@ counts of 108 and 20.  This is a correction in new sibling evidence; no v1
 byte or claim is rewritten.
 
 Both captures stop under debugger control at the second
-`c_leapfrog_step` entry before any second-step body instruction.  Their status
-is `IMPLEMENTED / INDEPENDENT CHECKER PENDING`.  Task 2 must independently
-decode instructions, derive reads and writes, and use root-transferred literal
-seal/source/module/antecedent pins.  This supplement does not claim checker or
-external-audit PASS.
+`c_leapfrog_step` entry before any second-step body instruction.  At the time
+of acquisition their historical status was
+`IMPLEMENTED / INDEPENDENT CHECKER PENDING`.  The checker work is now complete:
+it independently decodes instructions, derives reads and writes, and uses the
+root-transferred literal seal/source/module/antecedent pins without importing
+the producer or acquisition implementation.
+
+The accepted checker reports are:
+
+- `artifacts/checker/fix-round2/audited-attempt-05-readproof-01/checker_report.json`
+- `artifacts/checker/fix-round2/fresh-closure-fresh-01-readproof-01/checker_report.json`
+
+Both reports have schema `gala-caller-transition-independent-checker-v3` and
+verdict `CHECKER_PASS`.  Current fault-injection evidence is recorded in
+`artifacts/checker/fix-round3/mutations/manifest.json`; all 41 generated cases
+are refused.  The current status is
+`IMPLEMENTED / CHECKER PASS / INDEPENDENT AUDIT PENDING`.  This supplement and
+the checker PASS do not claim external-audit PASS.

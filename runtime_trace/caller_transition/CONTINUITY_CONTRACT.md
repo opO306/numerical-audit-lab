@@ -10,7 +10,7 @@ two-step result, or make trajectory, accumulated-error, physical-accuracy, or
 observable-accuracy claims.
 
 Native Gala has no V2 `Form` objects.  The native evidence establishes memory,
-control-flow, argument, and write-set facts.  `producer.py` then binds the
+control-flow, argument, and write-set facts.  `producer_reads.py` then binds the
 already audited offline endpoint dynamic IDs and exact serialized Forms to
 the prospective next input.  This binding does not manufacture native Form
 execution.
@@ -84,13 +84,18 @@ captured roots.
 
 ## Raw evidence and failure behavior
 
-`capture.json` has schema `gala-caller-transition-capture-v1` and includes
-process/thread identity, maps, modules, first entry, first return, second
-entry, argument-source receipts, single-thread/all-stop configuration, and a
-controlled-stop receipt.  `caller_trace.jsonl` is a chained sequence of raw
-instruction records.  `execution.json` records the real command, process IDs,
-environment, source hashes, and that no package was installed.  The harness
-diff is independently recorded.
+The accepted `capture.json` files have schema
+`gala-caller-transition-capture-v2` and include process/thread identity, maps,
+modules, first entry, first return, second entry, argument-source receipts,
+single-thread/all-stop configuration, and a controlled-stop receipt.  Their
+`caller_trace.jsonl` rows have schema
+`gala-caller-transition-instruction-v2`; each row records the live raw bytes
+for explicit memory sources and implicit `ret`, `pop`, and `leave` sources,
+plus the pre/post FS and GS bases needed for segment-relative addressing.
+`execution.json` has schema `caller-transition-execution-v2` and records the
+real command, process IDs, environment, source hashes, and that no package was
+installed.  The exact source/module pinsets, harness proof, and final
+`caller-transition-acquisition-seal-v1` receipt authenticate the acquisition.
 
 Acquisition refuses an unregistered module, unsupported opcode or addressing
 form, absent ELF correspondence, changed instruction byte, thread change,
@@ -98,14 +103,40 @@ oversized string effect, missing time/dt source, wrong ABI, wrong argument
 bits, timeout, or instruction limit.  Output directories are created
 exclusively.  Failed exploratory directories are never overwritten.
 
-`transition.json` is canonical JSON.  Re-running the producer on the same raw
-evidence is deterministic.  `summary.json` is a normal concise receipt and
-must not be used instead of the raw evidence.  The later independent checker
-must decode the pinned module bytes with GNU objdump and derive the write set
-and bindings independently; it must not import this producer decoder.
+The accepted canonical `transition.json` files have schema
+`gala-caller-transition-v2` and are produced by `producer_reads.py`.  Re-running
+the producer on the same raw evidence is deterministic.  `summary.json` is a
+normal concise receipt and must not be used instead of the raw evidence.  The
+independent checker decodes the pinned module bytes with GNU objdump and
+derives the write set and bindings independently; it does not import the
+producer or acquisition implementation.
 
-For Task 2, the accepted producer outputs are the two transitions under
-`artifacts/producer-fix-round1/`.  Their `pointer_identity` receipts record the
-first-step and second-entry addresses for q, full_v, latent, and gradient.
-The older transitions stored directly with each acquisition are immutable,
-superseded history and are not checker inputs.
+The accepted raw acquisitions and producer outputs are exactly:
+
+```text
+artifacts/audited-attempt-05-readproof-01/
+artifacts/fresh-closure-fresh-01-readproof-01/
+artifacts/producer-fix-round2/audited-attempt-05-readproof-01/transition.json
+artifacts/producer-fix-round2/fresh-closure-fresh-01-readproof-01/transition.json
+```
+
+Their `pointer_identity` receipts bind the first-step and second-entry
+addresses for q, full_v, latent, and gradient.  The independent checker reports
+for both accepted cases are:
+
+```text
+artifacts/checker/fix-round2/audited-attempt-05-readproof-01/checker_report.json
+artifacts/checker/fix-round2/fresh-closure-fresh-01-readproof-01/checker_report.json
+```
+
+Both reports have schema `gala-caller-transition-independent-checker-v3` and
+verdict `CHECKER_PASS`.  The current fault-injection evidence is recorded in
+`artifacts/checker/fix-round3/mutations/manifest.json`; all 41 generated cases
+are refused.  The current status is
+`IMPLEMENTED / CHECKER PASS / INDEPENDENT AUDIT PENDING`.
+
+The capture-v1 acquisitions, transitions stored directly with acquisitions,
+and `artifacts/producer-fix-round1/` outputs are immutable, superseded
+historical evidence.  They are not accepted checker inputs.  Checker PASS is
+an implementation-check result; fresh external independent audit remains
+pending.
