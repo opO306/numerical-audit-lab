@@ -100,3 +100,7 @@ current/numeric_ir_v2_independent_audit_evidence_2026-10-03.zip -text
 runtime_trace/harness_nsteps2.py -text
 runtime_trace/caller_transition/artifacts/** -text
 runtime_trace/caller_transition/frozen_modules/** -text
+
+# Received Caller external audit and regular two-step evidence: raw bytes.
+current/caller-external-audit-2026-10-03/** -text
+runtime_trace/regular_2step/artifacts/** -text
