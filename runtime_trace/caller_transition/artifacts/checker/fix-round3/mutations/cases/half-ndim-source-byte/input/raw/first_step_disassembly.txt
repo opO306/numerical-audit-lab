@@ -1,0 +1,129 @@
+Dump of assembler code for function __pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_c_leapfrog_step(CPotential*, size_t, int, double, double, double*, double*, double*, double*):
+Address range 0x7fffae797780 to 0x7fffae7978f8:
+=> 0x00007fffae797780 <+0>:	push   %r15
+   0x00007fffae797782 <+2>:	push   %r14
+   0x00007fffae797784 <+4>:	push   %r13
+   0x00007fffae797786 <+6>:	push   %r12
+   0x00007fffae797788 <+8>:	push   %rbp
+   0x00007fffae797789 <+9>:	push   %rbx
+   0x00007fffae79778a <+10>:	mov    %rsi,%rbx
+   0x00007fffae79778d <+13>:	mov    %edx,%esi
+   0x00007fffae79778f <+15>:	mov    %rcx,%rdx
+   0x00007fffae797792 <+18>:	sub    $0x8,%rsp
+   0x00007fffae797796 <+22>:	mov    0x40(%rsp),%r13
+   0x00007fffae79779b <+27>:	test   %esi,%esi
+   0x00007fffae79779d <+29>:	jle    0x7fffae7978ca <__pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_c_leapfrog_step(CPotential*, size_t, int, double, double, double*, double*, double*, double*)+330>
+   0x00007fffae7977a3 <+35>:	mov    %r8,%r12
+   0x00007fffae7977a6 <+38>:	movq   %xmm1,%r15
+   0x00007fffae7977ab <+43>:	mov    %r9,%rbp
+   0x00007fffae7977ae <+46>:	xor    %r8d,%r8d
+   0x00007fffae7977b1 <+49>:	xor    %r14d,%r14d
+   0x00007fffae7977b4 <+52>:	test   %rbx,%rbx
+   0x00007fffae7977b7 <+55>:	je     0x7fffae7978e4 <__pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_c_leapfrog_step(CPotential*, size_t, int, double, double, double*, double*, double*, double*)+356>
+   0x00007fffae7977bd <+61>:	nopl   (%rax)
+   0x00007fffae7977c0 <+64>:	xor    %ecx,%ecx
+   0x00007fffae7977c2 <+66>:	xor    %eax,%eax
+   0x00007fffae7977c4 <+68>:	data16 cs nopw 0x0(%rax,%rax,1)
+   0x00007fffae7977cf <+79>:	data16 cs nopw 0x0(%rax,%rax,1)
+   0x00007fffae7977da <+90>:	data16 cs nopw 0x0(%rax,%rax,1)
+   0x00007fffae7977e5 <+101>:	data16 cs nopw 0x0(%rax,%rax,1)
+   0x00007fffae7977f0 <+112>:	data16 cs nopw 0x0(%rax,%rax,1)
+   0x00007fffae7977fb <+123>:	nopl   0x0(%rax,%rax,1)
+   0x00007fffae797800 <+128>:	add    %r8,%rax
+   0x00007fffae797803 <+131>:	movq   %r15,%xmm1
+   0x00007fffae797808 <+136>:	add    $0x1,%ecx
+   0x00007fffae79780b <+139>:	mulsd  0x0(%rbp,%rax,8),%xmm1
+   0x00007fffae797811 <+145>:	lea    (%rdx,%rax,8),%r9
+   0x00007fffae797815 <+149>:	movslq %ecx,%rax
+   0x00007fffae797818 <+152>:	addsd  (%r9),%xmm1
+   0x00007fffae79781d <+157>:	movsd  %xmm1,(%r9)
+   0x00007fffae797822 <+162>:	cmp    %rbx,%rax
+   0x00007fffae797825 <+165>:	jb     0x7fffae797800 <__pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_c_leapfrog_step(CPotential*, size_t, int, double, double, double*, double*, double*, double*)+128>
+   0x00007fffae797827 <+167>:	lea    0x1(%r14),%eax
+   0x00007fffae79782b <+171>:	add    %rbx,%r8
+   0x00007fffae79782e <+174>:	cmp    %eax,%esi
+   0x00007fffae797830 <+176>:	je     0x7fffae797840 <__pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_c_leapfrog_step(CPotential*, size_t, int, double, double, double*, double*, double*, double*)+192>
+   0x00007fffae797832 <+178>:	mov    %eax,%r14d
+   0x00007fffae797835 <+181>:	jmp    0x7fffae7977c0 <__pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_c_leapfrog_step(CPotential*, size_t, int, double, double, double*, double*, double*, double*)+64>
+   0x00007fffae797837 <+183>:	nopw   0x0(%rax,%rax,1)
+   0x00007fffae797840 <+192>:	mov    %r13,%rcx
+   0x00007fffae797843 <+195>:	mov    %rbx,%rsi
+   0x00007fffae797846 <+198>:	call   0x7fffae7887c0 <_Z10c_gradientP11_CPotentialmdPdS1_@plt>
+   0x00007fffae79784b <+203>:	movq   %r15,%xmm2
+   0x00007fffae797850 <+208>:	xor    %edi,%edi
+   0x00007fffae797852 <+210>:	xor    %r8d,%r8d
+   0x00007fffae797855 <+213>:	mulsd  0x25b03(%rip),%xmm2        # 0x7fffae7bd360
+   0x00007fffae79785d <+221>:	nopl   (%rax)
+   0x00007fffae797860 <+224>:	xor    %esi,%esi
+   0x00007fffae797862 <+226>:	xor    %eax,%eax
+   0x00007fffae797864 <+228>:	data16 cs nopw 0x0(%rax,%rax,1)
+   0x00007fffae79786f <+239>:	nop
+   0x00007fffae797870 <+240>:	add    %rdi,%rax
+   0x00007fffae797873 <+243>:	add    $0x1,%esi
+   0x00007fffae797876 <+246>:	lea    0x0(,%rax,8),%rdx
+   0x00007fffae79787e <+254>:	lea    0x0(%rbp,%rdx,1),%rcx
+   0x00007fffae797883 <+259>:	add    %r13,%rdx
+   0x00007fffae797886 <+262>:	movsd  (%rdx),%xmm1
+   0x00007fffae79788a <+266>:	movsd  (%rcx),%xmm0
+   0x00007fffae79788e <+270>:	mulsd  %xmm2,%xmm1
+   0x00007fffae797892 <+274>:	subsd  %xmm1,%xmm0
+   0x00007fffae797896 <+278>:	movq   %r15,%xmm1
+   0x00007fffae79789b <+283>:	movsd  %xmm0,(%r12,%rax,8)
+   0x00007fffae7978a1 <+289>:	mulsd  (%rdx),%xmm1
+   0x00007fffae7978a5 <+293>:	movsd  (%rcx),%xmm0
+   0x00007fffae7978a9 <+297>:	movslq %esi,%rax
+   0x00007fffae7978ac <+300>:	subsd  %xmm1,%xmm0
+   0x00007fffae7978b0 <+304>:	movsd  %xmm0,(%rcx)
+   0x00007fffae7978b4 <+308>:	cmp    %rbx,%rax
+   0x00007fffae7978b7 <+311>:	jb     0x7fffae797870 <__pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_c_leapfrog_step(CPotential*, size_t, int, double, double, double*, double*, double*, double*)+240>
+   0x00007fffae7978b9 <+313>:	lea    0x1(%r8),%eax
+   0x00007fffae7978bd <+317>:	add    %rbx,%rdi
+   0x00007fffae7978c0 <+320>:	cmp    %r8d,%r14d
+   0x00007fffae7978c3 <+323>:	je     0x7fffae7978d5 <__pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_c_leapfrog_step(CPotential*, size_t, int, double, double, double*, double*, double*, double*)+341>
+   0x00007fffae7978c5 <+325>:	mov    %eax,%r8d
+   0x00007fffae7978c8 <+328>:	jmp    0x7fffae797860 <__pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_c_leapfrog_step(CPotential*, size_t, int, double, double, double*, double*, double*, double*)+224>
+   0x00007fffae7978ca <+330>:	mov    %r13,%rcx
+   0x00007fffae7978cd <+333>:	mov    %rbx,%rsi
+   0x00007fffae7978d0 <+336>:	call   0x7fffae7887c0 <_Z10c_gradientP11_CPotentialmdPdS1_@plt>
+   0x00007fffae7978d5 <+341>:	add    $0x8,%rsp
+   0x00007fffae7978d9 <+345>:	pop    %rbx
+   0x00007fffae7978da <+346>:	pop    %rbp
+   0x00007fffae7978db <+347>:	pop    %r12
+   0x00007fffae7978dd <+349>:	pop    %r13
+   0x00007fffae7978df <+351>:	pop    %r14
+   0x00007fffae7978e1 <+353>:	pop    %r15
+   0x00007fffae7978e3 <+355>:	ret
+   0x00007fffae7978e4 <+356>:	mov    %r13,%rcx
+   0x00007fffae7978e7 <+359>:	xor    %esi,%esi
+   0x00007fffae7978e9 <+361>:	call   0x7fffae7887c0 <_Z10c_gradientP11_CPotentialmdPdS1_@plt>
+   0x00007fffae7978ee <+366>:	jmp    0x7fffae7978d5 <__pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_c_leapfrog_step(CPotential*, size_t, int, double, double, double*, double*, double*, double*)+341>
+   0x00007fffae7978f0 <+368>:	mov    %rax,%rdi
+   0x00007fffae7978f3 <+371>:	jmp    0x7fffae7899c5 <_ZL66__pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_c_leapfrog_stepP11_CPotentialmiddPdS1_S1_S1_.cold>
+Address range 0x7fffae7899c5 to 0x7fffae789a23:
+   0x00007fffae7899c5 <-56763>:	call   0x7fffae7881e0 <__cxa_begin_catch@plt>
+   0x00007fffae7899ca <-56758>:	call   0x7fffae7889d0 <PyGILState_Ensure@plt>
+   0x00007fffae7899cf <-56753>:	mov    %eax,%ebx
+   0x00007fffae7899d1 <-56751>:	call   0x7fffae788ae9 <__Pyx_CppExn2PyErr()>
+   0x00007fffae7899d6 <-56746>:	mov    %ebx,%edi
+   0x00007fffae7899d8 <-56744>:	call   0x7fffae7886e0 <PyGILState_Release@plt>
+   0x00007fffae7899dd <-56739>:	call   0x7fffae7888b0 <__cxa_end_catch@plt>
+   0x00007fffae7899e2 <-56734>:	call   0x7fffae7889d0 <PyGILState_Ensure@plt>
+   0x00007fffae7899e7 <-56729>:	lea    0x307ba(%rip),%rdi        # 0x7fffae7ba1a8
+   0x00007fffae7899ee <-56722>:	mov    $0x2c,%esi
+   0x00007fffae7899f3 <-56717>:	lea    0x3077e(%rip),%rdx        # 0x7fffae7ba178
+   0x00007fffae7899fa <-56710>:	mov    %eax,%ebx
+   0x00007fffae7899fc <-56708>:	call   0x7fffae797430 <__Pyx_AddTraceback(char const*, int, char const*, int)>
+   0x00007fffae789a01 <-56703>:	pop    %rax
+   0x00007fffae789a02 <-56702>:	mov    %ebx,%edi
+   0x00007fffae789a04 <-56700>:	pop    %rbx
+   0x00007fffae789a05 <-56699>:	pop    %rbp
+   0x00007fffae789a06 <-56698>:	pop    %r12
+   0x00007fffae789a08 <-56696>:	pop    %r13
+   0x00007fffae789a0a <-56694>:	pop    %r14
+   0x00007fffae789a0c <-56692>:	pop    %r15
+   0x00007fffae789a0e <-56690>:	jmp    0x7fffae7886e0 <PyGILState_Release@plt>
+   0x00007fffae789a13 <-56685>:	mov    %rax,%rbx
+   0x00007fffae789a16 <-56682>:	call   0x7fffae7888b0 <__cxa_end_catch@plt>
+   0x00007fffae789a1b <-56677>:	mov    %rbx,%rdi
+   0x00007fffae789a1e <-56674>:	call   0x7fffae788950 <_Unwind_Resume@plt>
+End of assembler dump.

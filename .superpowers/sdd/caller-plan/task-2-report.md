@@ -726,3 +726,221 @@ result.
 - The scoped implementation has no known evidence or opcode blocker. The root
   owner retains the combined suite, integration documentation/package checks,
   and the original reviewer's scoped re-review.
+
+# Task 2 fix round 3 addendum — complete saved mutation inputs
+
+## Result and finding disposition
+
+The single open fix-round-2 Important finding is repaired. The exclusive
+`runtime_trace/caller_transition/artifacts/checker/fix-round3/mutations/`
+evidence set contains all 35 names from the frozen fix-round-1 manifest and
+all six names from the frozen fix-round-2 manifest. Every case was executed
+again with the current approved checker; all 41 current results are
+`REFUSED`. No old refusal result was copied as current verification.
+
+No new checker defect or unsupported observed opcode was exposed. Therefore
+`runtime_trace/caller_transition/checker.py` and its production literal pins
+were not changed. Its SHA-256 remains
+`8c1915ed19e9fb1cefd757d8a2ff8c475193ed581fa272784dabcd89e5e125a4`,
+identical to BASE `522a99daa42c4b1abee86f89e8cbcd823f381bb0`.
+C1/I2 remain retained, and the fix-round-2 C2/I1 behavior remains addressed.
+
+## Exact input layout and trust separation
+
+The 41 cases contain 27 complete raw-bundle attacks, 12 transition-only
+attacks, and two structured unit fixtures. Each complete raw attack saves all
+nine raw acquisition files under `input/raw/` plus `input/transition.json`.
+Each transition-only attack saves its exact `input/transition.json`; its
+receipt separately pins all nine unchanged source-raw file hashes. Each unit
+case saves the exact `input/fixture.json`. Every result and receipt contains
+the input SHA-256 map. The manifest repeats those maps and adds every
+receipt/result SHA, the checker SHA, generator SHA, accepted source transition
+SHA, all nine accepted source-raw SHAs, and the two unchanged authoritative
+normal-report SHAs.
+
+The trust modes are explicit and disjoint:
+
+- 38 semantic or binding attacks use `TEST_ONLY_REPIN` through the checker's
+  private in-memory test-pin entry point;
+- `public-coherent-repin` uses the public production entry point and is
+  refused at `TRUST_PATH` as `PUBLIC_RIGID_PRODUCTION`;
+- `unknown-instruction-effect` uses `UNIT_CLOSED_DECODER`;
+- `same-bits-wrong-origin-role` uses `UNIT_STRUCTURED_FIXTURE`.
+
+The generator CLI exposes only `--out`. It has no argument or file interface
+for changing production trusted pins. It derives test pins from the checker's
+already compiled literal pin object only inside saved semantic-fixture runs.
+It imports no producer, acquisition, write-effects, capture-contract,
+module-resolver, old V2 checker, or evaluator proof core.
+
+## Current refusal coverage and stages
+
+The transition-only cases reproduce the six carry-set/binding failures, Form
+failure, time/dt provenance failures, pointer identity failure, unknown
+antecedent refusal, and immutable antecedent pin failure. Their current codes
+are three `CARRY_BINDING`, three `CARRY_SET`, and one each of `FORM_BINDING`,
+`TIME_PROVENANCE`, `DT_PROVENANCE`, `POINTER_IDENTITY`,
+`UNSUPPORTED_ANTECEDENT`, and `ANTECEDENT_PIN`.
+
+The retained raw semantic set saves and rejects:
+
+- fully receipt-repaired `dense-record-deletion` and
+  `dense-record-reordering`, plus the fix2 fully repaired deletion/reorder, at
+  `TRACE_CONTROL_TARGET` after receipt preflight passed;
+- `indirect-target-source-byte` and `return-target-source-byte` at
+  `TRACE_CONTROL_TARGET`;
+- `semantic-write-alteration`, `same-value-store-omission`,
+  `incomplete-zero-coverage`, `tls-destination-address`, and
+  `gradient-push-source-byte` at `WRITE_SET`;
+- `required-read-omission`, with all count/hash/chain/seal receipts repaired,
+  at `MEMORY_OBSERVATION`;
+- all six scalar/final ABI source-byte attacks, q and latent propagated
+  register attacks, and the actual 728-row upper-XMM attack at
+  `REGISTER_SEMANTICS`;
+- structured process, source-set, and module-set attacks at `EXECUTION_AUTH`,
+  `SOURCE_SET`, and `MODULE_SET` respectively.
+
+The two deliberately stale fix2 controls remain distinct: deletion refuses
+because the capture row count is stale, and reorder refuses because the time
+sequence list is stale, both at `SEQUENCE_RECEIPT`. The two corresponding
+fully repaired cases reach control semantics. The closed decoder fixture
+refuses `stosq %rax,(%rdi)` at `UNKNOWN_INSTRUCTION_EFFECT`, and the same-bits
+wrong-role origin graph refuses at `ABI_PROVENANCE`.
+
+The final code distribution is nine `REGISTER_SEMANTICS`, six
+`TRACE_CONTROL_TARGET`, five `WRITE_SET`, three each of `CARRY_BINDING` and
+`CARRY_SET`, two `SEQUENCE_RECEIPT`, and one of every remaining code listed
+above. The manifest records the exact reason and declared refusal stage for
+every name.
+
+## Reproducible generator and covering tests
+
+`runtime_trace/caller_transition/generate_checker_fix3_mutations.py`
+independently materializes every saved input. For raw mutations it copies the
+frozen nine-file bundle and accepted transition, performs only the declared
+mutation, recomputes all applicable row/read/write/control counts, every row
+chain, trace hash/final chain, capture/execution bytes, all acquisition-seal
+file hashes, transition authentication, and private test pins. Dense repaired
+cases remap every schema-declared `sequence`, `*_sequence`, and
+`*_sequences` field from the retained row order and refuse an unmappable
+declaration. Only the two named stale controls deliberately retain stale
+receipt data.
+
+`test_caller_fix3_evidence.py` requires the exact ordered union of the frozen
+35- and six-case manifests, all 41 names, input-kind and trust-mode
+distinctions, each input/receipt/result hash, both protected normal-report
+hashes, the unchanged checker hash, receipt-preflight classifications, and the
+semantic-stage dense refusals. Its second test generates all 41 cases into a
+fresh temporary directory, executes every refusal again, and compares every
+generated byte and the returned manifest with the committed evidence.
+
+The first full out-of-tree generator probe produced all 41 refusals. A final
+exit-zero out-of-tree replay after the generator was sealed was byte-for-byte
+identical to the committed 367-file mutation tree. The complete
+SHA map is
+`artifacts/checker/fix-round3/verification/sha256-map.json`; it contains 391
+input/result/receipt/source/report/verification file entries.
+
+## Changed and read files
+
+This round changes 391 paths: 388 new files under the exclusive
+`artifacts/checker/fix-round3/` tree, the new generator, the new covering test,
+and this report. The 388 evidence files comprise 367 mutation files and 21
+verification files. The 367 mutation files are exactly 324 files for 27 raw
+cases, 36 files for 12 transition-only cases, six files for two unit fixtures,
+and one manifest. No prior artifact, raw capture, producer output,
+acquisition source, checker, old test, README, current/STATUS, attributes, or
+normal report was edited.
+
+Fully read for this round were `task-2-fix3-brief.md`, the complete
+`task-2-fix2-review.md`, the complete external fix1 generator, the complete
+fix2 generator and fix2 covering test, and both frozen prior mutation
+manifests. The relevant current checker ordering and refusal sites, prior
+report addenda, accepted raw file inventory, authoritative normal reports,
+and both root-owned preservation baselines were read or structurally parsed.
+
+## Hashes and preservation
+
+Key SHA-256 values are:
+
+- checker (unchanged):
+  `8c1915ed19e9fb1cefd757d8a2ff8c475193ed581fa272784dabcd89e5e125a4`;
+- fix3 generator:
+  `975283794960530871cee63b58f9de9a6be97211bd1ca68fc0725e2f4ea6ee8c`;
+- fix3 covering test:
+  `b4c9ce3b7af203bbc4982b0414c3e7258b6c56fa51809f6fe0b8b7792f30ad16`;
+- fix3 mutation manifest:
+  `32a92021f69fce6f9e04f79a418e1c9492d11c2946c6acc2f1f2145331c01112`;
+- dedicated log:
+  `9cb9e6ad8bcff8987ac502be4185cc088c4c83f59c1ec27babff2ea23c66641d`;
+- dedicated JUnit:
+  `45b91f8d7bce89b92449c61b50c8efc2fca9969e4f4056ef74eaa1a22534d340`;
+- protected-177 check:
+  `6277da79c52c6e0c7a87ef0df736aee74f0f3b06ffabeda875e61e46d1e25e8b`;
+- protected-262 check:
+  `9c86b7d1b251fa9722629fbde600f4c0a48e44810cbaf7e49e93ff7ce2999f2b`;
+- complete SHA map:
+  `1f41a925ad9b17e2b594b067a14b8bc8c99d8e6bb2f0db5334962f981281eb7e`;
+- execution receipt:
+  `6cc56a5360c0846750624d0a236ed867479d730cf06755643ee530d21cff6baf`.
+
+The authoritative fix2 normal reports remain unchanged at
+`a3964850e39643fe2dd503883773a35952f1412b3e3e8f267487d0be6bc03f36`
+(audited) and
+`50ae61b76b2b9efc38edb3d554b8cc7df30a1383345ee271b9c8fa223cb1c923`
+(fresh). No new normal report was generated because the checker source did
+not change.
+
+The root-owned 177-file baseline SHA is
+`4dcc2713e6720c4467f4cc7d64de00f163ce5f8cac285b9ffbf414612e8d1ad7`;
+all 177 paths match SHA, byte count, and Git blob. The root-owned 262-file
+baseline SHA is
+`11765c996ffd0ec2c065a8ae76c723f46a0b44a81145de566803dcff8a777704`;
+all 262 paths likewise match. The detailed per-path checks are saved in the
+two protected verification JSON files.
+
+## Commands, tests, and preserved intermediates
+
+Exact commands and wrapper disclosures are saved in
+`artifacts/checker/fix-round3/verification/commands.md`. Frozen Python results:
+
+- initial focused RED: collection error because the fix3 generator did not
+  yet exist;
+- complete generator: 41/41 current cases refused at their expected codes;
+- `py_compile`: exit 0 for the generator and covering test;
+- focused final: two passed in 30.44 seconds;
+- full dedicated Caller Transition suite: 101 passed in 68.67 seconds, with
+  JUnit recording 101 tests, zero failures/errors/skips, and 68.641 seconds;
+- protected baseline checks: 177/177 and 262/262 unchanged.
+
+All fix3 failed/intermediate output directories are exclusive and preserved:
+
+- `D:/numerical-audit-lab-caller-continuity-delivery-2026-10-03/task2-fix3-red-01`;
+- `D:/numerical-audit-lab-caller-continuity-delivery-2026-10-03/task2-fix3-probe-01`;
+- `D:/numerical-audit-lab-caller-continuity-delivery-2026-10-03/task2-fix3-final-replay-01`.
+
+Two successful-run wrapper anomalies are also retained rather than erased:
+`mutation-generator-exit-code-shell-bool.txt` contains the PowerShell success
+token produced by the first committed generator wrapper, and
+`focused-pytest-exit-code-empty.txt` is the empty exit-code file from the first
+focused wrapper. Their runs completed successfully (`manifest.json` has 41
+refusals; focused log/JUnit has two passes); numeric zero receipts are saved
+beside them. Neither anomaly affects a checker result or input byte.
+
+## Self-review and limits
+
+- The mutation evidence proves current rejection for the exact saved attacks;
+  it does not prove completeness for unseen instructions or arbitrary attacks.
+- Test-only repinning is confined to the generator's private checker call and
+  is not an accepted production input path. The public coherent-repin case
+  confirms refusal before semantic evaluation.
+- The checker remains conditional on the frozen external endpoint Form audit.
+  This round performs no new external audit and makes no external-closure
+  claim.
+- The two accepted acquisitions remain independent same-machine processes.
+  No cross-machine result is claimed.
+- No native Form object, second native body, second V2 block, trajectory,
+  accumulated-error, or physical-accuracy claim is added.
+- The scoped fix has no known core checker, evidence, opcode, or provenance
+  blocker. Root still owns the combined suite, integration documents, final
+  package checks, and the original reviewer's scoped re-review.

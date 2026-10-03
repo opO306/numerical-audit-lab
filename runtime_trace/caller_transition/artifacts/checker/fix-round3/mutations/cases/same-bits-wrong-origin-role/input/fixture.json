@@ -1,0 +1,1 @@
+{"location":"xmm0_time","origin":{"address":36493040,"kind":"Load","memory_origin":{"address":36493040,"captured_before_sequence":718,"case":"audited-attempt-05-readproof-01","kind":"AuthenticatedMemoryRoot","role":"dt","width":8},"sequence":718,"width":8},"required_role":"time","schema":"gala-caller-transition-origin-fixture-v1","value_bits":"0x3fa0000000000000"}

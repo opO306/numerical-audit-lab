@@ -1,0 +1,1 @@
+{"assembly":"stosq  %rax,(%rdi)","row":{"instruction_bytes":"48ab","pc":4096,"post":{"gpr":{"rax":"0x0000000000000001","rdi":"0x2008","rsp":"0x3000"}},"pre":{"gpr":{"rax":"0x0000000000000001","rdi":"0x2000","rsp":"0x3000"}},"sequence":9},"schema":"gala-caller-transition-unknown-instruction-fixture-v1"}
