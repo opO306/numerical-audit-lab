@@ -95,3 +95,8 @@ runtime_trace/numeric_ir/v2/artifacts/validation-after-parser-fix/first-post-fix
 # Numeric IR to frozen V2 independent audit: immutable received bytes.
 current/NUMERIC_IR_V2_INDEPENDENT_AUDIT_2026-10-03.md -text whitespace=-blank-at-eol
 current/numeric_ir_v2_independent_audit_evidence_2026-10-03.zip -text
+
+# Caller Gate: retain new acquisition evidence and minimal harness bytes.
+runtime_trace/harness_nsteps2.py -text
+runtime_trace/caller_transition/artifacts/** -text
+runtime_trace/caller_transition/frozen_modules/** -text
