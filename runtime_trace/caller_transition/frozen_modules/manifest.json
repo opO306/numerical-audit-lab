@@ -1,0 +1,8 @@
+{
+  "schema": "caller-transition-module-resolver-v1",
+  "modules": {
+    "a6ac98736304bb9f6a92e473bba45da10d9b5b99f8019e2ca15eb6a7f86234fc": "../../../audit/gate2c1/vendor/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so",
+    "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf": "../../../runtime_trace/frozen_binaries/libc.so.6",
+    "e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f": "python3.12"
+  }
+}
