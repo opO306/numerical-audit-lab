@@ -47,11 +47,11 @@ raw rows, frozen files, hashes, roles, and a new `objdump` result independently.
 ## Paths and exact final file set
 
 The authoritative captures are
-`runtime_trace/regular_2step/artifacts/{known-02,fresh-02}/`.  The complete
-`known-01` and `fresh-01` directories are immutable historical Task-1 evidence;
-they remain byte-for-byte preserved under their original source pins, but are
-superseded because the strengthened checker and exit-event acquisition source
-have different hashes.  Each authoritative directory contains exactly:
+`runtime_trace/regular_2step/artifacts/{known-03,fresh-03}/`.  The complete
+`known-01`/`fresh-01` and `known-02`/`fresh-02` directories are immutable
+historical Task-1 evidence; they remain byte-for-byte preserved under their
+original source pins, but are superseded by later checker/source contracts.
+Each authoritative directory contains exactly:
 
 - `trace.jsonl`
 - `capture.json`
@@ -122,6 +122,13 @@ function-entry stack observation, requires the caller corridor's observed
 write transition from the step1 gradient bits to exact zero, and requires both
 step2 gradient lanes to be exact zero.  Equal bits with a different acquisition
 ID are rejected.
+
+For each protected role, replay requires one equality chain from the measured
+step1 `end_state` and pointer through handoff-from, Caller start state and
+protected pointer, Caller end state and entry-ABI pointer, handoff-to, and the
+measured step2 `start_state` and pointer.  The Caller receipt carries the same
+source acquisition ID and exact protected role set.  Only after this join does
+the checker apply actual Caller-row no-write observations to those ranges.
 
 `caller_corridor` records its half-open global row range, the step1-RET post PC,
 step2 entry PC/ABI, start/end component bits, actual `t`/`dt` load provenance,

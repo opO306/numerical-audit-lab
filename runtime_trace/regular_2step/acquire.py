@@ -319,6 +319,8 @@ def main(argv=None):
                         "executed_native_step_calls": 2, "harness_completed_normally": True,
                         "inherited_stale_n_steps_metadata": True,
                         "source_proof": harness_proof}})
+    capture["caller_corridor"]["source_acquisition_id"] = acquisition_id
+    capture["caller_corridor"]["protected_role_set"] = ["q", "full_v", "latent"]
     capture["process_local_handoff"] = _process_local_handoff(capture)
     antecedent_path = Path(args.antecedent).resolve()
     antecedent = json.loads(antecedent_path.read_text(encoding="utf-8"))

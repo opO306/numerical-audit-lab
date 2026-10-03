@@ -480,6 +480,41 @@ def _validate_gradient_reset(corridor_rows, pointer, from_bits):
             "sequences": [row["seq"] for row, _ in writes]}
 
 
+def _validate_protected_boundary(capture, regions, corridor):
+    """Join measured step1 state through Caller declarations to measured step2."""
+    role_names = ("q", "full_v", "latent")
+    handoff = capture.get("process_local_handoff", {})
+    roles = handoff.get("roles", {})
+    _require(corridor.get("source_acquisition_id") == capture.get("acquisition_id") and
+             corridor.get("protected_role_set") == list(role_names),
+             "protected boundary join acquisition/role set")
+    _require(set(roles) == set(role_names), "protected boundary join handoff roles")
+    corridor_pointers = corridor.get("protected_role_pointers", {})
+    entry_pointers = corridor.get("entry_abi", {}).get("pointers", {})
+    protected = {}
+    joins = {}
+    for name in role_names:
+        handoff_role = roles[name]
+        step1_bits = regions[1].get("end_state", {}).get(name)
+        step2_bits = regions[2].get("start_state", {}).get(name)
+        start_bits = corridor.get("start_component_bits", {}).get(name)
+        end_bits = corridor.get("end_component_bits", {}).get(name)
+        _require(step1_bits == handoff_role.get("from_bits") == start_bits == end_bits ==
+                 handoff_role.get("to_bits") == step2_bits,
+                 f"protected boundary join bits: {name}")
+        step1_pointer = regions[1].get("pointers", {}).get(name)
+        step2_pointer = regions[2].get("pointers", {}).get(name)
+        _require(isinstance(step1_pointer, int) and
+                 step1_pointer == handoff_role.get("from_pointer") ==
+                 corridor_pointers.get(name) == entry_pointers.get(name) ==
+                 handoff_role.get("to_pointer") == step2_pointer,
+                 f"protected boundary join pointer: {name}")
+        protected[name] = (step1_pointer, step1_pointer + 16)
+        joins[name] = {"bits": step1_bits, "pointer": step1_pointer,
+                       "source_acquisition_id": capture["acquisition_id"]}
+    return {"validated": True, "roles": joins, "protected_ranges": protected}
+
+
 def _validate_antecedent_boundary(capture, antecedent_capture, antecedent_path,
                                   corridor_rows, regions):
     binding = capture.get("antecedent_binding", {})
@@ -670,8 +705,8 @@ def compare(capture_dir: Path, root: Path) -> dict:
     antecedent_caller_rows = [row for row in antecedent_rows if row.get("phase") == "caller"]
     _validate_antecedent_boundary(capture, antecedent_capture, antecedent_capture_path,
                                   corridor_rows, regions)
-    protected = {name: (regions[1]["pointers"][name], regions[1]["pointers"][name] + 16)
-                 for name in ("q", "full_v", "latent")}
+    protected_boundary = _validate_protected_boundary(capture, regions, corridor)
+    protected = protected_boundary["protected_ranges"]
     corridor_proof = compare_caller_corridor(corridor_rows, antecedent_caller_rows, protected)
     for name in protected:
         _require(corridor.get("start_component_bits", {}).get(name) ==
@@ -699,6 +734,7 @@ def compare(capture_dir: Path, root: Path) -> dict:
         "address_validated_rows": address_rows,
         "observation_counts": observation_counts,
         "caller_corridor": corridor_proof,
+        "protected_boundary": protected_boundary,
         "reuse": reuse,
         "value_differences": value_differences,
         "claim_scope": "actual step1/step2 structural reuse in this acquisition only",

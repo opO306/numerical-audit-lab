@@ -46,7 +46,7 @@ def _repair_seal(directory):
 
 def _repaired_copy(tmp_path, case="known"):
     destination = tmp_path / case
-    shutil.copytree(ARTIFACTS / f"{case}-02", destination)
+    shutil.copytree(ARTIFACTS / f"{case}-03", destination)
     return destination
 
 
@@ -482,6 +482,33 @@ def test_repaired_seal_rejects_normal_exit_event_mutation(tmp_path: Path):
 
 
 def test_authoritative_pair_replay_requires_distinct_known_and_fresh():
-    report = compare_pair(ARTIFACTS / "known-02", ARTIFACTS / "fresh-02", ROOT)
+    report = compare_pair(ARTIFACTS / "known-03", ARTIFACTS / "fresh-03", ROOT)
     assert report["verdict"] == "PAIR_REUSE_PROVEN"
     assert report["runtime_address_equality_required_across_processes"] is False
+
+
+@pytest.mark.parametrize("role", ["q", "full_v", "latent"])
+@pytest.mark.parametrize("edge", ["step1_endpoint", "handoff_bits", "corridor_bits",
+                                   "handoff_pointer"])
+def test_repaired_seal_rejects_each_protected_role_join(tmp_path: Path, role, edge):
+    directory = _repaired_copy(tmp_path)
+    capture_path = directory / "capture.json"
+    capture = json.loads(capture_path.read_text(encoding="utf-8"))
+    wrong_bits = ["0x0000000000000001", "0x0000000000000002"]
+    handoff = capture["process_local_handoff"]["roles"][role]
+    corridor = capture["caller_corridor"]
+    if edge == "step1_endpoint":
+        capture["regions"][1]["end_state"][role] = wrong_bits
+    elif edge == "handoff_bits":
+        handoff["from_bits"] = wrong_bits
+        handoff["to_bits"] = wrong_bits
+    elif edge == "corridor_bits":
+        corridor["start_component_bits"][role] = wrong_bits
+        corridor["end_component_bits"][role] = wrong_bits
+    else:
+        handoff["from_pointer"] += 0x1000
+        handoff["to_pointer"] += 0x1000
+    _canonical_file(capture_path, capture)
+    _repair_seal(directory)
+    with pytest.raises(StructureRefused, match="protected boundary join"):
+        compare(directory, ROOT)

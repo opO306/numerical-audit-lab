@@ -1,0 +1,1473 @@
+Function "_ZL66__pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_c_init_velocityP11_CPotentialmiddPdS1_S1_S1_" not defined.
+Function "_ZL66__pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_c_leapfrog_stepP11_CPotentialmiddPdS1_S1_S1_" not defined.
+
+Thread 1 "python" hit Breakpoint -1, __pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_c_init_velocity (__pyx_v_p=0x298d250, __pyx_v_n=1, __pyx_v_half_ndim=2, __pyx_v_t=0, __pyx_v_dt=0.015625, __pyx_v_x_jm1=0x28f4cd0, __pyx_v_v_jm1=0x28f4ce0, __pyx_v_v_jm1_2=0x28b5270, __pyx_v_grad=0x2fadbe0) at src/gala/integrate/cyintegrators/leapfrog.cpp:21114
+0x00007fffae797902	21114	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797907	21114	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797909	21114	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79790c	21114	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79790f	21092	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797911	21092	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797913	21092	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797916	21092	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797917	21092	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79791a	21092	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79791b	21092	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79791e	21092	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797922	21092	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797927	21114	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79792a	21114	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7887c0 in c_gradient(_CPotential*, unsigned long, double, double*, double*)@plt () from /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+c_gradient (p=0x298d250, N=1, t=0, qp=0x28f4cd0, grad=0x2fadbe0) at src/gala/potential/potential/src/cpotential.cpp:223
+0x00007fffae7b73f2	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b73f4	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b73f7	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b73f9	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b73fc	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b73fe	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b73ff	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7400	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7404	238	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7408	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b740b	214	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7410	238	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7413	214	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7418	238	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b741c	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b741e	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7424	224	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7428	224	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b742b	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b742d	223	in src/gala/potential/potential/src/cpotential.cpp
+224	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7440	224	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7442	224	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7430	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7434	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7437	223	in src/gala/potential/potential/src/cpotential.cpp
+238	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7673	238	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7679	239	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7681	239	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7684	239	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7686	219	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7689	239	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae788350 in memset@plt () from /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+__memset_avx2_unaligned_erms () at ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:158
+159	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+0x00007ffff7d89788	159	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+164	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+165	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+337	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+346	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+347	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+378	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+379	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+380	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+c_gradient (p=0x298d250, N=1, t=0, qp=0x28f4cd0, grad=0x2fadbe0) at src/gala/potential/potential/src/cpotential.cpp:242
+0x00007fffae7b7690	220	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7695	218	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b769a	218	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7493	224	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7497 in double6ptr::double6ptr (this=<optimized out>, q=<optimized out>, N=<optimized out>) at src/gala/potential/potential/src/../../src/vectorization.h:20
+0x00007fffae7b749f in c_gradient (p=0x298d250, N=1, t=0, qp=0x28f4cd0, grad=0x2fadbe0) at src/gala/potential/potential/src/cpotential.cpp:242
+0x00007fffae7b74a1	242	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74a4 in double6ptr::double6ptr (this=<optimized out>, q=<optimized out>, N=<optimized out>) at src/gala/potential/potential/src/../../src/vectorization.h:20
+0x00007fffae7b74a9	21	in src/gala/potential/potential/src/../../src/vectorization.h
+0x00007fffae7b74ac	21	in src/gala/potential/potential/src/../../src/vectorization.h
+0x00007fffae7b74b0	21	in src/gala/potential/potential/src/../../src/vectorization.h
+0x00007fffae7b74b5	21	in src/gala/potential/potential/src/../../src/vectorization.h
+c_gradient (p=0x298d250, N=1, t=0, qp=0x28f4cd0, grad=0x2fadbe0) at src/gala/potential/potential/src/cpotential.cpp:243
+0x00007fffae7b7505	243	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b750d	243	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b750f	243	in src/gala/potential/potential/src/cpotential.cpp
+244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74c4	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74c8	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74cb	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74ce	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74d3	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74d8	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74dc	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74e0	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74e4	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74e7	244	in src/gala/potential/potential/src/cpotential.cpp
+gradientv<henon_heiles_gradient_functor> (t=0, pars=0x27a0ca0, n_dim=2, state=0x0, q=0x28f4cd0, N=1, grad=0x2fadbe0) at src/gala/potential/src/vectorization.h:71
+0x00007fffd5b2da53	71	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2da59 in double6ptr::double6ptr (this=<optimized out>, q=<optimized out>, N=<optimized out>) at src/gala/potential/src/vectorization.h:20
+20	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2da61	20	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2da65	20	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2da69	20	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2db60 in gradientv<henon_heiles_gradient_functor> (t=0, pars=0x27a0ca0, n_dim=<optimized out>, state=0x0, q=0x28f4cd0, N=1, grad=0x2fadbe0) at src/gala/potential/src/vectorization.h:71
+71	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2db63	71	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2db65	71	in src/gala/potential/src/vectorization.h
+henon_heiles_gradient_single (t=<optimized out>, pars=<optimized out>, q=..., n_dim=<optimized out>, grad=..., state=<optimized out>) at src/gala/potential/potential/builtin/builtin_potentials.cpp:37
+0x00007fffd5b2db76	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db7b	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db81	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db85	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db89	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db8d	38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db91	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db95	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db99	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2dba3	38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2dba7	38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2dbac	38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2dbb0	38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2dbb4	38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+gradientv<henon_heiles_gradient_functor> (t=<optimized out>, pars=0x27a0ca0, n_dim=<optimized out>, state=0x0, q=0x28f4cd0, N=1, grad=0x2fadbe0) at src/gala/potential/src/vectorization.h:71
+0x00007fffd5b2dbbd	71	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2dbc0	71	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2dbc2 in henon_heiles_gradient (t=<optimized out>, pars=<optimized out>, q=0x28f4cd0, n_dim=<optimized out>, N=1, grad=0x2fadbe0, state=<optimized out>) at src/gala/potential/potential/builtin/builtin_potentials.cpp:2282
+c_gradient (p=0x298d250, N=1, t=0, qp=0x28f4cd0, grad=0x2fadbe0) at src/gala/potential/potential/src/cpotential.cpp:242
+0x00007fffae7b74ed	242	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74f1	242	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74f4	242	in src/gala/potential/potential/src/cpotential.cpp
+283	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7655	283	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b765b	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b765f	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7660	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7661	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7663	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7665	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7667	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7669	287	in src/gala/potential/potential/src/cpotential.cpp
+__pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_c_init_velocity (__pyx_v_p=<optimized out>, __pyx_v_n=1, __pyx_v_half_ndim=2, __pyx_v_t=<optimized out>, __pyx_v_dt=0.015625, __pyx_v_x_jm1=<optimized out>, __pyx_v_v_jm1=0x28f4ce0, __pyx_v_v_jm1_2=0x28b5270, __pyx_v_grad=0x2fadbe0) at src/gala/integrate/cyintegrators/leapfrog.cpp:21133
+0x00007fffae797932	21133	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797938	21133	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79793d	21133	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79793f	21133	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797941	21133	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797949	21133	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79794c	21133	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79794e	21133	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21147	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797952	21147	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797954	21147	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79795f	21147	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79796a	21147	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797975	21147	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21157	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797983	21147	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797986	21157	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79798d	21157	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797993	21157	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797997	21157	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79799b	21157	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21147	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7979a4	21147	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7979a7	21147	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21133	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7979ac	21133	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7979af	21133	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7979b2	21133	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21147	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797952	21147	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797954	21147	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79795f	21147	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79796a	21147	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797975	21147	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21157	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797983	21147	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797986	21157	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79798d	21157	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797993	21157	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797997	21157	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79799b	21157	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21147	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7979a4	21147	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7979a7	21147	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21133	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7979ac	21133	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7979af	21133	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7979b2	21133	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7979b4	21180	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7979b8	21180	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7979b9	21180	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7979ba	21180	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7979bc	21180	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7979be	21180	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7979c0	21180	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7979c2	21180	in src/gala/integrate/cyintegrators/leapfrog.cpp
+__Pyx_ErrOccurredWithGIL () at src/gala/integrate/cyintegrators/leapfrog.cpp:30419
+30419	in src/gala/integrate/cyintegrators/leapfrog.cpp
+
+Thread 1 "python" hit Breakpoint -2, __pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_c_leapfrog_step (__pyx_v_p=0x298d250, __pyx_v_n=1, __pyx_v_half_ndim=2, __pyx_v_t=0.015625, __pyx_v_dt=0.015625, __pyx_v_x_jm1=0x28f4cd0, __pyx_v_v_jm1=0x28f4ce0, __pyx_v_v_jm1_2=0x28b5270, __pyx_v_grad=0x2fadbe0) at src/gala/integrate/cyintegrators/leapfrog.cpp:21212
+21212	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797782	21212	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797784	21212	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797786	21212	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797788	21212	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797789	21212	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79778a	21212	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79778d	21212	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797792	21190	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797796	21190	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79779b	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79779d	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977a3	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977a6	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977ab	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977ae	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977b1	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977b4	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977b7	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977bd	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977c2	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977c4	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977cf	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977da	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977e5	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977f0	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977fb	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797803	21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797808	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79780b	21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797811	21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797815	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797818	21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79781d	21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797825	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79782b	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79782e	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797830	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797832	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797835	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977c2	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977c4	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977cf	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977da	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977e5	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977f0	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977fb	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797803	21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797808	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79780b	21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797811	21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797815	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797818	21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79781d	21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797825	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79782b	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79782e	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797830	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21253	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797843	21253	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797846	21253	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7887c0 in c_gradient(_CPotential*, unsigned long, double, double*, double*)@plt () from /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+c_gradient (p=0x298d250, N=1, t=0.015625, qp=0x28f4cd0, grad=0x2fadbe0) at src/gala/potential/potential/src/cpotential.cpp:223
+0x00007fffae7b73f2	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b73f4	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b73f7	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b73f9	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b73fc	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b73fe	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b73ff	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7400	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7404	238	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7408	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b740b	214	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7410	238	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7413	214	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7418	238	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b741c	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b741e	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7424	224	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7428	224	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b742b	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b742d	223	in src/gala/potential/potential/src/cpotential.cpp
+224	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7440	224	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7442	224	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7430	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7434	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7437	223	in src/gala/potential/potential/src/cpotential.cpp
+238	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7673	238	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7679	239	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7681	239	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7684	239	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7686	219	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7689	239	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae788350 in memset@plt () from /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+__memset_avx2_unaligned_erms () at ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:158
+159	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+0x00007ffff7d89788	159	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+164	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+165	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+337	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+346	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+347	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+378	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+379	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+380	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+c_gradient (p=0x298d250, N=1, t=0.015625, qp=0x28f4cd0, grad=0x2fadbe0) at src/gala/potential/potential/src/cpotential.cpp:242
+0x00007fffae7b7690	220	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7695	218	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b769a	218	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7493	224	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7497 in double6ptr::double6ptr (this=<optimized out>, q=<optimized out>, N=<optimized out>) at src/gala/potential/potential/src/../../src/vectorization.h:20
+0x00007fffae7b749f in c_gradient (p=0x298d250, N=1, t=0.015625, qp=0x28f4cd0, grad=0x2fadbe0) at src/gala/potential/potential/src/cpotential.cpp:242
+0x00007fffae7b74a1	242	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74a4 in double6ptr::double6ptr (this=<optimized out>, q=<optimized out>, N=<optimized out>) at src/gala/potential/potential/src/../../src/vectorization.h:20
+0x00007fffae7b74a9	21	in src/gala/potential/potential/src/../../src/vectorization.h
+0x00007fffae7b74ac	21	in src/gala/potential/potential/src/../../src/vectorization.h
+0x00007fffae7b74b0	21	in src/gala/potential/potential/src/../../src/vectorization.h
+0x00007fffae7b74b5	21	in src/gala/potential/potential/src/../../src/vectorization.h
+c_gradient (p=0x298d250, N=1, t=0.015625, qp=0x28f4cd0, grad=0x2fadbe0) at src/gala/potential/potential/src/cpotential.cpp:243
+0x00007fffae7b7505	243	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b750d	243	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b750f	243	in src/gala/potential/potential/src/cpotential.cpp
+244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74c4	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74c8	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74cb	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74ce	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74d3	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74d8	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74dc	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74e0	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74e4	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74e7	244	in src/gala/potential/potential/src/cpotential.cpp
+gradientv<henon_heiles_gradient_functor> (t=0.015625, pars=0x27a0ca0, n_dim=2, state=0x0, q=0x28f4cd0, N=1, grad=0x2fadbe0) at src/gala/potential/src/vectorization.h:71
+0x00007fffd5b2da53	71	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2da59 in double6ptr::double6ptr (this=<optimized out>, q=<optimized out>, N=<optimized out>) at src/gala/potential/src/vectorization.h:20
+20	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2da61	20	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2da65	20	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2da69	20	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2db60 in gradientv<henon_heiles_gradient_functor> (t=0.015625, pars=0x27a0ca0, n_dim=<optimized out>, state=0x0, q=0x28f4cd0, N=1, grad=0x2fadbe0) at src/gala/potential/src/vectorization.h:71
+71	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2db63	71	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2db65	71	in src/gala/potential/src/vectorization.h
+henon_heiles_gradient_single (t=<optimized out>, pars=<optimized out>, q=..., n_dim=<optimized out>, grad=..., state=<optimized out>) at src/gala/potential/potential/builtin/builtin_potentials.cpp:37
+0x00007fffd5b2db76	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db7b	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db81	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db85	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db89	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db8d	38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db91	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db95	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db99	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2dba3	38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2dba7	38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2dbac	38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2dbb0	38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2dbb4	38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+gradientv<henon_heiles_gradient_functor> (t=<optimized out>, pars=0x27a0ca0, n_dim=<optimized out>, state=0x0, q=0x28f4cd0, N=1, grad=0x2fadbe0) at src/gala/potential/src/vectorization.h:71
+0x00007fffd5b2dbbd	71	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2dbc0	71	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2dbc2 in henon_heiles_gradient (t=<optimized out>, pars=<optimized out>, q=0x28f4cd0, n_dim=<optimized out>, N=1, grad=0x2fadbe0, state=<optimized out>) at src/gala/potential/potential/builtin/builtin_potentials.cpp:2282
+c_gradient (p=0x298d250, N=1, t=0.015625, qp=0x28f4cd0, grad=0x2fadbe0) at src/gala/potential/potential/src/cpotential.cpp:242
+0x00007fffae7b74ed	242	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74f1	242	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74f4	242	in src/gala/potential/potential/src/cpotential.cpp
+283	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7655	283	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b765b	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b765f	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7660	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7661	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7663	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7665	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7667	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7669	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae79784b in __pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_c_leapfrog_step (__pyx_v_p=<optimized out>, __pyx_v_n=1, __pyx_v_half_ndim=<optimized out>, __pyx_v_t=<optimized out>, __pyx_v_dt=0.015625, __pyx_v_x_jm1=<optimized out>, __pyx_v_v_jm1=0x28f4ce0, __pyx_v_v_jm1_2=0x28b5270, __pyx_v_grad=0x2fadbe0) at src/gala/integrate/cyintegrators/leapfrog.cpp:21253
+0x00007fffae797850	21253	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797852	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797855	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79785d	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797862	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797864	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79786f	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797873	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797876	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79787e	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797883	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797886	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79788a	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79788e	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797892	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797896	21305	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79789b	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21305	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978a5	21305	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978a9	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978ac	21305	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978b0	21305	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978b7	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978bd	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978c0	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978c3	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978c5	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978c8	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797862	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797864	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79786f	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797873	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797876	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79787e	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797883	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797886	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79788a	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79788e	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797892	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797896	21305	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79789b	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21305	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978a5	21305	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978a9	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978ac	21305	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978b0	21305	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978b7	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978bd	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978c0	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978c3	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978d5	21328	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978d9	21328	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978da	21328	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978db	21328	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978dd	21328	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978df	21328	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978e1	21328	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978e3	21328	in src/gala/integrate/cyintegrators/leapfrog.cpp
+__Pyx_ErrOccurredWithGIL () at src/gala/integrate/cyintegrators/leapfrog.cpp:30419
+30419	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b3621	30419	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b3623	30419	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7889d0 in PyGILState_Ensure@plt () from /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+0x00000000006b2ba0 in PyGILState_Ensure ()
+0x00000000006b2ba4 in PyGILState_Ensure ()
+0x00000000006b2ba5 in PyGILState_Ensure ()
+0x00000000006b2baa in PyGILState_Ensure ()
+0x00000000006b2bad in PyGILState_Ensure ()
+0x00000000006b2bae in PyGILState_Ensure ()
+0x00000000006b2baf in PyGILState_Ensure ()
+0x00000000006104e0 in PyThread_tss_get ()
+0x00000000006104e4 in PyThread_tss_get ()
+0x00000000006104e7 in PyThread_tss_get ()
+0x0000000000421760 in pthread_getspecific@plt ()
+___pthread_getspecific (key=0) at ./nptl/pthread_getspecific.c:24
+29	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e697	29	in ./nptl/pthread_getspecific.c
+30	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e69b	30	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e69f	30	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e6a3	30	in ./nptl/pthread_getspecific.c
+54	in ./nptl/pthread_getspecific.c
+55	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e6b3	55	in ./nptl/pthread_getspecific.c
+59	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e6b7	59	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e6be	59	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e6c1	59	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e6c5	59	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e6c9	59	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e6cb	64	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e6ce	64	in ./nptl/pthread_getspecific.c
+0x00000000006b2bb4 in PyGILState_Ensure ()
+0x00000000006b2bb7 in PyGILState_Ensure ()
+0x00000000006b2bbd in PyGILState_Ensure ()
+0x00000000006b2bc6 in PyGILState_Ensure ()
+0x00000000006b2bc9 in PyGILState_Ensure ()
+0x00000000006b2bce in PyGILState_Ensure ()
+0x00000000006b2bd1 in PyGILState_Ensure ()
+0x00000000006b2bde in PyGILState_Ensure ()
+0x00000000006b2be1 in PyGILState_Ensure ()
+0x00000000005fc4c0 in PyEval_RestoreThread ()
+0x00000000005fc4c4 in PyEval_RestoreThread ()
+0x00000000005fc4c5 in PyEval_RestoreThread ()
+0x00000000005fc4c8 in PyEval_RestoreThread ()
+0x00000000005fc4c9 in PyEval_RestoreThread ()
+0x00000000005fc4cd in PyEval_RestoreThread ()
+0x00000000005fc4d0 in PyEval_RestoreThread ()
+0x00000000005fc4d6 in PyEval_RestoreThread ()
+0x00000000005fc4d9 in PyEval_RestoreThread ()
+0x00000000005fbbe0 in ?? ()
+0x00000000005fbbe1 in ?? ()
+0x00000000005fbbe4 in ?? ()
+0x00000000005fbbe6 in ?? ()
+0x00000000005fbbe8 in ?? ()
+0x00000000005fbbea in ?? ()
+0x00000000005fbbed in ?? ()
+0x00000000005fbbef in ?? ()
+0x00000000005fbbf0 in ?? ()
+0x00000000005fbbf4 in ?? ()
+0x00000000004214b0 in __errno_location@plt ()
+__GI___errno_location () at ./csu/errno-loc.c:25
+26	in ./csu/errno-loc.c
+0x00007ffff7c2a6eb	26	in ./csu/errno-loc.c
+0x00007ffff7c2a6f4	27	in ./csu/errno-loc.c
+0x00000000005fbbf9 in ?? ()
+0x00000000005fbbfc in ?? ()
+0x00000000005fbbff in ?? ()
+0x00000000005fbc01 in ?? ()
+0x00000000005fbc04 in ?? ()
+0x0000000000608330 in ?? ()
+0x0000000000608334 in ?? ()
+0x0000000000608335 in ?? ()
+0x0000000000608338 in ?? ()
+0x0000000000608339 in ?? ()
+0x000000000060833d in ?? ()
+0x0000000000608344 in ?? ()
+0x000000000060834b in ?? ()
+0x000000000060834e in ?? ()
+0x0000000000608350 in ?? ()
+0x0000000000608354 in ?? ()
+0x0000000000608358 in ?? ()
+0x000000000060835f in ?? ()
+0x0000000000608362 in ?? ()
+0x0000000000608364 in ?? ()
+0x0000000000608367 in ?? ()
+0x000000000060836d in ?? ()
+0x000000000060836f in ?? ()
+0x0000000000608373 in ?? ()
+0x0000000000608374 in ?? ()
+0x00000000005fbc09 in ?? ()
+0x00000000005fbc0b in ?? ()
+0x00000000005fbc11 in ?? ()
+0x00000000005fbc15 in ?? ()
+0x00000000005fbc1d in ?? ()
+0x00000000005fbc25 in ?? ()
+0x00000000005fbc29 in ?? ()
+0x00000000005fbc2d in ?? ()
+0x00000000005fbc30 in ?? ()
+0x0000000000421c00 in pthread_mutex_lock@plt ()
+___pthread_mutex_lock (mutex=0xb49288 <_PyRuntime+77512>) at ./nptl/pthread_mutex_lock.c:77
+80	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00d7	80	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00d9	80	in ./nptl/pthread_mutex_lock.c
+82	in ./nptl/pthread_mutex_lock.c
+84	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00e3	84	in ./nptl/pthread_mutex_lock.c
+88	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00ea	88	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00ed	88	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00ee	88	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00f2	88	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00f4	88	in ./nptl/pthread_mutex_lock.c
+90	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0101	90	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0104	90	in ./nptl/pthread_mutex_lock.c
+lll_mutex_lock_optimized (mutex=0xb49288 <_PyRuntime+77512>) at ./nptl/pthread_mutex_lock.c:44
+44	in ./nptl/pthread_mutex_lock.c
+45	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca010f	45	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0111	45	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0118	45	in ./nptl/pthread_mutex_lock.c
+48	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca011c	48	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0121	48	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0125	48	in ./nptl/pthread_mutex_lock.c
+___pthread_mutex_lock (mutex=<optimized out>) at ./nptl/pthread_mutex_lock.c:94
+94	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca012e	94	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0130	94	in ./nptl/pthread_mutex_lock.c
+179	in ./nptl/pthread_mutex_lock.c
+182	in ./nptl/pthread_mutex_lock.c
+184	in ./nptl/pthread_mutex_lock.c
+187	in ./nptl/pthread_mutex_lock.c
+189	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0148	190	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca014c	190	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca014d	190	in ./nptl/pthread_mutex_lock.c
+0x00000000005fbc35 in ?? ()
+0x00000000005fbc38 in ?? ()
+0x00000000005fbc3a in ?? ()
+0x00000000005fbc40 in ?? ()
+0x00000000005fbc43 in ?? ()
+0x00000000005fbc47 in ?? ()
+0x00000000005fbc49 in ?? ()
+0x00000000005fbc4f in ?? ()
+0x00000000005fbc56 in ?? ()
+0x00000000005fbc59 in ?? ()
+0x00000000005fbc5d in ?? ()
+0x0000000000421c00 in pthread_mutex_lock@plt ()
+___pthread_mutex_lock (mutex=0xb492e0 <_PyRuntime+77600>) at ./nptl/pthread_mutex_lock.c:77
+77	in ./nptl/pthread_mutex_lock.c
+80	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00d7	80	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00d9	80	in ./nptl/pthread_mutex_lock.c
+82	in ./nptl/pthread_mutex_lock.c
+84	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00e3	84	in ./nptl/pthread_mutex_lock.c
+88	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00ea	88	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00ed	88	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00ee	88	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00f2	88	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00f4	88	in ./nptl/pthread_mutex_lock.c
+90	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0101	90	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0104	90	in ./nptl/pthread_mutex_lock.c
+lll_mutex_lock_optimized (mutex=0xb492e0 <_PyRuntime+77600>) at ./nptl/pthread_mutex_lock.c:44
+44	in ./nptl/pthread_mutex_lock.c
+45	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca010f	45	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0111	45	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0118	45	in ./nptl/pthread_mutex_lock.c
+48	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca011c	48	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0121	48	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0125	48	in ./nptl/pthread_mutex_lock.c
+___pthread_mutex_lock (mutex=<optimized out>) at ./nptl/pthread_mutex_lock.c:94
+94	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca012e	94	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0130	94	in ./nptl/pthread_mutex_lock.c
+179	in ./nptl/pthread_mutex_lock.c
+182	in ./nptl/pthread_mutex_lock.c
+184	in ./nptl/pthread_mutex_lock.c
+187	in ./nptl/pthread_mutex_lock.c
+189	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0148	190	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca014c	190	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca014d	190	in ./nptl/pthread_mutex_lock.c
+0x00000000005fbc62 in ?? ()
+0x00000000005fbc64 in ?? ()
+0x00000000005fbc6a in ?? ()
+0x00000000005fbc71 in ?? ()
+0x00000000005fbc75 in ?? ()
+0x00000000005fbc78 in ?? ()
+0x00000000005fbc7e in ?? ()
+0x00000000005fbc82 in ?? ()
+0x0000000000420470 in pthread_cond_signal@plt ()
+___pthread_cond_signal (cond=0xb492b0 <_PyRuntime+77552>) at ./nptl/pthread_cond_signal.c:35
+36	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b0a5	36	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b0a8	36	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b0aa	36	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b0ac	36	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b0ae	36	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b0b0	36	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b0b1	36	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b0b5	36	in ./nptl/pthread_cond_signal.c
+41	in ./nptl/pthread_cond_signal.c
+42	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b0bb	42	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b0be	42	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b15b	96	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b15f	96	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b161	96	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b162	96	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b164	96	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b166	96	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b168	96	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b16a	96	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b16b	96	in ./nptl/pthread_cond_signal.c
+0x00000000005fbc87 in ?? ()
+0x00000000005fbc89 in ?? ()
+0x00000000005fbc8f in ?? ()
+0x00000000005fbc93 in ?? ()
+0x0000000000421db0 in pthread_mutex_unlock@plt ()
+___pthread_mutex_unlock (mutex=0xb492e0 <_PyRuntime+77600>) at ./nptl/pthread_mutex_unlock.c:367
+__GI___pthread_mutex_unlock_usercnt (decr=1, mutex=0xb492e0 <_PyRuntime+77600>) at ./nptl/pthread_mutex_unlock.c:51
+51	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b57	51	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b59	51	in ./nptl/pthread_mutex_unlock.c
+52	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b61	52	in ./nptl/pthread_mutex_unlock.c
+___pthread_mutex_unlock (mutex=0xb492e0 <_PyRuntime+77600>) at ./nptl/pthread_mutex_unlock.c:57
+57	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b64	57	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b67	57	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b6b in __GI___pthread_mutex_unlock_usercnt (decr=1, mutex=0xb492e0 <_PyRuntime+77600>) at ./nptl/pthread_mutex_unlock.c:57
+57	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b6d	57	in ./nptl/pthread_mutex_unlock.c
+62	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b73	62	in ./nptl/pthread_mutex_unlock.c
+lll_mutex_unlock_optimized (mutex=0xb492e0 <_PyRuntime+77600>) at ./nptl/pthread_mutex_unlock.c:39
+39	in ./nptl/pthread_mutex_unlock.c
+40	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b83	40	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b85	40	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b8c	40	in ./nptl/pthread_mutex_unlock.c
+43	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1ba2	43	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1ba4	43	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1ba7	43	in ./nptl/pthread_mutex_unlock.c
+__GI___pthread_mutex_unlock_usercnt (decr=1, mutex=<optimized out>) at ./nptl/pthread_mutex_unlock.c:70
+70	in ./nptl/pthread_mutex_unlock.c
+72	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b97 in ___pthread_mutex_unlock (mutex=<optimized out>) at ./nptl/pthread_mutex_unlock.c:369
+369	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b98	369	in ./nptl/pthread_mutex_unlock.c
+0x00000000005fbc98 in ?? ()
+0x00000000005fbc9a in ?? ()
+0x00000000005fbca0 in ?? ()
+0x00000000005fbca3 in ?? ()
+0x0000000000608330 in ?? ()
+0x0000000000608334 in ?? ()
+0x0000000000608335 in ?? ()
+0x0000000000608338 in ?? ()
+0x0000000000608339 in ?? ()
+0x000000000060833d in ?? ()
+0x0000000000608344 in ?? ()
+0x000000000060834b in ?? ()
+0x000000000060834e in ?? ()
+0x0000000000608350 in ?? ()
+0x0000000000608354 in ?? ()
+0x0000000000608358 in ?? ()
+0x000000000060835f in ?? ()
+0x0000000000608362 in ?? ()
+0x0000000000608364 in ?? ()
+0x0000000000608367 in ?? ()
+0x000000000060836d in ?? ()
+0x000000000060836f in ?? ()
+0x0000000000608373 in ?? ()
+0x0000000000608374 in ?? ()
+0x00000000005fbca8 in ?? ()
+0x00000000005fbcaa in ?? ()
+0x00000000005fbcac in ?? ()
+0x00000000005fbcb2 in ?? ()
+0x00000000005fbcba in ?? ()
+0x00000000005fbcbc in ?? ()
+0x00000000005fbcc2 in ?? ()
+0x00000000005fbcca in ?? ()
+0x00000000005fbcd0 in ?? ()
+0x00000000005fbcd2 in ?? ()
+0x00000000005fbcd8 in ?? ()
+0x00000000005fbcdb in ?? ()
+0x00000000005fbce3 in ?? ()
+0x00000000005fbce6 in ?? ()
+0x0000000000610060 in PyThread_get_thread_ident ()
+0x0000000000610064 in PyThread_get_thread_ident ()
+0x0000000000610065 in PyThread_get_thread_ident ()
+0x0000000000610068 in PyThread_get_thread_ident ()
+0x000000000061006c in PyThread_get_thread_ident ()
+0x0000000000610072 in PyThread_get_thread_ident ()
+0x0000000000610074 in PyThread_get_thread_ident ()
+0x000000000061007a in PyThread_get_thread_ident ()
+0x0000000000420ef0 in pthread_self@plt ()
+__GI___pthread_self () at ./nptl/pthread_self.c:23
+24	in ./nptl/pthread_self.c
+0x00007ffff7ca37bd	24	in ./nptl/pthread_self.c
+0x000000000061007f in PyThread_get_thread_ident ()
+0x0000000000610083 in PyThread_get_thread_ident ()
+0x0000000000610087 in PyThread_get_thread_ident ()
+0x0000000000610088 in PyThread_get_thread_ident ()
+0x00000000005fbceb in ?? ()
+0x00000000005fbcf2 in ?? ()
+0x00000000005fbcf5 in ?? ()
+0x00000000005fbcfb in ?? ()
+0x00000000005fbd02 in ?? ()
+0x00000000005fbd08 in ?? ()
+0x00000000005fbd0e in ?? ()
+0x00000000005fbd16 in ?? ()
+0x00000000005fbd19 in ?? ()
+0x00000000005fbd1b in ?? ()
+0x00000000005fbd1d in ?? ()
+0x00000000005fbd1f in ?? ()
+0x00000000005fbd22 in ?? ()
+0x00000000005fbd25 in ?? ()
+0x00000000005fbd27 in ?? ()
+0x00000000005fbd2f in ?? ()
+0x00000000005fbd31 in ?? ()
+0x00000000005fbd39 in ?? ()
+0x00000000005fbd41 in ?? ()
+0x00000000005fbd47 in ?? ()
+0x00000000005fbd4a in ?? ()
+0x0000000000421db0 in pthread_mutex_unlock@plt ()
+___pthread_mutex_unlock (mutex=0xb49288 <_PyRuntime+77512>) at ./nptl/pthread_mutex_unlock.c:367
+__GI___pthread_mutex_unlock_usercnt (decr=1, mutex=0xb49288 <_PyRuntime+77512>) at ./nptl/pthread_mutex_unlock.c:51
+51	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b57	51	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b59	51	in ./nptl/pthread_mutex_unlock.c
+52	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b61	52	in ./nptl/pthread_mutex_unlock.c
+___pthread_mutex_unlock (mutex=0xb49288 <_PyRuntime+77512>) at ./nptl/pthread_mutex_unlock.c:57
+57	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b64	57	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b67	57	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b6b in __GI___pthread_mutex_unlock_usercnt (decr=1, mutex=0xb49288 <_PyRuntime+77512>) at ./nptl/pthread_mutex_unlock.c:57
+57	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b6d	57	in ./nptl/pthread_mutex_unlock.c
+62	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b73	62	in ./nptl/pthread_mutex_unlock.c
+lll_mutex_unlock_optimized (mutex=0xb49288 <_PyRuntime+77512>) at ./nptl/pthread_mutex_unlock.c:39
+39	in ./nptl/pthread_mutex_unlock.c
+40	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b83	40	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b85	40	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b8c	40	in ./nptl/pthread_mutex_unlock.c
+43	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1ba2	43	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1ba4	43	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1ba7	43	in ./nptl/pthread_mutex_unlock.c
+__GI___pthread_mutex_unlock_usercnt (decr=1, mutex=<optimized out>) at ./nptl/pthread_mutex_unlock.c:70
+70	in ./nptl/pthread_mutex_unlock.c
+72	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b97 in ___pthread_mutex_unlock (mutex=<optimized out>) at ./nptl/pthread_mutex_unlock.c:369
+369	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b98	369	in ./nptl/pthread_mutex_unlock.c
+0x00000000005fbd4f in ?? ()
+0x00000000005fbd51 in ?? ()
+0x00000000005fbd57 in ?? ()
+0x00000000005fbd5a in ?? ()
+0x00000000005fbd5d in ?? ()
+0x00000000005fbd61 in ?? ()
+0x00000000005fbd62 in ?? ()
+0x00000000005fbd64 in ?? ()
+0x00000000005fbd66 in ?? ()
+0x00000000005fbd68 in ?? ()
+0x00000000005fbd6a in ?? ()
+0x00000000005fbd6b in ?? ()
+0x00000000005fc4de in PyEval_RestoreThread ()
+0x00000000005fc4e1 in PyEval_RestoreThread ()
+0x00000000005fc4e5 in PyEval_RestoreThread ()
+0x00000000005fc4e6 in PyEval_RestoreThread ()
+0x00000000006082c0 in ?? ()
+0x00000000006082c4 in ?? ()
+0x00000000006082cd in ?? ()
+0x00000000006082da in ?? ()
+0x00000000006082dd in ?? ()
+0x00000000006082e3 in ?? ()
+0x00000000006082e6 in ?? ()
+0x00000000006082e8 in ?? ()
+0x00000000006082f1 in ?? ()
+0x00000000006082f5 in ?? ()
+0x00000000006082f8 in ?? ()
+0x00000000006082fa in ?? ()
+0x00000000006082fd in ?? ()
+0x0000000000608300 in ?? ()
+0x00000000006b2be6 in PyGILState_Ensure ()
+0x00000000006b2be9 in PyGILState_Ensure ()
+0x00000000006b2beb in PyGILState_Ensure ()
+0x00000000006b2bd3 in PyGILState_Ensure ()
+0x00000000006b2bd7 in PyGILState_Ensure ()
+0x00000000006b2bda in PyGILState_Ensure ()
+0x00000000006b2bdb in PyGILState_Ensure ()
+0x00000000006b2bdc in PyGILState_Ensure ()
+0x00000000006b2bdd in PyGILState_Ensure ()
+0x00007fffae7b3628 in __Pyx_ErrOccurredWithGIL () at src/gala/integrate/cyintegrators/leapfrog.cpp:30419
+30420	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae788890 in PyErr_Occurred@plt () from /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+0x00000000005f1620 in PyErr_Occurred ()
+0x00000000005f1624 in PyErr_Occurred ()
+0x00000000005f162b in PyErr_Occurred ()
+0x00000000005f162f in PyErr_Occurred ()
+0x00000000005f1633 in PyErr_Occurred ()
+0x00000000005f1636 in PyErr_Occurred ()
+0x00000000005f1638 in PyErr_Occurred ()
+0x00007fffae7b3630 in __Pyx_ErrOccurredWithGIL () at src/gala/integrate/cyintegrators/leapfrog.cpp:30421
+30421	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b3633	30420	in src/gala/integrate/cyintegrators/leapfrog.cpp
+30421	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7886e0 in PyGILState_Release@plt () from /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+0x00000000006b2bf0 in PyGILState_Release ()
+0x00000000006b2bf4 in PyGILState_Release ()
+0x00000000006b2bf5 in PyGILState_Release ()
+0x00000000006b2bf8 in PyGILState_Release ()
+0x00000000006b2bf9 in PyGILState_Release ()
+0x00000000006b2bfb in PyGILState_Release ()
+0x00000000006b2c00 in PyGILState_Release ()
+0x00000000006b2c04 in PyGILState_Release ()
+0x00000000006104e0 in PyThread_tss_get ()
+0x00000000006104e4 in PyThread_tss_get ()
+0x00000000006104e7 in PyThread_tss_get ()
+0x0000000000421760 in pthread_getspecific@plt ()
+___pthread_getspecific (key=0) at ./nptl/pthread_getspecific.c:24
+29	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e697	29	in ./nptl/pthread_getspecific.c
+30	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e69b	30	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e69f	30	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e6a3	30	in ./nptl/pthread_getspecific.c
+54	in ./nptl/pthread_getspecific.c
+55	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e6b3	55	in ./nptl/pthread_getspecific.c
+59	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e6b7	59	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e6be	59	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e6c1	59	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e6c5	59	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e6c9	59	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e6cb	64	in ./nptl/pthread_getspecific.c
+0x00007ffff7c9e6ce	64	in ./nptl/pthread_getspecific.c
+0x00000000006b2c09 in PyGILState_Release ()
+0x00000000006b2c0c in PyGILState_Release ()
+0x00000000006b2c12 in PyGILState_Release ()
+0x00000000006b2c1b in PyGILState_Release ()
+0x00000000006b2c21 in PyGILState_Release ()
+0x00000000006b2c25 in PyGILState_Release ()
+0x00000000006b2c2b in PyGILState_Release ()
+0x00000000006b2c2e in PyGILState_Release ()
+0x00000000006b2c37 in PyGILState_Release ()
+0x00000000006b2c3b in PyGILState_Release ()
+0x00000000006b2c3c in PyGILState_Release ()
+0x00000000006b2c3d in PyGILState_Release ()
+0x00000000005fc060 in PyEval_SaveThread ()
+0x00000000005fc064 in PyEval_SaveThread ()
+0x00000000005fc065 in PyEval_SaveThread ()
+0x00000000005fc067 in PyEval_SaveThread ()
+0x00000000005fc06a in PyEval_SaveThread ()
+0x00000000005fc06c in PyEval_SaveThread ()
+0x00000000005fc06e in PyEval_SaveThread ()
+0x00000000005fc070 in PyEval_SaveThread ()
+0x00000000005fc071 in PyEval_SaveThread ()
+0x00000000006082c0 in ?? ()
+0x00000000006082c4 in ?? ()
+0x00000000006082cd in ?? ()
+0x00000000006082da in ?? ()
+0x00000000006082dd in ?? ()
+0x00000000006082df in ?? ()
+0x00000000006082e3 in ?? ()
+0x00000000006082e6 in ?? ()
+0x0000000000608308 in ?? ()
+0x00000000005fc076 in PyEval_SaveThread ()
+0x00000000005fc079 in PyEval_SaveThread ()
+0x00000000005fc07f in PyEval_SaveThread ()
+0x00000000005fc083 in PyEval_SaveThread ()
+0x00000000005fc086 in PyEval_SaveThread ()
+0x00000000005fc08d in PyEval_SaveThread ()
+0x00000000005fc092 in PyEval_SaveThread ()
+0x00000000005fc094 in PyEval_SaveThread ()
+0x00000000005fc09a in PyEval_SaveThread ()
+0x00000000005fc09f in PyEval_SaveThread ()
+0x00000000005fc0a4 in PyEval_SaveThread ()
+0x00000000005fc0a7 in PyEval_SaveThread ()
+0x0000000000421c00 in pthread_mutex_lock@plt ()
+___pthread_mutex_lock (mutex=0xb49288 <_PyRuntime+77512>) at ./nptl/pthread_mutex_lock.c:77
+80	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00d7	80	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00d9	80	in ./nptl/pthread_mutex_lock.c
+82	in ./nptl/pthread_mutex_lock.c
+84	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00e3	84	in ./nptl/pthread_mutex_lock.c
+88	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00ea	88	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00ed	88	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00ee	88	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00f2	88	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca00f4	88	in ./nptl/pthread_mutex_lock.c
+90	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0101	90	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0104	90	in ./nptl/pthread_mutex_lock.c
+lll_mutex_lock_optimized (mutex=0xb49288 <_PyRuntime+77512>) at ./nptl/pthread_mutex_lock.c:44
+44	in ./nptl/pthread_mutex_lock.c
+45	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca010f	45	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0111	45	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0118	45	in ./nptl/pthread_mutex_lock.c
+48	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca011c	48	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0121	48	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0125	48	in ./nptl/pthread_mutex_lock.c
+___pthread_mutex_lock (mutex=<optimized out>) at ./nptl/pthread_mutex_lock.c:94
+94	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca012e	94	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0130	94	in ./nptl/pthread_mutex_lock.c
+179	in ./nptl/pthread_mutex_lock.c
+182	in ./nptl/pthread_mutex_lock.c
+184	in ./nptl/pthread_mutex_lock.c
+187	in ./nptl/pthread_mutex_lock.c
+189	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca0148	190	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca014c	190	in ./nptl/pthread_mutex_lock.c
+0x00007ffff7ca014d	190	in ./nptl/pthread_mutex_lock.c
+0x00000000005fc0ac in PyEval_SaveThread ()
+0x00000000005fc0ae in PyEval_SaveThread ()
+0x00000000005fc0b4 in PyEval_SaveThread ()
+0x00000000005fc0bd in PyEval_SaveThread ()
+0x00000000005fc0c2 in PyEval_SaveThread ()
+0x0000000000420470 in pthread_cond_signal@plt ()
+___pthread_cond_signal (cond=0xb49258 <_PyRuntime+77464>) at ./nptl/pthread_cond_signal.c:35
+36	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b0a5	36	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b0a8	36	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b0aa	36	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b0ac	36	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b0ae	36	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b0b0	36	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b0b1	36	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b0b5	36	in ./nptl/pthread_cond_signal.c
+41	in ./nptl/pthread_cond_signal.c
+42	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b0bb	42	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b0be	42	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b15b	96	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b15f	96	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b161	96	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b162	96	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b164	96	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b166	96	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b168	96	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b16a	96	in ./nptl/pthread_cond_signal.c
+0x00007ffff7c9b16b	96	in ./nptl/pthread_cond_signal.c
+0x00000000005fc0c7 in PyEval_SaveThread ()
+0x00000000005fc0c9 in PyEval_SaveThread ()
+0x00000000005fc0cf in PyEval_SaveThread ()
+0x00000000005fc0d2 in PyEval_SaveThread ()
+0x0000000000421db0 in pthread_mutex_unlock@plt ()
+___pthread_mutex_unlock (mutex=0xb49288 <_PyRuntime+77512>) at ./nptl/pthread_mutex_unlock.c:367
+__GI___pthread_mutex_unlock_usercnt (decr=1, mutex=0xb49288 <_PyRuntime+77512>) at ./nptl/pthread_mutex_unlock.c:51
+51	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b57	51	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b59	51	in ./nptl/pthread_mutex_unlock.c
+52	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b61	52	in ./nptl/pthread_mutex_unlock.c
+___pthread_mutex_unlock (mutex=0xb49288 <_PyRuntime+77512>) at ./nptl/pthread_mutex_unlock.c:57
+57	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b64	57	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b67	57	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b6b in __GI___pthread_mutex_unlock_usercnt (decr=1, mutex=0xb49288 <_PyRuntime+77512>) at ./nptl/pthread_mutex_unlock.c:57
+57	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b6d	57	in ./nptl/pthread_mutex_unlock.c
+62	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b73	62	in ./nptl/pthread_mutex_unlock.c
+lll_mutex_unlock_optimized (mutex=0xb49288 <_PyRuntime+77512>) at ./nptl/pthread_mutex_unlock.c:39
+39	in ./nptl/pthread_mutex_unlock.c
+40	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b83	40	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b85	40	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b8c	40	in ./nptl/pthread_mutex_unlock.c
+43	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1ba2	43	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1ba4	43	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1ba7	43	in ./nptl/pthread_mutex_unlock.c
+__GI___pthread_mutex_unlock_usercnt (decr=1, mutex=<optimized out>) at ./nptl/pthread_mutex_unlock.c:70
+70	in ./nptl/pthread_mutex_unlock.c
+72	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b97 in ___pthread_mutex_unlock (mutex=<optimized out>) at ./nptl/pthread_mutex_unlock.c:369
+369	in ./nptl/pthread_mutex_unlock.c
+0x00007ffff7ca1b98	369	in ./nptl/pthread_mutex_unlock.c
+0x00000000005fc0d7 in PyEval_SaveThread ()
+0x00000000005fc0d9 in PyEval_SaveThread ()
+0x00000000005fc0df in PyEval_SaveThread ()
+0x00000000005fc0e6 in PyEval_SaveThread ()
+0x00000000005fc0e8 in PyEval_SaveThread ()
+0x00000000005fc0ea in PyEval_SaveThread ()
+0x00000000005fc0ed in PyEval_SaveThread ()
+0x00000000005fc0ee in PyEval_SaveThread ()
+0x00000000005fc0f0 in PyEval_SaveThread ()
+0x00000000005fc0f2 in PyEval_SaveThread ()
+0x00000000005fc0f4 in PyEval_SaveThread ()
+0x00000000005fc0f5 in PyEval_SaveThread ()
+__pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_leapfrog_integrate_hamiltonian (__pyx_skip_dispatch=1, __pyx_v_hamiltonian=<optimized out>, __pyx_v_w0=..., __pyx_v_t=..., __pyx_optional_args=<synthetic pointer>) at src/gala/integrate/cyintegrators/leapfrog.cpp:30422
+0x00007fffae7b363e	30422	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21964	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b3648	21964	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b364a	21964	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d07	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d09	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d0f	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d17	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d1f	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d22	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d24	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d28	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d32	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d34	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d3a	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d3c	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d3f	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d47	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d49	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d4d	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d51	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d54	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d5a	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d5e	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b53f2 in Py_DECREF (op=<optimized out>) at /opt/_internal/cpython-3.12.14/include/python3.12/object.h:705
+0x00007fffae7b53f5 in __pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_leapfrog_integrate_hamiltonian (__pyx_skip_dispatch=1, __pyx_v_hamiltonian=<optimized out>, __pyx_v_w0=..., __pyx_v_t=..., __pyx_optional_args=<synthetic pointer>) at src/gala/integrate/cyintegrators/leapfrog.cpp:21357
+0x00007fffae7b53f7	21357	in src/gala/integrate/cyintegrators/leapfrog.cpp
+22008	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b5405	22008	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b5408	22008	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b5411	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b5414	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b5416	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4db2	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4db6	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4db9	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4dc1	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4dc4	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4dcc	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d51	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d54	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d5a	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d5e	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b53f2 in Py_DECREF (op=<optimized out>) at /opt/_internal/cpython-3.12.14/include/python3.12/object.h:705
+0x00007fffae7b53f5 in __pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_leapfrog_integrate_hamiltonian (__pyx_skip_dispatch=1, __pyx_v_hamiltonian=<optimized out>, __pyx_v_w0=..., __pyx_v_t=..., __pyx_optional_args=<synthetic pointer>) at src/gala/integrate/cyintegrators/leapfrog.cpp:21357
+0x00007fffae7b53f7	21357	in src/gala/integrate/cyintegrators/leapfrog.cpp
+22008	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b5405	22008	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b5408	22008	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b5411	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b5414	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b5416	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4db2	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4db6	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4db9	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4dc1	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4dc4	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4dcc	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d51	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d54	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d5a	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d5e	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b53f2 in Py_DECREF (op=<optimized out>) at /opt/_internal/cpython-3.12.14/include/python3.12/object.h:705
+0x00007fffae7b53f5 in __pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_leapfrog_integrate_hamiltonian (__pyx_skip_dispatch=1, __pyx_v_hamiltonian=<optimized out>, __pyx_v_w0=..., __pyx_v_t=..., __pyx_optional_args=<synthetic pointer>) at src/gala/integrate/cyintegrators/leapfrog.cpp:21357
+0x00007fffae7b53f7	21357	in src/gala/integrate/cyintegrators/leapfrog.cpp
+22008	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b5405	22008	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b5408	22008	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b5411	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b5414	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b5416	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4db2	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4db6	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4db9	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4dc1	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4dc4	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4dcc	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d51	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d54	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d5a	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4d5e	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b53f2 in Py_DECREF (op=<optimized out>) at /opt/_internal/cpython-3.12.14/include/python3.12/object.h:705
+0x00007fffae7b53f5 in __pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_leapfrog_integrate_hamiltonian (__pyx_skip_dispatch=1, __pyx_v_hamiltonian=<optimized out>, __pyx_v_w0=..., __pyx_v_t=..., __pyx_optional_args=<synthetic pointer>) at src/gala/integrate/cyintegrators/leapfrog.cpp:21357
+0x00007fffae7b53f7	21357	in src/gala/integrate/cyintegrators/leapfrog.cpp
+22008	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b5405	22008	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b5408	22008	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b5411	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b5414	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b5416	21992	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4db2	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4db6	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4db9	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4dc1	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4dc4	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4dcc	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b4dd2	21978	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21882	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b3658	21882	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b365c	21882	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b3661	21882	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b3669	21882	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b366c	21882	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21898	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b35cb	21898	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b35cd	21899	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b35d5	21899	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b35da	21899	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b35dc	21899	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae788350 in memset@plt () from /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+__memset_avx2_unaligned_erms () at ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:158
+159	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+0x00007ffff7d89788	159	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+164	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+165	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+337	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+346	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+347	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+378	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+379	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+380	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+__pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_leapfrog_integrate_hamiltonian (__pyx_skip_dispatch=1, __pyx_v_hamiltonian=<optimized out>, __pyx_v_w0=..., __pyx_v_t=..., __pyx_optional_args=<synthetic pointer>) at src/gala/integrate/cyintegrators/leapfrog.cpp:21953
+0x00007fffae7b35e5	21953	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b35eb	21953	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b35ee	21953	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b35f1	21953	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b35f5	21953	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b35fa	21953	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b3603	21953	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b360a	21953	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b3612	21953	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7b361a	21953	in src/gala/integrate/cyintegrators/leapfrog.cpp
+
+Thread 1 "python" hit Breakpoint -2, __pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_c_leapfrog_step (__pyx_v_p=0x298d250, __pyx_v_n=1, __pyx_v_half_ndim=2, __pyx_v_t=0.03125, __pyx_v_dt=0.015625, __pyx_v_x_jm1=0x28f4cd0, __pyx_v_v_jm1=0x28f4ce0, __pyx_v_v_jm1_2=0x28b5270, __pyx_v_grad=0x2fadbe0) at src/gala/integrate/cyintegrators/leapfrog.cpp:21212
+21212	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797782	21212	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797784	21212	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797786	21212	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797788	21212	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797789	21212	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79778a	21212	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79778d	21212	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797792	21190	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797796	21190	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79779b	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79779d	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977a3	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977a6	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977ab	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977ae	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977b1	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977b4	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977b7	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977bd	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977c2	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977c4	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977cf	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977da	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977e5	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977f0	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977fb	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797803	21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797808	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79780b	21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797811	21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797815	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797818	21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79781d	21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797825	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79782b	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79782e	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797830	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797832	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797835	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977c2	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977c4	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977cf	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977da	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977e5	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977f0	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7977fb	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797803	21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797808	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79780b	21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797811	21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797815	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797818	21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79781d	21239	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797825	21229	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79782b	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79782e	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797830	21215	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21253	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797843	21253	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797846	21253	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7887c0 in c_gradient(_CPotential*, unsigned long, double, double*, double*)@plt () from /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+c_gradient (p=0x298d250, N=1, t=0.03125, qp=0x28f4cd0, grad=0x2fadbe0) at src/gala/potential/potential/src/cpotential.cpp:223
+0x00007fffae7b73f2	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b73f4	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b73f7	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b73f9	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b73fc	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b73fe	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b73ff	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7400	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7404	238	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7408	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b740b	214	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7410	238	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7413	214	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7418	238	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b741c	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b741e	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7424	224	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7428	224	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b742b	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b742d	223	in src/gala/potential/potential/src/cpotential.cpp
+224	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7440	224	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7442	224	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7430	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7434	223	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7437	223	in src/gala/potential/potential/src/cpotential.cpp
+238	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7673	238	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7679	239	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7681	239	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7684	239	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7686	219	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7689	239	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae788350 in memset@plt () from /home/otherside123/venvs/gate2c1-trace/lib/python3.12/site-packages/gala/integrate/cyintegrators/leapfrog.cpython-312-x86_64-linux-gnu.so
+__memset_avx2_unaligned_erms () at ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:158
+159	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+0x00007ffff7d89788	159	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+164	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+165	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+337	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+346	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+347	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+378	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+379	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+380	in ../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+c_gradient (p=0x298d250, N=1, t=0.03125, qp=0x28f4cd0, grad=0x2fadbe0) at src/gala/potential/potential/src/cpotential.cpp:242
+0x00007fffae7b7690	220	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7695	218	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b769a	218	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7493	224	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7497 in double6ptr::double6ptr (this=<optimized out>, q=<optimized out>, N=<optimized out>) at src/gala/potential/potential/src/../../src/vectorization.h:20
+0x00007fffae7b749f in c_gradient (p=0x298d250, N=1, t=0.03125, qp=0x28f4cd0, grad=0x2fadbe0) at src/gala/potential/potential/src/cpotential.cpp:242
+0x00007fffae7b74a1	242	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74a4 in double6ptr::double6ptr (this=<optimized out>, q=<optimized out>, N=<optimized out>) at src/gala/potential/potential/src/../../src/vectorization.h:20
+0x00007fffae7b74a9	21	in src/gala/potential/potential/src/../../src/vectorization.h
+0x00007fffae7b74ac	21	in src/gala/potential/potential/src/../../src/vectorization.h
+0x00007fffae7b74b0	21	in src/gala/potential/potential/src/../../src/vectorization.h
+0x00007fffae7b74b5	21	in src/gala/potential/potential/src/../../src/vectorization.h
+c_gradient (p=0x298d250, N=1, t=0.03125, qp=0x28f4cd0, grad=0x2fadbe0) at src/gala/potential/potential/src/cpotential.cpp:243
+0x00007fffae7b7505	243	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b750d	243	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b750f	243	in src/gala/potential/potential/src/cpotential.cpp
+244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74c4	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74c8	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74cb	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74ce	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74d3	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74d8	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74dc	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74e0	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74e4	244	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74e7	244	in src/gala/potential/potential/src/cpotential.cpp
+gradientv<henon_heiles_gradient_functor> (t=0.03125, pars=0x27a0ca0, n_dim=2, state=0x0, q=0x28f4cd0, N=1, grad=0x2fadbe0) at src/gala/potential/src/vectorization.h:71
+0x00007fffd5b2da53	71	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2da59 in double6ptr::double6ptr (this=<optimized out>, q=<optimized out>, N=<optimized out>) at src/gala/potential/src/vectorization.h:20
+20	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2da61	20	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2da65	20	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2da69	20	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2db60 in gradientv<henon_heiles_gradient_functor> (t=0.03125, pars=0x27a0ca0, n_dim=<optimized out>, state=0x0, q=0x28f4cd0, N=1, grad=0x2fadbe0) at src/gala/potential/src/vectorization.h:71
+71	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2db63	71	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2db65	71	in src/gala/potential/src/vectorization.h
+henon_heiles_gradient_single (t=<optimized out>, pars=<optimized out>, q=..., n_dim=<optimized out>, grad=..., state=<optimized out>) at src/gala/potential/potential/builtin/builtin_potentials.cpp:37
+0x00007fffd5b2db76	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db7b	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db81	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db85	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db89	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db8d	38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db91	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db95	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2db99	37	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2dba3	38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2dba7	38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2dbac	38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2dbb0	38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+0x00007fffd5b2dbb4	38	in src/gala/potential/potential/builtin/builtin_potentials.cpp
+gradientv<henon_heiles_gradient_functor> (t=<optimized out>, pars=0x27a0ca0, n_dim=<optimized out>, state=0x0, q=0x28f4cd0, N=1, grad=0x2fadbe0) at src/gala/potential/src/vectorization.h:71
+0x00007fffd5b2dbbd	71	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2dbc0	71	in src/gala/potential/src/vectorization.h
+0x00007fffd5b2dbc2 in henon_heiles_gradient (t=<optimized out>, pars=<optimized out>, q=0x28f4cd0, n_dim=<optimized out>, N=1, grad=0x2fadbe0, state=<optimized out>) at src/gala/potential/potential/builtin/builtin_potentials.cpp:2282
+c_gradient (p=0x298d250, N=1, t=0.03125, qp=0x28f4cd0, grad=0x2fadbe0) at src/gala/potential/potential/src/cpotential.cpp:242
+0x00007fffae7b74ed	242	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74f1	242	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b74f4	242	in src/gala/potential/potential/src/cpotential.cpp
+283	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7655	283	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b765b	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b765f	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7660	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7661	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7663	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7665	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7667	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae7b7669	287	in src/gala/potential/potential/src/cpotential.cpp
+0x00007fffae79784b in __pyx_f_4gala_9integrate_13cyintegrators_8leapfrog_c_leapfrog_step (__pyx_v_p=<optimized out>, __pyx_v_n=1, __pyx_v_half_ndim=<optimized out>, __pyx_v_t=<optimized out>, __pyx_v_dt=0.015625, __pyx_v_x_jm1=<optimized out>, __pyx_v_v_jm1=0x28f4ce0, __pyx_v_v_jm1_2=0x28b5270, __pyx_v_grad=0x2fadbe0) at src/gala/integrate/cyintegrators/leapfrog.cpp:21253
+0x00007fffae797850	21253	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797852	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797855	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79785d	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797862	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797864	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79786f	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797873	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797876	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79787e	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797883	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797886	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79788a	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79788e	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797892	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797896	21305	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79789b	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21305	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978a5	21305	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978a9	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978ac	21305	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978b0	21305	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978b7	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978bd	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978c0	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978c3	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978c5	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978c8	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797862	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797864	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79786f	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797873	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797876	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79787e	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797883	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797886	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79788a	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79788e	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797892	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae797896	21305	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae79789b	21296	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21305	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978a5	21305	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978a9	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978ac	21305	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978b0	21305	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978b7	21286	in src/gala/integrate/cyintegrators/leapfrog.cpp
+21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978bd	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978c0	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978c3	21272	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978d5	21328	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978d9	21328	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978da	21328	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978db	21328	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978dd	21328	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978df	21328	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978e1	21328	in src/gala/integrate/cyintegrators/leapfrog.cpp
+0x00007fffae7978e3	21328	in src/gala/integrate/cyintegrators/leapfrog.cpp
+__Pyx_ErrOccurredWithGIL () at src/gala/integrate/cyintegrators/leapfrog.cpp:30419
+30419	in src/gala/integrate/cyintegrators/leapfrog.cpp
+[Inferior 1 (process 461) exited normally]

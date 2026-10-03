@@ -301,6 +301,8 @@ class Regular2StepCapture(BaseCapture):
             "entry_abi": entry_abi, "argument_sources": argument_sources,
             "start_context": start_context, "start_component_bits": start_state,
             "end_component_bits": end_state, "owner_ptid": list(self.owner),
+            "protected_role_pointers": {name: protected_pointers[name]
+                for name in ("q", "full_v", "latent")},
             "local_record_count": corridor.records, "local_final_chain": corridor.chain,
             "opcode_histogram": corridor.opcodes,
             "counts": {"pre_memory_observations": corridor.pre_memory_observation_count,
