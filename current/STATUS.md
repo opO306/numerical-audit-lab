@@ -103,9 +103,27 @@ frozen V2와 감사 완료된 Numeric IR 및 Runtime Trace를 수정하지 않�
 
 ## Numeric IR → frozen V2 regular init + 1-step — 2026-10-03
 
-**Numeric IR → V2 regular 1-step = IMPLEMENTED / CHECKER PASS.**
-**INDEPENDENT AUDIT PENDING.** 외부 독립 감사 전에는 CLOSED / PASS로 올리지 않는다.
+**Numeric IR → frozen V2 regular init + 1-step = CLOSED / PASS.**
+2026-10-03 수령한 [외부 독립 감사 보고서](NUMERIC_IR_V2_INDEPENDENT_AUDIT_2026-10-03.md)와
+[원 evidence ZIP](numeric_ir_v2_independent_audit_evidence_2026-10-03.zip)을 원 bytes로 보존한다.
+감사 대상 HEAD는 `34e062dee6bf0564d6aafa8ea901de317f7e2871`이며 A1–A12 PASS,
+Critical 0 / Major 0 / Minor 0 / 기술적 UNRESOLVED 0, Final PASS다.
+이 범위의 INDEPENDENT AUDIT PENDING은 종료했다. 이전 구현 README의 PENDING은 감사 당시 기록으로 보존한다.
+수령 ZIP SHA-256은 `6fd330347662c535fd80f7b6c9cc80df0532740883e50ea7c88290a1d39419dc`,
+내부 보고서 SHA-256은 `86aa095d84420f0ca5278bbdbce65d8c504d27100dc574c5e51bcef6bed425d9`다.
+수령 ZIP의 SHA256SUMS에 나열된 payload 6/6을 다시 검사했다.
 선행 Runtime Trace → Numeric IR의 위 CLOSED / PASS는 별도 범위로 유지한다.
+
+독립 감사자는 전달 ZIP의 manifest 875/875, Git bundle/ancestry, 보호 대상 기존 파일 759개와
+snapshot 807개 전부의 HEAD blob byte identity를 확인했다. Adapter/checker evaluator를 사용하지 않는
+별도 IEEE-754 bits → exact rational 및 V2 Form 구현으로 전체 correspondence를 다시 계산했다.
+두 source의 fresh regeneration은 byte-identical이며 감사자가 새로 실행한 시험은
+전용 69 passed in 5.44s / 전체 479 passed in 56.07s, skip/xfail 0이다.
+이 수치는 수령 감사의 재현 결과이며 이번 상태 기록 갱신에서 다시 실행한 시험으로 표현하지 않는다.
+
+PASS 범위는 **두 byte-pinned audited Numeric IR / unchanged frozen V2 operation layer /
+regular orbit / init + 1-step**이다. Caller 실행·error continuity, center 독립 재계산,
+10/100-step, trajectory/global error/physical/observable accuracy로 확대하지 않는다.
 
 첫 audited attempt-05 Numeric IR의 출력 파일을 생성·검사한 뒤 closure-fresh-01을 별도로
 통과시켰다. 각 입력은 IR arithmetic 36개 ↔ 실제 frozen V2 arithmetic 36개,
@@ -137,3 +155,19 @@ Boundary의 Form 전달은 선언된 IR 모델이며 캡처 밖 caller 실행·r
 [V2 연결 구현 보고](../runtime_trace/numeric_ir/v2/README.md)에 기록했다.
 로컬 브랜치는 `numeric-ir-v2-regular-1step`, 시작 HEAD는
 `d679c8ba32d98e6076708b2b70b93c4eb37f5a49`다. Push하지 않았다.
+
+## Caller Transition / Error-Continuity Gate — 2026-10-03
+
+승인된 다음 작업은 **1-step output → 실제 caller → next-step input**의 연결 검증이다.
+현재는 SOURCE ANALYSIS / SCOPE CLARIFICATION 상태이며 새 Gate의 IMPLEMENTED/CHECKER PASS를 주장하지 않는다.
+Frozen Gala Cython caller는 `leapfrog_integrate_hamiltonian`의 반복문이다.
+`tmp_w`의 q/full_v 및 별도 `v_jm1_2` 버퍼를 전달하고 각 호출 전에 `grad_v[:] = 0.`을 수행한다.
+반면 현재 IR→V2 adapter는 감사된 init+1-step 문서를 한 번 소비한 뒤 종료하며 다음 step caller를 구현하지 않는다.
+기존 `n_steps=1` 획득에는 첫 step 이후 다음 함수 진입이 존재하지 않는다.
+
+Native caller의 다음 진입 관측, 기존 init→step caller, 별도 `run_v2.py` rebase caller는 서로 다른 대상이다.
+실제 대상과 fresh acquisition의 정지 지점을 확인한 뒤 continuity 계약과 독립 검사 범위를 확정한다.
+동일 center bits만으로 동일 exact/Form error state를 가정하지 않는다.
+현재 1-step correspondence·기존 checker 결과·Runtime Trace·Numeric IR·frozen V2를 보존한다.
+10/100-step 및 trajectory/global accumulated-error/physical/observable accuracy를 수행하거나 주장하지 않는다.
+새 Gate는 외부 독립 감사 전에는 CLOSED / PASS로 표시하지 않는다. Push하지 않는다.

@@ -91,3 +91,7 @@ runtime_trace/numeric_ir/v2/artifacts/** -text
 runtime_trace/numeric_ir/v2/artifacts/*.log whitespace=cr-at-eol
 # Raw failure excerpts retain the source indentation on blank lines.
 runtime_trace/numeric_ir/v2/artifacts/validation-after-parser-fix/first-post-fix-combined-failed.* whitespace=-blank-at-eol
+
+# Numeric IR to frozen V2 independent audit: immutable received bytes.
+current/NUMERIC_IR_V2_INDEPENDENT_AUDIT_2026-10-03.md -text whitespace=-blank-at-eol
+current/numeric_ir_v2_independent_audit_evidence_2026-10-03.zip -text
