@@ -1,0 +1,327 @@
+{
+  "base_head": "a821d197c1354a9e3f72adb083a436967a2c5a17",
+  "baseline_inventory_sha256": "df210670172e00e85400ce7f37a183b61a28b41da0a68cee37f0cf9a06babc8f",
+  "changed_tracked_paths": [
+    "runtime_trace/regular_2step/README.md",
+    "runtime_trace/regular_2step/artifacts/derived/fresh/chain.json",
+    "runtime_trace/regular_2step/artifacts/derived/fresh/checker_report.json",
+    "runtime_trace/regular_2step/artifacts/derived/fresh/components.json",
+    "runtime_trace/regular_2step/artifacts/derived/known/chain.json",
+    "runtime_trace/regular_2step/artifacts/derived/known/checker_report.json",
+    "runtime_trace/regular_2step/artifacts/derived/known/components.json",
+    "runtime_trace/regular_2step/artifacts/mutations/01/derived/chain.json",
+    "runtime_trace/regular_2step/artifacts/mutations/01/derived/checker_report.json",
+    "runtime_trace/regular_2step/artifacts/mutations/01/derived/components.json",
+    "runtime_trace/regular_2step/artifacts/mutations/01/repair.json",
+    "runtime_trace/regular_2step/artifacts/mutations/02/derived/chain.json",
+    "runtime_trace/regular_2step/artifacts/mutations/02/derived/checker_report.json",
+    "runtime_trace/regular_2step/artifacts/mutations/02/derived/components.json",
+    "runtime_trace/regular_2step/artifacts/mutations/02/repair.json",
+    "runtime_trace/regular_2step/artifacts/mutations/03/derived/chain.json",
+    "runtime_trace/regular_2step/artifacts/mutations/03/derived/checker_report.json",
+    "runtime_trace/regular_2step/artifacts/mutations/03/derived/components.json",
+    "runtime_trace/regular_2step/artifacts/mutations/03/repair.json",
+    "runtime_trace/regular_2step/artifacts/mutations/04/derived/chain.json",
+    "runtime_trace/regular_2step/artifacts/mutations/04/derived/checker_report.json",
+    "runtime_trace/regular_2step/artifacts/mutations/04/derived/components.json",
+    "runtime_trace/regular_2step/artifacts/mutations/04/repair.json",
+    "runtime_trace/regular_2step/artifacts/mutations/05/derived/chain.json",
+    "runtime_trace/regular_2step/artifacts/mutations/05/derived/checker_report.json",
+    "runtime_trace/regular_2step/artifacts/mutations/05/derived/components.json",
+    "runtime_trace/regular_2step/artifacts/mutations/05/repair.json",
+    "runtime_trace/regular_2step/artifacts/mutations/06/derived/chain.json",
+    "runtime_trace/regular_2step/artifacts/mutations/06/derived/checker_report.json",
+    "runtime_trace/regular_2step/artifacts/mutations/06/derived/components.json",
+    "runtime_trace/regular_2step/artifacts/mutations/06/repair.json",
+    "runtime_trace/regular_2step/artifacts/mutations/07/derived/chain.json",
+    "runtime_trace/regular_2step/artifacts/mutations/07/derived/checker_report.json",
+    "runtime_trace/regular_2step/artifacts/mutations/07/derived/components.json",
+    "runtime_trace/regular_2step/artifacts/mutations/07/repair.json",
+    "runtime_trace/regular_2step/artifacts/mutations/08/derived/chain.json",
+    "runtime_trace/regular_2step/artifacts/mutations/08/derived/checker_report.json",
+    "runtime_trace/regular_2step/artifacts/mutations/08/derived/components.json",
+    "runtime_trace/regular_2step/artifacts/mutations/08/repair.json",
+    "runtime_trace/regular_2step/artifacts/mutations/09/derived/chain.json",
+    "runtime_trace/regular_2step/artifacts/mutations/09/derived/checker_report.json",
+    "runtime_trace/regular_2step/artifacts/mutations/09/derived/components.json",
+    "runtime_trace/regular_2step/artifacts/mutations/09/repair.json",
+    "runtime_trace/regular_2step/artifacts/mutations/10/derived/chain.json",
+    "runtime_trace/regular_2step/artifacts/mutations/10/derived/checker_report.json",
+    "runtime_trace/regular_2step/artifacts/mutations/10/derived/components.json",
+    "runtime_trace/regular_2step/artifacts/mutations/10/repair.json",
+    "runtime_trace/regular_2step/artifacts/mutations/11/derived/chain.json",
+    "runtime_trace/regular_2step/artifacts/mutations/11/derived/checker_report.json",
+    "runtime_trace/regular_2step/artifacts/mutations/11/derived/components.json",
+    "runtime_trace/regular_2step/artifacts/mutations/11/repair.json",
+    "runtime_trace/regular_2step/artifacts/mutations/12/derived/chain.json",
+    "runtime_trace/regular_2step/artifacts/mutations/12/derived/checker_report.json",
+    "runtime_trace/regular_2step/artifacts/mutations/12/derived/components.json",
+    "runtime_trace/regular_2step/artifacts/mutations/12/repair.json",
+    "runtime_trace/regular_2step/artifacts/mutations/13/derived/chain.json",
+    "runtime_trace/regular_2step/artifacts/mutations/13/derived/checker_report.json",
+    "runtime_trace/regular_2step/artifacts/mutations/13/derived/components.json",
+    "runtime_trace/regular_2step/artifacts/mutations/13/repair.json",
+    "runtime_trace/regular_2step/artifacts/mutations/14/derived/chain.json",
+    "runtime_trace/regular_2step/artifacts/mutations/14/derived/checker_report.json",
+    "runtime_trace/regular_2step/artifacts/mutations/14/derived/components.json",
+    "runtime_trace/regular_2step/artifacts/mutations/14/repair.json",
+    "runtime_trace/regular_2step/artifacts/mutations/15/derived/chain.json",
+    "runtime_trace/regular_2step/artifacts/mutations/15/derived/checker_report.json",
+    "runtime_trace/regular_2step/artifacts/mutations/15/derived/components.json",
+    "runtime_trace/regular_2step/artifacts/mutations/15/repair.json",
+    "runtime_trace/regular_2step/artifacts/mutations/16/derived/chain.json",
+    "runtime_trace/regular_2step/artifacts/mutations/16/derived/checker_report.json",
+    "runtime_trace/regular_2step/artifacts/mutations/16/derived/components.json",
+    "runtime_trace/regular_2step/artifacts/mutations/16/repair.json",
+    "runtime_trace/regular_2step/artifacts/mutations/17/derived/chain.json",
+    "runtime_trace/regular_2step/artifacts/mutations/17/derived/checker_report.json",
+    "runtime_trace/regular_2step/artifacts/mutations/17/derived/components.json",
+    "runtime_trace/regular_2step/artifacts/mutations/17/repair.json",
+    "runtime_trace/regular_2step/artifacts/mutations/copy_receipt.json",
+    "runtime_trace/regular_2step/artifacts/mutations/manifest.json",
+    "runtime_trace/regular_2step/checker.py",
+    "runtime_trace/regular_2step/tests/test_step2_chain.py"
+  ],
+  "closed_control_forms": [
+    "ff25 disp32: JMP read8 at PC+6+signed_disp32",
+    "ff14e8: CALL read8 at pre_RAX+8*pre_RBP",
+    "c3: RET read8 at pre_RSP"
+  ],
+  "elapsed_seconds": 826.755647,
+  "final_pytest": "19 passed in 135.40s",
+  "hash_controls": 1,
+  "loc_definition": "Physical splitlines including blanks/comments; Task2-only five production Python files and two tests, excluding Task1, existing reused modules, docs and artifacts",
+  "measured_at_utc": "2026-10-03T11:34:04.755647+00:00",
+  "measured_start_utc": "2026-10-03T11:20:18Z",
+  "new_acquisitions": 0,
+  "original_reports": [
+    {
+      "path": ".superpowers/sdd/2026-10-03-regular-2step/task-2-report.md",
+      "sha256": "76ba6ee1ffa2a36e05bdd2b0af71bb78c4e39a9e02e7c78d17ecb481a777975b"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-03-regular-2step/task-2-review.md",
+      "sha256": "9eea4f81ea01790a4971bba4baafeae43223f7c77652a3ab64a8f2ba798abc19"
+    }
+  ],
+  "production_python_lines": 801,
+  "protected_tracked_paths": 1553,
+  "pytest_cumulative_seconds": 137.74,
+  "runs": [
+    {
+      "directory": "task2-fix1-attempt-02-red",
+      "logs": [
+        {
+          "name": "pytest.log",
+          "sha256": "023ad91000d53056f6d4301a93f9bf4ad4ab535281f3db2b093cbe3f8b26a821"
+        }
+      ],
+      "timing": {
+        "ended_utc": "2026-10-03T11:24:18.9178685Z",
+        "exit_code": 1,
+        "wall_seconds": 1.361448
+      }
+    },
+    {
+      "directory": "task2-fix1-attempt-03-focused",
+      "logs": [
+        {
+          "name": "pytest.log",
+          "sha256": "0e05013614465b3fd4ea1403e95ee511ad307b6ce03ccfed844b2c481be70c33"
+        }
+      ],
+      "timing": {
+        "ended_utc": "2026-10-03T11:26:48.5438228Z",
+        "exit_code": 0,
+        "wall_seconds": 4.0559512
+      }
+    },
+    {
+      "directory": "task2-fix1-attempt-04-public-cli",
+      "logs": [
+        {
+          "name": "fresh-checker.log",
+          "sha256": "e1ee83ca9898540624c06b3fb6226b0d6bae6cc2d95bed5c9c3e9f8bcc5f632a"
+        },
+        {
+          "name": "fresh-producer.log",
+          "sha256": "e1ee83ca9898540624c06b3fb6226b0d6bae6cc2d95bed5c9c3e9f8bcc5f632a"
+        },
+        {
+          "name": "known-checker.log",
+          "sha256": "8fbd10cbc6257201fc8b5de6f435a1b4a6d717c380feba394d252d6d93796462"
+        },
+        {
+          "name": "known-producer.log",
+          "sha256": "8fbd10cbc6257201fc8b5de6f435a1b4a6d717c380feba394d252d6d93796462"
+        }
+      ],
+      "timing": [
+        {
+          "command": [
+            "/home/otherside123/venvs/gate2c1-trace/bin/python",
+            "-m",
+            "runtime_trace.regular_2step.producer",
+            "--root",
+            "/mnt/d/numerical-audit-lab-recovered-2026-10-01",
+            "--capture",
+            "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_2step/artifacts/known-03",
+            "--out",
+            "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-04-public-cli/known"
+          ],
+          "ended_utc": "2026-10-03T11:27:57.483432+00:00",
+          "exit_code": 0,
+          "wall_seconds": 11.792986478999993
+        },
+        {
+          "command": [
+            "/home/otherside123/venvs/gate2c1-trace/bin/python",
+            "-m",
+            "runtime_trace.regular_2step.checker",
+            "--root",
+            "/mnt/d/numerical-audit-lab-recovered-2026-10-01",
+            "--capture",
+            "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_2step/artifacts/known-03",
+            "--derived",
+            "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-04-public-cli/known"
+          ],
+          "ended_utc": "2026-10-03T11:28:04.319900+00:00",
+          "exit_code": 0,
+          "wall_seconds": 6.833081085999993
+        },
+        {
+          "command": [
+            "/home/otherside123/venvs/gate2c1-trace/bin/python",
+            "-m",
+            "runtime_trace.regular_2step.producer",
+            "--root",
+            "/mnt/d/numerical-audit-lab-recovered-2026-10-01",
+            "--capture",
+            "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_2step/artifacts/fresh-03",
+            "--out",
+            "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-04-public-cli/fresh"
+          ],
+          "ended_utc": "2026-10-03T11:28:18.942562+00:00",
+          "exit_code": 0,
+          "wall_seconds": 13.60653803599999
+        },
+        {
+          "command": [
+            "/home/otherside123/venvs/gate2c1-trace/bin/python",
+            "-m",
+            "runtime_trace.regular_2step.checker",
+            "--root",
+            "/mnt/d/numerical-audit-lab-recovered-2026-10-01",
+            "--capture",
+            "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_2step/artifacts/fresh-03",
+            "--derived",
+            "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-04-public-cli/fresh"
+          ],
+          "ended_utc": "2026-10-03T11:28:25.100760+00:00",
+          "exit_code": 0,
+          "wall_seconds": 6.154696291999997
+        }
+      ]
+    },
+    {
+      "directory": "task2-fix1-attempt-05-final-green",
+      "logs": [
+        {
+          "name": "pytest.log",
+          "sha256": "bf6be5d79c31ee37c9f2104caca786178e82bff9c0139c350ac8b60340c1364c"
+        }
+      ],
+      "timing": {
+        "ended_utc": "2026-10-03T11:31:41.8413311Z",
+        "exit_code": 0,
+        "wall_seconds": 142.7938427
+      }
+    }
+  ],
+  "semantic_classes": 15,
+  "shell_preexecution_failure": "ParserError before copy/final pytest; corrected next invocation; preserved in attempt04/shell-parser-failure.txt",
+  "source": [
+    {
+      "functions": 10,
+      "lines": 74,
+      "path": "runtime_trace/regular_2step/schema.py",
+      "sha256": "c72710d43fd8ed737fcdb68ad3325f176faea78481173a0ce7496965ac4feab1"
+    },
+    {
+      "functions": 4,
+      "lines": 73,
+      "path": "runtime_trace/regular_2step/form_oracle.py",
+      "sha256": "624e09e4ad2a18d8e028c7f36f8311c1c55804c83a25921ae3f45ee3fde83135"
+    },
+    {
+      "functions": 15,
+      "lines": 370,
+      "path": "runtime_trace/regular_2step/checker.py",
+      "sha256": "1c6c4ab6920a0dcf3ea21b9e90832e00262480d28e4d9c269e67642ad75c05ee"
+    },
+    {
+      "functions": 2,
+      "lines": 119,
+      "path": "runtime_trace/regular_2step/producer.py",
+      "sha256": "52778e9944cbaab348cbf3a3c7c2cd9b16a90cd7cb039aa5edadeebccaadcd6f"
+    },
+    {
+      "functions": 4,
+      "lines": 165,
+      "path": "runtime_trace/regular_2step/mutations.py",
+      "sha256": "d47796945f589efd9df57d507afbed3f802c40854f808446f12a7093a5904741"
+    },
+    {
+      "functions": 13,
+      "lines": 206,
+      "path": "runtime_trace/regular_2step/tests/test_step2_chain.py",
+      "sha256": "e38fc7a2bff7b9a2799722dced7455037c976946b0897285b497b1b4d0ab4782"
+    },
+    {
+      "functions": 1,
+      "lines": 16,
+      "path": "runtime_trace/regular_2step/tests/test_step2_mutations.py",
+      "sha256": "1e6b8313aa53507d2642e177b5169de75e82d2e27541192ee42291d0bd0b6743"
+    },
+    {
+      "functions": null,
+      "lines": 114,
+      "path": "runtime_trace/regular_2step/README.md",
+      "sha256": "f5914482171969cb6db3c5cb2ca8c9f41ccfb881a895fa2b819d5cf8ebd7258c"
+    }
+  ],
+  "test_python_lines": 222,
+  "trust_controls": 1,
+  "unchanged_numeric_artifacts": [
+    {
+      "case": "known",
+      "file": "numeric_ir.json",
+      "sha256": "7ed21ab23490ece117f82f1290647209f7eca4aa5524ab157d8b5fe38c8b0a69"
+    },
+    {
+      "case": "known",
+      "file": "v2_correspondence.json",
+      "sha256": "89afa7e1712d62cbd726999afe7724a3f94dd13868ab34fec0c70a8982fb3b70"
+    },
+    {
+      "case": "known",
+      "file": "endpoint.json",
+      "sha256": "653bb2ccf527f9d1323d5ca96bfeb44d37a1f1ca9bc6d2d4a9571030f1eeebf6"
+    },
+    {
+      "case": "fresh",
+      "file": "numeric_ir.json",
+      "sha256": "92d4ef8681de35f57bd0b8860c6fb037e2bff8881d11580a417065de30bc4be2"
+    },
+    {
+      "case": "fresh",
+      "file": "v2_correspondence.json",
+      "sha256": "ebd927beecc124f1a244bd381b7c40db13c1bc77e0fff01a321764be7773d48a"
+    },
+    {
+      "case": "fresh",
+      "file": "endpoint.json",
+      "sha256": "980042c2f3ea603d1af8557c201c8a3f646512344a23283c6f96539ee223e2e7"
+    }
+  ]
+}

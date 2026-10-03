@@ -56,7 +56,7 @@ def test_frozen_protocol_receipt(built):
 
 def test_prefix_heap_bijection_preserves_partial_aliases():
     import copy
-    from runtime_trace.regular_2step.checker import prefix_structure
+    from runtime_trace.regular_2step.checker import prefix_structure, module_operand
     capture = json.loads((PACKAGE / 'artifacts/known-03/capture.json').read_bytes())
     rows = [json.loads(line) for line in (PACKAGE / 'artifacts/known-03/trace.jsonl').read_bytes().splitlines()]
     region = capture['regions'][0]
@@ -68,21 +68,23 @@ def test_prefix_heap_bijection_preserves_partial_aliases():
     from runtime_trace.regular_2step.structure import _memory_role
     for row in moved:
         for op in row['operands']:
-            if op['kind'] == 'memory' and 'constant_origin' not in op and _memory_role(op['address'], op['width'], row, region)[0] == 'other':
+            if op['kind'] == 'memory' and module_operand(op['address'], op['width'], capture['modules']) is None and _memory_role(op['address'], op['width'], row, region)[0] == 'other':
                 op['address'] += 1000000000
-    assert prefix_structure(original, region) == prefix_structure(moved, region)
+                if row['kind'] == 'CONTROL':
+                    row['pre']['gpr']['rax'] = hex(int(row['pre']['gpr']['rax'], 16) + 1000000000)
+    assert prefix_structure(original, region, capture['modules']) == prefix_structure(moved, region, capture['modules'])
     moved[67]['operands'][0]['address'] += 1
-    assert prefix_structure(original, region) != prefix_structure(moved, region)
+    assert prefix_structure(original, region, capture['modules']) != prefix_structure(moved, region, capture['modules'])
 
 
 def test_prefix_constant_retains_elf_role():
-    from runtime_trace.regular_2step.checker import prefix_structure
+    from runtime_trace.regular_2step.checker import prefix_structure, module_operand
     capture = json.loads((PACKAGE / 'artifacts/known-03/capture.json').read_bytes())
     rows = [json.loads(line) for line in (PACKAGE / 'artifacts/known-03/trace.jsonl').read_bytes().splitlines()]
     region = capture['regions'][0]
-    signature = prefix_structure(rows[region['start_seq']:region['end_seq']], region)
+    signature = prefix_structure(rows[region['start_seq']:region['end_seq']], region, capture['modules'])
     assert signature['topology'][139][0][1] == ['elf-constant',
-        'a6ac98736304bb9f6a92e473bba45da10d9b5b99f8019e2ca15eb6a7f86234fc', 242528, 8]
+        'a6ac98736304bb9f6a92e473bba45da10d9b5b99f8019e2ca15eb6a7f86234fc', 242528, 8, 242528]
 
 
 def test_malformed_derived_refused(built, tmp_path):
@@ -134,3 +136,71 @@ def test_exact_ieee_rounding_and_nonzero_symbolic_form():
             {'x': int(x, 16), 'y': int(y, 16), 'z': int(z, 16)},
             {'x': v2_bound.Form(a, .01), 'y': v2_bound.Form(b, .02)})['z']
         assert o.fdoc(independent) == o.fdoc(frozen)
+
+
+def test_actual_module_data_reads_keep_rva():
+    from runtime_trace.regular_2step.checker import prefix_structure, module_operand
+    capture = json.loads((PACKAGE / 'artifacts/known-03/capture.json').read_bytes())
+    rows = [json.loads(line) for line in (PACKAGE / 'artifacts/known-03/trace.jsonl').read_bytes().splitlines()]
+    for seq, rva in ((16, 0x413c8), (51, 0x41190), (261, 0x413c8), (296, 0x41190)):
+        region = capture['regions'][0 if seq < 200 else 1]
+        operand = prefix_structure([rows[seq]], region, capture['modules'])['topology'][0][0]
+        assert operand == ['read', ['module', rows[seq]['module_sha256'], rva, 8]]
+
+
+def test_changed_control_memory_ea_refused():
+    from runtime_trace.regular_2step.checker import prefix_structure, module_operand
+    capture = json.loads((PACKAGE / 'artifacts/known-03/capture.json').read_bytes())
+    rows = [json.loads(line) for line in (PACKAGE / 'artifacts/known-03/trace.jsonl').read_bytes().splitlines()]
+    rows[16]['operands'][0]['address'] += 8
+    with pytest.raises(ValueError, match='CONTROL effective address'):
+        prefix_structure([rows[16]], capture['regions'][0], capture['modules'])
+
+
+def test_module_operand_relocation_and_rejections():
+    import copy
+    from runtime_trace.regular_2step.checker import module_operand, prefix_structure
+    capture = json.loads((PACKAGE / 'artifacts/known-03/capture.json').read_bytes())
+    rows = [json.loads(line) for line in (PACKAGE / 'artifacts/known-03/trace.jsonl').read_bytes().splitlines()]
+    row, modules, region = rows[16], capture['modules'], capture['regions'][0]
+    moved, relocated = copy.deepcopy(row), copy.deepcopy(modules)
+    delta = 0x100000000
+    relocated[row['module_path']]['load_base'] += delta
+    for key in ('runtime_pc', 'module_load_base', 'post_pc'):
+        moved[key] += delta
+    moved['pre']['gpr']['rip'] = hex(moved['runtime_pc'])
+    moved['operands'][0]['address'] += delta
+    assert prefix_structure([row], region, modules) == prefix_structure([moved], region, relocated)
+    # A coherent changed displacement/address preserves EA but not module RVA.
+    moved = copy.deepcopy(row)
+    code = bytes.fromhex(moved['bytes'])
+    moved['bytes'] = (code[:2] + (int.from_bytes(code[2:], 'little', signed=True) + 8).to_bytes(4, 'little', signed=True)).hex()
+    moved['operands'][0]['address'] += 8
+    assert prefix_structure([row], region, modules)['topology'] != prefix_structure([moved], region, modules)['topology']
+    address = row['operands'][0]['address']
+    ambiguous = copy.deepcopy(modules)
+    ambiguous['duplicate'] = copy.deepcopy(modules[row['module_path']])
+    with pytest.raises(ValueError, match='ambiguous or cross-boundary'):
+        module_operand(address, 8, ambiguous)
+    module = modules[row['module_path']]
+    segment = next(s for s in module['segments'] if s['flags'] == 6)
+    with pytest.raises(ValueError, match='ambiguous or cross-boundary'):
+        module_operand(module['load_base'] + segment['vaddr'] + segment['memsz'] - 4, 8, modules)
+
+
+@pytest.mark.parametrize('seq', [16, 90, 62])
+def test_closed_control_memory_forms(seq):
+    import copy
+    from runtime_trace.regular_2step.checker import check_control_ea
+    rows = [json.loads(line) for line in (PACKAGE / 'artifacts/known-03/trace.jsonl').read_bytes().splitlines()]
+    row = rows[seq]
+    check_control_ea(row)
+    for field, value in [('address', row['operands'][0]['address'] + 1), ('width', 4), ('access', 'write')]:
+        changed = copy.deepcopy(row)
+        changed['operands'][0][field] = value
+        with pytest.raises(ValueError, match='CONTROL effective address'):
+            check_control_ea(changed)
+    changed = copy.deepcopy(row)
+    changed['bytes'] = 'ff10'
+    with pytest.raises(ValueError, match='unsupported CONTROL memory encoding'):
+        check_control_ea(changed)

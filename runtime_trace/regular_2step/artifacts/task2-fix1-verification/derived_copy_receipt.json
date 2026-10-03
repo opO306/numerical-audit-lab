@@ -1,0 +1,74 @@
+[
+  {
+    "source": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-04-public-cli/known/chain.json",
+    "destination": "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_2step/artifacts/derived/known/chain.json",
+    "prior_sha256": "d8ae999ec2f01ebb7a3be2547452e51429ab55eedd6855f793cbf8fc51cf00ad",
+    "sha256": "edebdc09eb3bc18a3af55f9993cd1a84dd8b506f7be2c22657224ad1d541d0a9"
+  },
+  {
+    "source": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-04-public-cli/known/checker_report.json",
+    "destination": "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_2step/artifacts/derived/known/checker_report.json",
+    "prior_sha256": "611036bd082533bd4a32aae9db5f9c2e1cfe58a4ea04d41c77c6e10c82e39f6f",
+    "sha256": "2e9b5b963c15b636e4bab0e994149b53b9677fc28ce614fbed714c8aadfa0146"
+  },
+  {
+    "source": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-04-public-cli/known/components.json",
+    "destination": "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_2step/artifacts/derived/known/components.json",
+    "prior_sha256": "441b5198909d35ad046a473106843936e5767ac2ff690cbbc6d1360a199eeeda",
+    "sha256": "72d600d2f70ce918f026d6cd87281e4473960b1dcb39d8bbbeac881b33c344cb"
+  },
+  {
+    "source": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-04-public-cli/known/endpoint.json",
+    "destination": "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_2step/artifacts/derived/known/endpoint.json",
+    "prior_sha256": "653bb2ccf527f9d1323d5ca96bfeb44d37a1f1ca9bc6d2d4a9571030f1eeebf6",
+    "sha256": "653bb2ccf527f9d1323d5ca96bfeb44d37a1f1ca9bc6d2d4a9571030f1eeebf6"
+  },
+  {
+    "source": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-04-public-cli/known/numeric_ir.json",
+    "destination": "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_2step/artifacts/derived/known/numeric_ir.json",
+    "prior_sha256": "7ed21ab23490ece117f82f1290647209f7eca4aa5524ab157d8b5fe38c8b0a69",
+    "sha256": "7ed21ab23490ece117f82f1290647209f7eca4aa5524ab157d8b5fe38c8b0a69"
+  },
+  {
+    "source": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-04-public-cli/known/v2_correspondence.json",
+    "destination": "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_2step/artifacts/derived/known/v2_correspondence.json",
+    "prior_sha256": "89afa7e1712d62cbd726999afe7724a3f94dd13868ab34fec0c70a8982fb3b70",
+    "sha256": "89afa7e1712d62cbd726999afe7724a3f94dd13868ab34fec0c70a8982fb3b70"
+  },
+  {
+    "source": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-04-public-cli/fresh/chain.json",
+    "destination": "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_2step/artifacts/derived/fresh/chain.json",
+    "prior_sha256": "6ef0041f8004b1ad0852179bf3cc522c05a9e95dccdb0947538da97c3cc26467",
+    "sha256": "4a112b56e384fdb262d3fa7b90015dca0ab5a5b9eee7f35668988b211cf517c7"
+  },
+  {
+    "source": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-04-public-cli/fresh/checker_report.json",
+    "destination": "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_2step/artifacts/derived/fresh/checker_report.json",
+    "prior_sha256": "a10571ead28f5c38d879e8011048044f94bda3e6b912712ac1fa1f6651c9f14d",
+    "sha256": "7a11dbf214db3ca90dcdd4a44dea008d5b5bb88bdb676bab071ad5356bff64f4"
+  },
+  {
+    "source": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-04-public-cli/fresh/components.json",
+    "destination": "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_2step/artifacts/derived/fresh/components.json",
+    "prior_sha256": "b72428961c6b3238e02b5d8ea8f02e4785af567559d3aa993fe11215f8f6ce1b",
+    "sha256": "0ef0ea3beadbd7bfde53e13f7fe61482350f73725f62dd44d2969be8f891de8e"
+  },
+  {
+    "source": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-04-public-cli/fresh/endpoint.json",
+    "destination": "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_2step/artifacts/derived/fresh/endpoint.json",
+    "prior_sha256": "980042c2f3ea603d1af8557c201c8a3f646512344a23283c6f96539ee223e2e7",
+    "sha256": "980042c2f3ea603d1af8557c201c8a3f646512344a23283c6f96539ee223e2e7"
+  },
+  {
+    "source": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-04-public-cli/fresh/numeric_ir.json",
+    "destination": "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_2step/artifacts/derived/fresh/numeric_ir.json",
+    "prior_sha256": "92d4ef8681de35f57bd0b8860c6fb037e2bff8881d11580a417065de30bc4be2",
+    "sha256": "92d4ef8681de35f57bd0b8860c6fb037e2bff8881d11580a417065de30bc4be2"
+  },
+  {
+    "source": "/mnt/d/numerical-audit-lab-regular-2step-delivery-2026-10-03/task2-fix1-attempt-04-public-cli/fresh/v2_correspondence.json",
+    "destination": "/mnt/d/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_2step/artifacts/derived/fresh/v2_correspondence.json",
+    "prior_sha256": "ebd927beecc124f1a244bd381b7c40db13c1bc77e0fff01a321764be7773d48a",
+    "sha256": "ebd927beecc124f1a244bd381b7c40db13c1bc77e0fff01a321764be7773d48a"
+  }
+]

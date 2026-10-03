@@ -34,6 +34,11 @@ def graph(capture, rows, regions, root, *, prefix=False):
             row['phase'] = phase
     subcapture = {**capture, 'regions': selected}
     body = [r for region in selected for r in graph_rows[region['start_seq']:region['end_seq']]]
+    for row in body:
+        check_control_ea(row)
+        for operand in row['operands']:
+            if operand['kind'] == 'memory':
+                module_operand(operand['address'], operand['width'], capture['modules'])
     decoded = raw_checker.disassembly_for_rows(body, capture['modules'], root=root)
     raw_checker.verify_flow(graph_rows, subcapture, decoded, root=root)
     reconstruction = graph_checker._Reconstruction(graph_rows, subcapture, decoded)
@@ -61,25 +66,74 @@ def trusted_case(capture_dir, root, test_pins=None):
     return capture, pins
 
 
-def prefix_structure(rows, region):
-    """Cross-process structure with a bijection of nonnumeric routing bytes.
+def module_operand(address, width, modules):
+    """Resolve a complete byte range; overlapping or partial PT_LOADs refuse."""
+    require(type(address) is int and type(width) is int and width > 0 and
+            0 <= address < address + width <= 2**64, 'invalid operand range')
+    hits = []
+    for module in modules.values():
+        for segment in module['segments']:
+            start = module['load_base'] + segment['vaddr']
+            end = start + segment['memsz']
+            if address < end and start < address + width:
+                hits.append((module, segment, start, end))
+    if not hits:
+        return None
+    require(len(hits) == 1 and hits[0][2] <= address and
+            address + width <= hits[0][3], 'ambiguous or cross-boundary module operand')
+    module, segment, start, _ = hits[0]
+    return (['module', module['sha256'], address - module['load_base'], width],
+            segment['file_offset'] + address - start, address + width <= start + segment['filesz'])
 
-    Absolute heap routing addresses differ across acquisitions. Assign each
-    observed byte its first-occurrence ordinal, preserving all observed alias
-    relationships. Component/stack roles, opcodes, ELF bytes and control targets
-    remain exact; numerical bits/roots are separately compared by full graph.
-    """
+
+def check_control_ea(row):
+    """Closed independent EA rules for the three observed CONTROL memory forms."""
+    memory = [op for op in row['operands'] if op['kind'] == 'memory']
+    if row['kind'] != 'CONTROL' or not memory:
+        return
+    require(len(memory) == 1, 'CONTROL memory operand count')
+    op, pre, code = memory[0], row['pre']['gpr'], bytes.fromhex(row['bytes'])
+    require(int(pre['rip'], 16) == row['runtime_pc'], 'CONTROL pre-PC')
+    if len(code) == 6 and code[:2] == b'\xff\x25' and row['opcode'] == 'jmp':
+        expected = row['runtime_pc'] + 6 + int.from_bytes(code[2:], 'little', signed=True)
+    elif code == b'\xff\x14\xe8' and row['opcode'] == 'call':
+        expected = int(pre['rax'], 16) + 8 * int(pre['rbp'], 16)
+    elif code == b'\xc3' and row['opcode'] == 'ret':
+        expected = int(pre['rsp'], 16)
+    else:
+        raise ValueError('unsupported CONTROL memory encoding')
+    require(op['access'] == 'read' and type(op['width']) is int and op['width'] == 8 and
+            type(op['address']) is int and 0 <= expected <= 2**64 - 8 and
+            op['address'] == expected, 'CONTROL effective address/width/access')
+
+
+def prefix_structure(rows, region, modules):
+    """Preserve module/component/stack roles; biject only nonmodule heap bytes."""
     aliases, topology = {}, []
     for row in rows:
+        check_control_ea(row)
         operands = structure._operand_topology(row, region)
         for operand, raw_operand in zip(operands, row['operands']):
+            if raw_operand['kind'] != 'memory':
+                continue
             role = operand[1]
-            if 'constant_origin' in raw_operand:
-                origin = raw_operand['constant_origin']
-                operand[1] = ['elf-constant', origin['module_sha256'], origin['file_offset'], raw_operand['width']]
-            elif role[0] == 'other':
-                address, width = role[1:]
-                operand[1] = ['routing-bytes', [aliases.setdefault(address + k, len(aliases)) for k in range(width)]]
+            resolved = module_operand(raw_operand['address'], raw_operand['width'], modules)
+            if resolved is not None:
+                module_role, file_offset, file_backed = resolved
+                require(role[0] not in ('component', 'stack'), 'ambiguous module/state operand')
+                operand[1] = module_role
+                if 'constant_origin' in raw_operand:
+                    origin = raw_operand['constant_origin']
+                    require(file_backed and origin['module_sha256'] == module_role[1] and
+                            origin['file_offset'] == file_offset, 'ELF constant origin')
+                    operand[1] = ['elf-constant', module_role[1], file_offset,
+                                  raw_operand['width'], module_role[2]]
+            else:
+                require('constant_origin' not in raw_operand and role[0] != 'mapped',
+                        'unresolved module operand')
+                if role[0] == 'other':
+                    address, width = role[1:]
+                    operand[1] = ['routing-bytes', [aliases.setdefault(address + k, len(aliases)) for k in range(width)]]
         topology.append(operands)
     return {'instructions': [(r['module_sha256'], r['elf_address'], r['bytes'], r['opcode'], r['kind']) for r in rows],
         'control': [(i, structure._post_target(r)) for i, r in enumerate(rows) if r['kind'] == 'CONTROL'],
@@ -110,7 +164,7 @@ def context(capture_dir, root, test_pins=None):
     for new_region, old_region in zip(capture['regions'][:2], old_capture['regions']):
         new_rows = rows[new_region['start_seq']:new_region['end_seq']]
         prior_rows = old_rows[old_region['start_seq']:old_region['end_seq']]
-        new_structure, prior_structure = prefix_structure(new_rows, new_region), prefix_structure(prior_rows, old_region)
+        new_structure, prior_structure = prefix_structure(new_rows, new_region, capture['modules']), prefix_structure(prior_rows, old_region, old_capture['modules'])
         require(new_structure == prior_structure, 'prefix normalized instruction/control/storage structure mismatch')
         prefix_receipts.append({'occurrence': new_region['occurrence'], 'row_count': len(new_rows),
                                 'normalized_structure_sha256': digest(new_structure)})

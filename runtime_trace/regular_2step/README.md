@@ -49,10 +49,17 @@ Before transferring old endpoint Forms, the checker runs the old IR and Caller
 checkers and the received independent old V2 reconstruction. It compares the
 new init+step1 complete graph, all ordered scalar bits and roots to the selected
 old audited block. Module-relative instruction bytes and control are exact.
-Only otherwise-unclassified nonnumeric heap routing memory is normalized by
+Every memory range is first resolved against all captured module PT_LOAD
+segments. Module data/control reads retain SHA, module RVA, width and access;
+ELF constants also retain their file offset. Ambiguous or cross-segment ranges
+are refused. Only verified nonmodule nonnumeric heap routing memory is normalized by
 first-observation byte ordinals: this is a bijection preserving every observed
 alias and overlap. Component, stack and module roles remain exact. Actual
-effective addresses are checked independently; equal scalar bits do not stand
+effective addresses are checked independently. For CONTROL memory operands,
+the new closed checker accepts only observed `ff25 disp32` JMP (PC + 6 + signed
+displacement), `ff14e8` CALL (pre RAX + 8 * pre RBP), and `c3` RET (pre RSP),
+all 8-byte reads; unknown encodings refuse. Other flow/EA checks reuse the old
+independent raw checker. Equal scalar bits do not stand
 in for storage identity. The focused alias regression changes one overlapping
 heap byte and detects the structural difference.
 
