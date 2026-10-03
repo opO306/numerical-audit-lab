@@ -1,0 +1,1 @@
+{"decoded_assembly":"stosq  %rax,(%rdi)","description":"Present an unimplemented memory-writing instruction form.","input_kind":"synthetic_decoded_effect","name":"unknown-instruction-effect","result":{"code":"UNKNOWN_INSTRUCTION_EFFECT","reason":"unknown memory-destination effect at sequence 9: stosq  %rax,(%rdi)","verdict":"REFUSED"}}
