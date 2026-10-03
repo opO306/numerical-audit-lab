@@ -158,23 +158,42 @@ Boundary의 Form 전달은 선언된 IR 모델이며 캡처 밖 caller 실행·r
 
 ## Caller Transition / Error-Continuity Gate — 2026-10-03
 
-승인된 다음 작업은 **1-step output → 실제 caller → next-step input**의 연결 검증이다.
-현재는 SOURCE ANALYSIS / TARGET RESOLVED 상태이며 새 Gate의 IMPLEMENTED/CHECKER PASS를 주장하지 않는다.
-Frozen Gala Cython caller는 `leapfrog_integrate_hamiltonian`의 반복문이다.
-`tmp_w`의 q/full_v 및 별도 `v_jm1_2` 버퍼를 전달하고 각 호출 전에 `grad_v[:] = 0.`을 수행한다.
-반면 현재 IR→V2 adapter는 감사된 init+1-step 문서를 한 번 소비한 뒤 종료하며 다음 step caller를 구현하지 않는다.
-기존 `n_steps=1` 획득에는 첫 step 이후 다음 함수 진입이 존재하지 않는다.
+```text
+IMPLEMENTED
+CHECKER PASS
+INDEPENDENT AUDIT PENDING
+```
 
-설계자가 확정한 대상은 **첫 `c_leapfrog_step`의 실제 return → Cython caller → 두 번째 함수 entry**다.
-기존 regular harness의 실제 호출에서 `n_steps=1`만 `n_steps=2`로 바꾼 새 획득을 사용한다.
-직접 kernel을 호출하는 별도 harness, `save_all=False`나 다른 실행 경로 단순화는 사용하지 않는다.
-두 번째 함수의 body 실행 전 entry에서 정지하며 두 번째 step 산술의 IR/V2 확장은 범위 밖이다.
-q/full_v/latent는 동일 주소·bits와 corridor 전체의 **해당 영역에 쓰기 없음**을 함께 증명해야 한다.
-grad_v는 실제 caller zeroing 뒤 새 exact-zero scratch root로 취급하고 이전 Form을 carry하지 않는다.
-t는 새 `t[j]` load, dt는 실제 두 번째 call argument의 bits/provenance, 임시 레지스터는 새 entry root다.
-기존 `n_steps=1` endpoint는 감사된 선행 조건으로만 사용하며 존재하지 않는 caller continuation을 만들지 않는다.
-새 프로세스 두 개의 획득 증거를 보존하여 기존 endpoint에 연결한 case와 독립 fresh case를 구분한다.
-동일 center bits만으로 동일 exact/Form error state를 가정하지 않는다.
-현재 1-step correspondence·기존 checker 결과·Runtime Trace·Numeric IR·frozen V2를 보존한다.
-10/100-step 및 trajectory/global accumulated-error/physical/observable accuracy를 수행하거나 주장하지 않는다.
-새 Gate는 외부 독립 감사 전에는 CLOSED / PASS로 표시하지 않는다. Push하지 않는다.
+Frozen Gala 1.12.0의 실제 production 경로에서 **첫 `c_leapfrog_step` return →
+Cython caller와 실제 helper → 두 번째 entry**를 새 프로세스 두 개에서 획득했다.
+기존 regular `H.integrate_orbit` harness는 실제 호출의 `n_steps=1`만 `n_steps=2`로 바꿨다.
+두 번째 body 실행 전 debugger로 종료했으며 harness 정상 완료로 표현하지 않는다.
+기존 n_steps=1 캡처는 감사된 endpoint 선행 조건이고 다음 caller를 추정한 증거가 아니다.
+
+각 trace는 명령 728개 / 실제 PRE reads 219개 / possible writes 111개 /
+same-value writes 21개 / 간접 control 16개 / return 23개 / second body 0개다.
+독립 checker는 packaged ELF SHA/relative address/offset/bytes/decode, memory shadow,
+read/write semantics, GPR/XMM lanes, 정의된 flags, actual control targets 및
+마지막 ABI 9개 origin chains를 확인했다. Production trust는 reviewed literal pins다.
+
+q/full_v/latent 6 lanes는 같은 주소·bits와 corridor 전체 write overlap 0을 함께 요구한다.
+감사된 dynamic COPY/identity/Form/shared basis의 carry는 기존 외부 endpoint/Form 감사에
+조건부로 연결한다. Native Gala에는 Form 객체가 없으며 center equality만으로 exact state를 만들지 않는다.
+grad_v는 실제 16-byte zeroing 뒤 새 exact-zero scratch다. t는 새 schedule load,
+dt는 실제 다음 call argument의 bits/source로 검사하고 임시 레지스터/XMM은 새 boundary roots다.
+
+최신 정상 결과는 [caller README](../runtime_trace/caller_transition/README.md)의
+`checker/fix-round2` 두 CHECKER_PASS, 실제 입력과 generator는 `checker/fix-round3`다.
+기존 35종 + regression 6종, 총 41종 모두 현재 checker에서 REFUSED다.
+27 raw bundles / 12 transition inputs / 2 unit fixtures의 mode·stage를 구분하고
+fresh replay는 367-file mutation tree 전체와 byte-identical이다.
+최종 전용 **101 passed in 68.67s**, 새 전체 통합 **580 passed in 214.16s**,
+failure/error/skip 0이다. 통합 실행 중 tracked Python 148개 SHA map 변화가 없었다.
+WSL Python 3.12.3와 `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1`로 실제 실행한 결과다.
+
+원 trace와 기존 Numeric IR/frozen V2 및 모든 실패·superseded 증거를 보존했다.
+초기 checker의 control/read/ABI/trust 및 MOVSD/origin/sequence 문제는 새 버전에서
+수정하고 scoped 재검토했다. 초기 526/570 통합 결과는 최신 Gate closure 증거가 아니다.
+새 Gate의 외부 감사는 아직 PENDING이다. 두 번째 산술/IR/V2, 완성된 2-step trajectory,
+10/100-step, global accumulated error 및 physical/observable accuracy로 확대하지 않는다.
+로컬 branch는 `caller-error-continuity-regular-1step`이며 push/fetch/merge하지 않았다.
