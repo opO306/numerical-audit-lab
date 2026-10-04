@@ -1,0 +1,557 @@
+FFFFFFFFF.......F                                                        [100%]
+================================== FAILURES ===================================
+______________ test_private_whole_vector_matches_diagnostic[q0] _______________
+
+name = 'producer'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse.producer', package = None
+
+    def import_module(name, package=None):
+        """Import a module.
+    
+        The 'package' argument is required when performing a relative import. It
+        specifies the package to use as the anchor point from which to resolve the
+        relative import to an absolute import.
+    
+        """
+        level = 0
+        if name.startswith('.'):
+            if not package:
+                raise TypeError("the 'package' argument is required to perform a "
+                                f"relative import for {name!r}")
+            for character in name:
+                if character != '.':
+                    break
+                level += 1
+>       return _bootstrap._gcd_import(name[level:], package, level)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.producer'
+
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+q = (6, 2, 1)
+
+    @pytest.mark.parametrize('q',[(6,2,1),(-6,-2,-1),(0,6,0)])
+    def test_private_whole_vector_matches_diagnostic(q):
+        import mpmath as mp
+        obj=input_object(q);data=encoded(obj);old=copy.deepcopy(obj)
+>       result=module('producer').evaluate_reference(data,reference_policy(obj))
+               ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_producer.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'producer'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: producer
+
+tests\test_impulse_reference_primitives.py:11: Failed
+______________ test_private_whole_vector_matches_diagnostic[q1] _______________
+
+name = 'producer'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse.producer', package = None
+
+    def import_module(name, package=None):
+        """Import a module.
+    
+        The 'package' argument is required when performing a relative import. It
+        specifies the package to use as the anchor point from which to resolve the
+        relative import to an absolute import.
+    
+        """
+        level = 0
+        if name.startswith('.'):
+            if not package:
+                raise TypeError("the 'package' argument is required to perform a "
+                                f"relative import for {name!r}")
+            for character in name:
+                if character != '.':
+                    break
+                level += 1
+>       return _bootstrap._gcd_import(name[level:], package, level)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.producer'
+
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+q = (-6, -2, -1)
+
+    @pytest.mark.parametrize('q',[(6,2,1),(-6,-2,-1),(0,6,0)])
+    def test_private_whole_vector_matches_diagnostic(q):
+        import mpmath as mp
+        obj=input_object(q);data=encoded(obj);old=copy.deepcopy(obj)
+>       result=module('producer').evaluate_reference(data,reference_policy(obj))
+               ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_producer.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'producer'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: producer
+
+tests\test_impulse_reference_primitives.py:11: Failed
+______________ test_private_whole_vector_matches_diagnostic[q2] _______________
+
+name = 'producer'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse.producer', package = None
+
+    def import_module(name, package=None):
+        """Import a module.
+    
+        The 'package' argument is required when performing a relative import. It
+        specifies the package to use as the anchor point from which to resolve the
+        relative import to an absolute import.
+    
+        """
+        level = 0
+        if name.startswith('.'):
+            if not package:
+                raise TypeError("the 'package' argument is required to perform a "
+                                f"relative import for {name!r}")
+            for character in name:
+                if character != '.':
+                    break
+                level += 1
+>       return _bootstrap._gcd_import(name[level:], package, level)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.producer'
+
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+q = (0, 6, 0)
+
+    @pytest.mark.parametrize('q',[(6,2,1),(-6,-2,-1),(0,6,0)])
+    def test_private_whole_vector_matches_diagnostic(q):
+        import mpmath as mp
+        obj=input_object(q);data=encoded(obj);old=copy.deepcopy(obj)
+>       result=module('producer').evaluate_reference(data,reference_policy(obj))
+               ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_producer.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'producer'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: producer
+
+tests\test_impulse_reference_primitives.py:11: Failed
+__________ test_runtime_entry_is_unbound_and_no_nonlinear_activation __________
+
+name = 'producer'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse.producer', package = None
+
+    def import_module(name, package=None):
+        """Import a module.
+    
+        The 'package' argument is required when performing a relative import. It
+        specifies the package to use as the anchor point from which to resolve the
+        relative import to an absolute import.
+    
+        """
+        level = 0
+        if name.startswith('.'):
+            if not package:
+                raise TypeError("the 'package' argument is required to perform a "
+                                f"relative import for {name!r}")
+            for character in name:
+                if character != '.':
+                    break
+                level += 1
+>       return _bootstrap._gcd_import(name[level:], package, level)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.producer'
+
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_runtime_entry_is_unbound_and_no_nonlinear_activation():
+>       obj=input_object();r=module('producer').produce(encoded(obj))
+                             ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_producer.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'producer'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: producer
+
+tests\test_impulse_reference_primitives.py:11: Failed
+____ test_domain_refusal_precedes_policy_and_zero[q0-SINGULAR_SEPARATION] _____
+
+name = 'producer'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse.producer', package = None
+
+    def import_module(name, package=None):
+        """Import a module.
+    
+        The 'package' argument is required when performing a relative import. It
+        specifies the package to use as the anchor point from which to resolve the
+        relative import to an absolute import.
+    
+        """
+        level = 0
+        if name.startswith('.'):
+            if not package:
+                raise TypeError("the 'package' argument is required to perform a "
+                                f"relative import for {name!r}")
+            for character in name:
+                if character != '.':
+                    break
+                level += 1
+>       return _bootstrap._gcd_import(name[level:], package, level)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.producer'
+
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+q = (0, 0, 0), reason = 'SINGULAR_SEPARATION'
+
+    @pytest.mark.parametrize('q,reason',[((0,0,0),'SINGULAR_SEPARATION'),((0,1,0),'PHYSICAL_DOMAIN')])
+    def test_domain_refusal_precedes_policy_and_zero(q,reason):
+>       obj=input_object(q);r=module('producer').produce(encoded(obj));f=json.loads(r.failure)
+                              ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_producer.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'producer'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: producer
+
+tests\test_impulse_reference_primitives.py:11: Failed
+______ test_domain_refusal_precedes_policy_and_zero[q1-PHYSICAL_DOMAIN] _______
+
+name = 'producer'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse.producer', package = None
+
+    def import_module(name, package=None):
+        """Import a module.
+    
+        The 'package' argument is required when performing a relative import. It
+        specifies the package to use as the anchor point from which to resolve the
+        relative import to an absolute import.
+    
+        """
+        level = 0
+        if name.startswith('.'):
+            if not package:
+                raise TypeError("the 'package' argument is required to perform a "
+                                f"relative import for {name!r}")
+            for character in name:
+                if character != '.':
+                    break
+                level += 1
+>       return _bootstrap._gcd_import(name[level:], package, level)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.producer'
+
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+q = (0, 1, 0), reason = 'PHYSICAL_DOMAIN'
+
+    @pytest.mark.parametrize('q,reason',[((0,0,0),'SINGULAR_SEPARATION'),((0,1,0),'PHYSICAL_DOMAIN')])
+    def test_domain_refusal_precedes_policy_and_zero(q,reason):
+>       obj=input_object(q);r=module('producer').produce(encoded(obj));f=json.loads(r.failure)
+                              ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_producer.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'producer'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: producer
+
+tests\test_impulse_reference_primitives.py:11: Failed
+___________ test_exhaustion_no_partial_vector_no_last_approximation ___________
+
+name = 'producer'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse.producer', package = None
+
+    def import_module(name, package=None):
+        """Import a module.
+    
+        The 'package' argument is required when performing a relative import. It
+        specifies the package to use as the anchor point from which to resolve the
+        relative import to an absolute import.
+    
+        """
+        level = 0
+        if name.startswith('.'):
+            if not package:
+                raise TypeError("the 'package' argument is required to perform a "
+                                f"relative import for {name!r}")
+            for character in name:
+                if character != '.':
+                    break
+                level += 1
+>       return _bootstrap._gcd_import(name[level:], package, level)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.producer'
+
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_exhaustion_no_partial_vector_no_last_approximation():
+        obj=input_object((0,6,1));obj['budget'].update(N0='1',P0='8',N_max='1',P_max='8',max_attempts='1',exp_order_max='1')
+>       r=module('producer').evaluate_reference(encoded(obj),reference_policy(obj));f=json.loads(r.failure)
+          ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_producer.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'producer'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: producer
+
+tests\test_impulse_reference_primitives.py:11: Failed
+___________ test_atomic_lane_decisions_overflow_dominates_unproved ____________
+
+name = 'producer'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse.producer', package = None
+
+    def import_module(name, package=None):
+        """Import a module.
+    
+        The 'package' argument is required when performing a relative import. It
+        specifies the package to use as the anchor point from which to resolve the
+        relative import to an absolute import.
+    
+        """
+        level = 0
+        if name.startswith('.'):
+            if not package:
+                raise TypeError("the 'package' argument is required to perform a "
+                                f"relative import for {name!r}")
+            for character in name:
+                if character != '.':
+                    break
+                level += 1
+>       return _bootstrap._gcd_import(name[level:], package, level)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.producer'
+
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_atomic_lane_decisions_overflow_dominates_unproved():
+>       m=module('interval');p=module('producer')
+                               ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_producer.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'producer'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: producer
+
+tests\test_impulse_reference_primitives.py:11: Failed
+________________ test_failure_closed_fields_and_resource_enum _________________
+
+name = 'producer'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse.producer', package = None
+
+    def import_module(name, package=None):
+        """Import a module.
+    
+        The 'package' argument is required when performing a relative import. It
+        specifies the package to use as the anchor point from which to resolve the
+        relative import to an absolute import.
+    
+        """
+        level = 0
+        if name.startswith('.'):
+            if not package:
+                raise TypeError("the 'package' argument is required to perform a "
+                                f"relative import for {name!r}")
+            for character in name:
+                if character != '.':
+                    break
+                level += 1
+>       return _bootstrap._gcd_import(name[level:], package, level)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.producer'
+
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_failure_closed_fields_and_resource_enum():
+        obj=input_object();obj['budget']['integer_bit_max']='8'
+>       r=module('producer').evaluate_reference(encoded(obj),reference_policy(obj));f=json.loads(r.failure)
+          ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_producer.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'producer'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: producer
+
+tests\test_impulse_reference_primitives.py:11: Failed
+______________ test_policy_schedule_and_conflicting_refinements _______________
+
+    def test_policy_schedule_and_conflicting_refinements():
+>       obj=input_object();p=reference_policy(obj)
+                             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_producer.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+obj = {'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '11eedb45fc80d8b1f8db1bc5afdceb1754914c5e2f49ba48ad2b4d87d63bb0...'], 'momentum_raw': ['0', '0', '0']}]}, 'budget': {'N0': '128', 'P0': '128', 'N_max': '512', 'P_max': '512', ...}, ...}
+
+    def reference_policy(obj):
+>       from independent_checker.c1b1.impulse.policy import ReferencePolicy
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.policy'
+
+tests\impulse_reference_support.py:33: ModuleNotFoundError
+=========================== short test summary info ===========================
+FAILED tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic[q0]
+FAILED tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic[q1]
+FAILED tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic[q2]
+FAILED tests/test_impulse_reference_producer.py::test_runtime_entry_is_unbound_and_no_nonlinear_activation
+FAILED tests/test_impulse_reference_producer.py::test_domain_refusal_precedes_policy_and_zero[q0-SINGULAR_SEPARATION]
+FAILED tests/test_impulse_reference_producer.py::test_domain_refusal_precedes_policy_and_zero[q1-PHYSICAL_DOMAIN]
+FAILED tests/test_impulse_reference_producer.py::test_exhaustion_no_partial_vector_no_last_approximation
+FAILED tests/test_impulse_reference_producer.py::test_atomic_lane_decisions_overflow_dominates_unproved
+FAILED tests/test_impulse_reference_producer.py::test_failure_closed_fields_and_resource_enum
+FAILED tests/test_impulse_reference_producer.py::test_policy_schedule_and_conflicting_refinements
+10 failed, 7 passed in 1.64s

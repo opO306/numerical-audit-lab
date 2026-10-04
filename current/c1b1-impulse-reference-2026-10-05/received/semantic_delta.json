@@ -1,0 +1,173 @@
+{
+  "acquisition-identity.json": [
+    {
+      "path": "/dependencies/domain_sha256",
+      "before": "a5242a7fb6e1fca0e6997f2a44af839049a5f610e00f73f8d4803b2d43f6b927",
+      "after": "eef0a3531c7bc5f233e7cd7212c3807735c05bc88284bd16600c894afc817c03"
+    },
+    {
+      "path": "/dependencies/wire_sha256",
+      "before": "4890780548aa8588293ad6bdb8a1dcf89c2d95a6aff0448218f19e486c8dc5bf",
+      "after": "b7994420f6896eb352730ac0fb5983a6c74c0635d357dffea3281535b57f27e9"
+    }
+  ],
+  "constants.json": [],
+  "finite-policy.json": [
+    {
+      "path": "/dependencies/proof_wire_sha256",
+      "before": "4890780548aa8588293ad6bdb8a1dcf89c2d95a6aff0448218f19e486c8dc5bf",
+      "after": "b7994420f6896eb352730ac0fb5983a6c74c0635d357dffea3281535b57f27e9"
+    }
+  ],
+  "package-manifest.json": [
+    {
+      "path": "/dependencies/acquisition-identity.json",
+      "before": "20dd3eb9cfb0c191d5b37caf4e5703e612b5956918a7f16f8fffcfd7b763d6a9",
+      "after": "673941bf9f88835f9ee494268e2837a6bd3e6b09323ad75db70d1f8df7666759"
+    },
+    {
+      "path": "/dependencies/finite-policy.json",
+      "before": "ca2a680a6dc454673c826b55a859056e1c79989add9b06316388b783cd11dcdb",
+      "after": "e8ceec423827a0699a8d3709508dff3eebd7f7e8a99f92d4436dc7b57f83fdd8"
+    },
+    {
+      "path": "/dependencies/physical-domain.json",
+      "before": "a5242a7fb6e1fca0e6997f2a44af839049a5f610e00f73f8d4803b2d43f6b927",
+      "after": "eef0a3531c7bc5f233e7cd7212c3807735c05bc88284bd16600c894afc817c03"
+    },
+    {
+      "path": "/dependencies/proof-wire.json",
+      "before": "4890780548aa8588293ad6bdb8a1dcf89c2d95a6aff0448218f19e486c8dc5bf",
+      "after": "b7994420f6896eb352730ac0fb5983a6c74c0635d357dffea3281535b57f27e9"
+    },
+    {
+      "path": "/dependencies/rechecker-lineage.json",
+      "before": "cb725a5a427946d48763105eaab422b05eced8ecfbe5a8b29cff04db245a06a4",
+      "after": "4767ae1773fa2f697e749b90aa1b66da686605cbfb690307aa9c2d0c87427ab9"
+    },
+    {
+      "path": "/dependencies/semantic-bundle.json",
+      "before": "a179dcfc065931d09ba4f364d159416ede4b9090a0924bf3fcc119815ed4266f",
+      "after": "11eedb45fc80d8b1f8db1bc5afdceb1754914c5e2f49ba48ad2b4d87d63bb007"
+    },
+    {
+      "path": "/dependencies/status-composition.json",
+      "before": "0c4ad325b9f62fd7f7158334882456300c43481a403546e553ad1c81877bda4f",
+      "after": "4257563b2c82a66094f96da539cdf9bbe1967699403fd61ba613d195b26483ee"
+    },
+    {
+      "path": "/review_state",
+      "before": "DESIGN CONDITIONS ADDRESSED / IMPLEMENTATION STILL NOT STARTED / REVIEW PENDING",
+      "after": "F-CLOSURE-1 FIX APPLIED / F-CLOSURE-2 FIX APPLIED / INDEPENDENT RECHECK PENDING"
+    },
+    {
+      "path": "/revision",
+      "added": {
+        "id": "F-CLOSURE-1-2-2026-10-05",
+        "revises_snapshot": "4cb2910fe936f7b1d5150196e062b6b61edc240f",
+        "scope": "F-CLOSURE-1 and F-CLOSURE-2 only"
+      }
+    },
+    {
+      "path": "/semantic_bundle_sha256",
+      "before": "a179dcfc065931d09ba4f364d159416ede4b9090a0924bf3fcc119815ed4266f",
+      "after": "11eedb45fc80d8b1f8db1bc5afdceb1754914c5e2f49ba48ad2b4d87d63bb007"
+    }
+  ],
+  "physical-domain.json": [
+    {
+      "path": "/applies_to/1",
+      "before": "future exact and stored drift segment guards",
+      "after": "future drift guard: exact unrounded closed relative segment minimum AND stored final relative position squared"
+    },
+    {
+      "path": "/cases/R=r_min",
+      "before": "ADMITTED point; drift requires entire closed segment >= r_min",
+      "after": "ADMITTED point; after drift require exact unrounded closed relative segment minimum >= r_min_squared AND stored final relative position squared >= r_min_squared"
+    },
+    {
+      "path": "/guard_contract",
+      "added": {
+        "after_drift": {
+          "combine": "AND",
+          "exact_unrounded_closed_relative_segment_minimum": ">= r_min_squared",
+          "stored_final_relative_position_squared": ">= r_min_squared"
+        },
+        "point_admission": "exact current R_squared >= r_min_squared"
+      }
+    }
+  ],
+  "proof-wire.json": [
+    {
+      "path": "/dependencies/physical_domain_sha256",
+      "before": "a5242a7fb6e1fca0e6997f2a44af839049a5f610e00f73f8d4803b2d43f6b927",
+      "after": "eef0a3531c7bc5f233e7cd7212c3807735c05bc88284bd16600c894afc817c03"
+    },
+    {
+      "path": "/resource_failure_record",
+      "before": "closed fixed fields only: schema,status,phase,reason,spec_sha256,state_sha256,occurrence_sha256,budget_sha256,attempt_count,attempt_digest; hashes nullable if unknown; no raw, large integer, exception text or payload",
+      "after": "closed fixed fields only: schema,status,phase,reason,resource_kind,spec_sha256,state_sha256,occurrence_sha256,budget_sha256,attempt_count,attempt_digest; hashes nullable if unknown; no raw, large integer, exception text or payload"
+    }
+  ],
+  "rechecker-lineage.json": [
+    {
+      "path": "/dependencies/identity_sha256",
+      "before": "20dd3eb9cfb0c191d5b37caf4e5703e612b5956918a7f16f8fffcfd7b763d6a9",
+      "after": "673941bf9f88835f9ee494268e2837a6bd3e6b09323ad75db70d1f8df7666759"
+    },
+    {
+      "path": "/dependencies/wire_sha256",
+      "before": "4890780548aa8588293ad6bdb8a1dcf89c2d95a6aff0448218f19e486c8dc5bf",
+      "after": "b7994420f6896eb352730ac0fb5983a6c74c0635d357dffea3281535b57f27e9"
+    }
+  ],
+  "semantic-bundle.json": [
+    {
+      "path": "/dependencies/acquisition_identity_sha256",
+      "before": "20dd3eb9cfb0c191d5b37caf4e5703e612b5956918a7f16f8fffcfd7b763d6a9",
+      "after": "673941bf9f88835f9ee494268e2837a6bd3e6b09323ad75db70d1f8df7666759"
+    },
+    {
+      "path": "/dependencies/finite_policy_sha256",
+      "before": "ca2a680a6dc454673c826b55a859056e1c79989add9b06316388b783cd11dcdb",
+      "after": "e8ceec423827a0699a8d3709508dff3eebd7f7e8a99f92d4436dc7b57f83fdd8"
+    },
+    {
+      "path": "/dependencies/physical_domain_sha256",
+      "before": "a5242a7fb6e1fca0e6997f2a44af839049a5f610e00f73f8d4803b2d43f6b927",
+      "after": "eef0a3531c7bc5f233e7cd7212c3807735c05bc88284bd16600c894afc817c03"
+    },
+    {
+      "path": "/dependencies/proof_wire_sha256",
+      "before": "4890780548aa8588293ad6bdb8a1dcf89c2d95a6aff0448218f19e486c8dc5bf",
+      "after": "b7994420f6896eb352730ac0fb5983a6c74c0635d357dffea3281535b57f27e9"
+    },
+    {
+      "path": "/dependencies/rechecker_lineage_sha256",
+      "before": "cb725a5a427946d48763105eaab422b05eced8ecfbe5a8b29cff04db245a06a4",
+      "after": "4767ae1773fa2f697e749b90aa1b66da686605cbfb690307aa9c2d0c87427ab9"
+    },
+    {
+      "path": "/dependencies/status_composition_sha256",
+      "before": "0c4ad325b9f62fd7f7158334882456300c43481a403546e553ad1c81877bda4f",
+      "after": "4257563b2c82a66094f96da539cdf9bbe1967699403fd61ba613d195b26483ee"
+    }
+  ],
+  "status-composition.json": [
+    {
+      "path": "/dependencies/identity_sha256",
+      "before": "20dd3eb9cfb0c191d5b37caf4e5703e612b5956918a7f16f8fffcfd7b763d6a9",
+      "after": "673941bf9f88835f9ee494268e2837a6bd3e6b09323ad75db70d1f8df7666759"
+    },
+    {
+      "path": "/dependencies/policy_sha256",
+      "before": "ca2a680a6dc454673c826b55a859056e1c79989add9b06316388b783cd11dcdb",
+      "after": "e8ceec423827a0699a8d3709508dff3eebd7f7e8a99f92d4436dc7b57f83fdd8"
+    },
+    {
+      "path": "/future_KDK",
+      "before": "separately approved J0(start)->Kick->Drift->exact/stored full segment guards->J1(new snapshot)->Kick; no reuse of same supplied J; local temporaries until atomic full publication",
+      "after": "separately approved J0(start)->Kick->Drift->guard(minimum over exact unrounded closed relative segment >= r_min_squared AND stored final relative position squared >= r_min_squared)->J1(new snapshot)->Kick; no reuse of same supplied J; local temporaries until atomic full publication"
+    }
+  ]
+}

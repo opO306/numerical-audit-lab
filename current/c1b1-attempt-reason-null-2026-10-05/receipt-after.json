@@ -1,0 +1,140 @@
+{
+  "schema": "C1B1_ATTEMPT_REASON_CLARIFICATION_AFTER_V1",
+  "recorded_at_utc": "2026-10-04T17:57:20.381187+00:00",
+  "revision": "ATTEMPT-REASON-NULL-2026-10-05",
+  "review_status": "INDEPENDENT RECHECK PENDING",
+  "head_after": "8e5865964770b3752326d361276cbccd125c547a",
+  "commit_created": false,
+  "push_performed": false,
+  "approved_antecedent_commit": "8e5865964770b3752326d361276cbccd125c547a",
+  "historical_approval": "DESIGN / PRE-IMPLEMENTATION CLOSURE PASS; implementation_may_start=true; runtime_activation_allowed=false",
+  "historical_approval_changed": false,
+  "existing_tracked_count": 2097,
+  "existing_tracked_bytes_preserved": true,
+  "changed_tracked_paths": [],
+  "preexisting_reference_WIP_count": 35,
+  "preexisting_reference_WIP_bytes_preserved": true,
+  "preexisting_producer_draft_status": "NOT COMPLETED; producer checks not GREEN; boundary continuation STOPPED",
+  "protected_arithmetic_files": [
+    {
+      "path": "independent_checker/c1b1/exact_slow.py",
+      "sha256": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+      "antecedent_byte_identical": true
+    },
+    {
+      "path": "independent_checker/c1b1/exact_fast.py",
+      "sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+      "antecedent_byte_identical": true
+    },
+    {
+      "path": "independent_checker/c1b1/exact_geometry.py",
+      "sha256": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+      "antecedent_byte_identical": true
+    },
+    {
+      "path": "independent_checker/c1b1/compare.py",
+      "sha256": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+      "antecedent_byte_identical": true
+    },
+    {
+      "path": "independent_checker/c1b1/contracts.py",
+      "sha256": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+      "antecedent_byte_identical": true
+    },
+    {
+      "path": "independent_checker/c1b1/claim_adapter.py",
+      "sha256": "24b05ebf374728583ba725c83b8f9324f4b75b5515b03c5b1036339eef3e4899",
+      "antecedent_byte_identical": true
+    },
+    {
+      "path": "independent_checker/c1b1/semantic_manifest_v1.json",
+      "sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+      "antecedent_byte_identical": true
+    },
+    {
+      "path": "independent_checker/c1b1/semantic_manifest_v1.sha256",
+      "sha256": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79",
+      "antecedent_byte_identical": true
+    }
+  ],
+  "approved_spec_directory_byte_preserved": true,
+  "spec_tests": {
+    "command": "python -m pytest tests/test_impulse_attempt_reason_spec.py -q",
+    "passed": 46,
+    "failed": 0,
+    "log": "logs/02-spec-green.txt",
+    "scope": "STATIC SPEC ONLY; no producer execution"
+  },
+  "static_checks": {
+    "count": 155,
+    "result": "PASS",
+    "receipt": "static-checks.json"
+  },
+  "closed_pairs": 25,
+  "reason_relationships_checked": 550,
+  "success_null_pairs": [
+    [
+      "RESOLVED",
+      "NOT_RUN"
+    ],
+    [
+      "RESOLVED",
+      "ACCEPTED"
+    ]
+  ],
+  "Failure_schema_fields": 11,
+  "Failure_reason_nullable": false,
+  "existing_reason_enum_unchanged": true,
+  "checker_AST_import_allowlist_verified": true,
+  "checker_imports": [
+    "argparse",
+    "hashlib",
+    "json",
+    "pathlib",
+    "re"
+  ],
+  "new_artifact_sha256_excluding_this_receipt": {
+    "audit/c1b1-attempt-reason-null-2026-10-05/.gitattributes": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+    "audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py": "ca64558e8340ac1c941b83e2f7b6d5c20f64b6812bff239e216afd04c6ad4b70",
+    "current/c1b1-attempt-reason-null-2026-10-05/.gitattributes": "85a7941474bf5530f17ca3cea1c924eb9e47aec4ad94d6f2176d08b07085cc88",
+    "current/c1b1-attempt-reason-null-2026-10-05/hash-rebinding.json": "55e96c16cdcc9db6a4951376d7ee2db5b6fff1689042df79fd4c5c7066b75bf6",
+    "current/c1b1-attempt-reason-null-2026-10-05/logs/01-spec-red.txt": "650e4f83348f35dc794d2b779dde6b0e4eba4fabbf52efe51d16d35daba51ad8",
+    "current/c1b1-attempt-reason-null-2026-10-05/logs/02-spec-green.txt": "50985535fc38aaa936f3124fa3a44bba0f6dbd977647e71aba4d4205501de7ae",
+    "current/c1b1-attempt-reason-null-2026-10-05/receipt-before.json": "f9027c13485663bfc3a790377ec17afef64000014eb56c2fc867c1ad2c3dd534",
+    "current/c1b1-attempt-reason-null-2026-10-05/static-checks.json": "6963dbadeb02ed2fb9ada4e42f22b9f638b065b24c8d1e8a18bbae4847ae83c4",
+    "docs/C1B1_ATTEMPT_REASON_NULL_CLARIFICATION_2026-10-05.md": "8bc9b69d218dfb10e698fba4d2768c5c6206a5d9f519d135603ed0971193c541",
+    "specs/c1b1-independent-impulse-v1-attempt-reason-null/.gitattributes": "2f0c1af484608d382d0abdaebf8985617cfcad5a44f1f58e9679d991d3e99de7",
+    "specs/c1b1-independent-impulse-v1-attempt-reason-null/README.md": "5838d6eb6ac1c3e64c65e69b7874be67faa7b154bfedc903321d28d88b856789",
+    "specs/c1b1-independent-impulse-v1-attempt-reason-null/acquisition-identity.json": "45f4d39571fb49440c5c2e71fe3f2b1be31a5855b68363e651494d3bb74dd73f",
+    "specs/c1b1-independent-impulse-v1-attempt-reason-null/acquisition-identity.json.sha256": "fdfe0b8618cc899b2810feb38420a457beaac0957d7611275e6248c45786f92e",
+    "specs/c1b1-independent-impulse-v1-attempt-reason-null/constants.json": "f1cf6a71afaf45e40db37a6e8a5b4f643a57885f4040d4fa285835530363e196",
+    "specs/c1b1-independent-impulse-v1-attempt-reason-null/constants.json.sha256": "9eaed523f8a48ef26e3670d5294a945a46166f67154dac14bf3edb842bc7e984",
+    "specs/c1b1-independent-impulse-v1-attempt-reason-null/finite-policy.json": "7e2db07cb87bb0d81981c707949c1cd9fc129c01b645eb7a2447923360b9ab2e",
+    "specs/c1b1-independent-impulse-v1-attempt-reason-null/finite-policy.json.sha256": "3b8bc2af9e40c6ee8029176a2473df5a6f1627ecf7a9e77d6a2c5ebc8e77151b",
+    "specs/c1b1-independent-impulse-v1-attempt-reason-null/package-manifest.json": "4a4cad78a192f72cf479cf16ceb971ea257d9bdf89acc5a7ca6e4fea3738219f",
+    "specs/c1b1-independent-impulse-v1-attempt-reason-null/package-manifest.json.sha256": "9cf98b6b02ccd5dcca646b70cef2f5dfbb1c1ec5bd97904716b114ef7c52c752",
+    "specs/c1b1-independent-impulse-v1-attempt-reason-null/physical-domain.json": "eef0a3531c7bc5f233e7cd7212c3807735c05bc88284bd16600c894afc817c03",
+    "specs/c1b1-independent-impulse-v1-attempt-reason-null/physical-domain.json.sha256": "dcc659d0e9b8cb90b2d8402c21155e725c7c7c71079651b44f952dd81f4cff76",
+    "specs/c1b1-independent-impulse-v1-attempt-reason-null/proof-wire.json": "ce23bfc1dfac2a9140af6d880ab4fcef995926f68ed895f68012a3397b9fe1a8",
+    "specs/c1b1-independent-impulse-v1-attempt-reason-null/proof-wire.json.sha256": "b44a46f16905da5ea4102d8e0d946b260ef3e9aaea5330b233ccd7dd6ec3797e",
+    "specs/c1b1-independent-impulse-v1-attempt-reason-null/rechecker-lineage.json": "8ee7df7e17c298a0402d86c019a6246c39fd8fef960f0627816fabb59d34076e",
+    "specs/c1b1-independent-impulse-v1-attempt-reason-null/rechecker-lineage.json.sha256": "65b2a9d5e4c76c04798593c5a80e8132988f7a9d513e0697de3bd8f9e217378c",
+    "specs/c1b1-independent-impulse-v1-attempt-reason-null/semantic-bundle.json": "3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2bc1",
+    "specs/c1b1-independent-impulse-v1-attempt-reason-null/semantic-bundle.json.sha256": "b6088d45901cef19a642f91901fcc8473e2fd997871534eda8be4975771c207a",
+    "specs/c1b1-independent-impulse-v1-attempt-reason-null/status-composition.json": "1fc2b69e87572b22d026c7d30f8cd013638557bf456f73480de83a4f67050207",
+    "specs/c1b1-independent-impulse-v1-attempt-reason-null/status-composition.json.sha256": "fc397b3b2b052bac14bde694abb491760e8edbc81cd1d867e567d26a1b6fd00f",
+    "tests/test_impulse_attempt_reason_spec.py": "593f592febeb91ee1c81163af9076538864ca9e41b1960fee9f10eb3b98cdb4f"
+  },
+  "local_link_count": 14,
+  "local_links_valid": true,
+  "implementation_boundary_continuation_allowed": false,
+  "producer_or_V2_run_this_revision": false,
+  "production_tests_run_this_revision": false,
+  "benchmarks_run": false,
+  "mutants_run": false,
+  "runtime_activation_allowed": false,
+  "numeric_production_instance_issued": false,
+  "J_status": "J_NOT_VERIFIED",
+  "certification": "NotCertified",
+  "receipt_self_hash_rule": "Excluded from own artifact hash inventory"
+}

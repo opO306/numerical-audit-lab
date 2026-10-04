@@ -1,0 +1,72 @@
+{
+  "schema": "C1B1_ATTEMPT_REASON_HASH_REBINDING_V1",
+  "antecedent": "8e5865964770b3752326d361276cbccd125c547a",
+  "topological_order": [
+    "constants.json",
+    "physical-domain.json",
+    "proof-wire.json",
+    "finite-policy.json",
+    "acquisition-identity.json",
+    "status-composition.json",
+    "rechecker-lineage.json",
+    "semantic-bundle.json",
+    "package-manifest.json"
+  ],
+  "files": [
+    {
+      "file": "constants.json",
+      "old_sha256": "f1cf6a71afaf45e40db37a6e8a5b4f643a57885f4040d4fa285835530363e196",
+      "new_sha256": "f1cf6a71afaf45e40db37a6e8a5b4f643a57885f4040d4fa285835530363e196",
+      "byte_preserved": true
+    },
+    {
+      "file": "physical-domain.json",
+      "old_sha256": "eef0a3531c7bc5f233e7cd7212c3807735c05bc88284bd16600c894afc817c03",
+      "new_sha256": "eef0a3531c7bc5f233e7cd7212c3807735c05bc88284bd16600c894afc817c03",
+      "byte_preserved": true
+    },
+    {
+      "file": "proof-wire.json",
+      "old_sha256": "b7994420f6896eb352730ac0fb5983a6c74c0635d357dffea3281535b57f27e9",
+      "new_sha256": "ce23bfc1dfac2a9140af6d880ab4fcef995926f68ed895f68012a3397b9fe1a8",
+      "byte_preserved": false
+    },
+    {
+      "file": "finite-policy.json",
+      "old_sha256": "e8ceec423827a0699a8d3709508dff3eebd7f7e8a99f92d4436dc7b57f83fdd8",
+      "new_sha256": "7e2db07cb87bb0d81981c707949c1cd9fc129c01b645eb7a2447923360b9ab2e",
+      "byte_preserved": false
+    },
+    {
+      "file": "acquisition-identity.json",
+      "old_sha256": "673941bf9f88835f9ee494268e2837a6bd3e6b09323ad75db70d1f8df7666759",
+      "new_sha256": "45f4d39571fb49440c5c2e71fe3f2b1be31a5855b68363e651494d3bb74dd73f",
+      "byte_preserved": false
+    },
+    {
+      "file": "status-composition.json",
+      "old_sha256": "4257563b2c82a66094f96da539cdf9bbe1967699403fd61ba613d195b26483ee",
+      "new_sha256": "1fc2b69e87572b22d026c7d30f8cd013638557bf456f73480de83a4f67050207",
+      "byte_preserved": false
+    },
+    {
+      "file": "rechecker-lineage.json",
+      "old_sha256": "4767ae1773fa2f697e749b90aa1b66da686605cbfb690307aa9c2d0c87427ab9",
+      "new_sha256": "8ee7df7e17c298a0402d86c019a6246c39fd8fef960f0627816fabb59d34076e",
+      "byte_preserved": false
+    },
+    {
+      "file": "semantic-bundle.json",
+      "old_sha256": "11eedb45fc80d8b1f8db1bc5afdceb1754914c5e2f49ba48ad2b4d87d63bb007",
+      "new_sha256": "3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2bc1",
+      "byte_preserved": false
+    },
+    {
+      "file": "package-manifest.json",
+      "old_sha256": "9d430833bb359600b4c9f67f225e9c8a74fb883d6fe119ca8b7c2502b8ce4499",
+      "new_sha256": "4a4cad78a192f72cf479cf16ceb971ea257d9bdf89acc5a7ca6e4fea3738219f",
+      "byte_preserved": false
+    }
+  ],
+  "status": "INDEPENDENT RECHECK PENDING"
+}

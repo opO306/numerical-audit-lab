@@ -1,0 +1,674 @@
+C1-B1 Independent Impulse V1의 pre-implementation closure 독립 재감사가 완료됐습니다.
+
+감사 대상:
+
+```text
+8e5865964770b3752326d361276cbccd125c547a
+```
+
+최종 상태:
+
+```text
+DESIGN / PRE-IMPLEMENTATION CLOSURE PASS
+
+implementation_may_start = true
+implementation = NOT YET IMPLEMENTED
+runtime_activation_allowed = false
+
+Arithmetic V1:
+INDEPENDENT REVIEW PASS
+
+Overall physical C1-B1:
+J_NOT_VERIFIED
+NotCertified
+```
+
+이제 **Independent Impulse V1 reference producer의 최소 구현**을 시작하십시오.
+
+이번 단계는 production runtime activation이나 full KDK integration 단계가 아닙니다.
+
+# 1. 구현 목표
+
+목표는 frozen Lab semantic bundle과 physical state로부터:
+
+```text
+q = r_j - r_i
+R² = q·q
+R = sqrt(R²)
+
+J_j,k = -V'(R) * q_k/R * Δt/2
+J_i = -J_j
+```
+
+를 독립적으로 계산하고,
+
+```text
+scaled_J_k = 2^Fmom * J_j,k
+```
+
+가 하나의 nearest-even rounding cell에 sound하게 포함됨을 증명한 경우에만:
+
+```text
+J_raw[k]
+```
+
+를 RESOLVED로 내는 reference producer를 만드는 것입니다.
+
+원본 executor의 impulse/J 값을 입력이나 oracle로 사용하지 마십시오.
+
+---
+
+# 2. 첫 구현은 reference only
+
+첫 구현은 속도 최적화를 하지 마십시오.
+
+```text
+Independent Impulse V1:
+REFERENCE PRODUCER ONLY
+```
+
+로 시작합니다.
+
+금지:
+
+```text
+fast path
+GPU
+Numba
+native extension
+executor primitive reuse
+Candidate B 구조 복사
+approximation cutoff
+performance promotion
+```
+
+목표는 가장 단순하고 감사 가능한 구현입니다.
+
+---
+
+# 3. authoritative specification
+
+구현은 반드시 현재 승인된 Lab spec bundle을 따라야 합니다.
+
+특히:
+
+```text
+semantic-bundle.json
+constants.json
+physical-domain.json
+proof-wire.json
+finite-policy.json
+rechecker-lineage.json
+acquisition-identity.json
+status-composition.json
+```
+
+의 고정 의미를 따라야 합니다.
+
+구현 convenience 때문에 spec을 바꾸지 마십시오.
+
+Spec ambiguity가 발견되면 코드에서 임의 결정하지 말고 STOP하고 finding으로 기록하십시오.
+
+---
+
+# 4. 기존 Arithmetic V1 수정 금지
+
+다음 기존 감사 PASS 파일은 byte-preserved로 유지하십시오.
+
+```text
+exact_slow.py
+exact_fast.py
+exact_geometry.py
+compare.py
+contracts.py
+claim_adapter.py
+semantic_manifest_v1.json
+semantic_manifest_v1.sha256
+```
+
+Independent Impulse는 별도 모듈로 작성하십시오.
+
+기존 Arithmetic V1과의 실제 composition은 이번 1차 구현 이후 별도 Gate입니다.
+
+---
+
+# 5. 권장 모듈 구조
+
+예:
+
+```text
+independent_checker/c1b1/impulse/
+
+contracts.py
+domain.py
+interval.py
+sqrt_enclosure.py
+exp_enclosure.py
+potential.py
+derivative.py
+rounding.py
+producer.py
+certificate.py
+```
+
+파일명은 조정 가능하지만 다음 층은 분리하십시오.
+
+```text
+physical formula
+primitive enclosure
+interval composition
+rounding decision
+resource accounting
+certificate construction
+```
+
+한 파일 하나에 전부 밀어 넣지 마십시오.
+
+---
+
+# 6. exact physical input
+
+Input은 external J를 받지 않습니다.
+
+최소한:
+
+```text
+position raw state
+position grid
+momentum/impulse grid
+species
+full dt / half-step binding
+spec identity
+acquisition / state / phase identity
+```
+
+로부터 J를 계산하십시오.
+
+J0와 향후 J1을 같은 snapshot으로 처리하지 않도록 phase identity를 보존하십시오.
+
+---
+
+# 7. domain admission 먼저
+
+수치 계산 전에 physical-domain 계약을 적용하십시오.
+
+```text
+R = 0
+→ singular refusal
+
+0 < R < r_min
+→ physical-domain refusal
+
+R >= r_min
+→ impulse calculation eligible
+```
+
+Domain 검사보다 zero-axis shortcut을 먼저 적용하지 마십시오.
+
+그리고 drift guard 계약은 기존 승인 의미 그대로입니다.
+
+```text
+exact unrounded closed relative segment minimum >= r_min²
+AND
+stored final relative position squared >= r_min²
+```
+
+Stored rounded segment 전체 minimum을 새로 검사하지 마십시오.
+
+---
+
+# 8. sqrt enclosure
+
+sqrt는 host float를 oracle로 사용하지 마십시오.
+
+승인된 dyadic isqrt enclosure 방식으로:
+
+```text
+sqrt(R²) ∈ [L_R, U_R]
+```
+
+를 증명하십시오.
+
+Singleton equality를 exact하게 입증할 수 있는 경우만 singleton을 허용하십시오.
+
+Coarse lower bound가 0이라고 실제 R=0으로 판정하지 마십시오.
+
+필요하면 refinement하고, finite policy에서 해결하지 못하면 UNPROVED입니다.
+
+---
+
+# 9. exp enclosure
+
+`exp(-x)`는 승인된:
+
+```text
+range reduction
+positive Taylor partial sum
+rigorous remainder bound
+reciprocal
+outward dyadic widening
+repeated squaring
+```
+
+전략으로 구현하십시오.
+
+금지:
+
+```text
+math.exp 결과를 proof oracle로 사용
+Decimal/mpmath point value를 proof로 사용
+값이 두 precision에서 같다는 이유로 accept
+작은 exp를 0으로 cutoff
+```
+
+---
+
+# 10. inverse / power / interval arithmetic
+
+다음 sound interval 연산을 독립 구현하십시오.
+
+```text
+positive reciprocal
+integer powers
+signed multiplication using 4 corners
+addition
+subtraction
+```
+
+모든 denominator positivity 및 interval ordering precondition을 명시적으로 검사하십시오.
+
+잘못된 interval을 silently normalize하지 마십시오.
+
+---
+
+# 11. V(R) / V'(R)
+
+BO / REL / QED 및 retardation branch를 현재 semantic bundle에 정확히 전사하십시오.
+
+특히 다음 오류를 피하십시오.
+
+```text
+BO i=-1 derivative
+Tang-Toennies derivative
+BO leading g'
+REL leading -T
+retardation branch identity
+exp sign/rate
+R power
+```
+
+Nominal model constants와 uncertainty/σ를 섞지 마십시오.
+
+---
+
+# 12. J enclosure
+
+최종적으로 각 axis에 대해:
+
+```text
+J_k = -V'(R) * q_k/R * full_dt/2
+```
+
+의 sound interval을 구성하십시오.
+
+중간 R이나 force를 storage grid로 반올림하지 마십시오.
+
+Rounding은 전체 J expression의 마지막에 한 번만 적용합니다.
+
+---
+
+# 13. nearest-even proof
+
+Scaled interval:
+
+```text
+Y_k = 2^80 * J_k
+```
+
+전체가 하나의 nearest-even cell에 들어갈 때만 raw를 확정하십시오.
+
+Cell 의미:
+
+```text
+m even:
+[m - 1/2, m + 1/2]
+
+m odd:
+(m - 1/2, m + 1/2)
+```
+
+대표 midpoint를 반올림해 결정하지 마십시오.
+
+두 cell을 걸치면 refinement 또는 UNPROVED입니다.
+
+---
+
+# 14. signed overflow
+
+현재 signed96 contract를 그대로 사용하십시오.
+
+```text
+m_min = -2^95
+m_max = 2^95 - 1
+```
+
+그리고 common J 적용에서 `-J`의 representability도 현재 spec 그대로 처리하십시오.
+
+Coarse interval 양끝이 overflow 방향에 있다고 해서 interval 전체 overflow라고 판정하지 마십시오.
+
+Overflow가 증명되지 않으면 refinement 또는 UNPROVED입니다.
+
+---
+
+# 15. finite policy
+
+현재 B5는:
+
+```text
+METHOD SPEC PASS
+RUNTIME NUMERIC INSTANCE STILL REQUIRED BEFORE ACTIVATION
+```
+
+입니다.
+
+이번 reference producer 구현에서는 parameterized finite policy 구조를 구현할 수 있지만, 승인되지 않은 production runtime budget instance를 임의 발급하지 마십시오.
+
+반드시 구분하십시오.
+
+```text
+internal convergence
+rounding-cell decision
+configured finite-budget success
+proof publication feasibility
+```
+
+Budget 소진 시 마지막 approximation을 채택하지 마십시오.
+
+```text
+UNPROVED / STOP
+```
+
+이어야 합니다.
+
+---
+
+# 16. resource accounting
+
+B4/B5 계약에 따라 큰 연산 전에 resource bound를 검사할 수 있는 구조를 만드십시오.
+
+특히:
+
+```text
+integer bit growth
+rational temporary size
+Taylor order
+attempt count
+certificate size
+```
+
+를 추적하십시오.
+
+다만 실제 runtime activation에 필요한:
+
+```text
+numeric instance
+source/platform/allocator majorants
+V2 whole-call preflight
+isolated worker hard caps
+```
+
+는 이번 구현만으로 승인됐다고 표시하지 마십시오.
+
+---
+
+# 17. Failure schema
+
+Failure record는 승인된 11개 field를 정확히 따르십시오.
+
+```text
+schema
+status
+phase
+reason
+resource_kind
+spec_sha256
+state_sha256
+occurrence_sha256
+budget_sha256
+attempt_count
+attempt_digest
+```
+
+`resource_kind`는 항상 존재합니다.
+
+```text
+resource failure:
+enum
+
+non-resource failure:
+null
+```
+
+Failure는 4096 bytes 이하여야 하며 giant integer, 전체 payload, raw exception string을 넣지 마십시오.
+
+---
+
+# 18. whole-vector atomicity
+
+세 component 중 하나라도:
+
+```text
+UNPROVED
+REFUSED
+ERROR
+resource failure
+```
+
+이면 partial J를 public result로 내지 마십시오.
+
+전체 3-vector가 승인된 뒤에만 certificate/public result를 만드십시오.
+
+입력/state mutation도 금지입니다.
+
+---
+
+# 19. certificate
+
+Compact certificate에는 최소:
+
+```text
+spec/state/occurrence identity
+method version
+finite-policy identity
+attempt parameters
+claimed raw J vector
+source/binding identity
+```
+
+를 담으십시오.
+
+거대한 intermediate interval transcript를 wire에 넣지 마십시오.
+
+Rechecker는 producer가 써 준 최종 interval을 그대로 신뢰하는 구조가 아니어야 합니다.
+
+---
+
+# 20. V2 integration은 adapter boundary로
+
+Pinned exact checker V2는 producer 내부 primitive로 import하지 마십시오.
+
+Producer는 독립 implementation이어야 합니다.
+
+Rechecker adapter가:
+
+```text
+producer certificate
+→ Lab binding validation
+→ pinned V2 input projection
+→ V2 check
+```
+
+을 담당하도록 설계하십시오.
+
+다만 이번 1차 구현에서 실제 runtime V2 activation까지 진행하지 않아도 됩니다.
+
+V2의 strict-cell exact-tie 제한은 availability 제한으로 유지하십시오.
+
+---
+
+# 21. 최소 validation tests
+
+첫 구현에는 최소 다음 test를 작성하십시오.
+
+```text
+domain:
+R=0
+below r_min
+above r_min
+zero axis
+
+sqrt:
+perfect square
+non-square
+coarse lower zero refinement
+
+exp:
+x=0
+small positive
+large positive
+tail bound
+
+interval:
+mixed-sign multiply
+reciprocal
+power
+
+rounding:
+even-cell interior
+even exact tie
+odd boundary
+positive/negative symmetry
+
+overflow:
+lower
+upper
+coarse ambiguous interval
+
+whole vector:
+one lane UNPROVED
+one lane overflow
+all resolved
+
+immutability:
+input unchanged
+state unchanged
+
+wire:
+Failure fields
+resource_kind enum/null
+4096-byte bound
+1 MiB artifact bound
+```
+
+Test fixture가 실제 spec 의미와 분리된 synthetic primitive test인지 physical-state test인지 label을 명확히 하십시오.
+
+---
+
+# 22. Mutation implementation
+
+설계된 M1–M17과 추가 certificate/identity mutants를 실제 source mutation 가능한 형태로 준비하십시오.
+
+단 이번 단계에서 모두 실행 완료할 필요는 없습니다.
+
+각 mutant는:
+
+```text
+actual source edit
+nondegenerate fixture
+independent expected
+semantic detection reason
+```
+
+을 가져야 합니다.
+
+Hash mismatch만으로 검출됐다고 세지 마십시오.
+
+---
+
+# 23. 구현 후 author evidence
+
+최소 다음을 제출하십시오.
+
+```text
+source file list
+source SHA-256
+dependency map
+
+unit tests
+differential/reference tests
+
+boundary tests
+resource/failure tests
+
+actual source mutant results
+
+input/state immutability results
+
+certificate examples
+
+known UNPROVED cases
+
+runtime not activated confirmation
+```
+
+가능하면 실제 숫자 결과뿐 아니라 왜 그 fixture가 해당 obligation을 검증하는지도 기록하십시오.
+
+---
+
+# 24. 상태 표기
+
+구현 후 독립 감사 전까지 상태는:
+
+```text
+Independent Impulse V1:
+IMPLEMENTED
+AUTHOR CHECKS ONLY
+INDEPENDENT IMPLEMENTATION AUDIT PENDING
+
+runtime_activation_allowed = false
+
+J_NOT_VERIFIED
+NotCertified
+```
+
+입니다.
+
+Author tests가 모두 PASS해도:
+
+```text
+J_VERIFIED
+physical PASS
+Certified
+```
+
+로 올리지 마십시오.
+
+---
+
+# 25. commit / push
+
+이번에는 먼저 구현과 author checks까지 수행하십시오.
+
+완료 후:
+
+```text
+변경 파일
+테스트 결과
+known limits
+mutant 결과
+hash/provenance
+```
+
+를 보고하십시오.
+
+사용자 추가 승인 없이 commit/push하지 마십시오.

@@ -1,0 +1,1183 @@
+FFFFFFFFFFFFFFFFFFFF                                                     [100%]
+================================== FAILURES ===================================
+________________ test_signed_four_corners_and_invalid_interval ________________
+
+name = 'interval'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse'
+import_ = <function _gcd_import at 0x0000029313F1C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_signed_four_corners_and_invalid_interval():
+>       m=module('interval'); c=context()
+          ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'interval'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: interval
+
+tests\test_impulse_reference_primitives.py:11: Failed
+_________________ test_positive_reciprocal_and_integer_power __________________
+
+name = 'interval'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse'
+import_ = <function _gcd_import at 0x0000029313F1C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_positive_reciprocal_and_integer_power():
+>       m=module('interval'); c=context()
+          ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'interval'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: interval
+
+tests\test_impulse_reference_primitives.py:11: Failed
+__________________ test_sqrt_exact_squared_containment[x0-8] __________________
+
+name = 'sqrt_enclosure'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse'
+import_ = <function _gcd_import at 0x0000029313F1C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+x = Fraction(9, 4), n = 8
+
+    @pytest.mark.parametrize('x,n',[(Q(9,4),8),(Q(2),16),(Q(1,65536),1),(Q(1,65536),16)])
+    def test_sqrt_exact_squared_containment(x,n):
+>       v=module('sqrt_enclosure').sqrt_enclosure(x,n,context())
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'sqrt_enclosure'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: sqrt_enclosure
+
+tests\test_impulse_reference_primitives.py:11: Failed
+_________________ test_sqrt_exact_squared_containment[x1-16] __________________
+
+name = 'sqrt_enclosure'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse'
+import_ = <function _gcd_import at 0x0000029313F1C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+x = Fraction(2, 1), n = 16
+
+    @pytest.mark.parametrize('x,n',[(Q(9,4),8),(Q(2),16),(Q(1,65536),1),(Q(1,65536),16)])
+    def test_sqrt_exact_squared_containment(x,n):
+>       v=module('sqrt_enclosure').sqrt_enclosure(x,n,context())
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'sqrt_enclosure'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: sqrt_enclosure
+
+tests\test_impulse_reference_primitives.py:11: Failed
+__________________ test_sqrt_exact_squared_containment[x2-1] __________________
+
+name = 'sqrt_enclosure'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse'
+import_ = <function _gcd_import at 0x0000029313F1C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+x = Fraction(1, 65536), n = 1
+
+    @pytest.mark.parametrize('x,n',[(Q(9,4),8),(Q(2),16),(Q(1,65536),1),(Q(1,65536),16)])
+    def test_sqrt_exact_squared_containment(x,n):
+>       v=module('sqrt_enclosure').sqrt_enclosure(x,n,context())
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'sqrt_enclosure'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: sqrt_enclosure
+
+tests\test_impulse_reference_primitives.py:11: Failed
+_________________ test_sqrt_exact_squared_containment[x3-16] __________________
+
+name = 'sqrt_enclosure'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse'
+import_ = <function _gcd_import at 0x0000029313F1C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+x = Fraction(1, 65536), n = 16
+
+    @pytest.mark.parametrize('x,n',[(Q(9,4),8),(Q(2),16),(Q(1,65536),1),(Q(1,65536),16)])
+    def test_sqrt_exact_squared_containment(x,n):
+>       v=module('sqrt_enclosure').sqrt_enclosure(x,n,context())
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'sqrt_enclosure'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: sqrt_enclosure
+
+tests\test_impulse_reference_primitives.py:11: Failed
+____________ test_exp_contains_independent_alternating_series[x0] _____________
+
+name = 'exp_enclosure'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse'
+import_ = <function _gcd_import at 0x0000029313F1C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+x = Fraction(0, 1)
+
+    @pytest.mark.parametrize('x',[Q(0),Q(1,100),Q(1,2),Q(1)])
+    def test_exp_contains_independent_alternating_series(x):
+>       v,order,s=module('exp_enclosure').exp_enclosure(module('interval').Interval(x,x),80,150,context())
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'exp_enclosure'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: exp_enclosure
+
+tests\test_impulse_reference_primitives.py:11: Failed
+____________ test_exp_contains_independent_alternating_series[x1] _____________
+
+name = 'exp_enclosure'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse'
+import_ = <function _gcd_import at 0x0000029313F1C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+x = Fraction(1, 100)
+
+    @pytest.mark.parametrize('x',[Q(0),Q(1,100),Q(1,2),Q(1)])
+    def test_exp_contains_independent_alternating_series(x):
+>       v,order,s=module('exp_enclosure').exp_enclosure(module('interval').Interval(x,x),80,150,context())
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'exp_enclosure'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: exp_enclosure
+
+tests\test_impulse_reference_primitives.py:11: Failed
+____________ test_exp_contains_independent_alternating_series[x2] _____________
+
+name = 'exp_enclosure'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse'
+import_ = <function _gcd_import at 0x0000029313F1C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+x = Fraction(1, 2)
+
+    @pytest.mark.parametrize('x',[Q(0),Q(1,100),Q(1,2),Q(1)])
+    def test_exp_contains_independent_alternating_series(x):
+>       v,order,s=module('exp_enclosure').exp_enclosure(module('interval').Interval(x,x),80,150,context())
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'exp_enclosure'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: exp_enclosure
+
+tests\test_impulse_reference_primitives.py:11: Failed
+____________ test_exp_contains_independent_alternating_series[x3] _____________
+
+name = 'exp_enclosure'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse'
+import_ = <function _gcd_import at 0x0000029313F1C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+x = Fraction(1, 1)
+
+    @pytest.mark.parametrize('x',[Q(0),Q(1,100),Q(1,2),Q(1)])
+    def test_exp_contains_independent_alternating_series(x):
+>       v,order,s=module('exp_enclosure').exp_enclosure(module('interval').Interval(x,x),80,150,context())
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'exp_enclosure'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: exp_enclosure
+
+tests\test_impulse_reference_primitives.py:11: Failed
+________________ test_large_exp_no_cutoff_and_tail_order_limit ________________
+
+name = 'exp_enclosure'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse'
+import_ = <function _gcd_import at 0x0000029313F1C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_large_exp_no_cutoff_and_tail_order_limit():
+>       e=module('exp_enclosure'); m=module('interval')
+          ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'exp_enclosure'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: exp_enclosure
+
+tests\test_impulse_reference_primitives.py:11: Failed
+_______________ test_even_odd_cell_and_negative_ties[lo0-hi0-2] _______________
+
+name = 'rounding'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse'
+import_ = <function _gcd_import at 0x0000029313F1C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+lo = Fraction(7, 4), hi = Fraction(9, 4), raw = 2
+
+    @pytest.mark.parametrize('lo,hi,raw',[(Q(7,4),Q(9,4),2),(Q(3,2),Q(3,2),2),
+        (Q(5,2),Q(5,2),2),(Q(-5,2),Q(-5,2),-2),(Q(5,2),Q(7,2),None),
+        (Q(-7,2),Q(-5,2),None),(Q(49,100),Q(51,100),None)])
+    def test_even_odd_cell_and_negative_ties(lo,hi,raw):
+>       d=module('rounding').decide_scaled(module('interval').Interval(lo,hi))
+          ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'rounding'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: rounding
+
+tests\test_impulse_reference_primitives.py:11: Failed
+_______________ test_even_odd_cell_and_negative_ties[lo1-hi1-2] _______________
+
+name = 'rounding'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse'
+import_ = <function _gcd_import at 0x0000029313F1C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+lo = Fraction(3, 2), hi = Fraction(3, 2), raw = 2
+
+    @pytest.mark.parametrize('lo,hi,raw',[(Q(7,4),Q(9,4),2),(Q(3,2),Q(3,2),2),
+        (Q(5,2),Q(5,2),2),(Q(-5,2),Q(-5,2),-2),(Q(5,2),Q(7,2),None),
+        (Q(-7,2),Q(-5,2),None),(Q(49,100),Q(51,100),None)])
+    def test_even_odd_cell_and_negative_ties(lo,hi,raw):
+>       d=module('rounding').decide_scaled(module('interval').Interval(lo,hi))
+          ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'rounding'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: rounding
+
+tests\test_impulse_reference_primitives.py:11: Failed
+_______________ test_even_odd_cell_and_negative_ties[lo2-hi2-2] _______________
+
+name = 'rounding'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse'
+import_ = <function _gcd_import at 0x0000029313F1C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+lo = Fraction(5, 2), hi = Fraction(5, 2), raw = 2
+
+    @pytest.mark.parametrize('lo,hi,raw',[(Q(7,4),Q(9,4),2),(Q(3,2),Q(3,2),2),
+        (Q(5,2),Q(5,2),2),(Q(-5,2),Q(-5,2),-2),(Q(5,2),Q(7,2),None),
+        (Q(-7,2),Q(-5,2),None),(Q(49,100),Q(51,100),None)])
+    def test_even_odd_cell_and_negative_ties(lo,hi,raw):
+>       d=module('rounding').decide_scaled(module('interval').Interval(lo,hi))
+          ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'rounding'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: rounding
+
+tests\test_impulse_reference_primitives.py:11: Failed
+______________ test_even_odd_cell_and_negative_ties[lo3-hi3--2] _______________
+
+name = 'rounding'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse'
+import_ = <function _gcd_import at 0x0000029313F1C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+lo = Fraction(-5, 2), hi = Fraction(-5, 2), raw = -2
+
+    @pytest.mark.parametrize('lo,hi,raw',[(Q(7,4),Q(9,4),2),(Q(3,2),Q(3,2),2),
+        (Q(5,2),Q(5,2),2),(Q(-5,2),Q(-5,2),-2),(Q(5,2),Q(7,2),None),
+        (Q(-7,2),Q(-5,2),None),(Q(49,100),Q(51,100),None)])
+    def test_even_odd_cell_and_negative_ties(lo,hi,raw):
+>       d=module('rounding').decide_scaled(module('interval').Interval(lo,hi))
+          ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'rounding'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: rounding
+
+tests\test_impulse_reference_primitives.py:11: Failed
+_____________ test_even_odd_cell_and_negative_ties[lo4-hi4-None] ______________
+
+name = 'rounding'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse'
+import_ = <function _gcd_import at 0x0000029313F1C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+lo = Fraction(5, 2), hi = Fraction(7, 2), raw = None
+
+    @pytest.mark.parametrize('lo,hi,raw',[(Q(7,4),Q(9,4),2),(Q(3,2),Q(3,2),2),
+        (Q(5,2),Q(5,2),2),(Q(-5,2),Q(-5,2),-2),(Q(5,2),Q(7,2),None),
+        (Q(-7,2),Q(-5,2),None),(Q(49,100),Q(51,100),None)])
+    def test_even_odd_cell_and_negative_ties(lo,hi,raw):
+>       d=module('rounding').decide_scaled(module('interval').Interval(lo,hi))
+          ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'rounding'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: rounding
+
+tests\test_impulse_reference_primitives.py:11: Failed
+_____________ test_even_odd_cell_and_negative_ties[lo5-hi5-None] ______________
+
+name = 'rounding'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse'
+import_ = <function _gcd_import at 0x0000029313F1C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+lo = Fraction(-7, 2), hi = Fraction(-5, 2), raw = None
+
+    @pytest.mark.parametrize('lo,hi,raw',[(Q(7,4),Q(9,4),2),(Q(3,2),Q(3,2),2),
+        (Q(5,2),Q(5,2),2),(Q(-5,2),Q(-5,2),-2),(Q(5,2),Q(7,2),None),
+        (Q(-7,2),Q(-5,2),None),(Q(49,100),Q(51,100),None)])
+    def test_even_odd_cell_and_negative_ties(lo,hi,raw):
+>       d=module('rounding').decide_scaled(module('interval').Interval(lo,hi))
+          ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'rounding'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: rounding
+
+tests\test_impulse_reference_primitives.py:11: Failed
+_____________ test_even_odd_cell_and_negative_ties[lo6-hi6-None] ______________
+
+name = 'rounding'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse'
+import_ = <function _gcd_import at 0x0000029313F1C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+lo = Fraction(49, 100), hi = Fraction(51, 100), raw = None
+
+    @pytest.mark.parametrize('lo,hi,raw',[(Q(7,4),Q(9,4),2),(Q(3,2),Q(3,2),2),
+        (Q(5,2),Q(5,2),2),(Q(-5,2),Q(-5,2),-2),(Q(5,2),Q(7,2),None),
+        (Q(-7,2),Q(-5,2),None),(Q(49,100),Q(51,100),None)])
+    def test_even_odd_cell_and_negative_ties(lo,hi,raw):
+>       d=module('rounding').decide_scaled(module('interval').Interval(lo,hi))
+          ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'rounding'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: rounding
+
+tests\test_impulse_reference_primitives.py:11: Failed
+_________________ test_overflow_asymmetric_ties_and_opposite __________________
+
+name = 'interval'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse'
+import_ = <function _gcd_import at 0x0000029313F1C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_overflow_asymmetric_ties_and_opposite():
+>       m=module('interval'); decide=module('rounding').decide_scaled; low=-(1<<95);high=(1<<95)-1
+          ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'interval'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: interval
+
+tests\test_impulse_reference_primitives.py:11: Failed
+___________ test_resource_guard_before_large_shift_or_cross_product ___________
+
+name = 'resource'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse'
+import_ = <function _gcd_import at 0x0000029313F1C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_resource_guard_before_large_shift_or_cross_product():
+>       r=module('resource');c=r.ResourceAccount(bit_max=32,num_bit_max=32,den_bit_max=32,work_max=10**8)
+          ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'resource'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: resource
+
+tests\test_impulse_reference_primitives.py:11: Failed
+=========================== short test summary info ===========================
+FAILED tests/test_impulse_reference_primitives.py::test_signed_four_corners_and_invalid_interval
+FAILED tests/test_impulse_reference_primitives.py::test_positive_reciprocal_and_integer_power
+FAILED tests/test_impulse_reference_primitives.py::test_sqrt_exact_squared_containment[x0-8]
+FAILED tests/test_impulse_reference_primitives.py::test_sqrt_exact_squared_containment[x1-16]
+FAILED tests/test_impulse_reference_primitives.py::test_sqrt_exact_squared_containment[x2-1]
+FAILED tests/test_impulse_reference_primitives.py::test_sqrt_exact_squared_containment[x3-16]
+FAILED tests/test_impulse_reference_primitives.py::test_exp_contains_independent_alternating_series[x0]
+FAILED tests/test_impulse_reference_primitives.py::test_exp_contains_independent_alternating_series[x1]
+FAILED tests/test_impulse_reference_primitives.py::test_exp_contains_independent_alternating_series[x2]
+FAILED tests/test_impulse_reference_primitives.py::test_exp_contains_independent_alternating_series[x3]
+FAILED tests/test_impulse_reference_primitives.py::test_large_exp_no_cutoff_and_tail_order_limit
+FAILED tests/test_impulse_reference_primitives.py::test_even_odd_cell_and_negative_ties[lo0-hi0-2]
+FAILED tests/test_impulse_reference_primitives.py::test_even_odd_cell_and_negative_ties[lo1-hi1-2]
+FAILED tests/test_impulse_reference_primitives.py::test_even_odd_cell_and_negative_ties[lo2-hi2-2]
+FAILED tests/test_impulse_reference_primitives.py::test_even_odd_cell_and_negative_ties[lo3-hi3--2]
+FAILED tests/test_impulse_reference_primitives.py::test_even_odd_cell_and_negative_ties[lo4-hi4-None]
+FAILED tests/test_impulse_reference_primitives.py::test_even_odd_cell_and_negative_ties[lo5-hi5-None]
+FAILED tests/test_impulse_reference_primitives.py::test_even_odd_cell_and_negative_ties[lo6-hi6-None]
+FAILED tests/test_impulse_reference_primitives.py::test_overflow_asymmetric_ties_and_opposite
+FAILED tests/test_impulse_reference_primitives.py::test_resource_guard_before_large_shift_or_cross_product
+20 failed in 0.69s

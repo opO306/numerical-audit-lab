@@ -1,0 +1,30 @@
+{
+  "purpose": "PRE-IMPLEMENTATION CONTRACT NON-EQUIVALENCE WITNESS",
+  "source_sha256": "c0c01e7d820bcf862bb3a1126d181619b66ef9a8dc6ec8cd05d3621f0512e946",
+  "checks": [
+    {
+      "quantity": "exact_segment_min",
+      "cross_product_difference": "10167614619845395755183317439696656041075412494901985484717819247143047474933398663373301852681",
+      "sign": 1,
+      "stored_difference_verified": true
+    },
+    {
+      "quantity": "stored_endpoint_R2",
+      "cross_product_difference": "1386634070868688242364563293137756887594068418044465",
+      "sign": 1,
+      "stored_difference_verified": true
+    },
+    {
+      "quantity": "stored_segment_min",
+      "cross_product_difference": "-5761692404863413497768701212802319211191",
+      "sign": -1,
+      "stored_difference_verified": true
+    }
+  ],
+  "original_contract_accepts": true,
+  "old_extra_stored_segment_condition_refuses": true,
+  "historical_witness_script_executed": false,
+  "arithmetic_kernel_executed": false,
+  "impulse_evaluator_executed": false,
+  "D_valid_or_trajectory_conclusion": false
+}

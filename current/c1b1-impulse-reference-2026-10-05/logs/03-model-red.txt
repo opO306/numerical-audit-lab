@@ -1,0 +1,538 @@
+FFFFFFFFF                                                                [100%]
+================================== FAILURES ===================================
+____________ test_domain_before_zero_axis[q0-SINGULAR_SEPARATION] _____________
+
+name = 'domain'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse.domain', package = None
+
+    def import_module(name, package=None):
+        """Import a module.
+    
+        The 'package' argument is required when performing a relative import. It
+        specifies the package to use as the anchor point from which to resolve the
+        relative import to an absolute import.
+    
+        """
+        level = 0
+        if name.startswith('.'):
+            if not package:
+                raise TypeError("the 'package' argument is required to perform a "
+                                f"relative import for {name!r}")
+            for character in name:
+                if character != '.':
+                    break
+                level += 1
+>       return _bootstrap._gcd_import(name[level:], package, level)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.domain'
+
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+q = (0, 0, 0), reason = 'SINGULAR_SEPARATION'
+
+    @pytest.mark.parametrize('q,reason',[( (0,0,0),'SINGULAR_SEPARATION'),((0,1,0),'PHYSICAL_DOMAIN'),((0,3,0),None)])
+    def test_domain_before_zero_axis(q,reason):
+>       d=module('domain').admit(tuple(Q(v) for v in q),module('spec').load_spec())
+          ^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_model.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'domain'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: domain
+
+tests\test_impulse_reference_primitives.py:11: Failed
+______________ test_domain_before_zero_axis[q1-PHYSICAL_DOMAIN] _______________
+
+name = 'domain'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse.domain', package = None
+
+    def import_module(name, package=None):
+        """Import a module.
+    
+        The 'package' argument is required when performing a relative import. It
+        specifies the package to use as the anchor point from which to resolve the
+        relative import to an absolute import.
+    
+        """
+        level = 0
+        if name.startswith('.'):
+            if not package:
+                raise TypeError("the 'package' argument is required to perform a "
+                                f"relative import for {name!r}")
+            for character in name:
+                if character != '.':
+                    break
+                level += 1
+>       return _bootstrap._gcd_import(name[level:], package, level)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.domain'
+
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+q = (0, 1, 0), reason = 'PHYSICAL_DOMAIN'
+
+    @pytest.mark.parametrize('q,reason',[( (0,0,0),'SINGULAR_SEPARATION'),((0,1,0),'PHYSICAL_DOMAIN'),((0,3,0),None)])
+    def test_domain_before_zero_axis(q,reason):
+>       d=module('domain').admit(tuple(Q(v) for v in q),module('spec').load_spec())
+          ^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_model.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'domain'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: domain
+
+tests\test_impulse_reference_primitives.py:11: Failed
+____________________ test_domain_before_zero_axis[q2-None] ____________________
+
+name = 'domain'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse.domain', package = None
+
+    def import_module(name, package=None):
+        """Import a module.
+    
+        The 'package' argument is required when performing a relative import. It
+        specifies the package to use as the anchor point from which to resolve the
+        relative import to an absolute import.
+    
+        """
+        level = 0
+        if name.startswith('.'):
+            if not package:
+                raise TypeError("the 'package' argument is required to perform a "
+                                f"relative import for {name!r}")
+            for character in name:
+                if character != '.':
+                    break
+                level += 1
+>       return _bootstrap._gcd_import(name[level:], package, level)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.domain'
+
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+q = (0, 3, 0), reason = None
+
+    @pytest.mark.parametrize('q,reason',[( (0,0,0),'SINGULAR_SEPARATION'),((0,1,0),'PHYSICAL_DOMAIN'),((0,3,0),None)])
+    def test_domain_before_zero_axis(q,reason):
+>       d=module('domain').admit(tuple(Q(v) for v in q),module('spec').load_spec())
+          ^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_model.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'domain'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: domain
+
+tests\test_impulse_reference_primitives.py:11: Failed
+_________________ test_fixed_input_no_external_or_wrong_grid __________________
+
+name = 'contracts'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse.contracts', package = None
+
+    def import_module(name, package=None):
+        """Import a module.
+    
+        The 'package' argument is required when performing a relative import. It
+        specifies the package to use as the anchor point from which to resolve the
+        relative import to an absolute import.
+    
+        """
+        level = 0
+        if name.startswith('.'):
+            if not package:
+                raise TypeError("the 'package' argument is required to perform a "
+                                f"relative import for {name!r}")
+            for character in name:
+                if character != '.':
+                    break
+                level += 1
+>       return _bootstrap._gcd_import(name[level:], package, level)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.contracts'
+
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_fixed_input_no_external_or_wrong_grid():
+>       c=module('contracts'); obj=input_object();old=copy.deepcopy(obj)
+          ^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_model.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'contracts'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: contracts
+
+tests\test_impulse_reference_primitives.py:11: Failed
+________ test_identity_full_state_momentum_and_occurrence_are_distinct ________
+
+name = 'identity'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse.identity', package = None
+
+    def import_module(name, package=None):
+        """Import a module.
+    
+        The 'package' argument is required when performing a relative import. It
+        specifies the package to use as the anchor point from which to resolve the
+        relative import to an absolute import.
+    
+        """
+        level = 0
+        if name.startswith('.'):
+            if not package:
+                raise TypeError("the 'package' argument is required to perform a "
+                                f"relative import for {name!r}")
+            for character in name:
+                if character != '.':
+                    break
+                level += 1
+>       return _bootstrap._gcd_import(name[level:], package, level)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.identity'
+
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_identity_full_state_momentum_and_occurrence_are_distinct():
+>       ident=module('identity'); spec=module('spec').load_spec(); obj=input_object()
+              ^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_model.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'identity'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: identity
+
+tests\test_impulse_reference_primitives.py:11: Failed
+________________ test_bo_minus_one_polynomial_derivative_exact ________________
+
+name = 'potential'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse.potential', package = None
+
+    def import_module(name, package=None):
+        """Import a module.
+    
+        The 'package' argument is required when performing a relative import. It
+        specifies the package to use as the anchor point from which to resolve the
+        relative import to an absolute import.
+    
+        """
+        level = 0
+        if name.startswith('.'):
+            if not package:
+                raise TypeError("the 'package' argument is required to perform a "
+                                f"relative import for {name!r}")
+            for character in name:
+                if character != '.':
+                    break
+                level += 1
+>       return _bootstrap._gcd_import(name[level:], package, level)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.potential'
+
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_bo_minus_one_polynomial_derivative_exact():
+>       p=module('potential');spec=module('spec').load_spec();m=module('interval');r=m.point(Q(3));c=context()
+          ^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_model.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'potential'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: potential
+
+tests\test_impulse_reference_primitives.py:11: Failed
+______ test_value_and_derivative_diagnostic_against_different_method[r0] ______
+
+name = 'spec'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse.spec', package = None
+
+    def import_module(name, package=None):
+        """Import a module.
+    
+        The 'package' argument is required when performing a relative import. It
+        specifies the package to use as the anchor point from which to resolve the
+        relative import to an absolute import.
+    
+        """
+        level = 0
+        if name.startswith('.'):
+            if not package:
+                raise TypeError("the 'package' argument is required to perform a "
+                                f"relative import for {name!r}")
+            for character in name:
+                if character != '.':
+                    break
+                level += 1
+>       return _bootstrap._gcd_import(name[level:], package, level)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.spec'
+
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+r = Fraction(3, 1)
+
+    @pytest.mark.parametrize('r',[Q(3),Q(6),Q(17,2)])
+    def test_value_and_derivative_diagnostic_against_different_method(r):
+        import mpmath as mp
+>       spec=module('spec').load_spec();m=module('interval');c=context();c.work_max=10**40
+             ^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_model.py:50: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'spec'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: spec
+
+tests\test_impulse_reference_primitives.py:11: Failed
+______ test_value_and_derivative_diagnostic_against_different_method[r1] ______
+
+name = 'spec'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse.spec', package = None
+
+    def import_module(name, package=None):
+        """Import a module.
+    
+        The 'package' argument is required when performing a relative import. It
+        specifies the package to use as the anchor point from which to resolve the
+        relative import to an absolute import.
+    
+        """
+        level = 0
+        if name.startswith('.'):
+            if not package:
+                raise TypeError("the 'package' argument is required to perform a "
+                                f"relative import for {name!r}")
+            for character in name:
+                if character != '.':
+                    break
+                level += 1
+>       return _bootstrap._gcd_import(name[level:], package, level)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.spec'
+
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+r = Fraction(6, 1)
+
+    @pytest.mark.parametrize('r',[Q(3),Q(6),Q(17,2)])
+    def test_value_and_derivative_diagnostic_against_different_method(r):
+        import mpmath as mp
+>       spec=module('spec').load_spec();m=module('interval');c=context();c.work_max=10**40
+             ^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_model.py:50: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'spec'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: spec
+
+tests\test_impulse_reference_primitives.py:11: Failed
+______ test_value_and_derivative_diagnostic_against_different_method[r2] ______
+
+name = 'spec'
+
+    def module(name):
+        try:
+>           return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'independent_checker.c1b1.impulse.spec', package = None
+
+    def import_module(name, package=None):
+        """Import a module.
+    
+        The 'package' argument is required when performing a relative import. It
+        specifies the package to use as the anchor point from which to resolve the
+        relative import to an absolute import.
+    
+        """
+        level = 0
+        if name.startswith('.'):
+            if not package:
+                raise TypeError("the 'package' argument is required to perform a "
+                                f"relative import for {name!r}")
+            for character in name:
+                if character != '.':
+                    break
+                level += 1
+>       return _bootstrap._gcd_import(name[level:], package, level)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.spec'
+
+C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+r = Fraction(17, 2)
+
+    @pytest.mark.parametrize('r',[Q(3),Q(6),Q(17,2)])
+    def test_value_and_derivative_diagnostic_against_different_method(r):
+        import mpmath as mp
+>       spec=module('spec').load_spec();m=module('interval');c=context();c.work_max=10**40
+             ^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_model.py:50: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'spec'
+
+    def module(name):
+        try:
+            return importlib.import_module('independent_checker.c1b1.impulse.' + name)
+        except ModuleNotFoundError:
+>           pytest.fail('reference primitive not implemented: ' + name)
+E           Failed: reference primitive not implemented: spec
+
+tests\test_impulse_reference_primitives.py:11: Failed
+=========================== short test summary info ===========================
+FAILED tests/test_impulse_reference_model.py::test_domain_before_zero_axis[q0-SINGULAR_SEPARATION]
+FAILED tests/test_impulse_reference_model.py::test_domain_before_zero_axis[q1-PHYSICAL_DOMAIN]
+FAILED tests/test_impulse_reference_model.py::test_domain_before_zero_axis[q2-None]
+FAILED tests/test_impulse_reference_model.py::test_fixed_input_no_external_or_wrong_grid
+FAILED tests/test_impulse_reference_model.py::test_identity_full_state_momentum_and_occurrence_are_distinct
+FAILED tests/test_impulse_reference_model.py::test_bo_minus_one_polynomial_derivative_exact
+FAILED tests/test_impulse_reference_model.py::test_value_and_derivative_diagnostic_against_different_method[r0]
+FAILED tests/test_impulse_reference_model.py::test_value_and_derivative_diagnostic_against_different_method[r1]
+FAILED tests/test_impulse_reference_model.py::test_value_and_derivative_diagnostic_against_different_method[r2]
+9 failed in 0.55s

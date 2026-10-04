@@ -1,0 +1,1161 @@
+{
+  "target": "8e5865964770b3752326d361276cbccd125c547a",
+  "parent": "4cb2910fe936f7b1d5150196e062b6b61edc240f",
+  "arithmetic_antecedent": "65d8fd29ae255529afead70289098d36b825b3b4",
+  "observed_at_utc": "2026-10-04T16:58:59.957087+00:00",
+  "python": "3.12.7 (tags/v3.12.7:0b05ead, Oct  1 2024, 03:06:41) [MSC v.1941 64 bit (AMD64)]",
+  "delta": {
+    "parent_count": 2055,
+    "target_count": 2097,
+    "added": [
+      "audit/c1b1-closure-fixes-2026-10-05/.gitattributes",
+      "audit/c1b1-closure-fixes-2026-10-05/check_static.py",
+      "current/c1b1-closure-fixes-2026-10-05/.gitattributes",
+      "current/c1b1-closure-fixes-2026-10-05/audit-result-update.json",
+      "current/c1b1-closure-fixes-2026-10-05/before-docs/B1-semantic-bundle.md",
+      "current/c1b1-closure-fixes-2026-10-05/before-docs/B3-physical-domain.md",
+      "current/c1b1-closure-fixes-2026-10-05/before-docs/B4-proof-wire-resource.md",
+      "current/c1b1-closure-fixes-2026-10-05/before-docs/B8-status-composition.md",
+      "current/c1b1-closure-fixes-2026-10-05/before-docs/README.md",
+      "current/c1b1-closure-fixes-2026-10-05/before-docs/obligation-ledger.md",
+      "current/c1b1-closure-fixes-2026-10-05/before-specs/.gitattributes",
+      "current/c1b1-closure-fixes-2026-10-05/before-specs/acquisition-identity.json",
+      "current/c1b1-closure-fixes-2026-10-05/before-specs/acquisition-identity.json.sha256",
+      "current/c1b1-closure-fixes-2026-10-05/before-specs/constants.json",
+      "current/c1b1-closure-fixes-2026-10-05/before-specs/constants.json.sha256",
+      "current/c1b1-closure-fixes-2026-10-05/before-specs/finite-policy.json",
+      "current/c1b1-closure-fixes-2026-10-05/before-specs/finite-policy.json.sha256",
+      "current/c1b1-closure-fixes-2026-10-05/before-specs/package-manifest.json",
+      "current/c1b1-closure-fixes-2026-10-05/before-specs/package-manifest.json.sha256",
+      "current/c1b1-closure-fixes-2026-10-05/before-specs/physical-domain.json",
+      "current/c1b1-closure-fixes-2026-10-05/before-specs/physical-domain.json.sha256",
+      "current/c1b1-closure-fixes-2026-10-05/before-specs/proof-wire.json",
+      "current/c1b1-closure-fixes-2026-10-05/before-specs/proof-wire.json.sha256",
+      "current/c1b1-closure-fixes-2026-10-05/before-specs/rechecker-lineage.json",
+      "current/c1b1-closure-fixes-2026-10-05/before-specs/rechecker-lineage.json.sha256",
+      "current/c1b1-closure-fixes-2026-10-05/before-specs/semantic-bundle.json",
+      "current/c1b1-closure-fixes-2026-10-05/before-specs/semantic-bundle.json.sha256",
+      "current/c1b1-closure-fixes-2026-10-05/before-specs/status-composition.json",
+      "current/c1b1-closure-fixes-2026-10-05/before-specs/status-composition.json.sha256",
+      "current/c1b1-closure-fixes-2026-10-05/hash-rebinding.json",
+      "current/c1b1-closure-fixes-2026-10-05/receipt-after.json",
+      "current/c1b1-closure-fixes-2026-10-05/receipt-before.json",
+      "current/c1b1-closure-fixes-2026-10-05/received/REPORT_KO.md",
+      "current/c1b1-closure-fixes-2026-10-05/received/extended_results.json",
+      "current/c1b1-closure-fixes-2026-10-05/received/failure_key_conflict.json",
+      "current/c1b1-closure-fixes-2026-10-05/received/guard_contract_witness.json",
+      "current/c1b1-closure-fixes-2026-10-05/received/guard_contract_witness.py",
+      "current/c1b1-closure-fixes-2026-10-05/received/static_results.json",
+      "current/c1b1-closure-fixes-2026-10-05/received/verdicts.json",
+      "current/c1b1-closure-fixes-2026-10-05/request/user-request.txt",
+      "current/c1b1-closure-fixes-2026-10-05/static-consistency.json",
+      "docs/C1B1_INDEPENDENT_IMPULSE_V1_CLOSURE_FIX_REPORT_2026-10-05.md"
+    ],
+    "modified": [
+      "docs/c1b1-independent-impulse-v1/B1-semantic-bundle.md",
+      "docs/c1b1-independent-impulse-v1/B3-physical-domain.md",
+      "docs/c1b1-independent-impulse-v1/B4-proof-wire-resource.md",
+      "docs/c1b1-independent-impulse-v1/B8-status-composition.md",
+      "docs/c1b1-independent-impulse-v1/README.md",
+      "docs/c1b1-independent-impulse-v1/obligation-ledger.md",
+      "specs/c1b1-independent-impulse-v1/acquisition-identity.json",
+      "specs/c1b1-independent-impulse-v1/acquisition-identity.json.sha256",
+      "specs/c1b1-independent-impulse-v1/finite-policy.json",
+      "specs/c1b1-independent-impulse-v1/finite-policy.json.sha256",
+      "specs/c1b1-independent-impulse-v1/package-manifest.json",
+      "specs/c1b1-independent-impulse-v1/package-manifest.json.sha256",
+      "specs/c1b1-independent-impulse-v1/physical-domain.json",
+      "specs/c1b1-independent-impulse-v1/physical-domain.json.sha256",
+      "specs/c1b1-independent-impulse-v1/proof-wire.json",
+      "specs/c1b1-independent-impulse-v1/proof-wire.json.sha256",
+      "specs/c1b1-independent-impulse-v1/rechecker-lineage.json",
+      "specs/c1b1-independent-impulse-v1/rechecker-lineage.json.sha256",
+      "specs/c1b1-independent-impulse-v1/semantic-bundle.json",
+      "specs/c1b1-independent-impulse-v1/semantic-bundle.json.sha256",
+      "specs/c1b1-independent-impulse-v1/status-composition.json",
+      "specs/c1b1-independent-impulse-v1/status-composition.json.sha256"
+    ],
+    "deleted": []
+  },
+  "branch_start": "8e5865964770b3752326d361276cbccd125c547a\trefs/heads/codex/c1b1-fclaim1-output-limit",
+  "audit_python_static_imports": {
+    "audit/c1b1-closure-fixes-2026-10-05/check_static.py": [
+      "__future__",
+      "argparse",
+      "datetime",
+      "fractions",
+      "hashlib",
+      "json",
+      "pathlib",
+      "re",
+      "subprocess"
+    ],
+    "current/c1b1-closure-fixes-2026-10-05/received/guard_contract_witness.py": [
+      "fractions",
+      "json",
+      "pathlib"
+    ]
+  },
+  "arithmetic_sources": {
+    "claim_adapter.py": {
+      "antecedent_sha256": "24b05ebf374728583ba725c83b8f9324f4b75b5515b03c5b1036339eef3e4899",
+      "target_sha256": "24b05ebf374728583ba725c83b8f9324f4b75b5515b03c5b1036339eef3e4899",
+      "bytes": 7649,
+      "identical": true,
+      "git_blob": "23cc7a26796e3b5324129e2b616af79385428910"
+    },
+    "compare.py": {
+      "antecedent_sha256": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+      "target_sha256": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+      "bytes": 2425,
+      "identical": true,
+      "git_blob": "af5f29962fdad2b3a05b1d69378a73ebc6c91485"
+    },
+    "contracts.py": {
+      "antecedent_sha256": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+      "target_sha256": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+      "bytes": 5856,
+      "identical": true,
+      "git_blob": "95c120de26f6b18434b81bdcda016f9b21f2af8b"
+    },
+    "exact_slow.py": {
+      "antecedent_sha256": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+      "target_sha256": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+      "bytes": 3400,
+      "identical": true,
+      "git_blob": "b0ec6d8ee7546b1cd20efa8c5cc579851c1a5551"
+    },
+    "exact_fast.py": {
+      "antecedent_sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+      "target_sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+      "bytes": 3170,
+      "identical": true,
+      "git_blob": "44d542f256916fd9726eeef4f9ec7d18b4dee07f"
+    },
+    "exact_geometry.py": {
+      "antecedent_sha256": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+      "target_sha256": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+      "bytes": 2724,
+      "identical": true,
+      "git_blob": "6c64125dd78625cf9173debe9fe66c6c8930649e"
+    },
+    "semantic_manifest_v1.json": {
+      "antecedent_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+      "target_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+      "bytes": 4385,
+      "identical": true,
+      "git_blob": "85ab3975dc10e6b003652de254363574413c8f86"
+    },
+    "semantic_manifest_v1.sha256": {
+      "antecedent_sha256": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79",
+      "target_sha256": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79",
+      "bytes": 93,
+      "identical": true,
+      "git_blob": "a94cc350ae067845b6261128160a237ab03072ee"
+    }
+  },
+  "preserved_provenance": {
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/P0-S2_ar2_pot.f90.raw": {
+      "identical": true,
+      "sha256": "a598057183121b9c928b3a9804c8e2e99afa553bad570a471aa4130f20e6b049",
+      "bytes": 12061
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/0baf719b63e9fc88331e4762042945983121e0ff.tree.raw": {
+      "identical": true,
+      "sha256": "eaa7de8d57965d90b617e4fd40d16e3f774461874f601c2576250f0caa7494c1",
+      "bytes": 556
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/0f7b744cf754450424a63c47f305e0327c5b37c1.commit.raw": {
+      "identical": true,
+      "sha256": "aa1ed758dfc105bfb61a2f93836674a973c7455e3bfd695b7e11ee72ab882edd",
+      "bytes": 215
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/1d15152b24e67f61951c12372eaee7520c203624.blob.raw": {
+      "identical": true,
+      "sha256": "b283ce09ff1b4958fe9c49e13c0f5513a122fc13d955cdfa94c5dc3dd2defa49",
+      "bytes": 18179
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/1e78e42cfe4cc0f03d2ff98d5b8839e1a10b08fd.tree.raw": {
+      "identical": true,
+      "sha256": "9530d74de55c4421ac141014a0e780cb2dd0f9ee0b830d8cab87780235c5d48a",
+      "bytes": 6283
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/21d485b8b3e0c4dec84f87f34222265defe77eab.blob.raw": {
+      "identical": true,
+      "sha256": "3a2812c1e74857e5519eb979f2ca6d8d573d8e8bd8dcd937eaff7a53a722ad56",
+      "bytes": 12319
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/27e48770ab5db666bcd78034d151ddbb04b6af54.commit.raw": {
+      "identical": true,
+      "sha256": "0b3cedaf5b836c35f3ec9a220d6ce328d368ac31a5f1a1fa08bc4dbe6e07501f",
+      "bytes": 271
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/4612f550cb3b09c568fc8f49fe72179b27395650.blob.raw": {
+      "identical": true,
+      "sha256": "4926455a62868ec45f404db780fc4f24813162d3eb3f38fe6350955c10c07e54",
+      "bytes": 108690
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/4bba9c58c8e6773dab88e0af3d4defe69b299d7d.tree.raw": {
+      "identical": true,
+      "sha256": "8f0038909a81c3cc096ad8da6bfede6893fa8f6a4ee509546e22d07f1a801a54",
+      "bytes": 236
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/5b47db3f39121ceed7f34df606bad51903610dac.tree.raw": {
+      "identical": true,
+      "sha256": "65552a2e66a2dbce177c9ba4ae709ccb7f54c31a3a8190c46e764a84585400ae",
+      "bytes": 594
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/602dcf17113046c1ef4415b42cee0c46658f971d.blob.raw": {
+      "identical": true,
+      "sha256": "8ec4af9e597ee55e7e5a914147f7fa231c874c3434487038d51d8f3b087f6a9c",
+      "bytes": 22488
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/6f255fd9ab086898caf6f6b6fec7eda8d3bcce86.tree.raw": {
+      "identical": true,
+      "sha256": "e8a7e1518676115a832dafb88f20b54377e753c7d1d5a901f88ba5333abb0068",
+      "bytes": 3793
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/978940e98830abd1259b58c4ed0ad0c25cffde16.blob.raw": {
+      "identical": true,
+      "sha256": "da72e6c9422e42e135a3e75d0dc19abfc489ebdda12ce57d306ba6c361612b26",
+      "bytes": 4086
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/9b714bb2555bd81f4fac6e9605e1ce6d2a907e27.tree.raw": {
+      "identical": true,
+      "sha256": "e9ea554d98060e6092aed869af3c657a5e21c2a2b1b23cf804af9fe4d9aae107",
+      "bytes": 316
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/9ecdaae5f636a67187499dab2c2baba73eae4a2f.blob.raw": {
+      "identical": true,
+      "sha256": "032135b2f248eb801675d1b2ab652bd2fc50867a3a0ab7a7d6902240af334188",
+      "bytes": 27079
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/a0255ed3faaf50ba5b58fd893d1c04807b4c35e2.tree.raw": {
+      "identical": true,
+      "sha256": "35149a2094b403e79e56b1dfc253e7ef3eb5514d3692997e268f8146306505b0",
+      "bytes": 176
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/ad1a66091ec743359565f3d19affbef800c70192.blob.raw": {
+      "identical": true,
+      "sha256": "180d5a19bbea606594912e95b3c210b5a7739995afa39c5300959faef8b94d96",
+      "bytes": 23569
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/aeaac85a5f6bc8a760f73db9b9346066ac23e442.tree.raw": {
+      "identical": true,
+      "sha256": "1abe5c450ea9f3dcef2f9f518171a75a1e01e0f0bb5ead0fc4512c1ed1ee095b",
+      "bytes": 2160
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/b005c950ad34fbcc24b6b7ac8ff47dec44a62b25.blob.raw": {
+      "identical": true,
+      "sha256": "52e669e0bdd9e3e85e3e448afb194bd30ea765aebc79a07fc46b897d49b2a116",
+      "bytes": 21756
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/c418984eaf100542b5049d6ef137d242d9482c91.tree.raw": {
+      "identical": true,
+      "sha256": "e3fe7688eaed00e51faa8d8a42cb3ed70928d654eae9e7d650a28d374689d469",
+      "bytes": 5793
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/d4fcbdafb604eeb8ef1fc2d508de1d78da66b808.tree.raw": {
+      "identical": true,
+      "sha256": "019d79f97bb0662c57f3dadbdeb908fbeda5e5cee66317d77576fd561a77ddcf",
+      "bytes": 5353
+    },
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/source-recovery.json": {
+      "identical": true,
+      "sha256": "8d0ab0720650f2df6148addc75619182ac1737be518e7cec9807ded81674de4b",
+      "bytes": 11662
+    }
+  },
+  "spec_hashes": {
+    "acquisition-identity.json": {
+      "parent": "20dd3eb9cfb0c191d5b37caf4e5703e612b5956918a7f16f8fffcfd7b763d6a9",
+      "target": "673941bf9f88835f9ee494268e2837a6bd3e6b09323ad75db70d1f8df7666759",
+      "bytes": 3541,
+      "changed": true
+    },
+    "constants.json": {
+      "parent": "f1cf6a71afaf45e40db37a6e8a5b4f643a57885f4040d4fa285835530363e196",
+      "target": "f1cf6a71afaf45e40db37a6e8a5b4f643a57885f4040d4fa285835530363e196",
+      "bytes": 55387,
+      "changed": false
+    },
+    "finite-policy.json": {
+      "parent": "ca2a680a6dc454673c826b55a859056e1c79989add9b06316388b783cd11dcdb",
+      "target": "e8ceec423827a0699a8d3709508dff3eebd7f7e8a99f92d4436dc7b57f83fdd8",
+      "bytes": 6311,
+      "changed": true
+    },
+    "package-manifest.json": {
+      "parent": "009fdd0bf9a540ae059b67a83fc10ef72bf7d87a9dcc1cf8c3b73f0ae967b730",
+      "target": "9d430833bb359600b4c9f67f225e9c8a74fb883d6fe119ca8b7c2502b8ce4499",
+      "bytes": 1828,
+      "changed": true
+    },
+    "physical-domain.json": {
+      "parent": "a5242a7fb6e1fca0e6997f2a44af839049a5f610e00f73f8d4803b2d43f6b927",
+      "target": "eef0a3531c7bc5f233e7cd7212c3807735c05bc88284bd16600c894afc817c03",
+      "bytes": 2283,
+      "changed": true
+    },
+    "proof-wire.json": {
+      "parent": "4890780548aa8588293ad6bdb8a1dcf89c2d95a6aff0448218f19e486c8dc5bf",
+      "target": "b7994420f6896eb352730ac0fb5983a6c74c0635d357dffea3281535b57f27e9",
+      "bytes": 6960,
+      "changed": true
+    },
+    "rechecker-lineage.json": {
+      "parent": "cb725a5a427946d48763105eaab422b05eced8ecfbe5a8b29cff04db245a06a4",
+      "target": "4767ae1773fa2f697e749b90aa1b66da686605cbfb690307aa9c2d0c87427ab9",
+      "bytes": 3480,
+      "changed": true
+    },
+    "semantic-bundle.json": {
+      "parent": "a179dcfc065931d09ba4f364d159416ede4b9090a0924bf3fcc119815ed4266f",
+      "target": "11eedb45fc80d8b1f8db1bc5afdceb1754914c5e2f49ba48ad2b4d87d63bb007",
+      "bytes": 3422,
+      "changed": true
+    },
+    "status-composition.json": {
+      "parent": "0c4ad325b9f62fd7f7158334882456300c43481a403546e553ad1c81877bda4f",
+      "target": "4257563b2c82a66094f96da539cdf9bbe1967699403fd61ba613d195b26483ee",
+      "bytes": 3651,
+      "changed": true
+    }
+  },
+  "dependency_edges": [
+    {
+      "source": "acquisition-identity.json",
+      "key": "constants_sha256",
+      "destination": "constants.json",
+      "hash": "f1cf6a71afaf45e40db37a6e8a5b4f643a57885f4040d4fa285835530363e196",
+      "expected": "f1cf6a71afaf45e40db37a6e8a5b4f643a57885f4040d4fa285835530363e196"
+    },
+    {
+      "source": "acquisition-identity.json",
+      "key": "domain_sha256",
+      "destination": "physical-domain.json",
+      "hash": "eef0a3531c7bc5f233e7cd7212c3807735c05bc88284bd16600c894afc817c03",
+      "expected": "eef0a3531c7bc5f233e7cd7212c3807735c05bc88284bd16600c894afc817c03"
+    },
+    {
+      "source": "acquisition-identity.json",
+      "key": "wire_sha256",
+      "destination": "proof-wire.json",
+      "hash": "b7994420f6896eb352730ac0fb5983a6c74c0635d357dffea3281535b57f27e9",
+      "expected": "b7994420f6896eb352730ac0fb5983a6c74c0635d357dffea3281535b57f27e9"
+    },
+    {
+      "source": "constants.json",
+      "key": "P0_raw_sha256",
+      "destination": "P0-raw.json",
+      "hash": "a598057183121b9c928b3a9804c8e2e99afa553bad570a471aa4130f20e6b049",
+      "expected": "a598057183121b9c928b3a9804c8e2e99afa553bad570a471aa4130f20e6b049"
+    },
+    {
+      "source": "constants.json",
+      "key": "source_recovery_sha256",
+      "destination": "source-recovery.json",
+      "hash": "8d0ab0720650f2df6148addc75619182ac1737be518e7cec9807ded81674de4b",
+      "expected": "8d0ab0720650f2df6148addc75619182ac1737be518e7cec9807ded81674de4b"
+    },
+    {
+      "source": "finite-policy.json",
+      "key": "proof_wire_sha256",
+      "destination": "proof-wire.json",
+      "hash": "b7994420f6896eb352730ac0fb5983a6c74c0635d357dffea3281535b57f27e9",
+      "expected": "b7994420f6896eb352730ac0fb5983a6c74c0635d357dffea3281535b57f27e9"
+    },
+    {
+      "source": "package-manifest.json",
+      "key": "acquisition-identity.json",
+      "destination": "acquisition-identity.json",
+      "hash": "673941bf9f88835f9ee494268e2837a6bd3e6b09323ad75db70d1f8df7666759",
+      "expected": "673941bf9f88835f9ee494268e2837a6bd3e6b09323ad75db70d1f8df7666759"
+    },
+    {
+      "source": "package-manifest.json",
+      "key": "constants.json",
+      "destination": "constants.json",
+      "hash": "f1cf6a71afaf45e40db37a6e8a5b4f643a57885f4040d4fa285835530363e196",
+      "expected": "f1cf6a71afaf45e40db37a6e8a5b4f643a57885f4040d4fa285835530363e196"
+    },
+    {
+      "source": "package-manifest.json",
+      "key": "finite-policy.json",
+      "destination": "finite-policy.json",
+      "hash": "e8ceec423827a0699a8d3709508dff3eebd7f7e8a99f92d4436dc7b57f83fdd8",
+      "expected": "e8ceec423827a0699a8d3709508dff3eebd7f7e8a99f92d4436dc7b57f83fdd8"
+    },
+    {
+      "source": "package-manifest.json",
+      "key": "physical-domain.json",
+      "destination": "physical-domain.json",
+      "hash": "eef0a3531c7bc5f233e7cd7212c3807735c05bc88284bd16600c894afc817c03",
+      "expected": "eef0a3531c7bc5f233e7cd7212c3807735c05bc88284bd16600c894afc817c03"
+    },
+    {
+      "source": "package-manifest.json",
+      "key": "proof-wire.json",
+      "destination": "proof-wire.json",
+      "hash": "b7994420f6896eb352730ac0fb5983a6c74c0635d357dffea3281535b57f27e9",
+      "expected": "b7994420f6896eb352730ac0fb5983a6c74c0635d357dffea3281535b57f27e9"
+    },
+    {
+      "source": "package-manifest.json",
+      "key": "rechecker-lineage.json",
+      "destination": "rechecker-lineage.json",
+      "hash": "4767ae1773fa2f697e749b90aa1b66da686605cbfb690307aa9c2d0c87427ab9",
+      "expected": "4767ae1773fa2f697e749b90aa1b66da686605cbfb690307aa9c2d0c87427ab9"
+    },
+    {
+      "source": "package-manifest.json",
+      "key": "semantic-bundle.json",
+      "destination": "semantic-bundle.json",
+      "hash": "11eedb45fc80d8b1f8db1bc5afdceb1754914c5e2f49ba48ad2b4d87d63bb007",
+      "expected": "11eedb45fc80d8b1f8db1bc5afdceb1754914c5e2f49ba48ad2b4d87d63bb007"
+    },
+    {
+      "source": "package-manifest.json",
+      "key": "status-composition.json",
+      "destination": "status-composition.json",
+      "hash": "4257563b2c82a66094f96da539cdf9bbe1967699403fd61ba613d195b26483ee",
+      "expected": "4257563b2c82a66094f96da539cdf9bbe1967699403fd61ba613d195b26483ee"
+    },
+    {
+      "source": "physical-domain.json",
+      "key": "constants_sha256",
+      "destination": "constants.json",
+      "hash": "f1cf6a71afaf45e40db37a6e8a5b4f643a57885f4040d4fa285835530363e196",
+      "expected": "f1cf6a71afaf45e40db37a6e8a5b4f643a57885f4040d4fa285835530363e196"
+    },
+    {
+      "source": "proof-wire.json",
+      "key": "physical_domain_sha256",
+      "destination": "physical-domain.json",
+      "hash": "eef0a3531c7bc5f233e7cd7212c3807735c05bc88284bd16600c894afc817c03",
+      "expected": "eef0a3531c7bc5f233e7cd7212c3807735c05bc88284bd16600c894afc817c03"
+    },
+    {
+      "source": "rechecker-lineage.json",
+      "key": "identity_sha256",
+      "destination": "acquisition-identity.json",
+      "hash": "673941bf9f88835f9ee494268e2837a6bd3e6b09323ad75db70d1f8df7666759",
+      "expected": "673941bf9f88835f9ee494268e2837a6bd3e6b09323ad75db70d1f8df7666759"
+    },
+    {
+      "source": "rechecker-lineage.json",
+      "key": "source_recovery_sha256",
+      "destination": "source-recovery.json",
+      "hash": "8d0ab0720650f2df6148addc75619182ac1737be518e7cec9807ded81674de4b",
+      "expected": "8d0ab0720650f2df6148addc75619182ac1737be518e7cec9807ded81674de4b"
+    },
+    {
+      "source": "rechecker-lineage.json",
+      "key": "wire_sha256",
+      "destination": "proof-wire.json",
+      "hash": "b7994420f6896eb352730ac0fb5983a6c74c0635d357dffea3281535b57f27e9",
+      "expected": "b7994420f6896eb352730ac0fb5983a6c74c0635d357dffea3281535b57f27e9"
+    },
+    {
+      "source": "semantic-bundle.json",
+      "key": "acquisition_identity_sha256",
+      "destination": "acquisition-identity.json",
+      "hash": "673941bf9f88835f9ee494268e2837a6bd3e6b09323ad75db70d1f8df7666759",
+      "expected": "673941bf9f88835f9ee494268e2837a6bd3e6b09323ad75db70d1f8df7666759"
+    },
+    {
+      "source": "semantic-bundle.json",
+      "key": "constants_sha256",
+      "destination": "constants.json",
+      "hash": "f1cf6a71afaf45e40db37a6e8a5b4f643a57885f4040d4fa285835530363e196",
+      "expected": "f1cf6a71afaf45e40db37a6e8a5b4f643a57885f4040d4fa285835530363e196"
+    },
+    {
+      "source": "semantic-bundle.json",
+      "key": "finite_policy_sha256",
+      "destination": "finite-policy.json",
+      "hash": "e8ceec423827a0699a8d3709508dff3eebd7f7e8a99f92d4436dc7b57f83fdd8",
+      "expected": "e8ceec423827a0699a8d3709508dff3eebd7f7e8a99f92d4436dc7b57f83fdd8"
+    },
+    {
+      "source": "semantic-bundle.json",
+      "key": "physical_domain_sha256",
+      "destination": "physical-domain.json",
+      "hash": "eef0a3531c7bc5f233e7cd7212c3807735c05bc88284bd16600c894afc817c03",
+      "expected": "eef0a3531c7bc5f233e7cd7212c3807735c05bc88284bd16600c894afc817c03"
+    },
+    {
+      "source": "semantic-bundle.json",
+      "key": "proof_wire_sha256",
+      "destination": "proof-wire.json",
+      "hash": "b7994420f6896eb352730ac0fb5983a6c74c0635d357dffea3281535b57f27e9",
+      "expected": "b7994420f6896eb352730ac0fb5983a6c74c0635d357dffea3281535b57f27e9"
+    },
+    {
+      "source": "semantic-bundle.json",
+      "key": "rechecker_lineage_sha256",
+      "destination": "rechecker-lineage.json",
+      "hash": "4767ae1773fa2f697e749b90aa1b66da686605cbfb690307aa9c2d0c87427ab9",
+      "expected": "4767ae1773fa2f697e749b90aa1b66da686605cbfb690307aa9c2d0c87427ab9"
+    },
+    {
+      "source": "semantic-bundle.json",
+      "key": "status_composition_sha256",
+      "destination": "status-composition.json",
+      "hash": "4257563b2c82a66094f96da539cdf9bbe1967699403fd61ba613d195b26483ee",
+      "expected": "4257563b2c82a66094f96da539cdf9bbe1967699403fd61ba613d195b26483ee"
+    },
+    {
+      "source": "status-composition.json",
+      "key": "identity_sha256",
+      "destination": "acquisition-identity.json",
+      "hash": "673941bf9f88835f9ee494268e2837a6bd3e6b09323ad75db70d1f8df7666759",
+      "expected": "673941bf9f88835f9ee494268e2837a6bd3e6b09323ad75db70d1f8df7666759"
+    },
+    {
+      "source": "status-composition.json",
+      "key": "policy_sha256",
+      "destination": "finite-policy.json",
+      "hash": "e8ceec423827a0699a8d3709508dff3eebd7f7e8a99f92d4436dc7b57f83fdd8",
+      "expected": "e8ceec423827a0699a8d3709508dff3eebd7f7e8a99f92d4436dc7b57f83fdd8"
+    }
+  ],
+  "active_scan_files": [
+    "docs/c1b1-independent-impulse-v1/B1-semantic-bundle.md",
+    "docs/c1b1-independent-impulse-v1/B2-units-constants-provenance.md",
+    "docs/c1b1-independent-impulse-v1/B3-physical-domain.md",
+    "docs/c1b1-independent-impulse-v1/B4-proof-wire-resource.md",
+    "docs/c1b1-independent-impulse-v1/B5-finite-computation-policy.md",
+    "docs/c1b1-independent-impulse-v1/B6-rechecker-lineage.md",
+    "docs/c1b1-independent-impulse-v1/B7-acquisition-identity.md",
+    "docs/c1b1-independent-impulse-v1/B8-status-composition.md",
+    "docs/c1b1-independent-impulse-v1/README.md",
+    "docs/c1b1-independent-impulse-v1/mutation-obligations.md",
+    "docs/c1b1-independent-impulse-v1/obligation-ledger.md",
+    "specs/c1b1-independent-impulse-v1/acquisition-identity.json",
+    "specs/c1b1-independent-impulse-v1/constants.json",
+    "specs/c1b1-independent-impulse-v1/finite-policy.json",
+    "specs/c1b1-independent-impulse-v1/package-manifest.json",
+    "specs/c1b1-independent-impulse-v1/physical-domain.json",
+    "specs/c1b1-independent-impulse-v1/proof-wire.json",
+    "specs/c1b1-independent-impulse-v1/rechecker-lineage.json",
+    "specs/c1b1-independent-impulse-v1/semantic-bundle.json",
+    "specs/c1b1-independent-impulse-v1/status-composition.json"
+  ],
+  "failure_byte_majorant": {
+    "bytes": 789,
+    "limit": 4096,
+    "construction": "maximal enum lengths and all nullable hashes filled; may combine unreachable statuses, hence conservative"
+  },
+  "archived_parent_files": [
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-docs/B1-semantic-bundle.md",
+      "parent_path": "docs/c1b1-independent-impulse-v1/B1-semantic-bundle.md",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-docs/B3-physical-domain.md",
+      "parent_path": "docs/c1b1-independent-impulse-v1/B3-physical-domain.md",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-docs/B4-proof-wire-resource.md",
+      "parent_path": "docs/c1b1-independent-impulse-v1/B4-proof-wire-resource.md",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-docs/B8-status-composition.md",
+      "parent_path": "docs/c1b1-independent-impulse-v1/B8-status-composition.md",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-docs/README.md",
+      "parent_path": "docs/c1b1-independent-impulse-v1/README.md",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-docs/obligation-ledger.md",
+      "parent_path": "docs/c1b1-independent-impulse-v1/obligation-ledger.md",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-specs/.gitattributes",
+      "parent_path": "specs/c1b1-independent-impulse-v1/.gitattributes",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-specs/acquisition-identity.json",
+      "parent_path": "specs/c1b1-independent-impulse-v1/acquisition-identity.json",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-specs/acquisition-identity.json.sha256",
+      "parent_path": "specs/c1b1-independent-impulse-v1/acquisition-identity.json.sha256",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-specs/constants.json",
+      "parent_path": "specs/c1b1-independent-impulse-v1/constants.json",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-specs/constants.json.sha256",
+      "parent_path": "specs/c1b1-independent-impulse-v1/constants.json.sha256",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-specs/finite-policy.json",
+      "parent_path": "specs/c1b1-independent-impulse-v1/finite-policy.json",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-specs/finite-policy.json.sha256",
+      "parent_path": "specs/c1b1-independent-impulse-v1/finite-policy.json.sha256",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-specs/package-manifest.json",
+      "parent_path": "specs/c1b1-independent-impulse-v1/package-manifest.json",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-specs/package-manifest.json.sha256",
+      "parent_path": "specs/c1b1-independent-impulse-v1/package-manifest.json.sha256",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-specs/physical-domain.json",
+      "parent_path": "specs/c1b1-independent-impulse-v1/physical-domain.json",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-specs/physical-domain.json.sha256",
+      "parent_path": "specs/c1b1-independent-impulse-v1/physical-domain.json.sha256",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-specs/proof-wire.json",
+      "parent_path": "specs/c1b1-independent-impulse-v1/proof-wire.json",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-specs/proof-wire.json.sha256",
+      "parent_path": "specs/c1b1-independent-impulse-v1/proof-wire.json.sha256",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-specs/rechecker-lineage.json",
+      "parent_path": "specs/c1b1-independent-impulse-v1/rechecker-lineage.json",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-specs/rechecker-lineage.json.sha256",
+      "parent_path": "specs/c1b1-independent-impulse-v1/rechecker-lineage.json.sha256",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-specs/semantic-bundle.json",
+      "parent_path": "specs/c1b1-independent-impulse-v1/semantic-bundle.json",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-specs/semantic-bundle.json.sha256",
+      "parent_path": "specs/c1b1-independent-impulse-v1/semantic-bundle.json.sha256",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-specs/status-composition.json",
+      "parent_path": "specs/c1b1-independent-impulse-v1/status-composition.json",
+      "identical": true
+    },
+    {
+      "path": "current/c1b1-closure-fixes-2026-10-05/before-specs/status-composition.json.sha256",
+      "parent_path": "specs/c1b1-independent-impulse-v1/status-composition.json.sha256",
+      "identical": true
+    }
+  ],
+  "received_historical_files": {
+    "REPORT_KO.md": {
+      "sha256": "f02c919c31c0fc3e2d4203017130b68b6c096b670579fb818a336257a014e370",
+      "bytes": 35548
+    },
+    "extended_results.json": {
+      "sha256": "303af060dd82a7291eccfba1c6708a1348e70dc545b4909845e7ef1451dd1f3b",
+      "bytes": 1548
+    },
+    "failure_key_conflict.json": {
+      "sha256": "962a1615f4ed975602eb9f3be1e992b2fb64a1efc9a3524fccc7ca7bdc4a6af2",
+      "bytes": 1034
+    },
+    "guard_contract_witness.json": {
+      "sha256": "c0c01e7d820bcf862bb3a1126d181619b66ef9a8dc6ec8cd05d3621f0512e946",
+      "bytes": 3188
+    },
+    "guard_contract_witness.py": {
+      "sha256": "7d5ebe0eb502cb68654441e45a84b2d862642a9611ccab7dea2fb165e69ebba3",
+      "bytes": 3332
+    },
+    "static_results.json": {
+      "sha256": "61921672ebdb783f7e905f864522d0d7568c0f0227e073522a07cf3f1d1abe0c",
+      "bytes": 35429
+    },
+    "verdicts.json": {
+      "sha256": "54344055c18a5a74a7347b5d64375428f2cf90e2fe4a05e1b5c023d83bd5b106",
+      "bytes": 10675
+    }
+  },
+  "ledger_rows": [
+    "| I1 | Lab bundle/constants/units/domain authority+canonical hash+source 전사 승인 | BLOCKED | FIX APPLIED / INDEPENDENT RECHECK PENDING | B1/B2/B3 |",
+    "| I2 | bounded raw→q=r_j-r_i→R²; acquisition/full-state equality | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B1/B7 |",
+    "| I3 | 모든 V short/long/retarded branches 및 indices 정확 전사 | READY | READY | B1/B2 |",
+    "| I4 | analytic V′, BO i=-1/g′/TT slope/REL leading, force/sign/h/no-mass 대응 | READY | READY | B1/B2 |",
+    "| I5 | sqrt/inverse/power/signed interval containment; denominator positivity | READY | READY | B3/B5/I17 |",
+    "| I6 | exp-tail/range reduction/각 squaring outward widening, cutoff 없음 | READY | READY | B1/B5 |",
+    "| I7 | V′→-V′/R→h*q→J sound composition; correlation/cancellation은 availability 문제 | READY | READY | B1/B5 |",
+    "| I8 | exact nearest-even cells, negative ties, asymmetric signed overflow; strict V2 제한 | READY | READY | B1/B8 |",
+    "| I9 | spec/domain 후 exact-zero만; common J orientation/negation range | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B3/B6 |",
+    "| I10 | 모든 refusal에서 immutable input/state; bounded error; pre-str guard; atomic publication | BLOCKED | FIX APPLIED / INDEPENDENT RECHECK PENDING | B4/B5/B8 |",
+    "| I11 | I11a–d 네 명제 별도 논증; finite-budget all-input success를 요구하지 않음 | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B4/B5 |",
+    "| I12 | 선택 B parser/primitive/enclosure/rounding/executor helpers 독립; 실제 source/process/call 증거 | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B6 |",
+    "| I13 | same-state/spec/occurrence/phase comparison; missing/mismatch/refusal 보존 | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B7/B8 |",
+    "| I14 | 기존 Arithmetic bytes/status 보존; J0/J1 새 snapshot; point와 composition gate 구분 | BLOCKED | FIX APPLIED / INDEPENDENT RECHECK PENDING | B3/B7/B8 |",
+    "| I15 | 각 실제 source mutant의 nondegenerate fixture+independent expected+semantic detection | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B6/B8 |",
+    "| I16 | author와 independent 대상 source/dependency/proof/receipt를 각각 고정 | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B1–B8 |",
+    "| I17 | 전역 domain 및 모든 denominator regularity와 coarse-lower-zero 처리 | READY | READY | B3/B5 |",
+    "| I18 | bit/allocation/work preflight 및 compact proof/wire/failure-envelope 공동 호환성 | BLOCKED | FIX APPLIED / INDEPENDENT RECHECK PENDING | B4+B5 |",
+    "| I19 | certificate→recheck full soundness; 원입력 nonlinear 재구성 또는 각 witness independent 검증 | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B6/B7 |",
+    "| I20 | refinement sequence 결정론; nonnested sound 허용; empty intersection/conflicting raw anomaly STOP | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B5/B8 |",
+    "| I21 | canonical full/math/occurrence identity와 stale cache 방어; V1 cache disabled | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B7 |",
+    "| I22 | 모든3축 승인/출판 가능 후 atomic J/certificate/state; partial commit 없음 | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B4/B8 |"
+  ],
+  "checks": [
+    {
+      "check": "target_parent",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "target_commit_object",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "no_deleted_files",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "modified_paths_only_normative_docs_specs_sidecars",
+      "result": "PASS",
+      "detail": [
+        "docs/c1b1-independent-impulse-v1/B1-semantic-bundle.md",
+        "docs/c1b1-independent-impulse-v1/B3-physical-domain.md",
+        "docs/c1b1-independent-impulse-v1/B4-proof-wire-resource.md",
+        "docs/c1b1-independent-impulse-v1/B8-status-composition.md",
+        "docs/c1b1-independent-impulse-v1/README.md",
+        "docs/c1b1-independent-impulse-v1/obligation-ledger.md",
+        "specs/c1b1-independent-impulse-v1/acquisition-identity.json",
+        "specs/c1b1-independent-impulse-v1/acquisition-identity.json.sha256",
+        "specs/c1b1-independent-impulse-v1/finite-policy.json",
+        "specs/c1b1-independent-impulse-v1/finite-policy.json.sha256",
+        "specs/c1b1-independent-impulse-v1/package-manifest.json",
+        "specs/c1b1-independent-impulse-v1/package-manifest.json.sha256",
+        "specs/c1b1-independent-impulse-v1/physical-domain.json",
+        "specs/c1b1-independent-impulse-v1/physical-domain.json.sha256",
+        "specs/c1b1-independent-impulse-v1/proof-wire.json",
+        "specs/c1b1-independent-impulse-v1/proof-wire.json.sha256",
+        "specs/c1b1-independent-impulse-v1/rechecker-lineage.json",
+        "specs/c1b1-independent-impulse-v1/rechecker-lineage.json.sha256",
+        "specs/c1b1-independent-impulse-v1/semantic-bundle.json",
+        "specs/c1b1-independent-impulse-v1/semantic-bundle.json.sha256",
+        "specs/c1b1-independent-impulse-v1/status-composition.json",
+        "specs/c1b1-independent-impulse-v1/status-composition.json.sha256"
+      ]
+    },
+    {
+      "check": "no_production_or_test_delta",
+      "result": "PASS",
+      "detail": []
+    },
+    {
+      "check": "new_python_is_audit_or_historical_only",
+      "result": "PASS",
+      "detail": [
+        "audit/c1b1-closure-fixes-2026-10-05/check_static.py",
+        "current/c1b1-closure-fixes-2026-10-05/received/guard_contract_witness.py"
+      ]
+    },
+    {
+      "check": "arithmetic_8_actual_byte_preservation",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "prior_provenance_bytes_preserved",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "canonical_and_sidecar:acquisition-identity.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "canonical_and_sidecar:constants.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "canonical_and_sidecar:finite-policy.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "canonical_and_sidecar:package-manifest.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "canonical_and_sidecar:physical-domain.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "canonical_and_sidecar:proof-wire.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "canonical_and_sidecar:rechecker-lineage.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "canonical_and_sidecar:semantic-bundle.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "canonical_and_sidecar:status-composition.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:acquisition-identity.json:constants_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:acquisition-identity.json:domain_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:acquisition-identity.json:wire_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:constants.json:P0_raw_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:constants.json:source_recovery_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:finite-policy.json:proof_wire_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:package-manifest.json:acquisition-identity.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:package-manifest.json:constants.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:package-manifest.json:finite-policy.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:package-manifest.json:physical-domain.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:package-manifest.json:proof-wire.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:package-manifest.json:rechecker-lineage.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:package-manifest.json:semantic-bundle.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:package-manifest.json:status-composition.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:physical-domain.json:constants_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:proof-wire.json:physical_domain_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:rechecker-lineage.json:identity_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:rechecker-lineage.json:source_recovery_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:rechecker-lineage.json:wire_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:semantic-bundle.json:acquisition_identity_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:semantic-bundle.json:constants_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:semantic-bundle.json:finite_policy_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:semantic-bundle.json:physical_domain_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:semantic-bundle.json:proof_wire_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:semantic-bundle.json:rechecker_lineage_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:semantic-bundle.json:status_composition_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:status-composition.json:identity_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency:status-composition.json:policy_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "package_semantic_id",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "package_revision_is_only_fix_record",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "no_unrelated_semantic_changes:acquisition-identity.json",
+      "result": "PASS",
+      "detail": []
+    },
+    {
+      "check": "no_unrelated_semantic_changes:constants.json",
+      "result": "PASS",
+      "detail": []
+    },
+    {
+      "check": "no_unrelated_semantic_changes:finite-policy.json",
+      "result": "PASS",
+      "detail": []
+    },
+    {
+      "check": "no_unrelated_semantic_changes:package-manifest.json",
+      "result": "PASS",
+      "detail": []
+    },
+    {
+      "check": "no_unrelated_semantic_changes:physical-domain.json",
+      "result": "PASS",
+      "detail": []
+    },
+    {
+      "check": "no_unrelated_semantic_changes:proof-wire.json",
+      "result": "PASS",
+      "detail": []
+    },
+    {
+      "check": "no_unrelated_semantic_changes:rechecker-lineage.json",
+      "result": "PASS",
+      "detail": []
+    },
+    {
+      "check": "no_unrelated_semantic_changes:semantic-bundle.json",
+      "result": "PASS",
+      "detail": []
+    },
+    {
+      "check": "no_unrelated_semantic_changes:status-composition.json",
+      "result": "PASS",
+      "detail": []
+    },
+    {
+      "check": "active_stale_hashes_absent",
+      "result": "PASS",
+      "detail": []
+    },
+    {
+      "check": "active_wrong_guard_requirements_absent",
+      "result": "PASS",
+      "detail": []
+    },
+    {
+      "check": "new_guard_json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "new_guard_B3",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "new_guard_B8",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "new_guard_status_json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "old_guard_mismatch_preserved",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "failure_11_fields_agree",
+      "result": "PASS",
+      "detail": {
+        "primary": [
+          "schema",
+          "status",
+          "phase",
+          "reason",
+          "resource_kind",
+          "spec_sha256",
+          "state_sha256",
+          "occurrence_sha256",
+          "budget_sha256",
+          "attempt_count",
+          "attempt_digest"
+        ],
+        "secondary": [
+          "schema",
+          "status",
+          "phase",
+          "reason",
+          "resource_kind",
+          "spec_sha256",
+          "state_sha256",
+          "occurrence_sha256",
+          "budget_sha256",
+          "attempt_count",
+          "attempt_digest"
+        ],
+        "markdown": [
+          "schema",
+          "status",
+          "phase",
+          "reason",
+          "resource_kind",
+          "spec_sha256",
+          "state_sha256",
+          "occurrence_sha256",
+          "budget_sha256",
+          "attempt_count",
+          "attempt_digest"
+        ]
+      }
+    },
+    {
+      "check": "required_resource_kind_null_policy",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "old_failure_inconsistency_preserved",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "all_resource_caps_unchanged",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "failure_limit_not_expanded",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "bounded_failure_envelope",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "archived_parent_bytes_preserved",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "historical_verdict_not_promoted",
+      "result": "PASS",
+      "detail": null
+    }
+  ],
+  "all_static_checks_pass": true,
+  "branch_end": "8e5865964770b3752326d361276cbccd125c547a\trefs/heads/codex/c1b1-fclaim1-output-limit",
+  "finished_at_utc": "2026-10-04T16:59:09.564643+00:00",
+  "repository_python_executed": false,
+  "production_tests_executed": false,
+  "V2_executed": false,
+  "benchmarks_executed": false
+}

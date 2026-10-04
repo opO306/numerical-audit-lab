@@ -1,0 +1,1135 @@
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF                           [100%]
+================================== FAILURES ===================================
+________ test_requested_attempt_relations[RESOLVED-NOT_RUN-None-True] _________
+
+producer = 'RESOLVED', rechecker = 'NOT_RUN', reason = None, want = True
+
+    @pytest.mark.parametrize('producer,rechecker,reason,want',[
+        ('RESOLVED','NOT_RUN',None,True),('RESOLVED','ACCEPTED',None,True),
+        ('RESOLVED','NOT_RUN','ROUNDING_UNPROVED',False),('UNPROVED','NOT_RUN',None,False),
+        ('RESOLVED','NOT_PROVED',None,False),('RESOLVED','NOT_PROVED','RECHECK_UNPROVED',True)])
+    def test_requested_attempt_relations(producer,rechecker,reason,want):
+>       assert checker().validate_attempt(tuple_for(producer,rechecker,reason),wire()) is want
+               ^^^^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def checker():
+>       assert AUDIT.is_file(), 'static spec checker has not been implemented'
+E       AssertionError: static spec checker has not been implemented
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py').is_file
+
+tests\test_impulse_attempt_reason_spec.py:28: AssertionError
+________ test_requested_attempt_relations[RESOLVED-ACCEPTED-None-True] ________
+
+producer = 'RESOLVED', rechecker = 'ACCEPTED', reason = None, want = True
+
+    @pytest.mark.parametrize('producer,rechecker,reason,want',[
+        ('RESOLVED','NOT_RUN',None,True),('RESOLVED','ACCEPTED',None,True),
+        ('RESOLVED','NOT_RUN','ROUNDING_UNPROVED',False),('UNPROVED','NOT_RUN',None,False),
+        ('RESOLVED','NOT_PROVED',None,False),('RESOLVED','NOT_PROVED','RECHECK_UNPROVED',True)])
+    def test_requested_attempt_relations(producer,rechecker,reason,want):
+>       assert checker().validate_attempt(tuple_for(producer,rechecker,reason),wire()) is want
+               ^^^^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def checker():
+>       assert AUDIT.is_file(), 'static spec checker has not been implemented'
+E       AssertionError: static spec checker has not been implemented
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py').is_file
+
+tests\test_impulse_attempt_reason_spec.py:28: AssertionError
+_ test_requested_attempt_relations[RESOLVED-NOT_RUN-ROUNDING_UNPROVED-False] __
+
+producer = 'RESOLVED', rechecker = 'NOT_RUN', reason = 'ROUNDING_UNPROVED'
+want = False
+
+    @pytest.mark.parametrize('producer,rechecker,reason,want',[
+        ('RESOLVED','NOT_RUN',None,True),('RESOLVED','ACCEPTED',None,True),
+        ('RESOLVED','NOT_RUN','ROUNDING_UNPROVED',False),('UNPROVED','NOT_RUN',None,False),
+        ('RESOLVED','NOT_PROVED',None,False),('RESOLVED','NOT_PROVED','RECHECK_UNPROVED',True)])
+    def test_requested_attempt_relations(producer,rechecker,reason,want):
+>       assert checker().validate_attempt(tuple_for(producer,rechecker,reason),wire()) is want
+               ^^^^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def checker():
+>       assert AUDIT.is_file(), 'static spec checker has not been implemented'
+E       AssertionError: static spec checker has not been implemented
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py').is_file
+
+tests\test_impulse_attempt_reason_spec.py:28: AssertionError
+________ test_requested_attempt_relations[UNPROVED-NOT_RUN-None-False] ________
+
+producer = 'UNPROVED', rechecker = 'NOT_RUN', reason = None, want = False
+
+    @pytest.mark.parametrize('producer,rechecker,reason,want',[
+        ('RESOLVED','NOT_RUN',None,True),('RESOLVED','ACCEPTED',None,True),
+        ('RESOLVED','NOT_RUN','ROUNDING_UNPROVED',False),('UNPROVED','NOT_RUN',None,False),
+        ('RESOLVED','NOT_PROVED',None,False),('RESOLVED','NOT_PROVED','RECHECK_UNPROVED',True)])
+    def test_requested_attempt_relations(producer,rechecker,reason,want):
+>       assert checker().validate_attempt(tuple_for(producer,rechecker,reason),wire()) is want
+               ^^^^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def checker():
+>       assert AUDIT.is_file(), 'static spec checker has not been implemented'
+E       AssertionError: static spec checker has not been implemented
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py').is_file
+
+tests\test_impulse_attempt_reason_spec.py:28: AssertionError
+______ test_requested_attempt_relations[RESOLVED-NOT_PROVED-None-False] _______
+
+producer = 'RESOLVED', rechecker = 'NOT_PROVED', reason = None, want = False
+
+    @pytest.mark.parametrize('producer,rechecker,reason,want',[
+        ('RESOLVED','NOT_RUN',None,True),('RESOLVED','ACCEPTED',None,True),
+        ('RESOLVED','NOT_RUN','ROUNDING_UNPROVED',False),('UNPROVED','NOT_RUN',None,False),
+        ('RESOLVED','NOT_PROVED',None,False),('RESOLVED','NOT_PROVED','RECHECK_UNPROVED',True)])
+    def test_requested_attempt_relations(producer,rechecker,reason,want):
+>       assert checker().validate_attempt(tuple_for(producer,rechecker,reason),wire()) is want
+               ^^^^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def checker():
+>       assert AUDIT.is_file(), 'static spec checker has not been implemented'
+E       AssertionError: static spec checker has not been implemented
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py').is_file
+
+tests\test_impulse_attempt_reason_spec.py:28: AssertionError
+_ test_requested_attempt_relations[RESOLVED-NOT_PROVED-RECHECK_UNPROVED-True] _
+
+producer = 'RESOLVED', rechecker = 'NOT_PROVED', reason = 'RECHECK_UNPROVED'
+want = True
+
+    @pytest.mark.parametrize('producer,rechecker,reason,want',[
+        ('RESOLVED','NOT_RUN',None,True),('RESOLVED','ACCEPTED',None,True),
+        ('RESOLVED','NOT_RUN','ROUNDING_UNPROVED',False),('UNPROVED','NOT_RUN',None,False),
+        ('RESOLVED','NOT_PROVED',None,False),('RESOLVED','NOT_PROVED','RECHECK_UNPROVED',True)])
+    def test_requested_attempt_relations(producer,rechecker,reason,want):
+>       assert checker().validate_attempt(tuple_for(producer,rechecker,reason),wire()) is want
+               ^^^^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def checker():
+>       assert AUDIT.is_file(), 'static spec checker has not been implemented'
+E       AssertionError: static spec checker has not been implemented
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py').is_file
+
+tests\test_impulse_attempt_reason_spec.py:28: AssertionError
+____ test_every_status_pair_and_every_existing_reason[NOT_RUN-NOT_STARTED] ____
+
+producer = 'NOT_STARTED', rechecker = 'NOT_RUN'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+_____ test_every_status_pair_and_every_existing_reason[NOT_RUN-RESOLVED] ______
+
+producer = 'RESOLVED', rechecker = 'NOT_RUN'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+_____ test_every_status_pair_and_every_existing_reason[NOT_RUN-UNPROVED] ______
+
+producer = 'UNPROVED', rechecker = 'NOT_RUN'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+______ test_every_status_pair_and_every_existing_reason[NOT_RUN-REFUSED] ______
+
+producer = 'REFUSED', rechecker = 'NOT_RUN'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+_______ test_every_status_pair_and_every_existing_reason[NOT_RUN-ERROR] _______
+
+producer = 'ERROR', rechecker = 'NOT_RUN'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+___ test_every_status_pair_and_every_existing_reason[ACCEPTED-NOT_STARTED] ____
+
+producer = 'NOT_STARTED', rechecker = 'ACCEPTED'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+_____ test_every_status_pair_and_every_existing_reason[ACCEPTED-RESOLVED] _____
+
+producer = 'RESOLVED', rechecker = 'ACCEPTED'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+_____ test_every_status_pair_and_every_existing_reason[ACCEPTED-UNPROVED] _____
+
+producer = 'UNPROVED', rechecker = 'ACCEPTED'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+_____ test_every_status_pair_and_every_existing_reason[ACCEPTED-REFUSED] ______
+
+producer = 'REFUSED', rechecker = 'ACCEPTED'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+______ test_every_status_pair_and_every_existing_reason[ACCEPTED-ERROR] _______
+
+producer = 'ERROR', rechecker = 'ACCEPTED'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+___ test_every_status_pair_and_every_existing_reason[REJECTED-NOT_STARTED] ____
+
+producer = 'NOT_STARTED', rechecker = 'REJECTED'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+_____ test_every_status_pair_and_every_existing_reason[REJECTED-RESOLVED] _____
+
+producer = 'RESOLVED', rechecker = 'REJECTED'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+_____ test_every_status_pair_and_every_existing_reason[REJECTED-UNPROVED] _____
+
+producer = 'UNPROVED', rechecker = 'REJECTED'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+_____ test_every_status_pair_and_every_existing_reason[REJECTED-REFUSED] ______
+
+producer = 'REFUSED', rechecker = 'REJECTED'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+______ test_every_status_pair_and_every_existing_reason[REJECTED-ERROR] _______
+
+producer = 'ERROR', rechecker = 'REJECTED'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+__ test_every_status_pair_and_every_existing_reason[NOT_PROVED-NOT_STARTED] ___
+
+producer = 'NOT_STARTED', rechecker = 'NOT_PROVED'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+____ test_every_status_pair_and_every_existing_reason[NOT_PROVED-RESOLVED] ____
+
+producer = 'RESOLVED', rechecker = 'NOT_PROVED'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+____ test_every_status_pair_and_every_existing_reason[NOT_PROVED-UNPROVED] ____
+
+producer = 'UNPROVED', rechecker = 'NOT_PROVED'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+____ test_every_status_pair_and_every_existing_reason[NOT_PROVED-REFUSED] _____
+
+producer = 'REFUSED', rechecker = 'NOT_PROVED'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+_____ test_every_status_pair_and_every_existing_reason[NOT_PROVED-ERROR] ______
+
+producer = 'ERROR', rechecker = 'NOT_PROVED'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+_____ test_every_status_pair_and_every_existing_reason[ERROR-NOT_STARTED] _____
+
+producer = 'NOT_STARTED', rechecker = 'ERROR'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+______ test_every_status_pair_and_every_existing_reason[ERROR-RESOLVED] _______
+
+producer = 'RESOLVED', rechecker = 'ERROR'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+______ test_every_status_pair_and_every_existing_reason[ERROR-UNPROVED] _______
+
+producer = 'UNPROVED', rechecker = 'ERROR'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+_______ test_every_status_pair_and_every_existing_reason[ERROR-REFUSED] _______
+
+producer = 'REFUSED', rechecker = 'ERROR'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+________ test_every_status_pair_and_every_existing_reason[ERROR-ERROR] ________
+
+producer = 'ERROR', rechecker = 'ERROR'
+
+    @pytest.mark.parametrize('producer',PRODUCERS)
+    @pytest.mark.parametrize('rechecker',RECHECKERS)
+    def test_every_status_pair_and_every_existing_reason(producer,rechecker):
+>       w=wire();c=checker()
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+__________ test_closed_table_complete_unique_and_no_new_reason_enum ___________
+
+    def test_closed_table_complete_unique_and_no_new_reason_enum():
+>       w=wire();prior=json.loads((OLD/'proof-wire.json').read_text())
+          ^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def wire():
+>       assert (NEW/'proof-wire.json').is_file(), 'clarification spec has not been issued'
+E       AssertionError: clarification spec has not been issued
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/specs/c1b1-independent-impulse-v1-attempt-reason-null') / 'proof-wire.json').is_file
+
+tests\test_impulse_attempt_reason_spec.py:35: AssertionError
+______ test_tuple_is_closed_typed_and_reason_is_always_present[missing] _______
+
+edit = 'missing'
+
+    @pytest.mark.parametrize('edit',['missing','extra','null_non_success','t_number','t_negative','N_zero','P_small','unknown_producer','unknown_rechecker','reason_bool','oversized_N'])
+    def test_tuple_is_closed_typed_and_reason_is_always_present(edit):
+        a=tuple_for('RESOLVED','NOT_RUN',None)
+        if edit=='missing':del a['reason']
+        elif edit=='extra':a['diagnostic']='x'
+        elif edit=='null_non_success':a['producer']='REFUSED'
+        elif edit=='t_number':a['t']=0
+        elif edit=='t_negative':a['t']='-1'
+        elif edit=='N_zero':a['N']='0'
+        elif edit=='P_small':a['P']='7'
+        elif edit=='unknown_producer':a['producer']='SUCCESS'
+        elif edit=='unknown_rechecker':a['rechecker']='SUCCESS'
+        elif edit=='reason_bool':a['reason']=False
+        elif edit=='oversized_N':a['N']='1'+'0'*4096
+>       assert checker().validate_attempt(a,wire()) is False
+               ^^^^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def checker():
+>       assert AUDIT.is_file(), 'static spec checker has not been implemented'
+E       AssertionError: static spec checker has not been implemented
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py').is_file
+
+tests\test_impulse_attempt_reason_spec.py:28: AssertionError
+_______ test_tuple_is_closed_typed_and_reason_is_always_present[extra] ________
+
+edit = 'extra'
+
+    @pytest.mark.parametrize('edit',['missing','extra','null_non_success','t_number','t_negative','N_zero','P_small','unknown_producer','unknown_rechecker','reason_bool','oversized_N'])
+    def test_tuple_is_closed_typed_and_reason_is_always_present(edit):
+        a=tuple_for('RESOLVED','NOT_RUN',None)
+        if edit=='missing':del a['reason']
+        elif edit=='extra':a['diagnostic']='x'
+        elif edit=='null_non_success':a['producer']='REFUSED'
+        elif edit=='t_number':a['t']=0
+        elif edit=='t_negative':a['t']='-1'
+        elif edit=='N_zero':a['N']='0'
+        elif edit=='P_small':a['P']='7'
+        elif edit=='unknown_producer':a['producer']='SUCCESS'
+        elif edit=='unknown_rechecker':a['rechecker']='SUCCESS'
+        elif edit=='reason_bool':a['reason']=False
+        elif edit=='oversized_N':a['N']='1'+'0'*4096
+>       assert checker().validate_attempt(a,wire()) is False
+               ^^^^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def checker():
+>       assert AUDIT.is_file(), 'static spec checker has not been implemented'
+E       AssertionError: static spec checker has not been implemented
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py').is_file
+
+tests\test_impulse_attempt_reason_spec.py:28: AssertionError
+__ test_tuple_is_closed_typed_and_reason_is_always_present[null_non_success] __
+
+edit = 'null_non_success'
+
+    @pytest.mark.parametrize('edit',['missing','extra','null_non_success','t_number','t_negative','N_zero','P_small','unknown_producer','unknown_rechecker','reason_bool','oversized_N'])
+    def test_tuple_is_closed_typed_and_reason_is_always_present(edit):
+        a=tuple_for('RESOLVED','NOT_RUN',None)
+        if edit=='missing':del a['reason']
+        elif edit=='extra':a['diagnostic']='x'
+        elif edit=='null_non_success':a['producer']='REFUSED'
+        elif edit=='t_number':a['t']=0
+        elif edit=='t_negative':a['t']='-1'
+        elif edit=='N_zero':a['N']='0'
+        elif edit=='P_small':a['P']='7'
+        elif edit=='unknown_producer':a['producer']='SUCCESS'
+        elif edit=='unknown_rechecker':a['rechecker']='SUCCESS'
+        elif edit=='reason_bool':a['reason']=False
+        elif edit=='oversized_N':a['N']='1'+'0'*4096
+>       assert checker().validate_attempt(a,wire()) is False
+               ^^^^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def checker():
+>       assert AUDIT.is_file(), 'static spec checker has not been implemented'
+E       AssertionError: static spec checker has not been implemented
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py').is_file
+
+tests\test_impulse_attempt_reason_spec.py:28: AssertionError
+______ test_tuple_is_closed_typed_and_reason_is_always_present[t_number] ______
+
+edit = 't_number'
+
+    @pytest.mark.parametrize('edit',['missing','extra','null_non_success','t_number','t_negative','N_zero','P_small','unknown_producer','unknown_rechecker','reason_bool','oversized_N'])
+    def test_tuple_is_closed_typed_and_reason_is_always_present(edit):
+        a=tuple_for('RESOLVED','NOT_RUN',None)
+        if edit=='missing':del a['reason']
+        elif edit=='extra':a['diagnostic']='x'
+        elif edit=='null_non_success':a['producer']='REFUSED'
+        elif edit=='t_number':a['t']=0
+        elif edit=='t_negative':a['t']='-1'
+        elif edit=='N_zero':a['N']='0'
+        elif edit=='P_small':a['P']='7'
+        elif edit=='unknown_producer':a['producer']='SUCCESS'
+        elif edit=='unknown_rechecker':a['rechecker']='SUCCESS'
+        elif edit=='reason_bool':a['reason']=False
+        elif edit=='oversized_N':a['N']='1'+'0'*4096
+>       assert checker().validate_attempt(a,wire()) is False
+               ^^^^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def checker():
+>       assert AUDIT.is_file(), 'static spec checker has not been implemented'
+E       AssertionError: static spec checker has not been implemented
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py').is_file
+
+tests\test_impulse_attempt_reason_spec.py:28: AssertionError
+_____ test_tuple_is_closed_typed_and_reason_is_always_present[t_negative] _____
+
+edit = 't_negative'
+
+    @pytest.mark.parametrize('edit',['missing','extra','null_non_success','t_number','t_negative','N_zero','P_small','unknown_producer','unknown_rechecker','reason_bool','oversized_N'])
+    def test_tuple_is_closed_typed_and_reason_is_always_present(edit):
+        a=tuple_for('RESOLVED','NOT_RUN',None)
+        if edit=='missing':del a['reason']
+        elif edit=='extra':a['diagnostic']='x'
+        elif edit=='null_non_success':a['producer']='REFUSED'
+        elif edit=='t_number':a['t']=0
+        elif edit=='t_negative':a['t']='-1'
+        elif edit=='N_zero':a['N']='0'
+        elif edit=='P_small':a['P']='7'
+        elif edit=='unknown_producer':a['producer']='SUCCESS'
+        elif edit=='unknown_rechecker':a['rechecker']='SUCCESS'
+        elif edit=='reason_bool':a['reason']=False
+        elif edit=='oversized_N':a['N']='1'+'0'*4096
+>       assert checker().validate_attempt(a,wire()) is False
+               ^^^^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def checker():
+>       assert AUDIT.is_file(), 'static spec checker has not been implemented'
+E       AssertionError: static spec checker has not been implemented
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py').is_file
+
+tests\test_impulse_attempt_reason_spec.py:28: AssertionError
+_______ test_tuple_is_closed_typed_and_reason_is_always_present[N_zero] _______
+
+edit = 'N_zero'
+
+    @pytest.mark.parametrize('edit',['missing','extra','null_non_success','t_number','t_negative','N_zero','P_small','unknown_producer','unknown_rechecker','reason_bool','oversized_N'])
+    def test_tuple_is_closed_typed_and_reason_is_always_present(edit):
+        a=tuple_for('RESOLVED','NOT_RUN',None)
+        if edit=='missing':del a['reason']
+        elif edit=='extra':a['diagnostic']='x'
+        elif edit=='null_non_success':a['producer']='REFUSED'
+        elif edit=='t_number':a['t']=0
+        elif edit=='t_negative':a['t']='-1'
+        elif edit=='N_zero':a['N']='0'
+        elif edit=='P_small':a['P']='7'
+        elif edit=='unknown_producer':a['producer']='SUCCESS'
+        elif edit=='unknown_rechecker':a['rechecker']='SUCCESS'
+        elif edit=='reason_bool':a['reason']=False
+        elif edit=='oversized_N':a['N']='1'+'0'*4096
+>       assert checker().validate_attempt(a,wire()) is False
+               ^^^^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def checker():
+>       assert AUDIT.is_file(), 'static spec checker has not been implemented'
+E       AssertionError: static spec checker has not been implemented
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py').is_file
+
+tests\test_impulse_attempt_reason_spec.py:28: AssertionError
+______ test_tuple_is_closed_typed_and_reason_is_always_present[P_small] _______
+
+edit = 'P_small'
+
+    @pytest.mark.parametrize('edit',['missing','extra','null_non_success','t_number','t_negative','N_zero','P_small','unknown_producer','unknown_rechecker','reason_bool','oversized_N'])
+    def test_tuple_is_closed_typed_and_reason_is_always_present(edit):
+        a=tuple_for('RESOLVED','NOT_RUN',None)
+        if edit=='missing':del a['reason']
+        elif edit=='extra':a['diagnostic']='x'
+        elif edit=='null_non_success':a['producer']='REFUSED'
+        elif edit=='t_number':a['t']=0
+        elif edit=='t_negative':a['t']='-1'
+        elif edit=='N_zero':a['N']='0'
+        elif edit=='P_small':a['P']='7'
+        elif edit=='unknown_producer':a['producer']='SUCCESS'
+        elif edit=='unknown_rechecker':a['rechecker']='SUCCESS'
+        elif edit=='reason_bool':a['reason']=False
+        elif edit=='oversized_N':a['N']='1'+'0'*4096
+>       assert checker().validate_attempt(a,wire()) is False
+               ^^^^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def checker():
+>       assert AUDIT.is_file(), 'static spec checker has not been implemented'
+E       AssertionError: static spec checker has not been implemented
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py').is_file
+
+tests\test_impulse_attempt_reason_spec.py:28: AssertionError
+__ test_tuple_is_closed_typed_and_reason_is_always_present[unknown_producer] __
+
+edit = 'unknown_producer'
+
+    @pytest.mark.parametrize('edit',['missing','extra','null_non_success','t_number','t_negative','N_zero','P_small','unknown_producer','unknown_rechecker','reason_bool','oversized_N'])
+    def test_tuple_is_closed_typed_and_reason_is_always_present(edit):
+        a=tuple_for('RESOLVED','NOT_RUN',None)
+        if edit=='missing':del a['reason']
+        elif edit=='extra':a['diagnostic']='x'
+        elif edit=='null_non_success':a['producer']='REFUSED'
+        elif edit=='t_number':a['t']=0
+        elif edit=='t_negative':a['t']='-1'
+        elif edit=='N_zero':a['N']='0'
+        elif edit=='P_small':a['P']='7'
+        elif edit=='unknown_producer':a['producer']='SUCCESS'
+        elif edit=='unknown_rechecker':a['rechecker']='SUCCESS'
+        elif edit=='reason_bool':a['reason']=False
+        elif edit=='oversized_N':a['N']='1'+'0'*4096
+>       assert checker().validate_attempt(a,wire()) is False
+               ^^^^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def checker():
+>       assert AUDIT.is_file(), 'static spec checker has not been implemented'
+E       AssertionError: static spec checker has not been implemented
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py').is_file
+
+tests\test_impulse_attempt_reason_spec.py:28: AssertionError
+_ test_tuple_is_closed_typed_and_reason_is_always_present[unknown_rechecker] __
+
+edit = 'unknown_rechecker'
+
+    @pytest.mark.parametrize('edit',['missing','extra','null_non_success','t_number','t_negative','N_zero','P_small','unknown_producer','unknown_rechecker','reason_bool','oversized_N'])
+    def test_tuple_is_closed_typed_and_reason_is_always_present(edit):
+        a=tuple_for('RESOLVED','NOT_RUN',None)
+        if edit=='missing':del a['reason']
+        elif edit=='extra':a['diagnostic']='x'
+        elif edit=='null_non_success':a['producer']='REFUSED'
+        elif edit=='t_number':a['t']=0
+        elif edit=='t_negative':a['t']='-1'
+        elif edit=='N_zero':a['N']='0'
+        elif edit=='P_small':a['P']='7'
+        elif edit=='unknown_producer':a['producer']='SUCCESS'
+        elif edit=='unknown_rechecker':a['rechecker']='SUCCESS'
+        elif edit=='reason_bool':a['reason']=False
+        elif edit=='oversized_N':a['N']='1'+'0'*4096
+>       assert checker().validate_attempt(a,wire()) is False
+               ^^^^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def checker():
+>       assert AUDIT.is_file(), 'static spec checker has not been implemented'
+E       AssertionError: static spec checker has not been implemented
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py').is_file
+
+tests\test_impulse_attempt_reason_spec.py:28: AssertionError
+____ test_tuple_is_closed_typed_and_reason_is_always_present[reason_bool] _____
+
+edit = 'reason_bool'
+
+    @pytest.mark.parametrize('edit',['missing','extra','null_non_success','t_number','t_negative','N_zero','P_small','unknown_producer','unknown_rechecker','reason_bool','oversized_N'])
+    def test_tuple_is_closed_typed_and_reason_is_always_present(edit):
+        a=tuple_for('RESOLVED','NOT_RUN',None)
+        if edit=='missing':del a['reason']
+        elif edit=='extra':a['diagnostic']='x'
+        elif edit=='null_non_success':a['producer']='REFUSED'
+        elif edit=='t_number':a['t']=0
+        elif edit=='t_negative':a['t']='-1'
+        elif edit=='N_zero':a['N']='0'
+        elif edit=='P_small':a['P']='7'
+        elif edit=='unknown_producer':a['producer']='SUCCESS'
+        elif edit=='unknown_rechecker':a['rechecker']='SUCCESS'
+        elif edit=='reason_bool':a['reason']=False
+        elif edit=='oversized_N':a['N']='1'+'0'*4096
+>       assert checker().validate_attempt(a,wire()) is False
+               ^^^^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def checker():
+>       assert AUDIT.is_file(), 'static spec checker has not been implemented'
+E       AssertionError: static spec checker has not been implemented
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py').is_file
+
+tests\test_impulse_attempt_reason_spec.py:28: AssertionError
+____ test_tuple_is_closed_typed_and_reason_is_always_present[oversized_N] _____
+
+edit = 'oversized_N'
+
+    @pytest.mark.parametrize('edit',['missing','extra','null_non_success','t_number','t_negative','N_zero','P_small','unknown_producer','unknown_rechecker','reason_bool','oversized_N'])
+    def test_tuple_is_closed_typed_and_reason_is_always_present(edit):
+        a=tuple_for('RESOLVED','NOT_RUN',None)
+        if edit=='missing':del a['reason']
+        elif edit=='extra':a['diagnostic']='x'
+        elif edit=='null_non_success':a['producer']='REFUSED'
+        elif edit=='t_number':a['t']=0
+        elif edit=='t_negative':a['t']='-1'
+        elif edit=='N_zero':a['N']='0'
+        elif edit=='P_small':a['P']='7'
+        elif edit=='unknown_producer':a['producer']='SUCCESS'
+        elif edit=='unknown_rechecker':a['rechecker']='SUCCESS'
+        elif edit=='reason_bool':a['reason']=False
+        elif edit=='oversized_N':a['N']='1'+'0'*4096
+>       assert checker().validate_attempt(a,wire()) is False
+               ^^^^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def checker():
+>       assert AUDIT.is_file(), 'static spec checker has not been implemented'
+E       AssertionError: static spec checker has not been implemented
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py').is_file
+
+tests\test_impulse_attempt_reason_spec.py:28: AssertionError
+___________ test_canonical_null_digest_and_missing_key_are_distinct ___________
+
+    def test_canonical_null_digest_and_missing_key_are_distinct():
+>       c=checker();a=tuple_for('RESOLVED','NOT_RUN',None)
+          ^^^^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:87: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def checker():
+>       assert AUDIT.is_file(), 'static spec checker has not been implemented'
+E       AssertionError: static spec checker has not been implemented
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py').is_file
+
+tests\test_impulse_attempt_reason_spec.py:28: AssertionError
+__________ test_failure_reason_remains_non_null_and_schema_unchanged __________
+
+    def test_failure_reason_remains_non_null_and_schema_unchanged():
+>       c=checker();w=wire();prior=json.loads((OLD/'proof-wire.json').read_text())
+          ^^^^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:98: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def checker():
+>       assert AUDIT.is_file(), 'static spec checker has not been implemented'
+E       AssertionError: static spec checker has not been implemented
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py').is_file
+
+tests\test_impulse_attempt_reason_spec.py:28: AssertionError
+__________ test_canonical_hash_graph_and_semantic_delta_are_minimal ___________
+
+    def test_canonical_hash_graph_and_semantic_delta_are_minimal():
+>       assert checker().check_package(NEW,OLD)['result']=='PASS'
+               ^^^^^^^^^
+
+tests\test_impulse_attempt_reason_spec.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def checker():
+>       assert AUDIT.is_file(), 'static spec checker has not been implemented'
+E       AssertionError: static spec checker has not been implemented
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('D:/numerical-audit-lab-recovered-2026-10-01/audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py').is_file
+
+tests\test_impulse_attempt_reason_spec.py:28: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_impulse_attempt_reason_spec.py::test_requested_attempt_relations[RESOLVED-NOT_RUN-None-True]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_requested_attempt_relations[RESOLVED-ACCEPTED-None-True]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_requested_attempt_relations[RESOLVED-NOT_RUN-ROUNDING_UNPROVED-False]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_requested_attempt_relations[UNPROVED-NOT_RUN-None-False]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_requested_attempt_relations[RESOLVED-NOT_PROVED-None-False]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_requested_attempt_relations[RESOLVED-NOT_PROVED-RECHECK_UNPROVED-True]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[NOT_RUN-NOT_STARTED]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[NOT_RUN-RESOLVED]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[NOT_RUN-UNPROVED]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[NOT_RUN-REFUSED]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[NOT_RUN-ERROR]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[ACCEPTED-NOT_STARTED]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[ACCEPTED-RESOLVED]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[ACCEPTED-UNPROVED]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[ACCEPTED-REFUSED]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[ACCEPTED-ERROR]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[REJECTED-NOT_STARTED]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[REJECTED-RESOLVED]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[REJECTED-UNPROVED]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[REJECTED-REFUSED]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[REJECTED-ERROR]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[NOT_PROVED-NOT_STARTED]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[NOT_PROVED-RESOLVED]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[NOT_PROVED-UNPROVED]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[NOT_PROVED-REFUSED]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[NOT_PROVED-ERROR]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[ERROR-NOT_STARTED]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[ERROR-RESOLVED]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[ERROR-UNPROVED]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[ERROR-REFUSED]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_every_status_pair_and_every_existing_reason[ERROR-ERROR]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_closed_table_complete_unique_and_no_new_reason_enum
+FAILED tests/test_impulse_attempt_reason_spec.py::test_tuple_is_closed_typed_and_reason_is_always_present[missing]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_tuple_is_closed_typed_and_reason_is_always_present[extra]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_tuple_is_closed_typed_and_reason_is_always_present[null_non_success]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_tuple_is_closed_typed_and_reason_is_always_present[t_number]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_tuple_is_closed_typed_and_reason_is_always_present[t_negative]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_tuple_is_closed_typed_and_reason_is_always_present[N_zero]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_tuple_is_closed_typed_and_reason_is_always_present[P_small]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_tuple_is_closed_typed_and_reason_is_always_present[unknown_producer]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_tuple_is_closed_typed_and_reason_is_always_present[unknown_rechecker]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_tuple_is_closed_typed_and_reason_is_always_present[reason_bool]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_tuple_is_closed_typed_and_reason_is_always_present[oversized_N]
+FAILED tests/test_impulse_attempt_reason_spec.py::test_canonical_null_digest_and_missing_key_are_distinct
+FAILED tests/test_impulse_attempt_reason_spec.py::test_failure_reason_remains_non_null_and_schema_unchanged
+FAILED tests/test_impulse_attempt_reason_spec.py::test_canonical_hash_graph_and_semantic_delta_are_minimal
+46 failed in 2.10s

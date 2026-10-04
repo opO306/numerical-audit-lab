@@ -1,0 +1,44 @@
+[
+  {
+    "file": "REPORT_KO.md",
+    "sha256": "f02c919c31c0fc3e2d4203017130b68b6c096b670579fb818a336257a014e370",
+    "bytes": 35548,
+    "matches_repository_received_copy": true
+  },
+  {
+    "file": "extended_results.json",
+    "sha256": "303af060dd82a7291eccfba1c6708a1348e70dc545b4909845e7ef1451dd1f3b",
+    "bytes": 1548,
+    "matches_repository_received_copy": true
+  },
+  {
+    "file": "failure_key_conflict.json",
+    "sha256": "962a1615f4ed975602eb9f3be1e992b2fb64a1efc9a3524fccc7ca7bdc4a6af2",
+    "bytes": 1034,
+    "matches_repository_received_copy": true
+  },
+  {
+    "file": "guard_contract_witness.json",
+    "sha256": "c0c01e7d820bcf862bb3a1126d181619b66ef9a8dc6ec8cd05d3621f0512e946",
+    "bytes": 3188,
+    "matches_repository_received_copy": true
+  },
+  {
+    "file": "guard_contract_witness.py",
+    "sha256": "7d5ebe0eb502cb68654441e45a84b2d862642a9611ccab7dea2fb165e69ebba3",
+    "bytes": 3332,
+    "matches_repository_received_copy": true
+  },
+  {
+    "file": "static_results.json",
+    "sha256": "61921672ebdb783f7e905f864522d0d7568c0f0227e073522a07cf3f1d1abe0c",
+    "bytes": 35429,
+    "matches_repository_received_copy": true
+  },
+  {
+    "file": "verdicts.json",
+    "sha256": "54344055c18a5a74a7347b5d64375428f2cf90e2fe4a05e1b5c023d83bd5b106",
+    "bytes": 10675,
+    "matches_repository_received_copy": true
+  }
+]

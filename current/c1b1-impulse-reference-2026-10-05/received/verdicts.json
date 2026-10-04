@@ -1,0 +1,374 @@
+{
+  "review_kind": "LIMITED INDEPENDENT STATIC CLOSURE FIX REAUDIT",
+  "repository": "opO306/numerical-audit-lab",
+  "branch_observed": "codex/c1b1-fclaim1-output-limit",
+  "audited_commit": "8e5865964770b3752326d361276cbccd125c547a",
+  "direct_parent": "4cb2910fe936f7b1d5150196e062b6b61edc240f",
+  "arithmetic_antecedent": "65d8fd29ae255529afead70289098d36b825b3b4",
+  "snapshot_selection": "User-specified exact SHA; later branch heads are not covered.",
+  "overall": "DESIGN / PRE-IMPLEMENTATION CLOSURE PASS",
+  "implementation_gate": "IMPLEMENTATION MAY START WITH EXPLICIT RUNTIME-INSTANCE CONDITIONS",
+  "implementation_may_start": true,
+  "implementation": "NOT YET IMPLEMENTED",
+  "runtime_activation_allowed": false,
+  "finding_verdicts": {
+    "F-CLOSURE-1": "PASS",
+    "F-CLOSURE-2": "PASS"
+  },
+  "closure_package": "PASS",
+  "checks": [
+    {
+      "id": "R1",
+      "item": "Git / delta",
+      "verdict": "PASS",
+      "basis": "정확한 target/parent Git 객체 확인. 신규 42, 수정 22, 삭제 0. 규범 문서·spec·sidecar와 audit/history 자료로 분류.",
+      "evidence": [
+        "evidence/independent_results.json#delta",
+        "evidence/target.commit.raw"
+      ]
+    },
+    {
+      "id": "R2",
+      "item": "F-CLOSURE-1 historical finding preserved",
+      "verdict": "PASS",
+      "basis": "Parent의 잘못된 stored-segment 요구가 보존되고 과거 보고서·판정 사본의 SHA가 실제 이전 첨부와 일치.",
+      "evidence": [
+        "antecedents/REPORT_KO.md",
+        "antecedents/verdicts.json",
+        "evidence/history_copy_checks.json"
+      ]
+    },
+    {
+      "id": "R3",
+      "item": "F-CLOSURE-1 fix correctness",
+      "verdict": "PASS",
+      "basis": "B3/domain과 B8/status의 active 규범이 exact unrounded closed segment minimum AND stored final relative position squared로 일치.",
+      "evidence": [
+        "evidence/semantic_delta.json",
+        "evidence/normative_docs.diff"
+      ]
+    },
+    {
+      "id": "R4",
+      "item": "witness interpretation",
+      "verdict": "PASS",
+      "basis": "보존된 기약 유리수와 차이의 정수 교차곱을 독립 재검산: 부호 +,+,-. 계약 비동치 증거로만 사용.",
+      "evidence": [
+        "verify_preserved_witness.py",
+        "witness_recheck.json"
+      ]
+    },
+    {
+      "id": "R5",
+      "item": "F-CLOSURE-2 historical finding preserved",
+      "verdict": "PASS",
+      "basis": "Parent의 두 Failure key 집합 차이가 resource_kind 하나임을 직접 다시 비교. 과거 FAIL을 변경하지 않음.",
+      "evidence": [
+        "antecedents/failure_key_conflict.json",
+        "evidence/independent_results.json"
+      ]
+    },
+    {
+      "id": "R6",
+      "item": "F-CLOSURE-2 fix correctness",
+      "verdict": "PASS",
+      "basis": "Primary JSON, secondary closed-fields 문구, B4 표의 순서·집합이 같은 11개. required resource_kind와 resource enum/nonresource null 규칙 일치.",
+      "evidence": [
+        "evidence/independent_results.json",
+        "evidence/normative_docs.diff",
+        "evidence/semantic_delta.json"
+      ]
+    },
+    {
+      "id": "R7",
+      "item": "resource contract preservation",
+      "verdict": "PASS",
+      "basis": "Wire limits와 parser/writer/publication 의미가 불변. Failure 보수적 최대 789 bytes로 cap 4096 이내.",
+      "evidence": [
+        "evidence/independent_results.json#failure_byte_majorant",
+        "evidence/semantic_delta.json"
+      ]
+    },
+    {
+      "id": "R8",
+      "item": "canonical / hash / dependency consistency",
+      "verdict": "PASS",
+      "basis": "Canonical JSON 9개와 sidecar 9개 검산. 28개 dependency 참조, package semantic ID, active 20파일의 stale hash 부재 확인.",
+      "evidence": [
+        "evidence/independent_results.json#spec_hashes",
+        "evidence/independent_results.json#dependency_edges"
+      ]
+    },
+    {
+      "id": "R9",
+      "item": "no unrelated semantic redesign",
+      "verdict": "PASS",
+      "basis": "실제 semantic delta는 guard/Failure 정정과 종속 hash·review/revision metadata. Constants와 B5/B6/B7의 규칙·상태층·mutation 계획 재설계 없음.",
+      "evidence": [
+        "evidence/semantic_delta.json",
+        "evidence/normative_docs.diff"
+      ]
+    },
+    {
+      "id": "R10",
+      "item": "Arithmetic antecedent preservation",
+      "verdict": "PASS",
+      "basis": "65d8fd2의 8개 보호 파일과 target 실제 Git blob bytes 및 SHA-256 일치.",
+      "evidence": [
+        "evidence/independent_results.json#arithmetic_sources"
+      ]
+    },
+    {
+      "id": "R11",
+      "item": "no production implementation",
+      "verdict": "PASS",
+      "basis": "Production/test delta 0. 추가 Python은 audit/check_static.py 및 received historical witness의 2개뿐. V2 source 보존.",
+      "evidence": [
+        "evidence/independent_results.json#delta",
+        "evidence/independent_results.json#preserved_provenance"
+      ]
+    },
+    {
+      "id": "R12",
+      "item": "obligation blocker closure",
+      "verdict": "PASS",
+      "basis": "I1→READY, I10/I14/I18→IMPLEMENTATION-DEPENDENT. 나머지 의무의 직전 독립 분류 보존.",
+      "evidence": [
+        "verdicts.json#obligations",
+        "evidence/independent_results.json#ledger_rows"
+      ]
+    },
+    {
+      "id": "R13",
+      "item": "B5 activation separation",
+      "verdict": "PASS",
+      "basis": "B5는 dependency hash 외 불변. METHOD SPEC PASS를 유지하며 numeric instance·activation decision·resource 보호 없는 실행은 승인하지 않음.",
+      "evidence": [
+        "evidence/semantic_delta.json#finite-policy.json",
+        "verdicts.json#runtime_activation_conditions"
+      ]
+    },
+    {
+      "id": "R14",
+      "item": "provenance preservation",
+      "verdict": "PASS",
+      "basis": "Constants bytes 및 P0/원본/A-EV의 22개 provenance 파일 실제 bytes 보존. 과거 전사·Merkle 판정을 선행 근거로만 유지, A-EV trust 승격 없음.",
+      "evidence": [
+        "evidence/independent_results.json#preserved_provenance",
+        "evidence/independent_results.json#spec_hashes"
+      ]
+    }
+  ],
+  "obligations": [
+    {
+      "id": "I1",
+      "prior_state": "BLOCKED",
+      "state": "READY",
+      "specification_blocker_closed": true,
+      "basis": "해당 규범 finding 해소. 실제 구현·운영 증거 승인이 아님."
+    },
+    {
+      "id": "I2",
+      "prior_state": "IMPLEMENTATION-DEPENDENT",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "specification_blocker_closed": false,
+      "basis": "의미 변경이 없어 직전 독립 판정을 보존."
+    },
+    {
+      "id": "I3",
+      "prior_state": "READY",
+      "state": "READY",
+      "specification_blocker_closed": false,
+      "basis": "의미 변경이 없어 직전 독립 판정을 보존."
+    },
+    {
+      "id": "I4",
+      "prior_state": "READY",
+      "state": "READY",
+      "specification_blocker_closed": false,
+      "basis": "의미 변경이 없어 직전 독립 판정을 보존."
+    },
+    {
+      "id": "I5",
+      "prior_state": "READY",
+      "state": "READY",
+      "specification_blocker_closed": false,
+      "basis": "의미 변경이 없어 직전 독립 판정을 보존."
+    },
+    {
+      "id": "I6",
+      "prior_state": "READY",
+      "state": "READY",
+      "specification_blocker_closed": false,
+      "basis": "의미 변경이 없어 직전 독립 판정을 보존."
+    },
+    {
+      "id": "I7",
+      "prior_state": "READY",
+      "state": "READY",
+      "specification_blocker_closed": false,
+      "basis": "의미 변경이 없어 직전 독립 판정을 보존."
+    },
+    {
+      "id": "I8",
+      "prior_state": "READY",
+      "state": "READY",
+      "specification_blocker_closed": false,
+      "basis": "의미 변경이 없어 직전 독립 판정을 보존."
+    },
+    {
+      "id": "I9",
+      "prior_state": "IMPLEMENTATION-DEPENDENT",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "specification_blocker_closed": false,
+      "basis": "의미 변경이 없어 직전 독립 판정을 보존."
+    },
+    {
+      "id": "I10",
+      "prior_state": "BLOCKED",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "specification_blocker_closed": true,
+      "basis": "해당 규범 finding 해소. 실제 구현·운영 증거 승인이 아님."
+    },
+    {
+      "id": "I11",
+      "prior_state": "IMPLEMENTATION-DEPENDENT",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "specification_blocker_closed": false,
+      "basis": "의미 변경이 없어 직전 독립 판정을 보존."
+    },
+    {
+      "id": "I12",
+      "prior_state": "IMPLEMENTATION-DEPENDENT",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "specification_blocker_closed": false,
+      "basis": "의미 변경이 없어 직전 독립 판정을 보존."
+    },
+    {
+      "id": "I13",
+      "prior_state": "IMPLEMENTATION-DEPENDENT",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "specification_blocker_closed": false,
+      "basis": "의미 변경이 없어 직전 독립 판정을 보존."
+    },
+    {
+      "id": "I14",
+      "prior_state": "BLOCKED",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "specification_blocker_closed": true,
+      "basis": "해당 규범 finding 해소. 실제 구현·운영 증거 승인이 아님."
+    },
+    {
+      "id": "I15",
+      "prior_state": "IMPLEMENTATION-DEPENDENT",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "specification_blocker_closed": false,
+      "basis": "의미 변경이 없어 직전 독립 판정을 보존."
+    },
+    {
+      "id": "I16",
+      "prior_state": "IMPLEMENTATION-DEPENDENT",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "specification_blocker_closed": false,
+      "basis": "의미 변경이 없어 직전 독립 판정을 보존."
+    },
+    {
+      "id": "I17",
+      "prior_state": "READY",
+      "state": "READY",
+      "specification_blocker_closed": false,
+      "basis": "의미 변경이 없어 직전 독립 판정을 보존."
+    },
+    {
+      "id": "I18",
+      "prior_state": "BLOCKED",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "specification_blocker_closed": true,
+      "basis": "해당 규범 finding 해소. 실제 구현·운영 증거 승인이 아님."
+    },
+    {
+      "id": "I19",
+      "prior_state": "IMPLEMENTATION-DEPENDENT",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "specification_blocker_closed": false,
+      "basis": "의미 변경이 없어 직전 독립 판정을 보존."
+    },
+    {
+      "id": "I20",
+      "prior_state": "IMPLEMENTATION-DEPENDENT",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "specification_blocker_closed": false,
+      "basis": "의미 변경이 없어 직전 독립 판정을 보존."
+    },
+    {
+      "id": "I21",
+      "prior_state": "IMPLEMENTATION-DEPENDENT",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "specification_blocker_closed": false,
+      "basis": "의미 변경이 없어 직전 독립 판정을 보존."
+    },
+    {
+      "id": "I22",
+      "prior_state": "IMPLEMENTATION-DEPENDENT",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "specification_blocker_closed": false,
+      "basis": "의미 변경이 없어 직전 독립 판정을 보존."
+    }
+  ],
+  "historical": {
+    "commit": "4cb2910fe936f7b1d5150196e062b6b61edc240f",
+    "overall": "CLOSURE REVISION REQUIRED",
+    "implementation_may_start": false,
+    "findings": [
+      "F-CLOSURE-1",
+      "F-CLOSURE-2"
+    ],
+    "changed_retroactively": false
+  },
+  "B5": "METHOD SPEC PASS / RUNTIME NUMERIC INSTANCE STILL REQUIRED BEFORE ACTIVATION",
+  "runtime_activation_conditions": [
+    "separately approved exact numeric policy instance and instance hash",
+    "independent activation decision",
+    "source/platform/allocator-bound resource majorants",
+    "pinned V2 whole-call preflight",
+    "verified isolated worker memory/CPU/wall enforcement",
+    "implementation correctness and independence review required by the specification"
+  ],
+  "preserved_status": {
+    "Arithmetic_V1": "INDEPENDENT REVIEW PASS",
+    "exact_slow": "DEFAULT",
+    "exact_fast": "EXPERIMENTAL / OPT-IN",
+    "scope": "ARITHMETIC_ONLY",
+    "impulse": "J_NOT_VERIFIED",
+    "certification": "NotCertified",
+    "AEV": "comparison-only / NOT A TRUSTED ANTECEDENT"
+  },
+  "not_approved": [
+    "Impulse correctness PASS",
+    "J_VERIFIED",
+    "runtime activation",
+    "physical C1-B1 PASS",
+    "full replay",
+    "trajectory",
+    "formal certification",
+    "exact_fast default promotion"
+  ],
+  "execution": {
+    "independent_static_checks": 71,
+    "production_code_run": false,
+    "production_pytest_run": false,
+    "V2_run": false,
+    "mutants_run": false,
+    "benchmark_run": false,
+    "historical_witness_script_run": false,
+    "production_modified": false,
+    "git_commit_or_push": false
+  },
+  "branch_observation_window": {
+    "start": "2026-10-04T16:58:59.957087+00:00",
+    "end": "2026-10-04T16:59:09.564643+00:00",
+    "start_ref": "8e5865964770b3752326d361276cbccd125c547a\trefs/heads/codex/c1b1-fclaim1-output-limit",
+    "end_ref": "8e5865964770b3752326d361276cbccd125c547a\trefs/heads/codex/c1b1-fclaim1-output-limit"
+  },
+  "new_findings": []
+}
