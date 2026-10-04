@@ -1,0 +1,155 @@
+{
+  "verified_target_source_sha256": {
+    "claim_adapter.py": "8e8894eb2abc0e1540f516418287b9e576e282c6140d7d83af9523788fd0d85e",
+    "compare.py": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+    "contracts.py": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+    "exact_fast.py": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+    "exact_geometry.py": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+    "exact_slow.py": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+    "semantic_manifest_v1.json": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+  },
+  "rounding": {
+    "status": "PASS",
+    "seconds": 0.9527531690000615,
+    "counts": {
+      "oracle_rounding_brute_selfcheck": 3220,
+      "rounding_exhaustive_rational_cells": 262272,
+      "rounding_huge_ties_neighbors_unreduced": 891
+    }
+  },
+  "drift": {
+    "status": "PASS",
+    "seconds": 6.147560522999811,
+    "counts": {
+      "target_calls": 80184,
+      "exact_slow:refused": 12373,
+      "exact_fast:refused": 12373,
+      "drift_small_exhaustive": 34560,
+      "exact_slow:computed": 27719,
+      "exact_fast:computed": 27719,
+      "drift_random_full_lane": 2400,
+      "drift_unreduced_equivalent": 2400,
+      "guard_random_full_lane": 400,
+      "drift_range_edges": 324,
+      "drift_round_sum_distinction": 2,
+      "drift_multifault_order": 6
+    }
+  },
+  "kick": {
+    "status": "PASS",
+    "seconds": 0.5595833980000862,
+    "counts": {
+      "target_calls": 14148,
+      "exact_slow:refused": 3857,
+      "exact_fast:refused": 3857,
+      "exact_slow:computed": 3217,
+      "exact_fast:computed": 3217,
+      "kick_small_exhaustive": 4608,
+      "kick_random_full_lane": 2400,
+      "kick_range_edges": 60,
+      "kick_multifault_order": 6
+    }
+  },
+  "geometry": {
+    "status": "PASS",
+    "seconds": 0.9054807769998661,
+    "counts": {
+      "target_calls": 8,
+      "exact_slow:refused": 3,
+      "exact_fast:refused": 3,
+      "exact_slow:computed": 1,
+      "exact_fast:computed": 1,
+      "geometry_integer_exhaustive": 2187,
+      "geometry_rational_threshold_cells": 6000,
+      "guard_hand_cases": 4
+    }
+  },
+  "validation": {
+    "status": "PASS",
+    "seconds": 0.005998239999826183,
+    "counts": {
+      "target_calls": 6,
+      "exact_slow:computed": 3,
+      "exact_fast:computed": 3,
+      "validation_target_calls": 200,
+      "validation_cases": 100,
+      "signed_zero_dt_valid": 3,
+      "geometry_validation_cases": 5
+    }
+  },
+  "claims_core": {
+    "status": "PASS",
+    "seconds": 0.012313526000070851,
+    "counts": {
+      "independent_claim_matches": 44,
+      "claim_invalid_cases": 11
+    }
+  },
+  "claim_serialization_counterexample": {
+    "input_integer_digits": 2151,
+    "result_denominator_digits": 4301,
+    "json_bytes": 5886,
+    "python_int_max_str_digits": 4300,
+    "observations": [
+      {
+        "path": "exact_slow",
+        "exception": "ValueError",
+        "is_LabRefusal": false,
+        "message": "Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit",
+        "traceback": "Traceback (most recent call last):\n  File \"/mnt/data/c1b1_audit_f806d8c/independent_audit.py\", line 498, in known_boundary_counterexample\n    result=CA.compare_claim(text,path,opt_in=path=='exact_fast')\n  File \"/mnt/data/c1b1_audit_f806d8c/source/independent_checker/c1b1/claim_adapter.py\", line 158, in compare_claim\n    expected = canonical_data(computed)\n  File \"/mnt/data/c1b1_audit_f806d8c/source/independent_checker/c1b1/claim_adapter.py\", line 97, in canonical_data\n    return {\"type\": type(value).__name__, **{f.name: canonical_data(getattr(value, f.name)) for f in fields(value)}}\n                                                     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/data/c1b1_audit_f806d8c/source/independent_checker/c1b1/claim_adapter.py\", line 97, in canonical_data\n    return {\"type\": type(value).__name__, **{f.name: canonical_data(getattr(value, f.name)) for f in fields(value)}}\n                                                     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/data/c1b1_audit_f806d8c/source/independent_checker/c1b1/claim_adapter.py\", line 101, in canonical_data\n    return [canonical_data(x) for x in value]\n            ~~~~~~~~~~~~~~^^^\n  File \"/mnt/data/c1b1_audit_f806d8c/source/independent_checker/c1b1/claim_adapter.py\", line 95, in canonical_data\n    return {\"numerator\": str(value.numerator // divisor), \"denominator\": str(value.denominator // divisor)}\n                                                                         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit\n"
+      },
+      {
+        "path": "exact_fast",
+        "exception": "ValueError",
+        "is_LabRefusal": false,
+        "message": "Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit",
+        "traceback": "Traceback (most recent call last):\n  File \"/mnt/data/c1b1_audit_f806d8c/independent_audit.py\", line 498, in known_boundary_counterexample\n    result=CA.compare_claim(text,path,opt_in=path=='exact_fast')\n  File \"/mnt/data/c1b1_audit_f806d8c/source/independent_checker/c1b1/claim_adapter.py\", line 158, in compare_claim\n    expected = canonical_data(computed)\n  File \"/mnt/data/c1b1_audit_f806d8c/source/independent_checker/c1b1/claim_adapter.py\", line 97, in canonical_data\n    return {\"type\": type(value).__name__, **{f.name: canonical_data(getattr(value, f.name)) for f in fields(value)}}\n                                                     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/data/c1b1_audit_f806d8c/source/independent_checker/c1b1/claim_adapter.py\", line 97, in canonical_data\n    return {\"type\": type(value).__name__, **{f.name: canonical_data(getattr(value, f.name)) for f in fields(value)}}\n                                                     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/data/c1b1_audit_f806d8c/source/independent_checker/c1b1/claim_adapter.py\", line 101, in canonical_data\n    return [canonical_data(x) for x in value]\n            ~~~~~~~~~~~~~~^^^\n  File \"/mnt/data/c1b1_audit_f806d8c/source/independent_checker/c1b1/claim_adapter.py\", line 95, in canonical_data\n    return {\"numerator\": str(value.numerator // divisor), \"denominator\": str(value.denominator // divisor)}\n                                                                         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit\n"
+      }
+    ],
+    "verdict": "FAIL"
+  },
+  "boundary_bug_reproduction": {
+    "status": "PASS",
+    "seconds": 0.0036132989998804987,
+    "counts": {
+      "target_calls": 2,
+      "exact_slow:computed": 1,
+      "exact_fast:computed": 1
+    }
+  },
+  "counts": {
+    "oracle_rounding_brute_selfcheck": 3220,
+    "rounding_exhaustive_rational_cells": 262272,
+    "rounding_huge_ties_neighbors_unreduced": 891,
+    "target_calls": 94348,
+    "exact_slow:refused": 16233,
+    "exact_fast:refused": 16233,
+    "drift_small_exhaustive": 34560,
+    "exact_slow:computed": 30941,
+    "exact_fast:computed": 30941,
+    "drift_random_full_lane": 2400,
+    "drift_unreduced_equivalent": 2400,
+    "guard_random_full_lane": 400,
+    "drift_range_edges": 324,
+    "drift_round_sum_distinction": 2,
+    "drift_multifault_order": 6,
+    "kick_small_exhaustive": 4608,
+    "kick_random_full_lane": 2400,
+    "kick_range_edges": 60,
+    "kick_multifault_order": 6,
+    "geometry_integer_exhaustive": 2187,
+    "geometry_rational_threshold_cells": 6000,
+    "guard_hand_cases": 4,
+    "validation_target_calls": 200,
+    "validation_cases": 100,
+    "signed_zero_dt_valid": 3,
+    "geometry_validation_cases": 5,
+    "independent_claim_matches": 44,
+    "claim_invalid_cases": 11
+  },
+  "target": "f806d8ce1ef86a0948b1a8abafe1a22c3058178b",
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "scope": "ARITHMETIC_ONLY",
+  "j_status": "J_NOT_VERIFIED",
+  "note": "boundary_bug_reproduction PASS means reproduction succeeded; the adapter defect itself is FAIL."
+}

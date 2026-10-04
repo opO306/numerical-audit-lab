@@ -11,6 +11,8 @@ from . import exact_slow, exact_fast
 
 INTEGER = re.compile(r"(?:0|-[1-9][0-9]*|[1-9][0-9]*)\Z")
 SCHEMA = "LAB_C1B1_CLAIM_V1"
+WIRE_INTEGER_MAX_DECIMAL_DIGITS = 4096
+_OUTPUT_INTEGER_LIMIT = 10 ** WIRE_INTEGER_MAX_DECIMAL_DIGITS
 
 
 @dataclass(frozen=True)
@@ -35,7 +37,7 @@ def _keys(value, names):
 
 
 def _integer(value):
-    if type(value) is not str or len(value.lstrip("-")) > 4096 or not INTEGER.fullmatch(value):
+    if type(value) is not str or len(value.lstrip("-")) > WIRE_INTEGER_MAX_DECIMAL_DIGITS or not INTEGER.fullmatch(value):
         refuse("CLAIM_SCHEMA", message="canonical decimal integer string required")
     return int(value)
 
@@ -88,14 +90,25 @@ def decode(payload):
         refuse("CLAIM_SCHEMA", message="invalid JSON claim")
 
 
+def _check_output_integer(value):
+    # Compare exact integers before decimal conversion; never change process limits.
+    if abs(value) >= _OUTPUT_INTEGER_LIMIT:
+        refuse("CLAIM_OUTPUT_LIMIT", "claim_output",
+               message="canonical computed integer exceeds Claim V1 4096 decimal digits")
+
+
 def canonical_data(value):
     """Normalize only the public artifact boundary; never an arithmetic helper."""
     if isinstance(value, (Ratio, Fraction)):
         divisor = gcd(value.numerator, value.denominator)
-        return {"numerator": str(value.numerator // divisor), "denominator": str(value.denominator // divisor)}
+        numerator, denominator = value.numerator // divisor, value.denominator // divisor
+        _check_output_integer(numerator)
+        _check_output_integer(denominator)
+        return {"numerator": str(numerator), "denominator": str(denominator)}
     if is_dataclass(value):
         return {"type": type(value).__name__, **{f.name: canonical_data(getattr(value, f.name)) for f in fields(value)}}
     if type(value) is int:
+        _check_output_integer(value)
         return str(value)
     if isinstance(value, tuple):
         return [canonical_data(x) for x in value]

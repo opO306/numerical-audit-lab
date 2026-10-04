@@ -1,0 +1,236 @@
+FFF........FFFFFFFFFFFFFFFF......FFFFFF.                                 [100%]
+================================== FAILURES ===================================
+___ test_fclaim1_exact_reproduction_has_identical_structured_refusals[dict] ___
+tests\test_c1b1_claim_output_boundary.py:68: in exercise_counterexample
+    module.compare_claim(argument, path, opt_in=(path == "exact_fast"))
+independent_checker\c1b1\claim_adapter.py:158: in compare_claim
+    expected = canonical_data(computed)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+independent_checker\c1b1\claim_adapter.py:97: in canonical_data
+    return {"type": type(value).__name__, **{f.name: canonical_data(getattr(value, f.name)) for f in fields(value)}}
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+independent_checker\c1b1\claim_adapter.py:97: in canonical_data
+    return {"type": type(value).__name__, **{f.name: canonical_data(getattr(value, f.name)) for f in fields(value)}}
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+independent_checker\c1b1\claim_adapter.py:101: in canonical_data
+    return [canonical_data(x) for x in value]
+            ^^^^^^^^^^^^^^^^^
+independent_checker\c1b1\claim_adapter.py:95: in canonical_data
+    return {"numerator": str(value.numerator // divisor), "denominator": str(value.denominator // divisor)}
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+
+During handling of the above exception, another exception occurred:
+tests\test_c1b1_claim_output_boundary.py:97: in test_fclaim1_exact_reproduction_has_identical_structured_refusals
+    exercise_counterexample(adapter, wire_form)
+tests\test_c1b1_claim_output_boundary.py:72: in exercise_counterexample
+    assert_output_refusal(exc)
+tests\test_c1b1_claim_output_boundary.py:46: in assert_output_refusal
+    assert type(exc).__name__ == "LabRefusal"
+E   AssertionError: assert 'ValueError' == 'LabRefusal'
+E     
+E     - LabRefusal
+E     + ValueError
+___ test_fclaim1_exact_reproduction_has_identical_structured_refusals[text] ___
+tests\test_c1b1_claim_output_boundary.py:68: in exercise_counterexample
+    module.compare_claim(argument, path, opt_in=(path == "exact_fast"))
+independent_checker\c1b1\claim_adapter.py:158: in compare_claim
+    expected = canonical_data(computed)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+independent_checker\c1b1\claim_adapter.py:97: in canonical_data
+    return {"type": type(value).__name__, **{f.name: canonical_data(getattr(value, f.name)) for f in fields(value)}}
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+independent_checker\c1b1\claim_adapter.py:97: in canonical_data
+    return {"type": type(value).__name__, **{f.name: canonical_data(getattr(value, f.name)) for f in fields(value)}}
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+independent_checker\c1b1\claim_adapter.py:101: in canonical_data
+    return [canonical_data(x) for x in value]
+            ^^^^^^^^^^^^^^^^^
+independent_checker\c1b1\claim_adapter.py:95: in canonical_data
+    return {"numerator": str(value.numerator // divisor), "denominator": str(value.denominator // divisor)}
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+
+During handling of the above exception, another exception occurred:
+tests\test_c1b1_claim_output_boundary.py:97: in test_fclaim1_exact_reproduction_has_identical_structured_refusals
+    exercise_counterexample(adapter, wire_form)
+tests\test_c1b1_claim_output_boundary.py:72: in exercise_counterexample
+    assert_output_refusal(exc)
+tests\test_c1b1_claim_output_boundary.py:46: in assert_output_refusal
+    assert type(exc).__name__ == "LabRefusal"
+E   AssertionError: assert 'ValueError' == 'LabRefusal'
+E     
+E     - LabRefusal
+E     + ValueError
+__ test_fclaim1_exact_reproduction_has_identical_structured_refusals[bytes] ___
+tests\test_c1b1_claim_output_boundary.py:68: in exercise_counterexample
+    module.compare_claim(argument, path, opt_in=(path == "exact_fast"))
+independent_checker\c1b1\claim_adapter.py:158: in compare_claim
+    expected = canonical_data(computed)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+independent_checker\c1b1\claim_adapter.py:97: in canonical_data
+    return {"type": type(value).__name__, **{f.name: canonical_data(getattr(value, f.name)) for f in fields(value)}}
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+independent_checker\c1b1\claim_adapter.py:97: in canonical_data
+    return {"type": type(value).__name__, **{f.name: canonical_data(getattr(value, f.name)) for f in fields(value)}}
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+independent_checker\c1b1\claim_adapter.py:101: in canonical_data
+    return [canonical_data(x) for x in value]
+            ^^^^^^^^^^^^^^^^^
+independent_checker\c1b1\claim_adapter.py:95: in canonical_data
+    return {"numerator": str(value.numerator // divisor), "denominator": str(value.denominator // divisor)}
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+
+During handling of the above exception, another exception occurred:
+tests\test_c1b1_claim_output_boundary.py:97: in test_fclaim1_exact_reproduction_has_identical_structured_refusals
+    exercise_counterexample(adapter, wire_form)
+tests\test_c1b1_claim_output_boundary.py:72: in exercise_counterexample
+    assert_output_refusal(exc)
+tests\test_c1b1_claim_output_boundary.py:46: in assert_output_refusal
+    assert type(exc).__name__ == "LabRefusal"
+E   AssertionError: assert 'ValueError' == 'LabRefusal'
+E     
+E     - LabRefusal
+E     + ValueError
+_ test_canonical_output_integer_boundary[at-limit-positive-numerator-unreduced-pair] _
+tests\test_c1b1_claim_output_boundary.py:118: in test_canonical_output_integer_boundary
+    with pytest.raises(C.LabRefusal) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE LabRefusal
+_ test_canonical_output_integer_boundary[at-limit-positive-numerator-Fraction] _
+tests\test_c1b1_claim_output_boundary.py:118: in test_canonical_output_integer_boundary
+    with pytest.raises(C.LabRefusal) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE LabRefusal
+_ test_canonical_output_integer_boundary[at-limit-positive-denominator-unreduced-pair] _
+tests\test_c1b1_claim_output_boundary.py:118: in test_canonical_output_integer_boundary
+    with pytest.raises(C.LabRefusal) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE LabRefusal
+_ test_canonical_output_integer_boundary[at-limit-positive-denominator-Fraction] _
+tests\test_c1b1_claim_output_boundary.py:118: in test_canonical_output_integer_boundary
+    with pytest.raises(C.LabRefusal) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE LabRefusal
+_ test_canonical_output_integer_boundary[at-limit-negative-numerator-unreduced-pair] _
+tests\test_c1b1_claim_output_boundary.py:118: in test_canonical_output_integer_boundary
+    with pytest.raises(C.LabRefusal) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE LabRefusal
+_ test_canonical_output_integer_boundary[at-limit-negative-numerator-Fraction] _
+tests\test_c1b1_claim_output_boundary.py:118: in test_canonical_output_integer_boundary
+    with pytest.raises(C.LabRefusal) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE LabRefusal
+_ test_canonical_output_integer_boundary[at-limit-negative-denominator-unreduced-pair] _
+tests\test_c1b1_claim_output_boundary.py:118: in test_canonical_output_integer_boundary
+    with pytest.raises(C.LabRefusal) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE LabRefusal
+_ test_canonical_output_integer_boundary[at-limit-negative-denominator-Fraction] _
+tests\test_c1b1_claim_output_boundary.py:118: in test_canonical_output_integer_boundary
+    with pytest.raises(C.LabRefusal) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE LabRefusal
+_ test_canonical_output_integer_boundary[above-limit-positive-numerator-unreduced-pair] _
+tests\test_c1b1_claim_output_boundary.py:118: in test_canonical_output_integer_boundary
+    with pytest.raises(C.LabRefusal) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE LabRefusal
+_ test_canonical_output_integer_boundary[above-limit-positive-numerator-Fraction] _
+tests\test_c1b1_claim_output_boundary.py:118: in test_canonical_output_integer_boundary
+    with pytest.raises(C.LabRefusal) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE LabRefusal
+_ test_canonical_output_integer_boundary[above-limit-positive-denominator-unreduced-pair] _
+tests\test_c1b1_claim_output_boundary.py:118: in test_canonical_output_integer_boundary
+    with pytest.raises(C.LabRefusal) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE LabRefusal
+_ test_canonical_output_integer_boundary[above-limit-positive-denominator-Fraction] _
+tests\test_c1b1_claim_output_boundary.py:118: in test_canonical_output_integer_boundary
+    with pytest.raises(C.LabRefusal) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE LabRefusal
+_ test_canonical_output_integer_boundary[above-limit-negative-numerator-unreduced-pair] _
+tests\test_c1b1_claim_output_boundary.py:118: in test_canonical_output_integer_boundary
+    with pytest.raises(C.LabRefusal) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE LabRefusal
+_ test_canonical_output_integer_boundary[above-limit-negative-numerator-Fraction] _
+tests\test_c1b1_claim_output_boundary.py:118: in test_canonical_output_integer_boundary
+    with pytest.raises(C.LabRefusal) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE LabRefusal
+_ test_canonical_output_integer_boundary[above-limit-negative-denominator-unreduced-pair] _
+tests\test_c1b1_claim_output_boundary.py:118: in test_canonical_output_integer_boundary
+    with pytest.raises(C.LabRefusal) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE LabRefusal
+_ test_canonical_output_integer_boundary[above-limit-negative-denominator-Fraction] _
+tests\test_c1b1_claim_output_boundary.py:118: in test_canonical_output_integer_boundary
+    with pytest.raises(C.LabRefusal) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE LabRefusal
+_________ test_computed_raw_integer_limit_is_structured[positive-at] __________
+tests\test_c1b1_claim_output_boundary.py:145: in test_computed_raw_integer_limit_is_structured
+    with pytest.raises(C.LabRefusal) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE LabRefusal
+________ test_computed_raw_integer_limit_is_structured[positive-above] ________
+tests\test_c1b1_claim_output_boundary.py:145: in test_computed_raw_integer_limit_is_structured
+    with pytest.raises(C.LabRefusal) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE LabRefusal
+_________ test_computed_raw_integer_limit_is_structured[negative-at] __________
+tests\test_c1b1_claim_output_boundary.py:145: in test_computed_raw_integer_limit_is_structured
+    with pytest.raises(C.LabRefusal) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE LabRefusal
+________ test_computed_raw_integer_limit_is_structured[negative-above] ________
+tests\test_c1b1_claim_output_boundary.py:145: in test_computed_raw_integer_limit_is_structured
+    with pytest.raises(C.LabRefusal) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE LabRefusal
+________ test_rejection_precedes_python_decimal_conversion[numerator] _________
+tests\test_c1b1_claim_output_boundary.py:154: in test_rejection_precedes_python_decimal_conversion
+    adapter.canonical_data(value)
+independent_checker\c1b1\claim_adapter.py:95: in canonical_data
+    return {"numerator": str(value.numerator // divisor), "denominator": str(value.denominator // divisor)}
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+_______ test_rejection_precedes_python_decimal_conversion[denominator] ________
+tests\test_c1b1_claim_output_boundary.py:154: in test_rejection_precedes_python_decimal_conversion
+    adapter.canonical_data(value)
+independent_checker\c1b1\claim_adapter.py:95: in canonical_data
+    return {"numerator": str(value.numerator // divisor), "denominator": str(value.denominator // divisor)}
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+=========================== short test summary info ===========================
+FAILED tests/test_c1b1_claim_output_boundary.py::test_fclaim1_exact_reproduction_has_identical_structured_refusals[dict]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_fclaim1_exact_reproduction_has_identical_structured_refusals[text]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_fclaim1_exact_reproduction_has_identical_structured_refusals[bytes]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_canonical_output_integer_boundary[at-limit-positive-numerator-unreduced-pair]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_canonical_output_integer_boundary[at-limit-positive-numerator-Fraction]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_canonical_output_integer_boundary[at-limit-positive-denominator-unreduced-pair]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_canonical_output_integer_boundary[at-limit-positive-denominator-Fraction]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_canonical_output_integer_boundary[at-limit-negative-numerator-unreduced-pair]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_canonical_output_integer_boundary[at-limit-negative-numerator-Fraction]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_canonical_output_integer_boundary[at-limit-negative-denominator-unreduced-pair]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_canonical_output_integer_boundary[at-limit-negative-denominator-Fraction]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_canonical_output_integer_boundary[above-limit-positive-numerator-unreduced-pair]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_canonical_output_integer_boundary[above-limit-positive-numerator-Fraction]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_canonical_output_integer_boundary[above-limit-positive-denominator-unreduced-pair]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_canonical_output_integer_boundary[above-limit-positive-denominator-Fraction]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_canonical_output_integer_boundary[above-limit-negative-numerator-unreduced-pair]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_canonical_output_integer_boundary[above-limit-negative-numerator-Fraction]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_canonical_output_integer_boundary[above-limit-negative-denominator-unreduced-pair]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_canonical_output_integer_boundary[above-limit-negative-denominator-Fraction]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_computed_raw_integer_limit_is_structured[positive-at]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_computed_raw_integer_limit_is_structured[positive-above]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_computed_raw_integer_limit_is_structured[negative-at]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_computed_raw_integer_limit_is_structured[negative-above]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_rejection_precedes_python_decimal_conversion[numerator]
+FAILED tests/test_c1b1_claim_output_boundary.py::test_rejection_precedes_python_decimal_conversion[denominator]
+25 failed, 15 passed in 0.59s

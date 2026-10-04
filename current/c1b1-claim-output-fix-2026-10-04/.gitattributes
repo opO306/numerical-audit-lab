@@ -1,0 +1,4 @@
+* -text whitespace=cr-at-eol
+# Preserve historical trailing spaces and raw Windows subprocess line endings.
+received/** whitespace=-blank-at-eol,cr-at-eol
+*.log whitespace=-blank-at-eol,cr-at-eol

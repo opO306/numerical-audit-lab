@@ -1,0 +1,90 @@
+{
+  "purpose": "AUTHOR REGRESSION MEASUREMENT ONLY / NO PERFORMANCE PROMOTION",
+  "scope": "ARITHMETIC_ONLY",
+  "j_status": "J_NOT_VERIFIED",
+  "certification": "NotCertified",
+  "python": "3.12.7 (tags/v3.12.7:0b05ead, Oct  1 2024, 03:06:41) [MSC v.1941 64 bit (AMD64)]",
+  "fixture": "one HAND_DERIVED_TEST_ONLY synthetic Drift claim",
+  "fixture_sha256": "7d024f6a27bf00d12b8dc95ef7cfab2e8c78684e8fb992e7cf40239aefc5eeb6",
+  "ordinary_modules": true,
+  "imports_and_startup_outside_timing": true,
+  "module_loading": "isolated source copies; parent package startup excluded for both revisions",
+  "measurement": "JSON decode + exact drift + canonical artifact + claim comparison + computed_json",
+  "invocations_per_sample": 400,
+  "samples": 9,
+  "warmup_per_path_per_revision": 20,
+  "script_sha256": "3fdd08782885df28b94eb0e8d41109268747f8e058a43335177563e4a1174508",
+  "adapter_sha256": {
+    "audited": "8e8894eb2abc0e1540f516418287b9e576e282c6140d7d83af9523788fd0d85e",
+    "fix": "24b05ebf374728583ba725c83b8f9324f4b75b5515b03c5b1036339eef3e4899"
+  },
+  "rows": {
+    "audited.exact_slow": {
+      "wall_ns_per_invocation": [
+        193119.0,
+        198726.5,
+        206055.5,
+        189220.5,
+        212496.5,
+        188637.0,
+        189732.75,
+        186442.5,
+        195936.75
+      ],
+      "median_ns": 193119.0,
+      "min_ns": 186442.5,
+      "max_ns": 212496.5
+    },
+    "audited.exact_fast": {
+      "wall_ns_per_invocation": [
+        136669.25,
+        157452.5,
+        142678.0,
+        147497.75,
+        136443.25,
+        132281.75,
+        133995.75,
+        136330.75,
+        136606.75
+      ],
+      "median_ns": 136606.75,
+      "min_ns": 132281.75,
+      "max_ns": 157452.5
+    },
+    "fix.exact_slow": {
+      "wall_ns_per_invocation": [
+        208310.25,
+        193765.25,
+        203703.0,
+        208466.0,
+        200504.75,
+        188754.75,
+        192205.25,
+        187925.0,
+        205296.25
+      ],
+      "median_ns": 200504.75,
+      "min_ns": 187925.0,
+      "max_ns": 208466.0
+    },
+    "fix.exact_fast": {
+      "wall_ns_per_invocation": [
+        146403.25,
+        143714.75,
+        138789.0,
+        136733.5,
+        134434.0,
+        137484.75,
+        134345.0,
+        144307.25,
+        139370.75
+      ],
+      "median_ns": 138789.0,
+      "min_ns": 134345.0,
+      "max_ns": 146403.25
+    }
+  },
+  "results_match": true,
+  "process_integer_limit_unchanged": 4300,
+  "limitations": "small single-fixture local regression; no claim about other inputs, hardware, kernel speedup, physical work or long-run throughput"
+}

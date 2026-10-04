@@ -1,0 +1,197 @@
+{
+  "timestamp_utc": "2026-10-04T11:21:26.453473+00:00",
+  "arithmetic_audit_target": "f806d8ce1ef86a0948b1a8abafe1a22c3058178b",
+  "historical_overall_audit": "FAIL",
+  "finding": "F-CLAIM-1",
+  "python": "3.12.7 (tags/v3.12.7:0b05ead, Oct  1 2024, 03:06:41) [MSC v.1941 64 bit (AMD64)]",
+  "implementation": "IMPLEMENTED FIX",
+  "author_checks": "PASS",
+  "independent_review": "INDEPENDENT RE-AUDIT PENDING",
+  "certification": "NotCertified",
+  "scope": "ARITHMETIC_ONLY",
+  "j_status": "J_NOT_VERIFIED",
+  "tested_source_sha256": {
+    "independent_checker/c1b1/claim_adapter.py": "24b05ebf374728583ba725c83b8f9324f4b75b5515b03c5b1036339eef3e4899",
+    "independent_checker/c1b1/compare.py": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+    "independent_checker/c1b1/contracts.py": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+    "independent_checker/c1b1/exact_fast.py": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+    "independent_checker/c1b1/exact_geometry.py": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+    "independent_checker/c1b1/exact_slow.py": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+    "tests/test_c1b1_boundary.py": "29c6c115f6bdf279dfbf1e3eec555d16bb70382864007ec0d7718391570a01fa",
+    "tests/test_c1b1_claim_output_boundary.py": "294a03d2d1f1b6855dc3451bda99d5cb1203bea294109cef5d7459bc73ff4359",
+    "tests/test_c1b1_claim_output_mutant.py": "3ed549c64c5f32a5608d8e8b7314a9517a79caf05fbd953ffbfdc20ad92c0ec8",
+    "tests/test_c1b1_claims.py": "b4ad15bcf52044e3f1ead2cc90ea99ec60c2311268ab59f5373db30eb022d6b2",
+    "tests/test_c1b1_differential.py": "ca7f19faf4547fcef0146cf6dce8f1c14fe53ce75cecc8bc162c24bb5430b512",
+    "tests/test_c1b1_fast.py": "e9ea17512cf6522b167346d49580b3368e56a8bb17c23a81811871b7450bf2ef",
+    "tests/test_c1b1_geometry.py": "c9675ed183aa7053e21c190c6cada3a98fe36bb1cd616896b184965d53e2cfe9",
+    "tests/test_c1b1_mutants.py": "2411402b50b819d9e2f338bbaac2d0274b174bee9baba08cbddf92ae874f3eb2",
+    "tests/test_c1b1_slow.py": "4ea2fc5df48ecd6d7b0bf0b7cc90b40e33f3886e315bc722044d66babb3c51c0",
+    "tools/verify_c1b1_claim_output_fix.py": "48407fe5affcc5a24f8dbe356d948c89d414c4430af39a09bbe993e9e3dea03f"
+  },
+  "preservation": {
+    "base_files": 1921,
+    "base_git_blobs_unchanged": 1921,
+    "base_raw_bytes_unchanged": 1921,
+    "pre_fix_files": 1944,
+    "pre_fix_raw_bytes_unchanged": 1943,
+    "changed_existing": [
+      "independent_checker/c1b1/claim_adapter.py"
+    ],
+    "deleted_existing": [],
+    "audited_source_sha256": {
+      "exact_slow.py": {
+        "audited_sha256": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+        "current_sha256": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+        "byte_identical": true
+      },
+      "exact_fast.py": {
+        "audited_sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+        "current_sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+        "byte_identical": true
+      },
+      "exact_geometry.py": {
+        "audited_sha256": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+        "current_sha256": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+        "byte_identical": true
+      },
+      "compare.py": {
+        "audited_sha256": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+        "current_sha256": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+        "byte_identical": true
+      },
+      "contracts.py": {
+        "audited_sha256": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+        "current_sha256": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+        "byte_identical": true
+      },
+      "semantic_manifest_v1.json": {
+        "audited_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+        "current_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+        "byte_identical": true
+      },
+      "semantic_manifest_v1.sha256": {
+        "audited_sha256": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79",
+        "current_sha256": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79",
+        "byte_identical": true
+      }
+    },
+    "received_originals_and_copies_byte_identical": 7,
+    "preservation_before_sha256": "a4c24f5babbe695f29ca3f4b67ea83789c93fada5eecd921b8a140ccfe3ed4ef"
+  },
+  "runs": {
+    "related-105": {
+      "command": [
+        "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_c1b1_slow.py",
+        "tests/test_c1b1_fast.py",
+        "tests/test_c1b1_differential.py",
+        "tests/test_c1b1_geometry.py",
+        "tests/test_c1b1_mutants.py",
+        "tests/test_c1b1_claims.py",
+        "tests/test_c1b1_boundary.py",
+        "tests/test_independence.py",
+        "tests/test_provenance.py",
+        "-q",
+        "--tb=short",
+        "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-claim-output-fix-2026-10-04\\verification-v1\\related-105.xml"
+      ],
+      "exit_code": 0,
+      "seconds": 5.006364400003804,
+      "tests": 105,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log": "related-105.log",
+      "xml": "related-105.xml"
+    },
+    "output-boundary": {
+      "command": [
+        "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_c1b1_claim_output_boundary.py",
+        "tests/test_c1b1_claim_output_mutant.py",
+        "-q",
+        "--tb=short",
+        "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-claim-output-fix-2026-10-04\\verification-v1\\output-boundary.xml"
+      ],
+      "exit_code": 0,
+      "seconds": 1.5630530000198632,
+      "tests": 45,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log": "output-boundary.log",
+      "xml": "output-boundary.xml"
+    },
+    "repository-full": {
+      "command": [
+        "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-claim-output-fix-2026-10-04\\verification-v1\\repository-full.xml"
+      ],
+      "exit_code": 0,
+      "seconds": 36.28344080000534,
+      "tests": 393,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log": "repository-full.log",
+      "xml": "repository-full.xml"
+    }
+  },
+  "reproduction": {
+    "finding": "F-CLAIM-1",
+    "status": "AUTHOR REPRODUCTION PASS",
+    "input_integer_digits": 2151,
+    "exact_denominator_digits": 4301,
+    "wire_bytes": 5886,
+    "input_unchanged": true,
+    "process_global_limit_before": 4300,
+    "process_global_limit_after": 4300,
+    "observations": [
+      {
+        "path": "exact_slow",
+        "kernel_exact_result_correct": true,
+        "exception": "LabRefusal",
+        "failure": {
+          "code": "CLAIM_OUTPUT_LIMIT",
+          "phase": "claim_output",
+          "atom": "",
+          "component": "",
+          "message": "canonical computed integer exceeds Claim V1 4096 decimal digits",
+          "scope": "ARITHMETIC_ONLY",
+          "j_status": "J_NOT_VERIFIED",
+          "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+        }
+      },
+      {
+        "path": "exact_fast",
+        "kernel_exact_result_correct": true,
+        "exception": "LabRefusal",
+        "failure": {
+          "code": "CLAIM_OUTPUT_LIMIT",
+          "phase": "claim_output",
+          "atom": "",
+          "component": "",
+          "message": "canonical computed integer exceeds Claim V1 4096 decimal digits",
+          "scope": "ARITHMETIC_ONLY",
+          "j_status": "J_NOT_VERIFIED",
+          "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+        }
+      }
+    ],
+    "scope": "ARITHMETIC_ONLY",
+    "j_status": "J_NOT_VERIFIED"
+  },
+  "existing_mutants": "16/16 DETECTED; identical historical edits and hashes",
+  "new_mutant": "BASELINE PASS / MUTANT DETECTED on slow and fast",
+  "performance": "NO PERFORMANCE PROMOTION; old timed kernels do not call claim_adapter",
+  "commit_binding": "Source bytes pinned here; exact new commit bound by separate post-commit receipt",
+  "push_performed": false
+}

@@ -1,0 +1,250 @@
+{
+  "1": {
+    "baseline": "PASS",
+    "mutant": "DETECTED",
+    "detector": "hand-derived, no slow/compare import",
+    "source": "exact_fast.py",
+    "baseline_sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+    "mutant_sha256": "8791b6a81010f314527752f91dd1b88b7aba385c67ead4989957d105ba9a0b64",
+    "detection": "",
+    "edits": [
+      [
+        "return q if q % 2 == 0 else q + 1",
+        "return q + 1 if numerator >= 0 else q"
+      ]
+    ]
+  },
+  "2": {
+    "baseline": "PASS",
+    "mutant": "DETECTED",
+    "detector": "hand-derived, no slow/compare import",
+    "source": "exact_fast.py",
+    "baseline_sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+    "mutant_sha256": "a634050ea92b1f4e4af641523701b0594c76ef9eeed2182429af8bd17b320552",
+    "detection": "('rational mismatch', 7, 6)",
+    "edits": [
+      [
+        "return a * e, (1 << request.momentum_grid.frac_bits) * b * c",
+        "return a, (1 << request.momentum_grid.frac_bits) * b * c"
+      ]
+    ]
+  },
+  "3": {
+    "baseline": "PASS",
+    "mutant": "DETECTED",
+    "detector": "hand-derived, no slow/compare import",
+    "source": "exact_fast.py",
+    "baseline_sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+    "mutant_sha256": "9f7ddb22f02e6ef61adf9f3cd5cff0a7356e344ca9e75e3a60ef25f45db66be4",
+    "detection": "('rational mismatch', 1, 1)",
+    "edits": [
+      [
+        "return a * e, (1 << request.momentum_grid.frac_bits) * b * c",
+        "return a * e, b * c"
+      ]
+    ]
+  },
+  "4": {
+    "baseline": "PASS",
+    "mutant": "DETECTED",
+    "detector": "hand-derived, no slow/compare import",
+    "source": "exact_fast.py",
+    "baseline_sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+    "mutant_sha256": "3b8042643c9facdc4ac1bfa67834ff9994610be67ed8eedfc3c448deff664334",
+    "detection": "('rational mismatch', 7, 6)",
+    "edits": [
+      [
+        "return a * e, (1 << request.momentum_grid.frac_bits) * b * c",
+        "return a * c, (1 << request.momentum_grid.frac_bits) * b * e"
+      ]
+    ]
+  },
+  "5": {
+    "baseline": "PASS",
+    "mutant": "DETECTED",
+    "detector": "hand-derived, no slow/compare import",
+    "source": "exact_fast.py",
+    "baseline_sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+    "mutant_sha256": "cd15fc264aeb9cf4f12c36dc4fecc76f1403ef472c5a6edd525dfd61a7e61208",
+    "detection": "('rational mismatch', 7, 6)",
+    "edits": [
+      [
+        "return a * e, (1 << request.momentum_grid.frac_bits) * b * c",
+        "return b * e, (1 << request.momentum_grid.frac_bits) * a * c"
+      ]
+    ]
+  },
+  "6": {
+    "baseline": "PASS",
+    "mutant": "DETECTED",
+    "detector": "hand-derived, no slow/compare import",
+    "source": "exact_fast.py",
+    "baseline_sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+    "mutant_sha256": "3649fd61578f7af3ae6e9f23d21eb8ad36e9225d3c9086870f6cfb436c056595",
+    "detection": "",
+    "edits": [
+      [
+        "delta = nearest_even_ratio(numerator * scale, denominator)",
+        "delta = nearest_even_ratio(old_r * denominator + numerator * scale, denominator) - old_r"
+      ]
+    ]
+  },
+  "7": {
+    "baseline": "PASS",
+    "mutant": "DETECTED",
+    "detector": "hand-derived, no slow/compare import",
+    "source": "exact_geometry.py",
+    "baseline_sha256": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+    "mutant_sha256": "cccdda52bf2976425ea5cc99d2ee6c04fec26d74fd583980e321a1aba2298cb7",
+    "detection": "expected refusal SEGMENT_INTRUSION",
+    "edits": [
+      [
+        "q1 = tuple(a - b for a, b in zip(endpoints[:3], endpoints[3:]))",
+        "q1 = tuple(Fraction(a - b, scale) for a, b in zip(result.r_i, result.r_j))"
+      ]
+    ]
+  },
+  "8": {
+    "baseline": "PASS",
+    "mutant": "DETECTED",
+    "detector": "hand-derived, no slow/compare import",
+    "source": "exact_fast.py",
+    "baseline_sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+    "mutant_sha256": "2fbf8b43663358a230acc692a480c6ebd8c0b54381b7a376c92c00e1bb57b5fa",
+    "detection": "",
+    "edits": [
+      [
+        "value = raw - impulse if atom == \"i\" else raw + impulse",
+        "value = raw + impulse if atom == \"i\" else raw - impulse"
+      ]
+    ]
+  },
+  "9": {
+    "baseline": "PASS",
+    "mutant": "DETECTED",
+    "detector": "hand-derived, no slow/compare import",
+    "source": "exact_fast.py",
+    "baseline_sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+    "mutant_sha256": "6d8770054f85805bdac5907fda1d865a72260bd449be3433521abdd3914c29e0",
+    "detection": "expected refusal DISPLACEMENT_OVERFLOW",
+    "edits": [
+      [
+        "if not minimum <= delta <= maximum:",
+        "if False:"
+      ],
+      [
+        "if updated < minimum or updated > maximum:",
+        "if False:"
+      ],
+      [
+        "if not minimum <= value <= maximum:",
+        "if False:"
+      ]
+    ]
+  },
+  "10": {
+    "baseline": "PASS",
+    "mutant": "DETECTED",
+    "detector": "hand-derived, no slow/compare import",
+    "source": "exact_fast.py",
+    "baseline_sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+    "mutant_sha256": "19b227df7a36a09718108ec9634a4d68be72ef7fd0ea2edf36f8be5b5ea0a697",
+    "detection": "",
+    "edits": [
+      [
+        "for atom, positions, momenta, mass in atoms:",
+        "for atom, positions, momenta, mass in reversed(atoms):"
+      ]
+    ]
+  },
+  "10_write": {
+    "baseline": "PASS",
+    "mutant": "DETECTED",
+    "detector": "hand-derived, no slow/compare import",
+    "source": "exact_fast.py",
+    "baseline_sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+    "mutant_sha256": "1b2841ed01ce5a955dad5a3e54113465139b1ac8fde87f7d9c27bf7e2fb155a7",
+    "detection": "input mutation",
+    "edits": [
+      [
+        "stored.append(updated)",
+        "stored.append(updated)\n            object.__setattr__(request, 'r_i', tuple(stored[:3]))"
+      ]
+    ]
+  },
+  "11": {
+    "baseline": "PASS",
+    "mutant": "DETECTED",
+    "detector": "hand-derived, no slow/compare import",
+    "source": "exact_fast.py",
+    "baseline_sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+    "mutant_sha256": "3b9c9fa3286eb17bee3a3cb4f94179e2c6cff999df982f47a229bd84014912ac",
+    "detection": "('rational mismatch', 1, 3)",
+    "edits": [
+      [
+        "return a * e, (1 << request.momentum_grid.frac_bits) * b * c",
+        "global _stale_cache\n    if '_stale_cache' not in globals():\n        _stale_cache = (a * e, (1 << request.momentum_grid.frac_bits) * b * c)\n    return _stale_cache"
+      ]
+    ]
+  },
+  "12": {
+    "baseline": "PASS",
+    "mutant": "DETECTED",
+    "detector": "hand-derived, no slow/compare import",
+    "source": "exact_fast.py",
+    "baseline_sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+    "mutant_sha256": "a2d449de5ba1a74c305469476d305a39df17764f8e645257c8dc1e468696813c",
+    "detection": "expected refusal GRID_MISMATCH",
+    "edits": [
+      [
+        "    validate_kick(request)",
+        "    request = __import__('dataclasses').replace(request, impulse_grid=request.momentum_grid)\n    validate_kick(request)"
+      ]
+    ]
+  },
+  "geometry_tie": {
+    "baseline": "PASS",
+    "mutant": "DETECTED",
+    "detector": "hand-derived, no slow/compare import",
+    "source": "exact_geometry.py",
+    "baseline_sha256": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+    "mutant_sha256": "99626c74ab100407276083742098f485a2baf320741abe66d69a84e657fa6478",
+    "detection": "",
+    "edits": [
+      [
+        "minimum < threshold",
+        "minimum <= threshold"
+      ]
+    ]
+  },
+  "geometry_tau": {
+    "baseline": "PASS",
+    "mutant": "DETECTED",
+    "detector": "hand-derived, no slow/compare import",
+    "source": "exact_geometry.py",
+    "baseline_sha256": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+    "mutant_sha256": "dac77ac85894f6e46efa4e56e1335a7c118b3ae22c19b8e74273545f9db90554",
+    "detection": "('rational mismatch', 1, 3)",
+    "edits": [
+      [
+        "-B / C",
+        "B / C"
+      ]
+    ]
+  },
+  "geometry_stored": {
+    "baseline": "PASS",
+    "mutant": "DETECTED",
+    "detector": "hand-derived, no slow/compare import",
+    "source": "exact_geometry.py",
+    "baseline_sha256": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+    "mutant_sha256": "802f6c717010d9e10dae4ea3640e4ba53994146d0852f18c5916c2e80d13890a",
+    "detection": "",
+    "edits": [
+      [
+        "stored_R2 < threshold)",
+        "False)"
+      ]
+    ]
+  }
+}

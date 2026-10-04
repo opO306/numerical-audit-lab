@@ -1,0 +1,18 @@
+{
+  "command": [
+    "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "--tb=short",
+    "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-claim-output-fix-2026-10-04\\verification-v1\\repository-full.xml"
+  ],
+  "exit_code": 0,
+  "seconds": 36.28344080000534,
+  "tests": 393,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "log": "repository-full.log",
+  "xml": "repository-full.xml"
+}

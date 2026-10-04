@@ -1,0 +1,27 @@
+{
+  "command": [
+    "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "-m",
+    "pytest",
+    "tests/test_c1b1_slow.py",
+    "tests/test_c1b1_fast.py",
+    "tests/test_c1b1_differential.py",
+    "tests/test_c1b1_geometry.py",
+    "tests/test_c1b1_mutants.py",
+    "tests/test_c1b1_claims.py",
+    "tests/test_c1b1_boundary.py",
+    "tests/test_independence.py",
+    "tests/test_provenance.py",
+    "-q",
+    "--tb=short",
+    "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-claim-output-fix-2026-10-04\\verification-v1\\related-105.xml"
+  ],
+  "exit_code": 0,
+  "seconds": 5.006364400003804,
+  "tests": 105,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "log": "related-105.log",
+  "xml": "related-105.xml"
+}

@@ -1,0 +1,29 @@
+{
+  "target": "f806d8ce1ef86a0948b1a8abafe1a22c3058178b",
+  "finding": "F-CLAIM-1",
+  "reproduction": "REPRODUCED",
+  "python": "3.12.7 (tags/v3.12.7:0b05ead, Oct  1 2024, 03:06:41) [MSC v.1941 64 bit (AMD64)]",
+  "int_max_str_digits": 4300,
+  "input_integer_digits": 2151,
+  "exact_denominator_digits": 4301,
+  "wire_bytes": 5877,
+  "observations": [
+    {
+      "path": "exact_slow",
+      "kernel_exact_result_correct": true,
+      "exception": "ValueError",
+      "is_LabRefusal": false,
+      "message": "Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\zun24\\Downloads\\reproduce_claim_boundary.py\", line 71, in main\n    answer = compare_claim(text, path, opt_in=(path == 'exact_fast'))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\numerical-audit-lab-recovered-2026-10-01\\independent_checker\\c1b1\\claim_adapter.py\", line 158, in compare_claim\n    expected = canonical_data(computed)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\numerical-audit-lab-recovered-2026-10-01\\independent_checker\\c1b1\\claim_adapter.py\", line 97, in canonical_data\n    return {\"type\": type(value).__name__, **{f.name: canonical_data(getattr(value, f.name)) for f in fields(value)}}\n                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\numerical-audit-lab-recovered-2026-10-01\\independent_checker\\c1b1\\claim_adapter.py\", line 97, in canonical_data\n    return {\"type\": type(value).__name__, **{f.name: canonical_data(getattr(value, f.name)) for f in fields(value)}}\n                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\numerical-audit-lab-recovered-2026-10-01\\independent_checker\\c1b1\\claim_adapter.py\", line 101, in canonical_data\n    return [canonical_data(x) for x in value]\n            ^^^^^^^^^^^^^^^^^\n  File \"D:\\numerical-audit-lab-recovered-2026-10-01\\independent_checker\\c1b1\\claim_adapter.py\", line 95, in canonical_data\n    return {\"numerator\": str(value.numerator // divisor), \"denominator\": str(value.denominator // divisor)}\n                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit\n"
+    },
+    {
+      "path": "exact_fast",
+      "kernel_exact_result_correct": true,
+      "exception": "ValueError",
+      "is_LabRefusal": false,
+      "message": "Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\zun24\\Downloads\\reproduce_claim_boundary.py\", line 71, in main\n    answer = compare_claim(text, path, opt_in=(path == 'exact_fast'))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\numerical-audit-lab-recovered-2026-10-01\\independent_checker\\c1b1\\claim_adapter.py\", line 158, in compare_claim\n    expected = canonical_data(computed)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\numerical-audit-lab-recovered-2026-10-01\\independent_checker\\c1b1\\claim_adapter.py\", line 97, in canonical_data\n    return {\"type\": type(value).__name__, **{f.name: canonical_data(getattr(value, f.name)) for f in fields(value)}}\n                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\numerical-audit-lab-recovered-2026-10-01\\independent_checker\\c1b1\\claim_adapter.py\", line 97, in canonical_data\n    return {\"type\": type(value).__name__, **{f.name: canonical_data(getattr(value, f.name)) for f in fields(value)}}\n                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\numerical-audit-lab-recovered-2026-10-01\\independent_checker\\c1b1\\claim_adapter.py\", line 101, in canonical_data\n    return [canonical_data(x) for x in value]\n            ^^^^^^^^^^^^^^^^^\n  File \"D:\\numerical-audit-lab-recovered-2026-10-01\\independent_checker\\c1b1\\claim_adapter.py\", line 95, in canonical_data\n    return {\"numerator\": str(value.numerator // divisor), \"denominator\": str(value.denominator // divisor)}\n                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit\n"
+    }
+  ],
+  "note": "Reproduction success is an adapter FAIL, not a mathematical kernel failure."
+}

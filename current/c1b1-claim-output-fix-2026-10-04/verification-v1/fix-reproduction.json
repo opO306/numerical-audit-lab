@@ -1,0 +1,44 @@
+{
+  "finding": "F-CLAIM-1",
+  "status": "AUTHOR REPRODUCTION PASS",
+  "input_integer_digits": 2151,
+  "exact_denominator_digits": 4301,
+  "wire_bytes": 5886,
+  "input_unchanged": true,
+  "process_global_limit_before": 4300,
+  "process_global_limit_after": 4300,
+  "observations": [
+    {
+      "path": "exact_slow",
+      "kernel_exact_result_correct": true,
+      "exception": "LabRefusal",
+      "failure": {
+        "code": "CLAIM_OUTPUT_LIMIT",
+        "phase": "claim_output",
+        "atom": "",
+        "component": "",
+        "message": "canonical computed integer exceeds Claim V1 4096 decimal digits",
+        "scope": "ARITHMETIC_ONLY",
+        "j_status": "J_NOT_VERIFIED",
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      }
+    },
+    {
+      "path": "exact_fast",
+      "kernel_exact_result_correct": true,
+      "exception": "LabRefusal",
+      "failure": {
+        "code": "CLAIM_OUTPUT_LIMIT",
+        "phase": "claim_output",
+        "atom": "",
+        "component": "",
+        "message": "canonical computed integer exceeds Claim V1 4096 decimal digits",
+        "scope": "ARITHMETIC_ONLY",
+        "j_status": "J_NOT_VERIFIED",
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      }
+    }
+  ],
+  "scope": "ARITHMETIC_ONLY",
+  "j_status": "J_NOT_VERIFIED"
+}
