@@ -1,7 +1,7 @@
 # B4 — Proof wire / bounded resource artifact
 
-- status: DESIGN CONDITIONS ADDRESSED / IMPLEMENTATION STILL NOT STARTED / REVIEW PENDING
-- version: 1, 2026-10-04; audited design snapshot `023b186c0e9d95c11399893e7f75772cfff6c3a7`의 후속 저자 사양
+- status: F-CLOSURE-2 FIX APPLIED / INDEPENDENT RECHECK PENDING / DESIGN ONLY / NOT IMPLEMENTED
+- version: 2, 2026-10-05; closure audit snapshot `4cb2910fe936f7b1d5150196e062b6b61edc240f`의 최소 규범 정정
 - dependencies: [wire data](../../specs/c1b1-independent-impulse-v1/proof-wire.json); B1/B3/B5/B6/B7/B8
 - unresolved items: B4+B5 공동 독립 승인; parser/writer 및 hard resource 구현 검증
 - what this does NOT certify: production 구현, 모든 입력의 finite-budget 성공, 물리 정확성, J verification, integration/trajectory/replay/N-Step, certification.
@@ -50,6 +50,8 @@ byte/structure 상한은 publication 정책이고 CPU/메모리 예산 숫자의
 | Failure | schema=`LAB_C1B1_IMPULSE_FAILURE_V1`, status:Layers, phase:Phase, reason:Reason, resource_kind:ResourceKind/null, spec_sha256:Hash/null, state_sha256:Hash/null, occurrence_sha256:Hash/null, budget_sha256:Hash/null, attempt_count:null, attempt_digest:Hash/null |
 
 영문 field 이름은 규범 식별자다. Phase enum은 PARSE, BINDING, PHYSICAL_DOMAIN, POLICY, COMPUTE, RECHECK, COMPARISON, ARITHMETIC, PUBLICATION이다. Reason enum은 SCHEMA_INVALID, BINDING_MISMATCH, POLICY_UNBOUND, SINGULAR_SEPARATION, PHYSICAL_DOMAIN, RAW_UNREPRESENTABLE, OPPOSITE_RAW_UNREPRESENTABLE, RESOURCE_CAP, ROUNDING_UNPROVED, RECHECK_UNPROVED, RECHECK_REJECTED, ACQUISITION_NOT_AVAILABLE, EXECUTOR_MISMATCH, ARITHMETIC_REFUSED, ARTIFACT_LIMIT, HOST_SERIALIZATION_LIMIT, PROGRAMMING_ANOMALY이다. Failure에는 literal error message나 offending integer/payload를 넣지 않는다. 모르는 hash는 null로 두고 만들어 채우지 않는다.
+
+`proof-wire.json`의 `closed_object_keys.Failure`와 `resource_failure_record`의 closed field 목록은 위 Failure 표와 같은 11개 필드를 요구한다. `resource_kind`는 항상 존재하는 필수 field이며 resource-related failure에는 정의된 enum, non-resource failure에는 null을 넣는다. 두 목록 사이의 암묵적 precedence는 없다. Failure의 4096-byte 상한과 bounded diagnostic 원칙은 그대로 유지한다.
 
 ResourceKind는 BIT, RATIONAL_BIT, TEMP_ALLOCATION, LIVE_ALLOCATION, WORK, ATTEMPTS, ORDER, CPU_DEADLINE, WALL_DEADLINE, HARD_MEMORY, PARSE_BYTES, ARTIFACT_BYTES, HOST_DECIMAL이고 resource 실패 이외에는 null이다. 실제 hard interruption 종류를 남기되 실행하지 않은 elapsed time을 만들지 않는다. attempt digest는 H0=SHA256(`LAB_C1B1_ATTEMPTS_V1` ASCII+NUL), H_next=SHA256(previous raw digest32+canonical `{t,N,P,producer,rechecker,reason}`)로 고정한다. 이 compact tuple도 pre-str/byte guard를 받고 status/reason은 closed enum이다. count는 success의 actual attempt 수이고 실패 count는 항상 null이다. digest는 진단 binding이며 producer/rechecker soundness를 대신하는 proof가 아니다.
 

@@ -1,0 +1,524 @@
+Independent Impulse V1 B1–B8 closure 독립 재검토 결과를 반영합니다.
+
+감사 대상:
+
+```text
+4cb2910fe936f7b1d5150196e062b6b61edc240f
+```
+
+직접 parent:
+
+```text
+023b186c0e9d95c11399893e7f75772cfff6c3a7
+```
+
+최종 판정:
+
+```text
+CLOSURE REVISION REQUIRED
+implementation_may_start = false
+```
+
+이번 FAIL의 원인은 정확히 두 개입니다.
+
+```text
+F-CLOSURE-1
+B3 guard contract mismatch
+
+F-CLOSURE-2
+B4 Failure schema inconsistency
+```
+
+이번 수정은 이 두 finding만 닫는 **최소 규범 수정**으로 진행하십시오.
+
+Impulse production 구현, rechecker 구현, benchmark 또는 새로운 수치 알고리즘 작업은 시작하지 마십시오.
+
+# 1. F-CLOSURE-1 수정
+
+현재 B3가 future drift guard를 다음처럼 요구하고 있습니다.
+
+```text
+exact unrounded segment 전체 검사
++
+stored rounded segment 전체 검사
+```
+
+그러나 기존 독립 감사 PASS를 받은 Arithmetic V1의 실제 계약은:
+
+```text
+exact unrounded closed segment minimum >= r_min²
+
+AND
+
+stored final relative position squared >= r_min²
+```
+
+입니다.
+
+즉 두 번째 검사는 stored segment 전체 minimum이 아니라 **stored 최종 상대 위치 한 점**입니다.
+
+B3 규범을 기존 Arithmetic V1 의미로 되돌리십시오.
+
+정식 규범은 다음으로 고정하십시오.
+
+```text
+Point admission:
+
+    exact current R² >= r_min²
+
+
+After drift:
+
+    minimum over the exact unrounded closed relative segment
+        >= r_min²
+
+    AND
+
+    stored final relative position squared
+        >= r_min²
+```
+
+다음 조건은 이번 V1 규범에서 제거하십시오.
+
+```text
+minimum over the stored rounded segment >= r_min²
+```
+
+그 검사를 정말 추가하고 싶다면 기존 Arithmetic guard와 별개의 **새로운 더 강한 정책**으로 따로 설계·감사해야 합니다.
+
+이번 closure 수정에서 추가 guard를 새로 구현하지 마십시오.
+
+## 수정 대상
+
+최소:
+
+```text
+docs/c1b1-independent-impulse-v1/B3-physical-domain.md
+
+specs/c1b1-independent-impulse-v1/physical-domain.json
+```
+
+및 이 의미를 참조하는 모든 normative 문서/JSON을 찾아 같은 의미로 통일하십시오.
+
+특히 다음 표현을 검색하십시오.
+
+```text
+stored segment
+stored drift segment
+future exact and stored drift segment guards
+```
+
+그리고 기존 Arithmetic 의미와 맞지 않는 사용을 제거하거나 명확히 비규범적 설명으로 바꾸십시오.
+
+---
+
+# 2. F-CLOSURE-1 exact witness 보존
+
+독립 감사자가 제공한 exact rational witness는 historical evidence로 보존하십시오.
+
+그 반례의 결론은:
+
+```text
+exact unrounded segment minimum > r_min²
+stored endpoint R²              > r_min²
+stored rounded segment minimum  < r_min²
+```
+
+입니다.
+
+따라서:
+
+```text
+기존 Arithmetic contract: ACCEPT
+잘못 추가된 stored-segment contract: REFUSE
+```
+
+가 됩니다.
+
+이 witness를 기존 구현의 버그 반례라고 기록하지 마십시오.
+
+정확한 의미는:
+
+```text
+PRE-IMPLEMENTATION CONTRACT NON-EQUIVALENCE WITNESS
+```
+
+입니다.
+
+D_valid, 실제 trajectory 또는 impulse 실행 적합성을 증명하거나 반증하는 자료로 확대하지 마십시오.
+
+---
+
+# 3. F-CLOSURE-2 수정
+
+현재 `proof-wire.json`에는 Failure schema에 대해 서로 충돌하는 두 closed field 목록이 있습니다.
+
+정식 Failure fields는 다음으로 통일하십시오.
+
+```text
+schema
+status
+phase
+reason
+resource_kind
+spec_sha256
+state_sha256
+occurrence_sha256
+budget_sha256
+attempt_count
+attempt_digest
+```
+
+`resource_kind`는 **항상 존재하는 필수 field**로 유지하십시오.
+
+규칙:
+
+```text
+resource-related failure:
+    resource_kind = 정의된 enum
+
+non-resource failure:
+    resource_kind = null
+```
+
+따라서 `resource_failure_record`의 `closed fixed fields only` 목록에도 반드시:
+
+```text
+resource_kind
+```
+
+를 추가하십시오.
+
+서로 다른 두 closed 목록이나 암묵적 precedence를 남기지 마십시오.
+
+---
+
+# 4. Failure record 한도는 그대로
+
+이번 수정 때문에 Failure schema의 자원 한도를 확대하지 마십시오.
+
+기존 설계:
+
+```text
+Failure <= 4096 bytes
+```
+
+와 bounded diagnostic 원칙을 유지하십시오.
+
+Failure record에 다음을 넣지 마십시오.
+
+```text
+거대한 offending integer
+전체 입력 payload
+전체 certificate
+원본 Python exception 문자열
+무제한 diagnostics
+```
+
+`resource_kind` 한 필드 추가는 기존 bounded record 설계를 바꾸는 이유가 아닙니다.
+
+---
+
+# 5. Hash / dependency 재발급
+
+두 normative 수정 후 변경된 canonical JSON의 SHA-256 sidecar를 다시 생성하십시오.
+
+그리고 이를 transitively 참조하는 모든 dependency hash를 다시 계산하십시오.
+
+최소 확인 대상:
+
+```text
+physical-domain.json
+physical-domain.json.sha256
+
+proof-wire.json
+proof-wire.json.sha256
+
+semantic-bundle.json
+semantic-bundle.json.sha256
+
+finite-policy.json
+해당 dependency가 있다면 sidecar
+
+package-manifest.json
+package-manifest.json.sha256
+```
+
+실제 dependency graph에 따라 추가 파일이 있다면 포함하십시오.
+
+중요:
+
+```text
+내용 수정
+→ sidecar 갱신
+→ dependent semantic hash 갱신
+→ package manifest 갱신
+```
+
+순서를 지키십시오.
+
+오래된 hash가 우연히 문서에 남지 않도록 reverse-reference 검사도 수행하십시오.
+
+---
+
+# 6. 기존 PASS 항목은 수정하지 말 것
+
+독립 재검토에서 이미 PASS된:
+
+```text
+B1 semantic bundle structure
+B2 units/constants provenance
+B5 finite computation method contract
+B6 rechecker lineage
+B7 acquisition/identity
+B8 status/composition
+mutation/validation plan
+```
+
+을 이유 없이 재설계하지 마십시오.
+
+단 B3/B4 hash 변경으로 인한 **dependency identifier 갱신**은 허용됩니다.
+
+내용 의미가 바뀌지 않은 파일은 가능한 한 byte-preserved로 유지하십시오.
+
+---
+
+# 7. Arithmetic V1 보호
+
+다음 기존 감사 PASS source는 수정 금지입니다.
+
+```text
+independent_checker/c1b1/exact_slow.py
+independent_checker/c1b1/exact_fast.py
+independent_checker/c1b1/exact_geometry.py
+independent_checker/c1b1/compare.py
+independent_checker/c1b1/contracts.py
+independent_checker/c1b1/claim_adapter.py
+independent_checker/c1b1/semantic_manifest_v1.json
+independent_checker/c1b1/semantic_manifest_v1.sha256
+```
+
+수정 후 이 8개가 antecedent와 byte-identical인지 다시 확인하십시오.
+
+---
+
+# 8. Obligation ledger 갱신
+
+현재 독립 판정은:
+
+```text
+I1   BLOCKED   by F-CLOSURE-1
+I14  BLOCKED   by F-CLOSURE-1
+
+I10  BLOCKED   by F-CLOSURE-2
+I18  BLOCKED   by F-CLOSURE-2
+```
+
+입니다.
+
+수정 후 작성자 자체 판단에서 바로 PASS로 승격하지 마십시오.
+
+다음처럼 기록하십시오.
+
+```text
+I1   FIX APPLIED / INDEPENDENT RECHECK PENDING
+I14  FIX APPLIED / INDEPENDENT RECHECK PENDING
+
+I10  FIX APPLIED / INDEPENDENT RECHECK PENDING
+I18  FIX APPLIED / INDEPENDENT RECHECK PENDING
+```
+
+나머지 READY / IMPLEMENTATION-DEPENDENT 상태는 독립 감사 결과를 보존하십시오.
+
+---
+
+# 9. B5 상태는 변경하지 말 것
+
+이번 FAIL은 numeric budget 숫자가 없어서 발생한 것이 아닙니다.
+
+B5 상태는:
+
+```text
+METHOD SPEC PASS
+RUNTIME NUMERIC INSTANCE STILL REQUIRED BEFORE ACTIVATION
+```
+
+으로 유지하십시오.
+
+근거 없이 budget 숫자를 새로 발급하지 마십시오.
+
+Impulse implementation 전에도 method closure와 runtime activation은 별개입니다.
+
+후속 실제 실행 전에는 여전히:
+
+```text
+numeric instance hash
+independent activation decision
+source/platform/allocator-bound majorants
+whole-call preflight
+isolated worker memory/CPU/wall enforcement
+```
+
+가 필요합니다.
+
+이번 F-CLOSURE 수정 범위에 이것을 억지로 끼워 넣지 마십시오.
+
+---
+
+# 10. P0 / A-EV provenance 상태 보존
+
+이번 독립 재검토에서 다음은 실제로 확인됐습니다.
+
+```text
+P0 raw bytes:
+12061
+
+P0 SHA-256:
+a598057183121b9c928b3a9804c8e2e99afa553bad570a471aa4130f20e6b049
+
+91 constant records:
+exact transcription matched
+
+A-EV exact commit/object:
+27e48770ab5db666bcd78034d151ddbb04b6af54
+recovered and object path verified
+```
+
+이 provenance를 다시 미확인 상태로 되돌리지 마십시오.
+
+다만 A-EV는 계속:
+
+```text
+comparison-only
+NOT A TRUSTED ANTECEDENT
+```
+
+입니다.
+
+복구됐다는 이유로 trust status를 승격하지 마십시오.
+
+---
+
+# 11. 이번 수정 후 정적 확인
+
+최소 다음을 확인하십시오.
+
+```text
+F-CLOSURE-1 문구 제거/통일
+F-CLOSURE-2 Failure key 집합 단일화
+
+canonical JSON validity
+sidecar SHA correctness
+transitive dependency SHA correctness
+package manifest correctness
+
+old forbidden guard wording 없음
+Failure closed-key set equality
+
+Arithmetic 8 source byte-identical
+기존 tracked source/test 변경 없음
+Impulse production .py 신규 없음
+```
+
+가능하면 작은 독립 정적 checker를 작성해:
+
+```text
+Failure key set A == Failure key set B
+resource_kind present
+```
+
+를 machine-checkable하게 검증하십시오.
+
+Guard 쪽은 최소한 normative JSON/markdown이 정확히:
+
+```text
+exact segment
++
+stored final point
+```
+
+를 표현하는지 검사하십시오.
+
+---
+
+# 12. 이번 단계에서 하지 말 것
+
+```text
+Impulse producer 구현 금지
+Impulse validator 구현 금지
+V2 실행 금지
+Arithmetic source 수정 금지
+production tests 실행 불필요
+benchmark 금지
+mutant 실행 불필요
+numeric runtime budget 발급 금지
+stored-segment 새 guard 구현 금지
+J_NOT_VERIFIED 제거 금지
+```
+
+---
+
+# 13. 산출물
+
+최소:
+
+```text
+F-CLOSURE-1/2 fix report
+
+변경된 B3/B4 normative docs
+
+변경된 canonical spec JSON
+
+새 sidecar hashes
+
+dependency/package manifest update
+
+updated I1–I22 ledger
+
+static consistency receipt
+```
+
+를 작성하십시오.
+
+Historical:
+
+```text
+4cb2910
+CLOSURE REVISION REQUIRED
+F-CLOSURE-1
+F-CLOSURE-2
+```
+
+는 그대로 보존하십시오.
+
+수정본은 별도 revision / commit으로 분리하십시오.
+
+---
+
+# 14. 수정 후 상태
+
+독립 재검토 전까지:
+
+```text
+Independent Impulse V1:
+DESIGN ONLY / NOT IMPLEMENTED
+
+Closure fixes:
+F-CLOSURE-1 FIX APPLIED
+F-CLOSURE-2 FIX APPLIED
+INDEPENDENT RECHECK PENDING
+
+implementation_may_start:
+false
+
+Arithmetic V1:
+INDEPENDENT REVIEW PASS
+
+Overall physical C1-B1:
+J_NOT_VERIFIED
+NotCertified
+```
+
+으로 유지하십시오.
+
+이번 작업에서는 사용자 추가 승인 전 commit/push하지 마십시오.

@@ -1,0 +1,37 @@
+{
+  "finding": "F-CLOSURE-2",
+  "source_commit": "4cb2910fe936f7b1d5150196e062b6b61edc240f",
+  "source_path": "specs/c1b1-independent-impulse-v1/proof-wire.json",
+  "source_sha256": "4890780548aa8588293ad6bdb8a1dcf89c2d95a6aff0448218f19e486c8dc5bf",
+  "basis": "Direct source reading; sets transcribed from returned fixed source, no target code executed.",
+  "closed_object_keys_Failure": [
+    "schema",
+    "status",
+    "phase",
+    "reason",
+    "resource_kind",
+    "spec_sha256",
+    "state_sha256",
+    "occurrence_sha256",
+    "budget_sha256",
+    "attempt_count",
+    "attempt_digest"
+  ],
+  "resource_failure_record_closed_fields_only": [
+    "schema",
+    "status",
+    "phase",
+    "reason",
+    "spec_sha256",
+    "state_sha256",
+    "occurrence_sha256",
+    "budget_sha256",
+    "attempt_count",
+    "attempt_digest"
+  ],
+  "required_but_omitted_from_secondary_closed_list": [
+    "resource_kind"
+  ],
+  "resource_kind_rule": "required Failure field; null for nonresource failure",
+  "runtime_failure_observed": false
+}

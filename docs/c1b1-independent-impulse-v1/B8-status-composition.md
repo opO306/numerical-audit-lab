@@ -1,7 +1,7 @@
 # B8 — Status / composition boundary
 
 - status: DESIGN CONDITIONS ADDRESSED / IMPLEMENTATION STILL NOT STARTED / REVIEW PENDING
-- version: 1, 2026-10-04; audited design snapshot `023b186c0e9d95c11399893e7f75772cfff6c3a7`의 후속 저자 사양
+- version: 2, 2026-10-05; B8의 PASS된 상태 의미를 유지하고 F-CLOSURE-1 guard 참조만 정정
 - dependencies: [status data](../../specs/c1b1-independent-impulse-v1/status-composition.json); B1/B3/B4/B5/B6/B7; Arithmetic audit 65d8fd2
 - unresolved items: 독립 closure review; future point 구현과 별도 composition 승인/검증
 - what this does NOT certify: production 구현, 모든 입력의 finite-budget 성공, 물리 정확성, J verification, integration/trajectory/replay/N-Step, certification.
@@ -47,6 +47,6 @@ V2 VALID는 Lab binding/domain/zero/whole-vector 조건까지 통과한 경우�
 
 독립 point proof는 세 축 모두 producer RESOLVED/rechecker ACCEPTED, 모든 wire cap 충족 후 `POINT_PROOF`로 공개할 수 있다. 이때 외부 comparison/arithmetic이 NOT_RUN인 것은 정확하며 실제 세계 execution은 STOP이다. `COMPOSITION_RESULT`와 실행 eligibility에는 같은 authenticated occurrence의 MATCH 및 별도 승인된 Arithmetic COMPUTED를 추가로 요구한다. point publication을 KDK 실행 승인으로 쓰지 않는다.
 
-future KDK는 승인 후에도 J0(start snapshot) → audited Kick → Drift → exact/stored 전체 segment guards → J1(새 snapshot) → Kick을 local temporary로 완료하고 전체 result만 atomic publication한다. 세 축 승인 전 partial J/certificate/state update/commit 금지다. 여기서 atomic publication은 application transaction이며 Git commit을 뜻하지 않는다. user 승인 없는 Git commit/push도 이번에는 하지 않는다.
+future KDK는 승인 후에도 J0(start snapshot) → audited Kick → Drift → exact unrounded closed relative segment minimum >= r_min² AND stored final relative position squared >= r_min² → J1(새 snapshot) → Kick을 local temporary로 완료하고 전체 result만 atomic publication한다. 세 축 승인 전 partial J/certificate/state update/commit 금지다. 여기서 atomic publication은 application transaction이며 Git commit을 뜻하지 않는다. user 승인 없는 Git commit/push도 이번에는 하지 않는다.
 
 Arithmetic V1은 `65d8fd29ae255529afead70289098d36b825b3b4`의 **INDEPENDENT REVIEW PASS / exact_slow DEFAULT / exact_fast EXPERIMENTAL·OPT-IN**을 유지한다. kernel/adapter/compare/contracts/manifest를 수정하지 않는다. 기존 ARITHMETIC_ONLY/J_NOT_VERIFIED, overall physical NotCertified는 그대로다. initial energy admission, D_valid, force physics validation, integration error, replay/trajectory/N-Step은 별도 미승인 gate다.

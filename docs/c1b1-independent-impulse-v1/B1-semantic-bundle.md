@@ -13,7 +13,7 @@
 Lab-owned ID는 `lab-c1b1-independent-impulse-v1-retarded-ar40`다. immutable semantic data의 SHA-256은:
 
 ```text
-a179dcfc065931d09ba4f364d159416ede4b9090a0924bf3fcc119815ed4266f
+11eedb45fc80d8b1f8db1bc5afdceb1754914c5e2f49ba48ad2b4d87d63bb007
 ```
 
 canonical bytes는 ASCII JSON, lexical key sort, compact `,`/`:` separator, `ensure_ascii` escape, 마지막 LF 한 개다. BOM/공백/중복 key/NaN/Infinity는 없다. 정수는 canonical decimal string, 분수는 `{"n":"…","d":"…"}`다. bundle 자체 hash는 자기 hash 필드를 넣지 않은 정확 bytes의 SHA-256이다. 원본 implementation SHA, legacy fingerprint, source Merkle proof와 구별한다. [manifest](../../specs/c1b1-independent-impulse-v1/package-manifest.json)는 8개 사양의 hash를 묶는다. human 문서의 규칙은 함께 심사하는 규범이며 이후 어느 규범 bytes가 바뀌면 package revision과 새 review target을 발급한다. 현재 canonical hash가 human 문서 전체를 자동으로 해시했다는 주장은 하지 않는다; 전체 파일 해시는 author receipt에 있다.

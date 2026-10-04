@@ -1,0 +1,242 @@
+{
+  "review_kind": "INDEPENDENT STATIC PRE-IMPLEMENTATION CLOSURE REVIEW",
+  "repository": "opO306/numerical-audit-lab",
+  "audited_commit": "4cb2910fe936f7b1d5150196e062b6b61edc240f",
+  "direct_parent": "023b186c0e9d95c11399893e7f75772cfff6c3a7",
+  "branch_at_discovery": "codex/c1b1-fclaim1-output-limit",
+  "arithmetic_antecedent": "65d8fd29ae255529afead70289098d36b825b3b4",
+  "snapshot_selection": "No new SHA was present in the pasted request. The closure-containing direct child was discovered, disclosed and pinned before review. No later HEAD is covered.",
+  "overall": "CLOSURE REVISION REQUIRED",
+  "implementation_may_start": false,
+  "runtime_numeric_instance_required": true,
+  "checks": [
+    {
+      "id": "C1",
+      "item": "B1 semantic bundle",
+      "verdict": "PASS",
+      "basis": "규범식·수치 의미·버전·canonical bytes와 8개 dependency 결합 확인. B3의 잘못된 guard 조건은 C3에서 별도 FAIL로 귀속한다."
+    },
+    {
+      "id": "C2",
+      "item": "B2 units/constants provenance",
+      "verdict": "PASS",
+      "basis": "P0 12,061 raw bytes 직접 hash, 91 exact record 및 87 P0 declaration/index/unit 검산, S1/S2 4개 값 대조, Git objects 20개와 Merkle paths 8개 검증."
+    },
+    {
+      "id": "C3",
+      "item": "B3 domain/r_min",
+      "verdict": "FAIL",
+      "basis": "r_min 값과 admission은 맞지만 stored endpoint guard를 stored segment 전체 guard로 바꾸었다. F-CLOSURE-1의 정확 반례로 비동치 확인."
+    },
+    {
+      "id": "C4",
+      "item": "B4 proof wire/resources",
+      "verdict": "FAIL",
+      "basis": "4096-digit/pre-str/compact proof 전략은 타당하지만 proof-wire.json의 두 closed Failure field 목록이 resource_kind 필수 여부에서 충돌한다. F-CLOSURE-2."
+    },
+    {
+      "id": "C5",
+      "item": "B5 finite computation policy",
+      "verdict": "PASS",
+      "basis": "METHOD SPEC PASS. PARAMETERIZED POLICY를 허용한다. 승인된 numeric instance·source-bound preflight·OS enforcement 없는 실제 실행은 금지."
+    },
+    {
+      "id": "C6",
+      "item": "B6 rechecker lineage",
+      "verdict": "PASS",
+      "basis": "독립 producer/validator와 pinned V2 경계가 명시됨. 소스와 private legacy projection 대조. 실제 구현 독립성은 구현 후 검증."
+    },
+    {
+      "id": "C7",
+      "item": "B7 acquisition/identity",
+      "verdict": "PASS",
+      "basis": "State/projection/math/occurrence/acquisition/budget 구분, domain-separated identities, J0/J1·previous occurrence·cache 비활성 규칙 확인."
+    },
+    {
+      "id": "C8",
+      "item": "B8 status/composition",
+      "verdict": "PASS",
+      "basis": "각 layer 상태, 관측된 복합 실패 우선순위, point proof와 execution eligibility, atomic publication의 구분은 적절하다. 실제 future guard는 C3 수정 전 연결 불가."
+    },
+    {
+      "id": "C9",
+      "item": "I1–I22 ledger",
+      "verdict": "UNRESOLVED",
+      "basis": "I1/I14는 F-CLOSURE-1, I10/I18은 F-CLOSURE-2 때문에 BLOCKED. 나머지는 READY 또는 IMPLEMENTATION-DEPENDENT로 재분류한다."
+    },
+    {
+      "id": "C10",
+      "item": "mutation/validation plan",
+      "verdict": "PASS",
+      "basis": "계획 closure만 PASS. 비퇴화 fixture·독립 expected·hash-only와 semantic detection 구분 및 위조/stale/partial-publication 공격 포함."
+    },
+    {
+      "id": "C11",
+      "item": "source/provenance preservation",
+      "verdict": "PASS",
+      "basis": "직접 parent 023b186c, 추가65/수정0/삭제0, Arithmetic8 actual bytes 불변, 신규 .py 없음. Git no-checkout 객체 기반 검토."
+    },
+    {
+      "id": "C12",
+      "item": "implementation readiness",
+      "verdict": "FAIL",
+      "basis": "CLOSURE REVISION REQUIRED. B3와 B4의 규범 불일치가 남아 이 제출물의 착수 조건을 충족하지 못한다."
+    }
+  ],
+  "obligations": [
+    {
+      "id": "I1",
+      "state": "BLOCKED",
+      "basis": "r_min scalar와 출처는 확인됐으나 domain/guard normative bundle의 F-CLOSURE-1 수정이 필요하다."
+    },
+    {
+      "id": "I2",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "basis": "raw→q→R²와 full-state/획득 결합 규칙은 충분하다. parser·전사·실제 획득 동치는 구현 후 검증."
+    },
+    {
+      "id": "I3",
+      "state": "READY",
+      "basis": "V family, coefficient/index mapping 및 retardation 분기는 원자료와 대응한다. 아직 코드 전사 PASS는 아니다."
+    },
+    {
+      "id": "I4",
+      "state": "READY",
+      "basis": "analytic derivative, BO i=-1, TT/g′, sign, h 및 mass 부재의 규범 의미가 닫혔다."
+    },
+    {
+      "id": "I5",
+      "state": "READY",
+      "basis": "sqrt/inverse/power/signed interval과 분모 정칙성의 전제가 B3/B5에 명시됐다. 구간 연산 코드는 미구현."
+    },
+    {
+      "id": "I6",
+      "state": "READY",
+      "basis": "exp tail·range reduction·각 squaring outward widening·cutoff 금지 전략이 구체적이다."
+    },
+    {
+      "id": "I7",
+      "state": "READY",
+      "basis": "V′→-V′/R→h*q의 포함 합성과 cancellation의 의미 구분은 충분하다."
+    },
+    {
+      "id": "I8",
+      "state": "READY",
+      "basis": "nearest-even cell과 signed overflow, V2 strict-cell availability 제한을 구분했다."
+    },
+    {
+      "id": "I9",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "basis": "domain 이후 zero-axis를 독립 validator가 증명하는 규칙은 명시됨. 실제 우회 방지와 whole-vector 처리는 검증 필요."
+    },
+    {
+      "id": "I10",
+      "state": "BLOCKED",
+      "basis": "bounded failure 원칙은 명시됐지만 Failure의 closed key 집합이 모순이다. F-CLOSURE-2 정정 후 parser/writer/transaction은 구현 후 검증."
+    },
+    {
+      "id": "I11",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "basis": "I11a–d 네 명제는 분리됐다. method convergence 전사·실제 finite-budget 결과·출판은 별도 증거가 필요하다."
+    },
+    {
+      "id": "I12",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "basis": "pinned V2와 공유금지 helper/parser의 계보가 선택됐다. 신규 source/process/call 증거는 아직 없다."
+    },
+    {
+      "id": "I13",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "basis": "canonical identity·missing/stale/mismatch 규칙은 충분하다. authenticated capture와 실제 comparator 검증은 미실행."
+    },
+    {
+      "id": "I14",
+      "state": "BLOCKED",
+      "basis": "기존 Arithmetic가 하는 stored endpoint 검사와 새 B3가 요구하는 stored segment 검사가 다르다."
+    },
+    {
+      "id": "I15",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "basis": "비퇴화 fixture 획득과 실제 source mutant 및 독립 expected 실행은 아직 없다."
+    },
+    {
+      "id": "I16",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "basis": "이번 사양 snapshot과 증거는 고정했지만 미래 구현·의존·감사 대상과 결과는 아직 없다."
+    },
+    {
+      "id": "I17",
+      "state": "READY",
+      "basis": "R>0, positive rates, D(R)>=1, positive factorial/tail denominator, coarse lower zero의 정칙성 규칙 확인."
+    },
+    {
+      "id": "I18",
+      "state": "BLOCKED",
+      "basis": "B4의 failure schema를 단일화해야 공동 resource/wire 계약이 닫힌다. Source-bound majorant와 OS enforcement는 그 뒤 구현 후 검증."
+    },
+    {
+      "id": "I19",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "basis": "원입력부터 V2가 nonlinear 값을 재구성한다는 계약은 충분하다. validator→legacy mapping→acceptance의 실제 soundness 확인 필요."
+    },
+    {
+      "id": "I20",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "basis": "정해진 attempt sequence, nonnested 허용, empty intersection/conflicting raw anomaly 규칙을 구현으로 검증해야 한다."
+    },
+    {
+      "id": "I21",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "basis": "domain-separated full/math/occurrence identity 및 disabled cache를 실제 구현에서 확인해야 한다."
+    },
+    {
+      "id": "I22",
+      "state": "IMPLEMENTATION-DEPENDENT",
+      "basis": "3축 proof·cap 통과 후 publication, partial vector/state 금지를 실제 writer/transaction에서 확인해야 한다."
+    }
+  ],
+  "findings": [
+    {
+      "id": "F-CLOSURE-1",
+      "severity": "PRE-IMPLEMENTATION CONTRACT BLOCKER",
+      "locations": [
+        "docs/c1b1-independent-impulse-v1/B3-physical-domain.md",
+        "specs/c1b1-independent-impulse-v1/physical-domain.json"
+      ],
+      "issue": "Stored endpoint guard was changed to minimum over the stored rounded segment. The unchanged Arithmetic V1 does not implement that extra guard.",
+      "exact_witness": "guard_contract_witness.json",
+      "correction": "Restore exact unrounded segment minimum plus stored endpoint R²; or move an explicitly stronger separate policy outside this closure and review it independently. Regenerate dependent hashes and sidecars for any revision."
+    },
+    {
+      "id": "F-CLOSURE-2",
+      "severity": "PRE-IMPLEMENTATION SCHEMA CONSISTENCY BLOCKER",
+      "locations": [
+        "specs/c1b1-independent-impulse-v1/proof-wire.json:closed_object_keys.Failure",
+        "specs/c1b1-independent-impulse-v1/proof-wire.json:resource_failure_record",
+        "specs/c1b1-independent-impulse-v1/proof-wire.json:resource_kind_rule"
+      ],
+      "issue": "closed_object_keys.Failure and resource_kind_rule require resource_kind, but the second closed fixed fields only list in resource_failure_record omits it. No precedence resolving the contradictory closed lists is declared.",
+      "correction": "Keep resource_kind as required (null for nonresource failures) and align the secondary field list; regenerate dependent hashes. No new runtime feature or production code change is required."
+    }
+  ],
+  "preserved_status": {
+    "arithmetic": "INDEPENDENT REVIEW PASS",
+    "exact_slow": "DEFAULT",
+    "exact_fast": "EXPERIMENTAL / OPT-IN",
+    "independent_impulse": "DESIGN ONLY / NOT IMPLEMENTED",
+    "impulse": "J_NOT_VERIFIED",
+    "certification": "NotCertified",
+    "f806d8c": "HISTORICAL OVERALL FAIL / F-CLAIM-1"
+  },
+  "execution": {
+    "static_git_hash_object_constant_checks": true,
+    "exact_contract_reasoning_script": true,
+    "impulse_evaluator_executed": false,
+    "V2_executed": false,
+    "production_tests_run": false,
+    "mutants_executed": false,
+    "benchmark_run": false,
+    "production_source_modified": false,
+    "commit_or_push": false
+  }
+}

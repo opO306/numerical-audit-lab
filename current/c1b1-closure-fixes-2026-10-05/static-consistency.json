@@ -1,0 +1,830 @@
+{
+  "schema": "C1B1_CLOSURE_REVISION_STATIC_CONSISTENCY_V1",
+  "result": "PASS",
+  "recorded_at_utc": "2026-10-04T16:26:31.698535+00:00",
+  "level": "AUTHOR STATIC CHECKS ONLY",
+  "audited_baseline": "4cb2910fe936f7b1d5150196e062b6b61edc240f",
+  "head_at_check": "4cb2910fe936f7b1d5150196e062b6b61edc240f",
+  "checks": [
+    {
+      "check": "baseline binding",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "historical finding preserved",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "canonical bytes: acquisition-identity.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "sidecar: acquisition-identity.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "canonical bytes: constants.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "sidecar: constants.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "canonical bytes: finite-policy.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "sidecar: finite-policy.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "canonical bytes: package-manifest.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "sidecar: package-manifest.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "canonical bytes: physical-domain.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "sidecar: physical-domain.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "canonical bytes: proof-wire.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "sidecar: proof-wire.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "canonical bytes: rechecker-lineage.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "sidecar: rechecker-lineage.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "canonical bytes: semantic-bundle.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "sidecar: semantic-bundle.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "canonical bytes: status-composition.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "sidecar: status-composition.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "Failure closed key sets equal",
+      "result": "PASS",
+      "detail": [
+        "schema",
+        "status",
+        "phase",
+        "reason",
+        "resource_kind",
+        "spec_sha256",
+        "state_sha256",
+        "occurrence_sha256",
+        "budget_sha256",
+        "attempt_count",
+        "attempt_digest"
+      ]
+    },
+    {
+      "check": "resource_kind required; nonresource null",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "Failure markdown keys equal JSON keys",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "wire caps unchanged",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "closed failure envelope byte upper bound",
+      "result": "PASS",
+      "detail": 789
+    },
+    {
+      "check": "historical F-CLOSURE-2 conflict retained in archive",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "point / exact segment / stored final point contract",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "B3 markdown has both after-drift conjuncts",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "B8 JSON guard reference",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "B8 markdown guard reference",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "forbidden guard requirements absent from active normative files",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "no unrelated semantic redesign: acquisition-identity.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "no unrelated semantic redesign: constants.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "no unrelated semantic redesign: finite-policy.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "no unrelated semantic redesign: package-manifest.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "no unrelated semantic redesign: physical-domain.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "no unrelated semantic redesign: proof-wire.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "no unrelated semantic redesign: rechecker-lineage.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "no unrelated semantic redesign: semantic-bundle.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "no unrelated semantic redesign: status-composition.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "other admission cases unchanged",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "F-CLOSURE-2 exact minimal delta",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: acquisition-identity.json:constants_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: acquisition-identity.json:domain_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: acquisition-identity.json:wire_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: constants.json:P0_raw_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: constants.json:source_recovery_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: finite-policy.json:proof_wire_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: package-manifest.json:acquisition-identity.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: package-manifest.json:constants.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: package-manifest.json:finite-policy.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: package-manifest.json:physical-domain.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: package-manifest.json:proof-wire.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: package-manifest.json:rechecker-lineage.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: package-manifest.json:semantic-bundle.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: package-manifest.json:status-composition.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: physical-domain.json:constants_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: proof-wire.json:physical_domain_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: rechecker-lineage.json:identity_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: rechecker-lineage.json:source_recovery_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: rechecker-lineage.json:wire_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: semantic-bundle.json:acquisition_identity_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: semantic-bundle.json:constants_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: semantic-bundle.json:finite_policy_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: semantic-bundle.json:physical_domain_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: semantic-bundle.json:proof_wire_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: semantic-bundle.json:rechecker_lineage_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: semantic-bundle.json:status_composition_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: status-composition.json:identity_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "dependency: status-composition.json:policy_sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "manifest member hashes",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "manifest semantic bundle hash",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "old changed hashes absent from active normative reverse references",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I1",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I2",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I3",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I4",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I5",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I6",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I7",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I8",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I9",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I10",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I11",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I12",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I13",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I14",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I15",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I16",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I17",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I18",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I19",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I20",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I21",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ledger state: I22",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "B5 method PASS and activation separation",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "confirmed provenance; A-EV trust unchanged",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "witness threshold identity",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "recorded witness exact inequality: exact_segment_min",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "recorded witness exact inequality: stored_endpoint_R2",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "recorded witness exact inequality: stored_segment_min",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "PRE-IMPLEMENTATION CONTRACT NON-EQUIVALENCE WITNESS; no kernel-bug claim",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "antecedent raw bytes: exact_slow.py",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "antecedent raw bytes: exact_fast.py",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "antecedent raw bytes: exact_geometry.py",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "antecedent raw bytes: compare.py",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "antecedent raw bytes: contracts.py",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "antecedent raw bytes: claim_adapter.py",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "antecedent raw bytes: semantic_manifest_v1.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "antecedent raw bytes: semantic_manifest_v1.sha256",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "tracked changes limited to normative delta and IDs",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "existing tracked source/test bytes unchanged",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "no new Impulse production Python",
+      "result": "PASS",
+      "detail": [
+        "audit/c1b1-closure-fixes-2026-10-05/check_static.py",
+        "current/c1b1-closure-fixes-2026-10-05/received/guard_contract_witness.py"
+      ]
+    },
+    {
+      "check": "historical attachment exact bytes: REPORT_KO.md",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "historical attachment exact bytes: static_results.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "historical attachment exact bytes: verdicts.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "historical attachment exact bytes: extended_results.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "historical attachment exact bytes: failure_key_conflict.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "historical attachment exact bytes: guard_contract_witness.json",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "historical attachment exact bytes: guard_contract_witness.py",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "passed method/provenance/identity/mutation documents byte preserved",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "91-record constants bundle byte preserved",
+      "result": "PASS",
+      "detail": null
+    }
+  ],
+  "canonical_hashes": {
+    "acquisition-identity.json": "673941bf9f88835f9ee494268e2837a6bd3e6b09323ad75db70d1f8df7666759",
+    "constants.json": "f1cf6a71afaf45e40db37a6e8a5b4f643a57885f4040d4fa285835530363e196",
+    "finite-policy.json": "e8ceec423827a0699a8d3709508dff3eebd7f7e8a99f92d4436dc7b57f83fdd8",
+    "package-manifest.json": "9d430833bb359600b4c9f67f225e9c8a74fb883d6fe119ca8b7c2502b8ce4499",
+    "physical-domain.json": "eef0a3531c7bc5f233e7cd7212c3807735c05bc88284bd16600c894afc817c03",
+    "proof-wire.json": "b7994420f6896eb352730ac0fb5983a6c74c0635d357dffea3281535b57f27e9",
+    "rechecker-lineage.json": "4767ae1773fa2f697e749b90aa1b66da686605cbfb690307aa9c2d0c87427ab9",
+    "semantic-bundle.json": "11eedb45fc80d8b1f8db1bc5afdceb1754914c5e2f49ba48ad2b4d87d63bb007",
+    "status-composition.json": "4257563b2c82a66094f96da539cdf9bbe1967699403fd61ba613d195b26483ee"
+  },
+  "dependency_edges": [
+    [
+      "acquisition-identity.json",
+      "constants.json"
+    ],
+    [
+      "acquisition-identity.json",
+      "physical-domain.json"
+    ],
+    [
+      "acquisition-identity.json",
+      "proof-wire.json"
+    ],
+    [
+      "finite-policy.json",
+      "proof-wire.json"
+    ],
+    [
+      "package-manifest.json",
+      "acquisition-identity.json"
+    ],
+    [
+      "package-manifest.json",
+      "constants.json"
+    ],
+    [
+      "package-manifest.json",
+      "finite-policy.json"
+    ],
+    [
+      "package-manifest.json",
+      "physical-domain.json"
+    ],
+    [
+      "package-manifest.json",
+      "proof-wire.json"
+    ],
+    [
+      "package-manifest.json",
+      "rechecker-lineage.json"
+    ],
+    [
+      "package-manifest.json",
+      "semantic-bundle.json"
+    ],
+    [
+      "package-manifest.json",
+      "status-composition.json"
+    ],
+    [
+      "physical-domain.json",
+      "constants.json"
+    ],
+    [
+      "proof-wire.json",
+      "physical-domain.json"
+    ],
+    [
+      "rechecker-lineage.json",
+      "acquisition-identity.json"
+    ],
+    [
+      "rechecker-lineage.json",
+      "proof-wire.json"
+    ],
+    [
+      "semantic-bundle.json",
+      "acquisition-identity.json"
+    ],
+    [
+      "semantic-bundle.json",
+      "constants.json"
+    ],
+    [
+      "semantic-bundle.json",
+      "finite-policy.json"
+    ],
+    [
+      "semantic-bundle.json",
+      "physical-domain.json"
+    ],
+    [
+      "semantic-bundle.json",
+      "proof-wire.json"
+    ],
+    [
+      "semantic-bundle.json",
+      "rechecker-lineage.json"
+    ],
+    [
+      "semantic-bundle.json",
+      "status-composition.json"
+    ],
+    [
+      "status-composition.json",
+      "acquisition-identity.json"
+    ],
+    [
+      "status-composition.json",
+      "finite-policy.json"
+    ]
+  ],
+  "protected_arithmetic_files": [
+    {
+      "path": "independent_checker/c1b1/exact_slow.py",
+      "sha256": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+      "antecedent_byte_identical": true
+    },
+    {
+      "path": "independent_checker/c1b1/exact_fast.py",
+      "sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+      "antecedent_byte_identical": true
+    },
+    {
+      "path": "independent_checker/c1b1/exact_geometry.py",
+      "sha256": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+      "antecedent_byte_identical": true
+    },
+    {
+      "path": "independent_checker/c1b1/compare.py",
+      "sha256": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+      "antecedent_byte_identical": true
+    },
+    {
+      "path": "independent_checker/c1b1/contracts.py",
+      "sha256": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+      "antecedent_byte_identical": true
+    },
+    {
+      "path": "independent_checker/c1b1/claim_adapter.py",
+      "sha256": "24b05ebf374728583ba725c83b8f9324f4b75b5515b03c5b1036339eef3e4899",
+      "antecedent_byte_identical": true
+    },
+    {
+      "path": "independent_checker/c1b1/semantic_manifest_v1.json",
+      "sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+      "antecedent_byte_identical": true
+    },
+    {
+      "path": "independent_checker/c1b1/semantic_manifest_v1.sha256",
+      "sha256": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79",
+      "antecedent_byte_identical": true
+    }
+  ],
+  "tracked_count_before": 2055,
+  "changed_tracked_paths": [
+    "docs/c1b1-independent-impulse-v1/B1-semantic-bundle.md",
+    "docs/c1b1-independent-impulse-v1/B3-physical-domain.md",
+    "docs/c1b1-independent-impulse-v1/B4-proof-wire-resource.md",
+    "docs/c1b1-independent-impulse-v1/B8-status-composition.md",
+    "docs/c1b1-independent-impulse-v1/README.md",
+    "docs/c1b1-independent-impulse-v1/obligation-ledger.md",
+    "specs/c1b1-independent-impulse-v1/acquisition-identity.json",
+    "specs/c1b1-independent-impulse-v1/acquisition-identity.json.sha256",
+    "specs/c1b1-independent-impulse-v1/finite-policy.json",
+    "specs/c1b1-independent-impulse-v1/finite-policy.json.sha256",
+    "specs/c1b1-independent-impulse-v1/package-manifest.json",
+    "specs/c1b1-independent-impulse-v1/package-manifest.json.sha256",
+    "specs/c1b1-independent-impulse-v1/physical-domain.json",
+    "specs/c1b1-independent-impulse-v1/physical-domain.json.sha256",
+    "specs/c1b1-independent-impulse-v1/proof-wire.json",
+    "specs/c1b1-independent-impulse-v1/proof-wire.json.sha256",
+    "specs/c1b1-independent-impulse-v1/rechecker-lineage.json",
+    "specs/c1b1-independent-impulse-v1/rechecker-lineage.json.sha256",
+    "specs/c1b1-independent-impulse-v1/semantic-bundle.json",
+    "specs/c1b1-independent-impulse-v1/semantic-bundle.json.sha256",
+    "specs/c1b1-independent-impulse-v1/status-composition.json",
+    "specs/c1b1-independent-impulse-v1/status-composition.json.sha256"
+  ],
+  "unchanged_tracked_count": 2033,
+  "failure_envelope_upper_bound_bytes": 789,
+  "new_nonproduction_python": [
+    "audit/c1b1-closure-fixes-2026-10-05/check_static.py",
+    "current/c1b1-closure-fixes-2026-10-05/received/guard_contract_witness.py"
+  ],
+  "witness_scope": "recorded exact rational inequalities only; segment/witness script NOT executed",
+  "impulse_or_V2_executed": false,
+  "production_tests_run": false,
+  "mutants_run": false,
+  "benchmark_run": false,
+  "numeric_runtime_instance_issued": false,
+  "implementation_may_start": false,
+  "J_status": "J_NOT_VERIFIED",
+  "certification": "NotCertified"
+}

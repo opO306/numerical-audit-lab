@@ -1,0 +1,56 @@
+{
+  "schema": "C1B1_CLOSURE_AUDIT_RESULT_UPDATE_V1",
+  "revision": "F-CLOSURE-1-2-2026-10-05",
+  "reviewed_snapshot": "4cb2910fe936f7b1d5150196e062b6b61edc240f",
+  "historical_result": "CLOSURE REVISION REQUIRED",
+  "historical_findings": [
+    "F-CLOSURE-1",
+    "F-CLOSURE-2"
+  ],
+  "current_disposition": {
+    "F-CLOSURE-1": "FIX APPLIED / INDEPENDENT RECHECK PENDING",
+    "F-CLOSURE-2": "FIX APPLIED / INDEPENDENT RECHECK PENDING"
+  },
+  "independent_impulse": "DESIGN ONLY / NOT IMPLEMENTED",
+  "implementation_may_start": false,
+  "passed_method_contracts": {
+    "C1": "B1 semantic bundle",
+    "C2": "B2 units/constants provenance",
+    "C5": "B5 finite computation policy",
+    "C6": "B6 rechecker lineage",
+    "C7": "B7 acquisition/identity",
+    "C8": "B8 status/composition",
+    "C10": "mutation/validation plan",
+    "C11": "source/provenance preservation"
+  },
+  "B5": "METHOD SPEC PASS / RUNTIME NUMERIC INSTANCE STILL REQUIRED BEFORE ACTIVATION",
+  "numeric_runtime_instance": "NOT ISSUED",
+  "provenance": {
+    "P0": {
+      "independent_review_confirmed": true,
+      "bytes": 12061,
+      "sha256": "a598057183121b9c928b3a9804c8e2e99afa553bad570a471aa4130f20e6b049",
+      "scope": "fixed package raw bytes; not a new publisher-server download or origin authenticity certificate"
+    },
+    "constants": {
+      "records": 91,
+      "exact_transcription_independently_matched": true,
+      "source": "received verdicts C2 and static_results"
+    },
+    "AEV": {
+      "commit": "27e48770ab5db666bcd78034d151ddbb04b6af54",
+      "exact_object_and_path_independently_verified": true,
+      "role": "comparison-only",
+      "trusted_antecedent": false
+    }
+  },
+  "historical_metadata_notice": "Old author-time unresolved/provenance flags in the byte-preserved constants bundle, source-recovery and initial documents are historical as-of metadata, not the current independent result. This dated audit-result update records the confirmed provenance; no source-data or historical receipt is rewritten.",
+  "arithmetic": "INDEPENDENT REVIEW PASS / exact_slow DEFAULT / exact_fast EXPERIMENTAL OPT-IN",
+  "physical": "J_NOT_VERIFIED / NotCertified",
+  "sources": {
+    "report": "received/REPORT_KO.md",
+    "verdicts": "received/verdicts.json",
+    "static": "received/static_results.json",
+    "extended": "received/extended_results.json"
+  }
+}

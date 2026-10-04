@@ -1,39 +1,41 @@
 # I1–I22 — Updated obligation ledger
 
-- status: DESIGN CONDITIONS ADDRESSED / IMPLEMENTATION STILL NOT STARTED / REVIEW PENDING
-- version: 1, 2026-10-04; audited design snapshot `023b186c0e9d95c11399893e7f75772cfff6c3a7`의 후속 저자 사양
-- dependencies: B1–B8; [independent verdicts](../../current/c1b1-impulse-design-conditions-2026-10-04/received/verdicts.json); historical design §16
-- unresolved items: I1/I10/I12/I13은 B gate independent 승인 전 BLOCKED; 모든 구현 증거 미발급
+- status: F-CLOSURE-1/2 FIX APPLIED / INDEPENDENT RECHECK PENDING / DESIGN ONLY / NOT IMPLEMENTED
+- version: 2, 2026-10-05; closure audit snapshot `4cb2910fe936f7b1d5150196e062b6b61edc240f`의 독립 판정 및 최소 수정 반영
+- dependencies: B1–B8; [closure verdicts](../../current/c1b1-closure-fixes-2026-10-05/received/verdicts.json); historical design §16
+- unresolved items: I1/I14(F-CLOSURE-1), I10/I18(F-CLOSURE-2)은 FIX APPLIED / INDEPENDENT RECHECK PENDING; 실제 구현 증거 미발급
 - what this does NOT certify: production 구현, 모든 입력의 finite-budget 성공, 물리 정확성, J verification, integration/trajectory/replay/N-Step, certification.
 
 기존 [감사 대상 설계](../C1B1_INDEPENDENT_IMPULSE_V1_DESIGN.md)는 역사적 snapshot으로 보존한다. 이 후속 사양은 지정한 항목에 한해 옛 제안/U1–U8을 대체하며, 독립 closure 재검토의 `IMPLEMENTATION MAY START` 판정 전 소스 구현을 허용하지 않는다.
 
-이 표는 historical verdict를 바꾸지 않는 후속 ledger다. 감사의 READY FOR IMPLEMENTATION은 개별 식 전략 평가이지 B1–B8을 건너뛰는 전체 착수 허가가 아니다. 이번 specification 작성이 implementation PASS라는 뜻도 아니다.
+이 표는 historical verdict를 바꾸지 않는 후속 ledger다. 이번 독립 감사의 READY는 해당 의무의 사양 준비 상태이며 전체 착수 허가가 아니다. 이번 specification 작성이 implementation PASS라는 뜻도 아니다.
 
-| ID | revised obligation | historical auditor state | current author state | dependencies |
+| ID | revised obligation | independent state at 4cb2910 | current revision state | dependencies |
 |---|---|---|---|---|
-| I1 | Lab bundle/constants/units/domain authority+canonical hash+source 전사 승인 | BLOCKED | BLOCKED — independent B-gate closure 승인 전 | B1/B2/B3 |
-| I2 | bounded raw→q=r_j-r_i→R²; acquisition/full-state equality | IMPLEMENTATION-DEPENDENT | OPEN — specification addressed; implementation/proof evidence pending | B1/B7 |
-| I3 | 모든 V short/long/retarded branches 및 indices 정확 전사 | READY FOR IMPLEMENTATION | OPEN — specification addressed; implementation/proof evidence pending | B1/B2 |
-| I4 | analytic V′, BO i=-1/g′/TT slope/REL leading, force/sign/h/no-mass 대응 | READY FOR IMPLEMENTATION | OPEN — specification addressed; implementation/proof evidence pending | B1/B2 |
-| I5 | sqrt/inverse/power/signed interval containment; denominator positivity | OPEN | OPEN — specification addressed; implementation/proof evidence pending | B3/B5/I17 |
-| I6 | exp-tail/range reduction/각 squaring outward widening, cutoff 없음 | READY FOR IMPLEMENTATION | OPEN — specification addressed; implementation/proof evidence pending | B1/B5 |
-| I7 | V′→-V′/R→h*q→J sound composition; correlation/cancellation은 availability 문제 | READY FOR IMPLEMENTATION | OPEN — specification addressed; implementation/proof evidence pending | B1/B5 |
-| I8 | exact nearest-even cells, negative ties, asymmetric signed overflow; strict V2 제한 | READY FOR IMPLEMENTATION | OPEN — specification addressed; implementation/proof evidence pending | B1/B8 |
-| I9 | spec/domain 후 exact-zero만; common J orientation/negation range | READY FOR IMPLEMENTATION | OPEN — specification addressed; implementation/proof evidence pending | B3/B6 |
-| I10 | 모든 refusal에서 immutable input/state; bounded error; pre-str guard; atomic publication | BLOCKED | BLOCKED — independent B-gate closure 승인 전 | B4/B5/B8 |
-| I11 | I11a–d 네 명제 별도 논증; finite-budget all-input success를 요구하지 않음 | OPEN | OPEN — specification addressed; implementation/proof evidence pending | B4/B5 |
-| I12 | 선택 B parser/primitive/enclosure/rounding/executor helpers 독립; 실제 source/process/call 증거 | BLOCKED | BLOCKED — independent B-gate closure 승인 전 | B6 |
-| I13 | same-state/spec/occurrence/phase comparison; missing/mismatch/refusal 보존 | BLOCKED | BLOCKED — independent B-gate closure 승인 전 | B7/B8 |
-| I14 | 기존 Arithmetic bytes/status 보존; J0/J1 새 snapshot; point와 composition gate 구분 | IMPLEMENTATION-DEPENDENT | OPEN — specification addressed; implementation/proof evidence pending | B3/B7/B8 |
-| I15 | 각 실제 source mutant의 nondegenerate fixture+independent expected+semantic detection | IMPLEMENTATION-DEPENDENT | OPEN — specification addressed; implementation/proof evidence pending | B6/B8 |
-| I16 | author와 independent 대상 source/dependency/proof/receipt를 각각 고정 | IMPLEMENTATION-DEPENDENT | OPEN — specification addressed; implementation/proof evidence pending | B1–B8 |
-| I17 | 전역 domain 및 모든 denominator regularity와 coarse-lower-zero 처리 | NEW AUDIT OBLIGATION | OPEN — specification addressed; implementation/proof evidence pending | B3/B5 |
-| I18 | bit/allocation/work preflight 및 compact proof/wire/failure-envelope 공동 호환성 | NEW AUDIT OBLIGATION | OPEN — specification addressed; implementation/proof evidence pending | B4+B5 |
-| I19 | certificate→recheck full soundness; 원입력 nonlinear 재구성 또는 각 witness independent 검증 | NEW AUDIT OBLIGATION | OPEN — specification addressed; implementation/proof evidence pending | B6/B7 |
-| I20 | refinement sequence 결정론; nonnested sound 허용; empty intersection/conflicting raw anomaly STOP | NEW AUDIT OBLIGATION | OPEN — specification addressed; implementation/proof evidence pending | B5/B8 |
-| I21 | canonical full/math/occurrence identity와 stale cache 방어; V1 cache disabled | NEW AUDIT OBLIGATION | OPEN — specification addressed; implementation/proof evidence pending | B7 |
-| I22 | 모든3축 승인/출판 가능 후 atomic J/certificate/state; partial commit 없음 | NEW AUDIT OBLIGATION | OPEN — specification addressed; implementation/proof evidence pending | B4/B8 |
+| I1 | Lab bundle/constants/units/domain authority+canonical hash+source 전사 승인 | BLOCKED | FIX APPLIED / INDEPENDENT RECHECK PENDING | B1/B2/B3 |
+| I2 | bounded raw→q=r_j-r_i→R²; acquisition/full-state equality | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B1/B7 |
+| I3 | 모든 V short/long/retarded branches 및 indices 정확 전사 | READY | READY | B1/B2 |
+| I4 | analytic V′, BO i=-1/g′/TT slope/REL leading, force/sign/h/no-mass 대응 | READY | READY | B1/B2 |
+| I5 | sqrt/inverse/power/signed interval containment; denominator positivity | READY | READY | B3/B5/I17 |
+| I6 | exp-tail/range reduction/각 squaring outward widening, cutoff 없음 | READY | READY | B1/B5 |
+| I7 | V′→-V′/R→h*q→J sound composition; correlation/cancellation은 availability 문제 | READY | READY | B1/B5 |
+| I8 | exact nearest-even cells, negative ties, asymmetric signed overflow; strict V2 제한 | READY | READY | B1/B8 |
+| I9 | spec/domain 후 exact-zero만; common J orientation/negation range | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B3/B6 |
+| I10 | 모든 refusal에서 immutable input/state; bounded error; pre-str guard; atomic publication | BLOCKED | FIX APPLIED / INDEPENDENT RECHECK PENDING | B4/B5/B8 |
+| I11 | I11a–d 네 명제 별도 논증; finite-budget all-input success를 요구하지 않음 | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B4/B5 |
+| I12 | 선택 B parser/primitive/enclosure/rounding/executor helpers 독립; 실제 source/process/call 증거 | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B6 |
+| I13 | same-state/spec/occurrence/phase comparison; missing/mismatch/refusal 보존 | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B7/B8 |
+| I14 | 기존 Arithmetic bytes/status 보존; J0/J1 새 snapshot; point와 composition gate 구분 | BLOCKED | FIX APPLIED / INDEPENDENT RECHECK PENDING | B3/B7/B8 |
+| I15 | 각 실제 source mutant의 nondegenerate fixture+independent expected+semantic detection | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B6/B8 |
+| I16 | author와 independent 대상 source/dependency/proof/receipt를 각각 고정 | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B1–B8 |
+| I17 | 전역 domain 및 모든 denominator regularity와 coarse-lower-zero 처리 | READY | READY | B3/B5 |
+| I18 | bit/allocation/work preflight 및 compact proof/wire/failure-envelope 공동 호환성 | BLOCKED | FIX APPLIED / INDEPENDENT RECHECK PENDING | B4+B5 |
+| I19 | certificate→recheck full soundness; 원입력 nonlinear 재구성 또는 각 witness independent 검증 | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B6/B7 |
+| I20 | refinement sequence 결정론; nonnested sound 허용; empty intersection/conflicting raw anomaly STOP | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B5/B8 |
+| I21 | canonical full/math/occurrence identity와 stale cache 방어; V1 cache disabled | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B7 |
+| I22 | 모든3축 승인/출판 가능 후 atomic J/certificate/state; partial commit 없음 | IMPLEMENTATION-DEPENDENT | IMPLEMENTATION-DEPENDENT | B4/B8 |
+
+4cb2910의 I1/I14 BLOCKED는 F-CLOSURE-1, I10/I18 BLOCKED는 F-CLOSURE-2에 귀속된 역사 판정이다. 이번 revision에서 네 항목은 FIX APPLIED / INDEPENDENT RECHECK PENDING이며 PASS로 승격하지 않는다. 나머지 READY / IMPLEMENTATION-DEPENDENT 판정은 그대로 보존한다. I12/I13을 다시 BLOCKED로 되돌리지 않는다.
 
 ## I11의 네 독립 명제
 
