@@ -1,0 +1,85 @@
+{
+  "schema": "regular-2step-independent-reaudit-v1",
+  "date": "2026-10-04",
+  "verdict": "PASS",
+  "scope": "regular two-step chain only",
+  "branch": "regular-2step-chain",
+  "git_head": "e69119e259b862a7d8462c8d61333782ee2747fd",
+  "package": {
+    "bytes": 355162217,
+    "sha256": "868558e66f72c3344b4e1145812a2c50f6a6ff32749c5f5d718531e92af599e8",
+    "zip_entries": 4885,
+    "manifest_payload_members": 4884,
+    "payload_hash_mismatches": 0,
+    "duplicate_member_names": 0
+  },
+  "git": {
+    "bundle_verify": "PASS",
+    "strict_fsck_exit": 0,
+    "baseline_ancestry": "PASS",
+    "live_remote_head": "e69119e259b862a7d8462c8d61333782ee2747fd",
+    "baseline_files": 1488,
+    "unchanged_existing_blobs": 1487,
+    "changed_existing": [
+      ".gitattributes"
+    ],
+    "deleted_existing": 0
+  },
+  "raw_chain": {
+    "cases": 2,
+    "records_per_case": 1428,
+    "step_rows_per_occurrence": 255,
+    "caller_rows_per_case": 727,
+    "operations_per_case": 22,
+    "operation_counts": {
+      "ADD_BINARY64": 7,
+      "SUB_BINARY64": 5,
+      "MUL_BINARY64": 10
+    },
+    "values_per_case": 151,
+    "state_bindings_per_case": 107,
+    "carries_per_case": 6
+  },
+  "independent_caller_ea": {
+    "pre_reads_per_case": 218,
+    "writes_per_case": 111,
+    "mismatches": 0,
+    "unsupported": 0,
+    "protected_overlaps": 0
+  },
+  "independent_binary64": {
+    "arithmetic_mismatches": 0,
+    "method": "stdlib Fraction + independent binary64 round-to-nearest-even encoder"
+  },
+  "tests": {
+    "independently_rerun_regular2step": 81,
+    "rerun_failures": 0,
+    "split_runs": [
+      {
+        "tests": 37,
+        "passed": 37
+      },
+      {
+        "tests": 44,
+        "passed": 44
+      }
+    ],
+    "historical_unique_inventory_verified": 661,
+    "full_661_rerun": false
+  },
+  "mutations": {
+    "semantic_classes": 15,
+    "semantic_refused": 15,
+    "hash_control": "REFUSED",
+    "trust_control": "REFUSED"
+  },
+  "limitations": [
+    "init-return to step1-entry remains untraced",
+    "native carried symbolic coefficients are zero",
+    "ASLR diversity not established",
+    "harness n_steps=1 field is stale metadata",
+    "frozen V2 theorem/math not re-audited from first principles in this audit",
+    "no N-step or trajectory correctness claim",
+    "no 3-step induction claim"
+  ]
+}

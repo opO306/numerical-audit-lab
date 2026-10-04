@@ -1,0 +1,67 @@
+{
+  "schema": "regular-2step-received-independent-audit-files-v1",
+  "received_date": "2026-10-04",
+  "source_directory": "D:\\regular2step-independent-audit-retry-2026-10-04",
+  "audited_branch": "regular-2step-chain",
+  "audited_head": "e69119e259b862a7d8462c8d61333782ee2747fd",
+  "evidence_role": "USER_SUPPLIED_EXTERNAL_INDEPENDENT_AUDIT; copied byte-for-byte, not a new audit performed by importer",
+  "files": [
+    {
+      "path": "INDEPENDENT_REAUDIT_REPORT_KO.md",
+      "bytes": 6519,
+      "sha256": "23537655ff0c244e21edc865f6b53320e5e3cc6f34022c81f5c9b30ef74e6338"
+    },
+    {
+      "path": "independent_reaudit_receipt.json",
+      "bytes": 2316,
+      "sha256": "9f72cf658b24e5442356ed68ddd3f2ba8cb82bb8bf8dc5731cfbe7bac869457f"
+    },
+    {
+      "path": "independent_raw_chain_check.py",
+      "bytes": 6790,
+      "sha256": "a402a275e50cf142eec371a36a635afe31889f159940bf1b341ca9a8ac4411b2"
+    },
+    {
+      "path": "independent_caller_ea_check.py",
+      "bytes": 5094,
+      "sha256": "7403d48f6231b67b3214ee0b7023cdacfbe0dbc8a259e640683c06b21adc5da8"
+    },
+    {
+      "path": "independent_binary64_check.py",
+      "bytes": 2147,
+      "sha256": "311b4313aafb656e28abdb228387bff05e531392179fa1194d4ae444dc59a92f"
+    },
+    {
+      "path": "independent_source_tree_check.py",
+      "bytes": 1681,
+      "sha256": "ea86b53f6582d7bf4a0844eb540b70ef668c14f3f53eed1f3fc58e719322b713"
+    },
+    {
+      "path": "independent_junit_check.py",
+      "bytes": 995,
+      "sha256": "d936e31ada388a26c67f0c0dad41a7844345702105db249e0da58e23e6e8e1f5"
+    },
+    {
+      "path": "independent_inventory_check.py",
+      "bytes": 768,
+      "sha256": "7fd7ed21c9b4eceddb2c98f33c14c986ef5a407f54659ec1508edfbb028bc0af"
+    }
+  ],
+  "manifest_self_included": false,
+  "hash_scope": "byte identity and provenance; not cryptographic proof of authorship",
+  "scripts_reproduction_boundary": "Original scripts retain their hardcoded source checkout paths; copying does not make them portable. Original external audit checkout remains untouched.",
+  "user_handoff": {
+    "path": "C:\\Users\\zun24\\.codex\\attachments\\df90f8b1-dabd-4eab-9022-f5eafbaca1ce\\붙여넣은 텍스트.txt",
+    "bytes": 13036,
+    "sha256": "afdb0249ab79baea318ea05b5f1dece3b7f11014936e2d778f002ce5570816e8"
+  },
+  "new_native_acquisitions": 0,
+  "new_pytest_runs_by_importer": 0,
+  "sealed_implementation_time_status": [
+    "IMPLEMENTED",
+    "CHECKER PASS",
+    "INDEPENDENT AUDIT PENDING"
+  ],
+  "received_external_audit_result": "INDEPENDENT AUDIT PASS",
+  "full_661_rerun": false
+}
