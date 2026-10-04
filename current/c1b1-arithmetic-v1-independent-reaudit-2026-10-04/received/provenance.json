@@ -1,0 +1,203 @@
+{
+  "observed_at_utc": "2026-10-04T11:39:02.222005+00:00",
+  "target": "65d8fd29ae255529afead70289098d36b825b3b4",
+  "parent": "433be43ee6aca31f3a4cb76094a19d50e2cbefa8",
+  "old": "f806d8ce1ef86a0948b1a8abafe1a22c3058178b",
+  "head": "65d8fd29ae255529afead70289098d36b825b3b4",
+  "remote_branch_start": "65d8fd29ae255529afead70289098d36b825b3b4\trefs/heads/codex/c1b1-fclaim1-output-limit",
+  "tree_counts": {
+    "old": 1943,
+    "parent": 1944,
+    "target": 1974
+  },
+  "old_to_parent": {
+    "added": [
+      "docs/C1B1_ARITHMETIC_V1_CURRENT_STATUS_2026-10-04.md"
+    ],
+    "deleted": [],
+    "modified": []
+  },
+  "parent_to_target": {
+    "added": [
+      "current/c1b1-claim-output-fix-2026-10-04/.gitattributes",
+      "current/c1b1-claim-output-fix-2026-10-04/baseline-reproduction.json",
+      "current/c1b1-claim-output-fix-2026-10-04/claim-regression.json",
+      "current/c1b1-claim-output-fix-2026-10-04/measure_claim_regression.py",
+      "current/c1b1-claim-output-fix-2026-10-04/preservation-before.json",
+      "current/c1b1-claim-output-fix-2026-10-04/received/REPORT_KO.md",
+      "current/c1b1-claim-output-fix-2026-10-04/received/claim_boundary_reproduction.json",
+      "current/c1b1-claim-output-fix-2026-10-04/received/independent_audit.py",
+      "current/c1b1-claim-output-fix-2026-10-04/received/independent_mutants.json",
+      "current/c1b1-claim-output-fix-2026-10-04/received/independent_results.json",
+      "current/c1b1-claim-output-fix-2026-10-04/received/remote_measurement_extract.json",
+      "current/c1b1-claim-output-fix-2026-10-04/received/reproduce_claim_boundary.py",
+      "current/c1b1-claim-output-fix-2026-10-04/red-boundary-tests.log",
+      "current/c1b1-claim-output-fix-2026-10-04/verification-v1/author-verification-receipt.json",
+      "current/c1b1-claim-output-fix-2026-10-04/verification-v1/existing-16-mutants.json",
+      "current/c1b1-claim-output-fix-2026-10-04/verification-v1/fclaim1-source-mutant.json",
+      "current/c1b1-claim-output-fix-2026-10-04/verification-v1/fix-reproduction.json",
+      "current/c1b1-claim-output-fix-2026-10-04/verification-v1/output-boundary-execution.json",
+      "current/c1b1-claim-output-fix-2026-10-04/verification-v1/output-boundary.log",
+      "current/c1b1-claim-output-fix-2026-10-04/verification-v1/output-boundary.xml",
+      "current/c1b1-claim-output-fix-2026-10-04/verification-v1/related-105-execution.json",
+      "current/c1b1-claim-output-fix-2026-10-04/verification-v1/related-105.log",
+      "current/c1b1-claim-output-fix-2026-10-04/verification-v1/related-105.xml",
+      "current/c1b1-claim-output-fix-2026-10-04/verification-v1/repository-full-execution.json",
+      "current/c1b1-claim-output-fix-2026-10-04/verification-v1/repository-full.log",
+      "current/c1b1-claim-output-fix-2026-10-04/verification-v1/repository-full.xml",
+      "docs/C1B1_ARITHMETIC_V1_FCLAIM1_FIX_2026-10-04.md",
+      "tests/test_c1b1_claim_output_boundary.py",
+      "tests/test_c1b1_claim_output_mutant.py",
+      "tools/verify_c1b1_claim_output_fix.py"
+    ],
+    "deleted": [],
+    "modified": [
+      "independent_checker/c1b1/claim_adapter.py"
+    ]
+  },
+  "source_sha256": {
+    "exact_slow.py": {
+      "old": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+      "parent": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+      "target": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+      "checkout": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13"
+    },
+    "exact_fast.py": {
+      "old": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+      "parent": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+      "target": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+      "checkout": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b"
+    },
+    "exact_geometry.py": {
+      "old": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+      "parent": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+      "target": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+      "checkout": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e"
+    },
+    "compare.py": {
+      "old": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+      "parent": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+      "target": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+      "checkout": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2"
+    },
+    "contracts.py": {
+      "old": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+      "parent": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+      "target": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+      "checkout": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed"
+    },
+    "semantic_manifest_v1.json": {
+      "old": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+      "parent": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+      "target": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+      "checkout": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+    },
+    "semantic_manifest_v1.sha256": {
+      "old": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79",
+      "parent": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79",
+      "target": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79",
+      "checkout": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79"
+    },
+    "claim_adapter.py": {
+      "old": "8e8894eb2abc0e1540f516418287b9e576e282c6140d7d83af9523788fd0d85e",
+      "parent": "8e8894eb2abc0e1540f516418287b9e576e282c6140d7d83af9523788fd0d85e",
+      "target": "24b05ebf374728583ba725c83b8f9324f4b75b5515b03c5b1036339eef3e4899",
+      "checkout": "24b05ebf374728583ba725c83b8f9324f4b75b5515b03c5b1036339eef3e4899"
+    }
+  },
+  "changed_checkout_bytes_match_git": 31,
+  "preserved_parent_paths": 1943,
+  "before_tracked_status": "",
+  "python": "3.12.7 (tags/v3.12.7:0b05ead, Oct  1 2024, 03:06:41) [MSC v.1941 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "process_integer_string_limit": 4300,
+  "runs": {
+    "related_105": {
+      "command": [
+        "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_c1b1_slow.py",
+        "tests/test_c1b1_fast.py",
+        "tests/test_c1b1_differential.py",
+        "tests/test_c1b1_geometry.py",
+        "tests/test_c1b1_mutants.py",
+        "tests/test_c1b1_claims.py",
+        "tests/test_c1b1_boundary.py",
+        "tests/test_independence.py",
+        "tests/test_provenance.py",
+        "--junitxml=C:\\Users\\zun24\\AppData\\Local\\Temp\\c1b1_reaudit_65d8fd2_2z1b9i6t\\related_105.xml"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 5.452971699996851,
+      "junit_suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "105",
+          "time": "4.495",
+          "timestamp": "2026-10-04T20:39:04.647040+09:00",
+          "hostname": "\uc73c\uc545"
+        }
+      ],
+      "stdout_sha256": "b747bec1ee029cf01ce380d5a2037266522e449edabd8a69302ba9ce4734b559"
+    },
+    "output_45": {
+      "command": [
+        "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_c1b1_claim_output_boundary.py",
+        "tests/test_c1b1_claim_output_mutant.py",
+        "--junitxml=C:\\Users\\zun24\\AppData\\Local\\Temp\\c1b1_reaudit_65d8fd2_2z1b9i6t\\output_45.xml"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.2337439999973867,
+      "junit_suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "45",
+          "time": "0.252",
+          "timestamp": "2026-10-04T20:39:10.024238+09:00",
+          "hostname": "\uc73c\uc545"
+        }
+      ],
+      "stdout_sha256": "a72786d1f0cdc935a9ebbc4544193714a58f92d78d0a385f5931bf55c1288066"
+    },
+    "full_393": {
+      "command": [
+        "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "--junitxml=C:\\Users\\zun24\\AppData\\Local\\Temp\\c1b1_reaudit_65d8fd2_2z1b9i6t\\full_393.xml"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 36.19483749999199,
+      "junit_suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "393",
+          "time": "35.213",
+          "timestamp": "2026-10-04T20:39:11.309873+09:00",
+          "hostname": "\uc73c\uc545"
+        }
+      ],
+      "stdout_sha256": "3b015016481f1bbce81a9cb1703f8271e9508c2d2f647e2761476d28deaffbf4"
+    }
+  },
+  "after_tracked_status": "",
+  "after_head": "65d8fd29ae255529afead70289098d36b825b3b4",
+  "remote_branch_end": "65d8fd29ae255529afead70289098d36b825b3b4\trefs/heads/codex/c1b1-fclaim1-output-limit",
+  "finished_at_utc": "2026-10-04T11:39:48.083422+00:00"
+}

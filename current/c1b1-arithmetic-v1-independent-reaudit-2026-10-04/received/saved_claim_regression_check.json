@@ -1,0 +1,27 @@
+{
+  "purpose": "SAVED CLAIM REGRESSION RECOMPUTATION ONLY / NO PERFORMANCE PROMOTION",
+  "rows": {
+    "audited.exact_slow": {
+      "median_ns": 193119.0,
+      "min_ns": 186442.5,
+      "max_ns": 212496.5
+    },
+    "audited.exact_fast": {
+      "median_ns": 136606.75,
+      "min_ns": 132281.75,
+      "max_ns": 157452.5
+    },
+    "fix.exact_slow": {
+      "median_ns": 200504.75,
+      "min_ns": 187925.0,
+      "max_ns": 208466.0
+    },
+    "fix.exact_fast": {
+      "median_ns": 138789.0,
+      "min_ns": 134345.0,
+      "max_ns": 146403.25
+    }
+  },
+  "script_and_adapter_source_hashes_match": true,
+  "fresh_timing_performed": false
+}

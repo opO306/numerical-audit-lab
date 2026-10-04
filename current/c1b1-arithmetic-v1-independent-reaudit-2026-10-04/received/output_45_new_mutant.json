@@ -1,0 +1,31 @@
+{
+  "finding": "F-CLAIM-1",
+  "source": "claim_adapter.py",
+  "edits": [
+    [
+      "if abs(value) >= _OUTPUT_INTEGER_LIMIT:",
+      "if False:"
+    ]
+  ],
+  "baseline_sha256": "24b05ebf374728583ba725c83b8f9324f4b75b5515b03c5b1036339eef3e4899",
+  "mutant_sha256": "6e2946ca939392d8dc82baff438f0be54279a1aed87120ac0d7f638391ab2c21",
+  "baseline": "PASS",
+  "actual_mutant_execution": "DETECTED",
+  "observations": [
+    {
+      "path": "exact_slow",
+      "baseline": "PASS",
+      "actual_mutant_execution": "DETECTED",
+      "detection": "assert 'ValueError' == 'LabRefusal'\n  \n  - LabRefusal\n  + ValueError"
+    },
+    {
+      "path": "exact_fast",
+      "baseline": "PASS",
+      "actual_mutant_execution": "DETECTED",
+      "detection": "assert 'ValueError' == 'LabRefusal'\n  \n  - LabRefusal\n  + ValueError"
+    }
+  ],
+  "scope": "ARITHMETIC_ONLY",
+  "j_status": "J_NOT_VERIFIED",
+  "review": "AUTHOR CHECK ONLY / INDEPENDENT RE-AUDIT PENDING"
+}

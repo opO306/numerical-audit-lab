@@ -1,0 +1,52 @@
+{
+  "schema": "DESIGN_ONLY_AUDIT_STATUS_DELIVERY_V1",
+  "observed_at_utc": "2026-10-04T12:45:09.825719+00:00",
+  "lab_head": "65d8fd29ae255529afead70289098d36b825b3b4",
+  "branch": "codex/c1b1-fclaim1-output-limit",
+  "audit_target": "65d8fd29ae255529afead70289098d36b825b3b4",
+  "historical_fail_preserved": "f806d8ce1ef86a0948b1a8abafe1a22c3058178b = overall FAIL / F-CLAIM-1",
+  "arithmetic_status": "INDEPENDENT REVIEW PASS / limited independent re-audit (received evidence)",
+  "impulse_status": "DESIGN ONLY / NOT IMPLEMENTED / NOT AUDITED",
+  "physical_status": "J_NOT_VERIFIED / NotCertified",
+  "fast_status": "EXPERIMENTAL / OPT-IN",
+  "tracked_existing_paths_checked": 1974,
+  "tracked_existing_raw_byte_changes": [],
+  "base_snapshot": "e976fa0fdeef16a27f112a0a4ee42494fe1e46b1",
+  "base_1921_mode_type_blob_objects_unchanged": 1921,
+  "received_original_files_unchanged": 9,
+  "source_provenance_pins_rechecked": 22,
+  "original_checkouts_clean": [
+    "C:\\Users\\zun24\\.codex\\worktrees\\a-ev-audit\\성공은 실패의 어머니",
+    "C:\\Users\\zun24\\성공은 실패의 어머니"
+  ],
+  "staged_changes": false,
+  "runtime_tests_executed_in_this_task": false,
+  "impulse_calculations_executed_in_this_task": false,
+  "auditor_executed_in_this_task": false,
+  "fresh_timing_executed_in_this_task": false,
+  "implementation_files_created": false,
+  "received_auditor_source_only_new_py": [
+    "current/c1b1-arithmetic-v1-independent-reaudit-2026-10-04/received/independent_reaudit.py"
+  ],
+  "new_file_sha256_except_this_receipt": {
+    "current/c1b1-arithmetic-v1-independent-reaudit-2026-10-04/.gitattributes": "8bcac3303cc24ce70bcaa5c9013a66b8288776ded45f69d80bdae34132433cf1",
+    "current/c1b1-arithmetic-v1-independent-reaudit-2026-10-04/receipt-before.json": "7711d2ac134298088fd6175b480b3fd1b679d909a48d6ec564552c1894eb1ed6",
+    "current/c1b1-arithmetic-v1-independent-reaudit-2026-10-04/received/final_observation.json": "36bf2583c998c4a7ce61a2fe7feaf541bd59fc6d01741759ff250640482d8c8d",
+    "current/c1b1-arithmetic-v1-independent-reaudit-2026-10-04/received/independent_reaudit.py": "1f61af099fad7beb1a6cc4d50c600969f6db0b7bcb25aa965cceb30b4f62a971",
+    "current/c1b1-arithmetic-v1-independent-reaudit-2026-10-04/received/independent_results.json": "8fb139e21ace02efe4fd7fdfe5515f4635cc960564e7365f93128419701b8699",
+    "current/c1b1-arithmetic-v1-independent-reaudit-2026-10-04/received/mutant_line_endings_check.json": "46dccc39eccae726a86af1cda19853fb0afd9d5f007e2828ca57d5166c40653a",
+    "current/c1b1-arithmetic-v1-independent-reaudit-2026-10-04/received/output_45_new_mutant.json": "8a4f2e60f36b1179a9d89786835f718e298c0bf0398ce66766d8bb7d5bc92b4b",
+    "current/c1b1-arithmetic-v1-independent-reaudit-2026-10-04/received/provenance.json": "dd34688e8172d14f7deacee7ca39fee0b54218570a0cb0462558264f510ae90a",
+    "current/c1b1-arithmetic-v1-independent-reaudit-2026-10-04/received/related_105_mutants.json": "21bc3843b17c75f20d46fbaee730ddad05eac048ca3f6f01cbdcb9aa3d5d0334",
+    "current/c1b1-arithmetic-v1-independent-reaudit-2026-10-04/received/REPORT_KO.md": "b2be0cd211889b03f6f1f0bf2aafd311b3952b7c3f52502c09143a1bc0c508da",
+    "current/c1b1-arithmetic-v1-independent-reaudit-2026-10-04/received/saved_claim_regression_check.json": "4f4c3917e765bc8c695664c241b2748ce5ee5adfac10d52e4acf1501b4217168",
+    "current/c1b1-arithmetic-v1-independent-reaudit-2026-10-04/request/user-request.txt": "c08fa9cb8a5378454277e82e686970f21bd4c67386ef6cc93c719ec5f50e7c4e",
+    "current/c1b1-arithmetic-v1-independent-reaudit-2026-10-04/specification-source-provenance.json": "2328d427e54b078b62a4582a23a46affff54e339b0bcec8ff4bd7d06ba7608ca",
+    "docs/C1B1_ARITHMETIC_V1_INDEPENDENT_REAUDIT_STATUS_2026-10-04.md": "535efb5882148e1db01c4fc5037ca3f71fc2c7cbb76a130ca8a4143fad5b264f",
+    "docs/C1B1_INDEPENDENT_IMPULSE_V1_DESIGN.md": "2894b84fcc2a341e8f05c7260ebc3e62aaa0c34616cde93f03ed11839548764e"
+  },
+  "commit_performed": false,
+  "push_performed": false,
+  "remote_read_in_this_task": false,
+  "evidence_limit": "Independent report/JSON received; referenced raw subprocess logs and JUnit XML were not in the nine-file delivery. Static byte/document checks do not substitute for independent mathematical review."
+}

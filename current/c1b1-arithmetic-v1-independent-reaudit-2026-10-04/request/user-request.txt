@@ -1,0 +1,647 @@
+C1-B1 Arithmetic V1의 제한 독립 재감사가 완료됐습니다.
+
+최종 감사 대상:
+
+```text
+65d8fd29ae255529afead70289098d36b825b3b4
+```
+
+독립 감사 결과:
+
+```text
+Claim Adapter fix:                    PASS
+Overall C1-B1 Arithmetic V1:          PASS
+
+exact_slow:                           PASS / DEFAULT
+exact_fast:                           PASS / EXPERIMENTAL / OPT-IN
+exact_geometry:                       PASS
+independence boundary:                PASS
+mutant defense:                       PASS
+
+scope:                                ARITHMETIC_ONLY
+impulse:                              J_NOT_VERIFIED
+certification:                        NotCertified
+```
+
+과거:
+
+```text
+f806d8c = overall FAIL / F-CLAIM-1
+```
+
+판정은 역사 기록으로 그대로 유지하십시오.
+
+---
+
+# 다음 목표
+
+이제 다음 핵심 Gate는:
+
+```text
+현재:
+외부 supplied J
+      ↓
+audited Drift/Kick arithmetic
+
+다음:
+physical state
+      ↓
+Independent Exact Impulse
+      ↓
+audited Drift/Kick arithmetic
+```
+
+입니다.
+
+즉 현재 남아 있는 가장 큰 구멍인:
+
+```text
+J_NOT_VERIFIED
+```
+
+를 닫는 방향으로 진행합니다.
+
+다만 **바로 구현하지 마십시오.**
+
+이번 작업은 먼저:
+
+```text
+C1-B1 Independent Impulse V1
+DESIGN ONLY
+```
+
+설계 제안서를 만드는 단계입니다.
+
+---
+
+# 1. 먼저 감사 PASS 상태를 현재 상태 문서에 반영
+
+새 current-status 문서를 만들거나 기존 current-status 후속 문서를 추가하여 다음 시간축을 명시하십시오.
+
+```text
+f806d8c
+→ independent audit FAIL
+→ F-CLAIM-1
+
+65d8fd2
+→ F-CLAIM-1 fixed
+→ limited independent re-audit PASS
+→ C1-B1 Arithmetic V1 independent review PASS
+```
+
+단 다음은 그대로 유지합니다.
+
+```text
+exact_fast:
+EXPERIMENTAL / OPT-IN
+
+scope:
+ARITHMETIC_ONLY
+
+impulse:
+J_NOT_VERIFIED
+
+certification:
+NotCertified
+```
+
+`exact_fast`를 default로 승격하지 마십시오.
+
+기존 감사 문서나 역사적 FAIL을 사후 수정하지 마십시오.
+
+---
+
+# 2. Independent Impulse의 목적
+
+새 독립 계산기는 원본 executor가 계산한 `J`를 받아 검산하는 것이 아닙니다.
+
+목표는:
+
+> 주어진 C1-B1 상태와 frozen physical/numeric specification으로부터 impulse `J` 자체를 독립적으로 계산하고, 원본 executor가 사용한 `J`와 비교할 수 있는 별도 oracle을 만드는 것
+
+입니다.
+
+따라서 최종적으로 원하는 구조는:
+
+```text
+Frozen C1-B1 state/spec
+          │
+          ├── Original executor impulse
+          │
+          └── Independent impulse oracle
+                       │
+                       ↓
+                 J comparison
+                       │
+                       ↓
+          Audited Arithmetic V1
+             K → D → K / guards
+```
+
+입니다.
+
+---
+
+# 3. 원본 impulse 코드는 oracle로 사용 금지
+
+다음 원본 구현을 import/copy/rebind하여 independent impulse를 만들지 마십시오.
+
+예:
+
+```text
+a_reference/c1b1_fast_impulse.py
+a_reference/c1b1_impulse_primitives.py
+a_reference/c1b1_two_atom.py
+```
+
+또 다음도 금지합니다.
+
+```text
+원본 함수 호출
+원본 helper import
+FunctionType rebinding
+AST function extraction
+source copy 후 exec
+monkeypatch로 원본 계산 우회 호출
+원본 fast path를 expected answer generator로 사용
+```
+
+원본 소스는 **비교 대상**이지 independent oracle이 아닙니다.
+
+---
+
+# 4. 먼저 specification source를 식별
+
+Independent Impulse V1을 구현하려면 어떤 수학적 정의가 authoritative한지 먼저 고정해야 합니다.
+
+설계 문서에서 최소 다음 항목의 출처를 찾아 표로 정리하십시오.
+
+```text
+physical potential V(R)
+dV/dR 또는 force definition
+radial direction / q vector convention
+impulse sign convention
+half-step / full-step time factor
+mass dependence 여부
+unit system
+R definition
+R=0 또는 domain-invalid handling
+exp / inverse / power semantics
+rounding 위치
+interval/enclosure 의미
+precision escalation
+refusal / STOP 조건
+J를 momentum grid로 변환하는 정확한 계약
+```
+
+각 항목마다:
+
+```text
+source document
+section
+adopted meaning
+frozen / candidate / unresolved
+```
+
+를 기록하십시오.
+
+원본 구현에서 “그렇게 하고 있으니 specification”이라고 역으로 정의하지 마십시오.
+
+---
+
+# 5. 물리식과 수치 실행 계약을 분리
+
+설계 문서에서는 반드시 다음 두 층을 분리하십시오.
+
+```text
+A. Physical mathematical impulse
+B. Numeric representation / certification
+```
+
+예를 들어 물리적으로 정확한 식이 무엇인지와:
+
+```text
+J_exact = ...
+```
+
+그 값을 어떤 numeric representation으로 계산하고:
+
+```text
+interval
+exact rational component
+fixed-point rounding
+precision escalation
+```
+
+어떻게 stored `J_raw`로 만드는지는 별도 계약입니다.
+
+두 층을 한 함수 안에 뭉개지 마십시오.
+
+---
+
+# 6. 독립 oracle은 처음부터 fast일 필요 없음
+
+첫 버전의 목표는 속도가 아닙니다.
+
+우선:
+
+```text
+impulse_exact_reference
+```
+
+를 가장 단순하고 감사하기 쉬운 방식으로 설계하십시오.
+
+가능한 구조 예:
+
+```text
+physical inputs
+↓
+exact / high-precision independent primitive evaluation
+↓
+independent force / impulse construction
+↓
+certified interval or exact rounding decision
+↓
+J_raw or REFUSED/UNPROVED
+```
+
+원본 Candidate B의 최적화 구조를 따라갈 필요가 없습니다.
+
+속도 최적화는 independent slow oracle이 검증된 뒤 별도 단계입니다.
+
+---
+
+# 7. 반드시 fail-closed
+
+Impulse 계산에서 exact rounding을 결정할 수 없다면:
+
+```text
+추측해서 진행
+```
+
+하지 마십시오.
+
+현재 프로젝트 원칙대로:
+
+```text
+RESOLVED
+or
+STOP / UNPROVED
+```
+
+형태를 유지하십시오.
+
+특히 precision escalation이 필요한 경우 설계 문서에서:
+
+```text
+어떤 조건에서 precision 증가
+어떤 조건에서 rounding cell 확정
+언제 STOP
+어떤 상태도 mutation하지 않는가
+```
+
+를 명확히 정의하십시오.
+
+원본 executor의 현재 precision loop를 그냥 가져와 독립 계산기의 정답 계약으로 삼지 마십시오.
+
+---
+
+# 8. 필요한 독립성 구조 제안
+
+최소 다음 구조를 검토하십시오.
+
+```text
+independent_checker/c1b1/
+
+impulse_contracts.py
+impulse_exact.py
+impulse_primitives.py
+impulse_compare.py
+```
+
+파일명은 제안일 뿐이며 더 나은 구조가 있으면 설계 문서에서 이유를 제시하십시오.
+
+중요한 것은:
+
+```text
+Arithmetic V1
+Impulse V1
+```
+
+을 분리하는 것입니다.
+
+현재 감사된 Drift/Kick 코드를 impulse 구현 편의를 위해 수정하지 마십시오.
+
+---
+
+# 9. Independent primitive 문제를 따로 다룰 것
+
+Impulse에서 가장 위험한 부분은 단순 add/sub보다:
+
+```text
+sqrt
+inverse R
+powers
+exp
+potential derivative
+interval direction
+```
+
+같은 비선형 primitive입니다.
+
+따라서 설계서에서 각각:
+
+```text
+어떻게 계산할 것인가
+무엇이 exact인가
+무엇이 interval인가
+어떻게 enclosure를 증명하는가
+host float를 사용하는가
+rounding direction을 어떻게 보장하는가
+```
+
+를 분리해서 기술하십시오.
+
+“Python Decimal/mpmath를 쓰면 고정밀이므로 충분” 같은 설명은 허용하지 마십시오.
+
+고정밀과 정확한 enclosure는 다른 주장입니다.
+
+---
+
+# 10. 기존 exact checker / Point Prover와 관계 조사
+
+현재 프로젝트에는 이미 exact checker와 Point Prover 계열의 자산이 있습니다.
+
+Independent Impulse V1 설계 시:
+
+```text
+기존 자산을 재사용하면 독립성이 깨지는 부분
+공유 가능한 specification/data
+별도 oracle로 사용 가능한 것
+동일 구현 계통이라 oracle로 사용하면 안 되는 것
+```
+
+을 구분하십시오.
+
+특히 원본 executor의 impulse implementation과 코드 계보가 같은 도구를 independent oracle이라고 부르면 안 됩니다.
+
+---
+
+# 11. 입력 계약 제안
+
+설계 단계에서 impulse 계산에 필요한 입력을 최소 plain-data contract로 정의하십시오.
+
+예상 항목은 최소:
+
+```text
+q_i / q_j 또는 relative q
+species / physical parameter binding
+dt 또는 half-step factor
+position grid
+momentum / impulse grid
+potential constants
+numeric specification ID
+physical specification ID
+record/acquisition/phase provenance
+```
+
+입니다.
+
+하지만 실제 필드와 단위는 specification source를 확인한 뒤 결정하십시오.
+
+모르는 field를 임의로 만들어 넣지 마십시오.
+
+---
+
+# 12. 출력 계약 제안
+
+출력은 단순 `J_raw` 하나만 내지 말고 감사 가능한 중간 의미를 보존하는 방안을 설계하십시오.
+
+예:
+
+```text
+R 또는 R²
+radial direction
+force / dVdR
+exact or certified impulse interval
+per-component impulse interval
+rounding-cell decision
+J_raw
+precision used
+resolution status
+spec binding
+```
+
+단 실제 필요한 필드는 수학 계약을 검토해서 결정하십시오.
+
+중간값 공개가 오히려 shared implementation detail이 되는 경우도 있으므로, 무엇을 proof artifact로 남길지도 설계에서 판단하십시오.
+
+---
+
+# 13. 비교 대상
+
+최종적으로 independent impulse가 비교해야 할 것은:
+
+```text
+원본의 내부 구현 방식
+```
+
+이 아니라:
+
+```text
+동일한 physical state/spec에서 나온 J의 의미
+```
+
+입니다.
+
+가능하다면:
+
+```text
+independent exact/certified J
+        vs
+executor supplied J
+```
+
+를 비교하십시오.
+
+원본 executor의 중간 계산을 무조건 그대로 재현할 필요는 없습니다.
+
+---
+
+# 14. 최초 검증 계획
+
+설계 문서에는 구현 후 요구할 독립 검증 계획도 포함하십시오.
+
+최소:
+
+```text
+symmetry / antisymmetry
+J_i = -J_j 관계
+
+축 정렬 사례
+
+zero-gradient 또는 force≈0 사례
+
+positive/negative coordinate signs
+
+radial rotation/permutation consistency
+
+R 경계
+
+rounding midpoint
+midpoint ± neighbor
+
+precision escalation 사례
+
+overflow / refusal
+
+very small force
+very large force
+
+exp-tail 또는 cutoff 관련 경계
+```
+
+를 검토하십시오.
+
+단 실제 물리식이 허용하는 성질만 사용하십시오. 문서 근거 없는 대칭성이나 cutoff를 새로 만들지 마십시오.
+
+---
+
+# 15. Mutation plan
+
+Impulse V1도 실제 source mutants를 설계하십시오.
+
+예상 후보:
+
+```text
+force sign flip
+atom i/j impulse sign swap
+dt 또는 half-step factor 누락
+1/R factor 누락
+R power 하나 잘못 적용
+potential derivative 항 하나 누락
+exp sign 오류
+coordinate component swap
+rounding ties-away
+lower/upper interval direction swap
+precision escalation early accept
+overflow/refusal 제거
+wrong spec/profile forced accept
+```
+
+실제 mutant 목록은 frozen 식을 확인한 뒤 확정하십시오.
+
+---
+
+# 16. 기존 Arithmetic V1은 손대지 말 것
+
+현재 독립 감사 PASS를 받은:
+
+```text
+exact_slow.py
+exact_fast.py
+exact_geometry.py
+compare.py
+contracts.py
+semantic_manifest_v1.json
+```
+
+은 이번 **설계 단계에서 수정하지 마십시오.**
+
+Independent Impulse가 나중에 Arithmetic V1과 연결될 때도 가능한 한 adapter/composition layer에서 연결하십시오.
+
+---
+
+# 17. 아직 하지 말 것
+
+이번 단계에서는 다음을 하지 마십시오.
+
+```text
+impulse 구현
+fast impulse 구현
+기존 executor 수정
+exact_fast default 승격
+physical r_min binding 임의 확정
+trajectory 연결
+full replay 승격
+GPU/native 최적화
+새 approximation/cutoff 도입
+```
+
+이번 산출물은 설계 제안뿐입니다.
+
+---
+
+# 18. 산출물
+
+권장 문서:
+
+```text
+docs/C1B1_INDEPENDENT_IMPULSE_V1_DESIGN.md
+```
+
+문서에는 최소 다음을 포함하십시오.
+
+```text
+1. 목표와 비목표
+2. authoritative specification provenance
+3. exact physical formula
+4. units/constants binding
+5. input contract
+6. output contract
+7. numeric/enclosure strategy
+8. rounding decision strategy
+9. precision escalation / STOP
+10. independence boundary
+11. Arithmetic V1 연결 방식
+12. validation plan
+13. mutation plan
+14. performance considerations
+15. unresolved questions
+16. proof obligations
+17. proposed file/module layout
+```
+
+각 proof obligation에는:
+
+```text
+OPEN
+PASS
+FAIL
+UNRESOLVED
+```
+
+상태를 둘 수 있게 번호를 부여하십시오.
+
+예:
+
+```text
+I1
+I2
+...
+```
+
+---
+
+# 19. 가장 중요한 제한
+
+이번 설계 문서가 나온 뒤에도 상태는:
+
+```text
+Independent Impulse:
+DESIGN ONLY / NOT IMPLEMENTED / NOT AUDITED
+
+C1-B1 Arithmetic V1:
+INDEPENDENT REVIEW PASS
+
+Overall physical C1-B1:
+J_NOT_VERIFIED / NotCertified
+```
+
+입니다.
+
+설계서를 작성했다는 이유만으로 `J_NOT_VERIFIED`를 제거하지 마십시오.
+
+먼저 specification provenance와 수학적 impulse 계약을 고정한 설계 제안서를 작성하고, 구현 전에 검토받으십시오.
+
+이번 작업에서는 사용자 추가 승인 없이 commit/push하지 마십시오.

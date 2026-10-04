@@ -1,0 +1,311 @@
+{
+  "schema": "IMPULSE_DESIGN_SOURCE_PROVENANCE_V1",
+  "observed_at_utc": "2026-10-04T12:29:21.224082+00:00",
+  "lab_head": "65d8fd29ae255529afead70289098d36b825b3b4",
+  "sources": [
+    {
+      "id": "S1",
+      "checkout": "C:\\Users\\zun24\\성공은 실패의 어머니",
+      "head": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+      "path": "docs/frozen/C1A_AR2_FREEZE_V1.md",
+      "raw_sha256": "da72e6c9422e42e135a3e75d0dc19abfc489ebdda12ce57d306ba6c361612b26",
+      "lf_sha256": "da72e6c9422e42e135a3e75d0dc19abfc489ebdda12ce57d306ba6c361612b26",
+      "git_blob_sha256": "da72e6c9422e42e135a3e75d0dc19abfc489ebdda12ce57d306ba6c361612b26",
+      "git_blob_oid": "978940e98830abd1259b58c4ed0ad0c25cffde16",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "S2",
+      "checkout": "C:\\Users\\zun24\\성공은 실패의 어머니",
+      "head": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+      "path": "docs/active/A_MICRO_V6_C1B1_TWO_ATOM_DYNAMICS_DESIGN_V1.md",
+      "raw_sha256": "fdbd97108ad00013795983c10b30c0c7b5825ae6e92e7d2e088578861f757115",
+      "lf_sha256": "4926455a62868ec45f404db780fc4f24813162d3eb3f38fe6350955c10c07e54",
+      "git_blob_sha256": "4926455a62868ec45f404db780fc4f24813162d3eb3f38fe6350955c10c07e54",
+      "git_blob_oid": "4612f550cb3b09c568fc8f49fe72179b27395650",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "S3",
+      "checkout": "C:\\Users\\zun24\\성공은 실패의 어머니",
+      "head": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+      "path": "docs/reference/A_NUMERIC_EXECUTION_STACK_V1.md",
+      "raw_sha256": "0c289146d6b87ce95c530f3730bd311a96e1345a6fc5ff4a129b344e6142175e",
+      "lf_sha256": "16ea1be204a8ce656ea4d17f597c10775ee15eb5ccc37a7e00f9d7cebdebb9cd",
+      "git_blob_sha256": "16ea1be204a8ce656ea4d17f597c10775ee15eb5ccc37a7e00f9d7cebdebb9cd",
+      "git_blob_oid": "09717999b12b0b9aed70eb486008a7318e52cf61",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "S4",
+      "checkout": "C:\\Users\\zun24\\성공은 실패의 어머니",
+      "head": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+      "path": "docs/active/C1B1_EXACT_IMPULSE_CERTIFICATE_SPEC_V1.md",
+      "raw_sha256": "032135b2f248eb801675d1b2ab652bd2fc50867a3a0ab7a7d6902240af334188",
+      "lf_sha256": "032135b2f248eb801675d1b2ab652bd2fc50867a3a0ab7a7d6902240af334188",
+      "git_blob_sha256": "032135b2f248eb801675d1b2ab652bd2fc50867a3a0ab7a7d6902240af334188",
+      "git_blob_oid": "9ecdaae5f636a67187499dab2c2baba73eae4a2f",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "S5",
+      "checkout": "C:\\Users\\zun24\\성공은 실패의 어머니",
+      "head": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+      "path": "docs/active/C1B1_EXACT_IMPULSE_CHECKER_V2_DESIGN.md",
+      "raw_sha256": "8ec4af9e597ee55e7e5a914147f7fa231c874c3434487038d51d8f3b087f6a9c",
+      "lf_sha256": "8ec4af9e597ee55e7e5a914147f7fa231c874c3434487038d51d8f3b087f6a9c",
+      "git_blob_sha256": "8ec4af9e597ee55e7e5a914147f7fa231c874c3434487038d51d8f3b087f6a9c",
+      "git_blob_oid": "602dcf17113046c1ef4415b42cee0c46658f971d",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "S6",
+      "checkout": "C:\\Users\\zun24\\성공은 실패의 어머니",
+      "head": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+      "path": "docs/active/C1B1_RUNTIME_ROUNDING_CONTRACT_V1_PROPOSAL.md",
+      "raw_sha256": "a39c6d58d1e8122890f7408660112fde9f500afea5e230c2682cecbb2b8d82b0",
+      "lf_sha256": "319ff147f124c5422a1720372a058c87e17b59f87dfdc33a423904a79bcf5b0e",
+      "git_blob_sha256": "319ff147f124c5422a1720372a058c87e17b59f87dfdc33a423904a79bcf5b0e",
+      "git_blob_oid": "87707541fc05d33583560969347ce46910dd28a9",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "S7",
+      "checkout": "C:\\Users\\zun24\\성공은 실패의 어머니",
+      "head": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+      "path": "docs/active/C1B1_POINT_PROVER_DESIGN_V0.md",
+      "raw_sha256": "a0d426e4817ab653a74f825ff4cc3326f438a6e42f132ed31dc975a3fcfbf2b7",
+      "lf_sha256": "0e19b68155b235b7a006b14d01c73b46988457dac8dc953e02cb525a446e8229",
+      "git_blob_sha256": "0e19b68155b235b7a006b14d01c73b46988457dac8dc953e02cb525a446e8229",
+      "git_blob_oid": "17eb1f81735b8f3eb8a50b897a307591ad37a7ba",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "S8",
+      "checkout": "C:\\Users\\zun24\\성공은 실패의 어머니",
+      "head": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+      "path": "docs/active/C1B1_POINT_PROVER_COMPLETENESS_AUDIT_V0.md",
+      "raw_sha256": "2145fe0b168daa992867b7195317184626a09a40709a1449d8c665d5cf080943",
+      "lf_sha256": "e603837d110961a4efb98f022002a59e251523983d2d1e4bc2f85939ec772e1d",
+      "git_blob_sha256": "e603837d110961a4efb98f022002a59e251523983d2d1e4bc2f85939ec772e1d",
+      "git_blob_oid": "b84ec188320268cbb38cde03ded53af2e78582a0",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "S9",
+      "checkout": "C:\\Users\\zun24\\성공은 실패의 어머니",
+      "head": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+      "path": "docs/active/C1B1_ROUNDING_DECISION_V1.md",
+      "raw_sha256": "ab927366577c6ddb778e2a212e17e63c078bd5f850a01af0ce8bb92affb5b2ed",
+      "lf_sha256": "698f446e3d061b48a1132629a3569dec076fd40e5534fa010be92e89b84e174d",
+      "git_blob_sha256": "698f446e3d061b48a1132629a3569dec076fd40e5534fa010be92e89b84e174d",
+      "git_blob_oid": "d90da27adbe939a4046d8c9fdba2937be9303e41",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "S10",
+      "checkout": "C:\\Users\\zun24\\성공은 실패의 어머니",
+      "head": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+      "path": "docs/active/C1B1_PRODUCTION_REPLAY_VERIFIER_V1.md",
+      "raw_sha256": "848ae992452399196603f1b9068509ce1f138972f394f1ad3add2f898d12d66b",
+      "lf_sha256": "6467c7f0e7d74cfa2cb36eaf85ce57e39421cbd0be8d3abe6979fb5250797fef",
+      "git_blob_sha256": "6467c7f0e7d74cfa2cb36eaf85ce57e39421cbd0be8d3abe6979fb5250797fef",
+      "git_blob_oid": "d3fb5e2d4076c3bbaa5382c63f083357851c8450",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "L1",
+      "checkout": "C:\\Users\\zun24\\성공은 실패의 어머니",
+      "head": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+      "path": "a_reference/c1b1_exact_impulse_checker.py",
+      "raw_sha256": "52e669e0bdd9e3e85e3e448afb194bd30ea765aebc79a07fc46b897d49b2a116",
+      "lf_sha256": "52e669e0bdd9e3e85e3e448afb194bd30ea765aebc79a07fc46b897d49b2a116",
+      "git_blob_sha256": "52e669e0bdd9e3e85e3e448afb194bd30ea765aebc79a07fc46b897d49b2a116",
+      "git_blob_oid": "b005c950ad34fbcc24b6b7ac8ff47dec44a62b25",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "L2",
+      "checkout": "C:\\Users\\zun24\\성공은 실패의 어머니",
+      "head": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+      "path": "a_reference/c1b1_exact_impulse_checker_v2.py",
+      "raw_sha256": "180d5a19bbea606594912e95b3c210b5a7739995afa39c5300959faef8b94d96",
+      "lf_sha256": "180d5a19bbea606594912e95b3c210b5a7739995afa39c5300959faef8b94d96",
+      "git_blob_sha256": "180d5a19bbea606594912e95b3c210b5a7739995afa39c5300959faef8b94d96",
+      "git_blob_oid": "ad1a66091ec743359565f3d19affbef800c70192",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "L3",
+      "checkout": "C:\\Users\\zun24\\성공은 실패의 어머니",
+      "head": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+      "path": "a_reference/c1b1_point_prover.py",
+      "raw_sha256": "1b9ada3a6357ddc85fe170aede3e72dc7d05181a0b663afd6a5f8d59b1a3634c",
+      "lf_sha256": "ae84e3c853351e5312ed379f9081b741c8d5591f5bacf3459b4f458cdf6b350b",
+      "git_blob_sha256": "ae84e3c853351e5312ed379f9081b741c8d5591f5bacf3459b4f458cdf6b350b",
+      "git_blob_oid": "8a158e0658a6573706c4c58de9cd0ebb5336c769",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "L4",
+      "checkout": "C:\\Users\\zun24\\성공은 실패의 어머니",
+      "head": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+      "path": "a_reference/c1b1_exact_impulse_search.py",
+      "raw_sha256": "63edf05e50eae11f1d5a830563ec841213f7d573c62cb6d7a187b1ec619d6553",
+      "lf_sha256": "63edf05e50eae11f1d5a830563ec841213f7d573c62cb6d7a187b1ec619d6553",
+      "git_blob_sha256": "63edf05e50eae11f1d5a830563ec841213f7d573c62cb6d7a187b1ec619d6553",
+      "git_blob_oid": "e0c1cffcb2e4f749c8411d89e178acf766e3466e",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "L5",
+      "checkout": "C:\\Users\\zun24\\성공은 실패의 어머니",
+      "head": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+      "path": "a_reference/c1b1_exact_impulse_search_v2.py",
+      "raw_sha256": "cf7f3b31e8ccb8c31fbcb9c1c75fe7531d0e00512b7f47ed1dc7175f23a5d21d",
+      "lf_sha256": "cf7f3b31e8ccb8c31fbcb9c1c75fe7531d0e00512b7f47ed1dc7175f23a5d21d",
+      "git_blob_sha256": "cf7f3b31e8ccb8c31fbcb9c1c75fe7531d0e00512b7f47ed1dc7175f23a5d21d",
+      "git_blob_oid": "8fc306d25561df363e04d5d538ceeba7f9f1a6a1",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "L6",
+      "checkout": "C:\\Users\\zun24\\성공은 실패의 어머니",
+      "head": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+      "path": "a_reference/c1b1_impulse_primitives.py",
+      "raw_sha256": "41c2b353dde3623502bf4027c2321ed1ce70190176eb7a268fe1f0e4e3cf1e83",
+      "lf_sha256": "c78c6e9aad60b14ebc098b0066a36381ba19817e5b0e93e575777a014176f060",
+      "git_blob_sha256": "c78c6e9aad60b14ebc098b0066a36381ba19817e5b0e93e575777a014176f060",
+      "git_blob_oid": "e08bffc3546eeca8de3cdc430443898ee931b4be",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "L7",
+      "checkout": "C:\\Users\\zun24\\성공은 실패의 어머니",
+      "head": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+      "path": "a_reference/c1b1_fast_impulse.py",
+      "raw_sha256": "49f1fec9ecc3bc9da1b4ce29dd0b2ff05429b30e1c62d514b2133f965b5e5c31",
+      "lf_sha256": "9dd05a16faf93b5bcbe9ea7345bf9c04b052bf72ec01c6811b15667957273cce",
+      "git_blob_sha256": "9dd05a16faf93b5bcbe9ea7345bf9c04b052bf72ec01c6811b15667957273cce",
+      "git_blob_oid": "d644c0e2a9f06da50c8b69c8c2896d6d5dfd3fc9",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "L8",
+      "checkout": "C:\\Users\\zun24\\성공은 실패의 어머니",
+      "head": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+      "path": "a_reference/c1b1_two_atom.py",
+      "raw_sha256": "c09c080775768c27ae77deeabb7a55ddc136095138d06bddb7efaf8ac8b21591",
+      "lf_sha256": "c09c080775768c27ae77deeabb7a55ddc136095138d06bddb7efaf8ac8b21591",
+      "git_blob_sha256": "c09c080775768c27ae77deeabb7a55ddc136095138d06bddb7efaf8ac8b21591",
+      "git_blob_oid": "eab52ac2461f7cb7f7d9cb8dfbc2f4bbc2bb3bd3",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "L9",
+      "checkout": "C:\\Users\\zun24\\성공은 실패의 어머니",
+      "head": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+      "path": "c1b1_replay/model.py",
+      "raw_sha256": "7bd991542fa3a4ef23a6c61ca1c37f478f133a770e84547f37fbbef311cf8f9c",
+      "lf_sha256": "7bd991542fa3a4ef23a6c61ca1c37f478f133a770e84547f37fbbef311cf8f9c",
+      "git_blob_sha256": "7bd991542fa3a4ef23a6c61ca1c37f478f133a770e84547f37fbbef311cf8f9c",
+      "git_blob_oid": "a886b2339763f7a7ca35445ad190aa4e3b8c5fdc",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "A1",
+      "checkout": "C:\\Users\\zun24\\.codex\\worktrees\\a-ev-audit\\성공은 실패의 어머니",
+      "head": "27e48770ab5db666bcd78034d151ddbb04b6af54",
+      "path": "audit/independent_physics/ar2_force_enclosure.py",
+      "raw_sha256": "b283ce09ff1b4958fe9c49e13c0f5513a122fc13d955cdfa94c5dc3dd2defa49",
+      "lf_sha256": "b283ce09ff1b4958fe9c49e13c0f5513a122fc13d955cdfa94c5dc3dd2defa49",
+      "git_blob_sha256": "b283ce09ff1b4958fe9c49e13c0f5513a122fc13d955cdfa94c5dc3dd2defa49",
+      "git_blob_oid": "1d15152b24e67f61951c12372eaee7520c203624",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "A2",
+      "checkout": "C:\\Users\\zun24\\.codex\\worktrees\\a-ev-audit\\성공은 실패의 어머니",
+      "head": "27e48770ab5db666bcd78034d151ddbb04b6af54",
+      "path": "docs/active/A_EV_PHASE1_INDEPENDENT_FORCE_AUDIT.md",
+      "raw_sha256": "3a2812c1e74857e5519eb979f2ca6d8d573d8e8bd8dcd937eaff7a53a722ad56",
+      "lf_sha256": "3a2812c1e74857e5519eb979f2ca6d8d573d8e8bd8dcd937eaff7a53a722ad56",
+      "git_blob_sha256": "3a2812c1e74857e5519eb979f2ca6d8d573d8e8bd8dcd937eaff7a53a722ad56",
+      "git_blob_oid": "21d485b8b3e0c4dec84f87f34222265defe77eab",
+      "checkout_matches_git_raw_or_crlf_to_lf": true,
+      "checkout_clean": true
+    },
+    {
+      "id": "P0",
+      "path": "D:\\reference\\ar2_lang2024\\S2_ar2_pot.f90",
+      "bytes": 12061,
+      "raw_sha256": "a598057183121b9c928b3a9804c8e2e99afa553bad570a471aa4130f20e6b049",
+      "meaning": "Published potential formula/constants source; no execution or implementation copying"
+    }
+  ],
+  "audited_lab_sources": [
+    {
+      "path": "independent_checker/c1b1/exact_slow.py",
+      "raw_sha256": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+      "matches_submitted_audit_target": true
+    },
+    {
+      "path": "independent_checker/c1b1/exact_fast.py",
+      "raw_sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+      "matches_submitted_audit_target": true
+    },
+    {
+      "path": "independent_checker/c1b1/exact_geometry.py",
+      "raw_sha256": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+      "matches_submitted_audit_target": true
+    },
+    {
+      "path": "independent_checker/c1b1/compare.py",
+      "raw_sha256": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+      "matches_submitted_audit_target": true
+    },
+    {
+      "path": "independent_checker/c1b1/contracts.py",
+      "raw_sha256": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+      "matches_submitted_audit_target": true
+    },
+    {
+      "path": "independent_checker/c1b1/semantic_manifest_v1.json",
+      "raw_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+      "matches_submitted_audit_target": true
+    },
+    {
+      "path": "independent_checker/c1b1/semantic_manifest_v1.sha256",
+      "raw_sha256": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79",
+      "matches_submitted_audit_target": true
+    },
+    {
+      "path": "independent_checker/c1b1/claim_adapter.py",
+      "raw_sha256": "24b05ebf374728583ba725c83b8f9324f4b75b5515b03c5b1036339eef3e4899",
+      "matches_submitted_audit_target": true
+    }
+  ],
+  "scope": "STATIC SOURCE/DOCUMENT INSPECTION ONLY; no calculations, tests, timing, auditor execution",
+  "authoritative_documents_over_executor_implementation": true,
+  "new_physical_binding_approved": false
+}

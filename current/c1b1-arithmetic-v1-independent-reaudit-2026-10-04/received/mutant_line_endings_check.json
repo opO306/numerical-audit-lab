@@ -1,0 +1,7 @@
+{
+  "baseline_sha256": "24b05ebf374728583ba725c83b8f9324f4b75b5515b03c5b1036339eef3e4899",
+  "mutant_lf_sha256": "4d4d2899055769a6077833e445ef62c1ca114a9bfbeac6edfd420a5a0679d777",
+  "mutant_crlf_sha256": "6e2946ca939392d8dc82baff438f0be54279a1aed87120ac0d7f638391ab2c21",
+  "logical_source_same_after_line_ending_normalization": true,
+  "explanation": "Independent Linux copy uses LF. Rerun Windows author mutation writer uses CRLF. Both contain the same sole guard-removal edit."
+}

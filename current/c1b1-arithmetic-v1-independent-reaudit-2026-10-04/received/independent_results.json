@@ -1,0 +1,877 @@
+{
+  "old_commit": "f806d8ce1ef86a0948b1a8abafe1a22c3058178b",
+  "target_commit": "65d8fd29ae255529afead70289098d36b825b3b4",
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "initial_integer_string_limit": 4300,
+  "original": [
+    {
+      "version": "old",
+      "path": "exact_slow",
+      "form": "dict",
+      "kernel_exact": true,
+      "exception": "ValueError",
+      "message": "Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit",
+      "historical_failure_reproduced": true
+    },
+    {
+      "version": "old",
+      "path": "exact_slow",
+      "form": "text",
+      "kernel_exact": true,
+      "exception": "ValueError",
+      "message": "Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit",
+      "historical_failure_reproduced": true
+    },
+    {
+      "version": "old",
+      "path": "exact_slow",
+      "form": "bytes",
+      "kernel_exact": true,
+      "exception": "ValueError",
+      "message": "Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit",
+      "historical_failure_reproduced": true
+    },
+    {
+      "version": "old",
+      "path": "exact_fast",
+      "form": "dict",
+      "kernel_exact": true,
+      "exception": "ValueError",
+      "message": "Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit",
+      "historical_failure_reproduced": true
+    },
+    {
+      "version": "old",
+      "path": "exact_fast",
+      "form": "text",
+      "kernel_exact": true,
+      "exception": "ValueError",
+      "message": "Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit",
+      "historical_failure_reproduced": true
+    },
+    {
+      "version": "old",
+      "path": "exact_fast",
+      "form": "bytes",
+      "kernel_exact": true,
+      "exception": "ValueError",
+      "message": "Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit",
+      "historical_failure_reproduced": true
+    },
+    {
+      "version": "target",
+      "path": "exact_slow",
+      "form": "dict",
+      "kernel_exact": true,
+      "failure": {
+        "code": "CLAIM_OUTPUT_LIMIT",
+        "phase": "claim_output",
+        "atom": "",
+        "component": "",
+        "message": "canonical computed integer exceeds Claim V1 4096 decimal digits",
+        "scope": "ARITHMETIC_ONLY",
+        "j_status": "J_NOT_VERIFIED",
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      }
+    },
+    {
+      "version": "target",
+      "path": "exact_slow",
+      "form": "text",
+      "kernel_exact": true,
+      "failure": {
+        "code": "CLAIM_OUTPUT_LIMIT",
+        "phase": "claim_output",
+        "atom": "",
+        "component": "",
+        "message": "canonical computed integer exceeds Claim V1 4096 decimal digits",
+        "scope": "ARITHMETIC_ONLY",
+        "j_status": "J_NOT_VERIFIED",
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      }
+    },
+    {
+      "version": "target",
+      "path": "exact_slow",
+      "form": "bytes",
+      "kernel_exact": true,
+      "failure": {
+        "code": "CLAIM_OUTPUT_LIMIT",
+        "phase": "claim_output",
+        "atom": "",
+        "component": "",
+        "message": "canonical computed integer exceeds Claim V1 4096 decimal digits",
+        "scope": "ARITHMETIC_ONLY",
+        "j_status": "J_NOT_VERIFIED",
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      }
+    },
+    {
+      "version": "target",
+      "path": "exact_fast",
+      "form": "dict",
+      "kernel_exact": true,
+      "failure": {
+        "code": "CLAIM_OUTPUT_LIMIT",
+        "phase": "claim_output",
+        "atom": "",
+        "component": "",
+        "message": "canonical computed integer exceeds Claim V1 4096 decimal digits",
+        "scope": "ARITHMETIC_ONLY",
+        "j_status": "J_NOT_VERIFIED",
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      }
+    },
+    {
+      "version": "target",
+      "path": "exact_fast",
+      "form": "text",
+      "kernel_exact": true,
+      "failure": {
+        "code": "CLAIM_OUTPUT_LIMIT",
+        "phase": "claim_output",
+        "atom": "",
+        "component": "",
+        "message": "canonical computed integer exceeds Claim V1 4096 decimal digits",
+        "scope": "ARITHMETIC_ONLY",
+        "j_status": "J_NOT_VERIFIED",
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      }
+    },
+    {
+      "version": "target",
+      "path": "exact_fast",
+      "form": "bytes",
+      "kernel_exact": true,
+      "failure": {
+        "code": "CLAIM_OUTPUT_LIMIT",
+        "phase": "claim_output",
+        "atom": "",
+        "component": "",
+        "message": "canonical computed integer exceeds Claim V1 4096 decimal digits",
+        "scope": "ARITHMETIC_ONLY",
+        "j_status": "J_NOT_VERIFIED",
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "label": "raw_0_1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_numerator_0_1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_numerator_0_1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "raw_0_-1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_numerator_0_-1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_numerator_0_-1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "raw_1_1",
+      "canonical_n_digits": 4095,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_numerator_1_1",
+      "canonical_n_digits": 4095,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_denominator_1_1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4095,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_numerator_1_1",
+      "canonical_n_digits": 4095,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_denominator_1_1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4095,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "raw_1_-1",
+      "canonical_n_digits": 4095,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_numerator_1_-1",
+      "canonical_n_digits": 4095,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_denominator_1_-1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4095,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_numerator_1_-1",
+      "canonical_n_digits": 4095,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_denominator_1_-1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4095,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "raw_2_1",
+      "canonical_n_digits": 4095,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_numerator_2_1",
+      "canonical_n_digits": 4095,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_denominator_2_1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4095,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_numerator_2_1",
+      "canonical_n_digits": 4095,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_denominator_2_1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4095,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "raw_2_-1",
+      "canonical_n_digits": 4095,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_numerator_2_-1",
+      "canonical_n_digits": 4095,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_denominator_2_-1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4095,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_numerator_2_-1",
+      "canonical_n_digits": 4095,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_denominator_2_-1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4095,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "raw_3_1",
+      "canonical_n_digits": 4096,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_numerator_3_1",
+      "canonical_n_digits": 4096,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_denominator_3_1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4096,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_numerator_3_1",
+      "canonical_n_digits": 4096,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_denominator_3_1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4096,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "raw_3_-1",
+      "canonical_n_digits": 4096,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_numerator_3_-1",
+      "canonical_n_digits": 4096,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_denominator_3_-1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4096,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_numerator_3_-1",
+      "canonical_n_digits": 4096,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_denominator_3_-1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4096,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "raw_4_1",
+      "canonical_n_digits": 4096,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_numerator_4_1",
+      "canonical_n_digits": 4096,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_denominator_4_1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4096,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_numerator_4_1",
+      "canonical_n_digits": 4096,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_denominator_4_1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4096,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "raw_4_-1",
+      "canonical_n_digits": 4096,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_numerator_4_-1",
+      "canonical_n_digits": 4096,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_denominator_4_-1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4096,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_numerator_4_-1",
+      "canonical_n_digits": 4096,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_denominator_4_-1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4096,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "raw_5_1",
+      "canonical_n_digits": 4097,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Ratio_numerator_5_1",
+      "canonical_n_digits": 4097,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Ratio_denominator_5_1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4097,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Fraction_numerator_5_1",
+      "canonical_n_digits": 4097,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Fraction_denominator_5_1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4097,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "raw_5_-1",
+      "canonical_n_digits": 4097,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Ratio_numerator_5_-1",
+      "canonical_n_digits": 4097,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Ratio_denominator_5_-1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4097,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Fraction_numerator_5_-1",
+      "canonical_n_digits": 4097,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Fraction_denominator_5_-1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4097,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "raw_6_1",
+      "canonical_n_digits": 4097,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Ratio_numerator_6_1",
+      "canonical_n_digits": 4097,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Ratio_denominator_6_1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4097,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Fraction_numerator_6_1",
+      "canonical_n_digits": 4097,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Fraction_denominator_6_1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4097,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "raw_6_-1",
+      "canonical_n_digits": 4097,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Ratio_numerator_6_-1",
+      "canonical_n_digits": 4097,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Ratio_denominator_6_-1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4097,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Fraction_numerator_6_-1",
+      "canonical_n_digits": 4097,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Fraction_denominator_6_-1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4097,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "raw_7_1",
+      "canonical_n_digits": 5001,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Ratio_numerator_7_1",
+      "canonical_n_digits": 5001,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Ratio_denominator_7_1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 5001,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Fraction_numerator_7_1",
+      "canonical_n_digits": 5001,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Fraction_denominator_7_1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 5001,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "raw_7_-1",
+      "canonical_n_digits": 5001,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Ratio_numerator_7_-1",
+      "canonical_n_digits": 5001,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Ratio_denominator_7_-1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 5001,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Fraction_numerator_7_-1",
+      "canonical_n_digits": 5001,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Fraction_denominator_7_-1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 5001,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Ratio_huge_reduction_0",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_huge_reduction_0",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_huge_reduction_1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_huge_reduction_1",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_huge_reduction_2",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_huge_reduction_2",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_huge_reduction_3",
+      "canonical_n_digits": 4096,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_huge_reduction_3",
+      "canonical_n_digits": 4096,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_huge_reduction_4",
+      "canonical_n_digits": 4096,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_huge_reduction_4",
+      "canonical_n_digits": 4096,
+      "canonical_d_digits": 1,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_huge_reduction_5",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4096,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_huge_reduction_5",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4096,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_huge_reduction_6",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4096,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Fraction_huge_reduction_6",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4096,
+      "result": "ACCEPT"
+    },
+    {
+      "label": "Ratio_huge_reduction_7",
+      "canonical_n_digits": 4097,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Fraction_huge_reduction_7",
+      "canonical_n_digits": 4097,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Ratio_huge_reduction_8",
+      "canonical_n_digits": 4097,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Fraction_huge_reduction_8",
+      "canonical_n_digits": 4097,
+      "canonical_d_digits": 1,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Ratio_huge_reduction_9",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4097,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Fraction_huge_reduction_9",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4097,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Ratio_huge_reduction_10",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4097,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    },
+    {
+      "label": "Fraction_huge_reduction_10",
+      "canonical_n_digits": 1,
+      "canonical_d_digits": 4097,
+      "result": "CLAIM_OUTPUT_LIMIT"
+    }
+  ],
+  "end_to_end": [
+    {
+      "case": "4096_digit_match",
+      "sign": 1,
+      "result": "ARITHMETIC_MATCH"
+    },
+    {
+      "case": "4096_digit_match",
+      "sign": -1,
+      "result": "ARITHMETIC_MATCH"
+    },
+    {
+      "case": "4097_digit_numerator",
+      "sign": 1,
+      "result": "CLAIM_OUTPUT_LIMIT",
+      "kernel_exact": true,
+      "refusal": {
+        "code": "CLAIM_OUTPUT_LIMIT",
+        "phase": "claim_output",
+        "atom": "",
+        "component": "",
+        "message": "canonical computed integer exceeds Claim V1 4096 decimal digits",
+        "scope": "ARITHMETIC_ONLY",
+        "j_status": "J_NOT_VERIFIED",
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      }
+    },
+    {
+      "case": "4097_digit_denominator",
+      "sign": 1,
+      "result": "CLAIM_OUTPUT_LIMIT",
+      "kernel_exact": true,
+      "refusal": {
+        "code": "CLAIM_OUTPUT_LIMIT",
+        "phase": "claim_output",
+        "atom": "",
+        "component": "",
+        "message": "canonical computed integer exceeds Claim V1 4096 decimal digits",
+        "scope": "ARITHMETIC_ONLY",
+        "j_status": "J_NOT_VERIFIED",
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      }
+    },
+    {
+      "case": "4097_digit_numerator",
+      "sign": -1,
+      "result": "CLAIM_OUTPUT_LIMIT",
+      "kernel_exact": true,
+      "refusal": {
+        "code": "CLAIM_OUTPUT_LIMIT",
+        "phase": "claim_output",
+        "atom": "",
+        "component": "",
+        "message": "canonical computed integer exceeds Claim V1 4096 decimal digits",
+        "scope": "ARITHMETIC_ONLY",
+        "j_status": "J_NOT_VERIFIED",
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      }
+    },
+    {
+      "case": "4097_digit_denominator",
+      "sign": -1,
+      "result": "CLAIM_OUTPUT_LIMIT",
+      "kernel_exact": true,
+      "refusal": {
+        "code": "CLAIM_OUTPUT_LIMIT",
+        "phase": "claim_output",
+        "atom": "",
+        "component": "",
+        "message": "canonical computed integer exceeds Claim V1 4096 decimal digits",
+        "scope": "ARITHMETIC_ONLY",
+        "j_status": "J_NOT_VERIFIED",
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      }
+    }
+  ],
+  "mutants": [
+    {
+      "path": "exact_slow",
+      "baseline": "PASS",
+      "mutant": "DETECTED",
+      "cause": "ordinary exception escaped: ValueError"
+    },
+    {
+      "path": "exact_fast",
+      "baseline": "PASS",
+      "mutant": "DETECTED",
+      "cause": "ordinary exception escaped: ValueError"
+    }
+  ],
+  "source_sha256": {
+    "old": {
+      "claim_adapter.py": "8e8894eb2abc0e1540f516418287b9e576e282c6140d7d83af9523788fd0d85e",
+      "compare.py": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+      "contracts.py": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+      "exact_fast.py": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+      "exact_geometry.py": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+      "exact_slow.py": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+      "semantic_manifest_v1.json": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+      "semantic_manifest_v1.sha256": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79"
+    },
+    "target": {
+      "claim_adapter.py": "24b05ebf374728583ba725c83b8f9324f4b75b5515b03c5b1036339eef3e4899",
+      "compare.py": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+      "contracts.py": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+      "exact_fast.py": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+      "exact_geometry.py": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+      "exact_slow.py": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+      "semantic_manifest_v1.json": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+      "semantic_manifest_v1.sha256": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79"
+    }
+  },
+  "mutant_sha256": "4d4d2899055769a6077833e445ef62c1ca114a9bfbeac6edfd420a5a0679d777",
+  "mutant_edit": [
+    "if abs(value) >= _OUTPUT_INTEGER_LIMIT:",
+    "if False:"
+  ],
+  "final_integer_string_limit": 4300,
+  "process_limit_setter_calls": [],
+  "ast_forbidden_calls": [],
+  "summary": {
+    "original_old_calls": 6,
+    "original_fixed_calls": 6,
+    "boundary_cases": 98,
+    "end_to_end_cases": 6,
+    "mutant_paths_detected": 2,
+    "status": "PASS"
+  }
+}
