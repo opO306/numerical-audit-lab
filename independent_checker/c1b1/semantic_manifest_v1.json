@@ -1,0 +1,83 @@
+{
+  "schema": "LAB_C1B1_SEMANTIC_MANIFEST_V1",
+  "spec_id": "LAB_C1B1_ARITHMETIC_V1",
+  "version": 1,
+  "owner": "numerical-audit-lab",
+  "scope": "ARITHMETIC_ONLY",
+  "impulse_status": "J_NOT_VERIFIED",
+  "fast_status": "EXPERIMENTAL / OPT-IN",
+  "default_path": "exact_slow",
+  "fixed_point": {
+    "kind": "signed_fx",
+    "supported_width": [2, 4096],
+    "fraction_bits": "0 <= F < W",
+    "meaning": "raw / 2^F",
+    "raw_range": "[-2^(W-1), 2^(W-1)-1]",
+    "rounding": "nearest_even",
+    "nearest_even": "choose the nearest integer; exact ties choose the even integer, including negative ties",
+    "overflow": "refuse; never wrap or saturate"
+  },
+  "drift": {
+    "version": 2,
+    "exact_displacement": "(p_raw / 2^Fmom) * dt / positive_mass",
+    "fast_identity": "dt=a/b,mass=c/e: N=p_raw*a*e,D=2^Fmom*b*c",
+    "stored_displacement": "nearest_even((N/D)*2^Fpos), then signed position-grid range check",
+    "stored_position": "r_raw + stored_displacement, then signed position-grid range check",
+    "exact_endpoint": "r_raw / 2^Fpos + N/D; independent of stored rounding",
+    "round_sum_forbidden": true
+  },
+  "kick": {
+    "same_grid_required": true,
+    "valid_J_raw_required": true,
+    "atom_i": "p_i_raw - J_raw",
+    "atom_j": "p_j_raw + J_raw",
+    "range": "check each updated momentum in the signed momentum-grid range"
+  },
+  "validation": {
+    "order": ["exact request type", "spec SHA-256", "grid metadata", "r_i,r_j if drift", "p_i,p_j", "mass_i,mass_j,dt if drift or J_raw if kick", "threshold if guarded"],
+    "integers": "type must be exactly int, not bool/float",
+    "vectors": "immutable tuples of exactly three lanes",
+    "rational_input": "exact integer pair with positive denominator; API permits unreduced pairs; wire requires coprime pair and zero 0/1",
+    "dt": "signed exact rational, including zero, for arithmetic kernel only",
+    "mass": "strictly positive exact rational",
+    "wire": "strict JSON, duplicate/unknown keys rejected, canonical signed decimal strings, no numbers or bool for raw/rational values",
+    "wire_max_bytes": 1048576,
+    "wire_integer_max_decimal_digits": 4096
+  },
+  "component_order": ["i.x", "i.y", "i.z", "j.x", "j.y", "j.z"],
+  "drift_check_order": "for each component in component_order: rounding, displacement range, stored-position range; then exact segment guard, then stored-position guard; publish only after all checks",
+  "kick_check_order": "i.x/y/z subtraction and range, then j.x/y/z addition and range; publish after all checks",
+  "refusal": {
+    "class": "LabRefusal with immutable Failure record",
+    "contract": "same stable code, phase, atom, component and message in slow and fast; no partial publication or input mutation",
+    "external_exception_priority": "EXTERNAL COMPATIBILITY NOT VERIFIED"
+  },
+  "geometry": {
+    "input": "exact rational 3-vectors q0,q1,stored_relative and positive exact r_min_squared",
+    "endpoint": "q1 is exact unrounded drift relative endpoint",
+    "definition": "v=q1-q0; A=q0 dot q0; B=q0 dot v; C=v dot v; if C=0 tau=0,min=A; else tau=max(0,min(1,-B/C)),min=|q0+tau*v|^2",
+    "segment_intrusion": "min_R2 < r_min_squared",
+    "stored_intrusion": "stored_relative dot stored_relative < r_min_squared",
+    "threshold_equality": "not an intrusion",
+    "domain": "EXACT_THRESHOLD_ONLY; no state correction"
+  },
+  "canonical_candidate_binding": {
+    "status": "CANDIDATE INFORMATION ONLY; not a kernel default or physical approval",
+    "position_grid": [96, 48],
+    "momentum_grid": [96, 80],
+    "drift_version": 2,
+    "physical_r_min_unit_binding": "PENDING SEPARATE SPECIFICATION GATE",
+    "physical_domain_verified": false,
+    "whole_C1B1_frozen": false
+  },
+  "specification_provenance": {
+    "source_head": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+    "documents": [
+      {"path": "docs/reference/A_NUMERIC_EXECUTION_STACK_V1.md", "sha256": "0c289146d6b87ce95c530f3730bd311a96e1345a6fc5ff4a129b344e6142175e"},
+      {"path": "docs/active/A_MICRO_V6_C1B1_TWO_ATOM_DYNAMICS_DESIGN_V1.md", "sha256": "fdbd97108ad00013795983c10b30c0c7b5825ae6e92e7d2e088578861f757115"},
+      {"path": "docs/active/C1B1_PILOT2_EXACT_ARITHMETIC_ARGUMENT_V1.md", "sha256": "794fed764f4a1b3affb78122cdd936de7f4627f7f0f9586aa355f33b9a08a656"}
+    ],
+    "implementation_fingerprint_reused": false,
+    "document_hashes_are_provenance_only": true
+  }
+}

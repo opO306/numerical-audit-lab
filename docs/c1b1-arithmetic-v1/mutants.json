@@ -1,0 +1,202 @@
+{
+  "1": {
+    "source": "exact_fast.py",
+    "mutant_sha256": "0d707629f8cb0c308308f4503eb5f70a7db29e1c394c85f1087b46d046c034e2",
+    "edits": [
+      [
+        "return q if q % 2 == 0 else q + 1",
+        "return q + 1 if numerator >= 0 else q"
+      ]
+    ],
+    "baseline": "PASS",
+    "actual_mutant_execution": "DETECTED"
+  },
+  "2": {
+    "source": "exact_fast.py",
+    "mutant_sha256": "ec064477d38f86aad58fbf425cc28728786e0ff5864051001fc6a788a3d8629e",
+    "edits": [
+      [
+        "return a * e, (1 << request.momentum_grid.frac_bits) * b * c",
+        "return a, (1 << request.momentum_grid.frac_bits) * b * c"
+      ]
+    ],
+    "baseline": "PASS",
+    "actual_mutant_execution": "DETECTED"
+  },
+  "3": {
+    "source": "exact_fast.py",
+    "mutant_sha256": "232bff8e3e500629b127d61e95a6e0e3f0d4c30e7e49d4df369a5eaa89061070",
+    "edits": [
+      [
+        "return a * e, (1 << request.momentum_grid.frac_bits) * b * c",
+        "return a * e, b * c"
+      ]
+    ],
+    "baseline": "PASS",
+    "actual_mutant_execution": "DETECTED"
+  },
+  "4": {
+    "source": "exact_fast.py",
+    "mutant_sha256": "e335ef523775e7732029cc7821f4e17c9d77196f176a45a7e8fac975c6e34ba7",
+    "edits": [
+      [
+        "return a * e, (1 << request.momentum_grid.frac_bits) * b * c",
+        "return a * c, (1 << request.momentum_grid.frac_bits) * b * e"
+      ]
+    ],
+    "baseline": "PASS",
+    "actual_mutant_execution": "DETECTED"
+  },
+  "5": {
+    "source": "exact_fast.py",
+    "mutant_sha256": "dea525e3d62e3db2171cdebe716c6667f1f79083f96818456317a92e96b549a7",
+    "edits": [
+      [
+        "return a * e, (1 << request.momentum_grid.frac_bits) * b * c",
+        "return b * e, (1 << request.momentum_grid.frac_bits) * a * c"
+      ]
+    ],
+    "baseline": "PASS",
+    "actual_mutant_execution": "DETECTED"
+  },
+  "6": {
+    "source": "exact_fast.py",
+    "mutant_sha256": "3c821675745261283c84b9d9a1e6b97f2f746d86040e5fcdc4d3f3623195fcb7",
+    "edits": [
+      [
+        "delta = nearest_even_ratio(numerator * scale, denominator)",
+        "delta = nearest_even_ratio(old_r * denominator + numerator * scale, denominator) - old_r"
+      ]
+    ],
+    "baseline": "PASS",
+    "actual_mutant_execution": "DETECTED"
+  },
+  "7": {
+    "source": "exact_geometry.py",
+    "mutant_sha256": "dd59243e6a47cec07c653530c762c0ebfa9b2a3916bbfa4d9360bc0ddd863edb",
+    "edits": [
+      [
+        "q1 = tuple(a - b for a, b in zip(endpoints[:3], endpoints[3:]))",
+        "q1 = tuple(Fraction(a - b, scale) for a, b in zip(result.r_i, result.r_j))"
+      ]
+    ],
+    "baseline": "PASS",
+    "actual_mutant_execution": "DETECTED"
+  },
+  "8": {
+    "source": "exact_fast.py",
+    "mutant_sha256": "cab34296b39d10ece8c27196c702cc74b4d3e5819120a77a82f91e56c1a288d9",
+    "edits": [
+      [
+        "value = raw - impulse if atom == \"i\" else raw + impulse",
+        "value = raw + impulse if atom == \"i\" else raw - impulse"
+      ]
+    ],
+    "baseline": "PASS",
+    "actual_mutant_execution": "DETECTED"
+  },
+  "9": {
+    "source": "exact_fast.py",
+    "mutant_sha256": "5981be614ce3d6b14ff0b4ed7bc59affcf3f3fc240221e0067a59ae9e7165e44",
+    "edits": [
+      [
+        "if not minimum <= delta <= maximum:",
+        "if False:"
+      ],
+      [
+        "if updated < minimum or updated > maximum:",
+        "if False:"
+      ],
+      [
+        "if not minimum <= value <= maximum:",
+        "if False:"
+      ]
+    ],
+    "baseline": "PASS",
+    "actual_mutant_execution": "DETECTED"
+  },
+  "10": {
+    "source": "exact_fast.py",
+    "mutant_sha256": "7bc46d5732970221d3354a55e095698f4e704a8c2201238c0cca39c267e0d343",
+    "edits": [
+      [
+        "for atom, positions, momenta, mass in atoms:",
+        "for atom, positions, momenta, mass in reversed(atoms):"
+      ]
+    ],
+    "baseline": "PASS",
+    "actual_mutant_execution": "DETECTED"
+  },
+  "10_write": {
+    "source": "exact_fast.py",
+    "mutant_sha256": "903db82281a3fc54dcea70ae0d3b3f0015a496bc028bba55a3facf2b15735f75",
+    "edits": [
+      [
+        "stored.append(updated)",
+        "stored.append(updated)\n            object.__setattr__(request, 'r_i', tuple(stored[:3]))"
+      ]
+    ],
+    "baseline": "PASS",
+    "actual_mutant_execution": "DETECTED"
+  },
+  "11": {
+    "source": "exact_fast.py",
+    "mutant_sha256": "e54d8835a55ada45e32f097c286030baa50a479270e7db6f66355529f1b7f9a0",
+    "edits": [
+      [
+        "return a * e, (1 << request.momentum_grid.frac_bits) * b * c",
+        "global _stale_cache\n    if '_stale_cache' not in globals():\n        _stale_cache = (a * e, (1 << request.momentum_grid.frac_bits) * b * c)\n    return _stale_cache"
+      ]
+    ],
+    "baseline": "PASS",
+    "actual_mutant_execution": "DETECTED"
+  },
+  "12": {
+    "source": "exact_fast.py",
+    "mutant_sha256": "8871eb921a4fd486dc375ac1ea342439913bd349f2459ed9517fd5627b62071e",
+    "edits": [
+      [
+        "    validate_kick(request)",
+        "    request = __import__('dataclasses').replace(request, impulse_grid=request.momentum_grid)\n    validate_kick(request)"
+      ]
+    ],
+    "baseline": "PASS",
+    "actual_mutant_execution": "DETECTED"
+  },
+  "geometry_tie": {
+    "source": "exact_geometry.py",
+    "mutant_sha256": "34ad0f9c58428f6b59ca728d1ff121784d6793822c351f31539655c91eed5307",
+    "edits": [
+      [
+        "minimum < threshold",
+        "minimum <= threshold"
+      ]
+    ],
+    "baseline": "PASS",
+    "actual_mutant_execution": "DETECTED"
+  },
+  "geometry_tau": {
+    "source": "exact_geometry.py",
+    "mutant_sha256": "0fb6302fe228a0eb6b8fca3406c0ccd7d22648ac674bb91625100e1cd91e3829",
+    "edits": [
+      [
+        "-B / C",
+        "B / C"
+      ]
+    ],
+    "baseline": "PASS",
+    "actual_mutant_execution": "DETECTED"
+  },
+  "geometry_stored": {
+    "source": "exact_geometry.py",
+    "mutant_sha256": "54f32a67a6ed2aeaa56da5ec1d873308a7e151961f3d6894ba2c0a02f9872fdf",
+    "edits": [
+      [
+        "stored_R2 < threshold)",
+        "False)"
+      ]
+    ],
+    "baseline": "PASS",
+    "actual_mutant_execution": "DETECTED"
+  }
+}

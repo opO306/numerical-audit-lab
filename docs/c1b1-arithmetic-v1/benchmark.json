@@ -1,0 +1,1099 @@
+{
+  "scope": "ARITHMETIC_ONLY",
+  "j_status": "J_NOT_VERIFIED",
+  "fast_status": "EXPERIMENTAL / OPT-IN",
+  "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+  "python": "3.12.7 (tags/v3.12.7:0b05ead, Oct  1 2024, 03:06:41) [MSC v.1941 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+  "input_panel": "8 synthetic successful 2-atom 3D cases; candidate numeric grids only; synthetic masses/dt/threshold; supplied J reused for both kicks",
+  "input_panel_data": [
+    {
+      "drift": {
+        "type": "DriftInput",
+        "position_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "48",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "momentum_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "r_i": [
+          "2814749767106560",
+          "562949953421312",
+          "0"
+        ],
+        "r_j": [
+          "-2814749767106560",
+          "-562949953421312",
+          "0"
+        ],
+        "p_i": [
+          "75557863725914323419136",
+          "-56668397794435742564352",
+          "37778931862957161709568"
+        ],
+        "p_j": [
+          "-37778931862957161709568",
+          "18889465931478580854784",
+          "-18889465931478580854784"
+        ],
+        "mass_i": {
+          "numerator": "3",
+          "denominator": "2"
+        },
+        "mass_j": {
+          "numerator": "7",
+          "denominator": "3"
+        },
+        "dt": {
+          "numerator": "1",
+          "denominator": "8"
+        },
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      },
+      "kick": {
+        "type": "KickInput",
+        "momentum_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "impulse_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "p_i": [
+          "75557863725914323419136",
+          "-56668397794435742564352",
+          "37778931862957161709568"
+        ],
+        "p_j": [
+          "-37778931862957161709568",
+          "18889465931478580854784",
+          "-18889465931478580854784"
+        ],
+        "J_raw": [
+          "4722366482869645213696",
+          "-2361183241434822606848",
+          "3541774862152233910272"
+        ],
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      },
+      "threshold": {
+        "numerator": "1",
+        "denominator": "100"
+      }
+    },
+    {
+      "drift": {
+        "type": "DriftInput",
+        "position_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "48",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "momentum_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "r_i": [
+          "2814749767106560",
+          "562949953421312",
+          "0"
+        ],
+        "r_j": [
+          "-2814749767106560",
+          "-562949953421312",
+          "0"
+        ],
+        "p_i": [
+          "151115727451828646838272",
+          "-56668397794435742564352",
+          "37778931862957161709568"
+        ],
+        "p_j": [
+          "-75557863725914323419136",
+          "18889465931478580854784",
+          "-18889465931478580854784"
+        ],
+        "mass_i": {
+          "numerator": "3",
+          "denominator": "2"
+        },
+        "mass_j": {
+          "numerator": "7",
+          "denominator": "3"
+        },
+        "dt": {
+          "numerator": "1",
+          "denominator": "4"
+        },
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      },
+      "kick": {
+        "type": "KickInput",
+        "momentum_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "impulse_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "p_i": [
+          "151115727451828646838272",
+          "-56668397794435742564352",
+          "37778931862957161709568"
+        ],
+        "p_j": [
+          "-75557863725914323419136",
+          "18889465931478580854784",
+          "-18889465931478580854784"
+        ],
+        "J_raw": [
+          "4722366482869645213696",
+          "-2361183241434822606848",
+          "3541774862152233910272"
+        ],
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      },
+      "threshold": {
+        "numerator": "1",
+        "denominator": "100"
+      }
+    },
+    {
+      "drift": {
+        "type": "DriftInput",
+        "position_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "48",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "momentum_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "r_i": [
+          "2814749767106560",
+          "562949953421312",
+          "0"
+        ],
+        "r_j": [
+          "-2814749767106560",
+          "-562949953421312",
+          "0"
+        ],
+        "p_i": [
+          "226673591177742970257408",
+          "-56668397794435742564352",
+          "37778931862957161709568"
+        ],
+        "p_j": [
+          "-113336795588871485128704",
+          "18889465931478580854784",
+          "-18889465931478580854784"
+        ],
+        "mass_i": {
+          "numerator": "3",
+          "denominator": "2"
+        },
+        "mass_j": {
+          "numerator": "7",
+          "denominator": "3"
+        },
+        "dt": {
+          "numerator": "3",
+          "denominator": "8"
+        },
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      },
+      "kick": {
+        "type": "KickInput",
+        "momentum_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "impulse_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "p_i": [
+          "226673591177742970257408",
+          "-56668397794435742564352",
+          "37778931862957161709568"
+        ],
+        "p_j": [
+          "-113336795588871485128704",
+          "18889465931478580854784",
+          "-18889465931478580854784"
+        ],
+        "J_raw": [
+          "4722366482869645213696",
+          "-2361183241434822606848",
+          "3541774862152233910272"
+        ],
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      },
+      "threshold": {
+        "numerator": "1",
+        "denominator": "100"
+      }
+    },
+    {
+      "drift": {
+        "type": "DriftInput",
+        "position_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "48",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "momentum_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "r_i": [
+          "2814749767106560",
+          "562949953421312",
+          "0"
+        ],
+        "r_j": [
+          "-2814749767106560",
+          "-562949953421312",
+          "0"
+        ],
+        "p_i": [
+          "302231454903657293676544",
+          "-56668397794435742564352",
+          "37778931862957161709568"
+        ],
+        "p_j": [
+          "-151115727451828646838272",
+          "18889465931478580854784",
+          "-18889465931478580854784"
+        ],
+        "mass_i": {
+          "numerator": "3",
+          "denominator": "2"
+        },
+        "mass_j": {
+          "numerator": "7",
+          "denominator": "3"
+        },
+        "dt": {
+          "numerator": "1",
+          "denominator": "2"
+        },
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      },
+      "kick": {
+        "type": "KickInput",
+        "momentum_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "impulse_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "p_i": [
+          "302231454903657293676544",
+          "-56668397794435742564352",
+          "37778931862957161709568"
+        ],
+        "p_j": [
+          "-151115727451828646838272",
+          "18889465931478580854784",
+          "-18889465931478580854784"
+        ],
+        "J_raw": [
+          "4722366482869645213696",
+          "-2361183241434822606848",
+          "3541774862152233910272"
+        ],
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      },
+      "threshold": {
+        "numerator": "1",
+        "denominator": "100"
+      }
+    },
+    {
+      "drift": {
+        "type": "DriftInput",
+        "position_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "48",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "momentum_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "r_i": [
+          "2814749767106560",
+          "562949953421312",
+          "0"
+        ],
+        "r_j": [
+          "-2814749767106560",
+          "-562949953421312",
+          "0"
+        ],
+        "p_i": [
+          "377789318629571617095680",
+          "-56668397794435742564352",
+          "37778931862957161709568"
+        ],
+        "p_j": [
+          "-188894659314785808547840",
+          "18889465931478580854784",
+          "-18889465931478580854784"
+        ],
+        "mass_i": {
+          "numerator": "3",
+          "denominator": "2"
+        },
+        "mass_j": {
+          "numerator": "7",
+          "denominator": "3"
+        },
+        "dt": {
+          "numerator": "5",
+          "denominator": "8"
+        },
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      },
+      "kick": {
+        "type": "KickInput",
+        "momentum_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "impulse_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "p_i": [
+          "377789318629571617095680",
+          "-56668397794435742564352",
+          "37778931862957161709568"
+        ],
+        "p_j": [
+          "-188894659314785808547840",
+          "18889465931478580854784",
+          "-18889465931478580854784"
+        ],
+        "J_raw": [
+          "4722366482869645213696",
+          "-2361183241434822606848",
+          "3541774862152233910272"
+        ],
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      },
+      "threshold": {
+        "numerator": "1",
+        "denominator": "100"
+      }
+    },
+    {
+      "drift": {
+        "type": "DriftInput",
+        "position_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "48",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "momentum_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "r_i": [
+          "2814749767106560",
+          "562949953421312",
+          "0"
+        ],
+        "r_j": [
+          "-2814749767106560",
+          "-562949953421312",
+          "0"
+        ],
+        "p_i": [
+          "453347182355485940514816",
+          "-56668397794435742564352",
+          "37778931862957161709568"
+        ],
+        "p_j": [
+          "-226673591177742970257408",
+          "18889465931478580854784",
+          "-18889465931478580854784"
+        ],
+        "mass_i": {
+          "numerator": "3",
+          "denominator": "2"
+        },
+        "mass_j": {
+          "numerator": "7",
+          "denominator": "3"
+        },
+        "dt": {
+          "numerator": "3",
+          "denominator": "4"
+        },
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      },
+      "kick": {
+        "type": "KickInput",
+        "momentum_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "impulse_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "p_i": [
+          "453347182355485940514816",
+          "-56668397794435742564352",
+          "37778931862957161709568"
+        ],
+        "p_j": [
+          "-226673591177742970257408",
+          "18889465931478580854784",
+          "-18889465931478580854784"
+        ],
+        "J_raw": [
+          "4722366482869645213696",
+          "-2361183241434822606848",
+          "3541774862152233910272"
+        ],
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      },
+      "threshold": {
+        "numerator": "1",
+        "denominator": "100"
+      }
+    },
+    {
+      "drift": {
+        "type": "DriftInput",
+        "position_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "48",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "momentum_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "r_i": [
+          "2814749767106560",
+          "562949953421312",
+          "0"
+        ],
+        "r_j": [
+          "-2814749767106560",
+          "-562949953421312",
+          "0"
+        ],
+        "p_i": [
+          "528905046081400263933952",
+          "-56668397794435742564352",
+          "37778931862957161709568"
+        ],
+        "p_j": [
+          "-264452523040700131966976",
+          "18889465931478580854784",
+          "-18889465931478580854784"
+        ],
+        "mass_i": {
+          "numerator": "3",
+          "denominator": "2"
+        },
+        "mass_j": {
+          "numerator": "7",
+          "denominator": "3"
+        },
+        "dt": {
+          "numerator": "7",
+          "denominator": "8"
+        },
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      },
+      "kick": {
+        "type": "KickInput",
+        "momentum_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "impulse_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "p_i": [
+          "528905046081400263933952",
+          "-56668397794435742564352",
+          "37778931862957161709568"
+        ],
+        "p_j": [
+          "-264452523040700131966976",
+          "18889465931478580854784",
+          "-18889465931478580854784"
+        ],
+        "J_raw": [
+          "4722366482869645213696",
+          "-2361183241434822606848",
+          "3541774862152233910272"
+        ],
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      },
+      "threshold": {
+        "numerator": "1",
+        "denominator": "100"
+      }
+    },
+    {
+      "drift": {
+        "type": "DriftInput",
+        "position_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "48",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "momentum_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "r_i": [
+          "2814749767106560",
+          "562949953421312",
+          "0"
+        ],
+        "r_j": [
+          "-2814749767106560",
+          "-562949953421312",
+          "0"
+        ],
+        "p_i": [
+          "604462909807314587353088",
+          "-56668397794435742564352",
+          "37778931862957161709568"
+        ],
+        "p_j": [
+          "-302231454903657293676544",
+          "18889465931478580854784",
+          "-18889465931478580854784"
+        ],
+        "mass_i": {
+          "numerator": "3",
+          "denominator": "2"
+        },
+        "mass_j": {
+          "numerator": "7",
+          "denominator": "3"
+        },
+        "dt": {
+          "numerator": "1",
+          "denominator": "1"
+        },
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      },
+      "kick": {
+        "type": "KickInput",
+        "momentum_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "impulse_grid": {
+          "type": "Grid",
+          "width": "96",
+          "frac_bits": "80",
+          "kind": "signed_fx",
+          "rounding": "nearest_even",
+          "overflow": "refuse"
+        },
+        "p_i": [
+          "604462909807314587353088",
+          "-56668397794435742564352",
+          "37778931862957161709568"
+        ],
+        "p_j": [
+          "-302231454903657293676544",
+          "18889465931478580854784",
+          "-18889465931478580854784"
+        ],
+        "J_raw": [
+          "4722366482869645213696",
+          "-2361183241434822606848",
+          "3541774862152233910272"
+        ],
+        "spec_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b"
+      },
+      "threshold": {
+        "numerator": "1",
+        "denominator": "100"
+      }
+    }
+  ],
+  "timing": "20 warm-up sweeps, 9 alternating repetitions; common operation-specific batch calibrated to at least 250ms for the faster path; ordinary production modules, no profiler; validation included; paired K-D-K includes exact segment/stored guards, supplied J only",
+  "clock_info": {
+    "perf_counter": {
+      "implementation": "QueryPerformanceCounter()",
+      "monotonic": true,
+      "adjustable": false,
+      "resolution": 1e-07
+    },
+    "process_time": {
+      "implementation": "GetProcessTimes()",
+      "monotonic": true,
+      "adjustable": false,
+      "resolution": 1e-07
+    }
+  },
+  "initial_measurement_limitation": "Initial 1600-invocation batches had zero/quantized GetProcessTimes CPU samples; initial report preserved outside repository; longer common batches used here. CPU granularity remains a measurement limitation.",
+  "count_coverage": "Executed AST * / // % and simple-name augmented assignments in six new Lab modules plus local stdlib fractions; divmod calls; actual math.gcd C calls; both Fraction __new__ and _from_coprime_ints allocation routes; nearest-even call events. Native bignum internal operations, power/shift internals, libraries outside these modules and full-machine totals are UNAVAILABLE.",
+  "full_C1B1_audit_speedup": "NOT AVAILABLE: no independent impulse or physical binding",
+  "original_executor_external_compatibility": "NOT VERIFIED",
+  "implementation_sha256": {
+    "claim_adapter.py": "8e8894eb2abc0e1540f516418287b9e576e282c6140d7d83af9523788fd0d85e",
+    "compare.py": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+    "contracts.py": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+    "exact_fast.py": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+    "exact_geometry.py": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+    "exact_slow.py": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13"
+  },
+  "stdlib_fractions_sha256": "f9e59117aa3b27cf17fc653d1be912cc6cb78d35f4e173ef8237098cdd80e1da",
+  "instrumented_source_sha256": {
+    "claim_adapter.instrumented.txt": "f3426e6f32425e504ccbe9f067197c5d3c40e1d04dd9ad730a54f50820b18ee5",
+    "compare.instrumented.txt": "efc902ed3f233759a8c2738a545930bec836f1c7e7997b0de7f452fae026e265",
+    "contracts.instrumented.txt": "8d99840be5b81b48fc860260887502f4e65380c08c106a6e392e86387b0b9693",
+    "exact_fast.instrumented.txt": "f5e426643e2a0027e11d9f84c720c59df7c2bcb765e46e7c3b5bc291ce1dcaf0",
+    "exact_geometry.instrumented.txt": "7829998af408f3e007d98c1dd0e5b5c255afae3f834634e171992ab307d823cb",
+    "exact_slow.instrumented.txt": "e0708d6817037157663f66e43ef6d6b5d95fabb61e8236415666bc51e35141cb",
+    "_lab_profile_fractions.instrumented.txt": "fa75cbfb08e53ad9122734278664428636745709cdca6c0272f9c387f4a311d5"
+  },
+  "rows": {
+    "exact_slow.drift": {
+      "count_input_invocations": 8,
+      "actual_counts": {
+        "Fraction_constructor_calls": 408,
+        "gcd_calls": 792,
+        "integer_floor_divide": 748,
+        "integer_multiply": 1080,
+        "Fraction_coprime_factory_calls": 384,
+        "rounding_calls": 48,
+        "Fraction_constructions": 792,
+        "integer_modulo": 0,
+        "integer_divmod": 0,
+        "integer_true_divide": 0
+      },
+      "instrumented_output_matches_ordinary": true,
+      "wall_ns_per_invocation": [
+        81682.1941254417,
+        79445.99712897527,
+        85906.7855565371,
+        83156.31073321555,
+        85146.08546819788,
+        84624.80675795053,
+        81827.27473498233,
+        84039.9293286219,
+        87028.64399293286
+      ],
+      "cpu_ns_per_invocation": [
+        81092.64575971731,
+        78504.58259717314,
+        84543.39664310955,
+        83680.70892226149,
+        84543.39664310955,
+        84543.39664310955,
+        81092.64575971731,
+        83680.70892226149,
+        87131.4598056537
+      ],
+      "timing_invocations_per_repetition": 18112,
+      "wall_summary_ns": {
+        "median": 84039.9293286219,
+        "min": 79445.99712897527,
+        "max": 87028.64399293286
+      },
+      "cpu_summary_ns": {
+        "median": 83680.70892226149,
+        "min": 78504.58259717314,
+        "max": 87131.4598056537
+      }
+    },
+    "exact_slow.kick": {
+      "count_input_invocations": 8,
+      "actual_counts": {
+        "Fraction_constructor_calls": 216,
+        "gcd_calls": 360,
+        "integer_floor_divide": 384,
+        "integer_multiply": 624,
+        "Fraction_coprime_factory_calls": 192,
+        "rounding_calls": 48,
+        "Fraction_constructions": 408,
+        "integer_modulo": 0,
+        "integer_divmod": 0,
+        "integer_true_divide": 0
+      },
+      "instrumented_output_matches_ordinary": true,
+      "wall_ns_per_invocation": [
+        47953.20918532944,
+        44016.910094125284,
+        43823.26760791951,
+        44612.349886400516,
+        45344.417396949044,
+        45424.42794547225,
+        46131.957968192146,
+        49245.65481986368,
+        46832.74099318403
+      ],
+      "cpu_ns_per_invocation": [
+        48178.3511846803,
+        44374.79714378448,
+        43106.945796819215,
+        45008.722817267124,
+        44374.79714378448,
+        45642.64849074976,
+        45642.64849074976,
+        48812.276858162935,
+        46910.499837715026
+      ],
+      "timing_invocations_per_repetition": 24648,
+      "wall_summary_ns": {
+        "median": 45424.42794547225,
+        "min": 43823.26760791951,
+        "max": 49245.65481986368
+      },
+      "cpu_summary_ns": {
+        "median": 45642.64849074976,
+        "min": 43106.945796819215,
+        "max": 48812.276858162935
+      }
+    },
+    "exact_slow.paired_arithmetic_transition": {
+      "count_input_invocations": 8,
+      "actual_counts": {
+        "Fraction_constructor_calls": 952,
+        "gcd_calls": 2128,
+        "integer_floor_divide": 2008,
+        "integer_multiply": 3296,
+        "Fraction_coprime_factory_calls": 1120,
+        "rounding_calls": 144,
+        "Fraction_constructions": 2072,
+        "integer_modulo": 0,
+        "integer_divmod": 0,
+        "integer_true_divide": 0
+      },
+      "instrumented_output_matches_ordinary": true,
+      "wall_ns_per_invocation": [
+        262452.1296296296,
+        270842.8240740741,
+        307173.98148148146,
+        258245.97222222222,
+        258740.97222222222,
+        302035.97222222225,
+        260386.0648148148,
+        260784.90740740742,
+        288148.24074074073
+      ],
+      "cpu_ns_per_invocation": [
+        260416.66666666666,
+        267650.462962963,
+        303819.44444444444,
+        260416.66666666666,
+        245949.07407407407,
+        303819.44444444444,
+        260416.66666666666,
+        260416.66666666666,
+        274884.25925925927
+      ],
+      "timing_invocations_per_repetition": 2160,
+      "wall_summary_ns": {
+        "median": 262452.1296296296,
+        "min": 258245.97222222222,
+        "max": 307173.98148148146
+      },
+      "cpu_summary_ns": {
+        "median": 260416.66666666666,
+        "min": 245949.07407407407,
+        "max": 303819.44444444444
+      }
+    },
+    "exact_fast.drift": {
+      "count_input_invocations": 8,
+      "actual_counts": {
+        "integer_multiply": 336,
+        "rounding_calls": 48,
+        "integer_divmod": 48,
+        "Fraction_constructions": 0,
+        "gcd_calls": 0,
+        "integer_floor_divide": 0,
+        "integer_modulo": 0,
+        "integer_true_divide": 0
+      },
+      "instrumented_output_matches_ordinary": true,
+      "wall_ns_per_invocation": [
+        14544.202738515902,
+        14189.465547703181,
+        14375.038648409894,
+        14129.985644876326,
+        14316.248895759718,
+        14265.83480565371,
+        14879.991166077738,
+        17428.40106007067,
+        15546.659673144877
+      ],
+      "cpu_ns_per_invocation": [
+        14665.69125441696,
+        14665.69125441696,
+        14665.69125441696,
+        13803.003533568904,
+        14665.69125441696,
+        14665.69125441696,
+        14665.69125441696,
+        17253.754416961132,
+        15528.378975265017
+      ],
+      "timing_invocations_per_repetition": 18112,
+      "wall_summary_ns": {
+        "median": 14375.038648409894,
+        "min": 14129.985644876326,
+        "max": 17428.40106007067
+      },
+      "cpu_summary_ns": {
+        "median": 14665.69125441696,
+        "min": 13803.003533568904,
+        "max": 17253.754416961132
+      }
+    },
+    "exact_fast.kick": {
+      "count_input_invocations": 8,
+      "actual_counts": {
+        "Fraction_constructions": 0,
+        "gcd_calls": 0,
+        "integer_multiply": 0,
+        "integer_floor_divide": 0,
+        "integer_modulo": 0,
+        "integer_divmod": 0,
+        "integer_true_divide": 0,
+        "rounding_calls": 0
+      },
+      "instrumented_output_matches_ordinary": true,
+      "wall_ns_per_invocation": [
+        8246.867900032457,
+        7345.468192145408,
+        7517.222492697177,
+        7981.1019149626745,
+        7436.80623174294,
+        7462.585199610516,
+        7473.640863356053,
+        7421.583901330737,
+        7626.087309315158
+      ],
+      "cpu_ns_per_invocation": [
+        8241.033755274262,
+        6973.1824083089905,
+        7607.108081791626,
+        7607.108081791626,
+        7607.108081791626,
+        7607.108081791626,
+        7607.108081791626,
+        7607.108081791626,
+        7607.108081791626
+      ],
+      "timing_invocations_per_repetition": 24648,
+      "wall_summary_ns": {
+        "median": 7473.640863356053,
+        "min": 7345.468192145408,
+        "max": 8246.867900032457
+      },
+      "cpu_summary_ns": {
+        "median": 7607.108081791626,
+        "min": 6973.1824083089905,
+        "max": 8241.033755274262
+      }
+    },
+    "exact_fast.paired_arithmetic_transition": {
+      "count_input_invocations": 8,
+      "actual_counts": {
+        "integer_multiply": 1296,
+        "rounding_calls": 48,
+        "integer_divmod": 48,
+        "Fraction_constructor_calls": 160,
+        "gcd_calls": 664,
+        "integer_floor_divide": 478,
+        "Fraction_coprime_factory_calls": 352,
+        "Fraction_constructions": 512,
+        "integer_modulo": 0,
+        "integer_true_divide": 0
+      },
+      "instrumented_output_matches_ordinary": true,
+      "wall_ns_per_invocation": [
+        114468.56481481482,
+        115679.67592592593,
+        122298.75,
+        114829.72222222222,
+        114415.0,
+        120227.4074074074,
+        115595.0925925926,
+        115361.43518518518,
+        130697.17592592593
+      ],
+      "cpu_ns_per_invocation": [
+        115740.74074074074,
+        115740.74074074074,
+        122974.53703703704,
+        108506.94444444444,
+        115740.74074074074,
+        115740.74074074074,
+        115740.74074074074,
+        115740.74074074074,
+        130208.33333333333
+      ],
+      "timing_invocations_per_repetition": 2160,
+      "wall_summary_ns": {
+        "median": 115595.0925925926,
+        "min": 114415.0,
+        "max": 130697.17592592593
+      },
+      "cpu_summary_ns": {
+        "median": 115740.74074074074,
+        "min": 108506.94444444444,
+        "max": 130208.33333333333
+      }
+    }
+  },
+  "slow_over_fast_median_ratio": {
+    "drift": {
+      "wall": 5.846240235181423,
+      "cpu": 5.705882352941177
+    },
+    "kick": {
+      "wall": 6.0779516671977625,
+      "cpu": 6.0
+    },
+    "paired_arithmetic_transition": {
+      "wall": 2.2704435261332856,
+      "cpu": 2.25
+    }
+  }
+}
