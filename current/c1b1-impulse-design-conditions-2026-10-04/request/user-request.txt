@@ -1,0 +1,660 @@
+Independent Impulse V1 독립 설계 감사 결과를 반영합니다.
+
+감사 대상 설계 snapshot:
+
+```text
+023b186c0e9d95c11399893e7f75772cfff6c3a7
+```
+
+직접 parent / 기존 Arithmetic V1 감사 대상:
+
+```text
+65d8fd29ae255529afead70289098d36b825b3b4
+```
+
+설계 감사 판정:
+
+```text
+DESIGN PASS WITH PRE-IMPLEMENTATION CONDITIONS
+
+implementation_may_start_now = false
+```
+
+따라서 이번 작업에서는 **Impulse production 코드를 구현하지 마십시오.**
+
+먼저 설계 감사에서 지정된 B1–B8을 문서·사양·provenance 수준에서 닫아야 합니다.
+
+# 목표
+
+이번 단계의 목표는:
+
+```text
+B1–B8 specification closure
+```
+
+입니다.
+
+완료 후 다시 독립 설계 재검토를 받아:
+
+```text
+IMPLEMENTATION MAY START
+```
+
+판정을 얻기 전까지 Impulse V1 소스 구현은 시작하지 않습니다.
+
+## B1 — Lab-owned semantic bundle
+
+원본 문서들의 SHA 목록만 만드는 것이 아니라, Independent Impulse V1이 실제로 따를 **Lab-owned canonical semantic bundle**을 작성하십시오.
+
+최소한 다음 의미를 canonical data로 고정하십시오.
+
+```text
+physical equation version
+potential family / retardation semantics
+V(R)
+V'(R)
+q = r_j - r_i
+R = |q|
+J_j = -V'(R) * q/R * dt/2
+J_i = -J_j
+
+position grid
+momentum/impulse grid
+full dt / half-step semantics
+
+nearest-even once-rounding
+overflow semantics
+
+physical admission
+r_min identity
+
+sqrt / inverse / power / exp proof method version
+precision method version
+proof wire version
+
+RESOLVED / UNPROVED / STOP semantics
+```
+
+원본 implementation hash를 semantic bundle ID로 사용하지 마십시오.
+
+Canonical serialization과 version을 정한 뒤 bundle 자체 SHA-256을 고정하십시오.
+
+상태:
+
+```text
+B1 완료 전:
+NOT APPROVED FOR IMPLEMENTATION
+```
+
+---
+
+## B2 — Unit / constant provenance
+
+원본 모델에서 채택한 모든 상수·계수·index·unit을 Lab이 독립적으로 전사할 수 있는 데이터 bundle로 고정하십시오.
+
+특히:
+
+```text
+BO
+REL
+QED
+retardation
+alpha
+eta/rate
+polynomial coefficients
+long-range C coefficients
+B_m
+species binding
+mass binding
+distance unit
+energy unit
+force unit
+time unit
+momentum unit
+```
+
+을 다룹니다.
+
+각 데이터에:
+
+```text
+source
+source version
+exact textual value
+exact rational/decimal interpretation
+unit
+index
+family
+Lab canonical representation
+```
+
+을 기록하십시오.
+
+측정 불확도 σ와 nominal physical model value를 섞지 마십시오.
+
+새 CODATA 값이나 “더 최신 값”으로 임의 교체하지 마십시오.
+
+### 중요한 provenance 미해결
+
+설계 감사자는 P0:
+
+```text
+S2_ar2_pot.f90
+```
+
+의 공개 내용은 확인했지만 raw byte SHA-256은 장치 오프라인 때문에 독립 재확인하지 못했습니다.
+
+또 A-EV ref:
+
+```text
+27e48770ab5db666bcd78034d151ddbb04b6af54
+```
+
+은 원격 GitHub에서 찾지 못했습니다.
+
+따라서 이 둘을 “독립 확인 완료”로 표시하지 마십시오.
+
+가능하면 P0 raw source를 확보해 실제 hash를 검증하십시오.
+
+A-EV는 정확한 commit/object를 복구할 수 없다면:
+
+```text
+UNAVAILABLE / NOT A TRUSTED ANTECEDENT
+```
+
+로 유지하십시오.
+
+다른 commit으로 몰래 대체하지 마십시오.
+
+---
+
+## B3 — Physical r_min / domain binding
+
+원본 후보:
+
+```text
+r_min =
+1200000000000 / 529177210903 bohr
+```
+
+를 Lab에서 사용할 physical binding으로 명시적으로 승인할지 결정하고 provenance와 함께 고정하십시오.
+
+중요:
+
+`r_min`은 단순 drift guard만의 값이 아닙니다.
+
+설계 감사 판정은:
+
+```text
+C:
+Impulse admission에도 필요
+Drift segment guard에도 필요
+```
+
+입니다.
+
+따라서 physical Impulse oracle은:
+
+```text
+R < r_min
+```
+
+상태를 force 계산 전에 physical-domain refusal로 처리하는 계약이 필요합니다.
+
+다음도 명시하십시오.
+
+```text
+R = 0
+R < r_min
+R = r_min
+R > r_min
+```
+
+각 경우의 의미와 우선순위.
+
+기존 Arithmetic V1의 generic supplied-threshold geometry PASS를 physical r_min binding 완료로 간주하지 마십시오.
+
+---
+
+## B4 — Proof wire / resource contract
+
+Impulse certificate/proof artifact의 wire contract를 새로 고정하십시오.
+
+Arithmetic V1의 F-CLAIM-1에서 이미 결과 serialization 경계가 실제 FAIL을 만들었으므로 이번에는 사전에 닫습니다.
+
+최소한 다음 한도를 정의하십시오.
+
+```text
+integer / rational encoding
+canonical reduction
+integer digit limit
+total artifact byte limit
+list/array length
+nesting depth
+metadata length
+attempt/history count
+diagnostic size
+certificate size
+```
+
+Canonical rational은 반드시:
+
+```text
+exact reduction
+→ output size check
+→ decimal/string serialization
+```
+
+순서로 처리하는 계약이어야 합니다.
+
+process-global integer-string limit을 변경하는 방식은 사용하지 않습니다.
+
+Proof가 너무 커서 publication할 수 없을 경우:
+
+```text
+계산 성공
+≠
+proof publication 성공
+```
+
+을 분리하십시오.
+
+Partial raw J만 먼저 공개해서 성공으로 처리하지 마십시오.
+
+Resource failure도 bounded structured record여야 하며, 거대한 integer나 payload 전체를 failure message에 다시 넣지 마십시오.
+
+---
+
+## B5 — Finite computation policy
+
+Precision escalation의 **유한 policy**를 작성하십시오.
+
+단, 감사자가 명시적으로 budget 숫자를 임의 선정하지 않았으므로 이번에도 근거 없이 숫자를 박지 마십시오.
+
+먼저 다음을 정의하십시오.
+
+```text
+N의 의미
+P의 의미
+
+exp Taylor/order parameter
+radius refinement parameter
+attempt sequence
+
+integer bit cap
+rational numerator/denominator bit cap
+temporary allocation cap
+work-unit accounting
+artifact-size interaction
+
+STOP priority
+resource failure priority
+programming fault 처리
+```
+
+그리고:
+
+```text
+internal enclosure convergence
+
+rounding cell decision
+
+finite-budget resolution
+
+proof-wire publication
+```
+
+을 서로 다른 명제로 분리하십시오.
+
+V1은 모든 admissible input에서 성공할 필요가 없습니다.
+
+다음 계약을 허용할 수 있습니다.
+
+```text
+soundness guaranteed
+finite budget에서 못 풀면 UNPROVED / STOP
+```
+
+그러나 그 정책을 명시해야 합니다.
+
+절대:
+
+```text
+budget 소진
+→ 마지막 approximation 반올림
+```
+
+으로 진행하지 마십시오.
+
+### B4와 B5 공동 검토
+
+Proof wire와 precision budget은 따로 승인하지 마십시오.
+
+예를 들어 dyadic denominator가 실제 `2^P`로 남는 경우:
+
+```text
+2^13606 < 10^4096 <= 2^13607
+```
+
+이므로 4096자리 wire와 높은 P가 충돌할 수 있습니다.
+
+따라서:
+
+```text
+B4 proof representation
++
+B5 precision/work budget
+```
+
+을 하나의 호환성 검토 대상으로 다루십시오.
+
+---
+
+## B6 — Independent rechecker lineage
+
+아래 중 어떤 구조를 공식 V1로 채택할지 결정하십시오.
+
+후보 A:
+
+```text
+새 Impulse producer
++
+새 독립 rechecker
+```
+
+후보 B:
+
+```text
+새 Lab binding/producer
++
+기존 exact checker V1/V2 중 감사 가능한 하나
+```
+
+단, “독립 계산기가 많을수록 좋다”는 이유만으로 새 nonlinear 엔진을 하나 더 만들지 마십시오.
+
+각 안에 대해:
+
+```text
+공유 TCB
+공유 specification
+공유 constants
+공유 parser
+공유 certificate schema
+
+공유 금지 primitive helper
+공유 금지 enclosure helper
+공유 금지 rounding implementation
+공유 금지 executor helper
+```
+
+를 표로 정리하십시오.
+
+Point Prover는 Checker V2의:
+
+```text
+K2.enclosure(...)
+K2.check_certificate(...)
+```
+
+를 사용하므로:
+
+```text
+Point Prover
++
+Checker V2
+```
+
+를 서로 독립된 두 oracle로 세지 마십시오.
+
+Rechecker가 producer가 써 준 최종 interval을 받아 rounding cell만 확인하는 구조도 충분하지 않습니다.
+
+Rechecker는 원래 state/spec에서 nonlinear proof를 다시 구성하거나, 각 primitive witness와 합성의 soundness를 독립적으로 확인해야 합니다.
+
+또 위조된 좁은 interval, 다른 constants, 누락 derivative term 등이 포함된 valid-looking certificate를 거부할 수 있어야 합니다.
+
+---
+
+## B7 — Acquisition / identity contract
+
+Impulse 결과가 무엇에 대한 증명인지 canonical identity를 고정하십시오.
+
+최소 binding 후보:
+
+```text
+spec ID/hash
+state ID/hash
+position raw state
+species
+phase
+atom identity
+axis/component
+full/half stage
+record ID
+acquisition ID
+method ID/version
+proof-wire version
+```
+
+같은 숫자 bits라도 다른 occurrence를 동일한 증거로 취급하지 마십시오.
+
+특히 KDK에서는:
+
+```text
+J0:
+start snapshot에서 계산
+
+J1:
+drift 후 새 snapshot에서 계산
+```
+
+해야 합니다.
+
+기존 synthetic benchmark에서 같은 supplied J를 두 kick에 사용했다는 사실을 physical J 생성 규칙으로 복사하지 마십시오.
+
+Cache를 사용한다면:
+
+```text
+mathematical cache
+vs
+execution occurrence record
+```
+
+를 분리하고 stale certificate 방어 조건을 정의하십시오.
+
+---
+
+## B8 — Status / composition boundary
+
+Impulse producer, rechecker, comparator, 기존 Arithmetic V1의 상태를 하나로 뭉개지 마십시오.
+
+예:
+
+```text
+producer:
+RESOLVED / UNPROVED / STOP
+
+rechecker:
+ACCEPTED / REJECTED / ERROR
+
+executor comparison:
+MATCH / MISMATCH / NOT_AVAILABLE
+
+Arithmetic:
+COMPUTED / REFUSED
+
+publication:
+PUBLISHED / NOT_PUBLISHED
+```
+
+실제 명칭은 별도 설계해도 되지만 의미 층은 분리하십시오.
+
+한 component가 overflow이고 다른 component가 UNPROVED인 경우 등 복합 실패 우선순위도 정의하십시오.
+
+3-vector 전체가 승인되기 전:
+
+```text
+partial J
+partial certificate
+partial state update
+```
+
+를 공개하거나 commit하지 마십시오.
+
+기존 Arithmetic V1 상태:
+
+```text
+INDEPENDENT REVIEW PASS
+exact_slow DEFAULT
+exact_fast EXPERIMENTAL / OPT-IN
+```
+
+는 변경하지 않습니다.
+
+---
+
+# I1–I22 반영
+
+기존 I1–I16을 감사 판정대로 수정하십시오.
+
+특히:
+
+```text
+I1   BLOCKED
+I10  BLOCKED
+I12  BLOCKED
+I13  BLOCKED
+```
+
+은 B Gate가 닫히기 전 해결됐다고 표시하지 마십시오.
+
+I11은 다음 네 명제로 분리하십시오.
+
+```text
+internal convergence
+rounding-cell decidability
+finite-budget success
+proof publication feasibility
+```
+
+I15에는 각 mutant마다:
+
+```text
+nondegenerate fixture
+independent expected result
+actual semantic detection
+```
+
+요건을 추가하십시오.
+
+그리고 감사자가 추가한:
+
+```text
+I17 domain / denominator regularity
+I18 budget–proof representation
+I19 rechecker soundness
+I20 refinement determinism
+I21 canonical identity / cache
+I22 whole-vector publication ordering
+```
+
+을 공식 obligation set에 편입하십시오.
+
+---
+
+# 구현 시작 승인 조건
+
+B1–B8 산출물이 완성되면 다음 상태로만 변경하십시오.
+
+```text
+Independent Impulse V1:
+DESIGN CONDITIONS ADDRESSED
+IMPLEMENTATION STILL NOT STARTED
+REVIEW PENDING
+```
+
+구현을 바로 시작하지 말고 B1–B8 closure 자체를 다시 독립 검토받으십시오.
+
+그 재검토에서:
+
+```text
+IMPLEMENTATION MAY START
+```
+
+판정을 받아야 첫 `impulse_exact` 구현에 들어갑니다.
+
+---
+
+# 이번 작업의 금지사항
+
+```text
+Impulse production 구현 금지
+rechecker 구현 금지
+Arithmetic V1 수정 금지
+fast impulse 구현 금지
+benchmark 금지
+새 physical approximation/cutoff 금지
+budget 숫자 임의 확정 금지
+P0/A-EV provenance 추정 금지
+기존 historical audit 수정 금지
+J_NOT_VERIFIED 제거 금지
+사용자 승인 없이 commit/push 금지
+```
+
+---
+
+# 이번 산출물
+
+B1–B8을 하나의 거대한 문서에 묻지 말고, 적어도 의미적으로 다음 산출물을 분리하십시오.
+
+```text
+Lab semantic bundle + canonical hash
+
+unit/constants provenance record
+
+physical domain/r_min binding
+
+proof wire/resource specification
+
+finite computation policy
+
+rechecker lineage/trust-boundary document
+
+acquisition/identity specification
+
+status/composition specification
+
+I1–I22 updated obligation ledger
+
+B1–B8 closure summary
+```
+
+파일명은 저장소 구조에 맞게 제안해도 됩니다.
+
+각 문서에는:
+
+```text
+status
+version
+dependencies
+unresolved items
+what this does NOT certify
+```
+
+를 명시하십시오.
+
+현재 상태는 계속:
+
+```text
+C1-B1 Arithmetic V1:
+INDEPENDENT REVIEW PASS
+
+Independent Impulse V1:
+DESIGN ONLY / NOT IMPLEMENTED
+DESIGN REVIEW CONDITIONAL PASS
+
+Overall physical C1-B1:
+J_NOT_VERIFIED
+NotCertified
+```
+
+입니다.

@@ -1,0 +1,469 @@
+"""A-EV Phase 1: independent rational interval enclosures for Lang 2024 Ar-Ar force.
+
+This development auditor reads the published Fortran parameter decimals and
+re-derives V, dV/dR, F, F/R, and pair impulses. It imports no project evaluator,
+numeric VM, or world code. Interval endpoints are exact Fractions; only sqrt and
+exp use dyadic endpoints, rounded outwards with integer arithmetic.
+"""
+from __future__ import annotations
+
+from dataclasses import dataclass
+from fractions import Fraction
+from hashlib import sha256
+from math import factorial, isqrt
+from pathlib import Path
+import re
+from typing import Mapping
+
+
+SOURCE_PATH = Path(r"D:\reference\ar2_lang2024\S2_ar2_pot.f90")
+FORTRAN_SHA256 = "a598057183121b9c928b3a9804c8e2e99afa553bad570a471aa4130f20e6b049"
+R_MIN_ANGSTROM = Fraction("1.2")
+BOHR_ANGSTROM = Fraction("0.529177210903")
+R_MIN_BOHR = R_MIN_ANGSTROM / BOHR_ANGSTROM
+R_MIN_SQUARED = R_MIN_BOHR * R_MIN_BOHR
+
+_NUMBER = re.compile(r"(?<![\w.])[-+]?(?:\d+\.\d*|\.\d+|\d+)(?:[eEdD][-+]?\d+)?_prec", re.I)
+_EXPECTED_LENGTHS = {
+    "alpha_BO": 2,
+    "a_BO": 8,
+    "eta_BO": 1,
+    "C_BO": 6,
+    "alpha_REL": 2,
+    "a_REL": 6,
+    "eta_REL": 1,
+    "C_REL": 3,
+    "alpha_QED": 2,
+    "a_QED": 6,
+    "eta_QED": 1,
+    "C_QED": 2,
+    "RET_A": 5,
+    "RET_B": 6,
+}
+
+
+@dataclass(frozen=True)
+class Interval:
+    """Closed interval with exact rational endpoints."""
+
+    lo: Fraction
+    hi: Fraction
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "lo", Fraction(self.lo))
+        object.__setattr__(self, "hi", Fraction(self.hi))
+        if self.lo > self.hi:
+            raise ValueError("interval lower endpoint exceeds upper endpoint")
+
+    @classmethod
+    def point(cls, value) -> "Interval":
+        q = Fraction(value)
+        return cls(q, q)
+
+    def contains(self, value) -> bool:
+        q = Fraction(value)
+        return self.lo <= q <= self.hi
+
+    def __add__(self, other) -> "Interval":
+        b = _as_interval(other)
+        return Interval(self.lo + b.lo, self.hi + b.hi)
+
+    __radd__ = __add__
+
+    def __neg__(self) -> "Interval":
+        return Interval(-self.hi, -self.lo)
+
+    def __sub__(self, other) -> "Interval":
+        return self + (-_as_interval(other))
+
+    def __rsub__(self, other) -> "Interval":
+        return _as_interval(other) - self
+
+    def __mul__(self, other) -> "Interval":
+        b = _as_interval(other)
+        products = (self.lo * b.lo, self.lo * b.hi, self.hi * b.lo, self.hi * b.hi)
+        return Interval(min(products), max(products))
+
+    __rmul__ = __mul__
+
+    def reciprocal(self) -> "Interval":
+        if self.lo <= 0 <= self.hi:
+            raise ZeroDivisionError("interval reciprocal crosses zero")
+        return Interval(1 / self.hi, 1 / self.lo)
+
+    def __truediv__(self, other) -> "Interval":
+        return self * _as_interval(other).reciprocal()
+
+    def __rtruediv__(self, other) -> "Interval":
+        return _as_interval(other) * self.reciprocal()
+
+    def power(self, exponent: int) -> "Interval":
+        if not isinstance(exponent, int):
+            raise TypeError("interval powers require an integer exponent")
+        if exponent < 0:
+            return self.reciprocal().power(-exponent)
+        result = Interval.point(1)
+        factor = self
+        n = exponent
+        while n:
+            if n & 1:
+                result = result * factor
+            n >>= 1
+            if n:
+                factor = factor * factor
+        return result
+
+
+def _as_interval(value) -> Interval:
+    return value if isinstance(value, Interval) else Interval.point(value)
+
+
+def _floor_q(value: Fraction) -> int:
+    return value.numerator // value.denominator
+
+
+def _ceil_q(value: Fraction) -> int:
+    return -((-value.numerator) // value.denominator)
+
+
+def outward_dyadic_interval(lo, hi, bits: int) -> Interval:
+    """Round rational bounds outwards to multiples of 2**-bits."""
+    lo, hi = Fraction(lo), Fraction(hi)
+    if bits < 0 or lo > hi:
+        raise ValueError("invalid dyadic enclosure request")
+    scale = 1 << bits
+    return Interval(Fraction(_floor_q(lo * scale), scale), Fraction(_ceil_q(hi * scale), scale))
+
+
+def radius_interval(r2, bits: int = 128) -> Interval:
+    """Enclose sqrt(r2) by adjacent dyadics, using integer square root only."""
+    r2 = Fraction(r2)
+    if r2 < 0 or bits < 0:
+        raise ValueError("sqrt input and precision must be nonnegative")
+    scale = 1 << bits
+    scaled_square = r2.numerator * scale * scale
+    q, rem = divmod(scaled_square, r2.denominator)
+    lower_raw = isqrt(q)
+    exact_lower = rem == 0 and lower_raw * lower_raw == q
+    if exact_lower:
+        upper_raw = lower_raw
+    else:
+        upper_raw = lower_raw + 1
+    return Interval(Fraction(lower_raw, scale), Fraction(upper_raw, scale))
+
+
+def _exp_negative_point(x: Fraction, bits: int) -> Interval:
+    """Enclose exp(-x), x >= 0, by range reduction and a rational Taylor tail bound.
+
+    Write x = 2**s y with 0 <= y <= 1/2. For S_n=sum(y**k/k!, k<=n),
+    the omitted positive series is at most t_(n+1)/(1-y/(n+2)); reciprocal
+    monotonicity encloses exp(-y), and s outward-rounded squarings enclose exp(-x).
+    """
+    x = Fraction(x)
+    if x < 0 or bits < 0:
+        raise ValueError("exp(-x) requires x >= 0 and nonnegative precision")
+    scale = 1 << bits
+    if x == 0:
+        return Interval.point(1)
+
+    y = x
+    squarings = 0
+    while y > Fraction(1, 2):
+        y /= 2
+        squarings += 1
+
+    partial = Fraction(1)
+    term = Fraction(1)
+    n = 0
+    local = None
+    for _ in range(2 * bits + 256):
+        first_omitted = term * y / (n + 1)
+        tail = first_omitted / (1 - y / (n + 2))
+        local = outward_dyadic_interval(1 / (partial + tail), 1 / partial, bits)
+        if local.hi - local.lo <= Fraction(1, scale):
+            break
+        term = first_omitted
+        partial += term
+        n += 1
+    else:
+        raise ArithmeticError("exponential Taylor enclosure did not reach the requested dyadic width")
+
+    for _ in range(squarings):
+        local = outward_dyadic_interval(local.lo * local.lo, local.hi * local.hi, bits)
+    return local
+
+
+def exp_negative_interval(argument: Interval, bits: int = 128) -> Interval:
+    """Enclose exp(-x) for x in a nonnegative rational interval."""
+    if argument.lo < 0:
+        raise ValueError("exponential argument interval must be nonnegative")
+    if argument.lo == argument.hi:
+        return _exp_negative_point(argument.lo, bits)
+    lower = _exp_negative_point(argument.hi, bits).lo
+    upper = _exp_negative_point(argument.lo, bits).hi
+    return Interval(lower, upper)
+
+
+def source_sha256(path=SOURCE_PATH) -> str:
+    return sha256(Path(path).read_bytes()).hexdigest()
+
+
+def _source_values(text: str, name: str) -> tuple[Fraction, ...]:
+    match = re.search(
+        rf"\bparameter\s*::\s*{re.escape(name)}\s*(?:\([^)]*\))?\s*=\s*",
+        text,
+        flags=re.I,
+    )
+    if match is None:
+        raise ValueError(f"published source has no parameter declaration for {name}")
+    rhs = text[match.end():]
+    if re.match(r"\s*reshape\s*\(\s*\[", rhs, flags=re.I):
+        array = re.search(r"reshape\s*\(\s*\[([\s\S]*?)\]", rhs, flags=re.I)
+        if array is None:
+            raise ValueError(f"cannot parse reshaped parameter {name}")
+        payload = array.group(1)
+    elif re.match(r"\s*\[", rhs):
+        array = re.search(r"\[([\s\S]*?)\]", rhs)
+        if array is None:
+            raise ValueError(f"cannot parse array parameter {name}")
+        payload = array.group(1)
+    else:
+        payload = rhs.splitlines()[0]
+    literals = _NUMBER.findall(payload)
+    if not literals:
+        raise ValueError(f"no exact decimal literals found for {name}")
+    values = tuple(Fraction(token[:-5].replace("D", "e").replace("d", "e")) for token in literals)
+    expected = _EXPECTED_LENGTHS.get(name)
+    if expected is None:
+        expected = {"A": 5, "B": 6}.get(name.upper())
+    if expected is None:
+        raise ValueError(f"no source length contract for parameter {name}")
+    if len(values) != expected:
+        raise ValueError(f"{name} has {len(values)} literals; expected {expected}")
+    return values
+
+
+def parse_fortran_parameters(path=SOURCE_PATH) -> dict[str, tuple[Fraction, ...]]:
+    """Read the exact published decimal tokens after requiring the frozen source hash."""
+    raw = Path(path).read_bytes()
+    actual = sha256(raw).hexdigest()
+    if actual != FORTRAN_SHA256:
+        raise ValueError(f"Lang Fortran source hash mismatch: {actual}")
+    text = "\n".join(line.split("!", 1)[0] for line in raw.decode("utf-8").splitlines())
+    source_names = {"RET_A": "A", "RET_B": "B"}
+    return {
+        name: _source_values(text, source_names.get(name, name))
+        for name in _EXPECTED_LENGTHS
+    }
+
+
+@dataclass(frozen=True)
+class ForceEnclosure:
+    bits: int
+    radius: Interval
+    potential_components: Mapping[str, Interval]
+    derivative_components: Mapping[str, Interval]
+    potential: Interval
+    dv_dr: Interval
+    radial_force: Interval
+    force_over_r: Interval
+    derivative_terms: Mapping[str, Interval]
+    damping_derivative: Interval
+    retardation_correction_potential: Interval
+    retardation_correction_dv_dr: Interval
+    retardation_g_prime_term: Interval
+
+
+@dataclass(frozen=True)
+class ImpulseEnclosure:
+    force: ForceEnclosure
+    displacement: tuple[Fraction, Fraction, Fraction]
+    dt_kick: Fraction
+    components: tuple[Interval, Interval, Interval]
+
+
+def _short_component(params, comp: str, R: Interval, powers: dict[int, Interval], bits: int):
+    imin = -1 if comp == "BO" else 0
+    alpha = params[f"alpha_{comp}"]
+    flat = params[f"a_{comp}"]
+    width = 4 if comp == "BO" else 3
+    potential = Interval.point(0)
+    derivative = Interval.point(0)
+    terms: dict[str, Interval] = {}
+    for j, a in enumerate(alpha, start=1):
+        exponential = exp_negative_interval(a * R, bits)
+        for offset in range(width):
+            exponent = imin + offset
+            coefficient = flat[(j - 1) * width + offset]
+            monomial = coefficient * powers[exponent]
+            potential = potential + exponential * monomial
+            exp_term = exponential * (-a * monomial)
+            key = f"short_{comp}_j{j}_i{exponent}_exp"
+            terms[key] = exp_term
+            derivative = derivative + exp_term
+            if exponent:
+                poly_term = exponential * (coefficient * exponent * powers[exponent - 1])
+                key = f"short_{comp}_j{j}_i{exponent}_poly"
+                terms[key] = poly_term
+                derivative = derivative + poly_term
+    return potential, derivative, terms
+
+
+def _retardation_ratio(params, powers: dict[int, Interval]):
+    numerator = Interval.point(1)
+    denominator = Interval.point(1)
+    numerator_derivative = Interval.point(0)
+    denominator_derivative = Interval.point(0)
+    for index, coefficient in enumerate(params["RET_A"], start=1):
+        numerator = numerator + coefficient * powers[index]
+        numerator_derivative = numerator_derivative + (index * coefficient) * powers[index - 1]
+    for index, coefficient in enumerate(params["RET_B"], start=1):
+        denominator = denominator + coefficient * powers[index]
+        denominator_derivative = denominator_derivative + (index * coefficient) * powers[index - 1]
+    ratio = numerator / denominator
+    derivative = (numerator_derivative * denominator - numerator * denominator_derivative) / denominator.power(2)
+    return ratio, derivative
+
+
+def _long_component(params, comp: str, R: Interval, powers: dict[int, Interval], bits: int, retardation: bool):
+    eta = params[f"eta_{comp}"][0]
+    coefficients = params[f"C_{comp}"]
+    kmin = {"BO": 3, "REL": 2, "QED": 3}[comp]
+    kadd = 1 if comp == "BO" else 0
+    x = eta * R
+    exponential = exp_negative_interval(x, bits)
+    g, g_prime = _retardation_ratio(params, powers) if retardation and comp == "BO" else (
+        Interval.point(1), Interval.point(0)
+    )
+    potential = Interval.point(0)
+    derivative = Interval.point(0)
+    damp_slope_total = Interval.point(0)
+    retardation_slope = Interval.point(0)
+    terms: dict[str, Interval] = {}
+    for offset, coefficient in enumerate(coefficients):
+        k = kmin + offset
+        order = 2 * k + kadd
+        partial = Interval.point(0)
+        term = Interval.point(1)
+        for index in range(order + 1):
+            if index:
+                term = term * x / index
+            partial = partial + term
+        damp_tail = exponential * partial
+        damped = 1 - damp_tail
+        damped_derivative = eta * exponential * x.power(order) / factorial(order)
+
+        if retardation and comp == "BO" and k == kmin:
+            damping_factor = g - damp_tail
+            g_term = -coefficient * g_prime * powers[-2 * k]
+        elif retardation and comp == "REL" and k == kmin:
+            damping_factor = -damp_tail
+            g_term = Interval.point(0)
+        else:
+            damping_factor = damped
+            g_term = Interval.point(0)
+
+        value_term = -coefficient * damping_factor * powers[-2 * k]
+        damp_term = -coefficient * damped_derivative * powers[-2 * k]
+        denominator_term = (2 * k * coefficient) * damping_factor * powers[-2 * k - 1]
+        potential = potential + value_term
+        derivative = derivative + damp_term + g_term + denominator_term
+        damp_slope_total = damp_slope_total + damp_term
+        retardation_slope = retardation_slope + g_term
+        terms[f"long_{comp}_k{k}_damping"] = damp_term
+        if g_term.lo != 0 or g_term.hi != 0:
+            terms[f"long_{comp}_k{k}_retardation_g_prime"] = g_term
+        terms[f"long_{comp}_k{k}_denominator"] = denominator_term
+    return potential, derivative, damp_slope_total, retardation_slope, terms
+
+
+def _component_values(params, comp: str, R: Interval, powers: dict[int, Interval], bits: int, retardation: bool):
+    short_v, short_d, short_terms = _short_component(params, comp, R, powers, bits)
+    long_v, long_d, damp_slope, ret_slope, long_terms = _long_component(
+        params, comp, R, powers, bits, retardation
+    )
+    terms = {**short_terms, **long_terms}
+    return short_v + long_v, short_d + long_d, terms, damp_slope, ret_slope
+
+
+def _retardation_correction(params, R: Interval, powers: dict[int, Interval], bits: int):
+    g, g_prime = _retardation_ratio(params, powers)
+    c_bo = params["C_BO"][0]
+    c_rel = params["C_REL"][0]
+    # Fortran ret_type=1 changes BO C6 from f_7 to g + f_7 - 1;
+    # ret_type=2 changes REL C4 from f_4 to f_4 - 1.
+    bo_damping_delta = g - 1
+    rel_damping_delta = Interval.point(-1)
+    delta_v = -c_bo * bo_damping_delta * powers[-6] - c_rel * rel_damping_delta * powers[-4]
+    g_prime_term = -c_bo * g_prime * powers[-6]
+    bo_denominator_term = 6 * c_bo * bo_damping_delta * powers[-7]
+    rel_denominator_term = 4 * c_rel * rel_damping_delta * powers[-5]
+    delta_dv = g_prime_term + bo_denominator_term + rel_denominator_term
+    return delta_v, delta_dv, g_prime_term
+
+
+def enclose_force_r2(r2, bits: int = 128, retardation: bool = True, source_path=SOURCE_PATH) -> ForceEnclosure:
+    """Enclose Lang's radial force at exact R=sqrt(r2), with no rounding by an A evaluator."""
+    r2 = Fraction(r2)
+    if bits < 1:
+        raise ValueError("precision must be at least one bit")
+    if r2 < R_MIN_SQUARED:
+        raise ValueError("R^2 is below the direct-data domain R >= 1.2 Angstrom")
+    R = radius_interval(r2, bits)
+    if R.lo <= 0:
+        raise ValueError("radius enclosure is not strictly positive")
+    powers: dict[int, Interval] = {0: Interval.point(1), 1: R}
+    for index in range(2, 18):
+        powers[index] = powers[index - 1] * R
+    for index in range(1, 18):
+        powers[-index] = powers[index].reciprocal()
+
+    params = parse_fortran_parameters(source_path)
+    potential_components: dict[str, Interval] = {}
+    derivative_components: dict[str, Interval] = {}
+    derivative_terms: dict[str, Interval] = {}
+    damping_derivative = Interval.point(0)
+    retardation_g_prime_term = Interval.point(0)
+    for comp in ("BO", "REL", "QED"):
+        v, dv, terms, damp_slope, ret_slope = _component_values(params, comp, R, powers, bits, retardation)
+        potential_components[comp] = v
+        derivative_components[comp] = dv
+        derivative_terms.update(terms)
+        damping_derivative = damping_derivative + damp_slope
+        retardation_g_prime_term = retardation_g_prime_term + ret_slope
+
+    total_v = sum(potential_components.values(), Interval.point(0))
+    total_dv = sum(derivative_components.values(), Interval.point(0))
+    force = -total_dv
+    force_over_r = force * R.reciprocal()
+    if retardation:
+        ret_v, ret_dv, _ = _retardation_correction(params, R, powers, bits)
+    else:
+        ret_v, ret_dv = Interval.point(0), Interval.point(0)
+    return ForceEnclosure(
+        bits=bits,
+        radius=R,
+        potential_components=potential_components,
+        derivative_components=derivative_components,
+        potential=total_v,
+        dv_dr=total_dv,
+        radial_force=force,
+        force_over_r=force_over_r,
+        derivative_terms=derivative_terms,
+        damping_derivative=damping_derivative,
+        retardation_correction_potential=ret_v,
+        retardation_correction_dv_dr=ret_dv,
+        retardation_g_prime_term=retardation_g_prime_term,
+    )
+
+
+def enclose_impulse(displacement, dt_kick, bits: int = 128, source_path=SOURCE_PATH) -> ImpulseEnclosure:
+    """Enclose J_k=(F/R)*dr_k*dt_kick for an exact three-vector and exact time factor."""
+    displacement = tuple(Fraction(value) for value in displacement)
+    if len(displacement) != 3:
+        raise ValueError("relative displacement must have exactly three components")
+    dt_kick = Fraction(dt_kick)
+    r2 = sum((coordinate * coordinate for coordinate in displacement), Fraction(0))
+    force = enclose_force_r2(r2, bits=bits, retardation=True, source_path=source_path)
+    components = tuple(force.force_over_r * (coordinate * dt_kick) for coordinate in displacement)
+    return ImpulseEnclosure(force=force, displacement=displacement, dt_kick=dt_kick, components=components)

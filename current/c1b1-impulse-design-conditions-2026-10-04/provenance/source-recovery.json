@@ -1,0 +1,265 @@
+{
+  "schema": "IMPULSE_CONDITIONS_SOURCE_RECOVERY_V1",
+  "recorded_at_utc": "2026-10-04T13:44:12.426236+00:00",
+  "P0": {
+    "actual_source": "D:\\reference\\ar2_lang2024\\S2_ar2_pot.f90",
+    "archived_path": "provenance/P0-S2_ar2_pot.f90.raw",
+    "bytes": 12061,
+    "raw_sha256": "a598057183121b9c928b3a9804c8e2e99afa553bad570a471aa4130f20e6b049",
+    "verification": "AUTHOR LOCAL RAW BYTE CHECK",
+    "independent_auditor_raw_hash_reconfirmation": false,
+    "public_raw_download_performed": false
+  },
+  "git_exports": [
+    {
+      "checkout": "C:\\Users\\zun24\\성공은 실패의 어머니",
+      "exact_commit": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+      "role": "selected existing checker for review",
+      "local_object_recovery": "AVAILABLE / AUTHOR LOCAL OBJECT VERIFICATION",
+      "independent_reconfirmation": false,
+      "trusted_antecedent_in_new_oracle": false,
+      "files": [
+        {
+          "path": "a_reference/c1b1_exact_impulse_checker_v2.py",
+          "blob_oid": "ad1a66091ec743359565f3d19affbef800c70192",
+          "sha256": "180d5a19bbea606594912e95b3c210b5a7739995afa39c5300959faef8b94d96",
+          "merkle_tree_chain": [
+            "c418984eaf100542b5049d6ef137d242d9482c91",
+            "6f255fd9ab086898caf6f6b6fec7eda8d3bcce86"
+          ]
+        },
+        {
+          "path": "a_reference/c1b1_exact_impulse_checker.py",
+          "blob_oid": "b005c950ad34fbcc24b6b7ac8ff47dec44a62b25",
+          "sha256": "52e669e0bdd9e3e85e3e448afb194bd30ea765aebc79a07fc46b897d49b2a116",
+          "merkle_tree_chain": [
+            "c418984eaf100542b5049d6ef137d242d9482c91",
+            "6f255fd9ab086898caf6f6b6fec7eda8d3bcce86"
+          ]
+        },
+        {
+          "path": "docs/frozen/C1A_AR2_FREEZE_V1.md",
+          "blob_oid": "978940e98830abd1259b58c4ed0ad0c25cffde16",
+          "sha256": "da72e6c9422e42e135a3e75d0dc19abfc489ebdda12ce57d306ba6c361612b26",
+          "merkle_tree_chain": [
+            "c418984eaf100542b5049d6ef137d242d9482c91",
+            "5b47db3f39121ceed7f34df606bad51903610dac",
+            "4bba9c58c8e6773dab88e0af3d4defe69b299d7d"
+          ]
+        },
+        {
+          "path": "docs/active/C1B1_EXACT_IMPULSE_CHECKER_V2_DESIGN.md",
+          "blob_oid": "602dcf17113046c1ef4415b42cee0c46658f971d",
+          "sha256": "8ec4af9e597ee55e7e5a914147f7fa231c874c3434487038d51d8f3b087f6a9c",
+          "merkle_tree_chain": [
+            "c418984eaf100542b5049d6ef137d242d9482c91",
+            "5b47db3f39121ceed7f34df606bad51903610dac",
+            "1e78e42cfe4cc0f03d2ff98d5b8839e1a10b08fd"
+          ]
+        },
+        {
+          "path": "docs/active/A_MICRO_V6_C1B1_TWO_ATOM_DYNAMICS_DESIGN_V1.md",
+          "blob_oid": "4612f550cb3b09c568fc8f49fe72179b27395650",
+          "sha256": "4926455a62868ec45f404db780fc4f24813162d3eb3f38fe6350955c10c07e54",
+          "merkle_tree_chain": [
+            "c418984eaf100542b5049d6ef137d242d9482c91",
+            "5b47db3f39121ceed7f34df606bad51903610dac",
+            "1e78e42cfe4cc0f03d2ff98d5b8839e1a10b08fd"
+          ]
+        },
+        {
+          "path": "docs/active/C1B1_EXACT_IMPULSE_CERTIFICATE_SPEC_V1.md",
+          "blob_oid": "9ecdaae5f636a67187499dab2c2baba73eae4a2f",
+          "sha256": "032135b2f248eb801675d1b2ab652bd2fc50867a3a0ab7a7d6902240af334188",
+          "merkle_tree_chain": [
+            "c418984eaf100542b5049d6ef137d242d9482c91",
+            "5b47db3f39121ceed7f34df606bad51903610dac",
+            "1e78e42cfe4cc0f03d2ff98d5b8839e1a10b08fd"
+          ]
+        }
+      ],
+      "objects": [
+        {
+          "oid": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+          "type": "commit",
+          "bytes": 215,
+          "sha256": "aa1ed758dfc105bfb61a2f93836674a973c7455e3bfd695b7e11ee72ab882edd",
+          "file": "provenance/objects/0f7b744cf754450424a63c47f305e0327c5b37c1.commit.raw"
+        },
+        {
+          "oid": "1e78e42cfe4cc0f03d2ff98d5b8839e1a10b08fd",
+          "type": "tree",
+          "bytes": 6283,
+          "sha256": "9530d74de55c4421ac141014a0e780cb2dd0f9ee0b830d8cab87780235c5d48a",
+          "file": "provenance/objects/1e78e42cfe4cc0f03d2ff98d5b8839e1a10b08fd.tree.raw"
+        },
+        {
+          "oid": "4612f550cb3b09c568fc8f49fe72179b27395650",
+          "type": "blob",
+          "bytes": 108690,
+          "sha256": "4926455a62868ec45f404db780fc4f24813162d3eb3f38fe6350955c10c07e54",
+          "file": "provenance/objects/4612f550cb3b09c568fc8f49fe72179b27395650.blob.raw"
+        },
+        {
+          "oid": "4bba9c58c8e6773dab88e0af3d4defe69b299d7d",
+          "type": "tree",
+          "bytes": 236,
+          "sha256": "8f0038909a81c3cc096ad8da6bfede6893fa8f6a4ee509546e22d07f1a801a54",
+          "file": "provenance/objects/4bba9c58c8e6773dab88e0af3d4defe69b299d7d.tree.raw"
+        },
+        {
+          "oid": "5b47db3f39121ceed7f34df606bad51903610dac",
+          "type": "tree",
+          "bytes": 594,
+          "sha256": "65552a2e66a2dbce177c9ba4ae709ccb7f54c31a3a8190c46e764a84585400ae",
+          "file": "provenance/objects/5b47db3f39121ceed7f34df606bad51903610dac.tree.raw"
+        },
+        {
+          "oid": "602dcf17113046c1ef4415b42cee0c46658f971d",
+          "type": "blob",
+          "bytes": 22488,
+          "sha256": "8ec4af9e597ee55e7e5a914147f7fa231c874c3434487038d51d8f3b087f6a9c",
+          "file": "provenance/objects/602dcf17113046c1ef4415b42cee0c46658f971d.blob.raw"
+        },
+        {
+          "oid": "6f255fd9ab086898caf6f6b6fec7eda8d3bcce86",
+          "type": "tree",
+          "bytes": 3793,
+          "sha256": "e8a7e1518676115a832dafb88f20b54377e753c7d1d5a901f88ba5333abb0068",
+          "file": "provenance/objects/6f255fd9ab086898caf6f6b6fec7eda8d3bcce86.tree.raw"
+        },
+        {
+          "oid": "978940e98830abd1259b58c4ed0ad0c25cffde16",
+          "type": "blob",
+          "bytes": 4086,
+          "sha256": "da72e6c9422e42e135a3e75d0dc19abfc489ebdda12ce57d306ba6c361612b26",
+          "file": "provenance/objects/978940e98830abd1259b58c4ed0ad0c25cffde16.blob.raw"
+        },
+        {
+          "oid": "9ecdaae5f636a67187499dab2c2baba73eae4a2f",
+          "type": "blob",
+          "bytes": 27079,
+          "sha256": "032135b2f248eb801675d1b2ab652bd2fc50867a3a0ab7a7d6902240af334188",
+          "file": "provenance/objects/9ecdaae5f636a67187499dab2c2baba73eae4a2f.blob.raw"
+        },
+        {
+          "oid": "ad1a66091ec743359565f3d19affbef800c70192",
+          "type": "blob",
+          "bytes": 23569,
+          "sha256": "180d5a19bbea606594912e95b3c210b5a7739995afa39c5300959faef8b94d96",
+          "file": "provenance/objects/ad1a66091ec743359565f3d19affbef800c70192.blob.raw"
+        },
+        {
+          "oid": "b005c950ad34fbcc24b6b7ac8ff47dec44a62b25",
+          "type": "blob",
+          "bytes": 21756,
+          "sha256": "52e669e0bdd9e3e85e3e448afb194bd30ea765aebc79a07fc46b897d49b2a116",
+          "file": "provenance/objects/b005c950ad34fbcc24b6b7ac8ff47dec44a62b25.blob.raw"
+        },
+        {
+          "oid": "c418984eaf100542b5049d6ef137d242d9482c91",
+          "type": "tree",
+          "bytes": 5793,
+          "sha256": "e3fe7688eaed00e51faa8d8a42cb3ed70928d654eae9e7d650a28d374689d469",
+          "file": "provenance/objects/c418984eaf100542b5049d6ef137d242d9482c91.tree.raw"
+        }
+      ],
+      "history_bundle": false,
+      "checkout_modified": false,
+      "selected_antecedent_for_review": true,
+      "trust_approval": "PENDING independent closure review; source selection is not approval"
+    },
+    {
+      "checkout": "C:\\Users\\zun24\\.codex\\worktrees\\a-ev-audit\\성공은 실패의 어머니",
+      "exact_commit": "27e48770ab5db666bcd78034d151ddbb04b6af54",
+      "role": "comparison only / NOT A TRUSTED ANTECEDENT",
+      "local_object_recovery": "AVAILABLE / AUTHOR LOCAL OBJECT VERIFICATION",
+      "independent_reconfirmation": false,
+      "trusted_antecedent_in_new_oracle": false,
+      "files": [
+        {
+          "path": "audit/independent_physics/ar2_force_enclosure.py",
+          "blob_oid": "1d15152b24e67f61951c12372eaee7520c203624",
+          "sha256": "b283ce09ff1b4958fe9c49e13c0f5513a122fc13d955cdfa94c5dc3dd2defa49",
+          "merkle_tree_chain": [
+            "d4fcbdafb604eeb8ef1fc2d508de1d78da66b808",
+            "9b714bb2555bd81f4fac6e9605e1ce6d2a907e27",
+            "a0255ed3faaf50ba5b58fd893d1c04807b4c35e2"
+          ]
+        },
+        {
+          "path": "docs/active/A_EV_PHASE1_INDEPENDENT_FORCE_AUDIT.md",
+          "blob_oid": "21d485b8b3e0c4dec84f87f34222265defe77eab",
+          "sha256": "3a2812c1e74857e5519eb979f2ca6d8d573d8e8bd8dcd937eaff7a53a722ad56",
+          "merkle_tree_chain": [
+            "d4fcbdafb604eeb8ef1fc2d508de1d78da66b808",
+            "0baf719b63e9fc88331e4762042945983121e0ff",
+            "aeaac85a5f6bc8a760f73db9b9346066ac23e442"
+          ]
+        }
+      ],
+      "objects": [
+        {
+          "oid": "0baf719b63e9fc88331e4762042945983121e0ff",
+          "type": "tree",
+          "bytes": 556,
+          "sha256": "eaa7de8d57965d90b617e4fd40d16e3f774461874f601c2576250f0caa7494c1",
+          "file": "provenance/objects/0baf719b63e9fc88331e4762042945983121e0ff.tree.raw"
+        },
+        {
+          "oid": "1d15152b24e67f61951c12372eaee7520c203624",
+          "type": "blob",
+          "bytes": 18179,
+          "sha256": "b283ce09ff1b4958fe9c49e13c0f5513a122fc13d955cdfa94c5dc3dd2defa49",
+          "file": "provenance/objects/1d15152b24e67f61951c12372eaee7520c203624.blob.raw"
+        },
+        {
+          "oid": "21d485b8b3e0c4dec84f87f34222265defe77eab",
+          "type": "blob",
+          "bytes": 12319,
+          "sha256": "3a2812c1e74857e5519eb979f2ca6d8d573d8e8bd8dcd937eaff7a53a722ad56",
+          "file": "provenance/objects/21d485b8b3e0c4dec84f87f34222265defe77eab.blob.raw"
+        },
+        {
+          "oid": "27e48770ab5db666bcd78034d151ddbb04b6af54",
+          "type": "commit",
+          "bytes": 271,
+          "sha256": "0b3cedaf5b836c35f3ec9a220d6ce328d368ac31a5f1a1fa08bc4dbe6e07501f",
+          "file": "provenance/objects/27e48770ab5db666bcd78034d151ddbb04b6af54.commit.raw"
+        },
+        {
+          "oid": "9b714bb2555bd81f4fac6e9605e1ce6d2a907e27",
+          "type": "tree",
+          "bytes": 316,
+          "sha256": "e9ea554d98060e6092aed869af3c657a5e21c2a2b1b23cf804af9fe4d9aae107",
+          "file": "provenance/objects/9b714bb2555bd81f4fac6e9605e1ce6d2a907e27.tree.raw"
+        },
+        {
+          "oid": "a0255ed3faaf50ba5b58fd893d1c04807b4c35e2",
+          "type": "tree",
+          "bytes": 176,
+          "sha256": "35149a2094b403e79e56b1dfc253e7ef3eb5514d3692997e268f8146306505b0",
+          "file": "provenance/objects/a0255ed3faaf50ba5b58fd893d1c04807b4c35e2.tree.raw"
+        },
+        {
+          "oid": "aeaac85a5f6bc8a760f73db9b9346066ac23e442",
+          "type": "tree",
+          "bytes": 2160,
+          "sha256": "1abe5c450ea9f3dcef2f9f518171a75a1e01e0f0bb5ead0fc4512c1ed1ee095b",
+          "file": "provenance/objects/aeaac85a5f6bc8a760f73db9b9346066ac23e442.tree.raw"
+        },
+        {
+          "oid": "d4fcbdafb604eeb8ef1fc2d508de1d78da66b808",
+          "type": "tree",
+          "bytes": 5353,
+          "sha256": "019d79f97bb0662c57f3dadbdeb908fbeda5e5cee66317d77576fd561a77ddcf",
+          "file": "provenance/objects/d4fcbdafb604eeb8ef1fc2d508de1d78da66b808.tree.raw"
+        }
+      ],
+      "history_bundle": false,
+      "checkout_modified": false
+    }
+  ],
+  "object_scope": "Raw uncompressed commit/tree/blob contents and selected path Merkle chains; not full-history recovery; exact OIDs recomputed from bytes; no code executed",
+  "original_audit_access_limits_preserved": true
+}

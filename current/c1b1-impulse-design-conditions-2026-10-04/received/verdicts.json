@@ -1,0 +1,351 @@
+{
+  "audit_type": "INDEPENDENT_DESIGN_REVIEW_ONLY",
+  "design_commit": "023b186c0e9d95c11399893e7f75772cfff6c3a7",
+  "design_blob": "e9d25f90abe579781b74c0d1314527c1bd319412",
+  "arithmetic_antecedent": "65d8fd29ae255529afead70289098d36b825b3b4",
+  "decision": "DESIGN PASS WITH PRE-IMPLEMENTATION CONDITIONS",
+  "implementation_may_start": false,
+  "D_verdicts": [
+    {
+      "id": "D1",
+      "topic": "formula / sign",
+      "verdict": "PASS",
+      "basis": "S1·S2 §4와 설계 §3 대조; gradient, half-step, 무질량 인자, common J 부호 직접 유도."
+    },
+    {
+      "id": "D2",
+      "topic": "specification provenance",
+      "verdict": "UNRESOLVED",
+      "basis": "원본 동결·채택과 Lab 신규 승인을 구별. Lab canonical bundle 미발급; P0 raw checksum과 A-EV 지정 commit의 독립 확인 미완료."
+    },
+    {
+      "id": "D3",
+      "topic": "units / constants",
+      "verdict": "UNRESOLVED",
+      "basis": "단위 차원 및 공개 Table 2/3와 설계 숫자는 일치. 정확 십진 전사 데이터·단위 ID·물리 binding의 Lab 승인 전."
+    },
+    {
+      "id": "D4",
+      "topic": "nonlinear primitive enclosure",
+      "verdict": "PASS",
+      "basis": "명시된 조건에서 sqrt, reciprocal, powers, exp geometric remainder, outward conversion의 포함 전략을 직접 유도. 실제 구현 판정 아님."
+    },
+    {
+      "id": "D5",
+      "topic": "rounding proof strategy",
+      "verdict": "PASS",
+      "basis": "짝수 닫힌 cell, 홀수 열린 cell, signed range union과 양쪽 비대칭 overflow 부등식 검토."
+    },
+    {
+      "id": "D6",
+      "topic": "precision escalation / STOP",
+      "verdict": "UNRESOLVED",
+      "basis": "추측 금지와 finite exhaustion STOP 원칙은 타당. 유한 policy 값·work accounting·오류 우선순위 미발급."
+    },
+    {
+      "id": "D7",
+      "topic": "proof wire / resource boundary",
+      "verdict": "UNRESOLVED",
+      "basis": "약분 후 pre-str 한도 원칙 타당. 총 bytes·중첩·metadata·failure envelope 및 precision-wire 호환성 미확정."
+    },
+    {
+      "id": "D8",
+      "topic": "r_min / domain relation",
+      "verdict": "PASS",
+      "basis": "C: impulse admission과 drift guard 둘 모두 필요. 원본 수치가 알려져 있다는 것과 Lab 승인 완료는 별개."
+    },
+    {
+      "id": "D9",
+      "topic": "implementation independence",
+      "verdict": "PASS",
+      "basis": "설계의 executor 금지 경계 및 기존 Point Prover→K2 공유 관계 확인. 새 구현의 실제 독립성은 아직 판정하지 않음."
+    },
+    {
+      "id": "D10",
+      "topic": "rechecker lineage",
+      "verdict": "UNRESOLVED",
+      "basis": "U5의 선택 및 parser/primitive/rounding trusted boundary, 최종 proof acceptance 조건 미확정."
+    },
+    {
+      "id": "D11",
+      "topic": "Arithmetic V1 composition",
+      "verdict": "PASS",
+      "basis": "새 composition layer로 기존 KickInput 연결 가능. core 8개 파일의 Git blob ID와 이전 감사 바이트가 일치."
+    },
+    {
+      "id": "D12",
+      "topic": "validation plan",
+      "verdict": "PASS",
+      "basis": "V1–V17은 서로 다른 층을 분리. 실제 fixture/수치 실행의 PASS가 아니라 계획 평가."
+    },
+    {
+      "id": "D13",
+      "topic": "mutation plan",
+      "verdict": "PASS",
+      "basis": "M1–M17이 독립 failure mode를 공격. 아래 obligation mapping 및 비퇴화 fixture 조건을 적용해야 함; 실행 결과 없음."
+    },
+    {
+      "id": "D14",
+      "topic": "I1–I16 review",
+      "verdict": "UNRESOLVED",
+      "basis": "각 의무를 평가·분리했으나 I1/I10/I12/I13 등 pre-implementation blocker가 남음."
+    },
+    {
+      "id": "D15",
+      "topic": "missing obligations",
+      "verdict": "PASS",
+      "basis": "I17–I22 추가 의무 제안 및 필요한 사전 조건을 명시. 이들의 구현 완료를 뜻하지 않음."
+    },
+    {
+      "id": "D16",
+      "topic": "implementation readiness",
+      "verdict": "UNRESOLVED",
+      "basis": "B1–B8 완료 전 구현 시작 불허. 무조건 구현 착수 승인 아님."
+    }
+  ],
+  "I_reviews": [
+    {
+      "id": "I1",
+      "design_evaluation": "MISSING PRECONDITION",
+      "current_state": "BLOCKED",
+      "basis": "승인된 Lab bundle, exact data 전사, authority/version/hash 미발급. B1–B3."
+    },
+    {
+      "id": "I2",
+      "design_evaluation": "VALID AS WRITTEN",
+      "current_state": "IMPLEMENTATION-DEPENDENT",
+      "basis": "raw→q→R² 규칙은 명확. 실제 parser·전사·acquisition 동치의 증거는 구현 후 필요."
+    },
+    {
+      "id": "I3",
+      "design_evaluation": "VALID AS WRITTEN",
+      "current_state": "READY FOR IMPLEMENTATION",
+      "basis": "공개 V의 retardation 재조립과 모든 family index는 식 수준에서 확인. B1/B2 승인과 실제 코드 전사는 별도."
+    },
+    {
+      "id": "I4",
+      "design_evaluation": "VALID AS WRITTEN",
+      "current_state": "READY FOR IMPLEMENTATION",
+      "basis": "T′, BO i=-1, g′, force·h·mass 의미의 수학적 유도 확인."
+    },
+    {
+      "id": "I5",
+      "design_evaluation": "MISSING PRECONDITION",
+      "current_state": "OPEN",
+      "basis": "R>0뿐 아니라 g의 denominator 양수, 유효 N/P·ordered interval·0 포함 분모의 행동을 명시해야 함. I17로 보완."
+    },
+    {
+      "id": "I6",
+      "design_evaluation": "VALID AS WRITTEN",
+      "current_state": "READY FOR IMPLEMENTATION",
+      "basis": "Taylor tail 조건, range reduction, outward squaring의 soundness 전략 충분. method별 widening 위치는 B1/B5에서 고정."
+    },
+    {
+      "id": "I7",
+      "design_evaluation": "VALID AS WRITTEN",
+      "current_state": "READY FOR IMPLEMENTATION",
+      "basis": "포함 구간의 합성은 sound. 같은 R 의존성과 cancellation은 폭/비용 문제이며 midpoint 채택 이유가 되지 않음."
+    },
+    {
+      "id": "I8",
+      "design_evaluation": "VALID AS WRITTEN",
+      "current_state": "READY FOR IMPLEMENTATION",
+      "basis": "nearest-even cell과 비대칭 signed overflow 정의 타당. synthetic decision 검사와 실제 Lang state를 구별."
+    },
+    {
+      "id": "I9",
+      "design_evaluation": "VALID AS WRITTEN",
+      "current_state": "READY FOR IMPLEMENTATION",
+      "basis": "spec/domain 검사 후 zero shortcut 및 same J 공유가 명시됨. R=0 우회 금지."
+    },
+    {
+      "id": "I10",
+      "design_evaluation": "INSUFFICIENT",
+      "current_state": "BLOCKED",
+      "basis": "원칙만으로 total allocation/serialization 실패 계약이 닫히지 않음. bounded diagnostic, metadata/work/byte cap과 publish point 필요."
+    },
+    {
+      "id": "I11",
+      "design_evaluation": "NEEDS REVISION",
+      "current_state": "OPEN",
+      "basis": "내부 enclosure 수렴, cell 결정 가능성, finite budget 성공, 제한된 wire 출판 가능성을 네 명제로 분리. no-tie 전체 정리는 필수 아님."
+    },
+    {
+      "id": "I12",
+      "design_evaluation": "INSUFFICIENT",
+      "current_state": "BLOCKED",
+      "basis": "executor와의 경계는 명확하나 새 producer/rechecker의 실제 source/primitive/parser 계보는 U5. 실제 검사 항목도 별도 필요."
+    },
+    {
+      "id": "I13",
+      "design_evaluation": "MISSING PRECONDITION",
+      "current_state": "BLOCKED",
+      "basis": "canonical acquisition/state/phase binding schema 및 mismatch/refusal 결정 규칙을 먼저 고정. B7/B8."
+    },
+    {
+      "id": "I14",
+      "design_evaluation": "VALID AS WRITTEN",
+      "current_state": "IMPLEMENTATION-DEPENDENT",
+      "basis": "기존 code 보존과 J0/J1 snapshot 분리 적절. point oracle의 최초 구현과 후속 KDK composition gate를 분리."
+    },
+    {
+      "id": "I15",
+      "design_evaluation": "NEEDS REVISION",
+      "current_state": "IMPLEMENTATION-DEPENDENT",
+      "basis": "각 semantic mutant의 비퇴화 fixture와 독립 expected·위조 certificate 거부 조건 추가. hash-only 검출과 분리."
+    },
+    {
+      "id": "I16",
+      "design_evaluation": "VALID AS WRITTEN",
+      "current_state": "IMPLEMENTATION-DEPENDENT",
+      "basis": "코드·dependency·proof·author/independent evidence의 실제 고정은 구현/감사 후에만 확인 가능."
+    }
+  ],
+  "mutation_plan": [
+    {
+      "id": "M1",
+      "fault": "force sign flip",
+      "obligations": "I4/I7/I8",
+      "detection_requirement": "인증된 nonzero rounded J를 쓰고 sign 반전이 서로 다른 cell로 가는 사례. 실제 힘이 0에 가깝다는 진단만으로 부족."
+    },
+    {
+      "id": "M2",
+      "fault": "i/j kick sign swap",
+      "obligations": "I9/I14",
+      "detection_requirement": "원자별 서로 다른 momentum과 nonzero J; common J 양쪽 적용 결과를 따로 비교."
+    },
+    {
+      "id": "M3",
+      "fault": "half-step factor 제거/full-step 사용",
+      "obligations": "I4/I13",
+      "detection_requirement": "h=dt/2와 다른 scalar가 동일 raw로 반올림되지 않는 fixture. 두 edit를 별도 mutant로 기록."
+    },
+    {
+      "id": "M4",
+      "fault": "1/R 제거",
+      "obligations": "I4/I7",
+      "detection_requirement": "R≠1만으로 부족. 올바른 값과 변형 값의 cell이 분리되는 axis/off-axis fixture."
+    },
+    {
+      "id": "M5",
+      "fault": "R power 오류",
+      "obligations": "I3/I4/I7",
+      "detection_requirement": "각 long term/derivative term의 독립 enclosure 또는 분리된 J cell; R=1 퇴화 회피."
+    },
+    {
+      "id": "M6",
+      "fault": "short derivative/TT slope 누락",
+      "obligations": "I4/I7",
+      "detection_requirement": "빠진 항의 영향이 독립 증거로 관찰되는 term-level fixture; 거친 총 J 구간 일치만으로 검사하지 않음."
+    },
+    {
+      "id": "M7",
+      "fault": "BO g′ 누락/REL leading 1−T",
+      "obligations": "I3/I4",
+      "detection_requirement": "두 source edits를 분리. 각각 retarded BO, REL term identity 및 J 포함을 공격."
+    },
+    {
+      "id": "M8",
+      "fault": "exp sign/rate 오류",
+      "obligations": "I6/I7",
+      "detection_requirement": "x>0의 증명된 exp 구간 및 x=0 아닌 case. exp(+x), exp(−2x)는 별도 mutant."
+    },
+    {
+      "id": "M9",
+      "fault": "component swap",
+      "obligations": "I2/I7/I13",
+      "detection_requirement": "서로 다른 크기의 비영 q 성분으로 lane별 expected가 다르게 구성."
+    },
+    {
+      "id": "M10",
+      "fault": "ties-away",
+      "obligations": "I8",
+      "detection_requirement": "합성 scaled y의 양·음 even tie. 실제 Lang state에서 exact tie를 만들었다고 주장하지 않음."
+    },
+    {
+      "id": "M11",
+      "fault": "inverse/division endpoint swap",
+      "obligations": "I5/I7",
+      "detection_requirement": "양수 폭이 있는 분모와 signed numerator, exact rational containment로 검출."
+    },
+    {
+      "id": "M12",
+      "fault": "corner 삭제/inward rounding",
+      "obligations": "I5/I6/I7",
+      "detection_requirement": "누락 corner가 실제 extremum인 mixed-sign interval과 dyadic 경계. 두 결함군 분리."
+    },
+    {
+      "id": "M13",
+      "fault": "early precision accept",
+      "obligations": "I8/I10/I11",
+      "detection_requirement": "midpoint를 가로지르는 sound interval이 false RESOLVED로 바뀌는지 검사."
+    },
+    {
+      "id": "M14",
+      "fault": "overflow/operational refusal 제거",
+      "obligations": "I8/I10/I11",
+      "detection_requirement": "lower/upper asymmetric threshold, 양끝 overflow이나 0을 포함한 coarse interval, budget 만료 각각 분리."
+    },
+    {
+      "id": "M15",
+      "fault": "wrong spec/profile forced accept",
+      "obligations": "I1/I2/I12/I13",
+      "detection_requirement": "다른 spec·grid·half/full binding을 valid-looking data와 함께 제시. 숫자 raw 일치로 통과시키면 실패."
+    },
+    {
+      "id": "M16",
+      "fault": "intermediate R/F quantization",
+      "obligations": "I4/I7/I8",
+      "detection_requirement": "whole-expression once-rounding과 두 번 반올림의 결과가 다른 독립 증거가 필요."
+    },
+    {
+      "id": "M17",
+      "fault": "fixed exp cutoff/output guard 제거",
+      "obligations": "I6/I10",
+      "detection_requirement": "tail의 참값>0인 primitive 포함 반례와 output resource boundary 반례를 별도로 검사."
+    }
+  ],
+  "proposed_obligations": [
+    {
+      "id": "I17",
+      "title": "전역 정의역과 모든 분모의 정칙성",
+      "requirement": "R>0, 양의 rates, g denominator≥1, exp-tail denominator>0, coarse inverse lower=0의 refine/refuse를 개별 정리로 결합."
+    },
+    {
+      "id": "I18",
+      "title": "budget와 proof representation의 공동 계약",
+      "requirement": "연산 전 bit/allocation, parser·metadata·history·총 bytes·writer limits, 약분 후 출판 범위, 제한된 오류 record. 내부 수렴≠출판 가능."
+    },
+    {
+      "id": "I19",
+      "title": "certificate→rechecker acceptance의 전체 soundness",
+      "requirement": "producer가 적은 구간을 신뢰하지 않음. 같은 입력/모델의 모든 primitive와 마지막 cell까지 proof dependency가 닫혀야 함. 위조 proof mutants 추가."
+    },
+    {
+      "id": "I20",
+      "title": "정밀화 불일치와 결정론",
+      "requirement": "nonnested sound enclosure 허용; empty intersection/상이한 proved raw는 anomaly STOP. wall time 포함 receipt와 deterministic math certificate를 분리."
+    },
+    {
+      "id": "I21",
+      "title": "canonical identity와 cache/occurrence 분리",
+      "requirement": "canonical encoding, version/hash domain separation, whole state→projection 연결, phase/atom/axis 순서 및 stale certificate 방어. 수학 cache와 실행 record cache 분리."
+    },
+    {
+      "id": "I22",
+      "title": "whole-vector 결정과 publish의 순서 계약",
+      "requirement": "i/j convention, 3성분 순서, 한 lane overflow와 다른 lane UNPROVED가 겹칠 때 우선순위, partial vector/partial artifact 금지, trusted check 전후 status 구분."
+    }
+  ],
+  "production_implementation": false,
+  "production_modification": false,
+  "commit_or_push": false,
+  "new_impulse_tests_or_benchmarks": false,
+  "state": {
+    "arithmetic": "INDEPENDENT REVIEW PASS",
+    "impulse": "DESIGN ONLY / NOT IMPLEMENTED / DESIGN REVIEW CONDITIONAL PASS",
+    "physical": "J_NOT_VERIFIED / NotCertified",
+    "exact_slow": "DEFAULT",
+    "exact_fast": "EXPERIMENTAL / OPT-IN"
+  }
+}

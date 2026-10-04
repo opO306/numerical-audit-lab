@@ -1,0 +1,83 @@
+{
+  "kind": "LOCAL_ANTECEDENT_BYTES_TO_REMOTE_GIT_BLOB_ID_COMPARISON",
+  "antecedent_commit": "65d8fd29ae255529afead70289098d36b825b3b4",
+  "design_snapshot": "023b186c0e9d95c11399893e7f75772cfff6c3a7",
+  "github_response": "turn83file0, contents at fixed ref",
+  "antecedent_zip_sha256": "f8fa249ce107db88ad6bbfabb1e27f083fd803ad639c35357bd7c0ab0414c101",
+  "rows": [
+    {
+      "file": "claim_adapter.py",
+      "bytes": 7649,
+      "antecedent_archive_member": "c1b1_reaudit_65d8fd2/source/target/independent_checker/c1b1/claim_adapter.py",
+      "sha256_of_antecedent_bytes": "24b05ebf374728583ba725c83b8f9324f4b75b5515b03c5b1036339eef3e4899",
+      "computed_git_blob_oid": "23cc7a26796e3b5324129e2b616af79385428910",
+      "design_snapshot_api_blob_oid": "23cc7a26796e3b5324129e2b616af79385428910",
+      "match": true
+    },
+    {
+      "file": "compare.py",
+      "bytes": 2425,
+      "antecedent_archive_member": "c1b1_reaudit_65d8fd2/source/target/independent_checker/c1b1/compare.py",
+      "sha256_of_antecedent_bytes": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+      "computed_git_blob_oid": "af5f29962fdad2b3a05b1d69378a73ebc6c91485",
+      "design_snapshot_api_blob_oid": "af5f29962fdad2b3a05b1d69378a73ebc6c91485",
+      "match": true
+    },
+    {
+      "file": "contracts.py",
+      "bytes": 5856,
+      "antecedent_archive_member": "c1b1_reaudit_65d8fd2/source/target/independent_checker/c1b1/contracts.py",
+      "sha256_of_antecedent_bytes": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+      "computed_git_blob_oid": "95c120de26f6b18434b81bdcda016f9b21f2af8b",
+      "design_snapshot_api_blob_oid": "95c120de26f6b18434b81bdcda016f9b21f2af8b",
+      "match": true
+    },
+    {
+      "file": "exact_fast.py",
+      "bytes": 3170,
+      "antecedent_archive_member": "c1b1_reaudit_65d8fd2/source/target/independent_checker/c1b1/exact_fast.py",
+      "sha256_of_antecedent_bytes": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+      "computed_git_blob_oid": "44d542f256916fd9726eeef4f9ec7d18b4dee07f",
+      "design_snapshot_api_blob_oid": "44d542f256916fd9726eeef4f9ec7d18b4dee07f",
+      "match": true
+    },
+    {
+      "file": "exact_geometry.py",
+      "bytes": 2724,
+      "antecedent_archive_member": "c1b1_reaudit_65d8fd2/source/target/independent_checker/c1b1/exact_geometry.py",
+      "sha256_of_antecedent_bytes": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+      "computed_git_blob_oid": "6c64125dd78625cf9173debe9fe66c6c8930649e",
+      "design_snapshot_api_blob_oid": "6c64125dd78625cf9173debe9fe66c6c8930649e",
+      "match": true
+    },
+    {
+      "file": "exact_slow.py",
+      "bytes": 3400,
+      "antecedent_archive_member": "c1b1_reaudit_65d8fd2/source/target/independent_checker/c1b1/exact_slow.py",
+      "sha256_of_antecedent_bytes": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+      "computed_git_blob_oid": "b0ec6d8ee7546b1cd20efa8c5cc579851c1a5551",
+      "design_snapshot_api_blob_oid": "b0ec6d8ee7546b1cd20efa8c5cc579851c1a5551",
+      "match": true
+    },
+    {
+      "file": "semantic_manifest_v1.json",
+      "bytes": 4385,
+      "antecedent_archive_member": "c1b1_reaudit_65d8fd2/source/target/independent_checker/c1b1/semantic_manifest_v1.json",
+      "sha256_of_antecedent_bytes": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+      "computed_git_blob_oid": "85ab3975dc10e6b003652de254363574413c8f86",
+      "design_snapshot_api_blob_oid": "85ab3975dc10e6b003652de254363574413c8f86",
+      "match": true
+    },
+    {
+      "file": "semantic_manifest_v1.sha256",
+      "bytes": 93,
+      "antecedent_archive_member": "c1b1_reaudit_65d8fd2/source/target/independent_checker/c1b1/semantic_manifest_v1.sha256",
+      "sha256_of_antecedent_bytes": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79",
+      "computed_git_blob_oid": "a94cc350ae067845b6261128160a237ab03072ee",
+      "design_snapshot_api_blob_oid": "a94cc350ae067845b6261128160a237ab03072ee",
+      "match": true
+    }
+  ],
+  "matched_count": 8,
+  "limits": "No new arithmetic execution or remote worktree hash was performed. Git blob identity at pinned commit is compared to previously delivered byte-exact audit sources."
+}

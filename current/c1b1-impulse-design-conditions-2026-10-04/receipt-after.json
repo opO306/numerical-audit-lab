@@ -1,0 +1,185 @@
+{
+  "schema": "IMPULSE_CONDITIONS_RECEIPT_AFTER_V1",
+  "recorded_at_utc": "2026-10-04T14:29:45.001643+00:00",
+  "head": "023b186c0e9d95c11399893e7f75772cfff6c3a7",
+  "branch": "codex/c1b1-fclaim1-output-limit",
+  "existing_tracked_count": 1990,
+  "existing_tracked_raw_bytes_unchanged": true,
+  "protected_arithmetic_files": [
+    {
+      "path": "independent_checker/c1b1/claim_adapter.py",
+      "raw_sha256": "24b05ebf374728583ba725c83b8f9324f4b75b5515b03c5b1036339eef3e4899",
+      "git_blob_oid": "23cc7a26796e3b5324129e2b616af79385428910",
+      "antecedent_match": true
+    },
+    {
+      "path": "independent_checker/c1b1/compare.py",
+      "raw_sha256": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+      "git_blob_oid": "af5f29962fdad2b3a05b1d69378a73ebc6c91485",
+      "antecedent_match": true
+    },
+    {
+      "path": "independent_checker/c1b1/contracts.py",
+      "raw_sha256": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+      "git_blob_oid": "95c120de26f6b18434b81bdcda016f9b21f2af8b",
+      "antecedent_match": true
+    },
+    {
+      "path": "independent_checker/c1b1/exact_fast.py",
+      "raw_sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+      "git_blob_oid": "44d542f256916fd9726eeef4f9ec7d18b4dee07f",
+      "antecedent_match": true
+    },
+    {
+      "path": "independent_checker/c1b1/exact_geometry.py",
+      "raw_sha256": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+      "git_blob_oid": "6c64125dd78625cf9173debe9fe66c6c8930649e",
+      "antecedent_match": true
+    },
+    {
+      "path": "independent_checker/c1b1/exact_slow.py",
+      "raw_sha256": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+      "git_blob_oid": "b0ec6d8ee7546b1cd20efa8c5cc579851c1a5551",
+      "antecedent_match": true
+    },
+    {
+      "path": "independent_checker/c1b1/semantic_manifest_v1.json",
+      "raw_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+      "git_blob_oid": "85ab3975dc10e6b003652de254363574413c8f86",
+      "antecedent_match": true
+    },
+    {
+      "path": "independent_checker/c1b1/semantic_manifest_v1.sha256",
+      "raw_sha256": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79",
+      "git_blob_oid": "a94cc350ae067845b6261128160a237ab03072ee",
+      "antecedent_match": true
+    }
+  ],
+  "f806d8c_kernel_bytes": [
+    {
+      "path": "independent_checker/c1b1/exact_slow.py",
+      "sha256": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+      "f806d8c_byte_identical": true
+    },
+    {
+      "path": "independent_checker/c1b1/exact_fast.py",
+      "sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+      "f806d8c_byte_identical": true
+    },
+    {
+      "path": "independent_checker/c1b1/exact_geometry.py",
+      "sha256": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+      "f806d8c_byte_identical": true
+    }
+  ],
+  "received_exact_copies": [
+    {
+      "name": "REPORT_KO.md",
+      "raw_sha256": "45b5f4fdb745c39af95e37ef7952567fbaea0c8dfaa9e0d50bb4cbd371fbf118",
+      "exact_copy": true
+    },
+    {
+      "name": "exact_design_checks.json",
+      "raw_sha256": "3ddb881e1585a709c81ec0075d80c656395c607854b2231020afa8a4eb596c60",
+      "exact_copy": true
+    },
+    {
+      "name": "source_identity.json",
+      "raw_sha256": "1f3c009b28e704af69e094b7978636734128bf0ddaf599dc6e01af64f2762d74",
+      "exact_copy": true
+    },
+    {
+      "name": "verdicts.json",
+      "raw_sha256": "98b5e9a77768fe89678fa007c1d73eb010a93bcd183ef18883fa775ef1037f13",
+      "exact_copy": true
+    },
+    {
+      "name": "sources.json",
+      "raw_sha256": "32fc7b750903e9cb52b7c11610a4e16c339bbf2f4d1a51a06209870240e40e7e",
+      "exact_copy": true
+    }
+  ],
+  "historic_f806d8c_entries": 1943,
+  "historic_previous_adapter_fix_only": {
+    "independent_checker/c1b1/claim_adapter.py": {
+      "old": "100644 blob e07374bf75dc5fcc64a641e34242292eb25f04b9",
+      "head": "100644 blob 23cc7a26796e3b5324129e2b616af79385428910"
+    }
+  },
+  "new_file_raw_sha256": {
+    "specs/c1b1-independent-impulse-v1/.gitattributes": "2f0c1af484608d382d0abdaebf8985617cfcad5a44f1f58e9679d991d3e99de7",
+    "specs/c1b1-independent-impulse-v1/acquisition-identity.json": "20dd3eb9cfb0c191d5b37caf4e5703e612b5956918a7f16f8fffcfd7b763d6a9",
+    "specs/c1b1-independent-impulse-v1/acquisition-identity.json.sha256": "c51833dd176fd1c2cca91dc03c3bd25d6f3a634d6324b66b6cc08c58b7324a15",
+    "specs/c1b1-independent-impulse-v1/constants.json": "f1cf6a71afaf45e40db37a6e8a5b4f643a57885f4040d4fa285835530363e196",
+    "specs/c1b1-independent-impulse-v1/constants.json.sha256": "9eaed523f8a48ef26e3670d5294a945a46166f67154dac14bf3edb842bc7e984",
+    "specs/c1b1-independent-impulse-v1/finite-policy.json": "ca2a680a6dc454673c826b55a859056e1c79989add9b06316388b783cd11dcdb",
+    "specs/c1b1-independent-impulse-v1/finite-policy.json.sha256": "401eefe736bdfb2c49b3b584f81915f193251bea339ac4de84f9dc64ec37a475",
+    "specs/c1b1-independent-impulse-v1/package-manifest.json": "009fdd0bf9a540ae059b67a83fc10ef72bf7d87a9dcc1cf8c3b73f0ae967b730",
+    "specs/c1b1-independent-impulse-v1/package-manifest.json.sha256": "1c35336b77b16c876cb72880d4f6f9e94f76e99cb200eacd18ee81fcf6149e20",
+    "specs/c1b1-independent-impulse-v1/physical-domain.json": "a5242a7fb6e1fca0e6997f2a44af839049a5f610e00f73f8d4803b2d43f6b927",
+    "specs/c1b1-independent-impulse-v1/physical-domain.json.sha256": "d212a7f572e3ae16d726dea508810656b82fae346ed724c455fa3e0c27aff4a4",
+    "specs/c1b1-independent-impulse-v1/proof-wire.json": "4890780548aa8588293ad6bdb8a1dcf89c2d95a6aff0448218f19e486c8dc5bf",
+    "specs/c1b1-independent-impulse-v1/proof-wire.json.sha256": "4e8df35b66a3a4addc12a6e2bd955e37a0dc5d55cdcc717912d5c3ed333e55d4",
+    "specs/c1b1-independent-impulse-v1/rechecker-lineage.json": "cb725a5a427946d48763105eaab422b05eced8ecfbe5a8b29cff04db245a06a4",
+    "specs/c1b1-independent-impulse-v1/rechecker-lineage.json.sha256": "6aa9acd72a053a247f818dec8bb94af3fbdc4cf98d1a7d94db2d8b81e69d0c76",
+    "specs/c1b1-independent-impulse-v1/semantic-bundle.json": "a179dcfc065931d09ba4f364d159416ede4b9090a0924bf3fcc119815ed4266f",
+    "specs/c1b1-independent-impulse-v1/semantic-bundle.json.sha256": "a5b490c23d45079f6a92d1fbb19010263cc98d1393721f71355c979b60354300",
+    "specs/c1b1-independent-impulse-v1/status-composition.json": "0c4ad325b9f62fd7f7158334882456300c43481a403546e553ad1c81877bda4f",
+    "specs/c1b1-independent-impulse-v1/status-composition.json.sha256": "087f03ac7f08f2ef87ce42a4b006256640b4783b838fb703aa853d8ee7dbe935",
+    "docs/c1b1-independent-impulse-v1/.gitattributes": "166ed80450dc0bc0cba414bd62eec0730bfb0f9cf70254625c9787e85d10624c",
+    "docs/c1b1-independent-impulse-v1/B1-semantic-bundle.md": "752c5630f96a9821242382f84fde3aa278792b23f288992a62a14d9c5d15496d",
+    "docs/c1b1-independent-impulse-v1/B2-units-constants-provenance.md": "6a2b0f5d322013d159c7bd938231b645f34df0268ef1c8b5a919e35dc21bb58b",
+    "docs/c1b1-independent-impulse-v1/B3-physical-domain.md": "f8051acdef3df7657e2952aa2aba75e177c2d3f39ed6d8ef0bf3c50d9f524a0e",
+    "docs/c1b1-independent-impulse-v1/B4-proof-wire-resource.md": "37e6f4c1e418455b4aa197c864a3718b14f4327baccd81f40e94e63daa6187b9",
+    "docs/c1b1-independent-impulse-v1/B5-finite-computation-policy.md": "37fb89b17c3903b6d90ede9fa40ca96d0c8c801f29001c8fb1ec08128680b787",
+    "docs/c1b1-independent-impulse-v1/B6-rechecker-lineage.md": "997993a3dc6ab65498cdc04a728a12d507d6cfc9ba788208f1d62167ac0aa23f",
+    "docs/c1b1-independent-impulse-v1/B7-acquisition-identity.md": "1d49bcce8ed55e11dc994a313e4889690a3e5ff3ca6b39ac0c7ab3c6b712e443",
+    "docs/c1b1-independent-impulse-v1/B8-status-composition.md": "c0039894009d6db433a7f4c5de52a0fbca1298a9aeeedbd7c36b722c7930c245",
+    "docs/c1b1-independent-impulse-v1/mutation-obligations.md": "41f3b600a943a0d293fcceace8f446496c5cb852628e838786831e92a5f0cef4",
+    "docs/c1b1-independent-impulse-v1/obligation-ledger.md": "0042bc8dc9816e62a05bebd83f80f0f85ff3e5294cc7cbf7cfee77e15417a84e",
+    "docs/c1b1-independent-impulse-v1/README.md": "fb01a6ff5c8ac4f161ecfb50fde96389210e0b8e03f7273a324d3c07a3e53888",
+    "current/c1b1-impulse-design-conditions-2026-10-04/.gitattributes": "8bcac3303cc24ce70bcaa5c9013a66b8288776ded45f69d80bdae34132433cf1",
+    "current/c1b1-impulse-design-conditions-2026-10-04/author-static-checks.json": "885b3cd623b3586686f32c2835f9fde4985105bc7d25c525627a1a4281ce736a",
+    "current/c1b1-impulse-design-conditions-2026-10-04/closure-disposition.json": "fe7669db5f8056dd6c2ababcb42b5727001e0519427afc495d738112f0589106",
+    "current/c1b1-impulse-design-conditions-2026-10-04/receipt-before.json": "f20e99cf1ca39ea8bc8d4d2f8a0d3ce8d6fea12c5bb7b2611d758991d2331bcf",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/P0-S2_ar2_pot.f90.raw": "a598057183121b9c928b3a9804c8e2e99afa553bad570a471aa4130f20e6b049",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/source-recovery.json": "8d0ab0720650f2df6148addc75619182ac1737be518e7cec9807ded81674de4b",
+    "current/c1b1-impulse-design-conditions-2026-10-04/received/exact_design_checks.json": "3ddb881e1585a709c81ec0075d80c656395c607854b2231020afa8a4eb596c60",
+    "current/c1b1-impulse-design-conditions-2026-10-04/received/REPORT_KO.md": "45b5f4fdb745c39af95e37ef7952567fbaea0c8dfaa9e0d50bb4cbd371fbf118",
+    "current/c1b1-impulse-design-conditions-2026-10-04/received/sources.json": "32fc7b750903e9cb52b7c11610a4e16c339bbf2f4d1a51a06209870240e40e7e",
+    "current/c1b1-impulse-design-conditions-2026-10-04/received/source_identity.json": "1f3c009b28e704af69e094b7978636734128bf0ddaf599dc6e01af64f2762d74",
+    "current/c1b1-impulse-design-conditions-2026-10-04/received/verdicts.json": "98b5e9a77768fe89678fa007c1d73eb010a93bcd183ef18883fa775ef1037f13",
+    "current/c1b1-impulse-design-conditions-2026-10-04/request/user-request.txt": "85b034fa1693fd105b355c9fedcab9f5fd43c66d7a1ff811a10070818443bdaf",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/0baf719b63e9fc88331e4762042945983121e0ff.tree.raw": "eaa7de8d57965d90b617e4fd40d16e3f774461874f601c2576250f0caa7494c1",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/0f7b744cf754450424a63c47f305e0327c5b37c1.commit.raw": "aa1ed758dfc105bfb61a2f93836674a973c7455e3bfd695b7e11ee72ab882edd",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/1d15152b24e67f61951c12372eaee7520c203624.blob.raw": "b283ce09ff1b4958fe9c49e13c0f5513a122fc13d955cdfa94c5dc3dd2defa49",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/1e78e42cfe4cc0f03d2ff98d5b8839e1a10b08fd.tree.raw": "9530d74de55c4421ac141014a0e780cb2dd0f9ee0b830d8cab87780235c5d48a",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/21d485b8b3e0c4dec84f87f34222265defe77eab.blob.raw": "3a2812c1e74857e5519eb979f2ca6d8d573d8e8bd8dcd937eaff7a53a722ad56",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/27e48770ab5db666bcd78034d151ddbb04b6af54.commit.raw": "0b3cedaf5b836c35f3ec9a220d6ce328d368ac31a5f1a1fa08bc4dbe6e07501f",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/4612f550cb3b09c568fc8f49fe72179b27395650.blob.raw": "4926455a62868ec45f404db780fc4f24813162d3eb3f38fe6350955c10c07e54",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/4bba9c58c8e6773dab88e0af3d4defe69b299d7d.tree.raw": "8f0038909a81c3cc096ad8da6bfede6893fa8f6a4ee509546e22d07f1a801a54",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/5b47db3f39121ceed7f34df606bad51903610dac.tree.raw": "65552a2e66a2dbce177c9ba4ae709ccb7f54c31a3a8190c46e764a84585400ae",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/602dcf17113046c1ef4415b42cee0c46658f971d.blob.raw": "8ec4af9e597ee55e7e5a914147f7fa231c874c3434487038d51d8f3b087f6a9c",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/6f255fd9ab086898caf6f6b6fec7eda8d3bcce86.tree.raw": "e8a7e1518676115a832dafb88f20b54377e753c7d1d5a901f88ba5333abb0068",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/978940e98830abd1259b58c4ed0ad0c25cffde16.blob.raw": "da72e6c9422e42e135a3e75d0dc19abfc489ebdda12ce57d306ba6c361612b26",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/9b714bb2555bd81f4fac6e9605e1ce6d2a907e27.tree.raw": "e9ea554d98060e6092aed869af3c657a5e21c2a2b1b23cf804af9fe4d9aae107",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/9ecdaae5f636a67187499dab2c2baba73eae4a2f.blob.raw": "032135b2f248eb801675d1b2ab652bd2fc50867a3a0ab7a7d6902240af334188",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/a0255ed3faaf50ba5b58fd893d1c04807b4c35e2.tree.raw": "35149a2094b403e79e56b1dfc253e7ef3eb5514d3692997e268f8146306505b0",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/ad1a66091ec743359565f3d19affbef800c70192.blob.raw": "180d5a19bbea606594912e95b3c210b5a7739995afa39c5300959faef8b94d96",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/aeaac85a5f6bc8a760f73db9b9346066ac23e442.tree.raw": "1abe5c450ea9f3dcef2f9f518171a75a1e01e0f0bb5ead0fc4512c1ed1ee095b",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/b005c950ad34fbcc24b6b7ac8ff47dec44a62b25.blob.raw": "52e669e0bdd9e3e85e3e448afb194bd30ea765aebc79a07fc46b897d49b2a116",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/c418984eaf100542b5049d6ef137d242d9482c91.tree.raw": "e3fe7688eaed00e51faa8d8a42cb3ed70928d654eae9e7d650a28d374689d469",
+    "current/c1b1-impulse-design-conditions-2026-10-04/provenance/objects/d4fcbdafb604eeb8ef1fc2d508de1d78da66b808.tree.raw": "019d79f97bb0662c57f3dadbdeb908fbeda5e5cee66317d77576fd561a77ddcf",
+    "docs/C1B1_INDEPENDENT_IMPULSE_V1_CONDITIONS_2026-10-04.md": "73682ae890ea1c1bf9b758a94bea40ccda83ff587f69f4762403484830b7c175"
+  },
+  "receipt_self_excluded": true,
+  "canonical_bundle_sha256": "a179dcfc065931d09ba4f364d159416ede4b9090a0924bf3fcc119815ed4266f",
+  "production_sources_added_or_modified": false,
+  "impulse_or_rechecker_execution": false,
+  "implementation_tests_or_benchmarks": false,
+  "git_commit_or_push": false,
+  "independent_audit_status": "REVIEW PENDING",
+  "implementation_may_start": false,
+  "J_status": "J_NOT_VERIFIED",
+  "certification": "NotCertified"
+}

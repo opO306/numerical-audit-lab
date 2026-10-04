@@ -1,0 +1,407 @@
+module ar2_potentials_LPL
+implicit none
+integer,parameter :: prec = kind(0.d0)
+real(prec),parameter :: EXPTHR = -log(tiny(0._prec))
+
+private
+public V_BO,V_REL,V_QED,V
+public sigma_BO,sigma_REL,sigma
+
+!-------------------------------------------------------------------------------
+
+integer,parameter :: Jn_BO = 2
+integer,parameter :: Imin_BO =-1, Imax_BO = 2
+integer,parameter :: Kmin_BO = 3, Kmax_BO = 8, Kadd_BO = 1
+
+real(prec),parameter :: alpha_BO(Jn_BO) = [ &
+      6.92639712_prec, &
+      2.34781022_prec  ]
+real(prec),parameter :: a_BO(Imin_BO:Imax_BO,Jn_BO) = reshape([ &
+      2.19578828e4_prec, 6.77672149e4_prec, 8.52129476e4_prec, 9.53252754e4_prec,&
+     -2.16338828e4_prec, 3.18311293e4_prec,-8.18603449e3_prec, 8.37564742e2_prec &
+      ],[Imax_BO-Imin_BO+1,Jn_BO])
+
+real(prec),parameter :: eta_BO = 3.65946625_prec
+real(prec),parameter :: C_BO(Kmin_BO:Kmax_BO) = [ &
+     64.2295222_prec, &
+     1503.45262_prec, &
+     49033._prec,     &  
+     1828012._prec,   &
+     81913453._prec,  &
+     4294913366._prec ]
+
+!-------------------------------------------------------------------------------
+
+integer,parameter :: Jn_REL = 2
+integer,parameter :: Imin_REL = 0, Imax_REL = 2
+integer,parameter :: Kmin_REL = 2, Kmax_REL = 4, Kadd_REL = 0
+
+real(prec),parameter :: alpha_REL(Jn_REL) = [ &
+      1.66833595_prec, &
+      3.07137482_prec  ]
+real(prec),parameter :: a_REL(Imin_REL:Imax_REL,Jn_REL) = reshape([ &
+     -3.55673715e0_prec, 7.59367220e-1_prec,-4.19874548e-2_prec, &
+     -2.83560129e1_prec, 1.64892143e1_prec , 7.19542232e0_prec   &
+      ],[Imax_REL-Imin_REL+1,Jn_REL])
+
+real(prec),parameter :: eta_REL = 1.05249333_prec
+real(prec),parameter :: C_REL(Kmin_REL:Kmax_REL) = [ &
+     -9.43594504e-4_prec, &
+      1.76276088e-1_prec, &
+      3.99787449e-1_prec  ]
+
+!-------------------------------------------------------------------------------
+
+integer,parameter :: Jn_QED = 2
+integer,parameter :: Imin_QED = 0, Imax_QED = 2
+integer,parameter :: Kmin_QED = 3, Kmax_QED = 4, Kadd_QED = 0
+
+real(prec),parameter :: alpha_QED(Jn_QED) = [ &
+      1.64936036_prec, &
+      2.29848003_prec  ]
+real(prec),parameter :: a_QED(Imin_QED:Imax_QED,Jn_QED) = reshape([ &
+     -1.2621862e-1_prec, 1.176436e-2_prec, 0._prec         , &
+      0._prec          , 0._prec         , 6.921721e-2_prec  &
+      ],[Imax_QED-Imin_QED+1,Jn_QED])
+
+real(prec),parameter :: eta_QED = 3.91638946_prec
+real(prec),parameter :: C_QED(Kmin_QED:Kmax_QED) = [ &
+     -1.949525e-2_prec , &
+     -4.8877359e-1_prec  ]
+
+!-------------------------------------------------------------------------------
+
+! first  value - exponent
+! second value - coefficient
+
+integer,parameter :: nS_BO = 3
+real(prec),parameter :: aS_BO(2,0:nS_BO) = reshape([ &
+     1.9_prec          , 6.29130076e-1_prec, &
+     6.81313900e-1_prec, 9.85423065e-1_prec, &
+     5.76343421e-3_prec, 2.56799977e-8_prec, &
+     2.56907367e-2_prec, 2.93856722e-6_prec  &
+     ],[2,nS_BO+1])
+
+integer,parameter :: nS_REL = 3
+real(prec),parameter :: aS_REL(2,0:nS_REL) = reshape([ &
+     1.05_prec         , 6.76919448e-5_prec, &
+     1.16451516e-2_prec, 1.95220703e-8_prec, &
+     2.58221232e-1_prec, 1.89517999e-3_prec, &
+     2.00658289e-3_prec, 6.75730842e-10_prec &
+     ],[2,nS_REL+1])
+
+!-------------------------------------------------------------------------------
+
+contains
+
+! output V     - pair potential in hartree
+! input  R     - interatomic distance in bohr
+!        ret   - should retardation correction be added (defaults to .true.)
+
+function V_BO(R)
+implicit none
+real(prec) :: V_BO
+real(prec),intent(in) :: R
+V_BO = 0._prec
+V_BO = V_BO + formShort(R,Jn_BO,Imin_BO,Imax_BO,alpha_BO,a_BO)
+V_BO = V_BO + formLong(R,0,Kmin_BO,Kmax_BO,Kadd_BO,eta_BO,C_BO)
+end function V_BO
+
+function V_REL(R)
+implicit none
+real(prec) :: V_REL
+real(prec),intent(in) :: R
+V_REL = 0._prec
+V_REL = V_REL + formShort(R,Jn_REL,Imin_REL,Imax_REL,alpha_REL,a_REL)
+V_REL = V_REL + formLong(R,0,Kmin_REL,Kmax_REL,Kadd_REL,eta_REL,C_REL)
+end function V_REL
+
+function V_QED(R)
+implicit none
+real(prec) :: V_QED
+real(prec),intent(in) :: R
+V_QED = 0._prec
+V_QED = V_QED + formShort(R,Jn_QED,Imin_QED,Imax_QED,alpha_QED,a_QED)
+V_QED = V_QED + formLong(R,0,Kmin_QED,Kmax_QED,Kadd_QED,eta_QED,C_QED)
+end function V_QED
+
+function V(R,ret)
+implicit none
+real(prec) :: V
+real(prec),intent(in) :: R
+logical,intent(in),optional  :: ret
+logical :: do_ret
+real(prec) :: elms(3)
+
+if(present(ret)) then
+   do_ret = ret
+else
+   do_ret = .true.
+endif
+
+elms = 0._prec
+
+elms(1) = elms(1) + formShort(R,Jn_BO ,Imin_BO ,Imax_BO ,alpha_BO ,a_BO )
+elms(2) = elms(2) + formShort(R,Jn_REL,Imin_REL,Imax_REL,alpha_REL,a_REL)
+elms(3) = elms(3) + formShort(R,Jn_QED,Imin_QED,Imax_QED,alpha_QED,a_QED)
+if(do_ret) then
+   elms(1) = elms(1) + formLong(R,1,Kmin_BO ,Kmax_BO ,Kadd_BO ,eta_BO ,C_BO )
+   elms(2) = elms(2) + formLong(R,2,Kmin_REL,Kmax_REL,Kadd_REL,eta_REL,C_REL)
+   elms(3) = elms(3) + formLong(R,0,Kmin_QED,Kmax_QED,Kadd_QED,eta_QED,C_QED)
+else                                                          
+   elms(1) = elms(1) + formLong(R,0,Kmin_BO ,Kmax_BO ,Kadd_BO ,eta_BO ,C_BO )
+   elms(2) = elms(2) + formLong(R,0,Kmin_REL,Kmax_REL,Kadd_REL,eta_REL,C_REL)
+   elms(3) = elms(3) + formLong(R,0,Kmin_QED,Kmax_QED,Kadd_QED,eta_QED,C_QED)
+endif
+
+V = sum(elms)
+
+end function V
+
+function sigma_BO(R)
+implicit none
+real(prec) :: sigma_BO
+real(prec),intent(in) :: R
+sigma_BO = formSigma(R,nS_BO,aS_BO)
+end function sigma_BO
+
+function sigma_REL(R)
+implicit none
+real(prec) :: sigma_REL
+real(prec),intent(in) :: R
+sigma_REL = formSigma(R,nS_REL,aS_REL)
+end function sigma_REL
+
+function sigma(R)
+implicit none
+real(prec) :: sigma
+real(prec),intent(in) :: R
+real(prec) :: elms(2)
+
+elms(1) = formSigma(R,nS_BO ,aS_BO )
+elms(2) = formSigma(R,nS_REL,aS_REL)
+
+sigma = norm2(elms)
+
+end function sigma
+
+!-------------------------------------------------------------------------------
+!-------------------------------------------------------------------------------
+!-------------------------------------------------------------------------------
+
+function formShort(R,Jn,Imin,Imax,alpha,a)
+!short-range formula
+!
+! sum_{j=1}^{Jn} [ exp(-alpha(j) R)  sum_{i=Imin}^{Imax} a(i,j) R^i ]
+!
+implicit none
+real(prec) :: formShort
+real(prec),intent(in) :: R
+integer,intent(in) :: Jn,Imin,Imax
+real(prec),intent(in) :: alpha(Jn)
+real(prec),intent(in) :: a(Imin:Imax,Jn)
+real(prec) :: alphaR,term
+integer :: i,j
+formShort = 0._prec
+do j=1,Jn
+   alphaR = alpha(j)*R
+   if(alphaR<EXPTHR) then
+      term = a(Imax,j)
+      do i=Imax-1,Imin,-1
+         term = term*R + a(i,j)
+      enddo
+      formShort = formShort + exp(-alphaR)*term
+   endif
+enddo
+if(Imin/=0) formShort = formShort*R**Imin
+end function formShort
+
+function formLong(R,ret_type,Kmin,Kmax,Kadd,eta,C)
+!long-range formula
+!
+! - sum_{k=Kmin}^{Kmax} C(k)/R^(2k) dampTT(2k+Kadd,eta R)
+!
+! damping of the leading term
+! ret_type = 0  ->   1     + shiftTT = dampTT (no retardation)
+! ret_type = 1  ->   retar + shiftTT          (BO  [C6] potential)
+! ret_type = 2  ->   0     + shiftTT          (REL [C4] potential)
+!
+implicit none
+real(prec) :: formLong
+real(prec),intent(in) :: R
+integer,intent(in) :: ret_type,Kmin,Kmax,Kadd
+real(prec),intent(in) :: eta
+real(prec),intent(in) :: C(Kmin:Kmax)
+real(prec) :: invR2,etaR
+integer :: k
+invR2 = 1._prec/(R*R)
+etaR = eta*R
+if(Kmin<Kmax) then
+   formLong = C(Kmax)*dampTT(2*Kmax+Kadd,etaR)
+   do k=Kmax-1,Kmin+1,-1
+      formLong = formLong*invR2 + C(k)*dampTT(2*k+Kadd,etaR)
+   enddo
+else
+   formLong = 0._prec
+endif
+select case(ret_type)
+case(0)
+   formLong = formLong*invR2 + C(Kmin)*dampTT(2*Kmin+Kadd,etaR)
+case(1)
+   formLong = formLong*invR2 + C(Kmin)*(retar(R)+shftTT(2*Kmin+Kadd,etaR))
+case(2)
+   formLong = formLong*invR2 + C(Kmin)*shftTT(2*Kmin+Kadd,etaR)
+end select
+formLong = - formLong*invR2**Kmin
+end function formLong
+
+function formSigma(R,nS,aS)
+!sigma formula
+!
+! exp(-a(0) R) s(0) + sum_{i=1}^{nS} exp(-a(i) R^2) s(i)
+!
+implicit none
+real(prec) :: formSigma
+real(prec),intent(in) :: R
+integer,intent(in) :: nS
+real(prec),intent(in) :: aS(2,0:nS)
+real(prec) :: R2,aR
+integer :: i
+aR = aS(1,0)*R
+if(aR<EXPTHR) then
+   formSigma = exp(-aR)*aS(2,0)
+   R2 = R*R
+   do i=1,nS
+      aR = aS(1,i)*R2
+      if(aR<EXPTHR) formSigma = formSigma + exp(-aR)*aS(2,i)
+   enddo
+else
+   formSigma = 0._prec
+endif
+end function formSigma
+
+!-------------------------------------------------------------------------------
+!-------------------------------------------------------------------------------
+!-------------------------------------------------------------------------------
+
+function dampTT(n,x)
+!Tang-Toennies damping function
+!
+! dampTT(n,x) = 1 - exp(-x) sum_{i=0}^{n} x^i/i!
+!
+!             = exp(-x) sum_{i=n+1}^{infty} x^i/i!
+!
+implicit none
+real(prec) :: dampTT
+integer,intent(in) :: n
+real(prec),intent(in) :: x
+integer,parameter :: extra1=100
+real(prec),parameter :: limit1(0:20) = [ &
+      0.10536052_prec, &
+      0.53181161_prec, 1.1020653_prec, 1.7447696_prec, 2.4325910_prec, &
+      3.1518980_prec , 3.8947668_prec, 4.6561182_prec, 5.4324681_prec, &
+      6.2213046_prec , 7.0207466_prec, 7.8293420_prec, 8.6459425_prec, &
+      9.4696212_prec ,10.299617_prec ,11.135297_prec ,11.976127_prec , &
+     12.821650_prec  ,13.671475_prec ,14.525261_prec ,15.382712_prec   ]
+real(prec),parameter :: limit2(0:20) = [ & ! for use in double precision
+      36.736801_prec, &
+      40.461567_prec, 43.641482_prec, 46.530502_prec, 49.227432_prec, &
+      51.784081_prec, 54.231956_prec, 56.592034_prec, 58.879176_prec, &
+      61.104390_prec, 63.276116_prec, 65.401004_prec, 67.484408_prec, &
+      69.530718_prec, 71.543591_prec, 73.526111_prec, 75.480908_prec, &
+      77.410250_prec, 79.316108_prec, 81.200206_prec, 83.064069_prec  ]
+!!$real(prec),parameter :: limit2(0:20) = [ & ! for use in quadruple precision
+!!$      78.325631_prec, &
+!!$      82.753509_prec, 86.577667_prec, 90.069092_prec, 93.335700_prec, &
+!!$      96.435150_prec, 99.403064_prec,102.26349_prec ,105.03367_prec , &
+!!$     107.72650_prec ,110.35199_prec ,112.91807_prec ,115.43118_prec , &
+!!$     117.89665_prec ,120.31895_prec ,122.70185_prec ,125.04860_prec , &
+!!$     127.36203_prec ,129.64459_prec ,131.89844_prec ,134.12551_prec   ]
+real(prec) :: term,suma
+integer :: i
+if(x<limit1(n)) then
+   term = 1._prec
+   do i=1,n
+      term = term*x/i
+   enddo
+   suma = 0._prec
+   do i=n+1,2*n+extra1
+      term = term*x/i
+      if(abs(term)<spacing(suma)) exit
+      suma = suma + term
+   enddo
+   dampTT = exp(-x)*suma
+elseif(x<limit2(n)) then
+   term = 1._prec
+   suma = 1._prec
+   do i=1,n
+      term = term*x/i
+      suma = suma + term
+   enddo
+   dampTT = 1._prec - exp(-x)*suma
+else
+   dampTT = 1._prec
+endif
+end function dampTT
+
+function shftTT(n,x)
+!shifted Tang-Toennies damping function
+!
+! shftTT(n,x) = dampTT(n,x) - 1
+!
+!             = - exp(-x) sum_{i=0}^{n} x^i/i!
+!
+implicit none
+real(prec) :: shftTT
+integer,intent(in) :: n
+real(prec),intent(in) :: x
+real(prec) :: term,suma
+integer :: i
+if(x<EXPTHR) then
+   term = 1._prec
+   suma = 1._prec
+   do i=1,n
+      term = term*x/i
+      suma = suma + term
+   enddo
+   shftTT = -exp(-x)*suma
+else
+   shftTT = 0._prec
+endif
+end function shftTT
+
+function retar(R)
+implicit none
+real(prec) :: retar
+real(prec),intent(in) :: R
+real(prec),parameter :: A(5) = [ &
+     3.064827731712776e-01_prec, &
+     4.843969950480238e-03_prec, &
+     7.793815409352866e-06_prec, &
+     1.031221966985517e-14_prec, &
+     4.204140311858030e-12_prec  ]
+real(prec),parameter :: B(6) = [ &
+     3.064827731712776e-01_prec, &
+     4.858660928580025e-03_prec, &
+     1.156839432134599e-05_prec, &
+     1.670845939899731e-08_prec, &
+     2.151070686307512e-17_prec, &
+     8.769598859882065e-15_prec  ]
+real(prec) :: num,den
+num =         A(5)
+num = num*R + A(4)
+num = num*R + A(3)
+num = num*R + A(2)
+num = num*R + A(1)
+num = num*R + 1._prec
+den =         B(6)
+den = den*R + B(5)
+den = den*R + B(4)
+den = den*R + B(3)
+den = den*R + B(2)
+den = den*R + B(1)
+den = den*R + 1._prec
+retar = num/den
+end function retar
+
+end module ar2_potentials_LPL

@@ -1,0 +1,310 @@
+{
+  "schema": "IMPULSE_CONDITIONS_AUTHOR_STATIC_CHECKS_V1",
+  "recorded_at_utc": "2026-10-04T14:29:44.965259+00:00",
+  "verification_level": "AUTHOR STATIC SPECIFICATION CONSISTENCY ONLY",
+  "overall": "PASS",
+  "implementation_tests_run": false,
+  "impulse_or_rechecker_execution": false,
+  "benchmark_run": false,
+  "independent_audit": false,
+  "canonical_specifications": {
+    "acquisition-identity.json": "20dd3eb9cfb0c191d5b37caf4e5703e612b5956918a7f16f8fffcfd7b763d6a9",
+    "constants.json": "f1cf6a71afaf45e40db37a6e8a5b4f643a57885f4040d4fa285835530363e196",
+    "finite-policy.json": "ca2a680a6dc454673c826b55a859056e1c79989add9b06316388b783cd11dcdb",
+    "package-manifest.json": "009fdd0bf9a540ae059b67a83fc10ef72bf7d87a9dcc1cf8c3b73f0ae967b730",
+    "physical-domain.json": "a5242a7fb6e1fca0e6997f2a44af839049a5f610e00f73f8d4803b2d43f6b927",
+    "proof-wire.json": "4890780548aa8588293ad6bdb8a1dcf89c2d95a6aff0448218f19e486c8dc5bf",
+    "rechecker-lineage.json": "cb725a5a427946d48763105eaab422b05eced8ecfbe5a8b29cff04db245a06a4",
+    "semantic-bundle.json": "a179dcfc065931d09ba4f364d159416ede4b9090a0924bf3fcc119815ed4266f",
+    "status-composition.json": "0c4ad325b9f62fd7f7158334882456300c43481a403546e553ad1c81877bda4f"
+  },
+  "dependency_edges": [
+    {
+      "from": "acquisition-identity.json",
+      "to": "constants.json",
+      "match": true
+    },
+    {
+      "from": "acquisition-identity.json",
+      "to": "physical-domain.json",
+      "match": true
+    },
+    {
+      "from": "acquisition-identity.json",
+      "to": "proof-wire.json",
+      "match": true
+    },
+    {
+      "from": "finite-policy.json",
+      "to": "proof-wire.json",
+      "match": true
+    },
+    {
+      "from": "package-manifest.json",
+      "to": "acquisition-identity.json",
+      "match": true
+    },
+    {
+      "from": "package-manifest.json",
+      "to": "constants.json",
+      "match": true
+    },
+    {
+      "from": "package-manifest.json",
+      "to": "finite-policy.json",
+      "match": true
+    },
+    {
+      "from": "package-manifest.json",
+      "to": "physical-domain.json",
+      "match": true
+    },
+    {
+      "from": "package-manifest.json",
+      "to": "proof-wire.json",
+      "match": true
+    },
+    {
+      "from": "package-manifest.json",
+      "to": "rechecker-lineage.json",
+      "match": true
+    },
+    {
+      "from": "package-manifest.json",
+      "to": "semantic-bundle.json",
+      "match": true
+    },
+    {
+      "from": "package-manifest.json",
+      "to": "status-composition.json",
+      "match": true
+    },
+    {
+      "from": "physical-domain.json",
+      "to": "constants.json",
+      "match": true
+    },
+    {
+      "from": "proof-wire.json",
+      "to": "physical-domain.json",
+      "match": true
+    },
+    {
+      "from": "rechecker-lineage.json",
+      "to": "acquisition-identity.json",
+      "match": true
+    },
+    {
+      "from": "rechecker-lineage.json",
+      "to": "proof-wire.json",
+      "match": true
+    },
+    {
+      "from": "semantic-bundle.json",
+      "to": "acquisition-identity.json",
+      "match": true
+    },
+    {
+      "from": "semantic-bundle.json",
+      "to": "constants.json",
+      "match": true
+    },
+    {
+      "from": "semantic-bundle.json",
+      "to": "finite-policy.json",
+      "match": true
+    },
+    {
+      "from": "semantic-bundle.json",
+      "to": "physical-domain.json",
+      "match": true
+    },
+    {
+      "from": "semantic-bundle.json",
+      "to": "proof-wire.json",
+      "match": true
+    },
+    {
+      "from": "semantic-bundle.json",
+      "to": "rechecker-lineage.json",
+      "match": true
+    },
+    {
+      "from": "semantic-bundle.json",
+      "to": "status-composition.json",
+      "match": true
+    },
+    {
+      "from": "status-composition.json",
+      "to": "acquisition-identity.json",
+      "match": true
+    },
+    {
+      "from": "status-composition.json",
+      "to": "finite-policy.json",
+      "match": true
+    }
+  ],
+  "transcription": {
+    "records": 91,
+    "P0_exact_decimal_to_rational": true,
+    "legacy_V2_static_literals_equal": true,
+    "legacy_format_method_rate_order_equal": true,
+    "function_extraction_or_execution": false
+  },
+  "domain_exact_identities": {
+    "r_min_and_squared": true,
+    "non_dyadic_FX_equality_impossible": true,
+    "dyadic_4096_digit_threshold": true,
+    "relative_squared_numerator_max_bits": 194
+  },
+  "wire_schema_size_upper_bounds": {
+    "input_upper_bound": 161517,
+    "certificate_upper_bound": 137039,
+    "artifact_upper_bound": 298870,
+    "failure_upper_bound": 789,
+    "container_depth": 6,
+    "largest_array": 9,
+    "basis": "all variable integer strings widened to 4096 digits plus sign for Int, maximum enum/hash lengths; NOT a valid physical input or certificate"
+  },
+  "source_object_checks": {
+    "unique_objects": 20,
+    "merkle_paths": [
+      {
+        "commit": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+        "path": "a_reference/c1b1_exact_impulse_checker_v2.py",
+        "blob_oid": "ad1a66091ec743359565f3d19affbef800c70192",
+        "path_verified": true
+      },
+      {
+        "commit": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+        "path": "a_reference/c1b1_exact_impulse_checker.py",
+        "blob_oid": "b005c950ad34fbcc24b6b7ac8ff47dec44a62b25",
+        "path_verified": true
+      },
+      {
+        "commit": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+        "path": "docs/frozen/C1A_AR2_FREEZE_V1.md",
+        "blob_oid": "978940e98830abd1259b58c4ed0ad0c25cffde16",
+        "path_verified": true
+      },
+      {
+        "commit": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+        "path": "docs/active/C1B1_EXACT_IMPULSE_CHECKER_V2_DESIGN.md",
+        "blob_oid": "602dcf17113046c1ef4415b42cee0c46658f971d",
+        "path_verified": true
+      },
+      {
+        "commit": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+        "path": "docs/active/A_MICRO_V6_C1B1_TWO_ATOM_DYNAMICS_DESIGN_V1.md",
+        "blob_oid": "4612f550cb3b09c568fc8f49fe72179b27395650",
+        "path_verified": true
+      },
+      {
+        "commit": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+        "path": "docs/active/C1B1_EXACT_IMPULSE_CERTIFICATE_SPEC_V1.md",
+        "blob_oid": "9ecdaae5f636a67187499dab2c2baba73eae4a2f",
+        "path_verified": true
+      },
+      {
+        "commit": "27e48770ab5db666bcd78034d151ddbb04b6af54",
+        "path": "audit/independent_physics/ar2_force_enclosure.py",
+        "blob_oid": "1d15152b24e67f61951c12372eaee7520c203624",
+        "path_verified": true
+      },
+      {
+        "commit": "27e48770ab5db666bcd78034d151ddbb04b6af54",
+        "path": "docs/active/A_EV_PHASE1_INDEPENDENT_FORCE_AUDIT.md",
+        "blob_oid": "21d485b8b3e0c4dec84f87f34222265defe77eab",
+        "path_verified": true
+      }
+    ],
+    "P0_author_raw_match": true,
+    "independent_raw_reconfirmation": false
+  },
+  "protected_arithmetic_files": [
+    {
+      "path": "independent_checker/c1b1/claim_adapter.py",
+      "raw_sha256": "24b05ebf374728583ba725c83b8f9324f4b75b5515b03c5b1036339eef3e4899",
+      "git_blob_oid": "23cc7a26796e3b5324129e2b616af79385428910",
+      "antecedent_match": true
+    },
+    {
+      "path": "independent_checker/c1b1/compare.py",
+      "raw_sha256": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+      "git_blob_oid": "af5f29962fdad2b3a05b1d69378a73ebc6c91485",
+      "antecedent_match": true
+    },
+    {
+      "path": "independent_checker/c1b1/contracts.py",
+      "raw_sha256": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+      "git_blob_oid": "95c120de26f6b18434b81bdcda016f9b21f2af8b",
+      "antecedent_match": true
+    },
+    {
+      "path": "independent_checker/c1b1/exact_fast.py",
+      "raw_sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+      "git_blob_oid": "44d542f256916fd9726eeef4f9ec7d18b4dee07f",
+      "antecedent_match": true
+    },
+    {
+      "path": "independent_checker/c1b1/exact_geometry.py",
+      "raw_sha256": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+      "git_blob_oid": "6c64125dd78625cf9173debe9fe66c6c8930649e",
+      "antecedent_match": true
+    },
+    {
+      "path": "independent_checker/c1b1/exact_slow.py",
+      "raw_sha256": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+      "git_blob_oid": "b0ec6d8ee7546b1cd20efa8c5cc579851c1a5551",
+      "antecedent_match": true
+    },
+    {
+      "path": "independent_checker/c1b1/semantic_manifest_v1.json",
+      "raw_sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+      "git_blob_oid": "85ab3975dc10e6b003652de254363574413c8f86",
+      "antecedent_match": true
+    },
+    {
+      "path": "independent_checker/c1b1/semantic_manifest_v1.sha256",
+      "raw_sha256": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79",
+      "git_blob_oid": "a94cc350ae067845b6261128160a237ab03072ee",
+      "antecedent_match": true
+    }
+  ],
+  "kernels_f806d8c_byte_identical": [
+    {
+      "path": "independent_checker/c1b1/exact_slow.py",
+      "sha256": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+      "f806d8c_byte_identical": true
+    },
+    {
+      "path": "independent_checker/c1b1/exact_fast.py",
+      "sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+      "f806d8c_byte_identical": true
+    },
+    {
+      "path": "independent_checker/c1b1/exact_geometry.py",
+      "sha256": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+      "f806d8c_byte_identical": true
+    }
+  ],
+  "documentation": {
+    "documents": 12,
+    "local_link_count": 44,
+    "all_links_exist": true,
+    "I1_I22_present": true,
+    "I1_I10_I12_I13_remain_BLOCKED": true
+  },
+  "preservation": {
+    "existing_tracked_files": 1990,
+    "all_raw_sha256_unchanged": true,
+    "historic_f806d8c_entries": 1943,
+    "historic_paths_still_present": true,
+    "historic_unchanged_entries": 1942,
+    "previously_authorized_changed_entry": "claim_adapter.py at 65d8fd2; no new source edit this turn"
+  },
+  "budget_instance": "NOT ISSUED",
+  "implementation_may_start": false,
+  "certification": "NotCertified"
+}

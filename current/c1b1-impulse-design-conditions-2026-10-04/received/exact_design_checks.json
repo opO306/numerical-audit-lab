@@ -1,0 +1,38 @@
+{
+  "kind": "EXACT_INTEGER_DESIGN_CONSISTENCY_CHECKS_NOT_IMPULSE_IMPLEMENTATION",
+  "r_min_candidate": {
+    "numerator": 1200000000000,
+    "denominator": 529177210903,
+    "gcd": 1
+  },
+  "r_min_squared_candidate": {
+    "numerator": 1440000000000000000000000,
+    "denominator": 280028520539078142075409,
+    "denominator_is_odd": true,
+    "denominator_greater_than_one": true,
+    "conclusion": "not dyadic; cannot equal an exact squared distance obtained from fixed-point dyadic coordinates"
+  },
+  "wire_4096_digit_limit": {
+    "exact_inequality": "2^13606 < 10^4096 <= 2^13607",
+    "verified": true,
+    "example": "2^16384 has exactly 4933 decimal digits",
+    "example_verified": true,
+    "precondition": "reduced dyadic numerator is odd; denominator actually equals 2^P",
+    "does_not_select_budget": true
+  },
+  "position_difference": {
+    "W": 96,
+    "Fpos": 48,
+    "max_abs_relative_raw_formula": "2^96 - 1",
+    "max_R2_raw_numerator_bit_length": 194
+  },
+  "production_code_implemented_or_modified": false,
+  "tests_or_benchmarks_rerun": false,
+  "composition_orientation": {
+    "preserved_geometry_q0": "r_i-r_j",
+    "impulse_proposed_q": "r_j-r_i",
+    "distance_and_segment_min_invariant_under_global_negation": true,
+    "force_direction_not_invariant_under_unlabelled_negation": true,
+    "source_bytes": "antecedent ZIP source/target/independent_checker/c1b1/exact_geometry.py"
+  }
+}

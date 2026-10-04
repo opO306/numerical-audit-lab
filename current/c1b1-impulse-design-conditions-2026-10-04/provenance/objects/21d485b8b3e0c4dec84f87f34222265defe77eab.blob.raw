@@ -1,0 +1,123 @@
+# A-EV Phase 1 — 독립 Ar-Ar 힘·충격량 구간 감사
+
+**기록일:** 2026-09-30
+
+**상태:** **A-EV Phase 1 완료** — 최소 독립 힘·충격량 구간 계산 경로, 소수 입력 대조, 필수 결함 주입 완료. 전체 D_valid 인증·인증서·형식 증명은 없음.
+
+**작업선:** worktree branch `a-ev-audit`
+
+**목적:** C1-B1 평가기가 정밀도 M에서 계산하는 구간에 Lang et al. 2024 Ar-Ar 퍼텐셜의 실제 수학적 힘·충격량이 들어가는지 독립 경로로 조사한다.
+
+이 결과는 구현자 측의 Phase 1 범위 완료 기록이다. 별도 코드 수준 독립 리뷰나 형식 증명은 수행하지 않았다. A-EV 전체 완료나 ④-Safety 완료를 뜻하지 않으며, 현재 ④-Safety는 계속 Conditional이다.
+
+## 기준 SHA 기록
+
+작업을 시작할 때 기존 작업공간에서 기록한 값은 다음과 같다.
+
+| 확인 대상 | SHA |
+|---|---|
+| 시작 시 기존 체크아웃 HEAD | `76f4240b5cbd0e3ddeb5557793064ff0e783ed37` |
+| 시작 시 로컬 `origin/master` 추적값 | `e7b46c396e95f334a157aa2581987281ff7bf25f` |
+| `git ls-remote origin refs/heads/master`로 확인한 GitHub master | `76f4240b5cbd0e3ddeb5557793064ff0e783ed37` |
+| A-EV worktree branch의 기반 HEAD | `76f4240b5cbd0e3ddeb5557793064ff0e783ed37` |
+
+처음의 로컬 추적 ref는 작업 시작 시 원격 master보다 한 커밋 뒤였다. 작업 시작 시점의 GitHub master SHA를 직접 확인한 뒤 그 SHA에서 `a-ev-audit` 브랜치를 만들었다. 작업 중 push는 하지 않았다.
+
+추가 점검 때 원격 `master`는 `403a42de58fc6fa065846a3cb0dc4b4dc9443ec1`로 전진해 있었다. 기준 SHA 이후 들어온 세 커밋은 다른 C1-B1 작업선의 Proof Cache 관련 작업이며, 이 별도 작업선에는 병합하지 않았다. A-EV 변경은 시작 기준 SHA `76f4240b5cbd0e3ddeb5557793064ff0e783ed37`에서 작성했다.
+
+## 무엇을 enclosure하는가
+
+입력은 정확한 유리수 상대변위 `dr=(dr_x,dr_y,dr_z)`이고 `R²=dr·dr`이다. 감사기가 enclosure하는 참값은 다음과 같다.
+
+- 공개 Fortran 원문의 십진 계수를 정확한 유리수로 해석한 Lang 2024의 중심 퍼텐셜 `V(R)`
+- `R=sqrt(R²)`에서의 analytic `dV/dR`와 radial force `F=-dV/dR`
+- `F/R`
+- 정확한 유리수 시간 인자 `dt_kick`에 대한 각 성분 `J_k=(F/R)·dr_k·dt_kick`
+
+Retardation은 켠 값을 기본으로 한다. BO·REL·QED 성분을 각각 계산하며, BO·REL retardation 보정도 별도 값으로 계산한다. 이 결과는 프로파일에 한 번 반올림한 raw 값이 아니라 **반올림 전 실수 수학값의 구간**이다. 불확실성 함수 `sigma`는 이번 Phase 1 대상이 아니다.
+
+물리 입력 범위는 `R ≥ 1.2 Å`이며, 그 경계는 정확 유리수 `1.2 / 0.529177210903 bohr`로 검사한다. 경계 아래를 clamp하거나 외삽하지 않는다.
+
+## 독립 계산 경로
+
+구현은 [ar2_force_enclosure.py](../../audit/independent_physics/ar2_force_enclosure.py)에 있다.
+
+1. `D:\reference\ar2_lang2024\S2_ar2_pot.f90`의 정확 십진 토큰을 직접 읽는다. SHA-256 `a598057183121b9c928b3a9804c8e2e99afa553bad570a471aa4130f20e6b049`와 다르면 계산을 거부한다. 기존 평가기 상수 테이블을 읽거나 import하지 않는다.
+2. `R²`은 정확 분수로 유지한다. `sqrt(R²)`는 `isqrt`로 얻은 인접 dyadic 유리수 사이에 둔다.
+3. 구간 덧셈·곱셈·나눗셈·정수 거듭제곱은 모두 정확한 `Fraction` 끝점으로 수행한다. 곱셈은 네 끝점 곱을 모두 조사한다. 이런 산술 단계에서는 근사 반올림이 없다.
+4. `exp(-x)`는 `x=2^s y`, `0≤y≤1/2`로 줄인다. `exp(y)`의 양의 Taylor 급수에서 남은 꼬리를 `t_(n+1)/(1-y/(n+2))`로 위에서 제한하고, 역수의 단조성으로 `exp(-y)`를 감싼 뒤 `s`번 바깥쪽 제곱한다. dyadic 변환은 하한을 내림, 상한을 올림한다.
+5. 짧은 거리 항 `e^(-αR)P(R)`의 도함수는 `e^(-αR)(P′−αP)`로 별도 전개한다.
+6. 장거리 항 `−C D(R)/R^(2k)`의 도함수는 `−C[D′/R^(2k)−2kD/R^(2k+1)]`로 구성한다. Tang–Toennies 감쇠 도함수 `D′=ηe^(-ηR)(ηR)^n/n!`와 BO retardation 비율의 `g′(R)`를 각각 출력에 보존한다.
+7. BO의 선도항은 retarded `D=g−T`, REL의 선도항은 retarded `D=−T`로 처리한다(`T=e^(-ηR)Σ(ηR)^i/i!`). 나머지 항과 QED는 `D=1−T`다. `g′`가 힘 도함수에서 빠지지 않았는지 따로 검사할 수 있다.
+
+입력 R²와 공식을 구성하는 나머지 구간이 올바르다는 조건 아래, 결과 끝점은 수학적 참값 바깥쪽으로 반올림된다. 구현을 형식 증명기가 검증한 것은 아니다.
+
+## 독립성과 공유 범위
+
+**감사 계산 경로에서 공유하지 않는 것:** `a_reference` 또는 `a_numeric` import, `_model`, `_model_R`, `_exp_neg`, `_decide`, 기존 VM 구간 연산, 기존 evaluator의 파라미터 배열 및 미분 코드. AST 시험으로 새 감사 모듈이 이 모듈들을 import하지 않는지 확인한다.
+
+**공유한 입력·정의:** Lang 2024 공개 Fortran 파일, 그 파일에 명시된 십진 계수, 그리고 적용 도메인 `R ≥ 1.2 Å`. 같은 실제 물리식을 독립적으로 미분·구간 계산했다.
+
+**시험 전용 비교:** 기존 `audit/independent_physics/ar2_lang2024.py`는 `V`를 수치 미분한 수치 대조에만 사용했다. `a_reference.c1b1_two_atom._model`은 기존 평가기 M=128 구간과 새 감사기 M=256 구간의 포함 관계를 관찰하는 시험에서만 읽었다. 둘 중 어느 하나를 참값으로 간주해 A-EV를 PASS시키지 않았다.
+
+## Phase 1 결과
+
+새 시험 [test_audit_independent_ar2_force_enclosure.py](../../tests/test_audit_independent_ar2_force_enclosure.py)에서 다음을 확인했다.
+
+- M=256 독립 구간이 기존 evaluator M=128 구간 안에 들어가는 관계를 **6개 정확 입력**에서 확인했다: `R_min`, `R_min+2^-20 bohr`, `R=3`, `dr=(3,4,0)`의 `R=5`, `dr=(5,12,0)`의 `R=13`, `dr=(48,64,0)`의 `R=80`. 각 점에서 radial force, `F/R`, 세 충격량 성분까지 총 30개 구간 포함 비교가 통과했다.
+- 위 여섯 점의 도함수 enclosure가 기존 독립 감사 경로의 120자리 수치 미분값을 포함했다.
+- `R=5`에서 retarded BO·REL·QED 각각의 퍼텐셜과 해석 도함수 구간도 기존 독립 감사 경로에서 별도로 계산한 120자리 수치값을 포함했다.
+- 비제곱 `R²=6`, `dr=(1,1,2)`에서는 `sqrt(R²)`의 정수 부등식 경계, retarded 총 퍼텐셜·힘·`F/R`·세 impulse 성분, unretarded BO/REL/QED 성분을 120자리 수치값과 대조했다. 이는 수치 교차검증이며 그 mpmath 점값 자체가 엄밀 구간 증거는 아니다.
+- Fortran parameter 표는 새 parser와 기존 별도 Fortran parser 양쪽에서 읽은 정확 분수 값이 일치했다. 새 parser는 매 호출마다 원문 SHA를 다시 확인한다.
+- 결함 주입 **15개 변이**를 모두 시험기가 감지했다. 앞선 9개에 내부 도함수 부호 반전 1개, evaluator의 BO·REL·QED 성분 전체 누락 3개, 구간 나눗셈의 역수 끝점 방향 오류 2개를 추가했다.
+
+결함 주입 결과:
+
+| 주입한 결함 | 감지 방식 |
+|---|---|
+| BO short 도함수 항 하나 제거 | 실제 수치 `dV/dR`가 변이 구간 밖 |
+| BO short 내부 도함수 항 하나 부호 반전 | `_short_component` 계산 경로를 변이시킨 총 `dV/dR` 구간이 독립 수치값을 놓침 |
+| force 부호 뒤집기 | 실제 radial force와 부호 변이 구간이 분리 |
+| `exp(-x)` 부호 오류 (`exp(+x)`) | 수치 도함수와 변이 구간 불포함 |
+| exponential 계수 오류 (`exp(-2x)`) | 수치 도함수와 변이 구간 불포함 |
+| Tang–Toennies 감쇠 도함수 제거 | 수치 도함수와 변이 구간 불포함 |
+| retardation `g′` 항 제거 | 수치 도함수와 변이 구간 불포함 |
+| 기존 evaluator의 BO·REL·QED 중 한 성분 전체 제거(각각 실행) | 변이한 `_model`의 force 구간이 독립 auditor 구간을 포함하지 못함 |
+| impulse의 `1/R` 인자 제거 | 정확한 `F·dr·dt` 변이가 올바른 `F/R·dr·dt` 점값을 포함하지 않음 |
+| interval 곱셈 끝점 하나 누락 | `[-1,2]·[-3,4]`의 참 상한 8을 놓치는 변이 `[-6,3]`을 검출 |
+| 구간 나눗셈의 역수 끝점 방향 오류 2종 | 끝점 역전은 빈 구간으로 거부; 상한을 낮은 끝에 잘못 고정하면 `1/√6`의 정확 부등식을 놓침 |
+| dyadic outward rounding을 inward로 변경 | `1/3`의 8-bit 하한 올림·상한 내림이 빈 구간이 되어 거부됨 |
+
+## 실행 및 검증
+
+- 신규 A-EV 시험: **24 passed**, 1.95초.
+- 기존 C1-A 관련 시험(감사 import 경계, published parameter 값, 전 GRID analytic-force 수치 미분): **3 passed, 12 deselected**, 1.72초.
+- C1-B1 두 원자 회귀: **41 passed, 1 strict xfailed**, 7.70초. 기존 xfail은 이번 작업으로 바뀌지 않았다.
+- LOCAL FULL은 생략했다. 이 작업선의 변경 파일은 새 독립 분석 모듈, 새 시험, 본 결과 문서, 후속 `survey_only` 조사 코드·문서뿐이며 기존 실행기·공용 코드·동결 계약·fixture·checker는 수정하지 않았다. 변경 파일 목록으로 경계를 재확인한다.
+
+단일 입력 `R=5`, `dr=(3,4,0)`, `dt_kick=20`에서 별도로 잰 한 번의 실행값은 다음과 같다. 이는 성능 보장이나 대표 벤치마크가 아니다.
+
+| 구간 precision | 벽시계 | radial force 구간 폭 |
+|---:|---:|---:|
+| 128 bit | 0.023426 s | `7.995672e-32` |
+| 256 bit | 0.038112 s | `2.349718e-70` |
+| 512 bit | 0.089633 s | `2.029255e-147` |
+
+## 구현 / 수치 검증 / 인증 / 증명
+
+| 증거 수준 | Phase 1 판정 |
+|---|---|
+| **구현** | Phase 1 최소 exact-rational interval force/impulse auditor 및 필수 결함 주입 완료 |
+| **수치 검증** | 소수 정확 입력·한 비제곱 반지름과 세 계산 경로 대조 및 fault injection 통과 |
+| **certificate** | 생성하지 않음 |
+| **formal proof** | 없음 |
+
+따라서 기존 evaluator의 포함 성질은 위 소수 입력에서만 조사했다. 모든 M, 모든 R, D_valid 전체, 모든 가능한 impulse 성분에 대해 증명한 것이 아니다. A-EV의 목표 물리식이 코드에 오기 없이 전사됐다는 형식 증명도 없다. `R<r_min`, 불확실성 함수, 전체 profile 반올림, 궤적·D_valid coverage는 이번 구현 밖이다.
+
+## 계산량이 커지는 위치와 가장 싼 다음 단계
+
+한 점의 힘 계산은 6개 짧은 거리 exponential과 BO/REL/QED 3개 감쇠 exponential을 포함한다. R 구간 끝이 다르면 각 argument의 두 끝을 따로 enclosure한다(최대 18개의 scalar exponential series). precision M이 오르면 요구 Taylor 항 수와 exact integer/Fraction 연산의 피연산자 크기가 함께 커진다. 큰 `ηR`에서는 각 exponential의 추가 squaring 횟수가 대략 `log₂(ηR)`로 늘어난다. 여기에 전체 R²/세 좌표의 격자점을 각각 평가하는 방식은 D_valid 크기에서 감당할 수 없다. 이번에는 대표점 7개만 계산했고 전수 탐색이나 랜덤 캠페인은 하지 않았다.
+
+후속 [15-cell radial 가능성 조사](A_EV_RADIAL_CELL_FEASIBILITY_V0.md)는 D_valid 동결 계약의 좌표 제약과 cell PASS의 점별 명제를 먼저 적고, 독립 `F/R` cell 구간의 폭을 측정했다. 단순히 cell 전체의 넓은 구간을 evaluator 한 점의 좁은 구간에 넣는 방식은 `R²=6`에서 처음 관측된 표본 포함에 `2^-128` 폭까지 필요했다. evaluator의 **cell envelope**에 독립 구간이 들어가도 각 점의 evaluator 구간에 참값이 포함된다는 결론은 나오지 않는다. 이 단순 방식을 D_valid 전체로 확장하지 않는다.
+
+현재 가장 싼 다음 일은 **한 cell에서 evaluator의 점별 `F/R` 구간 끝점을 일괄 제어하는 수학적 lemma**가 가능한지 조사하는 것이다. 실제 `dr_k`와 시간 인자를 각 점에 정확하게 곱하면 방향을 한 넓은 좌표 상자에 섞는 일을 피할 수 있다. lemma가 나오기 전에는 cell 수를 늘리지 않는다. A-EV 전체는 미해결이고 ④-Safety도 Conditional이다.

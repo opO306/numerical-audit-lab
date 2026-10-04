@@ -1,0 +1,29 @@
+{
+  "lab_repository": "opO306/numerical-audit-lab",
+  "design_commit": "023b186c0e9d95c11399893e7f75772cfff6c3a7",
+  "parent": "65d8fd29ae255529afead70289098d36b825b3b4",
+  "design_blob": "e9d25f90abe579781b74c0d1314527c1bd319412",
+  "state_blob": "c8c218ea2c6d2862e7be080debb4be3d667ca8fa",
+  "source_receipt_blob": "783bf3e570bcd1ce5d44430bf20d71190f267082",
+  "original_repository": "opO306/success-is-mother-of-failure",
+  "original_ref": "0f7b744cf754450424a63c47f305e0327c5b37c1",
+  "primary_paper": "Lang, Przybytek, Lesiuk; arXiv:2304.14719v2; 2024-04-09; HTML equations and Tables 2, 3",
+  "primary_paper_url": "https://arxiv.org/html/2304.14719v2",
+  "P0": {
+    "path": "S2_ar2_pot.f90",
+    "claimed_sha256": "a598057183121b9c928b3a9804c8e2e99afa553bad570a471aa4130f20e6b049",
+    "claimed_bytes": 12061,
+    "raw_checksum_independently_verified": false,
+    "reason": "User device offline; parsed public supplemental/paper is not raw bytes."
+  },
+  "AEV": {
+    "ref": "27e48770ab5db666bcd78034d151ddbb04b6af54",
+    "path": "audit/independent_physics/ar2_force_enclosure.py",
+    "retrieval": "GitHub: no commit found for ref",
+    "independently_verified": false
+  },
+  "request_sha256": "b58cc63effa65919634f0d724cac40dd8289153adebe0551d4694360ce836796",
+  "no_new_production_code": true,
+  "no_implementation_tests_or_benchmarks": true,
+  "no_commits_or_pushes": true
+}
