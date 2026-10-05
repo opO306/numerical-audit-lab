@@ -1,0 +1,156 @@
+**실제 소스와 실행 경로를 확인한 결과, ROUND-ADD와 QDIV-SIGN 두 수정은 독립 제한 재감사 PASS입니다. 다만 작성자가 OPEN으로 남긴 R² 경로에서 사전 비용 청구 누락을 직접 재현했으므로, 전역 resource accounting은 여전히 NOT PASS입니다.**
+
+C1B1_QDIV_SIGN_INDEPENDENT_REAUDIT_2026-10-05.zip[**독립 감사 패키지 — 판정문·검사 소스·실행 로그·후속 작업안**](sandbox:/mnt/data/C1B1_QDIV_SIGN_INDEPENDENT_REAUDIT_2026-10-05.zip)  
+:chatgpt-content-reference{index="1"}[한국어 판정문](sandbox:/mnt/data/qdiv_limited_reaudit_2026-10-05/AUDIT_REPORT_KO.md)
+
+## 1. 이번 판정
+
+| 항목 | 독립 판정 |
+|---|---|
+| `F-RESOURCE-ROUND-ADD` | **PASS — 해당 finding 종결** |
+| `F-RESOURCE-QDIV-SIGN` | **PASS — 해당 finding 종결** |
+| 기존 `O-R2-TRUTH-PATH` | **확정 FAIL로 구체화: `F-RESOURCE-R2-PRECHARGE`** |
+| 전역 resource accounting | **NOT PASS — 실제 계약 위반이 남아 있음** |
+| Control/parameter 및 직접 Fraction construction의 비용 배정 | **OPEN / UNRESOLVED 유지** |
+| Reference producer 전체·runtime·V2·J·certification | **승인하지 않음** |
+
+여기서 두 finding의 종결은 **이번에 고정한 후보 소스에 대한 제한 판정**입니다. 역사적 `d5475e2`의 FAIL이나 `6a63798`의 당시 QDIV OPEN을 소급 변경하는 뜻이 아닙니다.
+
+## 2. 먼저 Git 상태는 제출 메시지와 달랐습니다
+
+이번 조회에서 확인한 로컬 상태는 다음과 같습니다.
+
+```text
+HEAD:
+baba8ea942b896af64ceaa7ab41e2bc5db73112c
+
+parent:
+6a63798adbae7c119439683b356f19ff414ac239
+
+커밋 시각:
+2026-10-05 13:33:07 +09:00
+
+작업 트리:
+clean
+```
+
+따라서 현재 후보를 계속 **“미커밋 상태의 6a”**라고 지칭하면 안 됩니다. 다만 실제 18-source bundle은 제출된 후보 해시와 정확히 일치했습니다.
+
+```text
+e4ae7a0491c94a8a56a7029d08b70d7afd0c422ce0057a9027111bc45541d507
+```
+
+이번 감사는 이 bundle을 가진 `baba8ea`에 적용합니다. **제가 저장소 파일을 변경하거나 commit/push한 것은 아닙니다.** 원격 push 여부나 해당 커밋의 승인 경위는 이번 검사로 판정하지 않았습니다. provenance_results.pretty.json[소스·Git 검증 로그](sandbox:/mnt/data/qdiv_limited_reaudit_2026-10-05/provenance_results.pretty.json)
+
+## 3. 두 수정과 W2는 독립 재현됐습니다
+
+### QDIV-SIGN
+
+승인 비용식으로 별도 계산한 `qdiv(1, ±1)`의 비용은 다음과 같습니다.
+
+```text
+첫 numerator 곱셈       4
+sign 곱셈               4
+denominator 곱셈         4
+normalization          32
+────────────────────────
+합계                    44
+```
+
+실제 결과도 일치했습니다.
+
+| 입력 | cap | 독립 실행 결과 |
+|---|---:|---|
+| `qdiv(1, ±1)` | 40, 43 | WORK refusal, work 12 / operations 3 |
+| `qdiv(1, ±1)` | 44 | 결과 ±1, work 44 / operations 4 |
+| `nearest_even(7/4)` | 73, 74 / 75 | 거부 / 결과 2 |
+| `nearest_even(-5/2)` | 42, 44 / 45 | 거부 / 결과 −2 |
+
+**사후 청구가 아니라는 것도 확인했습니다.** cap=4에서 첫 곱셈은 실행됐지만, 두 번째 sign 곱셈은 `pre()`에서 거부되어 실제 `a * b` 줄에 도달하지 않았습니다.
+
+추가로 별도 기대값 계산을 사용해 QDIV 경계 **8,704회**, rounding 경계 **8,128회**를 검증했습니다. 역사적 누락 함수를 메모리에서 실행했을 때는 부족한 cap에서 잘못 성공하여 현재 수정과 구별됐습니다. 이 횟수들은 독립 증명 개수가 아닙니다. core_results.pretty.json[독립 실행 로그](sandbox:/mnt/data/qdiv_limited_reaudit_2026-10-05/core_results.pretty.json)
+
+### Whole-call
+
+Canonical 실행에서는 각 `pre()`의 호출자 피연산자를 읽고 **별도 비용식으로 다시 계산**했습니다.
+
+```text
+재구성한 wrapper work = 2605253326092204528
+성공 precharge         = 36826회
+
+sign multiply          = 1590회
+추가 비용               = 5314390
+```
+
+`W2−1`에서는 `RESOURCE_CAP / WORK`와 함께 raw·opposite·certificate가 모두 없었고, `W2`에서는 기존 raw가 반환됐습니다. 동일한 충분한 cap에서 수정 전후 **radius, V, V′, J의 exact endpoints, local exp orders, raw가 모두 같았습니다.**
+
+단, 이것은 **wrapper 내부 비용 합계와 변경 전후 결과 보존**을 확인한 것입니다. 전체 연산이 빠짐없이 청구됐다는 증명은 아니며, W2에서의 private 성공도 `NOT_PUBLISHED / STOP`입니다. core_results.pretty.json[Whole-call·비용 재구성 로그](sandbox:/mnt/data/qdiv_limited_reaudit_2026-10-05/core_results.pretty.json)
+
+## 4. R² 경로는 이제 단순 후보가 아니라 확정 누락입니다
+
+대상은 `producer.py:109`입니다.
+
+```python
+r2 = sum((x*x for x in parsed.q), Q(0))
+```
+
+**canonical q=(5,3,−2), work cap=1**로 실행하고, account 생성 직후부터 첫 sqrt 진입까지 추적했습니다.
+
+```text
+5 × 5
+0 + 25
+3 × 3
+25 + 9
+−2 × −2
+34 + 4
+
+첫 sqrt 진입 시:
+R²         = 38
+work       = 0
+operations = 0
+work cap   = 1
+```
+
+즉, **유리수 곱셈 3회와 덧셈 3회가 비용 0으로 실행됐습니다.**
+
+승인된 multiply 비용식으로는 첫 `5×5`만 해도 각 피연산자의 bit length가 3이므로 비용이 `(3+1)(3+1)=16`입니다. cap=1보다 큰데도 해당 연산이 먼저 실행됐습니다. finite-policy는 rational cross-products와 normalization 등을 청구하도록 요구하므로, 입력이 signed96으로 제한됐다는 주석만으로 면제할 수 없습니다.
+
+그 뒤 sqrt의 첫 charged operation에서 WORK refusal이 발생하고 결과가 노출되지 않은 것은 확인했습니다. **하지만 나중에 거부했다고 앞서 실행한 연산의 사전 검사 의무가 충족되는 것은 아닙니다.**
+
+따라서 판정은 다음과 같습니다.
+
+```text
+F-RESOURCE-R2-PRECHARGE
+CONFIRMED / OPEN / FAIL
+```
+
+이것은 **비용·사전 검사 계약의 결함**입니다. 이번 반례에서 잘못된 raw가 발행됐거나 물리 수식이 틀렸다는 판정은 아닙니다. core_results.pretty.json[R² 실제 추적 및 실패 결과](sandbox:/mnt/data/qdiv_limited_reaudit_2026-10-05/core_results.pretty.json)
+
+## 5. 증거 보존과 재감사 범위
+
+Receipt의 **166개 파일 해시·크기**, 보고서 해시, 보고서 상대 링크 **14개**를 직접 대조했고 모두 일치했습니다. Arithmetic 보호 8개도 확인했습니다.
+
+기존 기록 718개는 **Git 객체 기준으로 보존**됐습니다. 다만 현재 Windows 작업 파일과 과거 Git blob을 raw bytes로 비교하면 78개에 CRLF/LF 차이가 있습니다. 전수 확인 결과 모두 줄바꿈 차이였으므로, 이를 내용 변경으로 판정하지 않았지만 **raw-byte 동일성과 Git 객체 보존을 같은 표현으로 쓰지는 않았습니다.** provenance_results.pretty.json[보존 검증 로그](sandbox:/mnt/data/qdiv_limited_reaudit_2026-10-05/provenance_results.pretty.json)
+
+또한 작성자의 **전체 pytest 1126개와 18-mutant 전체를 이번에 다시 실행한 것은 아닙니다.** 이번 독립 실행은 위 경계 검사·비용 재구성·R² 추적과 **두 accounting 누락 변형**에 한정합니다. 전체 테스트 수나 기존 수학 PASS 영역을 새 독립 승인으로 재발급하지 않았습니다.
+
+## 다음 작업
+
+다음 수정 대상은 **R² 구성의 rational multiply/add를 기존 accounted 경로에 연결하는 것**입니다. 사후 일괄 청구가 아니라 **실제 연산 전에 검사·청구**해야 합니다. 이후 새 관측 비용을 W3로 다시 구하고, W3−1 거부와 W3의 기존 수학 결과 보존을 확인해야 합니다. 과거 W2 증거는 그대로 남겨야 합니다.
+
+구현자에게 전달할 조건은 NEXT_STEP_KO.md[후속 작업안](sandbox:/mnt/data/qdiv_limited_reaudit_2026-10-05/NEXT_STEP_KO.md)에 정리했습니다. **R²를 고쳐도 나머지 OPEN의 비용 배정이 끝나기 전에는 전역 closure PASS가 아닙니다.**
+
+현재 유지할 전체 상태는 다음과 같습니다.
+
+```text
+ROUND-ADD / QDIV-SIGN: INDEPENDENT LIMITED REAUDIT PASS
+R2-PRECHARGE: CONFIRMED FAIL / OPEN
+GLOBAL RESOURCE ACCOUNTING: NOT PASS
+
+reference_producer_implementation: NOT YET INDEPENDENTLY APPROVED
+adapter: PREPARED_ONLY / invoke blocked
+V2 numerical recheck: NOT APPROVED
+runtime_activation_allowed = false
+J_NOT_VERIFIED
+NotCertified
+```

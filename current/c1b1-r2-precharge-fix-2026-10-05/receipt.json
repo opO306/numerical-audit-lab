@@ -1,0 +1,993 @@
+{
+  "schema": "C1B1_R2_PRECHARGE_FIX_AUTHOR_RECEIPT_V1",
+  "recorded_at_utc": "2026-10-05T05:39:39.571415+00:00",
+  "target": "baba8ea942b896af64ceaa7ab41e2bc5db73112c",
+  "parent": "6a63798adbae7c119439683b356f19ff414ac239",
+  "new_git_commit_sha": null,
+  "commit_performed": false,
+  "push_performed": false,
+  "candidate_source_bundle_sha256": "4bd5cb0ef00c022689aa1a1dd4354deba08961ab4e1887b38d2f62f287a8cced",
+  "historical_baba_source_bundle_sha256": "e4ae7a0491c94a8a56a7029d08b70d7afd0c422ce0057a9027111bc45541d507",
+  "received_limited_reaudit": {
+    "target": "baba8ea942b896af64ceaa7ab41e2bc5db73112c",
+    "source_bundle_sha256": "e4ae7a0491c94a8a56a7029d08b70d7afd0c422ce0057a9027111bc45541d507",
+    "ROUND_ADD": "PASS",
+    "QDIV_SIGN": "PASS",
+    "R2_PRECHARGE": "CONFIRMED FAIL AT AUDIT TIME"
+  },
+  "R2_candidate": "FIX APPLIED / AUTHOR REGRESSION PASS / INDEPENDENT REAUDIT PENDING",
+  "historical_d547": "INDEPENDENT IMPLEMENTATION AUDIT FAIL",
+  "historical_6a": "ROUND-ADD FIX CANDIDATE / QDIV OPEN AT THAT TIME",
+  "overall_resource_accounting": "NOT PASS",
+  "remaining_open": [
+    "O-CONTROL-PARAMETERS",
+    "O-DIRECT-FRACTION-CONSTRUCTION",
+    "O-ALLOCATION-AND-WORKER"
+  ],
+  "global_resource_accounting_verified": false,
+  "reference_producer_implementation": "NOT YET INDEPENDENTLY APPROVED",
+  "runtime_activation_allowed": false,
+  "J_status": "J_NOT_VERIFIED",
+  "certification": "NotCertified",
+  "adapter": "PREPARED_ONLY / invoke blocked / independent reconstruction OPEN",
+  "V2_numerical_recheck": "NOT APPROVED",
+  "W3": {
+    "W3": "2605253326092221245",
+    "previous_W2": "2605253326092204528",
+    "observed_R2_work_delta": "16717",
+    "R2_operations": 25,
+    "operations": 36851,
+    "raw": [
+      "52119986341579705480988",
+      "31271991804947823288593",
+      "-20847994536631882192395"
+    ],
+    "scope": "CURRENT AUTHOR WRAPPER LEDGER; NOT GLOBAL FULLY-ACCOUNTED OR PRODUCTION BUDGET"
+  },
+  "mathematics_before_after_equal": {
+    "canonical": {
+      "R2": true,
+      "diagnostics": true,
+      "J": true,
+      "raw": true
+    },
+    "noninteger_dyadic": {
+      "R2": true,
+      "diagnostics": true,
+      "J": true,
+      "raw": true
+    },
+    "signed_zero_axis": {
+      "R2": true,
+      "diagnostics": true,
+      "J": true,
+      "raw": true
+    }
+  },
+  "tests": {
+    "targeted": {
+      "tests": 42,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "impulse": {
+      "tests": 743,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "spec": {
+      "tests": 46,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "full": {
+      "tests": 1136,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "red_before_fix": {
+    "r2-red": {
+      "tests": 8,
+      "failures": 8,
+      "errors": 0,
+      "skipped": 0
+    },
+    "r2-preoperation-red": {
+      "tests": 8,
+      "failures": 8,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "initial_green": {
+    "tests": 8,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "static_spec_checks": 155,
+  "semantic_mutants": {
+    "existing": 18,
+    "new": 1,
+    "baselines_pass": 19,
+    "semantic_detected": 19,
+    "hash_only_detections": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "preservation": {
+    "target": "baba8ea942b896af64ceaa7ab41e2bc5db73112c",
+    "base_tracked": 2734,
+    "changed": [
+      "independent_checker/c1b1/impulse/producer.py",
+      "tests/test_impulse_round_add_accounting.py"
+    ],
+    "missing": [],
+    "unchanged": 2732,
+    "historical_count": 881,
+    "historical_working_raw_preserved": true,
+    "approved_specs_preserved": true,
+    "resource_py_preserved": true,
+    "rounding_py_preserved": true,
+    "scope": "Working-byte identity is relative to recorded current baseline; not a claim that working bytes equal all historical Git blobs"
+  },
+  "protected_arithmetic_8": {
+    "independent_checker/c1b1/claim_adapter.py": "24b05ebf374728583ba725c83b8f9324f4b75b5515b03c5b1036339eef3e4899",
+    "independent_checker/c1b1/compare.py": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+    "independent_checker/c1b1/contracts.py": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+    "independent_checker/c1b1/exact_fast.py": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+    "independent_checker/c1b1/exact_geometry.py": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+    "independent_checker/c1b1/exact_slow.py": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+    "independent_checker/c1b1/semantic_manifest_v1.json": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+    "independent_checker/c1b1/semantic_manifest_v1.sha256": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79"
+  },
+  "previous_receipt_verification": {
+    "total": 166,
+    "unchanged_current_files": 165,
+    "authorized_active_test": "tests/test_impulse_round_add_accounting.py",
+    "historical_test_evidence": "round-add-test-target.py / exact target Git bytes equal prior receipt and recorded working baseline"
+  },
+  "source_report_sha256": "2bbbb76b4b9513135b8cf796db4f093db80ea901fa4c0f45480ab6435f5fa9d7",
+  "python": "3.12.7 (tags/v3.12.7:0b05ead, Oct  1 2024, 03:06:41) [MSC v.1941 64 bit (AMD64)]",
+  "commands": {
+    "targeted": {
+      "command": [
+        "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_impulse_r2_precharge.py",
+        "tests/test_impulse_qdiv_sign_accounting.py",
+        "tests/test_impulse_round_add_accounting.py",
+        "tests/test_impulse_resource_allocation.py",
+        "tests/test_impulse_mutant_resource_probe.py",
+        "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\targeted.xml"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 10.39100000000326
+    },
+    "impulse": {
+      "command": [
+        "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "tests\\test_impulse_attempt_reason_spec.py",
+        "tests\\test_impulse_attempt_runtime.py",
+        "tests\\test_impulse_mutant_resource_probe.py",
+        "tests\\test_impulse_qdiv_sign_accounting.py",
+        "tests\\test_impulse_r2_precharge.py",
+        "tests\\test_impulse_rechecker_preparation.py",
+        "tests\\test_impulse_reference_boundaries.py",
+        "tests\\test_impulse_reference_model.py",
+        "tests\\test_impulse_reference_primitives.py",
+        "tests\\test_impulse_reference_producer.py",
+        "tests\\test_impulse_resource_allocation.py",
+        "tests\\test_impulse_review_regressions.py",
+        "tests\\test_impulse_round_add_accounting.py",
+        "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\impulse.xml"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 11.25
+    },
+    "spec": {
+      "command": [
+        "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_impulse_attempt_reason_spec.py",
+        "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\spec.xml"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 4.764999999999418
+    },
+    "full": {
+      "command": [
+        "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\full.xml"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 57.328999999997905
+    },
+    "static": {
+      "command": [
+        "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py",
+        "--output",
+        "D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\static-spec-checks.json"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.4219999999986612
+    },
+    "mutants": {
+      "command": [
+        "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "audit/c1b1-r2-precharge-fix-2026-10-05/run_mutants.py"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 75.0789999999979
+    },
+    "diff-check": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.06300000000192085
+    }
+  },
+  "git_status": " M independent_checker/c1b1/impulse/producer.py\n M tests/test_impulse_round_add_accounting.py\n?? audit/c1b1-qdiv-limited-reaudit-received-2026-10-05/\n?? audit/c1b1-r2-precharge-fix-2026-10-05/\n?? current/C1B1_IMPULSE_RESOURCE_ACCOUNTING_STATUS_2026-10-05.md\n?? current/c1b1-qdiv-limited-reaudit-received-2026-10-05/\n?? current/c1b1-r2-precharge-fix-2026-10-05/\n?? docs/C1B1_IMPULSE_R2_PRECHARGE_FIX_REPORT_2026-10-05.md\n?? tests/test_impulse_r2_precharge.py\n",
+  "scope": "AUTHOR EVIDENCE ONLY; COUNTS OVERLAP AND ARE NOT INDEPENDENT PROOF COUNTS",
+  "evidence_files": {
+    "audit/c1b1-qdiv-limited-reaudit-received-2026-10-05/receive.py": {
+      "sha256": "b2efac63550e65c08ccc85208bf5961028aecbf4d6de96381885d3787892aa03",
+      "bytes": 6535
+    },
+    "audit/c1b1-r2-precharge-fix-2026-10-05/collect_receipt.py": {
+      "sha256": "bb51bbe62e49d5f6f4c3e1d8bd7b25dea14a12207d10377917ca8107142f34d8",
+      "bytes": 14332
+    },
+    "audit/c1b1-r2-precharge-fix-2026-10-05/replay_work.py": {
+      "sha256": "bf3a2e280492124c18ab0519aa107c3d6c16321bbb40a973cb447cf3621ee089",
+      "bytes": 5418
+    },
+    "audit/c1b1-r2-precharge-fix-2026-10-05/run_checks.py": {
+      "sha256": "ca84d9d54b14fe89e2b8b04d7c90fe6b7481f5da6f0a574dc1c25ea5f8760665",
+      "bytes": 2482
+    },
+    "audit/c1b1-r2-precharge-fix-2026-10-05/run_mutants.py": {
+      "sha256": "28e2d9aa57cbe2737b45287cf5560b166088d83951c88c4efdd1e08c6e8eb5b7",
+      "bytes": 8077
+    },
+    "audit/c1b1-r2-precharge-fix-2026-10-05/verify.py": {
+      "sha256": "c40d0330be8e312f7e401f88c715413d9b37200518384d39687c588e09ce13fa",
+      "bytes": 10420
+    },
+    "current/c1b1-qdiv-limited-reaudit-received-2026-10-05/received/AUDIT_REPORT_KO.md": {
+      "sha256": "10320f6e2a2a32a91fd4ac8285e340a86c34c1bc13ff7658a8c027920b30b036",
+      "bytes": 18504
+    },
+    "current/c1b1-qdiv-limited-reaudit-received-2026-10-05/received/core_results.pretty.json": {
+      "sha256": "eea40351efd8cf190453597067f1063783900797905521dfca4be3180555d3a9",
+      "bytes": 12159
+    },
+    "current/c1b1-qdiv-limited-reaudit-received-2026-10-05/received/NEXT_STEP_KO.md": {
+      "sha256": "5964cacb90bde3cbfe3650edc0fd478e4a035933af5510ff00a5f270d36e2c43",
+      "bytes": 4165
+    },
+    "current/c1b1-qdiv-limited-reaudit-received-2026-10-05/received/provenance_results.pretty.json": {
+      "sha256": "43a94e09472d37e662450d135e683d36910a3d73d227cc800ed46e3d568a1aba",
+      "bytes": 11870
+    },
+    "current/c1b1-qdiv-limited-reaudit-received-2026-10-05/received/user-request.txt": {
+      "sha256": "6c4cb61f9413f76b666efddcee422d689de3c9c457227e8ada3ac5a28a03535c",
+      "bytes": 8712
+    },
+    "current/c1b1-qdiv-limited-reaudit-received-2026-10-05/received-identity.json": {
+      "sha256": "d18d1b330b358f3947450d2ff47a3249928e5fd9addb18963eaaaa290d35a23a",
+      "bytes": 442359
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/actual-work-reconstruction.json": {
+      "sha256": "c02bd9268a76e323b9669b5daf8f70dbb9a903cb2324762f7384b2ec9340d1b5",
+      "bytes": 16823551
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/after-boundaries.json": {
+      "sha256": "bf1d8da9844dc3aebfb0db148b9cf8b3507da7ca656849c4d40cc7d7990cff23",
+      "bytes": 208413
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/AUTHORIZED_SCOPE_KO.md": {
+      "sha256": "53db824319a33ec832c357be766c59063cb228bb3789767e1ac1d23fd1502b33",
+      "bytes": 1159
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/baseline.json": {
+      "sha256": "301942b1060cefa0cfa9f3e0173d171fe78e986d656129e04d54bad73b48a2a2",
+      "bytes": 426239
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/before-boundaries.json": {
+      "sha256": "08760ab0a88fd98fe0944841518388c804d5b222a12897fea629457e6006f619",
+      "bytes": 183660
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/canonical-input.json": {
+      "sha256": "bab9520968c7e3b5be3e6d5c5e53627a06d066bbb950579c7cc8ec2b65dcfffd",
+      "bytes": 1875
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/diff-check-command.json": {
+      "sha256": "76fd073058c9b4a2a3881a270477f303197048d6613118f452055cfb5464dbe7",
+      "bytes": 3402
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/diff-check-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/diff-check-stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/full-command.json": {
+      "sha256": "c8a0d8c07e7e44a83eaf4accf257b838b68ed9ecb40b5810552421d6d11ab9c4",
+      "bytes": 3596
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/full-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/full-stdout.txt": {
+      "sha256": "00b67f56afbec22b4204407995d77c6482bef9ed52d60c996750caceb09b3235",
+      "bytes": 1319
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/full.xml": {
+      "sha256": "7962d72795d9d596edd8ce7cf9a44a849881bf58f516c5853e0139b892a7402c",
+      "bytes": 153660
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/impulse-command.json": {
+      "sha256": "6dd456f5f631bc79c2e85df9325c6fe2c84b30b1d00fd7d590a5e9a46db191b2",
+      "bytes": 4240
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/impulse-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/impulse-stdout.txt": {
+      "sha256": "f6c058a73344e71bf6a59dd731cb5b8d901227afaa0b1b4a9761c94ea38494c4",
+      "bytes": 912
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/impulse.xml": {
+      "sha256": "8088cc2d66bdc9e286a8d7d663fce910dd1ed54f51e9e35a34d27d795392a761",
+      "bytes": 105990
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/BO-gprime/baseline.txt": {
+      "sha256": "b1b6b6e955b7c0dda5203a77fe31e4a3c17077ae5b8765f1fdb252d5c522a35c",
+      "bytes": 100
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/BO-gprime/baseline.xml": {
+      "sha256": "f97f82be470c7fa27511d7ec4f6fd83385d9e21be67d15b919f490fb44d05202",
+      "bytes": 385
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/BO-gprime/mutant.txt": {
+      "sha256": "93eb60733e618e7eca8541cfe7e7d412a30a6e51a9d3d9f863029f7d1d3db626",
+      "bytes": 4011
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/BO-gprime/mutant.xml": {
+      "sha256": "2b993bb75e0c7dd82fd3ab19ae0ebaff652f20ae494cdc7303dbfe29c75e94ef",
+      "bytes": 5380
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/BO-gprime/source-before.py": {
+      "sha256": "5add6bb8c26f399882a6d79d185b2f4d7bb0265f25009da90b04400eec84f9c4",
+      "bytes": 3234
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/BO-gprime/source-mutant.py": {
+      "sha256": "0dd9dca7a5ccd24f26a6491365d515dcf45bb1460799d0d3d8bd3207e792e362",
+      "bytes": 3224
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/component-swap/baseline.txt": {
+      "sha256": "08beeeabe7a3680a99d98a53a1e9686aa8c5bb0fc598845be2df80499d64cefe",
+      "bytes": 100
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/component-swap/baseline.xml": {
+      "sha256": "396ceae2dee4cac0412cefbf36479fab8fe9d52a0dffa5f6d4c15e2ee5e3da1f",
+      "bytes": 635
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/component-swap/mutant.txt": {
+      "sha256": "65c86ce037ffcefa92ec9bd7155a5f3fd03cdba88d331c9ff20fab32078893dd",
+      "bytes": 5589
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/component-swap/mutant.xml": {
+      "sha256": "c8b7aeddc7a1196efa564faff84c7043590fc458b144197f04c324741b787d7f",
+      "bytes": 6468
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/component-swap/source-before.py": {
+      "sha256": "ba229aa50994c8409def1ca2f74c37df9dd33f563c0920719263c81e54d2b184",
+      "bytes": 8367
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/component-swap/source-mutant.py": {
+      "sha256": "272f8089566a55db980e936c9d4d72e63f9e9ea6b71a916a66a4b0b0660d5d66",
+      "bytes": 8396
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/early-accept/baseline.txt": {
+      "sha256": "f397ef9634063d81e537b9e8d1ddf14c20471abd6e45773b319b6354bc68ad69",
+      "bytes": 100
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/early-accept/baseline.xml": {
+      "sha256": "f3d34abcffe83b552005f84e6401804a726a9b29f8a2abddecc080ef126fa850",
+      "bytes": 1176
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/early-accept/mutant.txt": {
+      "sha256": "76c0815b85a203ce5d585d7c6285a908868465b6567f60a1a5e3151c4a62a0e3",
+      "bytes": 2578
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/early-accept/mutant.xml": {
+      "sha256": "61cd91f0679595c712723c66e3b8ddfce1ff79614d9f0ee2c3ae04e674a30d66",
+      "bytes": 3248
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/early-accept/source-before.py": {
+      "sha256": "3667079195517f84f23a37a6f0787123b16571be2f6975967b0f2a9e127b2bf9",
+      "bytes": 1647
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/early-accept/source-mutant.py": {
+      "sha256": "d4aaa5c25aa05c6b77bde710ef7cd5dd71aedde1b93a2b3492950a5cc9b6b49f",
+      "bytes": 1657
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/exp-cutoff/baseline.txt": {
+      "sha256": "8fe1a5ebe3bef9e75708f4835e8b369440d1a5a7b0bad4ed8a81513c7b8d4fc5",
+      "bytes": 100
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/exp-cutoff/baseline.xml": {
+      "sha256": "ce40025319762319767b2171fc726dbb72c49fa9d8761f4280e8b9bb7c900274",
+      "bytes": 372
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/exp-cutoff/mutant.txt": {
+      "sha256": "d1d0a00b062effdca9ff89bcfb44636724a2ffcefecf352ecff353c6e1ecdff4",
+      "bytes": 861
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/exp-cutoff/mutant.xml": {
+      "sha256": "850758dc84d0077265d1279c25bd9e29fa484b355b078dd3dce4498736a20703",
+      "bytes": 947
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/exp-cutoff/source-before.py": {
+      "sha256": "032123fcd0f9d2d486c8fa5fd3fd9ca13995fe1a91f98ddb2e53d31e1c9cb2e1",
+      "bytes": 1486
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/exp-cutoff/source-mutant.py": {
+      "sha256": "820f3e8996a901e3f2eddf636d4f255f2c018eba64cecec851183c99b8dff7ef",
+      "bytes": 1541
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/exp-sign/baseline.txt": {
+      "sha256": "a63ea0fadf7272aa2b837a64326a182cd8e45fe13dc1ffa16eb297dd8d5638e9",
+      "bytes": 100
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/exp-sign/baseline.xml": {
+      "sha256": "c6d9c5d04062fe3da7b2ce050ce53e89bfb4d5859ee2349c296e77cba7742067",
+      "bytes": 790
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/exp-sign/mutant.txt": {
+      "sha256": "3030bcfade519a1dcb56d09a520bc5936ad00835930c71fcfd17a88f577cf9fd",
+      "bytes": 5057
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/exp-sign/mutant.xml": {
+      "sha256": "8bbfa7fd40deb4633dfa487d7931488a57c4402135d2575120067ea113e7b101",
+      "bytes": 5266
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/exp-sign/source-before.py": {
+      "sha256": "032123fcd0f9d2d486c8fa5fd3fd9ca13995fe1a91f98ddb2e53d31e1c9cb2e1",
+      "bytes": 1486
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/exp-sign/source-mutant.py": {
+      "sha256": "d038537237b7263acaea860302ab9ff600b1914363edcedcfa4a24762e806045",
+      "bytes": 1488
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/force-sign/baseline.txt": {
+      "sha256": "3cfea9f641e19b8d4f878db36812bc3992375e6be42bcbe67cd972d424373c70",
+      "bytes": 100
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/force-sign/baseline.xml": {
+      "sha256": "8aab326cb8d2b9ab816755076a97363fba0bfb82d9392bb6ba212d12150463ea",
+      "bytes": 635
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/force-sign/mutant.txt": {
+      "sha256": "e7cabbc1c967f7da468b589867f33c2600dae8f9dece687c5e6fdda1e8b6e545",
+      "bytes": 5741
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/force-sign/mutant.xml": {
+      "sha256": "ef587a82202cfd610f7a9df4a6cf1dc1ca65258e6959e6ab4c116bb3415d663f",
+      "bytes": 6772
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/force-sign/source-before.py": {
+      "sha256": "ba229aa50994c8409def1ca2f74c37df9dd33f563c0920719263c81e54d2b184",
+      "bytes": 8367
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/force-sign/source-mutant.py": {
+      "sha256": "95f261bc3abfb0e8b5584e0b8756a90e399f1f7874a92a1c3ba2de6e1d15d15d",
+      "bytes": 8362
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/half-step/baseline.txt": {
+      "sha256": "385cf6fe5e2e976669912bed24829c797ab6699fb6d49f7772e9e24b0445f7f4",
+      "bytes": 100
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/half-step/baseline.xml": {
+      "sha256": "43386cf92e5477b461f1b0d9efbfa406e65734f9b47c8713335a16a4de0369d0",
+      "bytes": 635
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/half-step/mutant.txt": {
+      "sha256": "04928785385a8bb4c1e6a2a76518bdcac91a347e0734dc98bbeafe90436b36a2",
+      "bytes": 5740
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/half-step/mutant.xml": {
+      "sha256": "428856c18b3380c1f3e4cb2b62e845c87a1a80495b4bc3a32d27d7a2e180685d",
+      "bytes": 6770
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/half-step/source-before.py": {
+      "sha256": "ba229aa50994c8409def1ca2f74c37df9dd33f563c0920719263c81e54d2b184",
+      "bytes": 8367
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/half-step/source-mutant.py": {
+      "sha256": "d719ecce883c581ff23012439243d5b97e4a8eab609906419184e367192c07bc",
+      "bytes": 8367
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/intermediate-quantization/baseline.txt": {
+      "sha256": "3ba0b6ee9cc25acda19ecd10e215032a01c9dbd294d86478412975f97043227f",
+      "bytes": 100
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/intermediate-quantization/baseline.xml": {
+      "sha256": "776ad715dc9c227de99ac0b249a6ca7839d7b4c78ebcf6d60e264c9bd0666daa",
+      "bytes": 635
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/intermediate-quantization/mutant.txt": {
+      "sha256": "3838299aba20049799d7be9932419ffc0511172c748f2336f580c38340787191",
+      "bytes": 3925
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/intermediate-quantization/mutant.xml": {
+      "sha256": "95adbcae3d7d0ecb8fd7808cc8efd89814c85812c43e9affbc029cbf0012dff9",
+      "bytes": 4726
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/intermediate-quantization/source-before.py": {
+      "sha256": "ba229aa50994c8409def1ca2f74c37df9dd33f563c0920719263c81e54d2b184",
+      "bytes": 8367
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/intermediate-quantization/source-mutant.py": {
+      "sha256": "735111ca9f26b04f2fafe3e086865d5de93c355e4eb7e92eee72969a1a06ef6f",
+      "bytes": 8427
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/inverse-endpoints/baseline.txt": {
+      "sha256": "2901e9dfa0b5714aa099acfe610f3c4dbfa0c352070d16e8a4538d7da5df8462",
+      "bytes": 100
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/inverse-endpoints/baseline.xml": {
+      "sha256": "4b261d06c89a8ee54264e8deadfb3ac76a99dbd824aa4bea67a82ead01d5847b",
+      "bytes": 369
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/inverse-endpoints/mutant.txt": {
+      "sha256": "87c5c9741959b4d139a495df18913899b4d710d24796a3574594270578a3ca4b",
+      "bytes": 1650
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/inverse-endpoints/mutant.xml": {
+      "sha256": "e027fa368a40bdca3d33986872c64a54a9f24f4506c9540cc41117b4b6bf39b7",
+      "bytes": 1660
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/inverse-endpoints/source-before.py": {
+      "sha256": "421b2fdb0ec1bb095d48347eb3892ca7da95e86240d87ba572dfa450da462834",
+      "bytes": 2331
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/inverse-endpoints/source-mutant.py": {
+      "sha256": "b5eab72aeff71584e29c0fd11b4df38eb5118012c57d4e019582fd0b6273d06c",
+      "bytes": 2331
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/inverse-R/baseline.txt": {
+      "sha256": "bd51f5a73f49c52f16638a8a0af50801100b8b8bd39d5a0600b08babf49b5a13",
+      "bytes": 100
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/inverse-R/baseline.xml": {
+      "sha256": "6cad26d94993ae9b010189800685b9e0f06b9e4e22cb4692db02d7eb68bb481a",
+      "bytes": 635
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/inverse-R/mutant.txt": {
+      "sha256": "4a2cce6c0c59578159a2da4dc3051f5ef2aba82b5ce23ce87132dd8f99c3709f",
+      "bytes": 5740
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/inverse-R/mutant.xml": {
+      "sha256": "53ffb99c7372502b231989af1e5197b1fb5e4db53e68dbfa04cd285427eae5b0",
+      "bytes": 6770
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/inverse-R/source-before.py": {
+      "sha256": "ba229aa50994c8409def1ca2f74c37df9dd33f563c0920719263c81e54d2b184",
+      "bytes": 8367
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/inverse-R/source-mutant.py": {
+      "sha256": "e1e71ac20d1e05c4f8564dd227d150b6b4c9db318ef61e78c7c15a818726c7f7",
+      "bytes": 8355
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/inward-rounding/baseline.txt": {
+      "sha256": "2901e9dfa0b5714aa099acfe610f3c4dbfa0c352070d16e8a4538d7da5df8462",
+      "bytes": 100
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/inward-rounding/baseline.xml": {
+      "sha256": "e05ac46915b5ebbf8640fbae40480c9dad9e7af2f621e89d9842d45a26dca2c5",
+      "bytes": 371
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/inward-rounding/mutant.txt": {
+      "sha256": "105a40dcb5c2841c86470eddcb9a8f1037d8bbc730b3766686e1ef9e0f413061",
+      "bytes": 994
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/inward-rounding/mutant.xml": {
+      "sha256": "270bd092130d040ef65277554aa9324ce9e0a82363147fcb3d5a5124183eb56f",
+      "bytes": 1131
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/inward-rounding/source-before.py": {
+      "sha256": "421b2fdb0ec1bb095d48347eb3892ca7da95e86240d87ba572dfa450da462834",
+      "bytes": 2331
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/inward-rounding/source-mutant.py": {
+      "sha256": "cc7099d0c84942f3b7df7074a960541fce3ac42409b30aaccbc9084444b0d149",
+      "bytes": 2372
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/QDIV-SIGN-ACCOUNTING/baseline.txt": {
+      "sha256": "fc5c7f5861f2fc169d3716d61b93d2db1560f11376a8255b3fd4d98b6bbf4749",
+      "bytes": 100
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/QDIV-SIGN-ACCOUNTING/baseline.xml": {
+      "sha256": "fd47252671d5165d4e6b3dca028de378151e0e7c866d04cb8ab93ac734089c84",
+      "bytes": 802
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/QDIV-SIGN-ACCOUNTING/mutant.txt": {
+      "sha256": "59c9e96619632fb8e0c2b01b06745fa760fbf310f0ab334d845416b3b57f4847",
+      "bytes": 2748
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/QDIV-SIGN-ACCOUNTING/mutant.xml": {
+      "sha256": "a5ea77985383a89c37a08c1aab94598b413f4a87af96b5112c9d06ac550c3558",
+      "bytes": 2824
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/QDIV-SIGN-ACCOUNTING/source-before.py": {
+      "sha256": "c5e081ee2c3dc49db85271d588cc3fde6e54caa6ce6e005a36c00c25d167a7cd",
+      "bytes": 6395
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/QDIV-SIGN-ACCOUNTING/source-mutant.py": {
+      "sha256": "1824503726fc4882e271908739604a9b641006500c34add58263a707cc098805",
+      "bytes": 6381
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/R-power/baseline.txt": {
+      "sha256": "c650684da631a53569764f5af8f60c3e0d0a19a4321a45fbbac8d3f55d3a7118",
+      "bytes": 100
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/R-power/baseline.xml": {
+      "sha256": "5ce34d452c2b30b00f6b2c23ffd316f7f73fa9f44419dad3dcf1af0af35da1ae",
+      "bytes": 362
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/R-power/mutant.txt": {
+      "sha256": "514ef2cf6a9c2413fe1418a81ec767083a5926dbf507e2eaa9174236335097b2",
+      "bytes": 1125
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/R-power/mutant.xml": {
+      "sha256": "55da0222a0872810f3d905cdb1f565c5f37bfa55f1ad66ed1726b1faa1284c87",
+      "bytes": 1260
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/R-power/source-before.py": {
+      "sha256": "d090e765d103451e54eadc73638f20ac6f2e7065e455d60745ba774ae21f1f33",
+      "bytes": 611
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/R-power/source-mutant.py": {
+      "sha256": "34244786c5da29dbad096d5812e0da22738657ebf1e2e4436dee339b9092d0c6",
+      "bytes": 609
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/R2-PRECHARGE-ACCOUNTING/baseline.txt": {
+      "sha256": "3dd5fe1cbcd96302aa2ec85d0885693195b6ce4dfd623dbeb664ddf779f37ee2",
+      "bytes": 100
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/R2-PRECHARGE-ACCOUNTING/baseline.xml": {
+      "sha256": "2f8ecd6b06571bd1c909444c61a686bcc54233171eb46da6ab0ff0675337e2f8",
+      "bytes": 984
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/R2-PRECHARGE-ACCOUNTING/mutant.txt": {
+      "sha256": "b99c75df76be293fcfadf684bcd1bbd30064687e27edd20ebc939c6263b09b3f",
+      "bytes": 5899
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/R2-PRECHARGE-ACCOUNTING/mutant.xml": {
+      "sha256": "8605e7492f1303b752aa1ac31f1e58ceccd59d4ac88a98cb3e503860f4334284",
+      "bytes": 6769
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/R2-PRECHARGE-ACCOUNTING/source-before.py": {
+      "sha256": "ba229aa50994c8409def1ca2f74c37df9dd33f563c0920719263c81e54d2b184",
+      "bytes": 8367
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/R2-PRECHARGE-ACCOUNTING/source-mutant.py": {
+      "sha256": "c3630c4bed6226aa2315ce6801002d5008117d3a5768ed7f9134a8056372fe05",
+      "bytes": 8320
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/resource-guard/baseline.txt": {
+      "sha256": "97f5adfb2ec9975df6d998bc11af616286bd89a5feba3be34a12c5039d829f43",
+      "bytes": 100
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/resource-guard/baseline.xml": {
+      "sha256": "dc39cd96d699d16e38f45f89c097d753b4444773d54003db4126638c6340903c",
+      "bytes": 353
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/resource-guard/mutant.txt": {
+      "sha256": "4f03f6af78e8f7d8ac987f84ec974cd07f7d9736f348ee917d82f4c3d4748788",
+      "bytes": 755
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/resource-guard/mutant.xml": {
+      "sha256": "6de8475eefb83ca00de411382f6aa4e090e89a77526a0b7c793625442731b38c",
+      "bytes": 755
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/resource-guard/source-before.py": {
+      "sha256": "c5e081ee2c3dc49db85271d588cc3fde6e54caa6ce6e005a36c00c25d167a7cd",
+      "bytes": 6395
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/resource-guard/source-mutant.py": {
+      "sha256": "218a965198a7b72a710a052f5ad8e7288c2e3cb1c4791ce1e5c711796a2785ba",
+      "bytes": 6405
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/results.json": {
+      "sha256": "ddb0a85306b342cd079c53bb38c524f1f74c32394cfebf5d4f07530a6cde5548",
+      "bytes": 37174
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/ROUND-ADD-ACCOUNTING/baseline.txt": {
+      "sha256": "b3c02baf3b8dc6ec37cee82bec0c81e4b56ca5c81ba09c9c15e7374eb7576eba",
+      "bytes": 100
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/ROUND-ADD-ACCOUNTING/baseline.xml": {
+      "sha256": "392221327dceb5a740684f2bd95e02f8fdf8367c8456f32fdc9bf6916e615fc0",
+      "bytes": 754
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/ROUND-ADD-ACCOUNTING/mutant.txt": {
+      "sha256": "7ad5729697e301bef9a0da01a085125ce660794cf7d8279ae004fa8de621b330",
+      "bytes": 3224
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/ROUND-ADD-ACCOUNTING/mutant.xml": {
+      "sha256": "e00d33b03c9fdda1f9bb24b027c3e645427c9e83ea6efd01a9cac71908a430d4",
+      "bytes": 3300
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/ROUND-ADD-ACCOUNTING/source-before.py": {
+      "sha256": "3667079195517f84f23a37a6f0787123b16571be2f6975967b0f2a9e127b2bf9",
+      "bytes": 1647
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/ROUND-ADD-ACCOUNTING/source-mutant.py": {
+      "sha256": "1f39a67c155cda9a3b09b48bc62e8c3ed9fefedd62bd7db7e9b734d77a3d73dc",
+      "bytes": 1614
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/ties-away/baseline.txt": {
+      "sha256": "f397ef9634063d81e537b9e8d1ddf14c20471abd6e45773b319b6354bc68ad69",
+      "bytes": 100
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/ties-away/baseline.xml": {
+      "sha256": "1ed061e8bf90612fa179432832e8c7a223d21f1f79ab58f6a1f52ad9f90caebd",
+      "bytes": 1176
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/ties-away/mutant.txt": {
+      "sha256": "29f5c9b70e2d1f03f682306b4ff4ee847250bc6cd22d9949136bf8278e69c35f",
+      "bytes": 1068
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/ties-away/mutant.xml": {
+      "sha256": "00eee0feefade989039168a457c36f8525ae73b5d7458724e47d83ac2debe23a",
+      "bytes": 1933
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/ties-away/source-before.py": {
+      "sha256": "3667079195517f84f23a37a6f0787123b16571be2f6975967b0f2a9e127b2bf9",
+      "bytes": 1647
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/ties-away/source-mutant.py": {
+      "sha256": "3c052387307f04b819ae41d2109a7c5611c6304b6839221454fe631754e2a75e",
+      "bytes": 1618
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/TT-derivative/baseline.txt": {
+      "sha256": "e232b009c8b279a968fb83127164a50cacb1547adcab91b45906a159e7a7ff1f",
+      "bytes": 100
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/TT-derivative/baseline.xml": {
+      "sha256": "4ca2a5b3ae0e37c6a61e8c66adc8938ec8a4738cb62743241674ed14a59a2505",
+      "bytes": 385
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/TT-derivative/mutant.txt": {
+      "sha256": "99cbd2f46470bbcd1050cac3c5111370f797529fb4fd6f30c1c68121811c8808",
+      "bytes": 3907
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/TT-derivative/mutant.xml": {
+      "sha256": "f29e0573a07ab48fe0a9d7cb1ff0c8ad7527db47b69d5ea503548e1142bb80ed",
+      "bytes": 5172
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/TT-derivative/source-before.py": {
+      "sha256": "5add6bb8c26f399882a6d79d185b2f4d7bb0265f25009da90b04400eec84f9c4",
+      "bytes": 3234
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/TT-derivative/source-mutant.py": {
+      "sha256": "3316ef532ce6512fa4bc8a2d6d66022cee923a642efce9e20496ca06d4a55338",
+      "bytes": 3218
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/wrong-spec/baseline.txt": {
+      "sha256": "db4ce22a81508ccb886f409bf6d5791df57d3810dd37302d8c4c62e5f45a28a3",
+      "bytes": 100
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/wrong-spec/baseline.xml": {
+      "sha256": "70dabf595612cba9c690582fcdcafe34a138af1491e1dadf608961ca7ef1185b",
+      "bytes": 377
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/wrong-spec/mutant.txt": {
+      "sha256": "a5a42026356fae0f1952719bf6b60896ee112464057a641433f9b9f0d1238088",
+      "bytes": 3595
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/wrong-spec/mutant.xml": {
+      "sha256": "a45e3101b4fd427546079f3b5a64f11ca358124d7cd58654c3e2cd8b73fbaf49",
+      "bytes": 3635
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/wrong-spec/source-before.py": {
+      "sha256": "9319b533d6ff8230cfa2f45225f5a00a08281ba350ed0648037c3fa4b3848f1b",
+      "bytes": 5463
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants/wrong-spec/source-mutant.py": {
+      "sha256": "4db2004ed51d27a9bd914547965b28fbfc2167e23cc5e251227756ecb24d1c2a",
+      "bytes": 5473
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants-command.json": {
+      "sha256": "c24d4779dc9aeabe1d7bf27cd738a6e95fe31d8f046e83d3a3a4d51c0058ae3b",
+      "bytes": 3502
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/mutants-stdout.txt": {
+      "sha256": "d53134a343eb8ad68a12025988c3b880b7ccf1d480bad239b9df1a4033cf353c",
+      "bytes": 463
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/preservation.json": {
+      "sha256": "98bd6adf945790ee55098ae193dab1a0c5a8ab887872952c4aa8b3a404bcd16f",
+      "bytes": 571
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/producer-after.py": {
+      "sha256": "ba229aa50994c8409def1ca2f74c37df9dd33f563c0920719263c81e54d2b184",
+      "bytes": 8367
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/producer-before.py": {
+      "sha256": "54d3d94f1d8b77824ffa9d5acd6b4bd27ac0f93fd31491d34b8cb0508c0825e9",
+      "bytes": 8355
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/producer.diff": {
+      "sha256": "45c5d82afdf19b5c4e19c597e15fc16139ca58dfad740d24edf7cdde7914084c",
+      "bytes": 790
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/r2-first-green.txt": {
+      "sha256": "a1a1e4c0cf7ec3d6b363b1584089be3b37ec7265ef73467cb11c815359e38d12",
+      "bytes": 100
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/r2-first-green.xml": {
+      "sha256": "3a30901f3e06a5880bd7d12664f65c67f5a40eae5b9f556798ad708062cb5bf2",
+      "bytes": 1353
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/r2-preoperation-red.txt": {
+      "sha256": "8538d69687da604cd8e6d82b6ff44ef77495260c7c85dac846252129e98219d0",
+      "bytes": 8566
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/r2-preoperation-red.xml": {
+      "sha256": "c618ec90a7c12d14a7468a045071ecb93a6eba256341c192c44ece64940867a3",
+      "bytes": 9943
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/r2-red.txt": {
+      "sha256": "2d9e3d35774cf3a4926635b153850ecf11c51530bdb7adcfc24fdd17108b6a4b",
+      "bytes": 8561
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/r2-red.xml": {
+      "sha256": "6d4108f1bf19f968b6fd4e54bf93c12eb88672e9e9d7c8bdeb8c9c66a7f15765",
+      "bytes": 9938
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/r2-test-before-fix.py": {
+      "sha256": "c86b18faab17622d5c97b92653d711062e6d2d1bcd10126cdb8438047b2b4125",
+      "bytes": 6150
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/receipt-first-helper-failure.json": {
+      "sha256": "ab24feb415314aab3a743f923f7e6f2694bc126d89640560a730c487663e1126",
+      "bytes": 829
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/receipt-second-helper-failure.json": {
+      "sha256": "8d978860b4a821320d70336fc09363d7c864be34cd12a80303c8157246d50318",
+      "bytes": 654
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/received-audit-binding.json": {
+      "sha256": "961d8ee93a421c0f95c623f12f2dba9aeed47c0030f32b33d7817d23c2d80e60",
+      "bytes": 299
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/RESOURCE_ACCOUNTING_UPDATE_KO.md": {
+      "sha256": "2509c7300b050353805d470766108c6f8028fdab3fe2160b7071add698109ef8",
+      "bytes": 3326
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/round-add-test-target.py": {
+      "sha256": "ca018bbd66cd2de3e26451f9c589cd226a9f08cad7b2fd2c318cfa22a8345d9b",
+      "bytes": 5267
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/source-identity.json": {
+      "sha256": "9cdf3cc91be975a3cf7d7ff2b77e010f0fcca9e3bfa6ed068fa8b7df697af79a",
+      "bytes": 1748
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/spec-command.json": {
+      "sha256": "87d8f674d8361bd3a31941e7fad65ce1fbe838dd75983209de26c52dec3c4fa4",
+      "bytes": 3645
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/spec-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/spec-stdout.txt": {
+      "sha256": "319f6b4187b3aed8d253f4ad2406c237f1c2ebb925ab372913ab8ee683a1ba9e",
+      "bytes": 101
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/spec.xml": {
+      "sha256": "a03cc92184f43a5d006d5e487f6392d66f2bf8546f2f865dcf27ab4b8dfa936e",
+      "bytes": 7127
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/static-command.json": {
+      "sha256": "536a826a18a22e01937cc3df91c67411a5e2de9b0d387ad5a415a3c746a2fa83",
+      "bytes": 3644
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/static-spec-checks.json": {
+      "sha256": "6963dbadeb02ed2fb9ada4e42f22b9f638b065b24c8d1e8a18bbae4847ae83c4",
+      "bytes": 10187
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/static-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/static-stdout.txt": {
+      "sha256": "dfb193b80e3cbacc89f66b3766fc3d2d5c9b03d67ad91d42c395571bdd36e02e",
+      "bytes": 94
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/targeted-command.json": {
+      "sha256": "8f00a70f53246874cc062e24de9d1175028de0674f264c81fb15133f7b85585d",
+      "bytes": 3846
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/targeted-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/targeted-stdout.txt": {
+      "sha256": "8a4c8fd9611700e426f65ad912e25b24076fb799cf986e831c29aebe097c74fc",
+      "bytes": 101
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/targeted.xml": {
+      "sha256": "f111ef115a0036d28ee75f0a1f5ea6358dc31afe4c81187dd2762c64fc8094ce",
+      "bytes": 6015
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/W3.json": {
+      "sha256": "02ac0a57bb23f9ed514959e4579735dda2d7f7ba958f61c413a95a563149699a",
+      "bytes": 372
+    },
+    "current/c1b1-r2-precharge-fix-2026-10-05/work-reconstruction-stdout.txt": {
+      "sha256": "4d1820c4b5545030e5e10a7502c88c61fbef10edbb3578b11047a13917bfce01",
+      "bytes": 221
+    },
+    "current/C1B1_IMPULSE_RESOURCE_ACCOUNTING_STATUS_2026-10-05.md": {
+      "sha256": "95753d2c6a26f6299b0636bf6ee6c0908388f080306cc01ba0f7e8f3ba3e52df",
+      "bytes": 1937
+    },
+    "docs/C1B1_IMPULSE_R2_PRECHARGE_FIX_REPORT_2026-10-05.md": {
+      "sha256": "2bbbb76b4b9513135b8cf796db4f093db80ea901fa4c0f45480ab6435f5fa9d7",
+      "bytes": 15564
+    },
+    "independent_checker/c1b1/impulse/producer.py": {
+      "sha256": "ba229aa50994c8409def1ca2f74c37df9dd33f563c0920719263c81e54d2b184",
+      "bytes": 8367
+    },
+    "independent_checker/c1b1/impulse/resource.py": {
+      "sha256": "c5e081ee2c3dc49db85271d588cc3fde6e54caa6ce6e005a36c00c25d167a7cd",
+      "bytes": 6395
+    },
+    "independent_checker/c1b1/impulse/rounding.py": {
+      "sha256": "3667079195517f84f23a37a6f0787123b16571be2f6975967b0f2a9e127b2bf9",
+      "bytes": 1647
+    },
+    "tests/test_impulse_r2_precharge.py": {
+      "sha256": "273c818bcab63c21114dacf550004aafa0d4a0d07e6c08c34b72808147aca89f",
+      "bytes": 7741
+    },
+    "tests/test_impulse_round_add_accounting.py": {
+      "sha256": "2148363815b5c6871188375bfd1116fb76d4ec35e8088ffad6a1e2948a1b7a2c",
+      "bytes": 5152
+    }
+  }
+}

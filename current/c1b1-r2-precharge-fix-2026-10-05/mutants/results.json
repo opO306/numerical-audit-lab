@@ -1,0 +1,883 @@
+{
+  "scope": "AUTHOR SOURCE SEMANTIC MUTANTS; NOT INDEPENDENT AUDIT",
+  "results": [
+    {
+      "name": "R2-PRECHARGE-ACCOUNTING",
+      "source": "producer.py",
+      "source_before_sha256": "ba229aa50994c8409def1ca2f74c37df9dd33f563c0920719263c81e54d2b184",
+      "mutant_source_sha256": "c3630c4bed6226aa2315ce6801002d5008117d3a5768ed7f9134a8056372fe05",
+      "actual_edit": {
+        "before": "r2=c.fraction(0,1)\n        for x in parsed.q:\n            r2=c.qadd(r2,c.qmul(x,x))",
+        "after": "r2=sum((x*x for x in parsed.q),Q(0))"
+      },
+      "fixture": "tests/test_impulse_r2_precharge.py::test_canonical_r2_stops_before_disallowed_operation",
+      "semantic_detection": "At low caps the direct Fraction R2 corridor executes uncharged products and reaches sqrt; accounted baseline stops before disallowed arithmetic",
+      "baseline": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_r2_precharge.py::test_canonical_r2_stops_before_disallowed_operation",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\R2-PRECHARGE-ACCOUNTING\\baseline.xml"
+        ],
+        "exit": 0,
+        "tests": 5,
+        "failed": [],
+        "errors": [],
+        "skipped": []
+      },
+      "mutant": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_r2_precharge.py::test_canonical_r2_stops_before_disallowed_operation",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\R2-PRECHARGE-ACCOUNTING\\mutant.xml"
+        ],
+        "exit": 1,
+        "tests": 5,
+        "failed": [
+          "test_canonical_r2_stops_before_disallowed_operation[1-0-0-primitives0]",
+          "test_canonical_r2_stops_before_disallowed_operation[31-0-0-primitives1]",
+          "test_canonical_r2_stops_before_disallowed_operation[32-32-1-primitives2]",
+          "test_canonical_r2_stops_before_disallowed_operation[47-32-1-primitives3]",
+          "test_canonical_r2_stops_before_disallowed_operation[48-48-2-primitives4]"
+        ],
+        "errors": [],
+        "skipped": []
+      },
+      "verdict": "DETECTED"
+    },
+    {
+      "name": "force-sign",
+      "source": "producer.py",
+      "source_before_sha256": "ba229aa50994c8409def1ca2f74c37df9dd33f563c0920719263c81e54d2b184",
+      "mutant_source_sha256": "95f261bc3abfb0e8b5584e0b8756a90e399f1f7874a92a1c3ba2de6e1d15d15d",
+      "actual_edit": {
+        "before": "mul(neg(vp),reciprocal(radius,c),c)",
+        "after": "mul(vp,reciprocal(radius,c),c)"
+      },
+      "fixture": "tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic",
+      "semantic_detection": "Nonzero off-axis analytic diagnostic sign differs",
+      "baseline": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\force-sign\\baseline.xml"
+        ],
+        "exit": 0,
+        "tests": 3,
+        "failed": [],
+        "errors": [],
+        "skipped": []
+      },
+      "mutant": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\force-sign\\mutant.xml"
+        ],
+        "exit": 1,
+        "tests": 3,
+        "failed": [
+          "test_private_whole_vector_matches_diagnostic[q0]",
+          "test_private_whole_vector_matches_diagnostic[q1]",
+          "test_private_whole_vector_matches_diagnostic[q2]"
+        ],
+        "errors": [],
+        "skipped": []
+      },
+      "verdict": "DETECTED"
+    },
+    {
+      "name": "half-step",
+      "source": "producer.py",
+      "source_before_sha256": "ba229aa50994c8409def1ca2f74c37df9dd33f563c0920719263c81e54d2b184",
+      "mutant_source_sha256": "d719ecce883c581ff23012439243d5b97e4a8eab609906419184e367192c07bc",
+      "actual_edit": {
+        "before": "point(Q(20*(1<<80)))",
+        "after": "point(Q(40*(1<<80)))"
+      },
+      "fixture": "tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic",
+      "semantic_detection": "Full step doubles once-rounded impulse",
+      "baseline": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\half-step\\baseline.xml"
+        ],
+        "exit": 0,
+        "tests": 3,
+        "failed": [],
+        "errors": [],
+        "skipped": []
+      },
+      "mutant": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\half-step\\mutant.xml"
+        ],
+        "exit": 1,
+        "tests": 3,
+        "failed": [
+          "test_private_whole_vector_matches_diagnostic[q0]",
+          "test_private_whole_vector_matches_diagnostic[q1]",
+          "test_private_whole_vector_matches_diagnostic[q2]"
+        ],
+        "errors": [],
+        "skipped": []
+      },
+      "verdict": "DETECTED"
+    },
+    {
+      "name": "inverse-R",
+      "source": "producer.py",
+      "source_before_sha256": "ba229aa50994c8409def1ca2f74c37df9dd33f563c0920719263c81e54d2b184",
+      "mutant_source_sha256": "e1e71ac20d1e05c4f8564dd227d150b6b4c9db318ef61e78c7c15a818726c7f7",
+      "actual_edit": {
+        "before": "mul(neg(vp),reciprocal(radius,c),c)",
+        "after": "mul(neg(vp),point(1),c)"
+      },
+      "fixture": "tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic",
+      "semantic_detection": "Missing radial division changes nonunit radius impulse",
+      "baseline": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\inverse-R\\baseline.xml"
+        ],
+        "exit": 0,
+        "tests": 3,
+        "failed": [],
+        "errors": [],
+        "skipped": []
+      },
+      "mutant": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\inverse-R\\mutant.xml"
+        ],
+        "exit": 1,
+        "tests": 3,
+        "failed": [
+          "test_private_whole_vector_matches_diagnostic[q0]",
+          "test_private_whole_vector_matches_diagnostic[q1]",
+          "test_private_whole_vector_matches_diagnostic[q2]"
+        ],
+        "errors": [],
+        "skipped": []
+      },
+      "verdict": "DETECTED"
+    },
+    {
+      "name": "R-power",
+      "source": "derivative.py",
+      "source_before_sha256": "d090e765d103451e54eadc73638f20ac6f2e7065e455d60745ba774ae21f1f33",
+      "mutant_source_sha256": "34244786c5da29dbad096d5812e0da22738657ebf1e2e4436dee339b9092d0c6",
+      "actual_edit": {
+        "before": "power(term.radius,-2*term.k-1,c)",
+        "after": "power(term.radius,-2*term.k,c)"
+      },
+      "fixture": "tests/test_impulse_reference_boundaries.py::test_exact_long_derivative_identity",
+      "semantic_detection": "Exact rational derivative 9/16 differs",
+      "baseline": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_boundaries.py::test_exact_long_derivative_identity",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\R-power\\baseline.xml"
+        ],
+        "exit": 0,
+        "tests": 1,
+        "failed": [],
+        "errors": [],
+        "skipped": []
+      },
+      "mutant": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_boundaries.py::test_exact_long_derivative_identity",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\R-power\\mutant.xml"
+        ],
+        "exit": 1,
+        "tests": 1,
+        "failed": [
+          "test_exact_long_derivative_identity"
+        ],
+        "errors": [],
+        "skipped": []
+      },
+      "verdict": "DETECTED"
+    },
+    {
+      "name": "TT-derivative",
+      "source": "potential.py",
+      "source_before_sha256": "5add6bb8c26f399882a6d79d185b2f4d7bb0265f25009da90b04400eec84f9c4",
+      "mutant_source_sha256": "3316ef532ce6512fa4bc8a2d6d66022cee923a642efce9e20496ca06d4a55338",
+      "actual_edit": {
+        "before": "slope=mul(mul(eta,e,c),term,c)",
+        "after": "slope=point(0)"
+      },
+      "fixture": "tests/test_impulse_reference_boundaries.py::test_tt_and_leading_branches_against_separate_exact_series",
+      "semantic_detection": "Independent exact TT last-term slope containment fails",
+      "baseline": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_boundaries.py::test_tt_and_leading_branches_against_separate_exact_series",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\TT-derivative\\baseline.xml"
+        ],
+        "exit": 0,
+        "tests": 1,
+        "failed": [],
+        "errors": [],
+        "skipped": []
+      },
+      "mutant": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_boundaries.py::test_tt_and_leading_branches_against_separate_exact_series",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\TT-derivative\\mutant.xml"
+        ],
+        "exit": 1,
+        "tests": 1,
+        "failed": [
+          "test_tt_and_leading_branches_against_separate_exact_series"
+        ],
+        "errors": [],
+        "skipped": []
+      },
+      "verdict": "DETECTED"
+    },
+    {
+      "name": "BO-gprime",
+      "source": "potential.py",
+      "source_before_sha256": "5add6bb8c26f399882a6d79d185b2f4d7bb0265f25009da90b04400eec84f9c4",
+      "mutant_source_sha256": "0dd9dca7a5ccd24f26a6491365d515dcf45bb1460799d0d3d8bd3207e792e362",
+      "actual_edit": {
+        "before": "slope=add(slope,gp,c)",
+        "after": "slope=slope"
+      },
+      "fixture": "tests/test_impulse_reference_boundaries.py::test_tt_and_leading_branches_against_separate_exact_series",
+      "semantic_detection": "Independent quotient derivative nonzero contribution absent",
+      "baseline": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_boundaries.py::test_tt_and_leading_branches_against_separate_exact_series",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\BO-gprime\\baseline.xml"
+        ],
+        "exit": 0,
+        "tests": 1,
+        "failed": [],
+        "errors": [],
+        "skipped": []
+      },
+      "mutant": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_boundaries.py::test_tt_and_leading_branches_against_separate_exact_series",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\BO-gprime\\mutant.xml"
+        ],
+        "exit": 1,
+        "tests": 1,
+        "failed": [
+          "test_tt_and_leading_branches_against_separate_exact_series"
+        ],
+        "errors": [],
+        "skipped": []
+      },
+      "verdict": "DETECTED"
+    },
+    {
+      "name": "exp-sign",
+      "source": "exp_enclosure.py",
+      "source_before_sha256": "032123fcd0f9d2d486c8fa5fd3fd9ca13995fe1a91f98ddb2e53d31e1c9cb2e1",
+      "mutant_source_sha256": "d038537237b7263acaea860302ab9ff600b1914363edcedcfa4a24762e806045",
+      "actual_edit": {
+        "before": "ylo, yhi, s = x.lo, x.hi, 0",
+        "after": "ylo, yhi, s = -x.hi, -x.lo, 0"
+      },
+      "fixture": "tests/test_impulse_reference_primitives.py::test_exp_contains_independent_alternating_series",
+      "semantic_detection": "Positive exponential instead of negative fails independent alternating bracket",
+      "baseline": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_primitives.py::test_exp_contains_independent_alternating_series",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\exp-sign\\baseline.xml"
+        ],
+        "exit": 0,
+        "tests": 4,
+        "failed": [],
+        "errors": [],
+        "skipped": []
+      },
+      "mutant": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_primitives.py::test_exp_contains_independent_alternating_series",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\exp-sign\\mutant.xml"
+        ],
+        "exit": 1,
+        "tests": 4,
+        "failed": [
+          "test_exp_contains_independent_alternating_series[x1]",
+          "test_exp_contains_independent_alternating_series[x2]",
+          "test_exp_contains_independent_alternating_series[x3]"
+        ],
+        "errors": [],
+        "skipped": []
+      },
+      "verdict": "DETECTED"
+    },
+    {
+      "name": "component-swap",
+      "source": "producer.py",
+      "source_before_sha256": "ba229aa50994c8409def1ca2f74c37df9dd33f563c0920719263c81e54d2b184",
+      "mutant_source_sha256": "272f8089566a55db980e936c9d4d72e63f9e9ea6b71a916a66a4b0b0660d5d66",
+      "actual_edit": {
+        "before": "for q in parsed.q)",
+        "after": "for q in (parsed.q[1],parsed.q[0],parsed.q[2]))"
+      },
+      "fixture": "tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic",
+      "semantic_detection": "Distinct q axes mismatch independently computed impulses",
+      "baseline": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\component-swap\\baseline.xml"
+        ],
+        "exit": 0,
+        "tests": 3,
+        "failed": [],
+        "errors": [],
+        "skipped": []
+      },
+      "mutant": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\component-swap\\mutant.xml"
+        ],
+        "exit": 1,
+        "tests": 3,
+        "failed": [
+          "test_private_whole_vector_matches_diagnostic[q0]",
+          "test_private_whole_vector_matches_diagnostic[q1]",
+          "test_private_whole_vector_matches_diagnostic[q2]"
+        ],
+        "errors": [],
+        "skipped": []
+      },
+      "verdict": "DETECTED"
+    },
+    {
+      "name": "ties-away",
+      "source": "rounding.py",
+      "source_before_sha256": "3667079195517f84f23a37a6f0787123b16571be2f6975967b0f2a9e127b2bf9",
+      "mutant_source_sha256": "3c052387307f04b819ae41d2109a7c5611c6304b6839221454fe631754e2a75e",
+      "actual_edit": {
+        "before": "return floor if floor % 2 == 0 else increment(floor)",
+        "after": "return increment(floor)"
+      },
+      "fixture": "tests/test_impulse_reference_primitives.py::test_even_odd_cell_and_negative_ties",
+      "semantic_detection": "Even exact tie 5/2 must map to 2; same old semantic mutation rebased onto checked increment",
+      "baseline": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_primitives.py::test_even_odd_cell_and_negative_ties",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\ties-away\\baseline.xml"
+        ],
+        "exit": 0,
+        "tests": 7,
+        "failed": [],
+        "errors": [],
+        "skipped": []
+      },
+      "mutant": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_primitives.py::test_even_odd_cell_and_negative_ties",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\ties-away\\mutant.xml"
+        ],
+        "exit": 1,
+        "tests": 7,
+        "failed": [
+          "test_even_odd_cell_and_negative_ties[lo2-hi2-2]"
+        ],
+        "errors": [],
+        "skipped": []
+      },
+      "verdict": "DETECTED"
+    },
+    {
+      "name": "ROUND-ADD-ACCOUNTING",
+      "source": "rounding.py",
+      "source_before_sha256": "3667079195517f84f23a37a6f0787123b16571be2f6975967b0f2a9e127b2bf9",
+      "mutant_source_sha256": "1f39a67c155cda9a3b09b48bc62e8c3ed9fefedd62bd7db7e9b734d77a3d73dc",
+      "actual_edit": {
+        "before": "return value + 1 if c is None else c.add(value,1)",
+        "after": "return value + 1"
+      },
+      "fixture": "tests/test_impulse_round_add_accounting.py::test_increment_refuses_before_add",
+      "semantic_detection": "Checked account omitted: baseline refuses both 7/4 and negative odd tie at below-add caps; mutant returns raw",
+      "baseline": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_round_add_accounting.py::test_increment_refuses_before_add",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\ROUND-ADD-ACCOUNTING\\baseline.xml"
+        ],
+        "exit": 0,
+        "tests": 4,
+        "failed": [],
+        "errors": [],
+        "skipped": []
+      },
+      "mutant": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_round_add_accounting.py::test_increment_refuses_before_add",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\ROUND-ADD-ACCOUNTING\\mutant.xml"
+        ],
+        "exit": 1,
+        "tests": 4,
+        "failed": [
+          "test_increment_refuses_before_add[q0-73-73]",
+          "test_increment_refuses_before_add[q1-74-73]",
+          "test_increment_refuses_before_add[q2-42-42]",
+          "test_increment_refuses_before_add[q3-44-42]"
+        ],
+        "errors": [],
+        "skipped": []
+      },
+      "verdict": "DETECTED"
+    },
+    {
+      "name": "QDIV-SIGN-ACCOUNTING",
+      "source": "resource.py",
+      "source_before_sha256": "c5e081ee2c3dc49db85271d588cc3fde6e54caa6ce6e005a36c00c25d167a7cd",
+      "mutant_source_sha256": "1824503726fc4882e271908739604a9b641006500c34add58263a707cc098805",
+      "actual_edit": {
+        "before": "numerator = self.multiply(numerator, sign)",
+        "after": "numerator = numerator * sign"
+      },
+      "fixture": "tests/test_impulse_qdiv_sign_accounting.py::test_qdiv_sign_refuses_under_complete_cost",
+      "semantic_detection": "At cap40/43 baseline refuses before normalization; direct sign multiply returns unaccounted qdiv result",
+      "baseline": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_qdiv_sign_accounting.py::test_qdiv_sign_refuses_under_complete_cost",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\QDIV-SIGN-ACCOUNTING\\baseline.xml"
+        ],
+        "exit": 0,
+        "tests": 4,
+        "failed": [],
+        "errors": [],
+        "skipped": []
+      },
+      "mutant": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_qdiv_sign_accounting.py::test_qdiv_sign_refuses_under_complete_cost",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\QDIV-SIGN-ACCOUNTING\\mutant.xml"
+        ],
+        "exit": 1,
+        "tests": 4,
+        "failed": [
+          "test_qdiv_sign_refuses_under_complete_cost[40-divisor0]",
+          "test_qdiv_sign_refuses_under_complete_cost[40-divisor1]",
+          "test_qdiv_sign_refuses_under_complete_cost[43-divisor0]",
+          "test_qdiv_sign_refuses_under_complete_cost[43-divisor1]"
+        ],
+        "errors": [],
+        "skipped": []
+      },
+      "verdict": "DETECTED"
+    },
+    {
+      "name": "inverse-endpoints",
+      "source": "interval.py",
+      "source_before_sha256": "421b2fdb0ec1bb095d48347eb3892ca7da95e86240d87ba572dfa450da462834",
+      "mutant_source_sha256": "b5eab72aeff71584e29c0fd11b4df38eb5118012c57d4e019582fd0b6273d06c",
+      "actual_edit": {
+        "before": "return Interval(c.qdiv(Q(1), a.hi), c.qdiv(Q(1), a.lo),c)",
+        "after": "return Interval(c.qdiv(Q(1), a.lo), c.qdiv(Q(1), a.hi),c)"
+      },
+      "fixture": "tests/test_impulse_reference_primitives.py::test_positive_reciprocal_and_integer_power",
+      "semantic_detection": "Valid [2,4] inverse must enclose [1/4,1/2]",
+      "baseline": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_primitives.py::test_positive_reciprocal_and_integer_power",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\inverse-endpoints\\baseline.xml"
+        ],
+        "exit": 0,
+        "tests": 1,
+        "failed": [],
+        "errors": [],
+        "skipped": []
+      },
+      "mutant": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_primitives.py::test_positive_reciprocal_and_integer_power",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\inverse-endpoints\\mutant.xml"
+        ],
+        "exit": 1,
+        "tests": 1,
+        "failed": [
+          "test_positive_reciprocal_and_integer_power"
+        ],
+        "errors": [],
+        "skipped": []
+      },
+      "verdict": "DETECTED"
+    },
+    {
+      "name": "inward-rounding",
+      "source": "interval.py",
+      "source_before_sha256": "421b2fdb0ec1bb095d48347eb3892ca7da95e86240d87ba572dfa450da462834",
+      "mutant_source_sha256": "cc7099d0c84942f3b7df7074a960541fce3ac42409b30aaccbc9084444b0d149",
+      "actual_edit": {
+        "before": "lo, _ = scaled(a.lo)",
+        "after": "lo, lo_rem = scaled(a.lo)\n    lo = c.add(lo,int(lo_rem != 0))"
+      },
+      "fixture": "tests/test_impulse_reference_boundaries.py::test_negative_power_exact_and_outward_dyadic",
+      "semantic_detection": "Negative rational lower endpoint rounded inward",
+      "baseline": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_boundaries.py::test_negative_power_exact_and_outward_dyadic",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\inward-rounding\\baseline.xml"
+        ],
+        "exit": 0,
+        "tests": 1,
+        "failed": [],
+        "errors": [],
+        "skipped": []
+      },
+      "mutant": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_boundaries.py::test_negative_power_exact_and_outward_dyadic",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\inward-rounding\\mutant.xml"
+        ],
+        "exit": 1,
+        "tests": 1,
+        "failed": [
+          "test_negative_power_exact_and_outward_dyadic"
+        ],
+        "errors": [],
+        "skipped": []
+      },
+      "verdict": "DETECTED"
+    },
+    {
+      "name": "early-accept",
+      "source": "rounding.py",
+      "source_before_sha256": "3667079195517f84f23a37a6f0787123b16571be2f6975967b0f2a9e127b2bf9",
+      "mutant_source_sha256": "d4aaa5c25aa05c6b77bde710ef7cd5dd71aedde1b93a2b3492950a5cc9b6b49f",
+      "actual_edit": {
+        "before": "if not fits:",
+        "after": "if not fits and False:"
+      },
+      "fixture": "tests/test_impulse_reference_primitives.py::test_even_odd_cell_and_negative_ties",
+      "semantic_detection": "Ambiguous [0.49,0.51] must not resolve raw 0",
+      "baseline": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_primitives.py::test_even_odd_cell_and_negative_ties",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\early-accept\\baseline.xml"
+        ],
+        "exit": 0,
+        "tests": 7,
+        "failed": [],
+        "errors": [],
+        "skipped": []
+      },
+      "mutant": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_primitives.py::test_even_odd_cell_and_negative_ties",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\early-accept\\mutant.xml"
+        ],
+        "exit": 1,
+        "tests": 7,
+        "failed": [
+          "test_even_odd_cell_and_negative_ties[lo4-hi4-None]",
+          "test_even_odd_cell_and_negative_ties[lo5-hi5-None]",
+          "test_even_odd_cell_and_negative_ties[lo6-hi6-None]"
+        ],
+        "errors": [],
+        "skipped": []
+      },
+      "verdict": "DETECTED"
+    },
+    {
+      "name": "resource-guard",
+      "source": "resource.py",
+      "source_before_sha256": "c5e081ee2c3dc49db85271d588cc3fde6e54caa6ce6e005a36c00c25d167a7cd",
+      "mutant_source_sha256": "218a965198a7b72a710a052f5ad8e7288c2e3cb1c4791ce1e5c711796a2785ba",
+      "actual_edit": {
+        "before": "if bits > self.bit_max:",
+        "after": "if bits > self.bit_max and False:"
+      },
+      "fixture": "tests/test_impulse_mutant_resource_probe.py::test_small_resource_guard",
+      "semantic_detection": "64-bit shift exceeds 32-bit cap before a small safe allocation",
+      "baseline": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_mutant_resource_probe.py::test_small_resource_guard",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\resource-guard\\baseline.xml"
+        ],
+        "exit": 0,
+        "tests": 1,
+        "failed": [],
+        "errors": [],
+        "skipped": []
+      },
+      "mutant": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_mutant_resource_probe.py::test_small_resource_guard",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\resource-guard\\mutant.xml"
+        ],
+        "exit": 1,
+        "tests": 1,
+        "failed": [
+          "test_small_resource_guard"
+        ],
+        "errors": [],
+        "skipped": []
+      },
+      "verdict": "DETECTED"
+    },
+    {
+      "name": "wrong-spec",
+      "source": "contracts.py",
+      "source_before_sha256": "9319b533d6ff8230cfa2f45225f5a00a08281ba350ed0648037c3fa4b3848f1b",
+      "mutant_source_sha256": "4db2004ed51d27a9bd914547965b28fbfc2167e23cc5e251227756ecb24d1c2a",
+      "actual_edit": {
+        "before": "if obj['spec_sha256']!=spec.sha256:",
+        "after": "if obj['spec_sha256']!=spec.sha256 and False:"
+      },
+      "fixture": "tests/test_impulse_reference_boundaries.py::test_wrong_spec_refused_and_failure_path_immutable",
+      "semantic_detection": "Wrong request spec must yield binding refusal",
+      "baseline": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_boundaries.py::test_wrong_spec_refused_and_failure_path_immutable",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\wrong-spec\\baseline.xml"
+        ],
+        "exit": 0,
+        "tests": 1,
+        "failed": [],
+        "errors": [],
+        "skipped": []
+      },
+      "mutant": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_boundaries.py::test_wrong_spec_refused_and_failure_path_immutable",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\wrong-spec\\mutant.xml"
+        ],
+        "exit": 1,
+        "tests": 1,
+        "failed": [
+          "test_wrong_spec_refused_and_failure_path_immutable"
+        ],
+        "errors": [],
+        "skipped": []
+      },
+      "verdict": "DETECTED"
+    },
+    {
+      "name": "intermediate-quantization",
+      "source": "producer.py",
+      "source_before_sha256": "ba229aa50994c8409def1ca2f74c37df9dd33f563c0920719263c81e54d2b184",
+      "mutant_source_sha256": "735111ca9f26b04f2fafe3e086865d5de93c355e4eb7e92eee72969a1a06ef6f",
+      "actual_edit": {
+        "before": "radius=sqrt_enclosure(r2,n,c)",
+        "after": "radius=sqrt_enclosure(r2,n,c)\n            radius=point(Q(round(radius.lo*(1<<48)),1<<48))"
+      },
+      "fixture": "tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic",
+      "semantic_detection": "Irrational sqrt41 rounded to FX48 loses whole-expression containment",
+      "baseline": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\intermediate-quantization\\baseline.xml"
+        ],
+        "exit": 0,
+        "tests": 3,
+        "failed": [],
+        "errors": [],
+        "skipped": []
+      },
+      "mutant": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\intermediate-quantization\\mutant.xml"
+        ],
+        "exit": 1,
+        "tests": 3,
+        "failed": [
+          "test_private_whole_vector_matches_diagnostic[q0]",
+          "test_private_whole_vector_matches_diagnostic[q1]"
+        ],
+        "errors": [],
+        "skipped": []
+      },
+      "verdict": "DETECTED"
+    },
+    {
+      "name": "exp-cutoff",
+      "source": "exp_enclosure.py",
+      "source_before_sha256": "032123fcd0f9d2d486c8fa5fd3fd9ca13995fe1a91f98ddb2e53d31e1c9cb2e1",
+      "mutant_source_sha256": "820f3e8996a901e3f2eddf636d4f255f2c018eba64cecec851183c99b8dff7ef",
+      "actual_edit": {
+        "before": "if x.lo == x.hi == 0:",
+        "after": "if x.lo>50:\n        return Interval(Q(0),Q(0)),0,0\n    if x.lo == x.hi == 0:"
+      },
+      "fixture": "tests/test_impulse_reference_primitives.py::test_large_exp_no_cutoff_and_tail_order_limit",
+      "semantic_detection": "Exact exp(-100) positive; fixed zero cutoff fails",
+      "baseline": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_primitives.py::test_large_exp_no_cutoff_and_tail_order_limit",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\exp-cutoff\\baseline.xml"
+        ],
+        "exit": 0,
+        "tests": 1,
+        "failed": [],
+        "errors": [],
+        "skipped": []
+      },
+      "mutant": {
+        "command": [
+          "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_impulse_reference_primitives.py::test_large_exp_no_cutoff_and_tail_order_limit",
+          "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\mutants\\exp-cutoff\\mutant.xml"
+        ],
+        "exit": 1,
+        "tests": 1,
+        "failed": [
+          "test_large_exp_no_cutoff_and_tail_order_limit"
+        ],
+        "errors": [],
+        "skipped": []
+      },
+      "verdict": "DETECTED"
+    }
+  ]
+}

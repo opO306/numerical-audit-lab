@@ -1,0 +1,164 @@
+FFFFFFFF                                                                 [100%]
+================================== FAILURES ===================================
+___ test_canonical_r2_stops_before_disallowed_operation[1-0-0-primitives0] ____
+
+cap = 1, ledger = 0, operations = 0, primitives = ['fraction']
+
+    @pytest.mark.parametrize('cap,ledger,operations,primitives', [
+        (1, 0, 0, ['fraction']),
+        (31, 0, 0, ['fraction']),
+        (32, 32, 1, ['fraction', 'multiply']),
+        (47, 32, 1, ['fraction', 'multiply']),
+        (48, 48, 2, ['fraction', 'multiply', 'multiply']),
+    ])
+    def test_canonical_r2_stops_before_disallowed_operation(cap, ledger, operations, primitives):
+        obj = json.loads(FIXTURE.read_bytes())
+        obj['budget']['work_unit_max'] = str(cap)
+        result, events = trace_r2(obj)
+>       assert not any(e['event'] in ('_mul', '_add', 'sqrt_entry') for e in events)
+E       assert not True
+E        +  where True = any(<generator object test_canonical_r2_stops_before_disallowed_operation.<locals>.<genexpr> at 0x00000219A0436400>)
+
+tests\test_impulse_r2_precharge.py:92: AssertionError
+___ test_canonical_r2_stops_before_disallowed_operation[31-0-0-primitives1] ___
+
+cap = 31, ledger = 0, operations = 0, primitives = ['fraction']
+
+    @pytest.mark.parametrize('cap,ledger,operations,primitives', [
+        (1, 0, 0, ['fraction']),
+        (31, 0, 0, ['fraction']),
+        (32, 32, 1, ['fraction', 'multiply']),
+        (47, 32, 1, ['fraction', 'multiply']),
+        (48, 48, 2, ['fraction', 'multiply', 'multiply']),
+    ])
+    def test_canonical_r2_stops_before_disallowed_operation(cap, ledger, operations, primitives):
+        obj = json.loads(FIXTURE.read_bytes())
+        obj['budget']['work_unit_max'] = str(cap)
+        result, events = trace_r2(obj)
+>       assert not any(e['event'] in ('_mul', '_add', 'sqrt_entry') for e in events)
+E       assert not True
+E        +  where True = any(<generator object test_canonical_r2_stops_before_disallowed_operation.<locals>.<genexpr> at 0x00000219A0437370>)
+
+tests\test_impulse_r2_precharge.py:92: AssertionError
+__ test_canonical_r2_stops_before_disallowed_operation[32-32-1-primitives2] ___
+
+cap = 32, ledger = 32, operations = 1, primitives = ['fraction', 'multiply']
+
+    @pytest.mark.parametrize('cap,ledger,operations,primitives', [
+        (1, 0, 0, ['fraction']),
+        (31, 0, 0, ['fraction']),
+        (32, 32, 1, ['fraction', 'multiply']),
+        (47, 32, 1, ['fraction', 'multiply']),
+        (48, 48, 2, ['fraction', 'multiply', 'multiply']),
+    ])
+    def test_canonical_r2_stops_before_disallowed_operation(cap, ledger, operations, primitives):
+        obj = json.loads(FIXTURE.read_bytes())
+        obj['budget']['work_unit_max'] = str(cap)
+        result, events = trace_r2(obj)
+>       assert not any(e['event'] in ('_mul', '_add', 'sqrt_entry') for e in events)
+E       assert not True
+E        +  where True = any(<generator object test_canonical_r2_stops_before_disallowed_operation.<locals>.<genexpr> at 0x00000219A0543ED0>)
+
+tests\test_impulse_r2_precharge.py:92: AssertionError
+__ test_canonical_r2_stops_before_disallowed_operation[47-32-1-primitives3] ___
+
+cap = 47, ledger = 32, operations = 1, primitives = ['fraction', 'multiply']
+
+    @pytest.mark.parametrize('cap,ledger,operations,primitives', [
+        (1, 0, 0, ['fraction']),
+        (31, 0, 0, ['fraction']),
+        (32, 32, 1, ['fraction', 'multiply']),
+        (47, 32, 1, ['fraction', 'multiply']),
+        (48, 48, 2, ['fraction', 'multiply', 'multiply']),
+    ])
+    def test_canonical_r2_stops_before_disallowed_operation(cap, ledger, operations, primitives):
+        obj = json.loads(FIXTURE.read_bytes())
+        obj['budget']['work_unit_max'] = str(cap)
+        result, events = trace_r2(obj)
+>       assert not any(e['event'] in ('_mul', '_add', 'sqrt_entry') for e in events)
+E       assert not True
+E        +  where True = any(<generator object test_canonical_r2_stops_before_disallowed_operation.<locals>.<genexpr> at 0x00000219A0436A80>)
+
+tests\test_impulse_r2_precharge.py:92: AssertionError
+__ test_canonical_r2_stops_before_disallowed_operation[48-48-2-primitives4] ___
+
+cap = 48, ledger = 48, operations = 2
+primitives = ['fraction', 'multiply', 'multiply']
+
+    @pytest.mark.parametrize('cap,ledger,operations,primitives', [
+        (1, 0, 0, ['fraction']),
+        (31, 0, 0, ['fraction']),
+        (32, 32, 1, ['fraction', 'multiply']),
+        (47, 32, 1, ['fraction', 'multiply']),
+        (48, 48, 2, ['fraction', 'multiply', 'multiply']),
+    ])
+    def test_canonical_r2_stops_before_disallowed_operation(cap, ledger, operations, primitives):
+        obj = json.loads(FIXTURE.read_bytes())
+        obj['budget']['work_unit_max'] = str(cap)
+        result, events = trace_r2(obj)
+>       assert not any(e['event'] in ('_mul', '_add', 'sqrt_entry') for e in events)
+E       assert not True
+E        +  where True = any(<generator object test_canonical_r2_stops_before_disallowed_operation.<locals>.<genexpr> at 0x00000219A0540AD0>)
+
+tests\test_impulse_r2_precharge.py:92: AssertionError
+_______________ test_admitted_r2_schedule_and_exact_result[q0] ________________
+
+q = (5, 3, -2)
+
+    @pytest.mark.parametrize('q', [(5, 3, -2), (Q(11, 2), Q(-3, 2), 0), (0, -6, 2)])
+    def test_admitted_r2_schedule_and_exact_result(q):
+        obj = input_object(q)
+        _, parsed, _, reason = prepared(encoded(obj))
+        assert reason is None
+        expected, schedule = expected_r2_schedule(parsed.q)
+        result, events = trace_r2(obj)
+        assert result.failure is None
+>       assert not any(e['event'] in ('_mul', '_add') for e in events)
+E       assert not True
+E        +  where True = any(<generator object test_admitted_r2_schedule_and_exact_result.<locals>.<genexpr> at 0x00000219A05EFE00>)
+
+tests\test_impulse_r2_precharge.py:113: AssertionError
+_______________ test_admitted_r2_schedule_and_exact_result[q1] ________________
+
+q = (Fraction(11, 2), Fraction(-3, 2), 0)
+
+    @pytest.mark.parametrize('q', [(5, 3, -2), (Q(11, 2), Q(-3, 2), 0), (0, -6, 2)])
+    def test_admitted_r2_schedule_and_exact_result(q):
+        obj = input_object(q)
+        _, parsed, _, reason = prepared(encoded(obj))
+        assert reason is None
+        expected, schedule = expected_r2_schedule(parsed.q)
+        result, events = trace_r2(obj)
+        assert result.failure is None
+>       assert not any(e['event'] in ('_mul', '_add') for e in events)
+E       assert not True
+E        +  where True = any(<generator object test_admitted_r2_schedule_and_exact_result.<locals>.<genexpr> at 0x00000219A0542810>)
+
+tests\test_impulse_r2_precharge.py:113: AssertionError
+_______________ test_admitted_r2_schedule_and_exact_result[q2] ________________
+
+q = (0, -6, 2)
+
+    @pytest.mark.parametrize('q', [(5, 3, -2), (Q(11, 2), Q(-3, 2), 0), (0, -6, 2)])
+    def test_admitted_r2_schedule_and_exact_result(q):
+        obj = input_object(q)
+        _, parsed, _, reason = prepared(encoded(obj))
+        assert reason is None
+        expected, schedule = expected_r2_schedule(parsed.q)
+        result, events = trace_r2(obj)
+        assert result.failure is None
+>       assert not any(e['event'] in ('_mul', '_add') for e in events)
+E       assert not True
+E        +  where True = any(<generator object test_admitted_r2_schedule_and_exact_result.<locals>.<genexpr> at 0x00000219A033D970>)
+
+tests\test_impulse_r2_precharge.py:113: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_impulse_r2_precharge.py::test_canonical_r2_stops_before_disallowed_operation[1-0-0-primitives0]
+FAILED tests/test_impulse_r2_precharge.py::test_canonical_r2_stops_before_disallowed_operation[31-0-0-primitives1]
+FAILED tests/test_impulse_r2_precharge.py::test_canonical_r2_stops_before_disallowed_operation[32-32-1-primitives2]
+FAILED tests/test_impulse_r2_precharge.py::test_canonical_r2_stops_before_disallowed_operation[47-32-1-primitives3]
+FAILED tests/test_impulse_r2_precharge.py::test_canonical_r2_stops_before_disallowed_operation[48-48-2-primitives4]
+FAILED tests/test_impulse_r2_precharge.py::test_admitted_r2_schedule_and_exact_result[q0]
+FAILED tests/test_impulse_r2_precharge.py::test_admitted_r2_schedule_and_exact_result[q1]
+FAILED tests/test_impulse_r2_precharge.py::test_admitted_r2_schedule_and_exact_result[q2]
+8 failed in 2.01s

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="8" skipped="0" tests="8" time="2.677" timestamp="2026-10-05T14:23:59.982510+09:00" hostname="으악"><testcase classname="tests.test_impulse_r2_precharge" name="test_canonical_r2_stops_before_disallowed_operation[1-0-0-primitives0]" time="0.075"><failure message="assert not True&#10; +  where True = any(&lt;generator object test_canonical_r2_stops_before_disallowed_operation.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000021E8CEF79F0&gt;)">cap = 1, ledger = 0, operations = 0, primitives = ['fraction']
+
+    @pytest.mark.parametrize('cap,ledger,operations,primitives', [
+        (1, 0, 0, ['fraction']),
+        (31, 0, 0, ['fraction']),
+        (32, 32, 1, ['fraction', 'multiply']),
+        (47, 32, 1, ['fraction', 'multiply']),
+        (48, 48, 2, ['fraction', 'multiply', 'multiply']),
+    ])
+    def test_canonical_r2_stops_before_disallowed_operation(cap, ledger, operations, primitives):
+        obj = json.loads(FIXTURE.read_bytes())
+        obj['budget']['work_unit_max'] = str(cap)
+        result, events = trace_r2(obj)
+&gt;       assert not any(e['event'] in ('_mul', '_add', 'sqrt_entry') for e in events)
+E       assert not True
+E        +  where True = any(&lt;generator object test_canonical_r2_stops_before_disallowed_operation.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000021E8CEF79F0&gt;)
+
+tests\test_impulse_r2_precharge.py:110: AssertionError</failure></testcase><testcase classname="tests.test_impulse_r2_precharge" name="test_canonical_r2_stops_before_disallowed_operation[31-0-0-primitives1]" time="0.064"><failure message="assert not True&#10; +  where True = any(&lt;generator object test_canonical_r2_stops_before_disallowed_operation.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000021E8CEF69B0&gt;)">cap = 31, ledger = 0, operations = 0, primitives = ['fraction']
+
+    @pytest.mark.parametrize('cap,ledger,operations,primitives', [
+        (1, 0, 0, ['fraction']),
+        (31, 0, 0, ['fraction']),
+        (32, 32, 1, ['fraction', 'multiply']),
+        (47, 32, 1, ['fraction', 'multiply']),
+        (48, 48, 2, ['fraction', 'multiply', 'multiply']),
+    ])
+    def test_canonical_r2_stops_before_disallowed_operation(cap, ledger, operations, primitives):
+        obj = json.loads(FIXTURE.read_bytes())
+        obj['budget']['work_unit_max'] = str(cap)
+        result, events = trace_r2(obj)
+&gt;       assert not any(e['event'] in ('_mul', '_add', 'sqrt_entry') for e in events)
+E       assert not True
+E        +  where True = any(&lt;generator object test_canonical_r2_stops_before_disallowed_operation.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000021E8CEF69B0&gt;)
+
+tests\test_impulse_r2_precharge.py:110: AssertionError</failure></testcase><testcase classname="tests.test_impulse_r2_precharge" name="test_canonical_r2_stops_before_disallowed_operation[32-32-1-primitives2]" time="0.055"><failure message="assert not True&#10; +  where True = any(&lt;generator object test_canonical_r2_stops_before_disallowed_operation.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000021E8CF9B030&gt;)">cap = 32, ledger = 32, operations = 1, primitives = ['fraction', 'multiply']
+
+    @pytest.mark.parametrize('cap,ledger,operations,primitives', [
+        (1, 0, 0, ['fraction']),
+        (31, 0, 0, ['fraction']),
+        (32, 32, 1, ['fraction', 'multiply']),
+        (47, 32, 1, ['fraction', 'multiply']),
+        (48, 48, 2, ['fraction', 'multiply', 'multiply']),
+    ])
+    def test_canonical_r2_stops_before_disallowed_operation(cap, ledger, operations, primitives):
+        obj = json.loads(FIXTURE.read_bytes())
+        obj['budget']['work_unit_max'] = str(cap)
+        result, events = trace_r2(obj)
+&gt;       assert not any(e['event'] in ('_mul', '_add', 'sqrt_entry') for e in events)
+E       assert not True
+E        +  where True = any(&lt;generator object test_canonical_r2_stops_before_disallowed_operation.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000021E8CF9B030&gt;)
+
+tests\test_impulse_r2_precharge.py:110: AssertionError</failure></testcase><testcase classname="tests.test_impulse_r2_precharge" name="test_canonical_r2_stops_before_disallowed_operation[47-32-1-primitives3]" time="0.054"><failure message="assert not True&#10; +  where True = any(&lt;generator object test_canonical_r2_stops_before_disallowed_operation.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000021E8D01EB50&gt;)">cap = 47, ledger = 32, operations = 1, primitives = ['fraction', 'multiply']
+
+    @pytest.mark.parametrize('cap,ledger,operations,primitives', [
+        (1, 0, 0, ['fraction']),
+        (31, 0, 0, ['fraction']),
+        (32, 32, 1, ['fraction', 'multiply']),
+        (47, 32, 1, ['fraction', 'multiply']),
+        (48, 48, 2, ['fraction', 'multiply', 'multiply']),
+    ])
+    def test_canonical_r2_stops_before_disallowed_operation(cap, ledger, operations, primitives):
+        obj = json.loads(FIXTURE.read_bytes())
+        obj['budget']['work_unit_max'] = str(cap)
+        result, events = trace_r2(obj)
+&gt;       assert not any(e['event'] in ('_mul', '_add', 'sqrt_entry') for e in events)
+E       assert not True
+E        +  where True = any(&lt;generator object test_canonical_r2_stops_before_disallowed_operation.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000021E8D01EB50&gt;)
+
+tests\test_impulse_r2_precharge.py:110: AssertionError</failure></testcase><testcase classname="tests.test_impulse_r2_precharge" name="test_canonical_r2_stops_before_disallowed_operation[48-48-2-primitives4]" time="0.052"><failure message="assert not True&#10; +  where True = any(&lt;generator object test_canonical_r2_stops_before_disallowed_operation.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000021E8CF9B6B0&gt;)">cap = 48, ledger = 48, operations = 2
+primitives = ['fraction', 'multiply', 'multiply']
+
+    @pytest.mark.parametrize('cap,ledger,operations,primitives', [
+        (1, 0, 0, ['fraction']),
+        (31, 0, 0, ['fraction']),
+        (32, 32, 1, ['fraction', 'multiply']),
+        (47, 32, 1, ['fraction', 'multiply']),
+        (48, 48, 2, ['fraction', 'multiply', 'multiply']),
+    ])
+    def test_canonical_r2_stops_before_disallowed_operation(cap, ledger, operations, primitives):
+        obj = json.loads(FIXTURE.read_bytes())
+        obj['budget']['work_unit_max'] = str(cap)
+        result, events = trace_r2(obj)
+&gt;       assert not any(e['event'] in ('_mul', '_add', 'sqrt_entry') for e in events)
+E       assert not True
+E        +  where True = any(&lt;generator object test_canonical_r2_stops_before_disallowed_operation.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000021E8CF9B6B0&gt;)
+
+tests\test_impulse_r2_precharge.py:110: AssertionError</failure></testcase><testcase classname="tests.test_impulse_r2_precharge" name="test_admitted_r2_schedule_and_exact_result[q0]" time="0.694"><failure message="assert not True&#10; +  where True = any(&lt;generator object test_admitted_r2_schedule_and_exact_result.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000021E8D01DF20&gt;)">q = (5, 3, -2)
+
+    @pytest.mark.parametrize('q', [(5, 3, -2), (Q(11, 2), Q(-3, 2), 0), (0, -6, 2)])
+    def test_admitted_r2_schedule_and_exact_result(q):
+        obj = input_object(q)
+        _, parsed, _, reason = prepared(encoded(obj))
+        assert reason is None
+        expected, schedule = expected_r2_schedule(parsed.q)
+        result, events = trace_r2(obj)
+        assert result.failure is None
+&gt;       assert not any(e['event'] in ('_mul', '_add') for e in events)
+E       assert not True
+E        +  where True = any(&lt;generator object test_admitted_r2_schedule_and_exact_result.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000021E8D01DF20&gt;)
+
+tests\test_impulse_r2_precharge.py:133: AssertionError</failure></testcase><testcase classname="tests.test_impulse_r2_precharge" name="test_admitted_r2_schedule_and_exact_result[q1]" time="0.624"><failure message="assert not True&#10; +  where True = any(&lt;generator object test_admitted_r2_schedule_and_exact_result.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000021E8D0D5E50&gt;)">q = (Fraction(11, 2), Fraction(-3, 2), 0)
+
+    @pytest.mark.parametrize('q', [(5, 3, -2), (Q(11, 2), Q(-3, 2), 0), (0, -6, 2)])
+    def test_admitted_r2_schedule_and_exact_result(q):
+        obj = input_object(q)
+        _, parsed, _, reason = prepared(encoded(obj))
+        assert reason is None
+        expected, schedule = expected_r2_schedule(parsed.q)
+        result, events = trace_r2(obj)
+        assert result.failure is None
+&gt;       assert not any(e['event'] in ('_mul', '_add') for e in events)
+E       assert not True
+E        +  where True = any(&lt;generator object test_admitted_r2_schedule_and_exact_result.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000021E8D0D5E50&gt;)
+
+tests\test_impulse_r2_precharge.py:133: AssertionError</failure></testcase><testcase classname="tests.test_impulse_r2_precharge" name="test_admitted_r2_schedule_and_exact_result[q2]" time="0.612"><failure message="assert not True&#10; +  where True = any(&lt;generator object test_admitted_r2_schedule_and_exact_result.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000021E8CEF7510&gt;)">q = (0, -6, 2)
+
+    @pytest.mark.parametrize('q', [(5, 3, -2), (Q(11, 2), Q(-3, 2), 0), (0, -6, 2)])
+    def test_admitted_r2_schedule_and_exact_result(q):
+        obj = input_object(q)
+        _, parsed, _, reason = prepared(encoded(obj))
+        assert reason is None
+        expected, schedule = expected_r2_schedule(parsed.q)
+        result, events = trace_r2(obj)
+        assert result.failure is None
+&gt;       assert not any(e['event'] in ('_mul', '_add') for e in events)
+E       assert not True
+E        +  where True = any(&lt;generator object test_admitted_r2_schedule_and_exact_result.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000021E8CEF7510&gt;)
+
+tests\test_impulse_r2_precharge.py:133: AssertionError</failure></testcase></testsuite></testsuites>

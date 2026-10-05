@@ -1,0 +1,16 @@
+{
+  "target": "baba8ea942b896af64ceaa7ab41e2bc5db73112c",
+  "base_tracked": 2734,
+  "changed": [
+    "independent_checker/c1b1/impulse/producer.py",
+    "tests/test_impulse_round_add_accounting.py"
+  ],
+  "missing": [],
+  "unchanged": 2732,
+  "historical_count": 881,
+  "historical_working_raw_preserved": true,
+  "approved_specs_preserved": true,
+  "resource_py_preserved": true,
+  "rounding_py_preserved": true,
+  "scope": "Working-byte identity is relative to recorded current baseline; not a claim that working bytes equal all historical Git blobs"
+}

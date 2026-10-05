@@ -112,6 +112,7 @@ def evaluate_reference(data,policy):
         for t,n,p in policy.attempts():
             active_attempt=(t,n,p)
             radius=sqrt_enclosure(r2,n,c)
+            radius=point(Q(round(radius.lo*(1<<48)),1<<48))
             reason='ROUNDING_UNPROVED';scaled=None
             if radius.lo.numerator>0:
                 terms=evaluate_terms(spec,radius,p,policy.exp_order_max,c)

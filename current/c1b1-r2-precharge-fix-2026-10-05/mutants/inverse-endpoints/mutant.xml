@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.345" timestamp="2026-10-05T14:29:47.576198+09:00" hostname="으악"><testcase classname="tests.test_impulse_reference_primitives" name="test_positive_reciprocal_and_integer_power" time="0.016"><failure message="ValueError: unordered interval">def test_positive_reciprocal_and_integer_power():
+        m=module('interval'); c=context()
+&gt;       a=m.Interval(Q(2),Q(4)); inv=m.reciprocal(a,c)
+                                     ^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:29: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+independent_checker\c1b1\impulse\interval.py:59: in reciprocal
+    return Interval(c.qdiv(Q(1), a.lo), c.qdiv(Q(1), a.hi),c)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;string&gt;:6: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = Interval(lo=Fraction(1, 2), hi=Fraction(1, 4))
+
+    def __post_init__(self):
+        if not isinstance(self.lo, Q) or not isinstance(self.hi, Q):
+            raise TypeError('exact Fraction endpoints required')
+        if self.lo is self.hi:return
+        reversed_order=self.account.compare(self.lo,self.hi)&gt;0 if self.account is not None else self.lo&gt;self.hi
+        if reversed_order:
+&gt;           raise ValueError('unordered interval')
+E           ValueError: unordered interval
+
+independent_checker\c1b1\impulse\interval.py:18: ValueError</failure></testcase></testsuite></testsuites>

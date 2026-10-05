@@ -1,0 +1,52 @@
+{
+  "command": [
+    "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-r2-precharge-fix-2026-10-05\\full.xml"
+  ],
+  "exit": 0,
+  "elapsed_seconds": 57.328999999997905,
+  "source_before": {
+    "__init__.py": "7ba075ea0e3610c058c6ef048bd1bc2a5aaf771e3ad0392816d8200e6f655b56",
+    "attempt.py": "9475c5d0c6329a4d0e8d61551528a4f86f14dad594fb5357cca51e94588e8950",
+    "certificate.py": "12902c7b981374d613f3080921926f7fffabc36b1583a524bc412cf3a51d3044",
+    "contracts.py": "9319b533d6ff8230cfa2f45225f5a00a08281ba350ed0648037c3fa4b3848f1b",
+    "derivative.py": "d090e765d103451e54eadc73638f20ac6f2e7065e455d60745ba774ae21f1f33",
+    "domain.py": "ac0dec4522377467a2397976d409d5a4da09bd5ff53f43f3adb889eb9b20f746",
+    "exp_enclosure.py": "032123fcd0f9d2d486c8fa5fd3fd9ca13995fe1a91f98ddb2e53d31e1c9cb2e1",
+    "identity.py": "4487192289e05d3824a9aa29907cd7c63f21cae6e2f47b2673089e41eeddb98e",
+    "interval.py": "421b2fdb0ec1bb095d48347eb3892ca7da95e86240d87ba572dfa450da462834",
+    "policy.py": "7ee389e22e36200cc5318fc8c27a5e592a2760626a4937b38bd96a4b5baf0724",
+    "potential.py": "5add6bb8c26f399882a6d79d185b2f4d7bb0265f25009da90b04400eec84f9c4",
+    "producer.py": "ba229aa50994c8409def1ca2f74c37df9dd33f563c0920719263c81e54d2b184",
+    "rechecker_adapter.py": "eda48be7b1d80b503e5ecb64b3b422cfa7e84321895d7fe638bb2c33da1fda23",
+    "resource.py": "c5e081ee2c3dc49db85271d588cc3fde6e54caa6ce6e005a36c00c25d167a7cd",
+    "rounding.py": "3667079195517f84f23a37a6f0787123b16571be2f6975967b0f2a9e127b2bf9",
+    "spec.py": "99f20976c15b18a3955b7c61136c3c19dd043a554d71d53d35ac88cf62f52a49",
+    "sqrt_enclosure.py": "fb7ad0a3ddacc712e294294f6db219dd4429e327aca12631a5536fca897c5994",
+    "wire.py": "3b63ae10402ce73ecedc810db35f4c966cdc317ae932cf1906204af75cb416c2"
+  },
+  "source_after": {
+    "__init__.py": "7ba075ea0e3610c058c6ef048bd1bc2a5aaf771e3ad0392816d8200e6f655b56",
+    "attempt.py": "9475c5d0c6329a4d0e8d61551528a4f86f14dad594fb5357cca51e94588e8950",
+    "certificate.py": "12902c7b981374d613f3080921926f7fffabc36b1583a524bc412cf3a51d3044",
+    "contracts.py": "9319b533d6ff8230cfa2f45225f5a00a08281ba350ed0648037c3fa4b3848f1b",
+    "derivative.py": "d090e765d103451e54eadc73638f20ac6f2e7065e455d60745ba774ae21f1f33",
+    "domain.py": "ac0dec4522377467a2397976d409d5a4da09bd5ff53f43f3adb889eb9b20f746",
+    "exp_enclosure.py": "032123fcd0f9d2d486c8fa5fd3fd9ca13995fe1a91f98ddb2e53d31e1c9cb2e1",
+    "identity.py": "4487192289e05d3824a9aa29907cd7c63f21cae6e2f47b2673089e41eeddb98e",
+    "interval.py": "421b2fdb0ec1bb095d48347eb3892ca7da95e86240d87ba572dfa450da462834",
+    "policy.py": "7ee389e22e36200cc5318fc8c27a5e592a2760626a4937b38bd96a4b5baf0724",
+    "potential.py": "5add6bb8c26f399882a6d79d185b2f4d7bb0265f25009da90b04400eec84f9c4",
+    "producer.py": "ba229aa50994c8409def1ca2f74c37df9dd33f563c0920719263c81e54d2b184",
+    "rechecker_adapter.py": "eda48be7b1d80b503e5ecb64b3b422cfa7e84321895d7fe638bb2c33da1fda23",
+    "resource.py": "c5e081ee2c3dc49db85271d588cc3fde6e54caa6ce6e005a36c00c25d167a7cd",
+    "rounding.py": "3667079195517f84f23a37a6f0787123b16571be2f6975967b0f2a9e127b2bf9",
+    "spec.py": "99f20976c15b18a3955b7c61136c3c19dd043a554d71d53d35ac88cf62f52a49",
+    "sqrt_enclosure.py": "fb7ad0a3ddacc712e294294f6db219dd4429e327aca12631a5536fca897c5994",
+    "wire.py": "3b63ae10402ce73ecedc810db35f4c966cdc317ae932cf1906204af75cb416c2"
+  },
+  "source_unchanged": true
+}

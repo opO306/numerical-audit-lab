@@ -1,0 +1,12 @@
+{
+  "scope": "AUTHOR RECEIPT HELPER FAILURE; NOT A PRODUCTION ARITHMETIC FAILURE",
+  "command": ["python", "-B", "audit/c1b1-r2-precharge-fix-2026-10-05/collect_receipt.py"],
+  "actual_exit": 1,
+  "failure": "AssertionError comparing every old receipt entry with current working files",
+  "confirmed_changed_old_receipt_entries": ["tests/test_impulse_round_add_accounting.py"],
+  "cause": "The old receipt includes the active regression intentionally updated from W2 success to W2 refusal by this authorized fix",
+  "repair": "Verify 165 unchanged live entries and verify the historical active test through exact baba Git bytes with the original receipt and working-baseline hash",
+  "historical_test_snapshot": "round-add-test-target.py",
+  "historical_receipt_modified": false,
+  "production_source_changed_by_repair": false
+}

@@ -106,9 +106,7 @@ def evaluate_reference(data,policy):
         if any(parsed.budget[k]!=v for k,v in vars(policy).items()):
             return failure('BINDING_MISMATCH','POLICY',binding=binding,spec_hash=spec_hash)
         c=policy.account();old=None
-        r2=c.fraction(0,1)
-        for x in parsed.q:
-            r2=c.qadd(r2,c.qmul(x,x))
+        r2=sum((x*x for x in parsed.q),Q(0))
         for t,n,p in policy.attempts():
             active_attempt=(t,n,p)
             radius=sqrt_enclosure(r2,n,c)

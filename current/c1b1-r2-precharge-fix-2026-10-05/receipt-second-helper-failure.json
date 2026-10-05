@@ -1,0 +1,10 @@
+{
+  "scope": "AUTHOR REPORT EDITORIAL VALIDATION FAILURE; NOT A PRODUCTION ARITHMETIC FAILURE",
+  "command": ["python", "-B", "audit/c1b1-r2-precharge-fix-2026-10-05/collect_receipt.py"],
+  "actual_exit": 1,
+  "failure": "Unintended Japanese text in Korean status file detected by language guard",
+  "path": "current/C1B1_IMPULSE_RESOURCE_ACCOUNTING_STATUS_2026-10-05.md",
+  "repair": "Replace two remaining link labels with Korean",
+  "secondary_diagnostic_failure": "Attempting to print the Japanese labels through cp949 stdout raised UnicodeEncodeError; PowerShell UTF-8 file read located the labels",
+  "production_source_changed_by_repair": false
+}

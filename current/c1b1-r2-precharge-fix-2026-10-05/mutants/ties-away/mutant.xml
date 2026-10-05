@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="7" time="0.341" timestamp="2026-10-05T14:29:37.238149+09:00" hostname="으악"><testcase classname="tests.test_impulse_reference_primitives" name="test_even_odd_cell_and_negative_ties[lo0-hi0-2]" time="0.021" /><testcase classname="tests.test_impulse_reference_primitives" name="test_even_odd_cell_and_negative_ties[lo1-hi1-2]" time="0.001" /><testcase classname="tests.test_impulse_reference_primitives" name="test_even_odd_cell_and_negative_ties[lo2-hi2-2]" time="0.001"><failure message="AssertionError: assert None == 2&#10; +  where None = Decision(raw=None, reason='ROUNDING_UNPROVED').raw">lo = Fraction(5, 2), hi = Fraction(5, 2), raw = 2
+
+    @pytest.mark.parametrize('lo,hi,raw',[(Q(7,4),Q(9,4),2),(Q(3,2),Q(3,2),2),
+        (Q(5,2),Q(5,2),2),(Q(-5,2),Q(-5,2),-2),(Q(5,2),Q(7,2),None),
+        (Q(-7,2),Q(-5,2),None),(Q(49,100),Q(51,100),None)])
+    def test_even_odd_cell_and_negative_ties(lo,hi,raw):
+        d=module('rounding').decide_scaled(module('interval').Interval(lo,hi))
+&gt;       assert d.raw==raw
+E       AssertionError: assert None == 2
+E        +  where None = Decision(raw=None, reason='ROUNDING_UNPROVED').raw
+
+tests\test_impulse_reference_primitives.py:75: AssertionError</failure></testcase><testcase classname="tests.test_impulse_reference_primitives" name="test_even_odd_cell_and_negative_ties[lo3-hi3--2]" time="0.001" /><testcase classname="tests.test_impulse_reference_primitives" name="test_even_odd_cell_and_negative_ties[lo4-hi4-None]" time="0.001" /><testcase classname="tests.test_impulse_reference_primitives" name="test_even_odd_cell_and_negative_ties[lo5-hi5-None]" time="0.001" /><testcase classname="tests.test_impulse_reference_primitives" name="test_even_odd_cell_and_negative_ties[lo6-hi6-None]" time="0.001" /></testsuite></testsuites>

@@ -1,0 +1,5 @@
+{
+  "path": "current/c1b1-qdiv-limited-reaudit-received-2026-10-05/received-identity.json",
+  "sha256": "d18d1b330b358f3947450d2ff47a3249928e5fd9addb18963eaaaa290d35a23a",
+  "independent_scope": "ROUND-ADD / QDIV-SIGN PASS on baba source; R2 CONFIRMED FAIL; full implementation NOT APPROVED"
+}

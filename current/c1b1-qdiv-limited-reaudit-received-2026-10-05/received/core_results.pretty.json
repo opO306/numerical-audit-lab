@@ -1,0 +1,467 @@
+{
+  "before_after": {
+    "W2": "2605253326092204528",
+    "equality": {
+      "J": true,
+      "orders": true,
+      "radius": true,
+      "raw": true,
+      "v": true,
+      "vp": true
+    },
+    "old_work": "2605253326086890138",
+    "raw": [
+      "52119986341579705480988",
+      "31271991804947823288593",
+      "-20847994536631882192395"
+    ]
+  },
+  "finished_utc": "2026-10-05T04:48:58.778136+00:00",
+  "identity_after": {
+    "bundle": "e4ae7a0491c94a8a56a7029d08b70d7afd0c422ce0057a9027111bc45541d507",
+    "head": "baba8ea942b896af64ceaa7ab41e2bc5db73112c",
+    "status": ""
+  },
+  "identity_before": {
+    "bundle": "e4ae7a0491c94a8a56a7029d08b70d7afd0c422ce0057a9027111bc45541d507",
+    "head": "baba8ea942b896af64ceaa7ab41e2bc5db73112c",
+    "status": ""
+  },
+  "input_sha256": "bab9520968c7e3b5be3e6d5c5e53627a06d066bbb950579c7cc8ec2b65dcfffd",
+  "mutants": {
+    "qdiv": [
+      {
+        "cap": 40,
+        "operations": 3,
+        "sign": 1,
+        "value": "1",
+        "work": 40
+      },
+      {
+        "cap": 43,
+        "operations": 3,
+        "sign": 1,
+        "value": "1",
+        "work": 40
+      },
+      {
+        "cap": 40,
+        "operations": 3,
+        "sign": -1,
+        "value": "-1",
+        "work": 40
+      },
+      {
+        "cap": 43,
+        "operations": 3,
+        "sign": -1,
+        "value": "-1",
+        "work": 40
+      }
+    ],
+    "round": [
+      {
+        "cap": 73,
+        "operations": 2,
+        "q": "7/4",
+        "value": "2",
+        "work": 73
+      },
+      {
+        "cap": 74,
+        "operations": 2,
+        "q": "7/4",
+        "value": "2",
+        "work": 73
+      },
+      {
+        "cap": 42,
+        "operations": 2,
+        "q": "-5/2",
+        "value": "-2",
+        "work": 42
+      },
+      {
+        "cap": 44,
+        "operations": 2,
+        "q": "-5/2",
+        "value": "-2",
+        "work": 42
+      }
+    ]
+  },
+  "primitive_replay": {
+    "classes": {
+      "add": 1683,
+      "compare": 4074,
+      "divmod": 129,
+      "fraction": 6804,
+      "isqrt": 1,
+      "multiply": 24056,
+      "shift": 79
+    },
+    "derived_work": "2605253326092204528",
+    "precharges": 36826,
+    "sign_calls": 1590,
+    "sign_work": 5314390
+  },
+  "public_blocked": {
+    "account": null,
+    "certificate_present": false,
+    "failure": {
+      "attempt_count": null,
+      "attempt_digest": null,
+      "budget_sha256": "6d105179c5cfbd1f67c62ad0c4ec4388ff054b97ea88c497e8d31d398e47b49a",
+      "occurrence_sha256": "3e4897e9767022e6979710293c544b06af7e45b512a828187b19d7163a36b669",
+      "phase": "POLICY",
+      "reason": "POLICY_UNBOUND",
+      "resource_kind": null,
+      "schema": "LAB_C1B1_IMPULSE_FAILURE_V1",
+      "spec_sha256": "3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2bc1",
+      "state_sha256": "a52cf41090fa1a13f3d0b088881c421fc8bc26736f8e5704428edd1f3bef19e7",
+      "status": {
+        "arithmetic": "NOT_RUN",
+        "execution": "STOP",
+        "executor_comparison": "NOT_RUN",
+        "producer": "REFUSED",
+        "publication": "NOT_PUBLISHED",
+        "rechecker": "NOT_RUN"
+      }
+    },
+    "layers": {
+      "arithmetic": "NOT_RUN",
+      "execution": "STOP",
+      "executor_comparison": "NOT_RUN",
+      "producer": "REFUSED",
+      "publication": "NOT_PUBLISHED",
+      "rechecker": "NOT_RUN"
+    },
+    "opposite_present": false,
+    "raw": null
+  },
+  "python": "3.12.7 (tags/v3.12.7:0b05ead, Oct  1 2024, 03:06:41) [MSC v.1941 64 bit (AMD64)]",
+  "qdiv_boundary_executions": 8704,
+  "qdiv_scalar": [
+    {
+      "cap": 4,
+      "operations": 1,
+      "refusal": "WORK",
+      "sign": 1,
+      "work": 4
+    },
+    {
+      "cap": 40,
+      "operations": 3,
+      "refusal": "WORK",
+      "sign": 1,
+      "work": 12
+    },
+    {
+      "cap": 43,
+      "operations": 3,
+      "refusal": "WORK",
+      "sign": 1,
+      "work": 12
+    },
+    {
+      "cap": 44,
+      "operations": 4,
+      "sign": 1,
+      "value": "1",
+      "work": 44
+    },
+    {
+      "cap": 4,
+      "operations": 1,
+      "refusal": "WORK",
+      "sign": -1,
+      "work": 4
+    },
+    {
+      "cap": 40,
+      "operations": 3,
+      "refusal": "WORK",
+      "sign": -1,
+      "work": 12
+    },
+    {
+      "cap": 43,
+      "operations": 3,
+      "refusal": "WORK",
+      "sign": -1,
+      "work": 12
+    },
+    {
+      "cap": 44,
+      "operations": 4,
+      "sign": -1,
+      "value": "-1",
+      "work": 44
+    }
+  ],
+  "r2_bypass": {
+    "result": {
+      "account": null,
+      "certificate_present": false,
+      "failure": {
+        "attempt_count": null,
+        "attempt_digest": "86653c4d5b2359f0bd7b4b30a9aa6c97ed8b0b71136025f735f28263567dea7b",
+        "budget_sha256": "6a4e60addd8af50d9d407838498ff197a93f0edd334a049673a42de8decac488",
+        "occurrence_sha256": "3e4897e9767022e6979710293c544b06af7e45b512a828187b19d7163a36b669",
+        "phase": "COMPUTE",
+        "reason": "RESOURCE_CAP",
+        "resource_kind": "WORK",
+        "schema": "LAB_C1B1_IMPULSE_FAILURE_V1",
+        "spec_sha256": "3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2bc1",
+        "state_sha256": "a52cf41090fa1a13f3d0b088881c421fc8bc26736f8e5704428edd1f3bef19e7",
+        "status": {
+          "arithmetic": "NOT_RUN",
+          "execution": "STOP",
+          "executor_comparison": "NOT_RUN",
+          "producer": "UNPROVED",
+          "publication": "NOT_PUBLISHED",
+          "rechecker": "NOT_RUN"
+        }
+      },
+      "layers": {
+        "arithmetic": "NOT_RUN",
+        "execution": "STOP",
+        "executor_comparison": "NOT_RUN",
+        "producer": "UNPROVED",
+        "publication": "NOT_PUBLISHED",
+        "rechecker": "NOT_RUN"
+      },
+      "opposite_present": false,
+      "raw": null
+    },
+    "trace": [
+      {
+        "a": "5",
+        "b": "5",
+        "event": "_mul"
+      },
+      {
+        "a": "0",
+        "b": "25",
+        "event": "_add"
+      },
+      {
+        "a": "3",
+        "b": "3",
+        "event": "_mul"
+      },
+      {
+        "a": "25",
+        "b": "9",
+        "event": "_add"
+      },
+      {
+        "a": "-2",
+        "b": "-2",
+        "event": "_mul"
+      },
+      {
+        "a": "34",
+        "b": "4",
+        "event": "_add"
+      },
+      {
+        "cap": 1,
+        "event": "sqrt_entry",
+        "operations": 0,
+        "r2": "38",
+        "work": 0
+      }
+    ],
+    "verdict": "FAIL"
+  },
+  "round_boundary_executions": 8128,
+  "round_scalar": [
+    {
+      "cap": 73,
+      "operations": 2,
+      "q": "7/4",
+      "refusal": "WORK",
+      "work": 73
+    },
+    {
+      "cap": 74,
+      "operations": 2,
+      "q": "7/4",
+      "refusal": "WORK",
+      "work": 73
+    },
+    {
+      "cap": 75,
+      "operations": 3,
+      "q": "7/4",
+      "value": "2",
+      "work": 75
+    },
+    {
+      "cap": 42,
+      "operations": 2,
+      "q": "-5/2",
+      "refusal": "WORK",
+      "work": 42
+    },
+    {
+      "cap": 44,
+      "operations": 2,
+      "q": "-5/2",
+      "refusal": "WORK",
+      "work": 42
+    },
+    {
+      "cap": 45,
+      "operations": 3,
+      "q": "-5/2",
+      "value": "-2",
+      "work": 45
+    }
+  ],
+  "started_utc": "2026-10-05T04:48:56.778508+00:00",
+  "verdict": {
+    "GLOBAL_ACCOUNTING": "NOT PASS",
+    "J": "J_NOT_VERIFIED",
+    "QDIV_SIGN": "PASS",
+    "R2_PRECHARGE": "FAIL",
+    "ROUND_ADD": "PASS",
+    "certification": "NotCertified",
+    "runtime_activation_allowed": false
+  },
+  "whole_boundaries": [
+    {
+      "account": null,
+      "cap": "2605253326086889986",
+      "certificate_present": false,
+      "failure": {
+        "attempt_count": null,
+        "attempt_digest": "4127e8735c008c88f0e9105fe8e895d60bc7776a778277763bf8d6bb940aa41e",
+        "budget_sha256": "6d105179c5cfbd1f67c62ad0c4ec4388ff054b97ea88c497e8d31d398e47b49a",
+        "occurrence_sha256": "3e4897e9767022e6979710293c544b06af7e45b512a828187b19d7163a36b669",
+        "phase": "PUBLICATION",
+        "reason": "RESOURCE_CAP",
+        "resource_kind": "WORK",
+        "schema": "LAB_C1B1_IMPULSE_FAILURE_V1",
+        "spec_sha256": "3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2bc1",
+        "state_sha256": "a52cf41090fa1a13f3d0b088881c421fc8bc26736f8e5704428edd1f3bef19e7",
+        "status": {
+          "arithmetic": "NOT_RUN",
+          "execution": "STOP",
+          "executor_comparison": "NOT_RUN",
+          "producer": "RESOLVED",
+          "publication": "NOT_PUBLISHED",
+          "rechecker": "NOT_RUN"
+        }
+      },
+      "layers": {
+        "arithmetic": "NOT_RUN",
+        "execution": "STOP",
+        "executor_comparison": "NOT_RUN",
+        "producer": "RESOLVED",
+        "publication": "NOT_PUBLISHED",
+        "rechecker": "NOT_RUN"
+      },
+      "opposite_present": false,
+      "raw": null
+    },
+    {
+      "account": null,
+      "cap": "2605253326086890138",
+      "certificate_present": false,
+      "failure": {
+        "attempt_count": null,
+        "attempt_digest": "4127e8735c008c88f0e9105fe8e895d60bc7776a778277763bf8d6bb940aa41e",
+        "budget_sha256": "0c8d368b7c5a427ae242cd66ee2db20f9341b5e7a15b7bbc5c596fb9d6ce112e",
+        "occurrence_sha256": "3e4897e9767022e6979710293c544b06af7e45b512a828187b19d7163a36b669",
+        "phase": "PUBLICATION",
+        "reason": "RESOURCE_CAP",
+        "resource_kind": "WORK",
+        "schema": "LAB_C1B1_IMPULSE_FAILURE_V1",
+        "spec_sha256": "3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2bc1",
+        "state_sha256": "a52cf41090fa1a13f3d0b088881c421fc8bc26736f8e5704428edd1f3bef19e7",
+        "status": {
+          "arithmetic": "NOT_RUN",
+          "execution": "STOP",
+          "executor_comparison": "NOT_RUN",
+          "producer": "RESOLVED",
+          "publication": "NOT_PUBLISHED",
+          "rechecker": "NOT_RUN"
+        }
+      },
+      "layers": {
+        "arithmetic": "NOT_RUN",
+        "execution": "STOP",
+        "executor_comparison": "NOT_RUN",
+        "producer": "RESOLVED",
+        "publication": "NOT_PUBLISHED",
+        "rechecker": "NOT_RUN"
+      },
+      "opposite_present": false,
+      "raw": null
+    },
+    {
+      "account": null,
+      "cap": "2605253326092204527",
+      "certificate_present": false,
+      "failure": {
+        "attempt_count": null,
+        "attempt_digest": "4127e8735c008c88f0e9105fe8e895d60bc7776a778277763bf8d6bb940aa41e",
+        "budget_sha256": "8cfa961c74cd9ff19bf6054482a1ec4c6b6b78d36e402b0ae7fadfe23ce717e9",
+        "occurrence_sha256": "3e4897e9767022e6979710293c544b06af7e45b512a828187b19d7163a36b669",
+        "phase": "PUBLICATION",
+        "reason": "RESOURCE_CAP",
+        "resource_kind": "WORK",
+        "schema": "LAB_C1B1_IMPULSE_FAILURE_V1",
+        "spec_sha256": "3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2bc1",
+        "state_sha256": "a52cf41090fa1a13f3d0b088881c421fc8bc26736f8e5704428edd1f3bef19e7",
+        "status": {
+          "arithmetic": "NOT_RUN",
+          "execution": "STOP",
+          "executor_comparison": "NOT_RUN",
+          "producer": "RESOLVED",
+          "publication": "NOT_PUBLISHED",
+          "rechecker": "NOT_RUN"
+        }
+      },
+      "layers": {
+        "arithmetic": "NOT_RUN",
+        "execution": "STOP",
+        "executor_comparison": "NOT_RUN",
+        "producer": "RESOLVED",
+        "publication": "NOT_PUBLISHED",
+        "rechecker": "NOT_RUN"
+      },
+      "opposite_present": false,
+      "raw": null
+    },
+    {
+      "account": {
+        "allocation_basis": "AUTHOR_FIXTURE_MODEL_UNVALIDATED",
+        "mathematical_work": 2605253326092204528,
+        "operations": 36826,
+        "peak_integer_bits": 13394,
+        "peak_temporary_bytes": 14816,
+        "predicted_live_bytes": 94919168
+      },
+      "cap": "2605253326092204528",
+      "certificate_present": true,
+      "failure": null,
+      "layers": {
+        "arithmetic": "NOT_RUN",
+        "execution": "STOP",
+        "executor_comparison": "NOT_RUN",
+        "producer": "RESOLVED",
+        "publication": "NOT_PUBLISHED",
+        "rechecker": "NOT_RUN"
+      },
+      "opposite_present": true,
+      "raw": [
+        "52119986341579705480988",
+        "31271991804947823288593",
+        "-20847994536631882192395"
+      ]
+    }
+  ]
+}

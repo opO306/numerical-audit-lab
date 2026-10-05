@@ -116,7 +116,7 @@ def evaluate_reference(data,policy):
             if radius.lo.numerator>0:
                 terms=evaluate_terms(spec,radius,p,policy.exp_order_max,c)
                 vp=derivative(terms,c)
-                force_over_r=mul(neg(vp),reciprocal(radius,c),c)
+                force_over_r=mul(vp,reciprocal(radius,c),c)
                 scaled=tuple(point(0) if q==0 else
                     mul(mul(force_over_r,point(q),c),point(Q(20*(1<<80))),c) for q in parsed.q)
                 if old is not None:check_refinements(old,scaled,c)

@@ -118,7 +118,7 @@ def evaluate_reference(data,policy):
                 vp=derivative(terms,c)
                 force_over_r=mul(neg(vp),reciprocal(radius,c),c)
                 scaled=tuple(point(0) if q==0 else
-                    mul(mul(force_over_r,point(q),c),point(Q(20*(1<<80))),c) for q in parsed.q)
+                    mul(mul(force_over_r,point(q),c),point(Q(20*(1<<80))),c) for q in (parsed.q[1],parsed.q[0],parsed.q[2]))
                 if old is not None:check_refinements(old,scaled,c)
                 old=scaled
                 raw,reason=decide_vector(scaled,c)
