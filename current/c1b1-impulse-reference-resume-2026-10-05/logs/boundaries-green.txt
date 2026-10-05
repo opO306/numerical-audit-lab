@@ -1,0 +1,188 @@
+........................................................................ [ 11%]
+........................................................................ [ 23%]
+........................................................................ [ 35%]
+........................................................................ [ 46%]
+........................................................................ [ 58%]
+........................................................................ [ 70%]
+........................................................................ [ 81%]
+........................................................................ [ 93%]
+...................F....FFFFFFF.F........                                [100%]
+================================== FAILURES ===================================
+________ test_identity_full_state_momentum_and_occurrence_are_distinct ________
+
+    def test_identity_full_state_momentum_and_occurrence_are_distinct():
+        ident=module('identity'); spec=module('spec').load_spec(); obj=input_object()
+>       a=ident.bind(obj,spec)
+          ^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_model.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+independent_checker\c1b1\impulse\identity.py:22: in bind
+    'math_request_sha256':digest(math,'LAB_C1B1_MATH_REQUEST_V1'),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+independent_checker\c1b1\impulse\wire.py:129: in digest
+    return hashlib.sha256(prefix + canonical_bytes(obj)).hexdigest()
+                                   ^^^^^^^^^^^^^^^^^^^^
+independent_checker\c1b1\impulse\wire.py:79: in canonical_bytes
+    visit(obj); emit(b'\n')
+    ^^^^^^^^^^
+independent_checker\c1b1\impulse\wire.py:67: in visit
+    visit(key, depth); emit(b':'); visit(value[key], depth+1)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+value = mappingproxy({'precision_method': 'FINITE_N_P_DOUBLING_ORDER_SEARCH_V1', 'producer_method': 'LAB_POINT_PRODUCER_V1', '...ker_method': 'PINNED_V2_SIGNIFICANT_DYADIC_POSITIVE_TAYLOR_FULL_V1', 'wire_version': 'LAB_C1B1_IMPULSE_PROOF_WIRE_V1'})
+depth = 2
+
+    def visit(value, depth=1):
+        if depth > 7:
+            raise WireFailure('SCHEMA_INVALID')
+        if value is None:
+            emit(b'null')
+        elif type(value) is str:
+            if len(value) > cap - size:
+                raise WireFailure('ARTIFACT_LIMIT', 'ARTIFACT_BYTES')
+            emit(b'"')
+            for char in value:
+                emit(json.dumps(char, ensure_ascii=True)[1:-1].encode('ascii'))
+            emit(b'"')
+        elif type(value) is dict:
+            if any(type(k) is not str for k in value):
+                raise WireFailure('SCHEMA_INVALID')
+            emit(b'{')
+            for i, key in enumerate(sorted(value)):
+                if i: emit(b',')
+                visit(key, depth); emit(b':'); visit(value[key], depth+1)
+            emit(b'}')
+        elif type(value) is list:
+            if len(value) > 12:
+                raise WireFailure('SCHEMA_INVALID')
+            emit(b'[')
+            for i, item in enumerate(value):
+                if i: emit(b',')
+                visit(item, depth+1)
+            emit(b']')
+        else:
+>           raise WireFailure('SCHEMA_INVALID')
+E           independent_checker.c1b1.impulse.wire.WireFailure: SCHEMA_INVALID
+
+independent_checker\c1b1\impulse\wire.py:78: WireFailure
+______________ test_private_whole_vector_matches_diagnostic[q0] _______________
+
+q = (6, 2, 1)
+
+    @pytest.mark.parametrize('q',[(6,2,1),(-6,-2,-1),(0,6,0)])
+    def test_private_whole_vector_matches_diagnostic(q):
+        import mpmath as mp
+        obj=input_object(q);data=encoded(obj);old=copy.deepcopy(obj)
+        result=module('producer').evaluate_reference(data,reference_policy(obj))
+>       assert result.layers['producer']=='RESOLVED' and result.raw is not None
+E       AssertionError: assert ('UNPROVED' == 'RESOLVED'
+E         
+E         - RESOLVED
+E         + UNPROVED)
+
+tests\test_impulse_reference_producer.py:17: AssertionError
+______________ test_private_whole_vector_matches_diagnostic[q1] _______________
+
+q = (-6, -2, -1)
+
+    @pytest.mark.parametrize('q',[(6,2,1),(-6,-2,-1),(0,6,0)])
+    def test_private_whole_vector_matches_diagnostic(q):
+        import mpmath as mp
+        obj=input_object(q);data=encoded(obj);old=copy.deepcopy(obj)
+        result=module('producer').evaluate_reference(data,reference_policy(obj))
+>       assert result.layers['producer']=='RESOLVED' and result.raw is not None
+E       AssertionError: assert ('UNPROVED' == 'RESOLVED'
+E         
+E         - RESOLVED
+E         + UNPROVED)
+
+tests\test_impulse_reference_producer.py:17: AssertionError
+______________ test_private_whole_vector_matches_diagnostic[q2] _______________
+
+q = (0, 6, 0)
+
+    @pytest.mark.parametrize('q',[(6,2,1),(-6,-2,-1),(0,6,0)])
+    def test_private_whole_vector_matches_diagnostic(q):
+        import mpmath as mp
+        obj=input_object(q);data=encoded(obj);old=copy.deepcopy(obj)
+        result=module('producer').evaluate_reference(data,reference_policy(obj))
+>       assert result.layers['producer']=='RESOLVED' and result.raw is not None
+E       AssertionError: assert ('UNPROVED' == 'RESOLVED'
+E         
+E         - RESOLVED
+E         + UNPROVED)
+
+tests\test_impulse_reference_producer.py:17: AssertionError
+__________ test_runtime_entry_is_unbound_and_no_nonlinear_activation __________
+
+    def test_runtime_entry_is_unbound_and_no_nonlinear_activation():
+        obj=input_object();r=module('producer').produce(encoded(obj))
+        f=json.loads(r.failure)
+>       assert f['phase']=='POLICY' and f['reason']=='POLICY_UNBOUND' and f['resource_kind'] is None
+E       AssertionError: assert ('BINDING' == 'POLICY'
+E         
+E         - POLICY
+E         + BINDING)
+
+tests\test_impulse_reference_producer.py:37: AssertionError
+____ test_domain_refusal_precedes_policy_and_zero[q0-SINGULAR_SEPARATION] _____
+
+q = (0, 0, 0), reason = 'SINGULAR_SEPARATION'
+
+    @pytest.mark.parametrize('q,reason',[((0,0,0),'SINGULAR_SEPARATION'),((0,1,0),'PHYSICAL_DOMAIN')])
+    def test_domain_refusal_precedes_policy_and_zero(q,reason):
+        obj=input_object(q);r=module('producer').produce(encoded(obj));f=json.loads(r.failure)
+>       assert f['phase']=='PHYSICAL_DOMAIN' and f['reason']==reason and r.raw is None
+E       AssertionError: assert ('BINDING' == 'PHYSICAL_DOMAIN'
+E         
+E         - PHYSICAL_DOMAIN
+E         + BINDING)
+
+tests\test_impulse_reference_producer.py:44: AssertionError
+______ test_domain_refusal_precedes_policy_and_zero[q1-PHYSICAL_DOMAIN] _______
+
+q = (0, 1, 0), reason = 'PHYSICAL_DOMAIN'
+
+    @pytest.mark.parametrize('q,reason',[((0,0,0),'SINGULAR_SEPARATION'),((0,1,0),'PHYSICAL_DOMAIN')])
+    def test_domain_refusal_precedes_policy_and_zero(q,reason):
+        obj=input_object(q);r=module('producer').produce(encoded(obj));f=json.loads(r.failure)
+>       assert f['phase']=='PHYSICAL_DOMAIN' and f['reason']==reason and r.raw is None
+E       AssertionError: assert ('BINDING' == 'PHYSICAL_DOMAIN'
+E         
+E         - PHYSICAL_DOMAIN
+E         + BINDING)
+
+tests\test_impulse_reference_producer.py:44: AssertionError
+___________ test_exhaustion_no_partial_vector_no_last_approximation ___________
+
+    def test_exhaustion_no_partial_vector_no_last_approximation():
+        obj=input_object((0,6,1));obj['budget'].update(N0='1',P0='8',N_max='1',P_max='8',max_attempts='1',exp_order_max='1')
+        r=module('producer').evaluate_reference(encoded(obj),reference_policy(obj));f=json.loads(r.failure)
+        assert r.raw is None and r.certificate is None and f['status']['producer']=='UNPROVED'
+>       assert f['reason'] in ['RESOURCE_CAP','ROUNDING_UNPROVED'] and f['resource_kind'] in ['ORDER',None]
+E       AssertionError: assert ('SCHEMA_INVALID' in ['RESOURCE_CAP', 'ROUNDING_UNPROVED'])
+
+tests\test_impulse_reference_producer.py:51: AssertionError
+________________ test_failure_closed_fields_and_resource_enum _________________
+
+    def test_failure_closed_fields_and_resource_enum():
+        obj=input_object();obj['budget']['integer_bit_max']='8'
+        r=module('producer').evaluate_reference(encoded(obj),reference_policy(obj));f=json.loads(r.failure)
+        assert set(f)=={'schema','status','phase','reason','resource_kind','spec_sha256','state_sha256','occurrence_sha256','budget_sha256','attempt_count','attempt_digest'}
+>       assert f['resource_kind']=='BIT' and f['attempt_count'] is None and len(r.failure)<=4096
+E       AssertionError: assert (None == 'BIT')
+
+tests\test_impulse_reference_producer.py:67: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_impulse_reference_model.py::test_identity_full_state_momentum_and_occurrence_are_distinct
+FAILED tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic[q0]
+FAILED tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic[q1]
+FAILED tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic[q2]
+FAILED tests/test_impulse_reference_producer.py::test_runtime_entry_is_unbound_and_no_nonlinear_activation
+FAILED tests/test_impulse_reference_producer.py::test_domain_refusal_precedes_policy_and_zero[q0-SINGULAR_SEPARATION]
+FAILED tests/test_impulse_reference_producer.py::test_domain_refusal_precedes_policy_and_zero[q1-PHYSICAL_DOMAIN]
+FAILED tests/test_impulse_reference_producer.py::test_exhaustion_no_partial_vector_no_last_approximation
+FAILED tests/test_impulse_reference_producer.py::test_failure_closed_fields_and_resource_enum
+9 failed, 608 passed in 2.72s

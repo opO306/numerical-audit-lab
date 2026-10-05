@@ -1,0 +1,164 @@
+{
+  "kind": "NORMALIZED_INDEPENDENT_REMOTE_TOOL_OBSERVATIONS",
+  "target": "bc6cf7a6312951ddefe4e066afa19bedfbeef695",
+  "parent": "8e5865964770b3752326d361276cbccd125c547a",
+  "observed_at_utc": "2026-10-04T18:17:12.744713+00:00",
+  "python": "3.12.7 (MSC v.1941 64 bit AMD64)",
+  "tree_counts": {
+    "parent": 2097,
+    "target": 2163
+  },
+  "delta": {
+    "added": 66,
+    "modified": 0,
+    "deleted": 0
+  },
+  "classification": {
+    "author_static_tool": 2,
+    "author_clarification_evidence": 7,
+    "stopped_wip_evidence": 14,
+    "clarification_document": 1,
+    "stopped_wip_plan": 1,
+    "stopped_wip_source": 16,
+    "new_spec_directory": 20,
+    "stopped_wip_tests_support": 4,
+    "spec_test": 1
+  },
+  "original_spec_count": 19,
+  "original_spec_bytes_equal": true,
+  "hashes": {
+    "acquisition-identity.json": {
+      "parent": "673941bf9f88835f9ee494268e2837a6bd3e6b09323ad75db70d1f8df7666759",
+      "target": "45f4d39571fb49440c5c2e71fe3f2b1be31a5855b68363e651494d3bb74dd73f",
+      "equal": false
+    },
+    "constants.json": {
+      "parent": "f1cf6a71afaf45e40db37a6e8a5b4f643a57885f4040d4fa285835530363e196",
+      "target": "f1cf6a71afaf45e40db37a6e8a5b4f643a57885f4040d4fa285835530363e196",
+      "equal": true
+    },
+    "finite-policy.json": {
+      "parent": "e8ceec423827a0699a8d3709508dff3eebd7f7e8a99f92d4436dc7b57f83fdd8",
+      "target": "7e2db07cb87bb0d81981c707949c1cd9fc129c01b645eb7a2447923360b9ab2e",
+      "equal": false
+    },
+    "package-manifest.json": {
+      "parent": "9d430833bb359600b4c9f67f225e9c8a74fb883d6fe119ca8b7c2502b8ce4499",
+      "target": "4a4cad78a192f72cf479cf16ceb971ea257d9bdf89acc5a7ca6e4fea3738219f",
+      "equal": false
+    },
+    "physical-domain.json": {
+      "parent": "eef0a3531c7bc5f233e7cd7212c3807735c05bc88284bd16600c894afc817c03",
+      "target": "eef0a3531c7bc5f233e7cd7212c3807735c05bc88284bd16600c894afc817c03",
+      "equal": true
+    },
+    "proof-wire.json": {
+      "parent": "b7994420f6896eb352730ac0fb5983a6c74c0635d357dffea3281535b57f27e9",
+      "target": "ce23bfc1dfac2a9140af6d880ab4fcef995926f68ed895f68012a3397b9fe1a8",
+      "equal": false
+    },
+    "rechecker-lineage.json": {
+      "parent": "4767ae1773fa2f697e749b90aa1b66da686605cbfb690307aa9c2d0c87427ab9",
+      "target": "8ee7df7e17c298a0402d86c019a6246c39fd8fef960f0627816fabb59d34076e",
+      "equal": false
+    },
+    "semantic-bundle.json": {
+      "parent": "11eedb45fc80d8b1f8db1bc5afdceb1754914c5e2f49ba48ad2b4d87d63bb007",
+      "target": "3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2bc1",
+      "equal": false
+    },
+    "status-composition.json": {
+      "parent": "4257563b2c82a66094f96da539cdf9bbe1967699403fd61ba613d195b26483ee",
+      "target": "1fc2b69e87572b22d026c7d30f8cd013638557bf456f73480de83a4f67050207",
+      "equal": false
+    }
+  },
+  "canonical_files_pass": 9,
+  "sidecars_pass": 9,
+  "dependency_edges_pass": 28,
+  "core": {
+    "claim_adapter.py": {
+      "antecedent": "24b05ebf374728583ba725c83b8f9324f4b75b5515b03c5b1036339eef3e4899",
+      "target": "24b05ebf374728583ba725c83b8f9324f4b75b5515b03c5b1036339eef3e4899",
+      "equal": true
+    },
+    "compare.py": {
+      "antecedent": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+      "target": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+      "equal": true
+    },
+    "contracts.py": {
+      "antecedent": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+      "target": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+      "equal": true
+    },
+    "exact_slow.py": {
+      "antecedent": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+      "target": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+      "equal": true
+    },
+    "exact_fast.py": {
+      "antecedent": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+      "target": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+      "equal": true
+    },
+    "exact_geometry.py": {
+      "antecedent": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+      "target": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+      "equal": true
+    },
+    "semantic_manifest_v1.json": {
+      "antecedent": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+      "target": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+      "equal": true
+    },
+    "semantic_manifest_v1.sha256": {
+      "antecedent": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79",
+      "target": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79",
+      "equal": true
+    }
+  },
+  "wip": {
+    "receipt_paths": 35,
+    "source_files": 16,
+    "mismatches": [],
+    "full_added_inventory_covered_by_checkpoint_and_clarification_receipts": true,
+    "no_target_code_imports": true,
+    "no_target_numeric_execution": true
+  },
+  "receipts": {
+    "before_timestamp": "2026-10-04T17:50:11.924303+00:00",
+    "after_timestamp": "2026-10-04T17:57:20.381187+00:00",
+    "before_sha256": "f9027c13485663bfc3a790377ec17afef64000014eb56c2fc867c1ad2c3dd534",
+    "after_sha256": "d2dbf0cfd779522374007b6e2a0c82cc211004c9d120fc28168b5ba535437b2f",
+    "author_clarification_artifacts_hash_checked": 30,
+    "mismatches": []
+  },
+  "relations": {
+    "pairs": 25,
+    "nonempty": 8,
+    "empty": 17,
+    "checked": 550,
+    "valid": 15,
+    "invalid": 535,
+    "mismatches": [],
+    "additional_tuple_probes": 68
+  },
+  "digests": {
+    "H0": "71440aac921a3a7ccda50b94757d27b25b8d1479f074cdabbcf80d37e62bb0cb",
+    "H1": "4127e8735c008c88f0e9105fe8e895d60bc7776a778277763bf8d6bb940aa41e",
+    "H2": "68b7991569c1fbb2b0b758c70638eee84c972f370df07fd8c27c5fe845290ecc"
+  },
+  "initial_static_assertions": {
+    "total": 147,
+    "pass": 146,
+    "false_positive": 1,
+    "false_positive_check": "no unrelated semantic changes"
+  },
+  "final_branch_observation": {
+    "at_utc": "2026-10-04T18:19:29.373725+00:00",
+    "value": "bc6cf7a6312951ddefe4e066afa19bedfbeef695",
+    "ref": "refs/heads/codex/c1b1-fclaim1-output-limit"
+  },
+  "notice": "This is a normalized transcription of observed tool JSON, not a byte-identical subprocess stdout file. Author PASS receipts were not used as correctness oracles."
+}

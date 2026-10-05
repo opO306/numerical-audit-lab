@@ -1,0 +1,796 @@
+`ATTEMPT-REASON-NULL` 제한 독립 재감사가 PASS했습니다.
+
+감사 대상:
+
+```text
+bc6cf7a6312951ddefe4e066afa19bedfbeef695
+```
+
+직접 parent:
+
+```text
+8e5865964770b3752326d361276cbccd125c547a
+```
+
+현재 승인 상태:
+
+```text
+ATTEMPT-REASON-NULL:
+INDEPENDENT RECHECK PASS
+
+Reference producer:
+WIP
+CONTINUATION ALLOWED
+NOT YET IMPLEMENTATION-AUDITED
+
+producer_boundary_continuation_allowed = true
+
+runtime_activation_allowed = false
+
+J_NOT_VERIFIED
+NotCertified
+```
+
+이제 중단했던 **Independent Impulse V1 reference producer 구현을 재개**하십시오.
+
+이번 단계의 목표는 구현 완료와 author evidence 작성까지입니다.
+
+아직 runtime activation, full executor integration, physical PASS 또는 J_VERIFIED 승격 단계가 아닙니다.
+
+# 1. 시작 전에 현재 Git 상태 고정
+
+먼저 현재 작업 상태를 직접 확인하십시오.
+
+최소:
+
+```text
+git rev-parse HEAD
+git status --short
+git branch --show-current
+git diff
+```
+
+확인할 것:
+
+```text
+HEAD == bc6cf7a6312951ddefe4e066afa19bedfbeef695
+또는 그 이후 사용자에 의해 명시적으로 승인된 작업 상태
+
+기존 감사된 Arithmetic V1 source는 불변
+
+ATTEMPT-REASON-NULL 승인 spec revision을 사용
+```
+
+기존 승인 이전 spec과 새 clarification spec을 조용히 섞지 마십시오.
+
+---
+
+# 2. 중단된 WIP에서 계속할 것
+
+현재 checkpoint에 이미 존재하는:
+
+```text
+independent_checker/c1b1/impulse/
+```
+
+계열 구현을 기준으로 이어서 작업하십시오.
+
+새로 처음부터 다시 작성하지 말고:
+
+```text
+현재 source
+현재 tests
+중단 지점
+미완성 TODO
+실패 중인 test
+```
+
+를 먼저 조사하십시오.
+
+특히 기존 WIP가 단순히 파일만 있는 상태인지, primitive/model/producer 각각 어디까지 구현됐는지 실제 source와 test로 확인하십시오.
+
+---
+
+# 3. 새 ATTEMPT-REASON-NULL 규범 반영
+
+Producer attempt record는 새 승인 계약을 따라야 합니다.
+
+정상 성공 상태:
+
+```text
+producer = RESOLVED
+rechecker = NOT_RUN
+reason = null
+```
+
+그리고 recheck 성공 이후:
+
+```text
+producer = RESOLVED
+rechecker = ACCEPTED
+reason = null
+```
+
+입니다.
+
+`reason` key는 항상 존재해야 합니다.
+
+금지:
+
+```text
+reason 생략
+reason = "null"
+reason = ""
+reason = "SUCCESS"
+reason = "OK"
+reason = "RESOLVED_SUCCESS"
+```
+
+25개 producer/rechecker 조합의 closed compatibility table을 source의 단일 authority에서 검증하십시오.
+
+단순히:
+
+```text
+reason is None or reason in enum
+```
+
+처럼 검사하면 안 됩니다.
+
+반드시:
+
+```text
+producer
+rechecker
+reason
+```
+
+세 값의 조합을 검증하십시오.
+
+---
+
+# 4. Attempt digest
+
+승인된 rolling digest contract를 그대로 구현하십시오.
+
+개념적으로:
+
+```text
+H0 =
+SHA256(
+    ASCII("LAB_C1B1_ATTEMPTS_V1")
+    + NUL
+)
+```
+
+각 attempt:
+
+```text
+H_next =
+SHA256(
+    previous_digest_raw32
+    +
+    canonical({
+        t,
+        N,
+        P,
+        producer,
+        rechecker,
+        reason
+    })
+)
+```
+
+정상 성공에서도:
+
+```json
+"reason": null
+```
+
+필드는 canonical bytes에 반드시 포함하십시오.
+
+필드 omission과 null을 동일시하지 마십시오.
+
+---
+
+# 5. Reference producer 목표
+
+Producer의 역할은 external J를 검증하는 것이 아닙니다.
+
+동일한 physical state/spec으로부터 독립적으로:
+
+```text
+q = r_j - r_i
+R² = q·q
+R = sqrt(R²)
+
+V'(R)
+
+J_k = -V'(R) * q_k/R * Δt/2
+```
+
+를 enclosure하고,
+
+```text
+2^80 * J_k
+```
+
+가 하나의 nearest-even rounding cell에 완전히 포함될 때만 `J_raw[k]`를 결정하는 것입니다.
+
+중간 R, F 또는 J를 storage grid에 먼저 반올림하지 마십시오.
+
+전체 표현식에 대한 once-rounding 계약을 유지하십시오.
+
+---
+
+# 6. 기존 executor 계산 재사용 금지
+
+Independent producer의 truth path에서 다음을 사용하지 마십시오.
+
+```text
+원본 executor impulse helper
+원본 J 계산 함수
+source extraction + exec
+FunctionType rebinding
+monkeypatch를 통한 원본 호출
+executor output을 expected answer로 사용
+V2 primitive/enclosure helper 재사용
+```
+
+공유 가능한 것은:
+
+```text
+승인된 공개 수학식
+승인된 exact constants
+승인된 units
+동일한 input state
+Python exact integer/Fraction 의미
+```
+
+정도입니다.
+
+---
+
+# 7. Domain admission
+
+Physical-domain 검사를 nonlinear 계산보다 먼저 적용하십시오.
+
+```text
+R = 0
+→ singular refusal
+
+0 < R < r_min
+→ physical-domain refusal
+
+R >= r_min
+→ 계산 가능
+```
+
+Zero-axis shortcut은 domain validation 이후에만 허용하십시오.
+
+Drift guard 관련 future composition 의미도 승인된 계약 그대로 유지합니다.
+
+```text
+exact unrounded closed relative segment minimum >= r_min²
+AND
+stored final relative position squared >= r_min²
+```
+
+Stored rounded segment 전체 guard를 다시 만들지 마십시오.
+
+---
+
+# 8. Primitive 구현 완료
+
+다음 primitive들의 soundness 경계를 구현하십시오.
+
+```text
+sqrt enclosure
+positive reciprocal
+integer powers
+signed interval multiply
+addition / subtraction
+exp(-x) enclosure
+```
+
+Exp는 승인된:
+
+```text
+range reduction
+Taylor positive sum
+rigorous remainder bound
+reciprocal
+outward dyadic widening
+repeated squaring
+```
+
+방식을 따르십시오.
+
+다음은 proof로 인정하지 않습니다.
+
+```text
+math.exp 값
+Decimal point value
+mpmath point value
+두 precision에서 동일
+```
+
+---
+
+# 9. Potential / derivative 구현
+
+BO / REL / QED와 retardation 식을 승인 spec에서 직접 전사하십시오.
+
+특히 다음 branch를 별도 test 대상으로 유지하십시오.
+
+```text
+BO i=-1 derivative
+Tang-Toennies derivative
+BO leading g'
+REL leading -T
+QED branch
+R power
+exp sign/rate
+```
+
+Nominal coefficient와 uncertainty/σ를 혼합하지 마십시오.
+
+---
+
+# 10. Rounding
+
+각 scaled J interval이 한 cell에 완전히 들어간 경우에만 raw를 결정하십시오.
+
+```text
+m even:
+[m-1/2, m+1/2]
+
+m odd:
+(m-1/2, m+1/2)
+```
+
+Interval midpoint를 대표값으로 반올림하지 마십시오.
+
+Boundary를 걸치면 precision refinement를 시도하고, finite policy 안에서 해결 못 하면:
+
+```text
+UNPROVED
+```
+
+입니다.
+
+---
+
+# 11. Overflow / opposite raw
+
+Signed96:
+
+```text
+[-2^95, 2^95-1]
+```
+
+계약을 따르십시오.
+
+공통 J에서 atom i가 `-J`를 받으므로 opposite raw representability 계약도 적용하십시오.
+
+Coarse interval이 정상 값과 overflow 값을 함께 포함한다면 바로 overflow로 판정하지 마십시오.
+
+---
+
+# 12. Resource accounting
+
+현재 B5 method contract를 구현하되 아직 **runtime numeric instance는 발급하지 마십시오.**
+
+구현해야 하는 구조:
+
+```text
+큰 shift 전 bit upper bound 검사
+pow 전 result bound 검사
+gcd/cross product 전 temporary bound 검사
+Taylor/order cap
+attempt cap
+predicted temporary/live allocation accounting
+work-unit accounting
+```
+
+Cap 초과 시 계산을 실행한 뒤 잡는 것이 아니라 가능한 한 **연산 전에** 중단하십시오.
+
+단 이번 단계의 author tests를 위한 bounded fixture configuration과 production activation instance를 혼동하지 마십시오.
+
+---
+
+# 13. Failure record
+
+Failure schema는 기존 11-field contract를 유지하십시오.
+
+```text
+schema
+status
+phase
+reason
+resource_kind
+spec_sha256
+state_sha256
+occurrence_sha256
+budget_sha256
+attempt_count
+attempt_digest
+```
+
+여기서:
+
+```text
+Failure.reason
+```
+
+은 항상 non-null closed reason enum입니다.
+
+`ATTEMPT-REASON-NULL`의 null 규칙을 Failure에 적용하지 마십시오.
+
+---
+
+# 14. Whole-vector atomicity
+
+x/y/z 중 하나라도:
+
+```text
+UNPROVED
+REFUSED
+ERROR
+RESOURCE_CAP
+RAW_UNREPRESENTABLE
+```
+
+이면 partial public J를 만들지 마십시오.
+
+세 축 전체가 승인될 때만 public result/certificate를 생성하십시오.
+
+입력 state mutation도 금지합니다.
+
+---
+
+# 15. Rechecker boundary 준비
+
+Producer 내부에서 V2를 truth helper로 사용하지 마십시오.
+
+구조는:
+
+```text
+Independent producer
+    ↓
+compact certificate
+    ↓
+Lab binding validator
+    ↓
+pinned V2 rechecker
+```
+
+이어야 합니다.
+
+이번 단계에서는 adapter/source를 구현하고 author-level integration test까지 준비할 수 있습니다.
+
+그러나:
+
+```text
+runtime_activation_allowed = false
+```
+
+이므로 실제 production activation으로 표현하지 마십시오.
+
+---
+
+# 16. 테스트
+
+중단 전에 작성된 기존 tests를 먼저 실행하고 현재 failure baseline을 기록하십시오.
+
+그 뒤 최소 다음을 닫으십시오.
+
+### Primitive
+
+```text
+sqrt perfect square / nonsquare
+inverse
+positive/negative powers
+mixed-sign interval multiply
+exp x=0
+small x
+large x
+tail/order boundary
+```
+
+### Domain
+
+```text
+R=0
+below r_min
+above r_min
+zero axis
+```
+
+### Rounding
+
+```text
+even interior
+even tie
+odd boundary
+negative symmetry
+ambiguous interval
+```
+
+### Overflow
+
+```text
+lower
+upper
+opposite raw
+coarse non-proved overflow
+```
+
+### Attempt reason
+
+```text
+25 producer/rechecker pair table
+reason null two success states
+all invalid null states
+omitted reason
+string "null"
+unknown reason
+unknown producer/rechecker
+```
+
+### Digest
+
+```text
+known H0
+known H1
+key-order invariance
+reason omission rejection
+string-null rejection
+```
+
+### Failure / wire
+
+```text
+Failure.reason null rejection
+resource_kind enum/null
+4096-digit boundary
+4096-byte Failure boundary
+1 MiB artifact boundary
+no partial publication
+```
+
+### Immutability
+
+```text
+input unchanged
+state unchanged
+failure path unchanged
+UNPROVED path unchanged
+```
+
+---
+
+# 17. Independent expected tests
+
+가능하면 producer가 만든 값 자체를 expected로 다시 사용하지 마십시오.
+
+Synthetic primitive test는 exact integer/Fraction 관계로 expected를 별도 구성하십시오.
+
+Physical model test도 가능한 경우:
+
+```text
+독립 rational identity
+analytic special case
+symmetry
+permutation
+sign
+separate checker
+```
+
+를 활용하십시오.
+
+---
+
+# 18. Mutation tests
+
+설계한 semantic mutants를 실제 source mutation으로 구현하십시오.
+
+최소 우선순위:
+
+```text
+force sign flip
+half-step 제거
+1/R 제거
+R power 변경
+TT derivative 누락
+BO g' 누락
+exp sign 변경
+component swap
+ties-away
+inverse endpoint swap
+inward interval rounding
+early precision accept
+resource guard 제거
+wrong spec forced accept
+intermediate quantization
+fixed exp cutoff
+```
+
+각 mutant는:
+
+```text
+baseline PASS
+mutant source hash
+actual source edit
+nondegenerate fixture
+DETECTED
+semantic detection reason
+```
+
+을 남기십시오.
+
+Hash mismatch만으로 DETECTED라고 세지 마십시오.
+
+---
+
+# 19. ATTEMPT-REASON-NULL regression
+
+이번 clarification 자체를 regression으로 고정하십시오.
+
+최소:
+
+```text
+RESOLVED / NOT_RUN / null
+PASS
+
+RESOLVED / ACCEPTED / null
+PASS
+
+RESOLVED / NOT_PROVED / null
+FAIL
+
+UNPROVED / NOT_RUN / null
+FAIL
+
+RESOLVED / NOT_RUN / "null"
+FAIL
+
+RESOLVED / NOT_RUN / missing reason
+FAIL
+```
+
+독립 감사에서 확인된 550-relation matrix를 작성자 test expected oracle로 그대로 복사할 필요는 없지만, 같은 closed semantics를 구현해야 합니다.
+
+---
+
+# 20. 테스트 증거 수준 구분
+
+결과를 다음처럼 분리하십시오.
+
+```text
+unit tests
+author differential tests
+source mutants
+static spec checks
+producer numerical examples
+V2 comparison
+```
+
+서로 합산해 거대한 숫자 하나로 만들지 마십시오.
+
+예:
+
+```text
+46 spec tests
++ 200 producer tests
+= 246 independent proofs
+```
+
+같은 표현은 금지입니다.
+
+---
+
+# 21. 현재 WIP에 대한 기존 감사 해석 유지
+
+`bc6cf7a`의 WIP checkpoint는:
+
+```text
+35/35 byte preservation PASS
+```
+
+를 받았습니다.
+
+하지만 이것은 correctness가 아닙니다.
+
+따라서 구현을 완료하기 전까지:
+
+```text
+Reference producer:
+WIP
+CONTINUATION ALLOWED
+NOT YET IMPLEMENTATION-AUDITED
+```
+
+를 유지하십시오.
+
+---
+
+# 22. 구현 완료 후 상태
+
+Author implementation과 tests가 완료되어도 독립 감사 전 상태는 최대:
+
+```text
+Independent Impulse V1 Reference Producer:
+IMPLEMENTED
+AUTHOR CHECKS PASS
+INDEPENDENT IMPLEMENTATION AUDIT PENDING
+
+runtime_activation_allowed = false
+
+J_NOT_VERIFIED
+NotCertified
+```
+
+입니다.
+
+---
+
+# 23. 제출할 author evidence
+
+구현 완료 후 최소 다음을 보고하십시오.
+
+```text
+Git HEAD / branch / dirty status
+
+새/수정 source 목록
+source SHA-256
+
+spec revision SHA
+dependency graph
+
+test commands
+test counts
+fail/error/skip
+
+primitive evidence
+physical-model evidence
+rounding/overflow evidence
+wire/failure evidence
+immutability evidence
+
+actual source mutant 목록
+mutant source hashes
+baseline / mutant 결과
+
+known UNPROVED inputs
+known unsupported scope
+
+V2 integration 상태
+
+runtime activation not performed 확인
+```
+
+또 기존 Arithmetic V1 보호 파일 8개가 계속 byte-identical인지 다시 확인하십시오.
+
+---
+
+# 24. 이번 단계에서 금지
+
+```text
+runtime activation
+world/executor production 연결
+full trajectory
+full replay
+performance promotion
+exact_fast default 승격
+J_VERIFIED 선언
+physical PASS 선언
+Certified 선언
+```
+
+---
+
+# 25. Commit / push
+
+구현과 author checks가 끝나면 먼저 결과를 보고하십시오.
+
+사용자 추가 승인 없이 commit/push하지 마십시오.

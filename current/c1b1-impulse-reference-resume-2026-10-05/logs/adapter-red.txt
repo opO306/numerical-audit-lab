@@ -1,0 +1,230 @@
+FFFFFFFFFFFFFFFFFF                                                       [100%]
+================================== FAILURES ===================================
+___________ test_independent_binding_preparation_and_disabled_call ____________
+
+example = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...c03378bc3416ce9623a9c015cba91357faf13bc49d7a1508a77e3550', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+
+    def test_independent_binding_preparation_and_disabled_call(example):
+>       from independent_checker.c1b1.impulse.rechecker_adapter import prepare,invoke
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.rechecker_adapter'
+
+tests\test_impulse_rechecker_preparation.py:15: ModuleNotFoundError
+________ test_adapter_rejects_forged_binding_or_closed_proof[momentum] ________
+
+example = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...c03378bc3416ce9623a9c015cba91357faf13bc49d7a1508a77e3550', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+mutation = 'momentum'
+
+    @pytest.mark.parametrize('mutation',['momentum','position','occurrence','budget','spec','producer',
+        'rechecker','zero','raw','rate','mode','order','unknown','reason','count','precision'])
+    def test_adapter_rejects_forged_binding_or_closed_proof(example,mutation):
+>       from independent_checker.c1b1.impulse.rechecker_adapter import prepare,BindingRefusal
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.rechecker_adapter'
+
+tests\test_impulse_rechecker_preparation.py:29: ModuleNotFoundError
+________ test_adapter_rejects_forged_binding_or_closed_proof[position] ________
+
+example = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...c03378bc3416ce9623a9c015cba91357faf13bc49d7a1508a77e3550', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+mutation = 'position'
+
+    @pytest.mark.parametrize('mutation',['momentum','position','occurrence','budget','spec','producer',
+        'rechecker','zero','raw','rate','mode','order','unknown','reason','count','precision'])
+    def test_adapter_rejects_forged_binding_or_closed_proof(example,mutation):
+>       from independent_checker.c1b1.impulse.rechecker_adapter import prepare,BindingRefusal
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.rechecker_adapter'
+
+tests\test_impulse_rechecker_preparation.py:29: ModuleNotFoundError
+_______ test_adapter_rejects_forged_binding_or_closed_proof[occurrence] _______
+
+example = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...c03378bc3416ce9623a9c015cba91357faf13bc49d7a1508a77e3550', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+mutation = 'occurrence'
+
+    @pytest.mark.parametrize('mutation',['momentum','position','occurrence','budget','spec','producer',
+        'rechecker','zero','raw','rate','mode','order','unknown','reason','count','precision'])
+    def test_adapter_rejects_forged_binding_or_closed_proof(example,mutation):
+>       from independent_checker.c1b1.impulse.rechecker_adapter import prepare,BindingRefusal
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.rechecker_adapter'
+
+tests\test_impulse_rechecker_preparation.py:29: ModuleNotFoundError
+_________ test_adapter_rejects_forged_binding_or_closed_proof[budget] _________
+
+example = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...c03378bc3416ce9623a9c015cba91357faf13bc49d7a1508a77e3550', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+mutation = 'budget'
+
+    @pytest.mark.parametrize('mutation',['momentum','position','occurrence','budget','spec','producer',
+        'rechecker','zero','raw','rate','mode','order','unknown','reason','count','precision'])
+    def test_adapter_rejects_forged_binding_or_closed_proof(example,mutation):
+>       from independent_checker.c1b1.impulse.rechecker_adapter import prepare,BindingRefusal
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.rechecker_adapter'
+
+tests\test_impulse_rechecker_preparation.py:29: ModuleNotFoundError
+__________ test_adapter_rejects_forged_binding_or_closed_proof[spec] __________
+
+example = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...c03378bc3416ce9623a9c015cba91357faf13bc49d7a1508a77e3550', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+mutation = 'spec'
+
+    @pytest.mark.parametrize('mutation',['momentum','position','occurrence','budget','spec','producer',
+        'rechecker','zero','raw','rate','mode','order','unknown','reason','count','precision'])
+    def test_adapter_rejects_forged_binding_or_closed_proof(example,mutation):
+>       from independent_checker.c1b1.impulse.rechecker_adapter import prepare,BindingRefusal
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.rechecker_adapter'
+
+tests\test_impulse_rechecker_preparation.py:29: ModuleNotFoundError
+________ test_adapter_rejects_forged_binding_or_closed_proof[producer] ________
+
+example = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...c03378bc3416ce9623a9c015cba91357faf13bc49d7a1508a77e3550', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+mutation = 'producer'
+
+    @pytest.mark.parametrize('mutation',['momentum','position','occurrence','budget','spec','producer',
+        'rechecker','zero','raw','rate','mode','order','unknown','reason','count','precision'])
+    def test_adapter_rejects_forged_binding_or_closed_proof(example,mutation):
+>       from independent_checker.c1b1.impulse.rechecker_adapter import prepare,BindingRefusal
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.rechecker_adapter'
+
+tests\test_impulse_rechecker_preparation.py:29: ModuleNotFoundError
+_______ test_adapter_rejects_forged_binding_or_closed_proof[rechecker] ________
+
+example = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...c03378bc3416ce9623a9c015cba91357faf13bc49d7a1508a77e3550', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+mutation = 'rechecker'
+
+    @pytest.mark.parametrize('mutation',['momentum','position','occurrence','budget','spec','producer',
+        'rechecker','zero','raw','rate','mode','order','unknown','reason','count','precision'])
+    def test_adapter_rejects_forged_binding_or_closed_proof(example,mutation):
+>       from independent_checker.c1b1.impulse.rechecker_adapter import prepare,BindingRefusal
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.rechecker_adapter'
+
+tests\test_impulse_rechecker_preparation.py:29: ModuleNotFoundError
+__________ test_adapter_rejects_forged_binding_or_closed_proof[zero] __________
+
+example = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...c03378bc3416ce9623a9c015cba91357faf13bc49d7a1508a77e3550', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+mutation = 'zero'
+
+    @pytest.mark.parametrize('mutation',['momentum','position','occurrence','budget','spec','producer',
+        'rechecker','zero','raw','rate','mode','order','unknown','reason','count','precision'])
+    def test_adapter_rejects_forged_binding_or_closed_proof(example,mutation):
+>       from independent_checker.c1b1.impulse.rechecker_adapter import prepare,BindingRefusal
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.rechecker_adapter'
+
+tests\test_impulse_rechecker_preparation.py:29: ModuleNotFoundError
+__________ test_adapter_rejects_forged_binding_or_closed_proof[raw] ___________
+
+example = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...c03378bc3416ce9623a9c015cba91357faf13bc49d7a1508a77e3550', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+mutation = 'raw'
+
+    @pytest.mark.parametrize('mutation',['momentum','position','occurrence','budget','spec','producer',
+        'rechecker','zero','raw','rate','mode','order','unknown','reason','count','precision'])
+    def test_adapter_rejects_forged_binding_or_closed_proof(example,mutation):
+>       from independent_checker.c1b1.impulse.rechecker_adapter import prepare,BindingRefusal
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.rechecker_adapter'
+
+tests\test_impulse_rechecker_preparation.py:29: ModuleNotFoundError
+__________ test_adapter_rejects_forged_binding_or_closed_proof[rate] __________
+
+example = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...c03378bc3416ce9623a9c015cba91357faf13bc49d7a1508a77e3550', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+mutation = 'rate'
+
+    @pytest.mark.parametrize('mutation',['momentum','position','occurrence','budget','spec','producer',
+        'rechecker','zero','raw','rate','mode','order','unknown','reason','count','precision'])
+    def test_adapter_rejects_forged_binding_or_closed_proof(example,mutation):
+>       from independent_checker.c1b1.impulse.rechecker_adapter import prepare,BindingRefusal
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.rechecker_adapter'
+
+tests\test_impulse_rechecker_preparation.py:29: ModuleNotFoundError
+__________ test_adapter_rejects_forged_binding_or_closed_proof[mode] __________
+
+example = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...c03378bc3416ce9623a9c015cba91357faf13bc49d7a1508a77e3550', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+mutation = 'mode'
+
+    @pytest.mark.parametrize('mutation',['momentum','position','occurrence','budget','spec','producer',
+        'rechecker','zero','raw','rate','mode','order','unknown','reason','count','precision'])
+    def test_adapter_rejects_forged_binding_or_closed_proof(example,mutation):
+>       from independent_checker.c1b1.impulse.rechecker_adapter import prepare,BindingRefusal
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.rechecker_adapter'
+
+tests\test_impulse_rechecker_preparation.py:29: ModuleNotFoundError
+_________ test_adapter_rejects_forged_binding_or_closed_proof[order] __________
+
+example = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...c03378bc3416ce9623a9c015cba91357faf13bc49d7a1508a77e3550', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+mutation = 'order'
+
+    @pytest.mark.parametrize('mutation',['momentum','position','occurrence','budget','spec','producer',
+        'rechecker','zero','raw','rate','mode','order','unknown','reason','count','precision'])
+    def test_adapter_rejects_forged_binding_or_closed_proof(example,mutation):
+>       from independent_checker.c1b1.impulse.rechecker_adapter import prepare,BindingRefusal
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.rechecker_adapter'
+
+tests\test_impulse_rechecker_preparation.py:29: ModuleNotFoundError
+________ test_adapter_rejects_forged_binding_or_closed_proof[unknown] _________
+
+example = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...c03378bc3416ce9623a9c015cba91357faf13bc49d7a1508a77e3550', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+mutation = 'unknown'
+
+    @pytest.mark.parametrize('mutation',['momentum','position','occurrence','budget','spec','producer',
+        'rechecker','zero','raw','rate','mode','order','unknown','reason','count','precision'])
+    def test_adapter_rejects_forged_binding_or_closed_proof(example,mutation):
+>       from independent_checker.c1b1.impulse.rechecker_adapter import prepare,BindingRefusal
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.rechecker_adapter'
+
+tests\test_impulse_rechecker_preparation.py:29: ModuleNotFoundError
+_________ test_adapter_rejects_forged_binding_or_closed_proof[reason] _________
+
+example = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...c03378bc3416ce9623a9c015cba91357faf13bc49d7a1508a77e3550', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+mutation = 'reason'
+
+    @pytest.mark.parametrize('mutation',['momentum','position','occurrence','budget','spec','producer',
+        'rechecker','zero','raw','rate','mode','order','unknown','reason','count','precision'])
+    def test_adapter_rejects_forged_binding_or_closed_proof(example,mutation):
+>       from independent_checker.c1b1.impulse.rechecker_adapter import prepare,BindingRefusal
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.rechecker_adapter'
+
+tests\test_impulse_rechecker_preparation.py:29: ModuleNotFoundError
+_________ test_adapter_rejects_forged_binding_or_closed_proof[count] __________
+
+example = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...c03378bc3416ce9623a9c015cba91357faf13bc49d7a1508a77e3550', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+mutation = 'count'
+
+    @pytest.mark.parametrize('mutation',['momentum','position','occurrence','budget','spec','producer',
+        'rechecker','zero','raw','rate','mode','order','unknown','reason','count','precision'])
+    def test_adapter_rejects_forged_binding_or_closed_proof(example,mutation):
+>       from independent_checker.c1b1.impulse.rechecker_adapter import prepare,BindingRefusal
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.rechecker_adapter'
+
+tests\test_impulse_rechecker_preparation.py:29: ModuleNotFoundError
+_______ test_adapter_rejects_forged_binding_or_closed_proof[precision] ________
+
+example = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...c03378bc3416ce9623a9c015cba91357faf13bc49d7a1508a77e3550', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+mutation = 'precision'
+
+    @pytest.mark.parametrize('mutation',['momentum','position','occurrence','budget','spec','producer',
+        'rechecker','zero','raw','rate','mode','order','unknown','reason','count','precision'])
+    def test_adapter_rejects_forged_binding_or_closed_proof(example,mutation):
+>       from independent_checker.c1b1.impulse.rechecker_adapter import prepare,BindingRefusal
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.rechecker_adapter'
+
+tests\test_impulse_rechecker_preparation.py:29: ModuleNotFoundError
+___________ test_exact_pinned_source_bytes_verified_without_import ____________
+
+    def test_exact_pinned_source_bytes_verified_without_import():
+>       from independent_checker.c1b1.impulse.rechecker_adapter import verify_checker_source
+E       ModuleNotFoundError: No module named 'independent_checker.c1b1.impulse.rechecker_adapter'
+
+tests\test_impulse_rechecker_preparation.py:50: ModuleNotFoundError
+=========================== short test summary info ===========================
+FAILED tests/test_impulse_rechecker_preparation.py::test_independent_binding_preparation_and_disabled_call
+FAILED tests/test_impulse_rechecker_preparation.py::test_adapter_rejects_forged_binding_or_closed_proof[momentum]
+FAILED tests/test_impulse_rechecker_preparation.py::test_adapter_rejects_forged_binding_or_closed_proof[position]
+FAILED tests/test_impulse_rechecker_preparation.py::test_adapter_rejects_forged_binding_or_closed_proof[occurrence]
+FAILED tests/test_impulse_rechecker_preparation.py::test_adapter_rejects_forged_binding_or_closed_proof[budget]
+FAILED tests/test_impulse_rechecker_preparation.py::test_adapter_rejects_forged_binding_or_closed_proof[spec]
+FAILED tests/test_impulse_rechecker_preparation.py::test_adapter_rejects_forged_binding_or_closed_proof[producer]
+FAILED tests/test_impulse_rechecker_preparation.py::test_adapter_rejects_forged_binding_or_closed_proof[rechecker]
+FAILED tests/test_impulse_rechecker_preparation.py::test_adapter_rejects_forged_binding_or_closed_proof[zero]
+FAILED tests/test_impulse_rechecker_preparation.py::test_adapter_rejects_forged_binding_or_closed_proof[raw]
+FAILED tests/test_impulse_rechecker_preparation.py::test_adapter_rejects_forged_binding_or_closed_proof[rate]
+FAILED tests/test_impulse_rechecker_preparation.py::test_adapter_rejects_forged_binding_or_closed_proof[mode]
+FAILED tests/test_impulse_rechecker_preparation.py::test_adapter_rejects_forged_binding_or_closed_proof[order]
+FAILED tests/test_impulse_rechecker_preparation.py::test_adapter_rejects_forged_binding_or_closed_proof[unknown]
+FAILED tests/test_impulse_rechecker_preparation.py::test_adapter_rejects_forged_binding_or_closed_proof[reason]
+FAILED tests/test_impulse_rechecker_preparation.py::test_adapter_rejects_forged_binding_or_closed_proof[count]
+FAILED tests/test_impulse_rechecker_preparation.py::test_adapter_rejects_forged_binding_or_closed_proof[precision]
+FAILED tests/test_impulse_rechecker_preparation.py::test_exact_pinned_source_bytes_verified_without_import
+18 failed in 0.66s

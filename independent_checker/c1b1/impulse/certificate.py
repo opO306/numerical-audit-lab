@@ -13,7 +13,7 @@ def source_identity():
     return hashlib.sha256(canonical_bytes(files)).hexdigest()
 
 
-def construct(spec,binding,raw,radius,n,p,t,count,attempt_digest,policy,c):
+def construct(spec,binding,raw,radius,n,p,t,count,attempt_digest,policy,c,q_raw):
     if n>policy.legacy_sqrt_bits_max or p>policy.legacy_work_bits_max:
         raise ResourceLimit('BIT')
     guard=c.qadd(radius.hi,c.fraction(1,c.shift(1,n)))
@@ -37,12 +37,6 @@ def construct(spec,binding,raw,radius,n,p,t,count,attempt_digest,policy,c):
           'producer_source_sha256':source_identity(),'rechecker_source_sha256':spec.rechecker_sha256,
           'method':'LAB_POINT_PRODUCER_V1_AND_PINNED_V2','raw_J':[decimal(x) for x in raw],
           'proof':{'sqrt_bits':decimal(n),'work_bits':decimal(p),'exp_plan':plan,
-                   'lane_kinds':['EXACT_ZERO_AXIS' if axis_zero else 'NONLINEAR_V2' for axis_zero in t_zero_axes(binding)]},
+                   'lane_kinds':['EXACT_ZERO_AXIS' if q==0 else 'NONLINEAR_V2' for q in q_raw]},
           'attempt_count':decimal(count),'attempt_digest':attempt_digest}
     return cert
-
-
-def t_zero_axes(binding):
-    # Construction caller replaces lane_kinds from the validated q_raw.
-    # No zero proof can be inferred from identity hashes.
-    return (False,False,False)

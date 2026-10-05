@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.355" timestamp="2026-10-05T10:52:38.388906+09:00" hostname="으악"><testcase classname="tests.test_impulse_reference_primitives" name="test_large_exp_no_cutoff_and_tail_order_limit" time="0.025"><failure message="assert 0 &lt; Fraction(0, 1)&#10; +  where Fraction(0, 1) = Interval(lo=Fraction(0, 1), hi=Fraction(0, 1)).lo">def test_large_exp_no_cutoff_and_tail_order_limit():
+        e=module('exp_enclosure'); m=module('interval')
+        v,_,_=e.exp_enclosure(m.Interval(Q(100),Q(100)),256,300,context())
+&gt;       assert 0&lt;v.lo&lt;=v.hi&lt;Q(1,10**40)
+E       assert 0 &lt; Fraction(0, 1)
+E        +  where Fraction(0, 1) = Interval(lo=Fraction(0, 1), hi=Fraction(0, 1)).lo
+
+tests\test_impulse_reference_primitives.py:64: AssertionError</failure></testcase></testsuite></testsuites>

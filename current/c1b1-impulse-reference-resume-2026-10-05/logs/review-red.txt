@@ -1,0 +1,258 @@
+FFF.FFFFFF.FF                                                            [100%]
+================================== FAILURES ===================================
+_________________ test_constructor_cross_products_precharged __________________
+
+    def test_constructor_cross_products_precharged():
+        c=tiny()
+>       with pytest.raises(resource.ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_review_regressions.py:14: Failed
+_____________ test_rounding_and_refinement_comparisons_precharged _____________
+
+    def test_rounding_and_refinement_comparisons_precharged():
+        c=tiny();v=interval.Interval(Q(1,251),Q(1,241))
+>       with pytest.raises(resource.ResourceLimit):rounding.decide_scaled(v,c)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: decide_scaled() takes 1 positional argument but 2 were given
+
+tests\test_impulse_review_regressions.py:20: TypeError
+_________ test_entire_input_syntax_before_first_int[acquisition-key] __________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001CB31BF13A0>
+bad = 'acquisition-key'
+
+    @pytest.mark.parametrize('bad',['acquisition-key','budget-key','last-atom-key','last-decimal','budget-decimal','long-decimal'])
+    def test_entire_input_syntax_before_first_int(monkeypatch,bad):
+        obj=input_object()
+        if bad=='acquisition-key':obj['acquisition']['extra']='x'
+        elif bad=='budget-key':obj['budget']['extra']='x'
+        elif bad=='last-atom-key':obj['state']['atoms'][1]['extra']='x'
+        elif bad=='last-decimal':obj['state']['atoms'][1]['momentum_raw'][2]='01'
+        elif bad=='budget-decimal':obj['budget']['legacy_digit_max']='01'
+        else:obj['state']['atoms'][1]['momentum_raw'][2]='1'*4097
+        calls=[];real=contracts.integer
+        def spy(*a,**kw):calls.append(a);return real(*a,**kw)
+        monkeypatch.setattr(contracts,'integer',spy)
+        with pytest.raises(contracts.ContractFailure):contracts.validate_input(encoded(obj),load_spec())
+>       assert calls==[]
+E       AssertionError: assert [('0',), ('0'..., ('0',), ...] == []
+E         
+E         Left contains 12 more items, first extra item: ('0',)
+E         Use -v to get more diff
+
+tests\test_impulse_review_regressions.py:38: AssertionError
+__________ test_entire_input_syntax_before_first_int[last-atom-key] ___________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001CB31BF16D0>
+bad = 'last-atom-key'
+
+    @pytest.mark.parametrize('bad',['acquisition-key','budget-key','last-atom-key','last-decimal','budget-decimal','long-decimal'])
+    def test_entire_input_syntax_before_first_int(monkeypatch,bad):
+        obj=input_object()
+        if bad=='acquisition-key':obj['acquisition']['extra']='x'
+        elif bad=='budget-key':obj['budget']['extra']='x'
+        elif bad=='last-atom-key':obj['state']['atoms'][1]['extra']='x'
+        elif bad=='last-decimal':obj['state']['atoms'][1]['momentum_raw'][2]='01'
+        elif bad=='budget-decimal':obj['budget']['legacy_digit_max']='01'
+        else:obj['state']['atoms'][1]['momentum_raw'][2]='1'*4097
+        calls=[];real=contracts.integer
+        def spy(*a,**kw):calls.append(a);return real(*a,**kw)
+        monkeypatch.setattr(contracts,'integer',spy)
+        with pytest.raises(contracts.ContractFailure):contracts.validate_input(encoded(obj),load_spec())
+>       assert calls==[]
+E       AssertionError: assert [('0',), ('0'...'0',), ('0',)] == []
+E         
+E         Left contains 6 more items, first extra item: ('0',)
+E         Use -v to get more diff
+
+tests\test_impulse_review_regressions.py:38: AssertionError
+___________ test_entire_input_syntax_before_first_int[last-decimal] ___________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001CB31C334D0>
+bad = 'last-decimal'
+
+    @pytest.mark.parametrize('bad',['acquisition-key','budget-key','last-atom-key','last-decimal','budget-decimal','long-decimal'])
+    def test_entire_input_syntax_before_first_int(monkeypatch,bad):
+        obj=input_object()
+        if bad=='acquisition-key':obj['acquisition']['extra']='x'
+        elif bad=='budget-key':obj['budget']['extra']='x'
+        elif bad=='last-atom-key':obj['state']['atoms'][1]['extra']='x'
+        elif bad=='last-decimal':obj['state']['atoms'][1]['momentum_raw'][2]='01'
+        elif bad=='budget-decimal':obj['budget']['legacy_digit_max']='01'
+        else:obj['state']['atoms'][1]['momentum_raw'][2]='1'*4097
+        calls=[];real=contracts.integer
+        def spy(*a,**kw):calls.append(a);return real(*a,**kw)
+        monkeypatch.setattr(contracts,'integer',spy)
+        with pytest.raises(contracts.ContractFailure):contracts.validate_input(encoded(obj),load_spec())
+>       assert calls==[]
+E       AssertionError: assert [('0',), ('0'..., ('0',), ...] == []
+E         
+E         Left contains 12 more items, first extra item: ('0',)
+E         Use -v to get more diff
+
+tests\test_impulse_review_regressions.py:38: AssertionError
+__________ test_entire_input_syntax_before_first_int[budget-decimal] __________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001CB31BF1760>
+bad = 'budget-decimal'
+
+    @pytest.mark.parametrize('bad',['acquisition-key','budget-key','last-atom-key','last-decimal','budget-decimal','long-decimal'])
+    def test_entire_input_syntax_before_first_int(monkeypatch,bad):
+        obj=input_object()
+        if bad=='acquisition-key':obj['acquisition']['extra']='x'
+        elif bad=='budget-key':obj['budget']['extra']='x'
+        elif bad=='last-atom-key':obj['state']['atoms'][1]['extra']='x'
+        elif bad=='last-decimal':obj['state']['atoms'][1]['momentum_raw'][2]='01'
+        elif bad=='budget-decimal':obj['budget']['legacy_digit_max']='01'
+        else:obj['state']['atoms'][1]['momentum_raw'][2]='1'*4097
+        calls=[];real=contracts.integer
+        def spy(*a,**kw):calls.append(a);return real(*a,**kw)
+        monkeypatch.setattr(contracts,'integer',spy)
+        with pytest.raises(contracts.ContractFailure):contracts.validate_input(encoded(obj),load_spec())
+>       assert calls==[]
+E       AssertionError: assert [('0',), ('0'..., ('0',), ...] == []
+E         
+E         Left contains 35 more items, first extra item: ('0',)
+E         Use -v to get more diff
+
+tests\test_impulse_review_regressions.py:38: AssertionError
+___________ test_entire_input_syntax_before_first_int[long-decimal] ___________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001CB31C56270>
+bad = 'long-decimal'
+
+    @pytest.mark.parametrize('bad',['acquisition-key','budget-key','last-atom-key','last-decimal','budget-decimal','long-decimal'])
+    def test_entire_input_syntax_before_first_int(monkeypatch,bad):
+        obj=input_object()
+        if bad=='acquisition-key':obj['acquisition']['extra']='x'
+        elif bad=='budget-key':obj['budget']['extra']='x'
+        elif bad=='last-atom-key':obj['state']['atoms'][1]['extra']='x'
+        elif bad=='last-decimal':obj['state']['atoms'][1]['momentum_raw'][2]='01'
+        elif bad=='budget-decimal':obj['budget']['legacy_digit_max']='01'
+        else:obj['state']['atoms'][1]['momentum_raw'][2]='1'*4097
+        calls=[];real=contracts.integer
+        def spy(*a,**kw):calls.append(a);return real(*a,**kw)
+        monkeypatch.setattr(contracts,'integer',spy)
+        with pytest.raises(contracts.ContractFailure):contracts.validate_input(encoded(obj),load_spec())
+>       assert calls==[]
+E       AssertionError: assert [('0',), ('0'..., ('0',), ...] == []
+E         
+E         Left contains 12 more items, first extra item: ('0',)
+E         Use -v to get more diff
+
+tests\test_impulse_review_regressions.py:38: AssertionError
+_________ test_adapter_entire_schema_before_first_int[input-late-key] _________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001CB31BF2B40>
+candidate = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...a7091504e8615e12d09afc4b09d2e62718787babab1bf7d9777ac92b', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+bad = 'input-late-key'
+
+    @pytest.mark.parametrize('bad',['input-late-key','input-late-decimal','certificate-key','last-order','last-rate'])
+    def test_adapter_entire_schema_before_first_int(monkeypatch,candidate,bad):
+        obj,cert=copy.deepcopy(candidate)
+        if bad=='input-late-key':obj['acquisition']['extra']='x'
+        elif bad=='input-late-decimal':obj['budget']['legacy_digit_max']='01'
+        elif bad=='certificate-key':cert['extra']='x'
+        elif bad=='last-order':cert['proof']['exp_plan'][-1]['order']='01'
+        else:cert['proof']['exp_plan'][-1]['rate']['d']='01'
+        calls=[];real=rechecker_adapter._int
+        def spy(*a,**kw):calls.append(a);return real(*a,**kw)
+        monkeypatch.setattr(rechecker_adapter,'_int',spy)
+        with pytest.raises(rechecker_adapter.BindingRefusal):rechecker_adapter.prepare(encoded(obj),encoded(cert),expected_producer_sha256=source_identity())
+>       assert calls==[]
+E       AssertionError: assert [('0',), ('0'..., ('0',), ...] == []
+E         
+E         Left contains 12 more items, first extra item: ('0',)
+E         Use -v to get more diff
+
+tests\test_impulse_review_regressions.py:57: AssertionError
+_______ test_adapter_entire_schema_before_first_int[input-late-decimal] _______
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001CB31C8DAC0>
+candidate = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...a7091504e8615e12d09afc4b09d2e62718787babab1bf7d9777ac92b', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+bad = 'input-late-decimal'
+
+    @pytest.mark.parametrize('bad',['input-late-key','input-late-decimal','certificate-key','last-order','last-rate'])
+    def test_adapter_entire_schema_before_first_int(monkeypatch,candidate,bad):
+        obj,cert=copy.deepcopy(candidate)
+        if bad=='input-late-key':obj['acquisition']['extra']='x'
+        elif bad=='input-late-decimal':obj['budget']['legacy_digit_max']='01'
+        elif bad=='certificate-key':cert['extra']='x'
+        elif bad=='last-order':cert['proof']['exp_plan'][-1]['order']='01'
+        else:cert['proof']['exp_plan'][-1]['rate']['d']='01'
+        calls=[];real=rechecker_adapter._int
+        def spy(*a,**kw):calls.append(a);return real(*a,**kw)
+        monkeypatch.setattr(rechecker_adapter,'_int',spy)
+        with pytest.raises(rechecker_adapter.BindingRefusal):rechecker_adapter.prepare(encoded(obj),encoded(cert),expected_producer_sha256=source_identity())
+>       assert calls==[]
+E       AssertionError: assert [('0',), ('0'..., ('0',), ...] == []
+E         
+E         Left contains 35 more items, first extra item: ('0',)
+E         Use -v to get more diff
+
+tests\test_impulse_review_regressions.py:57: AssertionError
+___________ test_adapter_entire_schema_before_first_int[last-order] ___________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001CB31C8C830>
+candidate = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...a7091504e8615e12d09afc4b09d2e62718787babab1bf7d9777ac92b', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+bad = 'last-order'
+
+    @pytest.mark.parametrize('bad',['input-late-key','input-late-decimal','certificate-key','last-order','last-rate'])
+    def test_adapter_entire_schema_before_first_int(monkeypatch,candidate,bad):
+        obj,cert=copy.deepcopy(candidate)
+        if bad=='input-late-key':obj['acquisition']['extra']='x'
+        elif bad=='input-late-decimal':obj['budget']['legacy_digit_max']='01'
+        elif bad=='certificate-key':cert['extra']='x'
+        elif bad=='last-order':cert['proof']['exp_plan'][-1]['order']='01'
+        else:cert['proof']['exp_plan'][-1]['rate']['d']='01'
+        calls=[];real=rechecker_adapter._int
+        def spy(*a,**kw):calls.append(a);return real(*a,**kw)
+        monkeypatch.setattr(rechecker_adapter,'_int',spy)
+        with pytest.raises(rechecker_adapter.BindingRefusal):rechecker_adapter.prepare(encoded(obj),encoded(cert),expected_producer_sha256=source_identity())
+>       assert calls==[]
+E       AssertionError: assert [('0',), ('0'..., ('0',), ...] == []
+E         
+E         Left contains 65 more items, first extra item: ('0',)
+E         Use -v to get more diff
+
+tests\test_impulse_review_regressions.py:57: AssertionError
+___________ test_adapter_entire_schema_before_first_int[last-rate] ____________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001CB31C696A0>
+candidate = ({'schema': 'LAB_C1B1_IMPULSE_INPUT_V1', 'spec_sha256': '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2...a7091504e8615e12d09afc4b09d2e62718787babab1bf7d9777ac92b', ...}, 'method': 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2', ...})
+bad = 'last-rate'
+
+    @pytest.mark.parametrize('bad',['input-late-key','input-late-decimal','certificate-key','last-order','last-rate'])
+    def test_adapter_entire_schema_before_first_int(monkeypatch,candidate,bad):
+        obj,cert=copy.deepcopy(candidate)
+        if bad=='input-late-key':obj['acquisition']['extra']='x'
+        elif bad=='input-late-decimal':obj['budget']['legacy_digit_max']='01'
+        elif bad=='certificate-key':cert['extra']='x'
+        elif bad=='last-order':cert['proof']['exp_plan'][-1]['order']='01'
+        else:cert['proof']['exp_plan'][-1]['rate']['d']='01'
+        calls=[];real=rechecker_adapter._int
+        def spy(*a,**kw):calls.append(a);return real(*a,**kw)
+        monkeypatch.setattr(rechecker_adapter,'_int',spy)
+        with pytest.raises(rechecker_adapter.BindingRefusal):rechecker_adapter.prepare(encoded(obj),encoded(cert),expected_producer_sha256=source_identity())
+>       assert calls==[]
+E       AssertionError: assert [('0',), ('0'..., ('0',), ...] == []
+E         
+E         Left contains 64 more items, first extra item: ('0',)
+E         Use -v to get more diff
+
+tests\test_impulse_review_regressions.py:57: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_impulse_review_regressions.py::test_constructor_cross_products_precharged
+FAILED tests/test_impulse_review_regressions.py::test_rounding_and_refinement_comparisons_precharged
+FAILED tests/test_impulse_review_regressions.py::test_entire_input_syntax_before_first_int[acquisition-key]
+FAILED tests/test_impulse_review_regressions.py::test_entire_input_syntax_before_first_int[last-atom-key]
+FAILED tests/test_impulse_review_regressions.py::test_entire_input_syntax_before_first_int[last-decimal]
+FAILED tests/test_impulse_review_regressions.py::test_entire_input_syntax_before_first_int[budget-decimal]
+FAILED tests/test_impulse_review_regressions.py::test_entire_input_syntax_before_first_int[long-decimal]
+FAILED tests/test_impulse_review_regressions.py::test_adapter_entire_schema_before_first_int[input-late-key]
+FAILED tests/test_impulse_review_regressions.py::test_adapter_entire_schema_before_first_int[input-late-decimal]
+FAILED tests/test_impulse_review_regressions.py::test_adapter_entire_schema_before_first_int[last-order]
+FAILED tests/test_impulse_review_regressions.py::test_adapter_entire_schema_before_first_int[last-rate]
+11 failed, 2 passed in 0.70s

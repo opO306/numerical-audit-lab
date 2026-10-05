@@ -1,0 +1,45 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_________ test_tt_and_leading_branches_against_separate_exact_series __________
+
+    def test_tt_and_leading_branches_against_separate_exact_series():
+        import math
+        m=module('interval');p=module('potential');s=module('spec').load_spec()
+        c=module('resource').ResourceAccount(bit_max=100000,num_bit_max=100000,den_bit_max=100000,work_max=10**40)
+        r=Q(3);terms=p.evaluate_terms(s,m.point(r),128,300,c)
+        # Reconstruct the needed exp bracket with an independent alternating series,
+        # after exact halving; no producer primitive is an expected-value helper.
+        def exp_bracket(z):
+            squarings=0
+            while z>Q(1,2):z/=2;squarings+=1
+            t=total=Q(1)
+            for k in range(1,181):t*=(-z)/k;total+=t
+            nxt=t*(-z)/181;lo,hi=sorted((total,total+nxt))
+            for _ in range(squarings):lo*=lo;hi*=hi
+            return lo,hi
+        numerator=1+sum(s.constants[f'RET_A_{k}']*r**k for k in range(1,6))
+        denominator=1+sum(s.constants[f'RET_B_{k}']*r**k for k in range(1,7))
+        np=sum(k*s.constants[f'RET_A_{k}']*r**(k-1) for k in range(1,6))
+        dp=sum(k*s.constants[f'RET_B_{k}']*r**(k-1) for k in range(1,7))
+        gp=(np*denominator-numerator*dp)/denominator**2
+        idx=0
+        for family,klo,khi,extra in [('BO',3,8,1),('REL',2,4,0),('QED',3,4,0)]:
+            eta=s.constants[f'eta_{family}'];z=eta*r;elo,ehi=exp_bracket(z)
+            for k in range(klo,khi+1):
+                term=terms.long[idx];idx+=1;last=2*k+extra
+                series=sum(z**l/math.factorial(l) for l in range(last+1))
+                b=eta*z**last/math.factorial(last)
+                leading=numerator/denominator if family=='BO' and k==3 else (0 if family=='REL' and k==2 else 1)
+                expected_lo,expected_hi=leading-ehi*series,leading-elo*series
+                slope_lo,slope_hi=elo*b,ehi*b
+                if family=='BO' and k==3:slope_lo+=gp;slope_hi+=gp
+                assert term.damping.lo<=expected_lo<=expected_hi<=term.damping.hi
+>               assert term.damping_slope.lo<=slope_lo<=slope_hi<=term.damping_slope.hi
+E               AssertionError: assert <[ValueError('Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit') raised in repr()] Fraction object at 0x2b09780f010> <= Fraction(-186005553812820996429873663098063494740748766310929059059000, 2409558033800385562749444095148790976751211162491611973515728441)
+E                +  where Fraction(-186005553812820996429873663098063494740748766310929059059000, 2409558033800385562749444095148790976751211162491611973515728441) = Interval(lo=Fraction(-186005553812820996429873663098063494740748766310929059059000, 2409558033800385562749444095148790...812820996429873663098063494740748766310929059059000, 2409558033800385562749444095148790976751211162491611973515728441)).hi
+E                +    where Interval(lo=Fraction(-186005553812820996429873663098063494740748766310929059059000, 2409558033800385562749444095148790...812820996429873663098063494740748766310929059059000, 2409558033800385562749444095148790976751211162491611973515728441)) = LongTerm(coefficient=Interval(lo=Fraction(321147611, 5000000), hi=Fraction(321147611, 5000000)), k=3, damping=Interval...9558033800385562749444095148790976751211162491611973515728441)), radius=Interval(lo=Fraction(3, 1), hi=Fraction(3, 1))).damping_slope
+
+tests\test_impulse_reference_boundaries.py:87: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_impulse_reference_boundaries.py::test_tt_and_leading_branches_against_separate_exact_series
+1 failed in 0.48s

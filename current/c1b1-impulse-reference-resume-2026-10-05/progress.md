@@ -1,0 +1,19 @@
+# Resume ledger — Independent Impulse V1 reference producer
+
+Base: bc6cf7a6312951ddefe4e066afa19bedfbeef695; clean initial tree. No commit/push authorized.
+Task 1/2 inherited primitives and model: baseline 92 passed including producer/spec cases.
+Task 3: runtime attempt/failure/allocation RED 570 failed/1 passed; initial GREEN 9 failed/608 passed exposed MappingProxy identity serialization; fixed by copying the flat approved methods payload; GREEN 617 passed.
+Additional tests: RED 3 failed/8 passed. Fixed container-depth and input-specific parse cap; enlarged only the independent exact-series test work fixture (earlier fixture exhausted WORK before testing the identity); GREEN 11 passed.
+Adapter preparation RED 18 failed; GREEN 18 passed. No pinned V2 code loaded or executed.
+Static spec checker: initial usage-only invocation exit 1 (missing --output); corrected invocation 155 checks PASS. Historical checker not edited.
+
+Ruling: latest user request supersedes the earlier plan allocator exclusion. Added parameterized predicted temporary/live accounting and whole-power precheck; reference controls use an explicitly unvalidated author allocation model. This is not a production allocator/OS majorant; if it underbounds a platform, author byte predictions are insufficient for activation. Runtime remains POLICY_UNBOUND.
+Ruling: adapter integration stops at independent binding validation and legacy certificate projection (PREPARED_ONLY). Full V2 numerical execution requires unimplemented whole-call majorant and enforced worker plus separate approval. Cost: this stage supplies no V2 ACCEPTED verdict.
+Ruling: user no-commit/no-push and immutable evidence requirements override skill commit/cleanup steps; all evidence stays as an uncommitted new revision.
+Review focus: malformed wire before integer conversion; coarse radius lower zero; mixed-sign interval extrema; asymmetric overflow and opposite raw; budget exhaustion/partial vector publication; closed attempt table/null encoding; pre-operation resource/allocation structure; separate adapter binding and disabled invocation.
+
+Final review: fresh reviewer (author-side, not independent audit) found Important Fraction comparison precharge bypass and malformed late wire converted before complete validation. RED 11 failed/2 passed; fixed context-bearing intervals, checked rounding/refinement comparisons and independent two-pass parser validation. GREEN 88 passed across regressions plus primitive/model/producer/boundary/adapter tests; full suite and 16 mutants re-running.
+Final: minor (deferred): adapter checks legacy orders against caps but does not independently recompute exact n_R(t) schedule. PREPARED_ONLY has no numerical ACCEPTED meaning; candidate source schedule is checked by producer tests, full adapter schedule reconstruction remains pending. Cost: a cap-compliant under-order may be prepared and later remain NOT_PROVED; no V2 call or publication occurs.
+Final scope rulings: production allocator/OS majorants, acquisition authenticity, pinned V2 nonlinear soundness, executor comparison, physical accuracy/certification, all-input success/convergence, drift/KDK/trajectory/replay remain outside this author stage under explicit user scope and runtime=false. Current evidence neither proves nor activates these. Parent test logs and preservation are verified by separate root receipts, not attributed to the reviewer.
+
+Final verification: full suite after review1099 passed/fail0/error0/skip0; all16 actual source mutants re-run baselinePASS/DETECTED. protected8 PASS; historical1921/1921 and2097/2097 unchanged; prior docs/spec/audit/current321/321 unchanged; no missing baseline paths. Source bundle a4bd12c92a4ad7f2a00503fa0ed249c8a96546d3999a68203fe4344f0c6554d7. No commit/push/activation.

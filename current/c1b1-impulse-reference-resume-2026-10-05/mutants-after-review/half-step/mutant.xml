@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="0.961" timestamp="2026-10-05T11:02:08.892576+09:00" hostname="으악"><testcase classname="tests.test_impulse_reference_producer" name="test_private_whole_vector_matches_diagnostic[q0]" time="0.341"><failure message="AssertionError: assert mpf('63739268466588044946738.7231911499218912049938090921549535713722609397472617038554921875165265445561572912322513957510451074389008897210480477499830968397') &lt;= mpf('31869634233294022473369.361597487018655751032523657426150001378234520704173111726915594087092983820807054985155505638491477383989531146290131444907480395')">q = (6, 2, 1)
+
+    @pytest.mark.parametrize('q',[(6,2,1),(-6,-2,-1),(0,6,0)])
+    def test_private_whole_vector_matches_diagnostic(q):
+        import mpmath as mp
+        obj=input_object(q);data=encoded(obj);old=copy.deepcopy(obj)
+        result=module('producer').evaluate_reference(data,reference_policy(obj))
+        assert result.layers['producer']=='RESOLVED' and result.raw is not None
+        assert result.opposite==tuple(-v for v in result.raw)
+        assert result.layers['publication']=='NOT_PUBLISHED' and result.layers['rechecker']=='NOT_RUN'
+        cert=json.loads(result.certificate)
+        assert tuple(int(v) for v in cert['raw_J'])==result.raw and 'final_interval' not in cert
+        assert len(cert['proof']['exp_plan'])==9 and data==encoded(obj) and obj==old
+        with mp.workdps(150):
+            radius=mp.sqrt(sum(mp.mpf(v)**2 for v in q));_,vp=nominal_diagnostic(radius)
+            for k,lane in enumerate(result.scaled_intervals):
+                expected=-vp*mp.mpf(q[k])/radius*20*2**80
+                lo=mp.mpf(lane.lo.numerator)/lane.lo.denominator
+                hi=mp.mpf(lane.hi.numerator)/lane.hi.denominator
+&gt;               assert lo&lt;=expected&lt;=hi
+E               AssertionError: assert mpf('63739268466588044946738.7231911499218912049938090921549535713722609397472617038554921875165265445561572912322513957510451074389008897210480477499830968397') &lt;= mpf('31869634233294022473369.361597487018655751032523657426150001378234520704173111726915594087092983820807054985155505638491477383989531146290131444907480395')
+
+tests\test_impulse_reference_producer.py:29: AssertionError</failure></testcase><testcase classname="tests.test_impulse_reference_producer" name="test_private_whole_vector_matches_diagnostic[q1]" time="0.189"><failure message="AssertionError: assert mpf('-31869634233294022473369.361597487018655751032523657426150001378234520704173111726915594087092983820807054985155505638491477383989531146290131444907480395') &lt;= mpf('-63739268466588044946738.7231911499218912049938090921549535713722609397472617038554921875165265445561572912322513957510451074389008897210480477499830968397')">q = (-6, -2, -1)
+
+    @pytest.mark.parametrize('q',[(6,2,1),(-6,-2,-1),(0,6,0)])
+    def test_private_whole_vector_matches_diagnostic(q):
+        import mpmath as mp
+        obj=input_object(q);data=encoded(obj);old=copy.deepcopy(obj)
+        result=module('producer').evaluate_reference(data,reference_policy(obj))
+        assert result.layers['producer']=='RESOLVED' and result.raw is not None
+        assert result.opposite==tuple(-v for v in result.raw)
+        assert result.layers['publication']=='NOT_PUBLISHED' and result.layers['rechecker']=='NOT_RUN'
+        cert=json.loads(result.certificate)
+        assert tuple(int(v) for v in cert['raw_J'])==result.raw and 'final_interval' not in cert
+        assert len(cert['proof']['exp_plan'])==9 and data==encoded(obj) and obj==old
+        with mp.workdps(150):
+            radius=mp.sqrt(sum(mp.mpf(v)**2 for v in q));_,vp=nominal_diagnostic(radius)
+            for k,lane in enumerate(result.scaled_intervals):
+                expected=-vp*mp.mpf(q[k])/radius*20*2**80
+                lo=mp.mpf(lane.lo.numerator)/lane.lo.denominator
+                hi=mp.mpf(lane.hi.numerator)/lane.hi.denominator
+&gt;               assert lo&lt;=expected&lt;=hi
+E               AssertionError: assert mpf('-31869634233294022473369.361597487018655751032523657426150001378234520704173111726915594087092983820807054985155505638491477383989531146290131444907480395') &lt;= mpf('-63739268466588044946738.7231911499218912049938090921549535713722609397472617038554921875165265445561572912322513957510451074389008897210480477499830968397')
+
+tests\test_impulse_reference_producer.py:29: AssertionError</failure></testcase><testcase classname="tests.test_impulse_reference_producer" name="test_private_whole_vector_matches_diagnostic[q2]" time="0.077"><failure message="AssertionError: assert mpf('191666927432972524979459.327016822672066562391050296500220058618038056006259869270709312681933503932478542815752995793392697232680714213170285505534452124') &lt;= mpf('95833463716486262489729.6635086264559415726416037855042937970426979691546655869171909096835708157063249050863086729284722741343829397581088948628595526697')">q = (0, 6, 0)
+
+    @pytest.mark.parametrize('q',[(6,2,1),(-6,-2,-1),(0,6,0)])
+    def test_private_whole_vector_matches_diagnostic(q):
+        import mpmath as mp
+        obj=input_object(q);data=encoded(obj);old=copy.deepcopy(obj)
+        result=module('producer').evaluate_reference(data,reference_policy(obj))
+        assert result.layers['producer']=='RESOLVED' and result.raw is not None
+        assert result.opposite==tuple(-v for v in result.raw)
+        assert result.layers['publication']=='NOT_PUBLISHED' and result.layers['rechecker']=='NOT_RUN'
+        cert=json.loads(result.certificate)
+        assert tuple(int(v) for v in cert['raw_J'])==result.raw and 'final_interval' not in cert
+        assert len(cert['proof']['exp_plan'])==9 and data==encoded(obj) and obj==old
+        with mp.workdps(150):
+            radius=mp.sqrt(sum(mp.mpf(v)**2 for v in q));_,vp=nominal_diagnostic(radius)
+            for k,lane in enumerate(result.scaled_intervals):
+                expected=-vp*mp.mpf(q[k])/radius*20*2**80
+                lo=mp.mpf(lane.lo.numerator)/lane.lo.denominator
+                hi=mp.mpf(lane.hi.numerator)/lane.hi.denominator
+&gt;               assert lo&lt;=expected&lt;=hi
+E               AssertionError: assert mpf('191666927432972524979459.327016822672066562391050296500220058618038056006259869270709312681933503932478542815752995793392697232680714213170285505534452124') &lt;= mpf('95833463716486262489729.6635086264559415726416037855042937970426979691546655869171909096835708157063249050863086729284722741343829397581088948628595526697')
+
+tests\test_impulse_reference_producer.py:29: AssertionError</failure></testcase></testsuite></testsuites>

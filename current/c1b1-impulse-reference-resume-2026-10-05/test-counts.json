@@ -1,0 +1,253 @@
+{
+  "command": "python -m pytest -q --junitxml=current/c1b1-impulse-reference-resume-2026-10-05/logs/full-suite-after-review.xml",
+  "total_regression_cases": 1099,
+  "by_file": {
+    "tests.test_c1b1_boundary": {
+      "tests": 5,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_c1b1_claim_output_boundary": {
+      "tests": 44,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_c1b1_claim_output_mutant": {
+      "tests": 1,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_c1b1_claims": {
+      "tests": 14,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_c1b1_differential": {
+      "tests": 7,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_c1b1_fast": {
+      "tests": 20,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_c1b1_geometry": {
+      "tests": 16,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_c1b1_mutants": {
+      "tests": 16,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_c1b1_slow": {
+      "tests": 20,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_gate0": {
+      "tests": 12,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_gate0_closure": {
+      "tests": 1,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_gate1": {
+      "tests": 81,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_gate2a": {
+      "tests": 14,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_gate2a_sealed": {
+      "tests": 9,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_gate2b": {
+      "tests": 10,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_gate2b_adapter": {
+      "tests": 3,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_gate2c": {
+      "tests": 17,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_gate2c1": {
+      "tests": 18,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_gate2c1_delivery_manifest": {
+      "tests": 6,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_gate2c1_independent": {
+      "tests": 4,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_gate2c1_package": {
+      "tests": 3,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_gate2c1_review_regressions": {
+      "tests": 6,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_gate2c1_sealed": {
+      "tests": 3,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_gate2c_sealed": {
+      "tests": 2,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_impulse_attempt_reason_spec": {
+      "tests": 46,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_impulse_attempt_runtime": {
+      "tests": 567,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_impulse_mutant_resource_probe": {
+      "tests": 1,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_impulse_rechecker_preparation": {
+      "tests": 18,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_impulse_reference_boundaries": {
+      "tests": 11,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_impulse_reference_model": {
+      "tests": 9,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_impulse_reference_primitives": {
+      "tests": 20,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_impulse_reference_producer": {
+      "tests": 17,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_impulse_resource_allocation": {
+      "tests": 4,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_impulse_review_regressions": {
+      "tests": 13,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_independence": {
+      "tests": 3,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_ported_hard_cases": {
+      "tests": 21,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_post_seal_audit": {
+      "tests": 13,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_provenance": {
+      "tests": 4,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_v2": {
+      "tests": 12,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_v2_audit_report_sealed": {
+      "tests": 1,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    },
+    "tests.test_v2_sealed": {
+      "tests": 7,
+      "fail": 0,
+      "error": 0,
+      "skip": 0
+    }
+  },
+  "label": "AUTHOR CHECKS; NO COUNT IS AN INDEPENDENT PROOF COUNT"
+}

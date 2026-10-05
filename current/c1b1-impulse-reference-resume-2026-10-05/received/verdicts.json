@@ -1,0 +1,152 @@
+{
+  "schema": "INDEPENDENT_ATTEMPT_REASON_NULL_REAUDIT_V1",
+  "audited_commit": "bc6cf7a6312951ddefe4e066afa19bedfbeef695",
+  "direct_parent": "8e5865964770b3752326d361276cbccd125c547a",
+  "arithmetic_antecedent": "65d8fd29ae255529afead70289098d36b825b3b4",
+  "audit_scope": "LIMITED SPECIFICATION / STATIC REVIEW; WIP CHECKPOINT BYTE PRESERVATION ONLY",
+  "items": {
+    "A1": {
+      "title": "Git / target / parent",
+      "verdict": "PASS",
+      "basis": "Raw commit object ID와 직접 parent를 재계산. Parent 2,097개, target 2,163개. 추가 66, 수정 0, 삭제 0."
+    },
+    "A2": {
+      "title": "original spec gap",
+      "verdict": "PASS",
+      "basis": "Parent의 rolling tuple은 reason을 요구하지만 성공 조합의 canonical 값은 명시하지 않았다. 기존 17개 reason은 non-success enum이고 두 정상 조합은 상태 계약에 존재한다."
+    },
+    "A3": {
+      "title": "null 허용 상태 정확성",
+      "verdict": "PASS",
+      "basis": "RESOLVED/NOT_RUN 및 RESOLVED/ACCEPTED 두 조합만 [null]. 다른 23개 조합에서 null 거부."
+    },
+    "A4": {
+      "title": "no success reason token",
+      "verdict": "PASS",
+      "basis": "기존 17개 reason enum 동일. SUCCESS/OK/RESOLVED_SUCCESS/PASS/NONE 등 새 success token 없음."
+    },
+    "A5": {
+      "title": "reason key canonical presence",
+      "verdict": "PASS",
+      "basis": "6개 exact keys에 reason 필수. 정상은 JSON null. 키 생략, 문자열 null, 빈 문자열, extra key를 거부하는 규범과 독립 probe 확인."
+    },
+    "A6": {
+      "title": "25-state closed table",
+      "verdict": "PASS",
+      "basis": "5×5 Cartesian product의 25개 조합이 정확히 한 번씩 나타남. 허용 reason이 있는 8개 pair와 전부 거부하는 17개 pair로 완결."
+    },
+    "A7": {
+      "title": "tuple semantic compatibility",
+      "verdict": "PASS",
+      "basis": "별도 phase/state 분기 oracle로 관계를 재구성. 단순 null-or-enum 검사 대신 producer/rechecker/reason의 결합을 확인. 문서 표와 machine table도 25/25 일치."
+    },
+    "A8": {
+      "title": "digest canonical determinism",
+      "verdict": "PASS",
+      "basis": "수작업 ASCII literal과 canonical serializer bytes 일치. terminal LF, null 키 보존, raw digest32 연결 확인. 생략/문자열-null은 digest 전에 거부."
+    },
+    "A9": {
+      "title": "Failure.reason contract preservation",
+      "verdict": "PASS",
+      "basis": "11개 Failure 필드와 두 closed 목록, 17개 reason enum 불변. Failure.reason은 required non-null. Attempt null 규칙을 Failure로 확장하지 않음."
+    },
+    "A10": {
+      "title": "resource limits preservation",
+      "verdict": "PASS",
+      "basis": "4096 digit, Failure 4096 bytes, artifact 1 MiB, 약분 후 한도 검사, no global setter, no partial publication 규범 불변."
+    },
+    "A11": {
+      "title": "original approved spec bytes preservation",
+      "verdict": "PASS",
+      "basis": "원래 specs/c1b1-independent-impulse-v1/의 19개 파일을 parent/target actual bytes로 비교하여 동일. 기존 문서와 파일 객체도 보존."
+    },
+    "A12": {
+      "title": "new revision hash/dependency consistency",
+      "verdict": "PASS",
+      "basis": "새 directory의 9개 JSON canonical bytes와 9개 sidecar, dependency 28개 및 manifest semantic binding 검산. 7개 JSON 재발급, constants/domain 2개 불변."
+    },
+    "A13": {
+      "title": "unrelated semantic change absence",
+      "verdict": "PASS",
+      "basis": "Proof wire의 Attempt reason clarification, 그 dependency hash 및 package history/WIP/review metadata만 변경. V/V′, units, domain, rounding, overflow, methods, B5–B8 의미 불변."
+    },
+    "A14": {
+      "title": "independent state/reason checks",
+      "verdict": "PASS",
+      "basis": "550개 relation: 15 허용 / 535 거부 / 불일치 0. 추가 tuple 경계 probe 68개 통과. 로컬에서 Failure reason 22개도 별도 확인. 작성자 checker를 oracle로 사용하지 않음."
+    },
+    "A15": {
+      "title": "stopped WIP checkpoint preservation",
+      "verdict": "PASS",
+      "basis": "Before receipt의 35개 WIP/evidence 파일 hash와 target 실제 bytes가 35/35 일치. 추가 runtime source 16개 모두 그 목록에 포함. 판정은 기록된 checkpoint→target 보존 범위이며 보이지 않는 작업 이력의 인증이 아님."
+    },
+    "A16": {
+      "title": "no implementation-status promotion",
+      "verdict": "PASS",
+      "basis": "새 package/doc/receipt는 WIP STOPPED / NOT COMPLETED 및 activation false를 명시. 파일 존재를 IMPLEMENTED, AUTHOR CHECKS PASS 또는 J correctness로 승격하지 않음."
+    },
+    "A17": {
+      "title": "Arithmetic antecedent preservation",
+      "verdict": "PASS",
+      "basis": "65d8fd2와 Arithmetic 보호 파일 8개 actual bytes 및 SHA-256 일치. 기존 산술 PASS를 바이트 보존된 antecedent로 유지."
+    },
+    "A18": {
+      "title": "previous closure verdict preservation",
+      "verdict": "PASS",
+      "basis": "8e586596의 역사적 pre-implementation closure PASS와 당시 start=true/activation=false를 보존. 새 gap 발견은 별도 revision으로 기록."
+    },
+    "A19": {
+      "title": "producer continuation gate",
+      "verdict": "PASS",
+      "basis": "이 정정의 규범 blocker가 해소되어 producer boundary continuation을 허용. WIP implementation correctness, V2 agreement 또는 runtime activation을 승인하지 않음."
+    }
+  },
+  "final": {
+    "ATTEMPT-REASON-NULL": "PASS",
+    "spec_revision_canonical_hash_consistency": "PASS",
+    "approved_antecedent_preservation": "PASS",
+    "stopped_WIP_preservation": "PASS",
+    "producer_boundary_continuation_allowed": true
+  },
+  "producer": {
+    "state": "WIP / CONTINUATION ALLOWED / NOT YET IMPLEMENTATION-AUDITED",
+    "implementation_correctness_reviewed": false,
+    "completed": false
+  },
+  "runtime_activation_allowed": false,
+  "impulse": "J_NOT_VERIFIED",
+  "certification": "NotCertified",
+  "arithmetic": {
+    "review": "INDEPENDENT REVIEW PASS",
+    "exact_slow": "DEFAULT",
+    "exact_fast": "EXPERIMENTAL / OPT-IN",
+    "scope": "ARITHMETIC_ONLY"
+  },
+  "historical_parent": {
+    "commit": "8e5865964770b3752326d361276cbccd125c547a",
+    "verdict": "DESIGN / PRE-IMPLEMENTATION CLOSURE PASS",
+    "implementation_may_start": true,
+    "runtime_activation_allowed": false,
+    "changed_by_this_review": false
+  },
+  "not_performed": [
+    "producer numeric execution",
+    "V2 numeric execution",
+    "production pytest",
+    "author spec/static suites",
+    "Impulse mutants",
+    "benchmark",
+    "trajectory",
+    "full replay",
+    "production modifications",
+    "producer continuation",
+    "commit",
+    "push"
+  ],
+  "evidence_limitations": [
+    "WIP preservation is verified against recorded receipt hashes and target bytes, not an independent timestamp attestation or proof about off-repository actions.",
+    "The downloadable Git CLI harness is a cleaned reproducible form of the read-only stdin inspections, not a byte-identical executed remote source file.",
+    "remote_observations.json is a normalized tool-result transcription; local logs/results are actual model-container execution outputs.",
+    "State/reason checks validate specification data and independent interpretations, not WIP runtime rejection behavior."
+  ]
+}

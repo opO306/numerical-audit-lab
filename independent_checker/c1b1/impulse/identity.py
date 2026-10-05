@@ -16,7 +16,7 @@ def bind(obj, spec):
         'executor_source_sha256','acquisition_tool_sha256','previous_occurrence_sha256']}
     occurrence.update(acquisition_record_sha256=acquired,full_state_sha256=full,
                       projection_sha256=proj,atom_roles=roles,axis_order=['x','y','z'])
-    math={'projection_sha256':proj,'methods':spec.identity['payload_schemas']['methods'],
+    math={'projection_sha256':proj,'methods':dict(spec.identity['payload_schemas']['methods']),
           'axis_order':['x','y','z']}
     return {'input_sha256':digest(obj),'full_state_sha256':full,'projection_sha256':proj,
         'math_request_sha256':digest(math,'LAB_C1B1_MATH_REQUEST_V1'),

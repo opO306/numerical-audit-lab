@@ -6,9 +6,17 @@ import json
 from pathlib import Path
 from types import MappingProxyType
 
-SPEC_SHA256 = '11eedb45fc80d8b1f8db1bc5afdceb1754914c5e2f49ba48ad2b4d87d63bb007'
-PACKAGE_SHA256 = '9d430833bb359600b4c9f67f225e9c8a74fb883d6fe119ca8b7c2502b8ce4499'
-SPEC_DIR = Path(__file__).resolve().parents[3] / 'specs/c1b1-independent-impulse-v1'
+SPEC_SHA256 = '3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2bc1'
+PACKAGE_SHA256 = '4a4cad78a192f72cf479cf16ceb971ea257d9bdf89acc5a7ca6e4fea3738219f'
+SPEC_DIR = Path(__file__).resolve().parents[3] / 'specs/c1b1-independent-impulse-v1-attempt-reason-null'
+
+
+def freeze(value):
+    if type(value) is dict:
+        return MappingProxyType({k:freeze(v) for k,v in value.items()})
+    if type(value) is list:
+        return tuple(freeze(v) for v in value)
+    return value
 
 
 @dataclass(frozen=True)
@@ -41,5 +49,5 @@ def load_spec():
            for r in docs['constants.json']['records'] if r['role']=='NOMINAL_MODEL'}
     r=docs['physical-domain.json']['r_min_squared_bohr2']
     return FrozenSpec(SPEC_SHA256,MappingProxyType(package['dependencies']),MappingProxyType(const),
-        Q(int(r['n']),int(r['d'])),docs['proof-wire.json'],docs['acquisition-identity.json'],
+        Q(int(r['n']),int(r['d'])),freeze(docs['proof-wire.json']),freeze(docs['acquisition-identity.json']),
         docs['rechecker-lineage.json']['checker_source']['raw_sha256'])

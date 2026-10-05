@@ -1,0 +1,1 @@
+Initial collect_evidence.py invocation exit1: historical path current/c1b1-impulse-reference-2026-10-05/baseline.json was absent. Correct historical receipt is receipt-before.json. Corrected collector rerun exit0. No old receipt was edited.

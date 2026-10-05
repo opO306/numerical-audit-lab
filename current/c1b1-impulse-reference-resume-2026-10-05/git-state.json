@@ -1,0 +1,22 @@
+{
+  "git rev-parse HEAD": {
+    "exit": 0,
+    "stdout": "bc6cf7a6312951ddefe4e066afa19bedfbeef695\n",
+    "stderr": ""
+  },
+  "git branch --show-current": {
+    "exit": 0,
+    "stdout": "codex/c1b1-fclaim1-output-limit\n",
+    "stderr": ""
+  },
+  "git status --short": {
+    "exit": 0,
+    "stdout": " M independent_checker/c1b1/impulse/certificate.py\n M independent_checker/c1b1/impulse/contracts.py\n M independent_checker/c1b1/impulse/exp_enclosure.py\n M independent_checker/c1b1/impulse/identity.py\n M independent_checker/c1b1/impulse/interval.py\n M independent_checker/c1b1/impulse/policy.py\n M independent_checker/c1b1/impulse/producer.py\n M independent_checker/c1b1/impulse/resource.py\n M independent_checker/c1b1/impulse/rounding.py\n M independent_checker/c1b1/impulse/spec.py\n M independent_checker/c1b1/impulse/sqrt_enclosure.py\n M independent_checker/c1b1/impulse/wire.py\n M tests/impulse_reference_support.py\n?? audit/c1b1-impulse-reference-resume-2026-10-05/\n?? current/c1b1-impulse-reference-resume-2026-10-05/\n?? docs/C1B1_INDEPENDENT_IMPULSE_REFERENCE_AUTHOR_REPORT_2026-10-05.md\n?? independent_checker/c1b1/impulse/attempt.py\n?? independent_checker/c1b1/impulse/rechecker_adapter.py\n?? tests/test_impulse_attempt_runtime.py\n?? tests/test_impulse_mutant_resource_probe.py\n?? tests/test_impulse_rechecker_preparation.py\n?? tests/test_impulse_reference_boundaries.py\n?? tests/test_impulse_resource_allocation.py\n?? tests/test_impulse_review_regressions.py\n",
+    "stderr": ""
+  },
+  "git diff --stat": {
+    "exit": 0,
+    "stdout": " independent_checker/c1b1/impulse/certificate.py    | 10 +---\n independent_checker/c1b1/impulse/contracts.py      | 33 ++++++++++-\n independent_checker/c1b1/impulse/exp_enclosure.py  | 12 ++--\n independent_checker/c1b1/impulse/identity.py       |  2 +-\n independent_checker/c1b1/impulse/interval.py       | 34 ++++++------\n independent_checker/c1b1/impulse/policy.py         |  8 ++-\n independent_checker/c1b1/impulse/producer.py       | 53 ++++++++++++------\n independent_checker/c1b1/impulse/resource.py       | 64 +++++++++++++++++++++-\n independent_checker/c1b1/impulse/rounding.py       | 20 ++++---\n independent_checker/c1b1/impulse/spec.py           | 16 ++++--\n independent_checker/c1b1/impulse/sqrt_enclosure.py |  4 +-\n independent_checker/c1b1/impulse/wire.py           |  9 +--\n tests/impulse_reference_support.py                 |  7 ++-\n 13 files changed, 198 insertions(+), 74 deletions(-)\n",
+    "stderr": ""
+  }
+}

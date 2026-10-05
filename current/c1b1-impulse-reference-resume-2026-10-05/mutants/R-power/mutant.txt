@@ -1,0 +1,19 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_____________________ test_exact_long_derivative_identity _____________________
+
+    def test_exact_long_derivative_identity():
+        m=module('interval');p=module('potential');d=module('derivative')
+        # Independent derivative of -3*5*R^-4 with a specified damping slope 7:
+        # -3*(7/R^4 - 4*5/R^5), at R=2, is 9/16.
+        terms=p.Terms((),(p.LongTerm(m.point(3),2,m.point(5),m.point(7),m.point(2)),),())
+        result=d.derivative(terms,context())
+>       assert result.lo==result.hi==Q(9,16)
+E       assert Fraction(39, 16) == Fraction(9, 16)
+E        +  where Fraction(39, 16) = Interval(lo=Fraction(39, 16), hi=Fraction(39, 16)).hi
+E        +  and   Fraction(9, 16) = Q(9, 16)
+
+tests\test_impulse_reference_boundaries.py:53: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_impulse_reference_boundaries.py::test_exact_long_derivative_identity
+1 failed in 0.38s

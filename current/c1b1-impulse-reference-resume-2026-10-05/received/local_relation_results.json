@@ -1,0 +1,457 @@
+{
+  "target": "bc6cf7a6312951ddefe4e066afa19bedfbeef695",
+  "execution": "MODEL CONTAINER / SPEC ONLY",
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "table_sha256": "86f39d2967fb4ce272ff54c3b17570fccd0f7300e34d7d22f497067918b1e21e",
+  "rows": 25,
+  "nonempty_pairs": 8,
+  "empty_pairs": 17,
+  "relation_count": 550,
+  "valid": 15,
+  "invalid": 535,
+  "mismatches": [],
+  "additional_tuple_probes": 68,
+  "probes": [
+    {
+      "case": "normal NOT_RUN",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "case": "normal ACCEPTED",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "case": "missing N",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "missing P",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "missing producer",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "missing reason",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "missing rechecker",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "missing t",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "extra key",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "invalid reason 'null'",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "invalid reason ''",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "invalid reason 'SUCCESS'",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "invalid reason 'OK'",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "invalid reason 'RESOLVED_SUCCESS'",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "invalid reason 'PASS'",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "invalid reason 'NONE'",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "invalid reason False",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "invalid reason True",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "invalid reason 0",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "invalid reason []",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "invalid reason {}",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "('RESOLVED', 'NOT_PROVED', 'RECHECK_UNPROVED')",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "case": "('RESOLVED', 'REJECTED', 'RECHECK_REJECTED')",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "case": "('RESOLVED', 'NOT_PROVED', None)",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "('RESOLVED', 'NOT_RUN', 'ROUNDING_UNPROVED')",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "('UNPROVED', 'NOT_RUN', None)",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "('RESOLVED', 'NOT_RUN', 'RECHECK_REJECTED')",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "('UNKNOWN', 'NOT_RUN', None)",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "('RESOLVED', 'UNKNOWN', None)",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "t minimum",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "case": "t below minimum",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "t invalid None",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "t invalid False",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "t invalid 8",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "t invalid 8.0",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "t invalid '01'",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "t invalid '+8'",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "t invalid '-0'",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "t invalid '8 '",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "t invalid '\u0668'",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "t 4096 digits",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "case": "t 4097 digits",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "N minimum",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "case": "N below minimum",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "N invalid None",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "N invalid False",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "N invalid 8",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "N invalid 8.0",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "N invalid '01'",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "N invalid '+8'",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "N invalid '-0'",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "N invalid '8 '",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "N invalid '\u0668'",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "N 4096 digits",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "case": "N 4097 digits",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "P minimum",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "case": "P below minimum",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "P invalid None",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "P invalid False",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "P invalid 8",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "P invalid 8.0",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "P invalid '01'",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "P invalid '+8'",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "P invalid '-0'",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "P invalid '8 '",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "P invalid '\u0668'",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "case": "P 4096 digits",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "case": "P 4097 digits",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "failure_reason_probes": [
+    {
+      "reason": null,
+      "accepted": false
+    },
+    {
+      "reason": "SCHEMA_INVALID",
+      "accepted": true
+    },
+    {
+      "reason": "BINDING_MISMATCH",
+      "accepted": true
+    },
+    {
+      "reason": "POLICY_UNBOUND",
+      "accepted": true
+    },
+    {
+      "reason": "SINGULAR_SEPARATION",
+      "accepted": true
+    },
+    {
+      "reason": "PHYSICAL_DOMAIN",
+      "accepted": true
+    },
+    {
+      "reason": "RAW_UNREPRESENTABLE",
+      "accepted": true
+    },
+    {
+      "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+      "accepted": true
+    },
+    {
+      "reason": "RESOURCE_CAP",
+      "accepted": true
+    },
+    {
+      "reason": "ROUNDING_UNPROVED",
+      "accepted": true
+    },
+    {
+      "reason": "RECHECK_UNPROVED",
+      "accepted": true
+    },
+    {
+      "reason": "RECHECK_REJECTED",
+      "accepted": true
+    },
+    {
+      "reason": "ACQUISITION_NOT_AVAILABLE",
+      "accepted": true
+    },
+    {
+      "reason": "EXECUTOR_MISMATCH",
+      "accepted": true
+    },
+    {
+      "reason": "ARITHMETIC_REFUSED",
+      "accepted": true
+    },
+    {
+      "reason": "ARTIFACT_LIMIT",
+      "accepted": true
+    },
+    {
+      "reason": "HOST_SERIALIZATION_LIMIT",
+      "accepted": true
+    },
+    {
+      "reason": "PROGRAMMING_ANOMALY",
+      "accepted": true
+    },
+    {
+      "reason": "null",
+      "accepted": false
+    },
+    {
+      "reason": "",
+      "accepted": false
+    },
+    {
+      "reason": "SUCCESS",
+      "accepted": false
+    },
+    {
+      "reason": "UNKNOWN_REASON",
+      "accepted": false
+    }
+  ],
+  "digest": {
+    "H0": "71440aac921a3a7ccda50b94757d27b25b8d1479f074cdabbcf80d37e62bb0cb",
+    "H1": "4127e8735c008c88f0e9105fe8e895d60bc7776a778277763bf8d6bb940aa41e",
+    "H2": "68b7991569c1fbb2b0b758c70638eee84c972f370df07fd8c27c5fe845290ecc",
+    "first_tuple_ascii": "{\"N\":\"128\",\"P\":\"128\",\"producer\":\"RESOLVED\",\"reason\":null,\"rechecker\":\"NOT_RUN\",\"t\":\"0\"}\n"
+  },
+  "process_limit_before": 4300,
+  "process_limit_after": 4300,
+  "all_pass": true,
+  "producer_or_V2_imported": false,
+  "source_code_under_audit_executed": false
+}

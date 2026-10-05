@@ -47,17 +47,18 @@ def canonical_bytes(obj, cap=1048576):
             raise WireFailure('ARTIFACT_LIMIT', 'ARTIFACT_BYTES')
         chunks.append(piece)
     def visit(value, depth=1):
-        if depth > 7:
+        if type(value) in (dict,list) and depth > 7:
             raise WireFailure('SCHEMA_INVALID')
         if value is None:
             emit(b'null')
         elif type(value) is str:
             if len(value) > cap - size:
                 raise WireFailure('ARTIFACT_LIMIT', 'ARTIFACT_BYTES')
-            emit(b'"')
+            predicted=2
             for char in value:
-                emit(json.dumps(char, ensure_ascii=True)[1:-1].encode('ascii'))
-            emit(b'"')
+                predicted+=len(json.dumps(char,ensure_ascii=True))-2
+                if predicted>cap-size:raise WireFailure('ARTIFACT_LIMIT','ARTIFACT_BYTES')
+            emit(json.dumps(value,ensure_ascii=True).encode('ascii'))
         elif type(value) is dict:
             if any(type(k) is not str for k in value):
                 raise WireFailure('SCHEMA_INVALID')

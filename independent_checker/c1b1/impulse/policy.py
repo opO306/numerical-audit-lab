@@ -1,6 +1,6 @@
 """Internal author reference controls. Not an issued/approved runtime Budget."""
 from dataclasses import dataclass
-from .resource import ResourceAccount, ResourceLimit
+from .resource import ResourceAccount, ResourceLimit, AUTHOR_ALLOCATION_BASIS
 
 
 @dataclass(frozen=True)
@@ -19,6 +19,8 @@ class ReferencePolicy:
     legacy_sqrt_bits_max: int
     legacy_work_bits_max: int
     legacy_order_max: int
+    temporary_allocation_bytes: int
+    live_allocation_bytes: int
 
     def __post_init__(self):
         if any(type(v) is not int or v <= 0 for v in vars(self).values()):
@@ -28,7 +30,9 @@ class ReferencePolicy:
 
     def account(self):
         return ResourceAccount(bit_max=self.integer_bit_max,num_bit_max=self.rational_num_bit_max,
-            den_bit_max=self.rational_den_bit_max,work_max=self.work_unit_max)
+            den_bit_max=self.rational_den_bit_max,work_max=self.work_unit_max,
+            allocation_basis=AUTHOR_ALLOCATION_BASIS,temp_max=self.temporary_allocation_bytes,
+            live_max=self.live_allocation_bytes)
 
     def attempts(self):
         n,p=self.N0,self.P0

@@ -3,7 +3,7 @@ import json
 from fractions import Fraction as Q
 from pathlib import Path
 
-SPEC_ID='11eedb45fc80d8b1f8db1bc5afdceb1754914c5e2f49ba48ad2b4d87d63bb007'
+SPEC_ID='3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2bc1'
 
 
 def input_object(q=(6,2,1)):
@@ -13,11 +13,12 @@ def input_object(q=(6,2,1)):
         state['atoms'].append({'atom_id':str(idx+1)*64,'species':'Ar40',
             'position_raw':[str(int(Q(x)*(1<<48))) for x in pos],
             'momentum_raw':['0','0','0']})
-    fields=json.loads(Path('specs/c1b1-independent-impulse-v1/finite-policy.json').read_text())['required_instance_fields']
+    fields=json.loads(Path('specs/c1b1-independent-impulse-v1-attempt-reason-null/finite-policy.json').read_text())['required_instance_fields']
     budget={k:'1' for k in fields}
     budget.update(N0='128',P0='128',N_max='512',P_max='512',max_attempts='3',exp_order_max='512',
         integer_bit_max='100000',rational_num_bit_max='100000',rational_den_bit_max='100000',
         work_unit_max=str(10**40),input_parse_bytes='1048576',private_certificate_bytes='1048576',
+        temporary_allocation_bytes=str(10**12),live_allocation_bytes=str(10**15),
         legacy_sqrt_bits_max='512',legacy_work_bits_max='512',legacy_order_max='1000000',
         basis_record_sha256='a'*64,issuer_sha256='b'*64,profile_version='1')
     return {'schema':'LAB_C1B1_IMPULSE_INPUT_V1','spec_sha256':SPEC_ID,'state':state,'budget':budget,
@@ -42,7 +43,7 @@ def nominal_diagnostic(R):
     producer's derivative, exp or interval helpers.
     """
     import mpmath as mp
-    records=json.loads(Path('specs/c1b1-independent-impulse-v1/constants.json').read_text())['records']
+    records=json.loads(Path('specs/c1b1-independent-impulse-v1-attempt-reason-null/constants.json').read_text())['records']
     c={r['key']:mp.mpf(r['lab_canonical']['n'])/mp.mpf(r['lab_canonical']['d'])
        for r in records if r['role']=='NOMINAL_MODEL'}
     def value(r):

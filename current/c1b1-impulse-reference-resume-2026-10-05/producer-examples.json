@@ -1,0 +1,202 @@
+{
+  "examples": [
+    {
+      "name": "off-axis",
+      "q": [
+        6,
+        2,
+        1
+      ],
+      "input_sha256": "907c7529a7091504e8615e12d09afc4b09d2e62718787babab1bf7d9777ac92b",
+      "layers": {
+        "producer": "RESOLVED",
+        "rechecker": "NOT_RUN",
+        "executor_comparison": "NOT_RUN",
+        "arithmetic": "NOT_RUN",
+        "publication": "NOT_PUBLISHED",
+        "execution": "STOP"
+      },
+      "raw": [
+        31869634233294022473369,
+        10623211411098007491123,
+        5311605705549003745562
+      ],
+      "opposite": [
+        -31869634233294022473369,
+        -10623211411098007491123,
+        -5311605705549003745562
+      ],
+      "account": {
+        "mathematical_work": 2600184624024338313,
+        "operations": 35411,
+        "peak_integer_bits": 13269,
+        "predicted_live_bytes": 91496288,
+        "peak_temporary_bytes": 14688,
+        "allocation_basis": "AUTHOR_FIXTURE_MODEL_UNVALIDATED"
+      },
+      "failure": null,
+      "input_unchanged": true,
+      "label": "AUTHOR NUMERICAL EXAMPLE; PRIVATE; NOT A PHYSICAL PASS"
+    },
+    {
+      "name": "opposite",
+      "q": [
+        -6,
+        -2,
+        -1
+      ],
+      "input_sha256": "b303da4054897b96744dabffe07d2f7fb666601fa3498f9ea200942a9b5a95c7",
+      "layers": {
+        "producer": "RESOLVED",
+        "rechecker": "NOT_RUN",
+        "executor_comparison": "NOT_RUN",
+        "arithmetic": "NOT_RUN",
+        "publication": "NOT_PUBLISHED",
+        "execution": "STOP"
+      },
+      "raw": [
+        -31869634233294022473369,
+        -10623211411098007491123,
+        -5311605705549003745562
+      ],
+      "opposite": [
+        31869634233294022473369,
+        10623211411098007491123,
+        5311605705549003745562
+      ],
+      "account": {
+        "mathematical_work": 2600184614317445652,
+        "operations": 35411,
+        "peak_integer_bits": 13269,
+        "predicted_live_bytes": 91495616,
+        "peak_temporary_bytes": 14688,
+        "allocation_basis": "AUTHOR_FIXTURE_MODEL_UNVALIDATED"
+      },
+      "failure": null,
+      "input_unchanged": true,
+      "label": "AUTHOR NUMERICAL EXAMPLE; PRIVATE; NOT A PHYSICAL PASS"
+    },
+    {
+      "name": "zero-axis",
+      "q": [
+        0,
+        6,
+        1
+      ],
+      "input_sha256": "204bcdfec03378bc3416ce9623a9c015cba91357faf13bc49d7a1508a77e3550",
+      "layers": {
+        "producer": "RESOLVED",
+        "rechecker": "NOT_RUN",
+        "executor_comparison": "NOT_RUN",
+        "arithmetic": "NOT_RUN",
+        "publication": "NOT_PUBLISHED",
+        "execution": "STOP"
+      },
+      "raw": [
+        0,
+        77538719082167436820196,
+        12923119847027906136699
+      ],
+      "opposite": [
+        0,
+        -77538719082167436820196,
+        -12923119847027906136699
+      ],
+      "account": {
+        "mathematical_work": 2582493892605611878,
+        "operations": 35168,
+        "peak_integer_bits": 13404,
+        "predicted_live_bytes": 90410624,
+        "peak_temporary_bytes": 14816,
+        "allocation_basis": "AUTHOR_FIXTURE_MODEL_UNVALIDATED"
+      },
+      "failure": null,
+      "input_unchanged": true,
+      "label": "AUTHOR NUMERICAL EXAMPLE; PRIVATE; NOT A PHYSICAL PASS"
+    },
+    {
+      "name": "known-unproved",
+      "q": [
+        0,
+        6,
+        1
+      ],
+      "input_sha256": "91c14bf32bc267fcf6c87d6202ea7ca7f18c0b68c7afa3de6476bedfcca0108d",
+      "layers": {
+        "producer": "UNPROVED",
+        "rechecker": "NOT_RUN",
+        "executor_comparison": "NOT_RUN",
+        "arithmetic": "NOT_RUN",
+        "publication": "NOT_PUBLISHED",
+        "execution": "STOP"
+      },
+      "raw": null,
+      "opposite": null,
+      "account": null,
+      "failure": {
+        "attempt_count": null,
+        "attempt_digest": "6ce6076de7728ac7584cc45369ce008a0863d7e8a837cd2f3ca66816e1e9af2a",
+        "budget_sha256": "5c0553e91e53e2b384fa3e58b315855b7b3ad0a67b40d3117bbfe130f79c7221",
+        "occurrence_sha256": "9b0a968bf14bf2d14c31dd23c0fc554573bb0eefc162059b065eb8b9c8f66a8d",
+        "phase": "COMPUTE",
+        "reason": "RESOURCE_CAP",
+        "resource_kind": "ORDER",
+        "schema": "LAB_C1B1_IMPULSE_FAILURE_V1",
+        "spec_sha256": "3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2bc1",
+        "state_sha256": "255f4cc28772a9044bd4e77d768b083255fbf3a8436fce7be436eecc3b0e04f2",
+        "status": {
+          "arithmetic": "NOT_RUN",
+          "execution": "STOP",
+          "executor_comparison": "NOT_RUN",
+          "producer": "UNPROVED",
+          "publication": "NOT_PUBLISHED",
+          "rechecker": "NOT_RUN"
+        }
+      },
+      "input_unchanged": true,
+      "label": "AUTHOR NUMERICAL EXAMPLE; PRIVATE; NOT A PHYSICAL PASS"
+    }
+  ],
+  "runtime_activation_allowed": false,
+  "runtime_failure": {
+    "attempt_count": null,
+    "attempt_digest": null,
+    "budget_sha256": "211b35b6b2f68b8c9c3186b8cf74e10f5dee3c5e15db7c4c5287febca6b0a3c5",
+    "occurrence_sha256": "0d782ea48168b2c1a5e2090335b52ab774b0dbc1651fdbf63851888c373aa126",
+    "phase": "POLICY",
+    "reason": "POLICY_UNBOUND",
+    "resource_kind": null,
+    "schema": "LAB_C1B1_IMPULSE_FAILURE_V1",
+    "spec_sha256": "3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2bc1",
+    "state_sha256": "0f49da3cd62e70b1d9d36dec362a67470a434304a64e16482e0bd562fdfa3227",
+    "status": {
+      "arithmetic": "NOT_RUN",
+      "execution": "STOP",
+      "executor_comparison": "NOT_RUN",
+      "producer": "REFUSED",
+      "publication": "NOT_PUBLISHED",
+      "rechecker": "NOT_RUN"
+    }
+  },
+  "new_V2_numeric_calls": 0,
+  "loaded_impulse_modules": [
+    "independent_checker.c1b1.impulse",
+    "independent_checker.c1b1.impulse.attempt",
+    "independent_checker.c1b1.impulse.certificate",
+    "independent_checker.c1b1.impulse.contracts",
+    "independent_checker.c1b1.impulse.derivative",
+    "independent_checker.c1b1.impulse.domain",
+    "independent_checker.c1b1.impulse.exp_enclosure",
+    "independent_checker.c1b1.impulse.identity",
+    "independent_checker.c1b1.impulse.interval",
+    "independent_checker.c1b1.impulse.policy",
+    "independent_checker.c1b1.impulse.potential",
+    "independent_checker.c1b1.impulse.producer",
+    "independent_checker.c1b1.impulse.resource",
+    "independent_checker.c1b1.impulse.rounding",
+    "independent_checker.c1b1.impulse.spec",
+    "independent_checker.c1b1.impulse.sqrt_enclosure",
+    "independent_checker.c1b1.impulse.wire"
+  ],
+  "forbidden_loaded_modules": []
+}

@@ -1,0 +1,3852 @@
+[
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_RUN",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ACCEPTED",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "REJECTED",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "NOT_PROVED",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "NOT_STARTED",
+    "rechecker": "ERROR",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": null,
+    "expected": true,
+    "observed": true
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": null,
+    "expected": true,
+    "observed": true
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ACCEPTED",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "RECHECK_REJECTED",
+    "expected": true,
+    "observed": true
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "REJECTED",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "RECHECK_UNPROVED",
+    "expected": true,
+    "observed": true
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": true,
+    "observed": true
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "RESOLVED",
+    "rechecker": "ERROR",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "RESOURCE_CAP",
+    "expected": true,
+    "observed": true
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": true,
+    "observed": true
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_RUN",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ACCEPTED",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "REJECTED",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "NOT_PROVED",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "UNPROVED",
+    "rechecker": "ERROR",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "SCHEMA_INVALID",
+    "expected": true,
+    "observed": true
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "BINDING_MISMATCH",
+    "expected": true,
+    "observed": true
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "POLICY_UNBOUND",
+    "expected": true,
+    "observed": true
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": true,
+    "observed": true
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": true,
+    "observed": true
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": true,
+    "observed": true
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": true,
+    "observed": true
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_RUN",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ACCEPTED",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "REJECTED",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "NOT_PROVED",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "REFUSED",
+    "rechecker": "ERROR",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": true,
+    "observed": true
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_RUN",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ACCEPTED",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "REJECTED",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "NOT_PROVED",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": null,
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "SCHEMA_INVALID",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "BINDING_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "POLICY_UNBOUND",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "SINGULAR_SEPARATION",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "PHYSICAL_DOMAIN",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "OPPOSITE_RAW_UNREPRESENTABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "RESOURCE_CAP",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "ROUNDING_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "RECHECK_UNPROVED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "RECHECK_REJECTED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "ACQUISITION_NOT_AVAILABLE",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "EXECUTOR_MISMATCH",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "ARITHMETIC_REFUSED",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "ARTIFACT_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "HOST_SERIALIZATION_LIMIT",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "PROGRAMMING_ANOMALY",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "null",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "SUCCESS",
+    "expected": false,
+    "observed": false
+  },
+  {
+    "producer": "ERROR",
+    "rechecker": "ERROR",
+    "reason": "UNKNOWN_REASON",
+    "expected": false,
+    "observed": false
+  }
+]
