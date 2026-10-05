@@ -14,6 +14,9 @@ from independent_checker.c1b1.impulse.rounding import nearest_even
 
 FIXTURE = Path(__file__).parent / 'fixtures/impulse_round_add/COUNTEREXAMPLE_INPUT.json'
 W = 2605253326086889986
+# Observed after both account fixes; author fixture boundary, not an approved
+# production budget or proof of global work-model completeness.
+W2 = 2605253326092204528
 EXPECTED_RAW = (
     52119986341579705480988,
     31271991804947823288593,
@@ -81,16 +84,46 @@ def test_canonical_whole_call_refuses_at_old_exact_cap():
     assert obj == before and data == encoded(obj)
 
 
-def test_canonical_whole_call_exact_additional_room_preserves_raw():
+def test_canonical_whole_call_old_round_add_only_room_refuses_after_qdiv_fix():
     obj = json.loads(FIXTURE.read_bytes())
     obj['budget']['work_unit_max'] = str(W + 152)
     before = copy.deepcopy(obj)
     data = encoded(obj)
     result = evaluate_reference(data, reference_policy(obj))
+    assert result.raw is result.opposite is result.certificate is None
+    failure = json.loads(result.failure)
+    assert (failure['reason'], failure['resource_kind']) == ('RESOURCE_CAP', 'WORK')
+    assert result.layers['publication'] == 'NOT_PUBLISHED'
+    assert result.layers['execution'] == 'STOP'
+    assert obj == before and data == encoded(obj)
+
+
+def test_canonical_whole_call_refuses_one_below_new_observed_work():
+    obj = json.loads(FIXTURE.read_bytes())
+    obj['budget']['work_unit_max'] = str(W2 - 1)
+    before = copy.deepcopy(obj)
+    data = encoded(obj)
+    result = evaluate_reference(data, reference_policy(obj))
+    assert result.raw is result.opposite is result.certificate is None
+    failure = json.loads(result.failure)
+    assert (failure['reason'], failure['resource_kind'], failure['phase']) == (
+        'RESOURCE_CAP', 'WORK', 'PUBLICATION')
+    assert result.layers['producer'] == 'RESOLVED'
+    assert result.layers['publication'] == 'NOT_PUBLISHED'
+    assert result.layers['execution'] == 'STOP'
+    assert obj == before and data == encoded(obj)
+
+
+def test_canonical_whole_call_new_observed_work_preserves_raw():
+    obj = json.loads(FIXTURE.read_bytes())
+    obj['budget']['work_unit_max'] = str(W2)
+    before = copy.deepcopy(obj)
+    data = encoded(obj)
+    result = evaluate_reference(data, reference_policy(obj))
     assert result.failure is None and result.raw == EXPECTED_RAW
     assert result.opposite == tuple(-v for v in EXPECTED_RAW)
-    assert result.account['mathematical_work'] == W + 152
-    assert result.account['operations'] == 35236
+    assert result.account['mathematical_work'] == W2
+    assert result.account['operations'] == 36826
     assert result.layers['producer'] == 'RESOLVED'
     assert result.layers['publication'] == 'NOT_PUBLISHED'
     assert result.layers['execution'] == 'STOP'

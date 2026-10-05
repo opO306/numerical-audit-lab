@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="7" time="0.435" timestamp="2026-10-05T13:17:14.587026+09:00" hostname="으악"><testcase classname="tests.test_impulse_reference_primitives" name="test_even_odd_cell_and_negative_ties[lo0-hi0-2]" time="0.024" /><testcase classname="tests.test_impulse_reference_primitives" name="test_even_odd_cell_and_negative_ties[lo1-hi1-2]" time="0.001" /><testcase classname="tests.test_impulse_reference_primitives" name="test_even_odd_cell_and_negative_ties[lo2-hi2-2]" time="0.001" /><testcase classname="tests.test_impulse_reference_primitives" name="test_even_odd_cell_and_negative_ties[lo3-hi3--2]" time="0.001" /><testcase classname="tests.test_impulse_reference_primitives" name="test_even_odd_cell_and_negative_ties[lo4-hi4-None]" time="0.001"><failure message="assert 2 == None&#10; +  where 2 = Decision(raw=2, reason=None).raw">lo = Fraction(5, 2), hi = Fraction(7, 2), raw = None
+
+    @pytest.mark.parametrize('lo,hi,raw',[(Q(7,4),Q(9,4),2),(Q(3,2),Q(3,2),2),
+        (Q(5,2),Q(5,2),2),(Q(-5,2),Q(-5,2),-2),(Q(5,2),Q(7,2),None),
+        (Q(-7,2),Q(-5,2),None),(Q(49,100),Q(51,100),None)])
+    def test_even_odd_cell_and_negative_ties(lo,hi,raw):
+        d=module('rounding').decide_scaled(module('interval').Interval(lo,hi))
+&gt;       assert d.raw==raw
+E       assert 2 == None
+E        +  where 2 = Decision(raw=2, reason=None).raw
+
+tests\test_impulse_reference_primitives.py:75: AssertionError</failure></testcase><testcase classname="tests.test_impulse_reference_primitives" name="test_even_odd_cell_and_negative_ties[lo5-hi5-None]" time="0.001"><failure message="assert -4 == None&#10; +  where -4 = Decision(raw=-4, reason=None).raw">lo = Fraction(-7, 2), hi = Fraction(-5, 2), raw = None
+
+    @pytest.mark.parametrize('lo,hi,raw',[(Q(7,4),Q(9,4),2),(Q(3,2),Q(3,2),2),
+        (Q(5,2),Q(5,2),2),(Q(-5,2),Q(-5,2),-2),(Q(5,2),Q(7,2),None),
+        (Q(-7,2),Q(-5,2),None),(Q(49,100),Q(51,100),None)])
+    def test_even_odd_cell_and_negative_ties(lo,hi,raw):
+        d=module('rounding').decide_scaled(module('interval').Interval(lo,hi))
+&gt;       assert d.raw==raw
+E       assert -4 == None
+E        +  where -4 = Decision(raw=-4, reason=None).raw
+
+tests\test_impulse_reference_primitives.py:75: AssertionError</failure></testcase><testcase classname="tests.test_impulse_reference_primitives" name="test_even_odd_cell_and_negative_ties[lo6-hi6-None]" time="0.001"><failure message="assert 0 == None&#10; +  where 0 = Decision(raw=0, reason=None).raw">lo = Fraction(49, 100), hi = Fraction(51, 100), raw = None
+
+    @pytest.mark.parametrize('lo,hi,raw',[(Q(7,4),Q(9,4),2),(Q(3,2),Q(3,2),2),
+        (Q(5,2),Q(5,2),2),(Q(-5,2),Q(-5,2),-2),(Q(5,2),Q(7,2),None),
+        (Q(-7,2),Q(-5,2),None),(Q(49,100),Q(51,100),None)])
+    def test_even_odd_cell_and_negative_ties(lo,hi,raw):
+        d=module('rounding').decide_scaled(module('interval').Interval(lo,hi))
+&gt;       assert d.raw==raw
+E       assert 0 == None
+E        +  where 0 = Decision(raw=0, reason=None).raw
+
+tests\test_impulse_reference_primitives.py:75: AssertionError</failure></testcase></testsuite></testsuites>

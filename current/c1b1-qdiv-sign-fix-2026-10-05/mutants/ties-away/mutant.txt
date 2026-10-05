@@ -1,0 +1,19 @@
+..F....                                                                  [100%]
+================================== FAILURES ===================================
+_______________ test_even_odd_cell_and_negative_ties[lo2-hi2-2] _______________
+
+lo = Fraction(5, 2), hi = Fraction(5, 2), raw = 2
+
+    @pytest.mark.parametrize('lo,hi,raw',[(Q(7,4),Q(9,4),2),(Q(3,2),Q(3,2),2),
+        (Q(5,2),Q(5,2),2),(Q(-5,2),Q(-5,2),-2),(Q(5,2),Q(7,2),None),
+        (Q(-7,2),Q(-5,2),None),(Q(49,100),Q(51,100),None)])
+    def test_even_odd_cell_and_negative_ties(lo,hi,raw):
+        d=module('rounding').decide_scaled(module('interval').Interval(lo,hi))
+>       assert d.raw==raw
+E       AssertionError: assert None == 2
+E        +  where None = Decision(raw=None, reason='ROUNDING_UNPROVED').raw
+
+tests\test_impulse_reference_primitives.py:75: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_impulse_reference_primitives.py::test_even_odd_cell_and_negative_ties[lo2-hi2-2]
+1 failed, 6 passed in 0.40s

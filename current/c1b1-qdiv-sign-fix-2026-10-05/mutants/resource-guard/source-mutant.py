@@ -55,7 +55,7 @@ class ResourceAccount:
         self.predicted_live_bytes=self.peak_temporary_bytes=0
 
     def pre(self, bits, work):
-        if bits > self.bit_max:
+        if bits > self.bit_max and False:
             raise ResourceLimit('BIT')
         if work > self.work_max - self.work:
             raise ResourceLimit('WORK')

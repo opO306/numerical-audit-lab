@@ -1,0 +1,92 @@
+FFFFFF.....                                                              [100%]
+================================== FAILURES ===================================
+___________ test_qdiv_sign_refuses_under_complete_cost[40-divisor0] ___________
+
+divisor = Fraction(1, 1), cap = 40
+
+    @pytest.mark.parametrize('divisor', [Q(1), Q(-1)])
+    @pytest.mark.parametrize('cap', [40, 43])
+    def test_qdiv_sign_refuses_under_complete_cost(divisor, cap):
+        c = account(cap)
+>       with pytest.raises(ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_qdiv_sign_accounting.py:18: Failed
+___________ test_qdiv_sign_refuses_under_complete_cost[40-divisor1] ___________
+
+divisor = Fraction(-1, 1), cap = 40
+
+    @pytest.mark.parametrize('divisor', [Q(1), Q(-1)])
+    @pytest.mark.parametrize('cap', [40, 43])
+    def test_qdiv_sign_refuses_under_complete_cost(divisor, cap):
+        c = account(cap)
+>       with pytest.raises(ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_qdiv_sign_accounting.py:18: Failed
+___________ test_qdiv_sign_refuses_under_complete_cost[43-divisor0] ___________
+
+divisor = Fraction(1, 1), cap = 43
+
+    @pytest.mark.parametrize('divisor', [Q(1), Q(-1)])
+    @pytest.mark.parametrize('cap', [40, 43])
+    def test_qdiv_sign_refuses_under_complete_cost(divisor, cap):
+        c = account(cap)
+>       with pytest.raises(ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_qdiv_sign_accounting.py:18: Failed
+___________ test_qdiv_sign_refuses_under_complete_cost[43-divisor1] ___________
+
+divisor = Fraction(-1, 1), cap = 43
+
+    @pytest.mark.parametrize('divisor', [Q(1), Q(-1)])
+    @pytest.mark.parametrize('cap', [40, 43])
+    def test_qdiv_sign_refuses_under_complete_cost(divisor, cap):
+        c = account(cap)
+>       with pytest.raises(ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_qdiv_sign_accounting.py:18: Failed
+______________ test_qdiv_sign_at_exact_cost[divisor0-expected0] _______________
+
+divisor = Fraction(1, 1), expected = Fraction(1, 1)
+
+    @pytest.mark.parametrize('divisor,expected', [(Q(1), Q(1)), (Q(-1), Q(-1))])
+    def test_qdiv_sign_at_exact_cost(divisor, expected):
+        c = account(44)
+        assert c.qdiv(Q(1), divisor) == expected
+>       assert (c.work, c.operations) == (44, 4)
+E       assert (40, 3) == (44, 4)
+E         
+E         At index 0 diff: 40 != 44
+E         Use -v to get more diff
+
+tests\test_impulse_qdiv_sign_accounting.py:29: AssertionError
+______________ test_qdiv_sign_at_exact_cost[divisor1-expected1] _______________
+
+divisor = Fraction(-1, 1), expected = Fraction(-1, 1)
+
+    @pytest.mark.parametrize('divisor,expected', [(Q(1), Q(1)), (Q(-1), Q(-1))])
+    def test_qdiv_sign_at_exact_cost(divisor, expected):
+        c = account(44)
+        assert c.qdiv(Q(1), divisor) == expected
+>       assert (c.work, c.operations) == (44, 4)
+E       assert (40, 3) == (44, 4)
+E         
+E         At index 0 diff: 40 != 44
+E         Use -v to get more diff
+
+tests\test_impulse_qdiv_sign_accounting.py:29: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_impulse_qdiv_sign_accounting.py::test_qdiv_sign_refuses_under_complete_cost[40-divisor0]
+FAILED tests/test_impulse_qdiv_sign_accounting.py::test_qdiv_sign_refuses_under_complete_cost[40-divisor1]
+FAILED tests/test_impulse_qdiv_sign_accounting.py::test_qdiv_sign_refuses_under_complete_cost[43-divisor0]
+FAILED tests/test_impulse_qdiv_sign_accounting.py::test_qdiv_sign_refuses_under_complete_cost[43-divisor1]
+FAILED tests/test_impulse_qdiv_sign_accounting.py::test_qdiv_sign_at_exact_cost[divisor0-expected0]
+FAILED tests/test_impulse_qdiv_sign_accounting.py::test_qdiv_sign_at_exact_cost[divisor1-expected1]
+6 failed, 5 passed in 0.74s

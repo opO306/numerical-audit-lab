@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="6" skipped="0" tests="11" time="0.666" timestamp="2026-10-05T13:12:23.514510+09:00" hostname="으악"><testcase classname="tests.test_impulse_qdiv_sign_accounting" name="test_qdiv_sign_refuses_under_complete_cost[40-divisor0]" time="0.001"><failure message="Failed: DID NOT RAISE ResourceLimit">divisor = Fraction(1, 1), cap = 40
+
+    @pytest.mark.parametrize('divisor', [Q(1), Q(-1)])
+    @pytest.mark.parametrize('cap', [40, 43])
+    def test_qdiv_sign_refuses_under_complete_cost(divisor, cap):
+        c = account(cap)
+&gt;       with pytest.raises(ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_qdiv_sign_accounting.py:18: Failed</failure></testcase><testcase classname="tests.test_impulse_qdiv_sign_accounting" name="test_qdiv_sign_refuses_under_complete_cost[40-divisor1]" time="0.001"><failure message="Failed: DID NOT RAISE ResourceLimit">divisor = Fraction(-1, 1), cap = 40
+
+    @pytest.mark.parametrize('divisor', [Q(1), Q(-1)])
+    @pytest.mark.parametrize('cap', [40, 43])
+    def test_qdiv_sign_refuses_under_complete_cost(divisor, cap):
+        c = account(cap)
+&gt;       with pytest.raises(ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_qdiv_sign_accounting.py:18: Failed</failure></testcase><testcase classname="tests.test_impulse_qdiv_sign_accounting" name="test_qdiv_sign_refuses_under_complete_cost[43-divisor0]" time="0.001"><failure message="Failed: DID NOT RAISE ResourceLimit">divisor = Fraction(1, 1), cap = 43
+
+    @pytest.mark.parametrize('divisor', [Q(1), Q(-1)])
+    @pytest.mark.parametrize('cap', [40, 43])
+    def test_qdiv_sign_refuses_under_complete_cost(divisor, cap):
+        c = account(cap)
+&gt;       with pytest.raises(ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_qdiv_sign_accounting.py:18: Failed</failure></testcase><testcase classname="tests.test_impulse_qdiv_sign_accounting" name="test_qdiv_sign_refuses_under_complete_cost[43-divisor1]" time="0.001"><failure message="Failed: DID NOT RAISE ResourceLimit">divisor = Fraction(-1, 1), cap = 43
+
+    @pytest.mark.parametrize('divisor', [Q(1), Q(-1)])
+    @pytest.mark.parametrize('cap', [40, 43])
+    def test_qdiv_sign_refuses_under_complete_cost(divisor, cap):
+        c = account(cap)
+&gt;       with pytest.raises(ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_qdiv_sign_accounting.py:18: Failed</failure></testcase><testcase classname="tests.test_impulse_qdiv_sign_accounting" name="test_qdiv_sign_at_exact_cost[divisor0-expected0]" time="0.001"><failure message="assert (40, 3) == (44, 4)&#10;  &#10;  At index 0 diff: 40 != 44&#10;  Use -v to get more diff">divisor = Fraction(1, 1), expected = Fraction(1, 1)
+
+    @pytest.mark.parametrize('divisor,expected', [(Q(1), Q(1)), (Q(-1), Q(-1))])
+    def test_qdiv_sign_at_exact_cost(divisor, expected):
+        c = account(44)
+        assert c.qdiv(Q(1), divisor) == expected
+&gt;       assert (c.work, c.operations) == (44, 4)
+E       assert (40, 3) == (44, 4)
+E         
+E         At index 0 diff: 40 != 44
+E         Use -v to get more diff
+
+tests\test_impulse_qdiv_sign_accounting.py:29: AssertionError</failure></testcase><testcase classname="tests.test_impulse_qdiv_sign_accounting" name="test_qdiv_sign_at_exact_cost[divisor1-expected1]" time="0.001"><failure message="assert (40, 3) == (44, 4)&#10;  &#10;  At index 0 diff: 40 != 44&#10;  Use -v to get more diff">divisor = Fraction(-1, 1), expected = Fraction(-1, 1)
+
+    @pytest.mark.parametrize('divisor,expected', [(Q(1), Q(1)), (Q(-1), Q(-1))])
+    def test_qdiv_sign_at_exact_cost(divisor, expected):
+        c = account(44)
+        assert c.qdiv(Q(1), divisor) == expected
+&gt;       assert (c.work, c.operations) == (44, 4)
+E       assert (40, 3) == (44, 4)
+E         
+E         At index 0 diff: 40 != 44
+E         Use -v to get more diff
+
+tests\test_impulse_qdiv_sign_accounting.py:29: AssertionError</failure></testcase><testcase classname="tests.test_impulse_qdiv_sign_accounting" name="test_qdiv_zero_divisor_does_not_start_arithmetic" time="0.001" /><testcase classname="tests.test_impulse_qdiv_sign_accounting" name="test_qdiv_exact_signed_rational_meaning[a0-b0-expected0]" time="0.001" /><testcase classname="tests.test_impulse_qdiv_sign_accounting" name="test_qdiv_exact_signed_rational_meaning[a1-b1-expected1]" time="0.001" /><testcase classname="tests.test_impulse_qdiv_sign_accounting" name="test_qdiv_exact_signed_rational_meaning[a2-b2-expected2]" time="0.001" /><testcase classname="tests.test_impulse_qdiv_sign_accounting" name="test_qdiv_exact_signed_rational_meaning[a3-b3-expected3]" time="0.001" /></testsuite></testsuites>

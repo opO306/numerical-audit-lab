@@ -1,0 +1,11 @@
+{
+  "scope": "AUTHOR RECEIPT HELPER FAILURE; NOT A PRODUCTION ARITHMETIC CHANGE",
+  "command": ["python", "audit/c1b1-qdiv-sign-fix-2026-10-05/collect_receipt.py"],
+  "actual_exit": 1,
+  "failure": "AssertionError comparing integer sum to JSON decimal-string sign_charge_work_delta",
+  "actual_sign_charge_sum": 5314390,
+  "serialized_sign_charge_work_delta": "5314390",
+  "mathematical_values_equal": true,
+  "repair": "Convert the declared decimal-string field to int in the receipt comparison",
+  "production_source_changed_by_repair": false
+}

@@ -1,0 +1,60 @@
+FFFF                                                                     [100%]
+================================== FAILURES ===================================
+___________ test_qdiv_sign_refuses_under_complete_cost[40-divisor0] ___________
+
+divisor = Fraction(1, 1), cap = 40
+
+    @pytest.mark.parametrize('divisor', [Q(1), Q(-1)])
+    @pytest.mark.parametrize('cap', [40, 43])
+    def test_qdiv_sign_refuses_under_complete_cost(divisor, cap):
+        c = account(cap)
+>       with pytest.raises(ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_qdiv_sign_accounting.py:18: Failed
+___________ test_qdiv_sign_refuses_under_complete_cost[40-divisor1] ___________
+
+divisor = Fraction(-1, 1), cap = 40
+
+    @pytest.mark.parametrize('divisor', [Q(1), Q(-1)])
+    @pytest.mark.parametrize('cap', [40, 43])
+    def test_qdiv_sign_refuses_under_complete_cost(divisor, cap):
+        c = account(cap)
+>       with pytest.raises(ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_qdiv_sign_accounting.py:18: Failed
+___________ test_qdiv_sign_refuses_under_complete_cost[43-divisor0] ___________
+
+divisor = Fraction(1, 1), cap = 43
+
+    @pytest.mark.parametrize('divisor', [Q(1), Q(-1)])
+    @pytest.mark.parametrize('cap', [40, 43])
+    def test_qdiv_sign_refuses_under_complete_cost(divisor, cap):
+        c = account(cap)
+>       with pytest.raises(ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_qdiv_sign_accounting.py:18: Failed
+___________ test_qdiv_sign_refuses_under_complete_cost[43-divisor1] ___________
+
+divisor = Fraction(-1, 1), cap = 43
+
+    @pytest.mark.parametrize('divisor', [Q(1), Q(-1)])
+    @pytest.mark.parametrize('cap', [40, 43])
+    def test_qdiv_sign_refuses_under_complete_cost(divisor, cap):
+        c = account(cap)
+>       with pytest.raises(ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_qdiv_sign_accounting.py:18: Failed
+=========================== short test summary info ===========================
+FAILED tests/test_impulse_qdiv_sign_accounting.py::test_qdiv_sign_refuses_under_complete_cost[40-divisor0]
+FAILED tests/test_impulse_qdiv_sign_accounting.py::test_qdiv_sign_refuses_under_complete_cost[40-divisor1]
+FAILED tests/test_impulse_qdiv_sign_accounting.py::test_qdiv_sign_refuses_under_complete_cost[43-divisor0]
+FAILED tests/test_impulse_qdiv_sign_accounting.py::test_qdiv_sign_refuses_under_complete_cost[43-divisor1]
+4 failed in 0.38s

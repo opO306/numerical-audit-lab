@@ -1,0 +1,82 @@
+FFF                                                                      [100%]
+================================== FAILURES ===================================
+______________ test_private_whole_vector_matches_diagnostic[q0] _______________
+
+q = (6, 2, 1)
+
+    @pytest.mark.parametrize('q',[(6,2,1),(-6,-2,-1),(0,6,0)])
+    def test_private_whole_vector_matches_diagnostic(q):
+        import mpmath as mp
+        obj=input_object(q);data=encoded(obj);old=copy.deepcopy(obj)
+        result=module('producer').evaluate_reference(data,reference_policy(obj))
+        assert result.layers['producer']=='RESOLVED' and result.raw is not None
+        assert result.opposite==tuple(-v for v in result.raw)
+        assert result.layers['publication']=='NOT_PUBLISHED' and result.layers['rechecker']=='NOT_RUN'
+        cert=json.loads(result.certificate)
+        assert tuple(int(v) for v in cert['raw_J'])==result.raw and 'final_interval' not in cert
+        assert len(cert['proof']['exp_plan'])==9 and data==encoded(obj) and obj==old
+        with mp.workdps(150):
+            radius=mp.sqrt(sum(mp.mpf(v)**2 for v in q));_,vp=nominal_diagnostic(radius)
+            for k,lane in enumerate(result.scaled_intervals):
+                expected=-vp*mp.mpf(q[k])/radius*20*2**80
+                lo=mp.mpf(lane.lo.numerator)/lane.lo.denominator
+                hi=mp.mpf(lane.hi.numerator)/lane.hi.denominator
+>               assert lo<=expected<=hi
+E               AssertionError: assert mpf('31869634233294022473369.361597487018655751032523657426150001378234520704173111726915594087092983820807054985155505638491477383989531146290131444907480395') <= mpf('-31869634233294022473369.3615955749609456024969045460774767856861304698736308519277460937582632722780786456161256978755225537194504448605240238749915484198')
+
+tests\test_impulse_reference_producer.py:29: AssertionError
+______________ test_private_whole_vector_matches_diagnostic[q1] _______________
+
+q = (-6, -2, -1)
+
+    @pytest.mark.parametrize('q',[(6,2,1),(-6,-2,-1),(0,6,0)])
+    def test_private_whole_vector_matches_diagnostic(q):
+        import mpmath as mp
+        obj=input_object(q);data=encoded(obj);old=copy.deepcopy(obj)
+        result=module('producer').evaluate_reference(data,reference_policy(obj))
+        assert result.layers['producer']=='RESOLVED' and result.raw is not None
+        assert result.opposite==tuple(-v for v in result.raw)
+        assert result.layers['publication']=='NOT_PUBLISHED' and result.layers['rechecker']=='NOT_RUN'
+        cert=json.loads(result.certificate)
+        assert tuple(int(v) for v in cert['raw_J'])==result.raw and 'final_interval' not in cert
+        assert len(cert['proof']['exp_plan'])==9 and data==encoded(obj) and obj==old
+        with mp.workdps(150):
+            radius=mp.sqrt(sum(mp.mpf(v)**2 for v in q));_,vp=nominal_diagnostic(radius)
+            for k,lane in enumerate(result.scaled_intervals):
+                expected=-vp*mp.mpf(q[k])/radius*20*2**80
+                lo=mp.mpf(lane.lo.numerator)/lane.lo.denominator
+                hi=mp.mpf(lane.hi.numerator)/lane.hi.denominator
+>               assert lo<=expected<=hi
+E               AssertionError: assert mpf('31869634233294022473369.3615955749609456024969045460774767856861304698736308519277460937582632722780786456161256978755225537194504448605240238749915484198') <= mpf('-31869634233294022473369.361597487018655751032523657426150001378234520704173111726915594087092983820807054985155505638491477383989531146290131444907480395')
+
+tests\test_impulse_reference_producer.py:29: AssertionError
+______________ test_private_whole_vector_matches_diagnostic[q2] _______________
+
+q = (0, 6, 0)
+
+    @pytest.mark.parametrize('q',[(6,2,1),(-6,-2,-1),(0,6,0)])
+    def test_private_whole_vector_matches_diagnostic(q):
+        import mpmath as mp
+        obj=input_object(q);data=encoded(obj);old=copy.deepcopy(obj)
+        result=module('producer').evaluate_reference(data,reference_policy(obj))
+        assert result.layers['producer']=='RESOLVED' and result.raw is not None
+        assert result.opposite==tuple(-v for v in result.raw)
+        assert result.layers['publication']=='NOT_PUBLISHED' and result.layers['rechecker']=='NOT_RUN'
+        cert=json.loads(result.certificate)
+        assert tuple(int(v) for v in cert['raw_J'])==result.raw and 'final_interval' not in cert
+        assert len(cert['proof']['exp_plan'])==9 and data==encoded(obj) and obj==old
+        with mp.workdps(150):
+            radius=mp.sqrt(sum(mp.mpf(v)**2 for v in q));_,vp=nominal_diagnostic(radius)
+            for k,lane in enumerate(result.scaled_intervals):
+                expected=-vp*mp.mpf(q[k])/radius*20*2**80
+                lo=mp.mpf(lane.lo.numerator)/lane.lo.denominator
+                hi=mp.mpf(lane.hi.numerator)/lane.hi.denominator
+>               assert lo<=expected<=hi
+E               AssertionError: assert mpf('95833463716486262489729.6635086264559415726416037855042937970426979691546655869171909096835708157063249050863086729284722741343829397581088948628595526697') <= mpf('-95833463716486262489729.6635084113360332811955251482501100293090190280031299346353546563409667519662392714078764978966963486163403571065851427527672260619')
+
+tests\test_impulse_reference_producer.py:29: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic[q0]
+FAILED tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic[q1]
+FAILED tests/test_impulse_reference_producer.py::test_private_whole_vector_matches_diagnostic[q2]
+3 failed in 1.06s

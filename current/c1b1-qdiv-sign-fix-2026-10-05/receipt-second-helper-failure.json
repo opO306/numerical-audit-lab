@@ -1,0 +1,9 @@
+{
+  "scope": "AUTHOR RECEIPT HELPER FAILURE; NOT A PRODUCTION ARITHMETIC CHANGE",
+  "command": ["python", "audit/c1b1-qdiv-sign-fix-2026-10-05/collect_receipt.py"],
+  "actual_exit": 1,
+  "failure": "AssertionError in document link validation: receipt.json",
+  "cause": "The not-yet-written receipt exception matched only slash-prefixed links, while STATUS_KO.md used receipt.json",
+  "repair": "Allow only the resolved current output receipt path before creation; verify all links after receipt creation",
+  "production_source_changed_by_repair": false
+}

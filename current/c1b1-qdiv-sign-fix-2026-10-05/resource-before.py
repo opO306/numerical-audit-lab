@@ -127,10 +127,8 @@ class ResourceAccount:
         if b.numerator == 0:
             raise ValueError('zero divisor')
         sign = 1 if b.numerator > 0 else -1
-        numerator = self.multiply(a.numerator, b.denominator)
-        numerator = self.multiply(numerator, sign)
-        denominator = self.multiply(a.denominator, abs(b.numerator))
-        return self.fraction(numerator, denominator)
+        return self.fraction(self.multiply(a.numerator, b.denominator)*sign,
+                             self.multiply(a.denominator, abs(b.numerator)))
 
     def qpower(self, a, n):
         if type(n) is not int or n<0:raise ValueError('nonnegative exponent required')

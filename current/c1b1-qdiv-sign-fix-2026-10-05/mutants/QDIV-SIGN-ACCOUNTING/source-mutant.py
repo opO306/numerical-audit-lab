@@ -128,7 +128,7 @@ class ResourceAccount:
             raise ValueError('zero divisor')
         sign = 1 if b.numerator > 0 else -1
         numerator = self.multiply(a.numerator, b.denominator)
-        numerator = self.multiply(numerator, sign)
+        numerator = numerator * sign
         denominator = self.multiply(a.denominator, abs(b.numerator))
         return self.fraction(numerator, denominator)
 

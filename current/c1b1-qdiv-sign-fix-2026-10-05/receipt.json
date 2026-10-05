@@ -1,0 +1,924 @@
+{
+  "schema": "C1B1_QDIV_SIGN_FIX_AUTHOR_RECEIPT_V1",
+  "recorded_at_utc": "2026-10-05T04:31:25.392625+00:00",
+  "target": "6a63798adbae7c119439683b356f19ff414ac239",
+  "parent": "d5475e23358cbf7f88018abfb67a8bfd192c5410",
+  "historical_d547_independent_implementation_audit": "FAIL",
+  "historical_6a": {
+    "round_add": "FIX CANDIDATE",
+    "qdiv_sign": "OPEN / NOT FIXED"
+  },
+  "findings": {
+    "F-RESOURCE-ROUND-ADD": "FIX APPLIED / AUTHOR REGRESSION PASS / INDEPENDENT LIMITED REAUDIT PENDING",
+    "F-RESOURCE-QDIV-SIGN": "FIX APPLIED / AUTHOR REGRESSION PASS / INDEPENDENT LIMITED REAUDIT PENDING"
+  },
+  "resource_accounting_closure_author_review": "COMPLETE",
+  "overall_resource_accounting": "NOT PASS",
+  "remaining_open": [
+    {
+      "id": "O-R2-TRUTH-PATH",
+      "status": "OPEN / UNRESOLVED",
+      "finding_candidate": true,
+      "expression": "producer.evaluate_reference: r2=sum(x*x for x in parsed.q)",
+      "basis": "Declared rational work includes products/normalization, but this direct expression executes after account creation with ledger zero. No approved exclusion established; keep unresolved and do not label W2 globally fully-accounted."
+    },
+    {
+      "id": "O-CONTROL-PARAMETERS",
+      "status": "OPEN / UNRESOLVED",
+      "finding_candidate": false,
+      "expression": "loop/precision/order arithmetic, parity, abs, unary signs, range/control comparisons",
+      "basis": "Direct syntax alone is not a confirmed defect. The spec has no blanket small/cheap exemption; exact assignment to an abstract operation remains unresolved."
+    },
+    {
+      "id": "O-DIRECT-FRACTION-CONSTRUCTION",
+      "status": "OPEN / UNRESOLVED",
+      "finding_candidate": false,
+      "expression": "point(q), Q(n+1), literal/input/constants Fraction construction outside fraction()",
+      "basis": "Do not model every Fraction CPU instruction. Establish whether each construction is a charged abstract normalization, pinned data or validation before closure."
+    },
+    {
+      "id": "O-ALLOCATION-AND-WORKER",
+      "status": "OPEN / UNRESOLVED",
+      "finding_candidate": false,
+      "expression": "allocator-specific majorant, V2 whole-call preflight, hard OS worker, approved instance",
+      "basis": "Separate activation gates explicitly retained by finite policy."
+    }
+  ],
+  "global_resource_accounting_verified": false,
+  "reference_producer_implementation": "NOT YET INDEPENDENTLY APPROVED",
+  "runtime_activation_allowed": false,
+  "J_status": "J_NOT_VERIFIED",
+  "certification": "NotCertified",
+  "adapter": "PREPARED_ONLY / INVOKE BLOCKED / INDEPENDENT SCHEDULE RECONSTRUCTION OPEN",
+  "V2_numerical_recheck": "NOT APPROVED",
+  "candidate_source_bundle_sha256": "e4ae7a0491c94a8a56a7029d08b70d7afd0c422ce0057a9027111bc45541d507",
+  "historical_source_bundle_sha256": "643e7658ca4ae6bd41efeacd734416d1e44335e0dc83823c169429fb9138aac9",
+  "new_git_commit_sha": null,
+  "W2": "2605253326092204528",
+  "W2_scope": "CURRENT AUTHOR WRAPPER LEDGER; NOT GLOBAL FULLY-ACCOUNTED OR PRODUCTION BUDGET",
+  "tests": {
+    "targeted": {
+      "tests": 32,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "impulse": {
+      "tests": 733,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "spec": {
+      "tests": 46,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "full": {
+      "tests": 1126,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "red_before_fix": {
+    "tests": 11,
+    "failures": 6,
+    "errors": 0,
+    "skipped": 0
+  },
+  "mathematics_before_after_equal": {
+    "raw": true,
+    "J_enclosure": true,
+    "V_and_derivative": true
+  },
+  "source_mutants": {
+    "existing": 17,
+    "new": 1,
+    "baselines_pass": 18,
+    "semantic_detected": 18,
+    "hash_only_detections": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "static_spec_checks": 155,
+  "preservation": {
+    "target": "6a63798adbae7c119439683b356f19ff414ac239",
+    "base_tracked": 2570,
+    "changed": [
+      "independent_checker/c1b1/impulse/resource.py",
+      "tests/test_impulse_round_add_accounting.py"
+    ],
+    "missing": [],
+    "unchanged": 2568,
+    "historical_count": 718,
+    "historical_byte_identical": true,
+    "protected": {
+      "independent_checker/c1b1/claim_adapter.py": {
+        "sha256": "24b05ebf374728583ba725c83b8f9324f4b75b5515b03c5b1036339eef3e4899",
+        "equal_target": true,
+        "equal_65d8": true
+      },
+      "independent_checker/c1b1/compare.py": {
+        "sha256": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+        "equal_target": true,
+        "equal_65d8": true
+      },
+      "independent_checker/c1b1/contracts.py": {
+        "sha256": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+        "equal_target": true,
+        "equal_65d8": true
+      },
+      "independent_checker/c1b1/exact_slow.py": {
+        "sha256": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+        "equal_target": true,
+        "equal_65d8": true
+      },
+      "independent_checker/c1b1/exact_fast.py": {
+        "sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+        "equal_target": true,
+        "equal_65d8": true
+      },
+      "independent_checker/c1b1/exact_geometry.py": {
+        "sha256": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+        "equal_target": true,
+        "equal_65d8": true
+      },
+      "independent_checker/c1b1/semantic_manifest_v1.json": {
+        "sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+        "equal_target": true,
+        "equal_65d8": true
+      },
+      "independent_checker/c1b1/semantic_manifest_v1.sha256": {
+        "sha256": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79",
+        "equal_target": true,
+        "equal_65d8": true
+      }
+    },
+    "approved_specs_preserved": true,
+    "rounding_preserved": true
+  },
+  "source_report_sha256": "ad8021a83942233903646e508bc63062e41026474540ec8f136cb3884101d18b",
+  "commit_performed": false,
+  "push_performed": false,
+  "python": "3.12.7 (tags/v3.12.7:0b05ead, Oct  1 2024, 03:06:41) [MSC v.1941 64 bit (AMD64)]",
+  "commands": {
+    "targeted": {
+      "command": [
+        "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_impulse_qdiv_sign_accounting.py",
+        "tests/test_impulse_round_add_accounting.py",
+        "tests/test_impulse_resource_allocation.py",
+        "tests/test_impulse_mutant_resource_probe.py",
+        "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-qdiv-sign-fix-2026-10-05\\targeted.xml"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 2.1569999999992433
+    },
+    "impulse": {
+      "command": [
+        "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "tests\\test_impulse_attempt_reason_spec.py",
+        "tests\\test_impulse_attempt_runtime.py",
+        "tests\\test_impulse_mutant_resource_probe.py",
+        "tests\\test_impulse_qdiv_sign_accounting.py",
+        "tests\\test_impulse_rechecker_preparation.py",
+        "tests\\test_impulse_reference_boundaries.py",
+        "tests\\test_impulse_reference_model.py",
+        "tests\\test_impulse_reference_primitives.py",
+        "tests\\test_impulse_reference_producer.py",
+        "tests\\test_impulse_resource_allocation.py",
+        "tests\\test_impulse_review_regressions.py",
+        "tests\\test_impulse_round_add_accounting.py",
+        "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-qdiv-sign-fix-2026-10-05\\impulse.xml"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 7.171999999998661
+    },
+    "spec": {
+      "command": [
+        "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_impulse_attempt_reason_spec.py",
+        "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-qdiv-sign-fix-2026-10-05\\spec.xml"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 1.5780000000013388
+    },
+    "full": {
+      "command": [
+        "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "--junitxml=D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-qdiv-sign-fix-2026-10-05\\full.xml"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 48.21899999999732
+    },
+    "static": {
+      "command": [
+        "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "audit/c1b1-attempt-reason-null-2026-10-05/check_spec.py",
+        "--output",
+        "D:\\numerical-audit-lab-recovered-2026-10-01\\current\\c1b1-qdiv-sign-fix-2026-10-05\\static-spec-checks.json"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.1569999999992433
+    },
+    "mutants": {
+      "command": [
+        "C:\\Users\\zun24\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "audit/c1b1-qdiv-sign-fix-2026-10-05/run_mutants.py"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 66.34300000000076
+    },
+    "diff-check": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.046999999998661224
+    }
+  },
+  "git_status": " M independent_checker/c1b1/impulse/resource.py\n M tests/test_impulse_round_add_accounting.py\n?? audit/c1b1-qdiv-sign-fix-2026-10-05/\n?? current/c1b1-qdiv-sign-fix-2026-10-05/\n?? docs/C1B1_IMPULSE_QDIV_SIGN_FIX_REPORT_2026-10-05.md\n?? tests/test_impulse_qdiv_sign_accounting.py\n",
+  "scope": "AUTHOR EVIDENCE ONLY; COUNTS OVERLAP AND ARE NOT INDEPENDENT PROOF COUNTS",
+  "evidence_files": {
+    "audit/c1b1-qdiv-sign-fix-2026-10-05/collect_receipt.py": {
+      "sha256": "237aad446a62e01c05926e026f7c5ae87c06dea731192ecb09455c1ec610e89c",
+      "bytes": 14416
+    },
+    "audit/c1b1-qdiv-sign-fix-2026-10-05/review_accounting.py": {
+      "sha256": "c3d5359ef7250c052b4d074604df747a2753f0ec9fa25f7167c9679e00cb3809",
+      "bytes": 11998
+    },
+    "audit/c1b1-qdiv-sign-fix-2026-10-05/run_checks.py": {
+      "sha256": "17cb86854dc4fc41b4162adaf0c2f6f65d657b6122445bd9fe71a1c21b40d8b0",
+      "bytes": 2393
+    },
+    "audit/c1b1-qdiv-sign-fix-2026-10-05/run_mutants.py": {
+      "sha256": "31bf0b6b247da03e578bf298a3febde9a7c3d4a79f2beecc84417fd62690e652",
+      "bytes": 7597
+    },
+    "audit/c1b1-qdiv-sign-fix-2026-10-05/verify.py": {
+      "sha256": "f5c8819324e9151f1f5a8d296f83948420cee1effb149f54cd0823d0b2b8f587",
+      "bytes": 10367
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/accounting-review-stdout.txt": {
+      "sha256": "8ddd7fe94d7b8d14b1cd11e2e928d579a92e74096b1f76196377664ba0d4c26c",
+      "bytes": 303
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/after-boundaries.json": {
+      "sha256": "b8831bd462c8a6c34559c49d6409acdfbc88aa0669c22bcbb9c89bddc2842377",
+      "bytes": 81696
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/after-probe-first-helper-failure.json": {
+      "sha256": "3b23ae933a91bc4d21a9da64fc5e96fd53b1cd4011d957fdf45581c6ec488bbf",
+      "bytes": 29879
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/baseline.json": {
+      "sha256": "958eae4ab91175a67951318944e63eb2b9169b2d81b72a75ca45c0ac651119da",
+      "bytes": 401031
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/before-boundaries.json": {
+      "sha256": "702a60e4fae67173ba98af0f982e3206a48bb44ca8989b813e06e030d6d40262",
+      "bytes": 80033
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/canonical-input.json": {
+      "sha256": "bab9520968c7e3b5be3e6d5c5e53627a06d066bbb950579c7cc8ec2b65dcfffd",
+      "bytes": 1875
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/diff-check-command.json": {
+      "sha256": "79d33ad352991dfe79617934b3ddc20db2cec85a37ac40147e3464c9dfdab992",
+      "bytes": 3403
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/diff-check-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/diff-check-stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/full-command.json": {
+      "sha256": "92e214154cbfeaccc822ea3c112e574bfc75a5e7dcc88199c0d87b714c8c5a02",
+      "bytes": 3592
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/full-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/full-stdout.txt": {
+      "sha256": "1bf6579bc6df4995908227227ee2ed38460466a0b8c0eb83550f3a6926f434f6",
+      "bytes": 1319
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/full.xml": {
+      "sha256": "afdb8cd789e67ec656745720fbdacdc62ca02268acd80922975c2f7857fd3726",
+      "bytes": 152291
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/impulse-command.json": {
+      "sha256": "75e41e60e89169b5c79dc3dc400e694684ba1015c2d6feb868e9779e5631cb51",
+      "bytes": 4205
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/impulse-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/impulse-stdout.txt": {
+      "sha256": "8285831026c7b821583f5a730d2a5998fc7438c8caef464a84693baa60882203",
+      "bytes": 912
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/impulse.xml": {
+      "sha256": "ddf4c5c939cacd1f87a64f32d00ea5a2ec3dd1aefd115f6f3f8f85496ee25d1e",
+      "bytes": 104621
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/BO-gprime/baseline.txt": {
+      "sha256": "08054f525f3e262e37d7681e7a64aecffdcc8f95dd2dc3c7c378754b0b40bda7",
+      "bytes": 100
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/BO-gprime/baseline.xml": {
+      "sha256": "7c705e4689042ff5cb229d7903e168bd45ba2547587398c8897f8df66338ed30",
+      "bytes": 385
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/BO-gprime/mutant.txt": {
+      "sha256": "e870799ca6569271a0dd23c2b13644615f0451c69291402a2acecec0058a1e8f",
+      "bytes": 4011
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/BO-gprime/mutant.xml": {
+      "sha256": "86538210bab4acc08389729a52adf5f77c99c5b716d3bf7327eccefe0fd0523e",
+      "bytes": 5380
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/BO-gprime/source-before.py": {
+      "sha256": "5add6bb8c26f399882a6d79d185b2f4d7bb0265f25009da90b04400eec84f9c4",
+      "bytes": 3234
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/BO-gprime/source-mutant.py": {
+      "sha256": "0dd9dca7a5ccd24f26a6491365d515dcf45bb1460799d0d3d8bd3207e792e362",
+      "bytes": 3224
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/component-swap/baseline.txt": {
+      "sha256": "c81ef3a0b17e3cf90ac4e0fd0e4a4d1ae93cbbb1508058cc34e16a9313c55ec8",
+      "bytes": 100
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/component-swap/baseline.xml": {
+      "sha256": "fbdca112b91714f89eff9ce7c4f5b72983fee5b03a77834ef6ae872084f86f00",
+      "bytes": 635
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/component-swap/mutant.txt": {
+      "sha256": "8956497bc145aeb7fe60fa20484865d37acc5d68b4f2755d383427f6fe9cf472",
+      "bytes": 5589
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/component-swap/mutant.xml": {
+      "sha256": "821c10033396b5c43bbef020846e02bd9a606b892277cacc077db60147edbe18",
+      "bytes": 6468
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/component-swap/source-before.py": {
+      "sha256": "54d3d94f1d8b77824ffa9d5acd6b4bd27ac0f93fd31491d34b8cb0508c0825e9",
+      "bytes": 8355
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/component-swap/source-mutant.py": {
+      "sha256": "28258fb8869114881297eb682735c7514ec2663fee33c07cd5b63117096c7ca2",
+      "bytes": 8384
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/early-accept/baseline.txt": {
+      "sha256": "8993c5f25ebe6f94fa4d5474be6296a9909d94b40b01830a8b47da1cf7be3bb9",
+      "bytes": 100
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/early-accept/baseline.xml": {
+      "sha256": "32ecc9de8f7c939bb31446c46d51ba4511b6f310561584d25cca236755aa57e2",
+      "bytes": 1176
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/early-accept/mutant.txt": {
+      "sha256": "f87530997ea81d93d1c2971b9c3e712d2a6a89c99c36328829a84106c15e3101",
+      "bytes": 2578
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/early-accept/mutant.xml": {
+      "sha256": "7c7eddec87ff22c72d8abc086435960aa332a9fa928f75a86164728915b6e1a5",
+      "bytes": 3248
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/early-accept/source-before.py": {
+      "sha256": "3667079195517f84f23a37a6f0787123b16571be2f6975967b0f2a9e127b2bf9",
+      "bytes": 1647
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/early-accept/source-mutant.py": {
+      "sha256": "d4aaa5c25aa05c6b77bde710ef7cd5dd71aedde1b93a2b3492950a5cc9b6b49f",
+      "bytes": 1657
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/exp-cutoff/baseline.txt": {
+      "sha256": "2901e9dfa0b5714aa099acfe610f3c4dbfa0c352070d16e8a4538d7da5df8462",
+      "bytes": 100
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/exp-cutoff/baseline.xml": {
+      "sha256": "0e6a91312a5d3d8a0a4beadb27b1f50dc5c5d356b547a42e5643d5f4ab93ed64",
+      "bytes": 372
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/exp-cutoff/mutant.txt": {
+      "sha256": "b508998c03843edb4e12076835e28e17c7846fe881bf07e62655a9cdbaa1e872",
+      "bytes": 861
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/exp-cutoff/mutant.xml": {
+      "sha256": "f9acfb2e0c62e6d76be3037f8de21e366b93dfe01d4bb0c0e4a81c3864af71d3",
+      "bytes": 947
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/exp-cutoff/source-before.py": {
+      "sha256": "032123fcd0f9d2d486c8fa5fd3fd9ca13995fe1a91f98ddb2e53d31e1c9cb2e1",
+      "bytes": 1486
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/exp-cutoff/source-mutant.py": {
+      "sha256": "820f3e8996a901e3f2eddf636d4f255f2c018eba64cecec851183c99b8dff7ef",
+      "bytes": 1541
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/exp-sign/baseline.txt": {
+      "sha256": "e6aeb355a594bb13bb226cfc8a7f772aeb6e4a5eb3169796e5256594abd44044",
+      "bytes": 100
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/exp-sign/baseline.xml": {
+      "sha256": "846cd6e6ea359d116daecef7407a8eb09a662ac534d8806622162ed21cd089fc",
+      "bytes": 790
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/exp-sign/mutant.txt": {
+      "sha256": "97889712a08ab4af560492b2ff7c4e26e55a2e6e8f3d96b183272d6de71380a5",
+      "bytes": 5057
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/exp-sign/mutant.xml": {
+      "sha256": "7aa72ba1fd091b229a0d984cca0f39bfdee1d3d401878e5d08d8a0b2e21fd49d",
+      "bytes": 5266
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/exp-sign/source-before.py": {
+      "sha256": "032123fcd0f9d2d486c8fa5fd3fd9ca13995fe1a91f98ddb2e53d31e1c9cb2e1",
+      "bytes": 1486
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/exp-sign/source-mutant.py": {
+      "sha256": "d038537237b7263acaea860302ab9ff600b1914363edcedcfa4a24762e806045",
+      "bytes": 1488
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/force-sign/baseline.txt": {
+      "sha256": "85e4d06af32fcf825c2ee1cd7e2c23c5c1462eb6fc5e75b7b01ee8cff2c6c7d0",
+      "bytes": 100
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/force-sign/baseline.xml": {
+      "sha256": "9225311fcad45b59531bc75e31eb37241b3ea53ce3b1da87957176da5def4525",
+      "bytes": 635
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/force-sign/mutant.txt": {
+      "sha256": "bf0e64f0f66339eedcce94e1ea47273b27c67b319e6d36db835316e964eae6a7",
+      "bytes": 5741
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/force-sign/mutant.xml": {
+      "sha256": "3e6427cdf266600ee9fa420fecc77c152a95e011ad8abb766792255186963237",
+      "bytes": 6772
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/force-sign/source-before.py": {
+      "sha256": "54d3d94f1d8b77824ffa9d5acd6b4bd27ac0f93fd31491d34b8cb0508c0825e9",
+      "bytes": 8355
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/force-sign/source-mutant.py": {
+      "sha256": "ce7df72aa973e08df9d98265ebc3829b7fdb0777db07f4335e0d342db9d93a51",
+      "bytes": 8350
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/half-step/baseline.txt": {
+      "sha256": "3cfea9f641e19b8d4f878db36812bc3992375e6be42bcbe67cd972d424373c70",
+      "bytes": 100
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/half-step/baseline.xml": {
+      "sha256": "0b3e4366248d7f65df63ad9ae9225e319df149a96915f01de277e9281760300b",
+      "bytes": 635
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/half-step/mutant.txt": {
+      "sha256": "f11f8cccd094a0316aec4c0e45572bf68b439930ce93b963c45a534ab847f0db",
+      "bytes": 5740
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/half-step/mutant.xml": {
+      "sha256": "a0d9beb6f2816433d3d12a4ecfeceab60127097605f5bb37cf3afe520764efd2",
+      "bytes": 6770
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/half-step/source-before.py": {
+      "sha256": "54d3d94f1d8b77824ffa9d5acd6b4bd27ac0f93fd31491d34b8cb0508c0825e9",
+      "bytes": 8355
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/half-step/source-mutant.py": {
+      "sha256": "63f35974e5df409b3da77feb29633da745b6f259a9f4d04fa5fa7df1e4dc9af8",
+      "bytes": 8355
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/intermediate-quantization/baseline.txt": {
+      "sha256": "e5b7c8e6c07cdb70821e5dfedc3ef4dfd5d2d79809bbe4c10af5873cbd380c3b",
+      "bytes": 100
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/intermediate-quantization/baseline.xml": {
+      "sha256": "f5deb565e629ea485c057f8c531e1d8f3558acf64cbefca6446eeb6c8709f046",
+      "bytes": 635
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/intermediate-quantization/mutant.txt": {
+      "sha256": "ec590ebfdb2a488a383e2b1a85dd6311d0721fbf2bb4773cf3c7135434bb22f0",
+      "bytes": 3925
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/intermediate-quantization/mutant.xml": {
+      "sha256": "7c687ee6f42c86b99a6fca95a3d73c2eee187ec1c54b5760c3b953d5beb0fb08",
+      "bytes": 4726
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/intermediate-quantization/source-before.py": {
+      "sha256": "54d3d94f1d8b77824ffa9d5acd6b4bd27ac0f93fd31491d34b8cb0508c0825e9",
+      "bytes": 8355
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/intermediate-quantization/source-mutant.py": {
+      "sha256": "7672e81209a39eb316133d4f3fa3e131dc400a039d1dde670d6874e6644db5f1",
+      "bytes": 8415
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/inverse-endpoints/baseline.txt": {
+      "sha256": "ef72a13f9958b536e504227b8820285bd090a9dcf888ae1b2c3c702c477036cf",
+      "bytes": 100
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/inverse-endpoints/baseline.xml": {
+      "sha256": "92399dd8b600601ff907344f3556da500f79bea7c4de50cfeade63595341dd28",
+      "bytes": 369
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/inverse-endpoints/mutant.txt": {
+      "sha256": "f3ed906edf5ba3afc650c2308660141c1bffc35ce8f1367e9d19fd891f7e2719",
+      "bytes": 1650
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/inverse-endpoints/mutant.xml": {
+      "sha256": "09093696b6da9144dcdcd489f1de2a77c978d78e6e97852af69d99a46a55467d",
+      "bytes": 1660
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/inverse-endpoints/source-before.py": {
+      "sha256": "421b2fdb0ec1bb095d48347eb3892ca7da95e86240d87ba572dfa450da462834",
+      "bytes": 2331
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/inverse-endpoints/source-mutant.py": {
+      "sha256": "b5eab72aeff71584e29c0fd11b4df38eb5118012c57d4e019582fd0b6273d06c",
+      "bytes": 2331
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/inverse-R/baseline.txt": {
+      "sha256": "8d56ddcc3d6f13b77e37868e3294f0b9d5f288bf8d282f7ddcc4734881be9fa7",
+      "bytes": 100
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/inverse-R/baseline.xml": {
+      "sha256": "5335a0f7147b19808843a6d96862155da6150ea3a2fd9382975d90ad57f07a8e",
+      "bytes": 635
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/inverse-R/mutant.txt": {
+      "sha256": "c371cb104d230fe4f92826ae027b577483f308ae973f8ea609ee575814c54991",
+      "bytes": 5740
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/inverse-R/mutant.xml": {
+      "sha256": "f7793b6e410bb4e2d100175ac5fda23fd52df87c9dd81069d865dc1e299babd8",
+      "bytes": 6770
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/inverse-R/source-before.py": {
+      "sha256": "54d3d94f1d8b77824ffa9d5acd6b4bd27ac0f93fd31491d34b8cb0508c0825e9",
+      "bytes": 8355
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/inverse-R/source-mutant.py": {
+      "sha256": "868d1f9886009731e02516552491e0bb7b88629547c1ba84b7b612975578d854",
+      "bytes": 8343
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/inward-rounding/baseline.txt": {
+      "sha256": "2901e9dfa0b5714aa099acfe610f3c4dbfa0c352070d16e8a4538d7da5df8462",
+      "bytes": 100
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/inward-rounding/baseline.xml": {
+      "sha256": "6cd2f280de21be020f97d047f8b18a9686916876f5e608ce29f84737d5e769f9",
+      "bytes": 371
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/inward-rounding/mutant.txt": {
+      "sha256": "6b6b7d5539a0f7eab2bd15e72b86c354e04e0500ce80973c6fd5f1030a7797e2",
+      "bytes": 994
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/inward-rounding/mutant.xml": {
+      "sha256": "66f278250a5304f1b4f7182c39a69eff66a0ce19674d2e81f0e681d0744c02d1",
+      "bytes": 1131
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/inward-rounding/source-before.py": {
+      "sha256": "421b2fdb0ec1bb095d48347eb3892ca7da95e86240d87ba572dfa450da462834",
+      "bytes": 2331
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/inward-rounding/source-mutant.py": {
+      "sha256": "cc7099d0c84942f3b7df7074a960541fce3ac42409b30aaccbc9084444b0d149",
+      "bytes": 2372
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/QDIV-SIGN-ACCOUNTING/baseline.txt": {
+      "sha256": "e6fd3dbbf11f1b06e7f4d90d237ce4b691920a1533ecc737f1d7f1d50b0d766e",
+      "bytes": 100
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/QDIV-SIGN-ACCOUNTING/baseline.xml": {
+      "sha256": "616b611c8c0b45f7c3979c85b73d61238aca5e1595c3a8f7c6a35e379bb9be3c",
+      "bytes": 802
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/QDIV-SIGN-ACCOUNTING/mutant.txt": {
+      "sha256": "fcd961d28225e1ef7d6434dcb6d515f1e298de8ee71d3b8c5e631d70baf80782",
+      "bytes": 2748
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/QDIV-SIGN-ACCOUNTING/mutant.xml": {
+      "sha256": "170d3daaeddd651baab3e2cc829713187f8ad601d090b4bbaaa4fdc6569889b9",
+      "bytes": 2824
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/QDIV-SIGN-ACCOUNTING/source-before.py": {
+      "sha256": "c5e081ee2c3dc49db85271d588cc3fde6e54caa6ce6e005a36c00c25d167a7cd",
+      "bytes": 6395
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/QDIV-SIGN-ACCOUNTING/source-mutant.py": {
+      "sha256": "1824503726fc4882e271908739604a9b641006500c34add58263a707cc098805",
+      "bytes": 6381
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/R-power/baseline.txt": {
+      "sha256": "b12e2a73d84d814528b4d6d01e360ddb8405c76fc1c543c044a7d96c73905b00",
+      "bytes": 100
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/R-power/baseline.xml": {
+      "sha256": "88ede09b05cb12ce443f48595230cf0730ea61ca304075dba1146cc968e52cb2",
+      "bytes": 362
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/R-power/mutant.txt": {
+      "sha256": "f83d9bad99716cfdf79453028b251e227d6e70b57f1b3b79a1c398a29f8f0b3f",
+      "bytes": 1125
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/R-power/mutant.xml": {
+      "sha256": "9b39a349d87ebe8369a3f229a2291ca1c3e2b2997484d297bd64256d1f1db2c5",
+      "bytes": 1260
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/R-power/source-before.py": {
+      "sha256": "d090e765d103451e54eadc73638f20ac6f2e7065e455d60745ba774ae21f1f33",
+      "bytes": 611
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/R-power/source-mutant.py": {
+      "sha256": "34244786c5da29dbad096d5812e0da22738657ebf1e2e4436dee339b9092d0c6",
+      "bytes": 609
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/resource-guard/baseline.txt": {
+      "sha256": "97f5adfb2ec9975df6d998bc11af616286bd89a5feba3be34a12c5039d829f43",
+      "bytes": 100
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/resource-guard/baseline.xml": {
+      "sha256": "0e9c22e13f072e599baa4662fe1e088e145ff42f3c5372890539311ae96a92e0",
+      "bytes": 353
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/resource-guard/mutant.txt": {
+      "sha256": "876790bf50d8bfbe79e7e9ee7b94c3150340bdc9fcdde5258b2f58ed7f657311",
+      "bytes": 755
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/resource-guard/mutant.xml": {
+      "sha256": "48fe8c6fabb4974f5c07501d816b69a63f0775a674a38c843852afc7114d8829",
+      "bytes": 755
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/resource-guard/source-before.py": {
+      "sha256": "c5e081ee2c3dc49db85271d588cc3fde6e54caa6ce6e005a36c00c25d167a7cd",
+      "bytes": 6395
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/resource-guard/source-mutant.py": {
+      "sha256": "218a965198a7b72a710a052f5ad8e7288c2e3cb1c4791ce1e5c711796a2785ba",
+      "bytes": 6405
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/results.json": {
+      "sha256": "9cde462e4fdaeae6c4af543bb672b38e5669a972170c3a43cb56aa87a48dfaec",
+      "bytes": 34669
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/ROUND-ADD-ACCOUNTING/baseline.txt": {
+      "sha256": "e6aeb355a594bb13bb226cfc8a7f772aeb6e4a5eb3169796e5256594abd44044",
+      "bytes": 100
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/ROUND-ADD-ACCOUNTING/baseline.xml": {
+      "sha256": "dd29fafe1c27868f1cfcf14d56fcb0540abf539fc25d6fbf13a1bf376953d686",
+      "bytes": 754
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/ROUND-ADD-ACCOUNTING/mutant.txt": {
+      "sha256": "371b471684014347d71620b421d1c43e1953f1d2c69c10b0bbb467a4e0b4f835",
+      "bytes": 3224
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/ROUND-ADD-ACCOUNTING/mutant.xml": {
+      "sha256": "f8d4fabf3e3a5f2ced04b037ecb52154af626d40aa1928249e402ff206fe95cb",
+      "bytes": 3300
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/ROUND-ADD-ACCOUNTING/source-before.py": {
+      "sha256": "3667079195517f84f23a37a6f0787123b16571be2f6975967b0f2a9e127b2bf9",
+      "bytes": 1647
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/ROUND-ADD-ACCOUNTING/source-mutant.py": {
+      "sha256": "1f39a67c155cda9a3b09b48bc62e8c3ed9fefedd62bd7db7e9b734d77a3d73dc",
+      "bytes": 1614
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/ties-away/baseline.txt": {
+      "sha256": "8993c5f25ebe6f94fa4d5474be6296a9909d94b40b01830a8b47da1cf7be3bb9",
+      "bytes": 100
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/ties-away/baseline.xml": {
+      "sha256": "5d69cd9efa9ccab1f3de635269bf531a20369905f4320c6120520e3445950ef7",
+      "bytes": 1176
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/ties-away/mutant.txt": {
+      "sha256": "cc5301dfe3d1fc1bc5d86404a94a8a5442f23a111512c7dac1f7d1c8ce0a7406",
+      "bytes": 1068
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/ties-away/mutant.xml": {
+      "sha256": "165ec61d01a4142abde6751fd8e230394675e4519d4a617fce5cd5444d435e31",
+      "bytes": 1933
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/ties-away/source-before.py": {
+      "sha256": "3667079195517f84f23a37a6f0787123b16571be2f6975967b0f2a9e127b2bf9",
+      "bytes": 1647
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/ties-away/source-mutant.py": {
+      "sha256": "3c052387307f04b819ae41d2109a7c5611c6304b6839221454fe631754e2a75e",
+      "bytes": 1618
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/TT-derivative/baseline.txt": {
+      "sha256": "5fc79a5bb1a4e56ea0450be5990136d6701e6157d03c85d3479a169c94877327",
+      "bytes": 100
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/TT-derivative/baseline.xml": {
+      "sha256": "56b154a220894fffb6163f0f457b9c7aab7532284e1e9afee5677e7c7072961e",
+      "bytes": 385
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/TT-derivative/mutant.txt": {
+      "sha256": "e92960ec387c927a8fe09be5efba010a1255973ef6cc4d1b20e52348392c934d",
+      "bytes": 3907
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/TT-derivative/mutant.xml": {
+      "sha256": "9248efb9f870c562f9b1cab78e141d86ca90c3a48c9f79ba2444f8d8730e62d8",
+      "bytes": 5172
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/TT-derivative/source-before.py": {
+      "sha256": "5add6bb8c26f399882a6d79d185b2f4d7bb0265f25009da90b04400eec84f9c4",
+      "bytes": 3234
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/TT-derivative/source-mutant.py": {
+      "sha256": "3316ef532ce6512fa4bc8a2d6d66022cee923a642efce9e20496ca06d4a55338",
+      "bytes": 3218
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/wrong-spec/baseline.txt": {
+      "sha256": "6c9294c723e8b4f0071bc1ed44f3dc172e3f96f376c22867366595be33b8d48c",
+      "bytes": 100
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/wrong-spec/baseline.xml": {
+      "sha256": "6b626bce13bf321c9173d8e7a51f3aa3528fcc70800db4ff91e5d390006be632",
+      "bytes": 377
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/wrong-spec/mutant.txt": {
+      "sha256": "5dcd6e13738fedea4e78f176e6c36c83466afe6a84394354e084264c2bda6348",
+      "bytes": 3595
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/wrong-spec/mutant.xml": {
+      "sha256": "399cd35ff5758e061a5e7e1135e127cf22f18994a57a03a5e3d9f46e702f0cf8",
+      "bytes": 3635
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/wrong-spec/source-before.py": {
+      "sha256": "9319b533d6ff8230cfa2f45225f5a00a08281ba350ed0648037c3fa4b3848f1b",
+      "bytes": 5463
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants/wrong-spec/source-mutant.py": {
+      "sha256": "4db2004ed51d27a9bd914547965b28fbfc2167e23cc5e251227756ecb24d1c2a",
+      "bytes": 5473
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants-command.json": {
+      "sha256": "324a7b0c85fbd8f4ea0b8bdbf977b0cfd4b3948c59305c12ed2934beeba7e5ff",
+      "bytes": 3500
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/mutants-stdout.txt": {
+      "sha256": "bfebab43c83bcb0a8d6f997ec40f823bbe9ef499b37ffd57f8db188f6ccf6f14",
+      "bytes": 429
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/preservation.json": {
+      "sha256": "da477cfb51a5c018de6fca87d55c6ded59b2f78d1a79e62ec7bbfafa2c343abc",
+      "bytes": 2014
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/qdiv-red.txt": {
+      "sha256": "a36a5e86e9f0b11ec1b5ec2fc09868473ab6a2b2d8d275e6c78e4a637b87c46e",
+      "bytes": 4136
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/qdiv-red.xml": {
+      "sha256": "552be599402f22462ba5e46e45a68a3b679fba5f67d6bbdd69384ea9f77746b1",
+      "bytes": 5066
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/receipt-first-helper-failure.json": {
+      "sha256": "9063ceb8cc19c997615c94e0f349a2ec55d5c1642a809c9a2c69264fc193afa0",
+      "bytes": 547
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/receipt-second-helper-failure.json": {
+      "sha256": "a229ef574de05b2f2b6ca34e771f99d27065f97c41f0b48381636522f1e037d5",
+      "bytes": 555
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/received-identity.json": {
+      "sha256": "438b9c001bac2acfc2b34bbff8564167e1cac3b8a1bc478010912fee94bc94fe",
+      "bytes": 351
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/resource-accounting-review.json": {
+      "sha256": "f1859ad9cda63ffe873307714d05af28ed04120ae0f20358631e549b49c657fc",
+      "bytes": 11111191
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/resource-after.py": {
+      "sha256": "c5e081ee2c3dc49db85271d588cc3fde6e54caa6ce6e005a36c00c25d167a7cd",
+      "bytes": 6395
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/resource-before.py": {
+      "sha256": "7cf03263c0e3461adf09e22ff56882dcbc3f5c12691d1e348f5a80a6a885a9c6",
+      "bytes": 6314
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/resource.diff": {
+      "sha256": "a8a2f56d076c03f052f0be900e07d59e9bf37fb4b467f392fe2e97a33cd12fbf",
+      "bytes": 916
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/RESOURCE_ACCOUNTING_CLOSURE_KO.md": {
+      "sha256": "c943b0a19340f3335aca3d627425d907c64f82db676d79971e8757da38cd501d",
+      "bytes": 8423
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/source-identity.json": {
+      "sha256": "2fb990a87e17c6847777f5975c505f4d92257ad1bf811f892dd9b80182ac57d0",
+      "bytes": 1748
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/spec-command.json": {
+      "sha256": "af571fdb5cb9892dce7131ae7fb4fa696ea2e9148ed12c87060e79ff2f34eef3",
+      "bytes": 3643
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/spec-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/spec-stdout.txt": {
+      "sha256": "76f5f19a411c3e784514d849dcf5b516fe4961a75d034549c3031d1b6e2d5581",
+      "bytes": 101
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/spec.xml": {
+      "sha256": "10729caaa68a1e7814d634bfdd049785ba3a2e377699f236c6e8d22a0689f452",
+      "bytes": 7127
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/static-command.json": {
+      "sha256": "1cb8c4862b93bbcb978baef7a4ccdf0b33baf925e4dc3c53130c74d64d318323",
+      "bytes": 3641
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/static-spec-checks.json": {
+      "sha256": "6963dbadeb02ed2fb9ada4e42f22b9f638b065b24c8d1e8a18bbae4847ae83c4",
+      "bytes": 10187
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/static-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/static-stdout.txt": {
+      "sha256": "dfb193b80e3cbacc89f66b3766fc3d2d5c9b03d67ad91d42c395571bdd36e02e",
+      "bytes": 94
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/STATUS_KO.md": {
+      "sha256": "b6af07b44ab0d69c17ec4e5e3ee8a48de94e81414611adc016ca2c83f1677b5f",
+      "bytes": 1135
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/targeted-command.json": {
+      "sha256": "d13f8f467bb8b9673d31f2f9acdb8644c655b9995665ea825aabf2a94c8dcb45",
+      "bytes": 3801
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/targeted-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/targeted-stdout.txt": {
+      "sha256": "223db21357287b9acd0480d4f443fab1313ad8b7f89a4a88dd56c7824c1c88f4",
+      "bytes": 101
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/targeted.xml": {
+      "sha256": "db028f82747fda5ab2dd4b34ad7a948ca4f8953c1bd79c4f39fbfca3bb30e645",
+      "bytes": 4646
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/user-request.txt": {
+      "sha256": "860a93ed569760dec0cf56e65af1584bc06fdaff0369aba6c6315aa726add5a9",
+      "bytes": 10265
+    },
+    "current/c1b1-qdiv-sign-fix-2026-10-05/W2.json": {
+      "sha256": "8c03a0e46d3e8edca4006e948aa64661f2f6ec64db2d6dc8b351562486dd5f3a",
+      "bytes": 285
+    },
+    "docs/C1B1_IMPULSE_QDIV_SIGN_FIX_REPORT_2026-10-05.md": {
+      "sha256": "ad8021a83942233903646e508bc63062e41026474540ec8f136cb3884101d18b",
+      "bytes": 12961
+    },
+    "independent_checker/c1b1/impulse/resource.py": {
+      "sha256": "c5e081ee2c3dc49db85271d588cc3fde6e54caa6ce6e005a36c00c25d167a7cd",
+      "bytes": 6395
+    },
+    "independent_checker/c1b1/impulse/rounding.py": {
+      "sha256": "3667079195517f84f23a37a6f0787123b16571be2f6975967b0f2a9e127b2bf9",
+      "bytes": 1647
+    },
+    "tests/test_impulse_qdiv_sign_accounting.py": {
+      "sha256": "9ab945d29b291f2fe874a1dd0256d5ea9074c196c2b2f5e3800ca0168b795e34",
+      "bytes": 1475
+    },
+    "tests/test_impulse_round_add_accounting.py": {
+      "sha256": "ca018bbd66cd2de3e26451f9c589cd226a9f08cad7b2fd2c318cfa22a8345d9b",
+      "bytes": 5267
+    }
+  }
+}

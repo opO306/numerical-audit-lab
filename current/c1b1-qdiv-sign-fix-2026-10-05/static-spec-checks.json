@@ -1,0 +1,295 @@
+{
+  "schema": "C1B1_ATTEMPT_REASON_STATIC_CHECKS_V1",
+  "result": "PASS",
+  "level": "AUTHOR STATIC SPEC CHECKS ONLY",
+  "checks": [
+    "package members unchanged",
+    "canonical bytes: acquisition-identity.json",
+    "sidecar: acquisition-identity.json",
+    "dependency: acquisition-identity.json -> constants.json",
+    "dependency: acquisition-identity.json -> physical-domain.json",
+    "dependency: acquisition-identity.json -> proof-wire.json",
+    "canonical bytes: constants.json",
+    "sidecar: constants.json",
+    "external dependency unchanged: constants.json P0_raw_sha256",
+    "external dependency unchanged: constants.json source_recovery_sha256",
+    "canonical bytes: finite-policy.json",
+    "sidecar: finite-policy.json",
+    "dependency: finite-policy.json -> proof-wire.json",
+    "canonical bytes: package-manifest.json",
+    "sidecar: package-manifest.json",
+    "dependency: package-manifest.json -> acquisition-identity.json",
+    "dependency: package-manifest.json -> constants.json",
+    "dependency: package-manifest.json -> finite-policy.json",
+    "dependency: package-manifest.json -> physical-domain.json",
+    "dependency: package-manifest.json -> proof-wire.json",
+    "dependency: package-manifest.json -> rechecker-lineage.json",
+    "dependency: package-manifest.json -> semantic-bundle.json",
+    "dependency: package-manifest.json -> status-composition.json",
+    "canonical bytes: physical-domain.json",
+    "sidecar: physical-domain.json",
+    "dependency: physical-domain.json -> constants.json",
+    "canonical bytes: proof-wire.json",
+    "sidecar: proof-wire.json",
+    "dependency: proof-wire.json -> physical-domain.json",
+    "canonical bytes: rechecker-lineage.json",
+    "sidecar: rechecker-lineage.json",
+    "dependency: rechecker-lineage.json -> acquisition-identity.json",
+    "external dependency unchanged: rechecker-lineage.json source_recovery_sha256",
+    "dependency: rechecker-lineage.json -> proof-wire.json",
+    "canonical bytes: semantic-bundle.json",
+    "sidecar: semantic-bundle.json",
+    "dependency: semantic-bundle.json -> acquisition-identity.json",
+    "dependency: semantic-bundle.json -> constants.json",
+    "dependency: semantic-bundle.json -> finite-policy.json",
+    "dependency: semantic-bundle.json -> physical-domain.json",
+    "dependency: semantic-bundle.json -> proof-wire.json",
+    "dependency: semantic-bundle.json -> rechecker-lineage.json",
+    "dependency: semantic-bundle.json -> status-composition.json",
+    "canonical bytes: status-composition.json",
+    "sidecar: status-composition.json",
+    "dependency: status-composition.json -> acquisition-identity.json",
+    "dependency: status-composition.json -> finite-policy.json",
+    "byte-preserved: constants.json",
+    "sidecar byte-preserved: constants.json",
+    "byte-preserved: physical-domain.json",
+    "sidecar byte-preserved: physical-domain.json",
+    "wire field unchanged: B4_B5_joint_review",
+    "wire field unchanged: closed_object_keys",
+    "wire field unchanged: dependencies",
+    "wire field unchanged: does_not_certify",
+    "wire field unchanged: encoding",
+    "wire field unchanged: failure_attempt_count_bound",
+    "wire field unchanged: forbidden_fields",
+    "wire field unchanged: implementation",
+    "wire field unchanged: limit_basis",
+    "wire field unchanged: limits",
+    "wire field unchanged: parameter_projection",
+    "wire field unchanged: parser_order",
+    "wire field unchanged: phases",
+    "wire field unchanged: proof_representation",
+    "wire field unchanged: publication",
+    "wire field unchanged: rate_order",
+    "wire field unchanged: reasons",
+    "wire field unchanged: resource_failure_record",
+    "wire field unchanged: resource_kind_rule",
+    "wire field unchanged: resource_kinds",
+    "wire field unchanged: schema",
+    "wire field unchanged: scope_of_limits",
+    "wire field unchanged: specification_version",
+    "wire field unchanged: status",
+    "wire field unchanged: types",
+    "wire field unchanged: unresolved_items",
+    "wire field unchanged: writer_order",
+    "wire field unchanged: zero_axis",
+    "only attempt contract added",
+    "digest rule narrowly clarified",
+    "required reason key",
+    "complete 25-row table",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed compatibility row",
+    "unique compatibility pair",
+    "closed relation matches proposal",
+    "no new success reason",
+    "Failure reason non-null",
+    "only dependency identifiers changed: finite-policy.json",
+    "only dependency identifiers changed: acquisition-identity.json",
+    "only dependency identifiers changed: status-composition.json",
+    "only dependency identifiers changed: rechecker-lineage.json",
+    "only dependency identifiers changed: semantic-bundle.json",
+    "manifest bundle identity",
+    "manifest unaffected fields preserved",
+    "independent recheck pending",
+    "boundary continuation and activation disabled",
+    "separate revision identifier",
+    "no stale dependency hash: acquisition-identity.json",
+    "no stale dependency hash: constants.json",
+    "no stale dependency hash: finite-policy.json",
+    "no stale dependency hash: package-manifest.json",
+    "no stale dependency hash: physical-domain.json",
+    "no stale dependency hash: proof-wire.json",
+    "no stale dependency hash: rechecker-lineage.json",
+    "no stale dependency hash: semantic-bundle.json",
+    "no stale dependency hash: status-composition.json"
+  ],
+  "check_count": 155,
+  "canonical_hashes": {
+    "acquisition-identity.json": "45f4d39571fb49440c5c2e71fe3f2b1be31a5855b68363e651494d3bb74dd73f",
+    "constants.json": "f1cf6a71afaf45e40db37a6e8a5b4f643a57885f4040d4fa285835530363e196",
+    "finite-policy.json": "7e2db07cb87bb0d81981c707949c1cd9fc129c01b645eb7a2447923360b9ab2e",
+    "package-manifest.json": "4a4cad78a192f72cf479cf16ceb971ea257d9bdf89acc5a7ca6e4fea3738219f",
+    "physical-domain.json": "eef0a3531c7bc5f233e7cd7212c3807735c05bc88284bd16600c894afc817c03",
+    "proof-wire.json": "ce23bfc1dfac2a9140af6d880ab4fcef995926f68ed895f68012a3397b9fe1a8",
+    "rechecker-lineage.json": "8ee7df7e17c298a0402d86c019a6246c39fd8fef960f0627816fabb59d34076e",
+    "semantic-bundle.json": "3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2bc1",
+    "status-composition.json": "1fc2b69e87572b22d026c7d30f8cd013638557bf456f73480de83a4f67050207"
+  },
+  "dependency_edges": [
+    [
+      "acquisition-identity.json",
+      "constants.json"
+    ],
+    [
+      "acquisition-identity.json",
+      "physical-domain.json"
+    ],
+    [
+      "acquisition-identity.json",
+      "proof-wire.json"
+    ],
+    [
+      "finite-policy.json",
+      "proof-wire.json"
+    ],
+    [
+      "package-manifest.json",
+      "acquisition-identity.json"
+    ],
+    [
+      "package-manifest.json",
+      "constants.json"
+    ],
+    [
+      "package-manifest.json",
+      "finite-policy.json"
+    ],
+    [
+      "package-manifest.json",
+      "physical-domain.json"
+    ],
+    [
+      "package-manifest.json",
+      "proof-wire.json"
+    ],
+    [
+      "package-manifest.json",
+      "rechecker-lineage.json"
+    ],
+    [
+      "package-manifest.json",
+      "semantic-bundle.json"
+    ],
+    [
+      "package-manifest.json",
+      "status-composition.json"
+    ],
+    [
+      "physical-domain.json",
+      "constants.json"
+    ],
+    [
+      "proof-wire.json",
+      "physical-domain.json"
+    ],
+    [
+      "rechecker-lineage.json",
+      "acquisition-identity.json"
+    ],
+    [
+      "rechecker-lineage.json",
+      "proof-wire.json"
+    ],
+    [
+      "semantic-bundle.json",
+      "acquisition-identity.json"
+    ],
+    [
+      "semantic-bundle.json",
+      "constants.json"
+    ],
+    [
+      "semantic-bundle.json",
+      "finite-policy.json"
+    ],
+    [
+      "semantic-bundle.json",
+      "physical-domain.json"
+    ],
+    [
+      "semantic-bundle.json",
+      "proof-wire.json"
+    ],
+    [
+      "semantic-bundle.json",
+      "rechecker-lineage.json"
+    ],
+    [
+      "semantic-bundle.json",
+      "status-composition.json"
+    ],
+    [
+      "status-composition.json",
+      "acquisition-identity.json"
+    ],
+    [
+      "status-composition.json",
+      "finite-policy.json"
+    ]
+  ],
+  "compatibility_pairs": 25,
+  "valid_status_pairs": 8,
+  "null_success_pairs": [
+    [
+      "RESOLVED",
+      "NOT_RUN"
+    ],
+    [
+      "RESOLVED",
+      "ACCEPTED"
+    ]
+  ],
+  "Failure_schema_unchanged": true,
+  "Failure_reason_nullable": false,
+  "producer_or_V2_executed": false,
+  "runtime_activation_allowed": false,
+  "review_status": "INDEPENDENT RECHECK PENDING",
+  "J_status": "J_NOT_VERIFIED",
+  "certification": "NotCertified"
+}

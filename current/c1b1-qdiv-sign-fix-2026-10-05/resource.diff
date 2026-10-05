@@ -1,0 +1,17 @@
+diff --git a/independent_checker/c1b1/impulse/resource.py b/independent_checker/c1b1/impulse/resource.py
+index e0bd52e..1c06971 100644
+--- a/independent_checker/c1b1/impulse/resource.py
++++ b/independent_checker/c1b1/impulse/resource.py
+@@ -127,8 +127,10 @@ class ResourceAccount:
+         if b.numerator == 0:
+             raise ValueError('zero divisor')
+         sign = 1 if b.numerator > 0 else -1
+-        return self.fraction(self.multiply(a.numerator, b.denominator)*sign,
+-                             self.multiply(a.denominator, abs(b.numerator)))
++        numerator = self.multiply(a.numerator, b.denominator)
++        numerator = self.multiply(numerator, sign)
++        denominator = self.multiply(a.denominator, abs(b.numerator))
++        return self.fraction(numerator, denominator)
+ 
+     def qpower(self, a, n):
+         if type(n) is not int or n<0:raise ValueError('nonnegative exponent required')

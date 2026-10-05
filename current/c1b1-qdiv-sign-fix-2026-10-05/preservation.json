@@ -1,0 +1,56 @@
+{
+  "target": "6a63798adbae7c119439683b356f19ff414ac239",
+  "base_tracked": 2570,
+  "changed": [
+    "independent_checker/c1b1/impulse/resource.py",
+    "tests/test_impulse_round_add_accounting.py"
+  ],
+  "missing": [],
+  "unchanged": 2568,
+  "historical_count": 718,
+  "historical_byte_identical": true,
+  "protected": {
+    "independent_checker/c1b1/claim_adapter.py": {
+      "sha256": "24b05ebf374728583ba725c83b8f9324f4b75b5515b03c5b1036339eef3e4899",
+      "equal_target": true,
+      "equal_65d8": true
+    },
+    "independent_checker/c1b1/compare.py": {
+      "sha256": "5ad6b3f0b03b240e559c955552f32eb9079d524fba55be47ab88329a7d0657b2",
+      "equal_target": true,
+      "equal_65d8": true
+    },
+    "independent_checker/c1b1/contracts.py": {
+      "sha256": "37acf394c9c252d5e401fdff06fcb28a0ab1202cc090f1456ecd4bb84fff47ed",
+      "equal_target": true,
+      "equal_65d8": true
+    },
+    "independent_checker/c1b1/exact_slow.py": {
+      "sha256": "b36efc03abdcb760f294f009ea1aea8aafa6fcc05a53c7b3970291c90edf4c13",
+      "equal_target": true,
+      "equal_65d8": true
+    },
+    "independent_checker/c1b1/exact_fast.py": {
+      "sha256": "2190e099642b4bf440e4a2280b09d4b89984f637e6cee1b09dfa23411f0b4c0b",
+      "equal_target": true,
+      "equal_65d8": true
+    },
+    "independent_checker/c1b1/exact_geometry.py": {
+      "sha256": "b237cd00e45e2ed635bae54880cfef88c1126e98af57d74843b752d2ed27677e",
+      "equal_target": true,
+      "equal_65d8": true
+    },
+    "independent_checker/c1b1/semantic_manifest_v1.json": {
+      "sha256": "3217fc38aa798fff3ffea8072cecafaecac9f98be85589e9fa35a9dc6aa8119b",
+      "equal_target": true,
+      "equal_65d8": true
+    },
+    "independent_checker/c1b1/semantic_manifest_v1.sha256": {
+      "sha256": "ae8b89667a539b4252cac34b0f96786dda67c10747e66f2468482d94e5a6db79",
+      "equal_target": true,
+      "equal_65d8": true
+    }
+  },
+  "approved_specs_preserved": true,
+  "rounding_preserved": true
+}

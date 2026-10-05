@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="4" time="0.330" timestamp="2026-10-05T13:17:05.433374+09:00" hostname="으악"><testcase classname="tests.test_impulse_qdiv_sign_accounting" name="test_qdiv_sign_refuses_under_complete_cost[40-divisor0]" time="0.001"><failure message="Failed: DID NOT RAISE ResourceLimit">divisor = Fraction(1, 1), cap = 40
+
+    @pytest.mark.parametrize('divisor', [Q(1), Q(-1)])
+    @pytest.mark.parametrize('cap', [40, 43])
+    def test_qdiv_sign_refuses_under_complete_cost(divisor, cap):
+        c = account(cap)
+&gt;       with pytest.raises(ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_qdiv_sign_accounting.py:18: Failed</failure></testcase><testcase classname="tests.test_impulse_qdiv_sign_accounting" name="test_qdiv_sign_refuses_under_complete_cost[40-divisor1]" time="0.001"><failure message="Failed: DID NOT RAISE ResourceLimit">divisor = Fraction(-1, 1), cap = 40
+
+    @pytest.mark.parametrize('divisor', [Q(1), Q(-1)])
+    @pytest.mark.parametrize('cap', [40, 43])
+    def test_qdiv_sign_refuses_under_complete_cost(divisor, cap):
+        c = account(cap)
+&gt;       with pytest.raises(ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_qdiv_sign_accounting.py:18: Failed</failure></testcase><testcase classname="tests.test_impulse_qdiv_sign_accounting" name="test_qdiv_sign_refuses_under_complete_cost[43-divisor0]" time="0.001"><failure message="Failed: DID NOT RAISE ResourceLimit">divisor = Fraction(1, 1), cap = 43
+
+    @pytest.mark.parametrize('divisor', [Q(1), Q(-1)])
+    @pytest.mark.parametrize('cap', [40, 43])
+    def test_qdiv_sign_refuses_under_complete_cost(divisor, cap):
+        c = account(cap)
+&gt;       with pytest.raises(ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_qdiv_sign_accounting.py:18: Failed</failure></testcase><testcase classname="tests.test_impulse_qdiv_sign_accounting" name="test_qdiv_sign_refuses_under_complete_cost[43-divisor1]" time="0.001"><failure message="Failed: DID NOT RAISE ResourceLimit">divisor = Fraction(-1, 1), cap = 43
+
+    @pytest.mark.parametrize('divisor', [Q(1), Q(-1)])
+    @pytest.mark.parametrize('cap', [40, 43])
+    def test_qdiv_sign_refuses_under_complete_cost(divisor, cap):
+        c = account(cap)
+&gt;       with pytest.raises(ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_qdiv_sign_accounting.py:18: Failed</failure></testcase></testsuite></testsuites>

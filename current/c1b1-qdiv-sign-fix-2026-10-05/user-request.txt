@@ -1,0 +1,562 @@
+현재 Git 상태를 기준으로 작업합니다.
+
+현재 target:
+
+```text
+6a63798adbae7c119439683b356f19ff414ac239
+```
+
+직접 parent:
+
+```text
+d5475e23358cbf7f88018abfb67a8bfd192c5410
+```
+
+현재 상태:
+
+```text
+F-RESOURCE-ROUND-ADD:
+FIX APPLIED
+AUTHOR REGRESSION PASS
+INDEPENDENT REAUDIT PENDING
+
+F-RESOURCE-QDIV-SIGN:
+AUTHOR CONFIRMED
+OPEN
+NOT FIXED
+
+overall resource accounting:
+NOT PASS
+
+runtime_activation_allowed = false
+J_NOT_VERIFIED
+NotCertified
+```
+
+`d5475e2`의 역사적 independent implementation audit FAIL은 그대로 보존하십시오.
+
+이번 작업의 목표는:
+
+```text
+1. F-RESOURCE-QDIV-SIGN 최소 수정
+2. 승인 finite-policy의 resource-accounting 경로 closure 확인
+3. 기존 ROUND-ADD 수정 회귀 유지
+```
+
+입니다.
+
+물리식, potential, derivative, interval 알고리즘 또는 rounding-cell 수학을 재설계하지 마십시오.
+
+# 1. F-RESOURCE-QDIV-SIGN
+
+현재:
+
+```python
+def qdiv(self, a, b):
+    if b.numerator == 0:
+        raise ValueError('zero divisor')
+    sign = 1 if b.numerator > 0 else -1
+    return self.fraction(
+        self.multiply(a.numerator, b.denominator) * sign,
+        self.multiply(a.denominator, abs(b.numerator))
+    )
+```
+
+에서:
+
+```text
+self.multiply(a.numerator, b.denominator)
+```
+
+뒤의:
+
+```text
+* sign
+```
+
+이 직접 Python integer multiplication이라 승인된 multiply work accounting을 우회합니다.
+
+이를 account path로 보내십시오.
+
+최소 형태:
+
+```python
+def qdiv(self, a, b):
+    if b.numerator == 0:
+        raise ValueError('zero divisor')
+
+    sign = 1 if b.numerator > 0 else -1
+
+    numerator = self.multiply(a.numerator, b.denominator)
+    numerator = self.multiply(numerator, sign)
+
+    denominator = self.multiply(
+        a.denominator,
+        abs(b.numerator),
+    )
+
+    return self.fraction(numerator, denominator)
+```
+
+실제 곱셈 전에 `self.multiply()`의 pre-operation resource check가 수행되어야 합니다.
+
+사후에 비용만 추가 청구하는 방식으로 구현하지 마십시오.
+
+# 2. 정확한 scalar regression
+
+다음 최소 반례를 보존하십시오.
+
+```python
+qdiv(Fraction(1), Fraction(1))
+```
+
+승인 work schedule:
+
+```text
+multiply(1,1)          = 4
+multiply(1, sign=1)    = 4
+multiply(1,1)          = 4
+fraction normalization = 32
+
+total = 44
+```
+
+따라서:
+
+```text
+work_max = 40
+→ WORK refusal
+
+work_max = 43
+→ WORK refusal
+
+work_max = 44
+→ Fraction(1,1)
+→ charged work = 44
+→ operations = 4
+```
+
+이어야 합니다.
+
+음수 denominator도 별도로 확인하십시오.
+
+```python
+qdiv(Fraction(1), Fraction(-1))
+```
+
+결과:
+
+```text
+-1
+```
+
+이고 sign multiplication이 동일하게 accounting되어야 합니다.
+
+# 3. ROUND-ADD 회귀 유지
+
+현재 6a63798의 수정:
+
+```text
+account 없음:
+    value + 1
+
+account 있음:
+    c.add(value, 1)
+```
+
+을 유지하십시오.
+
+기존 정확 경계:
+
+```text
+7/4:
+cap 73,74 → WORK refusal
+cap 75    → 2 / work75 / operations3
+
+-5/2:
+cap 42,44 → WORK refusal
+cap 45    → -2 / work45 / operations3
+```
+
+를 그대로 재실행하십시오.
+
+# 4. 기존 whole-call W+152 의미 수정
+
+주의:
+
+F-RESOURCE-QDIV-SIGN을 수정하면 whole-call의 총 accounting work가 추가로 증가할 수 있습니다.
+
+따라서 기존:
+
+```text
+W + 152
+```
+
+성공을 **새 수정 후에도 반드시 성공해야 하는 고정 기대값**으로 사용하지 마십시오.
+
+`W+152`는:
+
+```text
+ROUND-ADD 누락만 추가 청구했을 때의 비교점
+```
+
+입니다.
+
+QDIV-SIGN까지 수정하면 새 정상 회계량은 다시 계산해야 합니다.
+
+기존 historical evidence:
+
+```text
+ROUND-ADD-only additional work = 152
+```
+
+는 그대로 보존하십시오.
+
+# 5. 새 whole-call resource boundary
+
+두 finding 수정 후 canonical q=(5,3,-2)를 다시 실행하여:
+
+```text
+fully-accounted observed work = W2
+```
+
+를 기록하십시오.
+
+그 뒤 최소:
+
+```text
+cap = W2 - 1
+→ RESOURCE_CAP / WORK
+→ no raw
+→ no opposite
+→ no certificate
+
+cap = W2
+→ 기존 수학 raw와 동일
+```
+
+을 확인하십시오.
+
+단 `W2`를 production-approved budget으로 부르지 마십시오.
+
+이것은 현재 author fixture/accounting model에서의 경계 증거일 뿐입니다.
+
+# 6. Resource-accounting closure 표 작성
+
+이번에는 또 하나 고치고 다음 감사에서 세 번째가 튀어나오는 식의 디버깅 두더지 잡기를 줄이십시오.
+
+승인 finite policy의 work schedule 항목별로 실제 reference truth path를 분류하십시오.
+
+최소 표:
+
+```text
+operation class
+declared work formula
+implementation wrapper
+actual call sites
+direct bypass found?
+status
+```
+
+대상:
+
+```text
+add / compare
+multiply
+shift
+divmod
+isqrt
+rational normalization / gcd
+```
+
+각 실제 arithmetic을 다음 셋 중 하나로 분류하십시오.
+
+```text
+ACCOUNTED
+EXPLICITLY OUTSIDE THIS WORK MODEL
+OPEN / UNRESOLVED
+```
+
+`EXPLICITLY OUTSIDE`는 그냥 작거나 싸다는 이유로 쓰지 마십시오.
+
+승인 spec에 그 연산을 해당 work schedule에서 제외할 근거가 있어야 합니다.
+
+# 7. 직접 Python 연산 전수 검토의 해석
+
+다음이 source에 있다고 해서 자동 결함으로 세지 마십시오.
+
+```text
+%
+abs()
+unary -
+small index arithmetic
+loop counter
+parameter arithmetic
+```
+
+먼저 승인 finite-policy가 해당 연산에 비용을 부과하는지 확인하십시오.
+
+반대로:
+
+```text
+승인 schedule이 비용을 요구하는 operation
++
+실제 truth path에서 직접 Python 연산으로 실행
++
+account/pre-check 없음
+```
+
+이면 finding 후보입니다.
+
+# 8. 특히 재검토할 경로
+
+다음을 집중적으로 확인하십시오.
+
+```text
+qadd
+qmul
+qdiv
+qpower
+compare
+sqrt preparation
+exp enclosure
+rounding/refinement
+potential polynomial composition
+J composition
+```
+
+각 경로에서 승인 schedule의:
+
+```text
+add_compare
+multiply
+shift
+divmod
+isqrt
+rational/gcd
+```
+
+가 wrapper 밖으로 빠지지 않는지 검사하십시오.
+
+# 9. Fraction 내부 연산과 구분
+
+Python `Fraction` 내부 implementation의 모든 CPU instruction을 자체 work unit으로 다시 모델링하려 하지 마십시오.
+
+현재 계약은 실제 wall-clock instruction accounting이 아니라 승인된 **수학적 work schedule**입니다.
+
+따라서 판단 기준은:
+
+```text
+approved abstract operation
+→ declared cost
+→ pre-operation resource charge
+```
+
+입니다.
+
+실제 CPU cycle 개수를 맞추는 작업으로 범위를 확대하지 마십시오.
+
+# 10. 새 mutant
+
+기존 17개 mutant에 추가해:
+
+```text
+QDIV-SIGN-ACCOUNTING
+```
+
+mutant를 추가하십시오.
+
+Baseline:
+
+```text
+self.multiply(numerator, sign)
+```
+
+Mutant:
+
+```text
+numerator * sign
+```
+
+fixture:
+
+```text
+qdiv(1,1), work_max=40
+```
+
+또는 정확한 경계 fixture.
+
+Baseline은 WORK refusal, mutant는 잘못 성공해야 합니다.
+
+Hash 차이만으로 DETECTED라고 세지 마십시오.
+
+# 11. 기존 mutants 회귀
+
+현재 기존:
+
+```text
+16 original semantic mutants
++ ROUND-ADD-ACCOUNTING
+```
+
+17개도 모두 재실행하십시오.
+
+최종적으로는:
+
+```text
+17 existing
++ QDIV-SIGN-ACCOUNTING
+= 18 semantic mutants
+```
+
+가 됩니다.
+
+각 mutant는 baseline PASS / mutant semantic DETECTED를 유지해야 합니다.
+
+# 12. 수학 결과 보존
+
+이번 수정 전후 충분한 resource cap에서 동일 입력의 raw가 동일해야 합니다.
+
+즉 accounting만 바뀌고:
+
+```text
+V
+V'
+J enclosure
+nearest-even result
+raw vector
+```
+
+의 수학적 결과는 바뀌면 안 됩니다.
+
+달라지면 별도 finding입니다.
+
+# 13. 기존 PASS 영역 보존
+
+독립 감사에서 PASS한 다음 영역을 이유 없이 수정하지 마십시오.
+
+```text
+I1–I14
+I17–I23
+```
+
+특히:
+
+```text
+physical formula
+potential/derivative
+interval
+sqrt
+exp
+J composition
+rounding mathematics
+domain
+attempt/digest
+wire
+atomicity
+immutability
+certificate boundary
+```
+
+는 이번 작업 대상이 아닙니다.
+
+# 14. Adapter OPEN blocker 유지
+
+다음은 그대로 별도 후속 Gate입니다.
+
+```text
+n_R(t)=ceil(4*rate*r_guard+1)*2**t
+```
+
+의 adapter 독립 재구성.
+
+따라서:
+
+```text
+PREPARED_ONLY
+invoke blocked
+V2 numerical recheck NOT APPROVED
+runtime_activation_allowed = false
+```
+
+를 유지하십시오.
+
+# 15. 수정 후 상태
+
+Author 검증이 모두 PASS해도 독립 재감사 전에는:
+
+```text
+Historical d5475e2:
+INDEPENDENT IMPLEMENTATION AUDIT FAIL
+
+Historical 6a63798:
+F-RESOURCE-ROUND-ADD fix candidate
+F-RESOURCE-QDIV-SIGN still OPEN
+
+new candidate:
+F-RESOURCE-ROUND-ADD FIX APPLIED
+F-RESOURCE-QDIV-SIGN FIX APPLIED
+RESOURCE ACCOUNTING CLOSURE AUTHOR REVIEW COMPLETE
+INDEPENDENT LIMITED REAUDIT PENDING
+
+reference_producer_implementation:
+NOT YET INDEPENDENTLY APPROVED
+
+runtime_activation_allowed = false
+J_NOT_VERIFIED
+NotCertified
+```
+
+로 유지하십시오.
+
+# 16. 검증
+
+최소 실행:
+
+```text
+targeted qdiv resource boundary
+ROUND-ADD boundary regression
+canonical whole-call boundary
+Impulse-related regression
+spec regression
+full repository pytest
+all semantic mutants
+static spec checks
+git diff --check
+```
+
+서로 다른 evidence 종류를 독립 proof 개수처럼 합산하지 마십시오.
+
+# 17. 제출 evidence
+
+최소:
+
+```text
+resource.py old/new diff
+rounding.py preservation
+
+qdiv scalar boundary
+round-add scalar boundary
+
+new whole-call accounted W2
+W2-1 refusal
+W2 success
+
+resource-accounting closure table
+remaining OPEN/UNRESOLVED paths
+
+18-mutant results
+full pytest
+
+18-source bundle SHA
+Arithmetic 8-file preservation
+spec/audit/history preservation
+```
+
+을 제출하십시오.
+
+# 18. Commit / push
+
+수정 및 author evidence 완료 후 먼저 결과를 보고하십시오.
+
+사용자 추가 승인 없이 commit/push하지 마십시오.

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.327" timestamp="2026-10-05T13:17:11.626198+09:00" hostname="으악"><testcase classname="tests.test_impulse_reference_boundaries" name="test_negative_power_exact_and_outward_dyadic" time="0.024"><failure message="assert (Fraction(-85...tion(43, 128)) == (Fraction(-43...tion(43, 128))&#10;  &#10;  At index 0 diff: Fraction(-85, 256) != Fraction(-43, 128)&#10;  Use -v to get more diff">def test_negative_power_exact_and_outward_dyadic():
+        m=module('interval');v=m.power(m.Interval(Q(2),Q(4)),-3,context())
+        assert (v.lo,v.hi)==(Q(1,64),Q(1,8))
+        v=m.widen(m.Interval(Q(-1,3),Q(1,3)),8,context())
+&gt;       assert (v.lo,v.hi)==(Q(-86,256),Q(86,256))
+E       assert (Fraction(-85...tion(43, 128)) == (Fraction(-43...tion(43, 128))
+E         
+E         At index 0 diff: Fraction(-85, 256) != Fraction(-43, 128)
+E         Use -v to get more diff
+
+tests\test_impulse_reference_boundaries.py:12: AssertionError</failure></testcase></testsuite></testsuites>

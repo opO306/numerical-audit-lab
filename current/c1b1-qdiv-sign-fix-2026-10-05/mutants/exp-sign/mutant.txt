@@ -1,0 +1,97 @@
+.FFF                                                                     [100%]
+================================== FAILURES ===================================
+____________ test_exp_contains_independent_alternating_series[x1] _____________
+
+x = Fraction(1, 100)
+
+    @pytest.mark.parametrize('x',[Q(0),Q(1,100),Q(1,2),Q(1)])
+    def test_exp_contains_independent_alternating_series(x):
+>       v,order,s=module('exp_enclosure').exp_enclosure(module('interval').Interval(x,x),80,150,context())
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+independent_checker\c1b1\impulse\exp_enclosure.py:24: in exp_enclosure
+    enclosure = Interval(c.qdiv(Q(1), c.qadd(shi, tail)), c.qdiv(Q(1), slo),c)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<string>:6: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = Interval(lo=Fraction(201, 199), hi=Fraction(1, 1))
+
+    def __post_init__(self):
+        if not isinstance(self.lo, Q) or not isinstance(self.hi, Q):
+            raise TypeError('exact Fraction endpoints required')
+        if self.lo is self.hi:return
+        reversed_order=self.account.compare(self.lo,self.hi)>0 if self.account is not None else self.lo>self.hi
+        if reversed_order:
+>           raise ValueError('unordered interval')
+E           ValueError: unordered interval
+
+independent_checker\c1b1\impulse\interval.py:18: ValueError
+____________ test_exp_contains_independent_alternating_series[x2] _____________
+
+x = Fraction(1, 2)
+
+    @pytest.mark.parametrize('x',[Q(0),Q(1,100),Q(1,2),Q(1)])
+    def test_exp_contains_independent_alternating_series(x):
+>       v,order,s=module('exp_enclosure').exp_enclosure(module('interval').Interval(x,x),80,150,context())
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+independent_checker\c1b1\impulse\exp_enclosure.py:24: in exp_enclosure
+    enclosure = Interval(c.qdiv(Q(1), c.qadd(shi, tail)), c.qdiv(Q(1), slo),c)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<string>:6: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = Interval(lo=Fraction(5, 3), hi=Fraction(1, 1))
+
+    def __post_init__(self):
+        if not isinstance(self.lo, Q) or not isinstance(self.hi, Q):
+            raise TypeError('exact Fraction endpoints required')
+        if self.lo is self.hi:return
+        reversed_order=self.account.compare(self.lo,self.hi)>0 if self.account is not None else self.lo>self.hi
+        if reversed_order:
+>           raise ValueError('unordered interval')
+E           ValueError: unordered interval
+
+independent_checker\c1b1\impulse\interval.py:18: ValueError
+____________ test_exp_contains_independent_alternating_series[x3] _____________
+
+x = Fraction(1, 1)
+
+    @pytest.mark.parametrize('x',[Q(0),Q(1,100),Q(1,2),Q(1)])
+    def test_exp_contains_independent_alternating_series(x):
+>       v,order,s=module('exp_enclosure').exp_enclosure(module('interval').Interval(x,x),80,150,context())
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_impulse_reference_primitives.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+independent_checker\c1b1\impulse\exp_enclosure.py:24: in exp_enclosure
+    enclosure = Interval(c.qdiv(Q(1), c.qadd(shi, tail)), c.qdiv(Q(1), slo),c)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<string>:6: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = Interval(lo=Fraction(3, 1), hi=Fraction(1, 1))
+
+    def __post_init__(self):
+        if not isinstance(self.lo, Q) or not isinstance(self.hi, Q):
+            raise TypeError('exact Fraction endpoints required')
+        if self.lo is self.hi:return
+        reversed_order=self.account.compare(self.lo,self.hi)>0 if self.account is not None else self.lo>self.hi
+        if reversed_order:
+>           raise ValueError('unordered interval')
+E           ValueError: unordered interval
+
+independent_checker\c1b1\impulse\interval.py:18: ValueError
+=========================== short test summary info ===========================
+FAILED tests/test_impulse_reference_primitives.py::test_exp_contains_independent_alternating_series[x1]
+FAILED tests/test_impulse_reference_primitives.py::test_exp_contains_independent_alternating_series[x2]
+FAILED tests/test_impulse_reference_primitives.py::test_exp_contains_independent_alternating_series[x3]
+3 failed, 1 passed in 0.39s
