@@ -1,0 +1,199 @@
+{
+  "audit": "C1-B1 Independent Impulse V1 Reference Producer implementation audit",
+  "target": "d5475e23358cbf7f88018abfb67a8bfd192c5410",
+  "parent": "bc6cf7a6312951ddefe4e066afa19bedfbeef695",
+  "reference_producer_implementation": "FAIL",
+  "independent_implementation_audit": "FAIL",
+  "runtime_activation_allowed": false,
+  "J_status": "J_NOT_VERIFIED",
+  "certification": "NotCertified",
+  "V2_numerical_recheck": "NOT YET APPROVED",
+  "findings": [
+    {
+      "id": "F-RESOURCE-ROUND-ADD",
+      "status": "CONFIRMED",
+      "affected": [
+        "I15",
+        "I16"
+      ],
+      "independent_root_cause_count": 1
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "scope": "snapshot/source identity",
+      "verdict": "PASS",
+      "rationale": "target/parent/tree 및 18개 source의 실제 Git blob SHA-256 고정. source inventory와 작업 사본 일치.",
+      "evidence": "inventory.json; independent-core/source-identity.json"
+    },
+    {
+      "id": "I2",
+      "scope": "approved spec binding",
+      "verdict": "PASS",
+      "rationale": "semantic/package 및 dependency/sidecar/canonical bytes 재계산 일치. 다른 revision의 대체 없음.",
+      "evidence": "independent-core/core-results.json: snapshot"
+    },
+    {
+      "id": "I3",
+      "scope": "independence",
+      "verdict": "PASS",
+      "rationale": "18개 AST/import 검사, 실제 reference 호출 74개 함수 경로 추적. executor/V2 수학 helper 또는 동적 추출을 계산 oracle로 사용하지 않음.",
+      "evidence": "independent-core/imports.json; independent-core/call-paths.json"
+    },
+    {
+      "id": "I4",
+      "scope": "physical formula/sign",
+      "verdict": "PASS",
+      "rationale": "q=r_j-r_i, -V′q/R, half_dt=20, scale=2^80, common-J negation 및 질량 비개입을 독립 유도·시험.",
+      "evidence": "independent-physics/physics-results.json"
+    },
+    {
+      "id": "I5",
+      "scope": "potential/derivative",
+      "verdict": "PASS",
+      "rationale": "공개 V 식의 generic forward AD와 exact enclosure로 BO/REL/QED 값·도함수 분기 대조.",
+      "evidence": "independent-physics/physics-results.json: family records"
+    },
+    {
+      "id": "I6",
+      "scope": "interval primitives",
+      "verdict": "PASS",
+      "rationale": "add/sub/corner product/positive reciprocal/powers/outward widening의 포함 관계 유도 및 180개 혼합 부호 interval 쌍 시험.",
+      "evidence": "independent-core/core-results.json: primitives"
+    },
+    {
+      "id": "I7",
+      "scope": "sqrt",
+      "verdict": "PASS",
+      "rationale": "정확한 제곱 부등식, dyadic square singleton, non-square, coarse zero lower, refinement를 확인.",
+      "evidence": "independent-core/core-results.json: sqrt"
+    },
+    {
+      "id": "I8",
+      "scope": "exp",
+      "verdict": "PASS",
+      "rationale": "positive Taylor reciprocal의 수학적 상·하한 유도. 별도 alternating-series oracle 및 매 squaring widening 확인.",
+      "evidence": "independent-core/core-results.json: exp; independent-supplement/supplement-results.json"
+    },
+    {
+      "id": "I9",
+      "scope": "J composition",
+      "verdict": "PASS",
+      "rationale": "V′→-V′/R→q→20→2^80의 exact interval 합성. storage-grid 중간 반올림 없음.",
+      "evidence": "independent-physics/physics-results.json"
+    },
+    {
+      "id": "I10",
+      "scope": "nearest-even rounding",
+      "verdict": "PASS",
+      "rationale": "수학적 cell 판정은 정확함. endpoint는 후보만 제안하고 두 끝점을 검사. 자원 청구 누락은 I15에서 별도 FAIL.",
+      "evidence": "independent-core/core-results.json: rounding"
+    },
+    {
+      "id": "I11",
+      "scope": "overflow/opposite raw",
+      "verdict": "PASS",
+      "rationale": "signed96 양끝 및 -2^95의 opposite 실패 확인. coarse 정상/overflow 혼합은 확정 overflow로 처리하지 않음.",
+      "evidence": "independent-core/core-results.json: rounding, atomic_domain"
+    },
+    {
+      "id": "I12",
+      "scope": "domain/zero-axis",
+      "verdict": "PASS",
+      "rationale": "schema/spec→exact physical domain→zero lane 순서. r_min의 rational equality와 FX48 경계 분리.",
+      "evidence": "independent-core/core-results.json: atomic_domain"
+    },
+    {
+      "id": "I13",
+      "scope": "attempt reason/digest",
+      "verdict": "PASS",
+      "rationale": "독립 25-state table, 525개 reason 조합, 두 null 성공행, 실제 attempt 및 canonical raw32 digest 재구성.",
+      "evidence": "independent-core/core-results.json: attempt, binding; attempt-trace.json"
+    },
+    {
+      "id": "I14",
+      "scope": "parser/failure wire",
+      "verdict": "PASS",
+      "rationale": "later malformed/4096-digit early field/duplicate/extra/missing를 conversion spy로 공격. Failure 11 fields·17 nonnull reasons 확인.",
+      "evidence": "independent-core/core-results.json: parser; independent-supplement/supplement-results.json"
+    },
+    {
+      "id": "I15",
+      "scope": "resource accounting",
+      "verdict": "FAIL",
+      "rationale": "F-RESOURCE-ROUND-ADD: nearest_even의 floor+1이 ResourceAccount.add를 우회. scalar 및 whole-call 반례 확정.",
+      "evidence": "resource-repro/resource-reproduction.json; sources/resource_repro.py"
+    },
+    {
+      "id": "I16",
+      "scope": "finite-policy fail-closed",
+      "verdict": "FAIL",
+      "rationale": "I15와 같은 원인에서 파생. 누락된 청구를 제외한 장부 cap에서 완전한 private candidate를 반환하여 승인된 work 계약을 보장하지 못함.",
+      "evidence": "resource-repro/resource-reproduction.json"
+    },
+    {
+      "id": "I17",
+      "scope": "whole-vector atomicity",
+      "verdict": "PASS",
+      "rationale": "수치 UNPROVED/overflow·관측된 resource/publication 실패에서 partial raw/opposite/certificate 없음. 혼합 lane 우선순위 확인.",
+      "evidence": "independent-core/core-results.json: atomic_domain; resource-repro/resource-reproduction.json"
+    },
+    {
+      "id": "I18",
+      "scope": "immutability",
+      "verdict": "PASS",
+      "rationale": "성공·domain·resource·publication 실패에서 입력 bytes/object 보존. translation/momentum fixture의 nested alias도 보존.",
+      "evidence": "independent-core/core-results.json; independent-physics/physics-results.json"
+    },
+    {
+      "id": "I19",
+      "scope": "certificate soundness boundary",
+      "verdict": "PASS",
+      "rationale": "compact binding/parameters/raw claim만 전달. final interval/transcript가 proof authority로 들어가지 않음. 7개 binding 독립 재구성.",
+      "evidence": "independent-core/reference-certificate.json; independent-supplement/supplement-results.json"
+    },
+    {
+      "id": "I20",
+      "scope": "adapter/prepared-only boundary",
+      "verdict": "PASS",
+      "rationale": "구조·binding·zero lane·invoke 차단 범위만 PASS. order schedule 누락은 실제 재현되었으며 후속 Gate blocker로 OPEN.",
+      "evidence": "independent-core/core-results.json: binding"
+    },
+    {
+      "id": "I21",
+      "scope": "independent tests/counterexamples",
+      "verdict": "PASS",
+      "rationale": "author test와 다른 exact oracle·fixtures·확정 resource 반례 및 실행 로그 확보. PASS는 전체 구현 PASS를 뜻하지 않음.",
+      "evidence": "sources/; evidence/raw/"
+    },
+    {
+      "id": "I22",
+      "scope": "source mutants",
+      "verdict": "PASS",
+      "rationale": "16개 실제 stored source edit/preimage 대조 후 독립 runner로 전부 semantic 검출. setup/hash mismatch를 검출로 세지 않음.",
+      "evidence": "independent-mutants-final/mutant-results.json; individual run.log"
+    },
+    {
+      "id": "I23",
+      "scope": "Arithmetic/history preservation",
+      "verdict": "PASS",
+      "rationale": "Arithmetic 8개는 65d8fd2와 byte-identical. bc6의 기존 specs/docs/audit/current에 수정·삭제 없음.",
+      "evidence": "inventory.json: protected, prior_evidence_changes"
+    }
+  ],
+  "source_bundle_sha256": "a4bd12c92a4ad7f2a00503fa0ed249c8a96546d3999a68203fe4344f0c6554d7",
+  "spec_sha256": "3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2bc1",
+  "package_sha256": "4a4cad78a192f72cf479cf16ceb971ea257d9bdf89acc5a7ca6e4fea3738219f",
+  "test_evidence": {
+    "core_assertions": 18445,
+    "physics_assertions": 208,
+    "supplement_assertions": 138,
+    "sum_direct_assertions": 18791,
+    "physical_states": 12,
+    "family_radius_combinations": 12,
+    "actual_source_mutants": 16,
+    "author_pytest_pass": 1099
+  },
+  "note": "21 PASS and 2 FAIL; the two FAIL items share one confirmed resource-accounting defect. No runtime approval or numerical V2 acceptance."
+}

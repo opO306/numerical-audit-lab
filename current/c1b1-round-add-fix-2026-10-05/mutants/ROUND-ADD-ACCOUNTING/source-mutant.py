@@ -16,7 +16,7 @@ def nearest_even(q,c=None):
     floor, rem = divmod(q.numerator, q.denominator) if c is None else c.divmod(q.numerator,q.denominator)
     twice = 2 * rem if c is None else c.multiply(2,rem)
     def increment(value):
-        return value + 1 if c is None else c.add(value,1)
+        return value + 1
     if twice < q.denominator:
         return floor
     if twice > q.denominator:

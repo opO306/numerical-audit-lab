@@ -1,0 +1,20 @@
+diff --git a/independent_checker/c1b1/impulse/rounding.py b/independent_checker/c1b1/impulse/rounding.py
+index 73eb4b9..b27ff1d 100644
+--- a/independent_checker/c1b1/impulse/rounding.py
++++ b/independent_checker/c1b1/impulse/rounding.py
+@@ -15,11 +15,13 @@ class Decision:
+ def nearest_even(q,c=None):
+     floor, rem = divmod(q.numerator, q.denominator) if c is None else c.divmod(q.numerator,q.denominator)
+     twice = 2 * rem if c is None else c.multiply(2,rem)
++    def increment(value):
++        return value + 1 if c is None else c.add(value,1)
+     if twice < q.denominator:
+         return floor
+     if twice > q.denominator:
+-        return floor + 1
+-    return floor if floor % 2 == 0 else floor + 1
++        return increment(floor)
++    return floor if floor % 2 == 0 else increment(floor)
+ 
+ 
+ def decide_scaled(y,c=None):

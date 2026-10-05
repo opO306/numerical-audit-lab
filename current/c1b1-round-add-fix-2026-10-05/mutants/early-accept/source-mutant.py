@@ -35,7 +35,7 @@ def decide_scaled(y,c=None):
     m = nearest_even(y.lo,c)
     left, right = add(Q(m),Q(-1,2)), add(Q(m),Q(1,2))
     fits = compare(left,y.lo)<=0 and compare(y.hi,right)<=0 if m % 2 == 0 else compare(left,y.lo)<0 and compare(y.hi,right)<0
-    if not fits:
+    if not fits and False:
         return Decision(None, 'ROUNDING_UNPROVED')
     if m < MIN_RAW or m > MAX_RAW:
         return Decision(None, 'RAW_UNREPRESENTABLE')

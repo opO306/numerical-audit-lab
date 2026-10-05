@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.452" timestamp="2026-10-05T12:53:28.893431+09:00" hostname="으악"><testcase classname="tests.test_impulse_reference_boundaries" name="test_exact_long_derivative_identity" time="0.039"><failure message="assert Fraction(39, 16) == Fraction(9, 16)&#10; +  where Fraction(39, 16) = Interval(lo=Fraction(39, 16), hi=Fraction(39, 16)).hi&#10; +  and   Fraction(9, 16) = Q(9, 16)">def test_exact_long_derivative_identity():
+        m=module('interval');p=module('potential');d=module('derivative')
+        # Independent derivative of -3*5*R^-4 with a specified damping slope 7:
+        # -3*(7/R^4 - 4*5/R^5), at R=2, is 9/16.
+        terms=p.Terms((),(p.LongTerm(m.point(3),2,m.point(5),m.point(7),m.point(2)),),())
+        result=d.derivative(terms,context())
+&gt;       assert result.lo==result.hi==Q(9,16)
+E       assert Fraction(39, 16) == Fraction(9, 16)
+E        +  where Fraction(39, 16) = Interval(lo=Fraction(39, 16), hi=Fraction(39, 16)).hi
+E        +  and   Fraction(9, 16) = Q(9, 16)
+
+tests\test_impulse_reference_boundaries.py:53: AssertionError</failure></testcase></testsuite></testsuites>

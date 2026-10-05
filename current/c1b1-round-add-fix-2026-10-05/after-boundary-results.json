@@ -1,0 +1,185 @@
+{
+  "scope": "AUTHOR REGRESSION / PRIVATE REFERENCE ONLY",
+  "scalar": [
+    {
+      "q": "7/4",
+      "work_max": 73,
+      "result": null,
+      "refusal": "WORK",
+      "charged_work": 73,
+      "operations": 2,
+      "add_events": [
+        {
+          "a": "1",
+          "b": "1",
+          "work_before": 73,
+          "operations_before": 2,
+          "outcome": "REFUSED",
+          "kind": "WORK"
+        }
+      ]
+    },
+    {
+      "q": "7/4",
+      "work_max": 74,
+      "result": null,
+      "refusal": "WORK",
+      "charged_work": 73,
+      "operations": 2,
+      "add_events": [
+        {
+          "a": "1",
+          "b": "1",
+          "work_before": 73,
+          "operations_before": 2,
+          "outcome": "REFUSED",
+          "kind": "WORK"
+        }
+      ]
+    },
+    {
+      "q": "7/4",
+      "work_max": 75,
+      "result": 2,
+      "refusal": null,
+      "charged_work": 75,
+      "operations": 3,
+      "add_events": [
+        {
+          "a": "1",
+          "b": "1",
+          "work_before": 73,
+          "operations_before": 2,
+          "outcome": "RETURNED",
+          "result": "2"
+        }
+      ]
+    },
+    {
+      "q": "-5/2",
+      "work_max": 42,
+      "result": null,
+      "refusal": "WORK",
+      "charged_work": 42,
+      "operations": 2,
+      "add_events": [
+        {
+          "a": "-3",
+          "b": "1",
+          "work_before": 42,
+          "operations_before": 2,
+          "outcome": "REFUSED",
+          "kind": "WORK"
+        }
+      ]
+    },
+    {
+      "q": "-5/2",
+      "work_max": 44,
+      "result": null,
+      "refusal": "WORK",
+      "charged_work": 42,
+      "operations": 2,
+      "add_events": [
+        {
+          "a": "-3",
+          "b": "1",
+          "work_before": 42,
+          "operations_before": 2,
+          "outcome": "REFUSED",
+          "kind": "WORK"
+        }
+      ]
+    },
+    {
+      "q": "-5/2",
+      "work_max": 45,
+      "result": -2,
+      "refusal": null,
+      "charged_work": 45,
+      "operations": 3,
+      "add_events": [
+        {
+          "a": "-3",
+          "b": "1",
+          "work_before": 42,
+          "operations_before": 2,
+          "outcome": "RETURNED",
+          "result": "-2"
+        }
+      ]
+    }
+  ],
+  "whole_call": [
+    {
+      "cap": "2605253326086889986",
+      "input_sha256": "bab9520968c7e3b5be3e6d5c5e53627a06d066bbb950579c7cc8ec2b65dcfffd",
+      "layers": {
+        "producer": "RESOLVED",
+        "rechecker": "NOT_RUN",
+        "executor_comparison": "NOT_RUN",
+        "arithmetic": "NOT_RUN",
+        "publication": "NOT_PUBLISHED",
+        "execution": "STOP"
+      },
+      "raw": null,
+      "opposite": null,
+      "certificate_present": false,
+      "account": null,
+      "failure": {
+        "attempt_count": null,
+        "attempt_digest": "4127e8735c008c88f0e9105fe8e895d60bc7776a778277763bf8d6bb940aa41e",
+        "budget_sha256": "6d105179c5cfbd1f67c62ad0c4ec4388ff054b97ea88c497e8d31d398e47b49a",
+        "occurrence_sha256": "3e4897e9767022e6979710293c544b06af7e45b512a828187b19d7163a36b669",
+        "phase": "PUBLICATION",
+        "reason": "RESOURCE_CAP",
+        "resource_kind": "WORK",
+        "schema": "LAB_C1B1_IMPULSE_FAILURE_V1",
+        "spec_sha256": "3c3773b306700b0cf2dced1a618ae73ad81c7dd4abbf36764fc6ec3191ff2bc1",
+        "state_sha256": "a52cf41090fa1a13f3d0b088881c421fc8bc26736f8e5704428edd1f3bef19e7",
+        "status": {
+          "arithmetic": "NOT_RUN",
+          "execution": "STOP",
+          "executor_comparison": "NOT_RUN",
+          "producer": "RESOLVED",
+          "publication": "NOT_PUBLISHED",
+          "rechecker": "NOT_RUN"
+        }
+      },
+      "input_unchanged": true
+    },
+    {
+      "cap": "2605253326086890138",
+      "input_sha256": "835314dcc102ff841c7cf532bc90c5b9f76702e26ad4ba3403cc0ff4f6fba0f7",
+      "layers": {
+        "producer": "RESOLVED",
+        "rechecker": "NOT_RUN",
+        "executor_comparison": "NOT_RUN",
+        "arithmetic": "NOT_RUN",
+        "publication": "NOT_PUBLISHED",
+        "execution": "STOP"
+      },
+      "raw": [
+        "52119986341579705480988",
+        "31271991804947823288593",
+        "-20847994536631882192395"
+      ],
+      "opposite": [
+        "-52119986341579705480988",
+        "-31271991804947823288593",
+        "20847994536631882192395"
+      ],
+      "certificate_present": true,
+      "account": {
+        "mathematical_work": 2605253326086890138,
+        "operations": 35236,
+        "peak_integer_bits": 13394,
+        "predicted_live_bytes": 91242784,
+        "peak_temporary_bytes": 14816,
+        "allocation_basis": "AUTHOR_FIXTURE_MODEL_UNVALIDATED"
+      },
+      "failure": null,
+      "input_unchanged": true
+    }
+  ]
+}

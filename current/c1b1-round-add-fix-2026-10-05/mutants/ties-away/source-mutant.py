@@ -21,7 +21,7 @@ def nearest_even(q,c=None):
         return floor
     if twice > q.denominator:
         return increment(floor)
-    return floor if floor % 2 == 0 else increment(floor)
+    return increment(floor)
 
 
 def decide_scaled(y,c=None):

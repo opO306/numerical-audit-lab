@@ -1,0 +1,7500 @@
+{
+  "scope": "AUTHOR STATIC AND DYNAMIC PATH REVIEW; NOT INDEPENDENT RESOURCE PASS",
+  "fixture": "canonical q=(5,3,-2), cap=W+152",
+  "result_layers": {
+    "producer": "RESOLVED",
+    "rechecker": "NOT_RUN",
+    "executor_comparison": "NOT_RUN",
+    "arithmetic": "NOT_RUN",
+    "publication": "NOT_PUBLISHED",
+    "execution": "STOP"
+  },
+  "static_operations": [
+    {
+      "file": "attempt.py",
+      "line": 27,
+      "syntax": "obj['reason'] not in compatibility_table().get((obj['producer'], obj['rechecker']), ())",
+      "node": "Compare"
+    },
+    {
+      "file": "attempt.py",
+      "line": 15,
+      "syntax": "len(rows) != 25",
+      "node": "Compare"
+    },
+    {
+      "file": "attempt.py",
+      "line": 15,
+      "syntax": "len(table) != 25",
+      "node": "Compare"
+    },
+    {
+      "file": "attempt.py",
+      "line": 21,
+      "syntax": "type(obj) is not dict",
+      "node": "Compare"
+    },
+    {
+      "file": "attempt.py",
+      "line": 21,
+      "syntax": "set(obj) != {'t', 'N', 'P', 'producer', 'rechecker', 'reason'}",
+      "node": "Compare"
+    },
+    {
+      "file": "attempt.py",
+      "line": 25,
+      "syntax": "obj['reason'] is not None",
+      "node": "Compare"
+    },
+    {
+      "file": "attempt.py",
+      "line": 25,
+      "syntax": "type(obj['reason']) is not str",
+      "node": "Compare"
+    },
+    {
+      "file": "attempt.py",
+      "line": 34,
+      "syntax": "t < 0",
+      "node": "Compare"
+    },
+    {
+      "file": "attempt.py",
+      "line": 34,
+      "syntax": "n < 1",
+      "node": "Compare"
+    },
+    {
+      "file": "attempt.py",
+      "line": 34,
+      "syntax": "p < 8",
+      "node": "Compare"
+    },
+    {
+      "file": "attempt.py",
+      "line": 40,
+      "syntax": "type(previous) is not bytes",
+      "node": "Compare"
+    },
+    {
+      "file": "attempt.py",
+      "line": 40,
+      "syntax": "len(previous) != 32",
+      "node": "Compare"
+    },
+    {
+      "file": "attempt.py",
+      "line": 23,
+      "syntax": "type(obj[k]) is not str",
+      "node": "Compare"
+    },
+    {
+      "file": "attempt.py",
+      "line": 32,
+      "syntax": "err.reason == 'HOST_SERIALIZATION_LIMIT'",
+      "node": "Compare"
+    },
+    {
+      "file": "attempt.py",
+      "line": 43,
+      "syntax": "previous + canonical_bytes(obj)",
+      "node": "BinOp"
+    },
+    {
+      "file": "certificate.py",
+      "line": 17,
+      "syntax": "n > policy.legacy_sqrt_bits_max",
+      "node": "Compare"
+    },
+    {
+      "file": "certificate.py",
+      "line": 17,
+      "syntax": "p > policy.legacy_work_bits_max",
+      "node": "Compare"
+    },
+    {
+      "file": "certificate.py",
+      "line": 31,
+      "syntax": "ceiling > policy.legacy_order_max >> t",
+      "node": "Compare"
+    },
+    {
+      "file": "certificate.py",
+      "line": 23,
+      "syntax": "'eta_' + rate_id[:-4]",
+      "node": "BinOp"
+    },
+    {
+      "file": "certificate.py",
+      "line": 31,
+      "syntax": "policy.legacy_order_max >> t",
+      "node": "BinOp"
+    },
+    {
+      "file": "certificate.py",
+      "line": 29,
+      "syntax": "rem != 0",
+      "node": "Compare"
+    },
+    {
+      "file": "certificate.py",
+      "line": 40,
+      "syntax": "q == 0",
+      "node": "Compare"
+    },
+    {
+      "file": "certificate.py",
+      "line": 23,
+      "syntax": "-4",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "contracts.py",
+      "line": 50,
+      "syntax": "acq['phase'] == 'FIRST_HALF_KICK'",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 60,
+      "syntax": "obj['schema'] != 'LAB_C1B1_IMPULSE_INPUT_V1'",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 62,
+      "syntax": "obj['spec_sha256'] != spec.sha256",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 78,
+      "syntax": "atoms[0]['atom_id'] == atoms[1]['atom_id']",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 82,
+      "syntax": "acq['phase'] == 'FIRST_HALF_KICK'",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 96,
+      "syntax": "len(data) > parsed['input_parse_bytes']",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 40,
+      "syntax": "type(atoms) is not list",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 40,
+      "syntax": "len(atoms) != 2",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 43,
+      "syntax": "atom['species'] != 'Ar40'",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 49,
+      "syntax": "acq['phase'] not in ('FIRST_HALF_KICK', 'SECOND_HALF_KICK')",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 49,
+      "syntax": "acq['full_half'] != 'HALF_OF_FULL_DT'",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 51,
+      "syntax": "acq['previous_occurrence_sha256'] is not None",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 55,
+      "syntax": "name in ('basis_record_sha256', 'issuer_sha256')",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 66,
+      "syntax": "state[name] != {'kind': 'FX', 'width': '96', 'frac_bits': frac}",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 68,
+      "syntax": "type(atoms) is not list",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 68,
+      "syntax": "len(atoms) != 2",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 72,
+      "syntax": "atom['species'] != 'Ar40'",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 81,
+      "syntax": "acq['full_half'] != 'HALF_OF_FULL_DT'",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 81,
+      "syntax": "acq['phase'] not in ['FIRST_HALF_KICK', 'SECOND_HALF_KICK']",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 83,
+      "syntax": "acq['previous_occurrence_sha256'] is not None",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 88,
+      "syntax": "name in ['basis_record_sha256', 'issuer_sha256']",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 92,
+      "syntax": "parsed['N0'] < 1",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 92,
+      "syntax": "parsed['P0'] < 8",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 92,
+      "syntax": "parsed['N_max'] < parsed['N0']",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 92,
+      "syntax": "parsed['P_max'] < parsed['P0']",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 94,
+      "syntax": "parsed['input_parse_bytes'] > 1048576",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 94,
+      "syntax": "parsed['private_certificate_bytes'] > 1048576",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 25,
+      "syntax": "type(value) is not dict",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 25,
+      "syntax": "set(value) != set(keys[kind])",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 28,
+      "syntax": "type(value) is not str",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 28,
+      "syntax": "not HASH_RE.fullmatch(value)",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "contracts.py",
+      "line": 34,
+      "syntax": "type(value) is not str",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 34,
+      "syntax": "not INT_RE.fullmatch(value)",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "contracts.py",
+      "line": 34,
+      "syntax": "len(value.lstrip('-')) > 4096",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 56,
+      "syntax": "name == 'profile_version'",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 77,
+      "syntax": "name == 'position_raw'",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 89,
+      "syntax": "name == 'profile_version'",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 98,
+      "syntax": "b - a",
+      "node": "BinOp"
+    },
+    {
+      "file": "contracts.py",
+      "line": 36,
+      "syntax": "value == '0'",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 45,
+      "syntax": "type(atom[name]) is not list",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 45,
+      "syntax": "len(atom[name]) != 3",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 57,
+      "syntax": "budget[name] != '1'",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 74,
+      "syntax": "type(atom[name]) is not list",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 74,
+      "syntax": "len(atom[name]) != 3",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 90,
+      "syntax": "budget[name] != '1'",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 76,
+      "syntax": "not -(1 << 95) <= v < 1 << 95",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "contracts.py",
+      "line": 99,
+      "syntax": "1 << 48",
+      "node": "BinOp"
+    },
+    {
+      "file": "contracts.py",
+      "line": 76,
+      "syntax": "-(1 << 95) <= v < 1 << 95",
+      "node": "Compare"
+    },
+    {
+      "file": "contracts.py",
+      "line": 76,
+      "syntax": "-(1 << 95)",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "contracts.py",
+      "line": 76,
+      "syntax": "1 << 95",
+      "node": "BinOp"
+    },
+    {
+      "file": "contracts.py",
+      "line": 76,
+      "syntax": "1 << 95",
+      "node": "BinOp"
+    },
+    {
+      "file": "derivative.py",
+      "line": 11,
+      "syntax": "-2 * term.k",
+      "node": "BinOp"
+    },
+    {
+      "file": "derivative.py",
+      "line": 12,
+      "syntax": "-2 * term.k - 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "derivative.py",
+      "line": 11,
+      "syntax": "-2",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "derivative.py",
+      "line": 12,
+      "syntax": "2 * term.k",
+      "node": "BinOp"
+    },
+    {
+      "file": "derivative.py",
+      "line": 12,
+      "syntax": "-2 * term.k",
+      "node": "BinOp"
+    },
+    {
+      "file": "derivative.py",
+      "line": 12,
+      "syntax": "-2",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "domain.py",
+      "line": 6,
+      "syntax": "r2 == 0",
+      "node": "Compare"
+    },
+    {
+      "file": "domain.py",
+      "line": 7,
+      "syntax": "r2 < spec.r_min_squared",
+      "node": "Compare"
+    },
+    {
+      "file": "domain.py",
+      "line": 5,
+      "syntax": "x * x",
+      "node": "BinOp"
+    },
+    {
+      "file": "exp_enclosure.py",
+      "line": 10,
+      "syntax": "x.lo == x.hi == 0",
+      "node": "Compare"
+    },
+    {
+      "file": "exp_enclosure.py",
+      "line": 13,
+      "syntax": "c.compare(yhi, Q(1, 2)) > 0",
+      "node": "Compare"
+    },
+    {
+      "file": "exp_enclosure.py",
+      "line": 14,
+      "syntax": "s += 1",
+      "node": "AugAssign"
+    },
+    {
+      "file": "exp_enclosure.py",
+      "line": 8,
+      "syntax": "x.lo.numerator < 0",
+      "node": "Compare"
+    },
+    {
+      "file": "exp_enclosure.py",
+      "line": 8,
+      "syntax": "bits < 8",
+      "node": "Compare"
+    },
+    {
+      "file": "exp_enclosure.py",
+      "line": 8,
+      "syntax": "type(order_max) is not int",
+      "node": "Compare"
+    },
+    {
+      "file": "exp_enclosure.py",
+      "line": 8,
+      "syntax": "order_max < 0",
+      "node": "Compare"
+    },
+    {
+      "file": "exp_enclosure.py",
+      "line": 17,
+      "syntax": "order_max + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "exp_enclosure.py",
+      "line": 21,
+      "syntax": "tail_den.numerator <= 0",
+      "node": "Compare"
+    },
+    {
+      "file": "exp_enclosure.py",
+      "line": 25,
+      "syntax": "c.compare(c.qadd(enclosure.hi, c.qneg(enclosure.lo)), tolerance) <= 0",
+      "node": "Compare"
+    },
+    {
+      "file": "exp_enclosure.py",
+      "line": 18,
+      "syntax": "n + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "exp_enclosure.py",
+      "line": 19,
+      "syntax": "n + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "exp_enclosure.py",
+      "line": 20,
+      "syntax": "n + 2",
+      "node": "BinOp"
+    },
+    {
+      "file": "interval.py",
+      "line": 22,
+      "syntax": "type(q) is int",
+      "node": "Compare"
+    },
+    {
+      "file": "interval.py",
+      "line": 33,
+      "syntax": "c is None",
+      "node": "Compare"
+    },
+    {
+      "file": "interval.py",
+      "line": 57,
+      "syntax": "c.compare(a.lo, Q(0)) <= 0",
+      "node": "Compare"
+    },
+    {
+      "file": "interval.py",
+      "line": 63,
+      "syntax": "type(n) is not int",
+      "node": "Compare"
+    },
+    {
+      "file": "interval.py",
+      "line": 65,
+      "syntax": "n < 0",
+      "node": "Compare"
+    },
+    {
+      "file": "interval.py",
+      "line": 70,
+      "syntax": "n == 0",
+      "node": "Compare"
+    },
+    {
+      "file": "interval.py",
+      "line": 15,
+      "syntax": "self.lo is self.hi",
+      "node": "Compare"
+    },
+    {
+      "file": "interval.py",
+      "line": 44,
+      "syntax": "c.compare(value, lo) < 0",
+      "node": "Compare"
+    },
+    {
+      "file": "interval.py",
+      "line": 46,
+      "syntax": "c.compare(value, hi) > 0",
+      "node": "Compare"
+    },
+    {
+      "file": "interval.py",
+      "line": 72,
+      "syntax": "n % 2 == 0",
+      "node": "Compare"
+    },
+    {
+      "file": "interval.py",
+      "line": 72,
+      "syntax": "c.compare(a.lo, Q(0)) <= 0",
+      "node": "Compare"
+    },
+    {
+      "file": "interval.py",
+      "line": 72,
+      "syntax": "c.compare(a.hi, Q(0)) >= 0",
+      "node": "Compare"
+    },
+    {
+      "file": "interval.py",
+      "line": 13,
+      "syntax": "not isinstance(self.lo, Q)",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "interval.py",
+      "line": 13,
+      "syntax": "not isinstance(self.hi, Q)",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "interval.py",
+      "line": 16,
+      "syntax": "self.account is not None",
+      "node": "Compare"
+    },
+    {
+      "file": "interval.py",
+      "line": 16,
+      "syntax": "self.account.compare(self.lo, self.hi) > 0",
+      "node": "Compare"
+    },
+    {
+      "file": "interval.py",
+      "line": 16,
+      "syntax": "self.lo > self.hi",
+      "node": "Compare"
+    },
+    {
+      "file": "interval.py",
+      "line": 33,
+      "syntax": "-a.hi",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "interval.py",
+      "line": 33,
+      "syntax": "-a.lo",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "interval.py",
+      "line": 66,
+      "syntax": "-n",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "interval.py",
+      "line": 72,
+      "syntax": "n % 2",
+      "node": "BinOp"
+    },
+    {
+      "file": "interval.py",
+      "line": 73,
+      "syntax": "c.compare(left, right) > 0",
+      "node": "Compare"
+    },
+    {
+      "file": "interval.py",
+      "line": 83,
+      "syntax": "rem != 0",
+      "node": "Compare"
+    },
+    {
+      "file": "policy.py",
+      "line": 28,
+      "syntax": "self.P0 < 8",
+      "node": "Compare"
+    },
+    {
+      "file": "policy.py",
+      "line": 28,
+      "syntax": "self.N_max < self.N0",
+      "node": "Compare"
+    },
+    {
+      "file": "policy.py",
+      "line": 28,
+      "syntax": "self.P_max < self.P0",
+      "node": "Compare"
+    },
+    {
+      "file": "policy.py",
+      "line": 28,
+      "syntax": "self.private_certificate_bytes > 1048576",
+      "node": "Compare"
+    },
+    {
+      "file": "policy.py",
+      "line": 43,
+      "syntax": "t + 1 < self.max_attempts",
+      "node": "Compare"
+    },
+    {
+      "file": "policy.py",
+      "line": 46,
+      "syntax": "n *= 2",
+      "node": "AugAssign"
+    },
+    {
+      "file": "policy.py",
+      "line": 46,
+      "syntax": "p *= 2",
+      "node": "AugAssign"
+    },
+    {
+      "file": "policy.py",
+      "line": 40,
+      "syntax": "n > self.N_max",
+      "node": "Compare"
+    },
+    {
+      "file": "policy.py",
+      "line": 40,
+      "syntax": "p > self.P_max",
+      "node": "Compare"
+    },
+    {
+      "file": "policy.py",
+      "line": 43,
+      "syntax": "t + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "policy.py",
+      "line": 26,
+      "syntax": "type(v) is not int",
+      "node": "Compare"
+    },
+    {
+      "file": "policy.py",
+      "line": 26,
+      "syntax": "v <= 0",
+      "node": "Compare"
+    },
+    {
+      "file": "policy.py",
+      "line": 44,
+      "syntax": "n > self.N_max // 2",
+      "node": "Compare"
+    },
+    {
+      "file": "policy.py",
+      "line": 44,
+      "syntax": "p > self.P_max // 2",
+      "node": "Compare"
+    },
+    {
+      "file": "policy.py",
+      "line": 44,
+      "syntax": "self.N_max // 2",
+      "node": "BinOp"
+    },
+    {
+      "file": "policy.py",
+      "line": 44,
+      "syntax": "self.P_max // 2",
+      "node": "BinOp"
+    },
+    {
+      "file": "potential.py",
+      "line": 33,
+      "syntax": "family == 'BO'",
+      "node": "Compare"
+    },
+    {
+      "file": "potential.py",
+      "line": 33,
+      "syntax": "-1",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "potential.py",
+      "line": 45,
+      "syntax": "m <= 5",
+      "node": "Compare"
+    },
+    {
+      "file": "potential.py",
+      "line": 53,
+      "syntax": "-2",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "potential.py",
+      "line": 70,
+      "syntax": "khi + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "potential.py",
+      "line": 71,
+      "syntax": "2 * k + kadd",
+      "node": "BinOp"
+    },
+    {
+      "file": "potential.py",
+      "line": 71,
+      "syntax": "2 * k",
+      "node": "BinOp"
+    },
+    {
+      "file": "potential.py",
+      "line": 72,
+      "syntax": "last + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "potential.py",
+      "line": 76,
+      "syntax": "family == 'BO'",
+      "node": "Compare"
+    },
+    {
+      "file": "potential.py",
+      "line": 76,
+      "syntax": "k == 3",
+      "node": "Compare"
+    },
+    {
+      "file": "potential.py",
+      "line": 51,
+      "syntax": "m - 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "potential.py",
+      "line": 78,
+      "syntax": "family == 'REL'",
+      "node": "Compare"
+    },
+    {
+      "file": "potential.py",
+      "line": 78,
+      "syntax": "k == 2",
+      "node": "Compare"
+    },
+    {
+      "file": "potential.py",
+      "line": 91,
+      "syntax": "-2 * term.k",
+      "node": "BinOp"
+    },
+    {
+      "file": "potential.py",
+      "line": 38,
+      "syntax": "i - 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "potential.py",
+      "line": 48,
+      "syntax": "m - 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "potential.py",
+      "line": 91,
+      "syntax": "-2",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "potential.py",
+      "line": 82,
+      "syntax": "2 * k",
+      "node": "BinOp"
+    },
+    {
+      "file": "producer.py",
+      "line": 22,
+      "syntax": "tuple | None",
+      "node": "BinOp"
+    },
+    {
+      "file": "producer.py",
+      "line": 23,
+      "syntax": "tuple | None",
+      "node": "BinOp"
+    },
+    {
+      "file": "producer.py",
+      "line": 24,
+      "syntax": "bytes | None",
+      "node": "BinOp"
+    },
+    {
+      "file": "producer.py",
+      "line": 25,
+      "syntax": "bytes | None",
+      "node": "BinOp"
+    },
+    {
+      "file": "producer.py",
+      "line": 26,
+      "syntax": "tuple | None",
+      "node": "BinOp"
+    },
+    {
+      "file": "producer.py",
+      "line": 27,
+      "syntax": "dict | None",
+      "node": "BinOp"
+    },
+    {
+      "file": "producer.py",
+      "line": 39,
+      "syntax": "reason in ('RESOURCE_CAP', 'ARTIFACT_LIMIT', 'HOST_SERIALIZATION_LIMIT')",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 42,
+      "syntax": "producer not in ('NOT_STARTED', 'RESOLVED', 'UNPROVED', 'REFUSED', 'ERROR')",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 57,
+      "syntax": "len(intervals) != 3",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 37,
+      "syntax": "type(reason) is not str",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 37,
+      "syntax": "reason not in wire['reasons']",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 37,
+      "syntax": "phase not in wire['phases']",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 40,
+      "syntax": "kind not in wire['resource_kinds']",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 40,
+      "syntax": "not resource",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "producer.py",
+      "line": 40,
+      "syntax": "kind is not None",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 51,
+      "syntax": "v is not None",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 65,
+      "syntax": "-v",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "producer.py",
+      "line": 71,
+      "syntax": "compare(a.lo, b.hi) > 0",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 71,
+      "syntax": "compare(b.lo, a.hi) > 0",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 74,
+      "syntax": "da.raw is not None",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 74,
+      "syntax": "db.raw is not None",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 74,
+      "syntax": "da.raw != db.raw",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 114,
+      "syntax": "radius.lo.numerator > 0",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 128,
+      "syntax": "reason in ['RAW_UNREPRESENTABLE', 'OPPOSITE_RAW_UNREPRESENTABLE']",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 130,
+      "syntax": "raw is not None",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 145,
+      "syntax": "active_attempt is not None",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 51,
+      "syntax": "type(v) is not str",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 51,
+      "syntax": "not HASH_RE.fullmatch(v)",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "producer.py",
+      "line": 60,
+      "syntax": "d.reason == reason",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 70,
+      "syntax": "c is None",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 70,
+      "syntax": "(x > y) - (x < y)",
+      "node": "BinOp"
+    },
+    {
+      "file": "producer.py",
+      "line": 106,
+      "syntax": "parsed.budget[k] != v",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 109,
+      "syntax": "x * x",
+      "node": "BinOp"
+    },
+    {
+      "file": "producer.py",
+      "line": 120,
+      "syntax": "old is not None",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 124,
+      "syntax": "reason is None",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 70,
+      "syntax": "x > y",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 70,
+      "syntax": "x < y",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 124,
+      "syntax": "reason == 'ROUNDING_UNPROVED'",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 132,
+      "syntax": "t + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "producer.py",
+      "line": 118,
+      "syntax": "q == 0",
+      "node": "Compare"
+    },
+    {
+      "file": "producer.py",
+      "line": 119,
+      "syntax": "20 * (1 << 80)",
+      "node": "BinOp"
+    },
+    {
+      "file": "producer.py",
+      "line": 119,
+      "syntax": "1 << 80",
+      "node": "BinOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 58,
+      "syntax": "_canonical(obj) != data",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 83,
+      "syntax": "sha != CHECKER_SHA256",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 106,
+      "syntax": "acq['full_half'] != 'HALF_OF_FULL_DT'",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 107,
+      "syntax": "acq['phase'] == 'FIRST_HALF_KICK'",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 141,
+      "syntax": "cert['method'] != 'LAB_POINT_PRODUCER_V1_AND_PINNED_V2'",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 157,
+      "syntax": "atoms[0]['atom_id'] == atoms[1]['atom_id']",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 163,
+      "syntax": "acq['full_half'] != 'HALF_OF_FULL_DT'",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 164,
+      "syntax": "acq['phase'] == 'FIRST_HALF_KICK'",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 191,
+      "syntax": "cert['binding'] != binding",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 193,
+      "syntax": "count > controls['max_attempts']",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 195,
+      "syntax": "count - 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 28,
+      "syntax": "type(data) is not bytes",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 28,
+      "syntax": "len(data) > 1048576",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 50,
+      "syntax": "type(v) is list",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 62,
+      "syntax": "type(value) is not str",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 62,
+      "syntax": "not INT.fullmatch(value)",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 62,
+      "syntax": "len(value.lstrip('-')) > 4096",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 66,
+      "syntax": "minimum is not None",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 66,
+      "syntax": "result < minimum",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 70,
+      "syntax": "type(value) is not str",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 70,
+      "syntax": "not INT.fullmatch(value)",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 70,
+      "syntax": "len(value.lstrip('-')) > 4096",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 75,
+      "syntax": "type(value) is not str",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 75,
+      "syntax": "not HASH.fullmatch(value)",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 78,
+      "syntax": "label is None",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 78,
+      "syntax": "label.encode('ascii') + b'\\x00'",
+      "node": "BinOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 96,
+      "syntax": "state[name] != {'kind': 'FX', 'width': '96', 'frac_bits': frac}",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 97,
+      "syntax": "type(state['atoms']) is not list",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 97,
+      "syntax": "len(state['atoms']) != 2",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 100,
+      "syntax": "atom['species'] != 'Ar40'",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 108,
+      "syntax": "acq['previous_occurrence_sha256'] is not None",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 109,
+      "syntax": "acq['phase'] == 'SECOND_HALF_KICK'",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 113,
+      "syntax": "k in ('issuer_sha256', 'basis_record_sha256')",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 123,
+      "syntax": "type(proof['exp_plan']) is not list",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 123,
+      "syntax": "len(proof['exp_plan']) != 9",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 133,
+      "syntax": "type(proof['lane_kinds']) is not list",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 133,
+      "syntax": "len(proof['lane_kinds']) != 3",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 136,
+      "syntax": "obj['schema'] != 'LAB_C1B1_IMPULSE_INPUT_V1'",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 136,
+      "syntax": "cert['schema'] != 'LAB_C1B1_IMPULSE_CERT_V1'",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 137,
+      "syntax": "obj['spec_sha256'] != spec.sha256",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 137,
+      "syntax": "cert['spec_sha256'] != spec.sha256",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 139,
+      "syntax": "cert['producer_source_sha256'] != expected_producer_sha256",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 139,
+      "syntax": "cert['rechecker_source_sha256'] != CHECKER_SHA256",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 145,
+      "syntax": "state[name] != {'kind': 'FX', 'width': '96', 'frac_bits': frac}",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 147,
+      "syntax": "type(atoms) is not list",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 147,
+      "syntax": "len(atoms) != 2",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 151,
+      "syntax": "atom['species'] != 'Ar40'",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 160,
+      "syntax": "r2raw == 0",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 160,
+      "syntax": "r2raw * threshold.denominator < threshold.numerator * (1 << 96)",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 165,
+      "syntax": "acq['previous_occurrence_sha256'] is not None",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 166,
+      "syntax": "acq['phase'] == 'SECOND_HALF_KICK'",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 170,
+      "syntax": "k in ('issuer_sha256', 'basis_record_sha256')",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 174,
+      "syntax": "controls['P0'] < 8",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 174,
+      "syntax": "controls['N0'] > controls['N_max']",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 174,
+      "syntax": "controls['P0'] > controls['P_max']",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 175,
+      "syntax": "not len(input_bytes) <= controls['input_parse_bytes'] <= 1048576",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 175,
+      "syntax": "not len(certificate_bytes) <= controls['private_certificate_bytes'] <= 1048576",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 196,
+      "syntax": "t > min(n.bit_length(), p.bit_length())",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 196,
+      "syntax": "n != controls['N0'] << t",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 196,
+      "syntax": "p != controls['P0'] << t",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 198,
+      "syntax": "n > min(controls['N_max'], controls['legacy_sqrt_bits_max'])",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 198,
+      "syntax": "p > min(controls['P_max'], controls['legacy_work_bits_max'])",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 201,
+      "syntax": "type(plan) is not list",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 201,
+      "syntax": "len(plan) != 9",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 209,
+      "syntax": "math.gcd(abs(numerator), denominator) != 1",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 214,
+      "syntax": "(numerator, denominator) != (wanted.numerator, wanted.denominator)",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 216,
+      "syntax": "order > controls['legacy_order_max']",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 219,
+      "syntax": "type(raw) is not list",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 219,
+      "syntax": "len(raw) != 3",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 219,
+      "syntax": "type(lanes) is not list",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 219,
+      "syntax": "len(lanes) != 3",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 223,
+      "syntax": "not -(1 << 95) < value < 1 << 95",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 224,
+      "syntax": "q[axis] == 0",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 25,
+      "syntax": "json.dumps(obj, sort_keys=True, separators=(',', ':'), ensure_ascii=True) + '\\n'",
+      "node": "BinOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 35,
+      "syntax": "byte == 34",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 44,
+      "syntax": "k in result",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 51,
+      "syntax": "len(v) > 12",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 53,
+      "syntax": "type(v) is dict",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 72,
+      "syntax": "value == '0'",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 89,
+      "syntax": "type(obj) is not dict",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 89,
+      "syntax": "set(obj) != set(keys[kind])",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 114,
+      "syntax": "k == 'profile_version'",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 126,
+      "syntax": "entry['rate_id'] != rate_id",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 126,
+      "syntax": "entry['mode'] != 'FULL'",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 127,
+      "syntax": "type(entry['rate']) is not dict",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 127,
+      "syntax": "set(entry['rate']) != {'n', 'd'}",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 131,
+      "syntax": "type(cert[field]) is not list",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 131,
+      "syntax": "len(cert[field]) != 3",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 156,
+      "syntax": "field == 'position_raw'",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 158,
+      "syntax": "b - a",
+      "node": "BinOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 158,
+      "syntax": "v * v",
+      "node": "BinOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 160,
+      "syntax": "r2raw * threshold.denominator",
+      "node": "BinOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 160,
+      "syntax": "threshold.numerator * (1 << 96)",
+      "node": "BinOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 171,
+      "syntax": "k == 'profile_version'",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 175,
+      "syntax": "len(input_bytes) <= controls['input_parse_bytes'] <= 1048576",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 175,
+      "syntax": "len(certificate_bytes) <= controls['private_certificate_bytes'] <= 1048576",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 196,
+      "syntax": "controls['N0'] << t",
+      "node": "BinOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 196,
+      "syntax": "controls['P0'] << t",
+      "node": "BinOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 205,
+      "syntax": "entry['rate_id'] != rate_id",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 205,
+      "syntax": "entry['mode'] != 'FULL'",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 207,
+      "syntax": "type(rate) is not dict",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 207,
+      "syntax": "set(rate) != {'n', 'd'}",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 210,
+      "syntax": "'eta_' + rate_id[:-4]",
+      "node": "BinOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 223,
+      "syntax": "-(1 << 95) < value < 1 << 95",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 225,
+      "syntax": "kind != ('EXACT_ZERO_AXIS' if is_zero else 'NONLINEAR_V2')",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 33,
+      "syntax": "byte == 92",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 36,
+      "syntax": "byte in (91, 123)",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 37,
+      "syntax": "depth += 1",
+      "node": "AugAssign"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 54,
+      "syntax": "len(v) > 26",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 79,
+      "syntax": "prefix + _canonical(value)",
+      "node": "BinOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 89,
+      "syntax": "'closed ' + kind",
+      "node": "BinOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 102,
+      "syntax": "type(atom[name]) is not list",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 102,
+      "syntax": "len(atom[name]) != 3",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 115,
+      "syntax": "obj['budget'][k] != '1'",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 134,
+      "syntax": "k not in ('EXACT_ZERO_AXIS', 'NONLINEAR_V2')",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 153,
+      "syntax": "type(atom[field]) is not list",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 153,
+      "syntax": "len(atom[field]) != 3",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 160,
+      "syntax": "1 << 96",
+      "node": "BinOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 172,
+      "syntax": "budget[k] != '1'",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 223,
+      "syntax": "-(1 << 95)",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 223,
+      "syntax": "1 << 95",
+      "node": "BinOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 225,
+      "syntax": "value != 0",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 34,
+      "syntax": "byte == 34",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 38,
+      "syntax": "depth > 7",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 39,
+      "syntax": "byte in (93, 125)",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 39,
+      "syntax": "depth -= 1",
+      "node": "AugAssign"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 56,
+      "syntax": "v is not None",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 56,
+      "syntax": "type(v) is not str",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 217,
+      "syntax": "rate['n'] + '/' + rate['d']",
+      "node": "BinOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 223,
+      "syntax": "1 << 95",
+      "node": "BinOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 155,
+      "syntax": "v < -(1 << 95)",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 155,
+      "syntax": "v >= 1 << 95",
+      "node": "Compare"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 210,
+      "syntax": "-4",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 217,
+      "syntax": "rate['n'] + '/'",
+      "node": "BinOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 155,
+      "syntax": "-(1 << 95)",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 155,
+      "syntax": "1 << 95",
+      "node": "BinOp"
+    },
+    {
+      "file": "rechecker_adapter.py",
+      "line": 155,
+      "syntax": "1 << 95",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 66,
+      "syntax": "self.predicted_live_bytes += predicted",
+      "node": "AugAssign"
+    },
+    {
+      "file": "resource.py",
+      "line": 68,
+      "syntax": "self.work += work",
+      "node": "AugAssign"
+    },
+    {
+      "file": "resource.py",
+      "line": 69,
+      "syntax": "self.operations += 1",
+      "node": "AugAssign"
+    },
+    {
+      "file": "resource.py",
+      "line": 26,
+      "syntax": "self.workspace_multiplier * (self.header_bytes + self.limb_bytes * ((bits + self.limb_bits - 1) // self.limb_bits))",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 58,
+      "syntax": "bits > self.bit_max",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 60,
+      "syntax": "work > self.work_max - self.work",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 63,
+      "syntax": "self.allocation_basis is not None",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 73,
+      "syntax": "max(abs(a).bit_length(), abs(b).bit_length()) + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 75,
+      "syntax": "a + b",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 80,
+      "syntax": "a * b",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 85,
+      "syntax": "abs(a).bit_length() + n + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 87,
+      "syntax": "a << n",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 90,
+      "syntax": "b <= 0",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 97,
+      "syntax": "a < 0",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 104,
+      "syntax": "d <= 0",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 127,
+      "syntax": "b.numerator == 0",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 137,
+      "syntax": "n > self.bit_max // largest",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 138,
+      "syntax": "self.allocation_basis is not None",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 151,
+      "syntax": "(u > v) - (u < v)",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 26,
+      "syntax": "self.header_bytes + self.limb_bytes * ((bits + self.limb_bits - 1) // self.limb_bits)",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 48,
+      "syntax": "allocation_basis is not None",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 51,
+      "syntax": "allocation_basis is None",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 60,
+      "syntax": "self.work_max - self.work",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 62,
+      "syntax": "self.allocation_basis is None",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 64,
+      "syntax": "predicted > self.temp_max",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 65,
+      "syntax": "predicted > self.live_max - self.predicted_live_bytes",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 79,
+      "syntax": "A + B",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 79,
+      "syntax": "(A + 1) * (B + 1)",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 83,
+      "syntax": "type(n) is not int",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 83,
+      "syntax": "n < 0",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 85,
+      "syntax": "abs(a).bit_length() + n",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 93,
+      "syntax": "max(A, B) + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 93,
+      "syntax": "(A + 1) * (B + 1) ** 2",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 100,
+      "syntax": "A + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 100,
+      "syntax": "(A + 1) ** 3",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 108,
+      "syntax": "M + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 108,
+      "syntax": "(2 * M + 2) * (M + 1) ** 3",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 110,
+      "syntax": "abs(result.numerator).bit_length() > self.num_bit_max",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 110,
+      "syntax": "result.denominator.bit_length() > self.den_bit_max",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 129,
+      "syntax": "b.numerator > 0",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 129,
+      "syntax": "-1",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 130,
+      "syntax": "self.multiply(a.numerator, b.denominator) * sign",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 134,
+      "syntax": "type(n) is not int",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 134,
+      "syntax": "n < 0",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 137,
+      "syntax": "self.bit_max // largest",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 140,
+      "syntax": "prediction > self.temp_max",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 141,
+      "syntax": "prediction > self.live_max - self.predicted_live_bytes",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 149,
+      "syntax": "max(abs(u).bit_length(), abs(v).bit_length()) + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 150,
+      "syntax": "max(abs(u).bit_length(), abs(v).bit_length()) + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 151,
+      "syntax": "u > v",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 151,
+      "syntax": "u < v",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 26,
+      "syntax": "self.limb_bytes * ((bits + self.limb_bits - 1) // self.limb_bits)",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 48,
+      "syntax": "not isinstance(allocation_basis, AllocationBasis)",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 51,
+      "syntax": "temp_max is not None",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 51,
+      "syntax": "live_max is not None",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 65,
+      "syntax": "self.live_max - self.predicted_live_bytes",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 79,
+      "syntax": "A + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 79,
+      "syntax": "B + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 93,
+      "syntax": "A + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 93,
+      "syntax": "(B + 1) ** 2",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 100,
+      "syntax": "A + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 108,
+      "syntax": "2 * M + 2",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 108,
+      "syntax": "(M + 1) ** 3",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 120,
+      "syntax": "-1",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 141,
+      "syntax": "self.live_max - self.predicted_live_bytes",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 22,
+      "syntax": "type(v) is not int",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 22,
+      "syntax": "v <= 0",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 26,
+      "syntax": "(bits + self.limb_bits - 1) // self.limb_bits",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 42,
+      "syntax": "type(x) is not int",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 42,
+      "syntax": "x <= 0",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 93,
+      "syntax": "B + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 108,
+      "syntax": "2 * M",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 108,
+      "syntax": "M + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 139,
+      "syntax": "largest * n",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 26,
+      "syntax": "bits + self.limb_bits - 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 26,
+      "syntax": "bits + self.limb_bits",
+      "node": "BinOp"
+    },
+    {
+      "file": "resource.py",
+      "line": 49,
+      "syntax": "type(x) is not int",
+      "node": "Compare"
+    },
+    {
+      "file": "resource.py",
+      "line": 49,
+      "syntax": "x <= 0",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 5,
+      "syntax": "-(1 << 95)",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "rounding.py",
+      "line": 6,
+      "syntax": "(1 << 95) - 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "rounding.py",
+      "line": 5,
+      "syntax": "1 << 95",
+      "node": "BinOp"
+    },
+    {
+      "file": "rounding.py",
+      "line": 6,
+      "syntax": "1 << 95",
+      "node": "BinOp"
+    },
+    {
+      "file": "rounding.py",
+      "line": 11,
+      "syntax": "int | None",
+      "node": "BinOp"
+    },
+    {
+      "file": "rounding.py",
+      "line": 12,
+      "syntax": "str | None",
+      "node": "BinOp"
+    },
+    {
+      "file": "rounding.py",
+      "line": 20,
+      "syntax": "twice < q.denominator",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 22,
+      "syntax": "twice > q.denominator",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 38,
+      "syntax": "not fits",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "rounding.py",
+      "line": 16,
+      "syntax": "c is None",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 17,
+      "syntax": "c is None",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 17,
+      "syntax": "2 * rem",
+      "node": "BinOp"
+    },
+    {
+      "file": "rounding.py",
+      "line": 24,
+      "syntax": "floor % 2 == 0",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 32,
+      "syntax": "compare(y.hi, lower) < 0",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 32,
+      "syntax": "compare(y.lo, upper) >= 0",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 37,
+      "syntax": "m % 2 == 0",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 40,
+      "syntax": "m < MIN_RAW",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 40,
+      "syntax": "m > MAX_RAW",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 42,
+      "syntax": "-m < MIN_RAW",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 42,
+      "syntax": "-m > MAX_RAW",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 19,
+      "syntax": "c is None",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 19,
+      "syntax": "value + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "rounding.py",
+      "line": 24,
+      "syntax": "floor % 2",
+      "node": "BinOp"
+    },
+    {
+      "file": "rounding.py",
+      "line": 29,
+      "syntax": "c is None",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 29,
+      "syntax": "(a > b) - (a < b)",
+      "node": "BinOp"
+    },
+    {
+      "file": "rounding.py",
+      "line": 30,
+      "syntax": "c is None",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 30,
+      "syntax": "a + b",
+      "node": "BinOp"
+    },
+    {
+      "file": "rounding.py",
+      "line": 31,
+      "syntax": "-1",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "rounding.py",
+      "line": 37,
+      "syntax": "m % 2",
+      "node": "BinOp"
+    },
+    {
+      "file": "rounding.py",
+      "line": 37,
+      "syntax": "compare(left, y.lo) <= 0",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 37,
+      "syntax": "compare(y.hi, right) <= 0",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 37,
+      "syntax": "compare(left, y.lo) < 0",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 37,
+      "syntax": "compare(y.hi, right) < 0",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 42,
+      "syntax": "-m",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "rounding.py",
+      "line": 42,
+      "syntax": "-m",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "rounding.py",
+      "line": 29,
+      "syntax": "a > b",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 29,
+      "syntax": "a < b",
+      "node": "Compare"
+    },
+    {
+      "file": "rounding.py",
+      "line": 36,
+      "syntax": "-1",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "spec.py",
+      "line": 11,
+      "syntax": "Path(__file__).resolve().parents[3] / 'specs/c1b1-independent-impulse-v1-attempt-reason-null'",
+      "node": "BinOp"
+    },
+    {
+      "file": "spec.py",
+      "line": 15,
+      "syntax": "type(value) is dict",
+      "node": "Compare"
+    },
+    {
+      "file": "spec.py",
+      "line": 17,
+      "syntax": "type(value) is list",
+      "node": "Compare"
+    },
+    {
+      "file": "spec.py",
+      "line": 46,
+      "syntax": "package['dependencies']['semantic-bundle.json'] != SPEC_SHA256",
+      "node": "Compare"
+    },
+    {
+      "file": "spec.py",
+      "line": 36,
+      "syntax": "hashlib.sha256(data).hexdigest() != wanted",
+      "node": "Compare"
+    },
+    {
+      "file": "spec.py",
+      "line": 39,
+      "syntax": "(json.dumps(obj, sort_keys=True, separators=(',', ':'), ensure_ascii=True) + '\\n').encode() != data",
+      "node": "Compare"
+    },
+    {
+      "file": "spec.py",
+      "line": 41,
+      "syntax": "(SPEC_DIR / (name + '.sha256')).read_text(encoding='ascii').split()[0] != wanted",
+      "node": "Compare"
+    },
+    {
+      "file": "spec.py",
+      "line": 49,
+      "syntax": "r['role'] == 'NOMINAL_MODEL'",
+      "node": "Compare"
+    },
+    {
+      "file": "spec.py",
+      "line": 35,
+      "syntax": "SPEC_DIR / name",
+      "node": "BinOp"
+    },
+    {
+      "file": "spec.py",
+      "line": 39,
+      "syntax": "json.dumps(obj, sort_keys=True, separators=(',', ':'), ensure_ascii=True) + '\\n'",
+      "node": "BinOp"
+    },
+    {
+      "file": "spec.py",
+      "line": 41,
+      "syntax": "SPEC_DIR / (name + '.sha256')",
+      "node": "BinOp"
+    },
+    {
+      "file": "spec.py",
+      "line": 41,
+      "syntax": "name + '.sha256'",
+      "node": "BinOp"
+    },
+    {
+      "file": "sqrt_enclosure.py",
+      "line": 12,
+      "syntax": "c.multiply(square, r2.denominator) == scaled",
+      "node": "Compare"
+    },
+    {
+      "file": "sqrt_enclosure.py",
+      "line": 6,
+      "syntax": "not isinstance(r2, Q)",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "sqrt_enclosure.py",
+      "line": 6,
+      "syntax": "r2.numerator < 0",
+      "node": "Compare"
+    },
+    {
+      "file": "sqrt_enclosure.py",
+      "line": 6,
+      "syntax": "type(bits) is not int",
+      "node": "Compare"
+    },
+    {
+      "file": "sqrt_enclosure.py",
+      "line": 6,
+      "syntax": "bits < 1",
+      "node": "Compare"
+    },
+    {
+      "file": "sqrt_enclosure.py",
+      "line": 8,
+      "syntax": "2 * bits",
+      "node": "BinOp"
+    },
+    {
+      "file": "wire.py",
+      "line": 6,
+      "syntax": "10 ** 4096",
+      "node": "BinOp"
+    },
+    {
+      "file": "wire.py",
+      "line": 18,
+      "syntax": "type(value) is not int",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 20,
+      "syntax": "abs(value) >= INTEGER_LIMIT",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 45,
+      "syntax": "size += len(piece)",
+      "node": "AugAssign"
+    },
+    {
+      "file": "wire.py",
+      "line": 85,
+      "syntax": "type(data) is not bytes",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 87,
+      "syntax": "len(data) > 1048576",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 123,
+      "syntax": "canonical_bytes(obj) != data",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 29,
+      "syntax": "type(text) is not str",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 29,
+      "syntax": "not INT_RE.fullmatch(text)",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "wire.py",
+      "line": 29,
+      "syntax": "len(text.lstrip('-')) > 4096",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 35,
+      "syntax": "value <= 0",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 46,
+      "syntax": "size > cap",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 52,
+      "syntax": "value is None",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 97,
+      "syntax": "byte == 34",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 129,
+      "syntax": "domain is None",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 129,
+      "syntax": "domain.encode('ascii') + b'\\x00'",
+      "node": "BinOp"
+    },
+    {
+      "file": "wire.py",
+      "line": 50,
+      "syntax": "type(value) in (dict, list)",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 50,
+      "syntax": "depth > 7",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 54,
+      "syntax": "type(value) is str",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 98,
+      "syntax": "byte in (123, 91)",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 115,
+      "syntax": "key in obj",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 55,
+      "syntax": "len(value) > cap - size",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 59,
+      "syntax": "predicted += len(json.dumps(char, ensure_ascii=True)) - 2",
+      "node": "AugAssign"
+    },
+    {
+      "file": "wire.py",
+      "line": 62,
+      "syntax": "type(value) is dict",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 94,
+      "syntax": "byte == 92",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 100,
+      "syntax": "len(stack) > 7",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 102,
+      "syntax": "stack[-1][1] += 1",
+      "node": "AugAssign"
+    },
+    {
+      "file": "wire.py",
+      "line": 130,
+      "syntax": "prefix + canonical_bytes(obj)",
+      "node": "BinOp"
+    },
+    {
+      "file": "wire.py",
+      "line": 55,
+      "syntax": "cap - size",
+      "node": "BinOp"
+    },
+    {
+      "file": "wire.py",
+      "line": 59,
+      "syntax": "len(json.dumps(char, ensure_ascii=True)) - 2",
+      "node": "BinOp"
+    },
+    {
+      "file": "wire.py",
+      "line": 60,
+      "syntax": "predicted > cap - size",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 70,
+      "syntax": "type(value) is list",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 95,
+      "syntax": "byte == 34",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 101,
+      "syntax": "byte == 58",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 101,
+      "syntax": "stack[-1][0] == 123",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 103,
+      "syntax": "stack[-1][1] > 26",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 105,
+      "syntax": "stack[-1][1] += 1",
+      "node": "AugAssign"
+    },
+    {
+      "file": "wire.py",
+      "line": 60,
+      "syntax": "cap - size",
+      "node": "BinOp"
+    },
+    {
+      "file": "wire.py",
+      "line": 71,
+      "syntax": "len(value) > 12",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 104,
+      "syntax": "byte == 44",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 104,
+      "syntax": "stack[-1][0] == 91",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 106,
+      "syntax": "stack[-1][1] >= 12",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 107,
+      "syntax": "byte in (125, 93)",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 63,
+      "syntax": "type(k) is not str",
+      "node": "Compare"
+    },
+    {
+      "file": "wire.py",
+      "line": 68,
+      "syntax": "depth + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "wire.py",
+      "line": 102,
+      "syntax": "-1",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "wire.py",
+      "line": 108,
+      "syntax": "not stack",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "wire.py",
+      "line": 76,
+      "syntax": "depth + 1",
+      "node": "BinOp"
+    },
+    {
+      "file": "wire.py",
+      "line": 101,
+      "syntax": "-1",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "wire.py",
+      "line": 103,
+      "syntax": "-1",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "wire.py",
+      "line": 105,
+      "syntax": "-1",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "wire.py",
+      "line": 104,
+      "syntax": "-1",
+      "node": "UnaryOp"
+    },
+    {
+      "file": "wire.py",
+      "line": 106,
+      "syntax": "-1",
+      "node": "UnaryOp"
+    }
+  ],
+  "actual_function_calls": [
+    {
+      "file": "attempt.py",
+      "function": "<genexpr>",
+      "count": 3
+    },
+    {
+      "file": "attempt.py",
+      "function": "append_attempt",
+      "count": 1
+    },
+    {
+      "file": "attempt.py",
+      "function": "compatibility_table",
+      "count": 1
+    },
+    {
+      "file": "attempt.py",
+      "function": "validate_attempt",
+      "count": 1
+    },
+    {
+      "file": "certificate.py",
+      "function": "construct",
+      "count": 1
+    },
+    {
+      "file": "certificate.py",
+      "function": "source_identity",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "<genexpr>",
+      "count": 40
+    },
+    {
+      "file": "contracts.py",
+      "function": "closed",
+      "count": 15
+    },
+    {
+      "file": "contracts.py",
+      "function": "hash_value",
+      "count": 17
+    },
+    {
+      "file": "contracts.py",
+      "function": "lexeme",
+      "count": 35
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "count": 1
+    },
+    {
+      "file": "derivative.py",
+      "function": "derivative",
+      "count": 1
+    },
+    {
+      "file": "domain.py",
+      "function": "<genexpr>",
+      "count": 4
+    },
+    {
+      "file": "domain.py",
+      "function": "admit",
+      "count": 1
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "count": 9
+    },
+    {
+      "file": "identity.py",
+      "function": "bind",
+      "count": 1
+    },
+    {
+      "file": "interval.py",
+      "function": "__post_init__",
+      "count": 1340
+    },
+    {
+      "file": "interval.py",
+      "function": "add",
+      "count": 207
+    },
+    {
+      "file": "interval.py",
+      "function": "extrema",
+      "count": 487
+    },
+    {
+      "file": "interval.py",
+      "function": "mul",
+      "count": 422
+    },
+    {
+      "file": "interval.py",
+      "function": "neg",
+      "count": 41
+    },
+    {
+      "file": "interval.py",
+      "function": "point",
+      "count": 278
+    },
+    {
+      "file": "interval.py",
+      "function": "power",
+      "count": 106
+    },
+    {
+      "file": "interval.py",
+      "function": "reciprocal",
+      "count": 29
+    },
+    {
+      "file": "interval.py",
+      "function": "scalar",
+      "count": 158
+    },
+    {
+      "file": "interval.py",
+      "function": "scaled",
+      "count": 116
+    },
+    {
+      "file": "interval.py",
+      "function": "sub",
+      "count": 40
+    },
+    {
+      "file": "interval.py",
+      "function": "widen",
+      "count": 58
+    },
+    {
+      "file": "policy.py",
+      "function": "<genexpr>",
+      "count": 17
+    },
+    {
+      "file": "policy.py",
+      "function": "<module>",
+      "count": 1
+    },
+    {
+      "file": "policy.py",
+      "function": "ReferencePolicy",
+      "count": 1
+    },
+    {
+      "file": "policy.py",
+      "function": "__post_init__",
+      "count": 1
+    },
+    {
+      "file": "policy.py",
+      "function": "account",
+      "count": 1
+    },
+    {
+      "file": "policy.py",
+      "function": "attempts",
+      "count": 2
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "count": 1
+    },
+    {
+      "file": "potential.py",
+      "function": "polynomial",
+      "count": 6
+    },
+    {
+      "file": "potential.py",
+      "function": "retardation",
+      "count": 1
+    },
+    {
+      "file": "producer.py",
+      "function": "<genexpr>",
+      "count": 49
+    },
+    {
+      "file": "producer.py",
+      "function": "decide_vector",
+      "count": 1
+    },
+    {
+      "file": "producer.py",
+      "function": "evaluate_reference",
+      "count": 1
+    },
+    {
+      "file": "producer.py",
+      "function": "layers",
+      "count": 2
+    },
+    {
+      "file": "producer.py",
+      "function": "opposite_vector",
+      "count": 1
+    },
+    {
+      "file": "producer.py",
+      "function": "prepared",
+      "count": 1
+    },
+    {
+      "file": "resource.py",
+      "function": "<genexpr>",
+      "count": 8
+    },
+    {
+      "file": "resource.py",
+      "function": "__init__",
+      "count": 1
+    },
+    {
+      "file": "resource.py",
+      "function": "add",
+      "count": 1683
+    },
+    {
+      "file": "resource.py",
+      "function": "compare",
+      "count": 4074
+    },
+    {
+      "file": "resource.py",
+      "function": "divmod",
+      "count": 129
+    },
+    {
+      "file": "resource.py",
+      "function": "footprint",
+      "count": 35394
+    },
+    {
+      "file": "resource.py",
+      "function": "fraction",
+      "count": 6804
+    },
+    {
+      "file": "resource.py",
+      "function": "isqrt",
+      "count": 1
+    },
+    {
+      "file": "resource.py",
+      "function": "multiply",
+      "count": 22466
+    },
+    {
+      "file": "resource.py",
+      "function": "pre",
+      "count": 35236
+    },
+    {
+      "file": "resource.py",
+      "function": "qadd",
+      "count": 1613
+    },
+    {
+      "file": "resource.py",
+      "function": "qdiv",
+      "count": 1590
+    },
+    {
+      "file": "resource.py",
+      "function": "qmul",
+      "count": 2809
+    },
+    {
+      "file": "resource.py",
+      "function": "qneg",
+      "count": 560
+    },
+    {
+      "file": "resource.py",
+      "function": "qpower",
+      "count": 158
+    },
+    {
+      "file": "resource.py",
+      "function": "shift",
+      "count": 79
+    },
+    {
+      "file": "rounding.py",
+      "function": "add",
+      "count": 12
+    },
+    {
+      "file": "rounding.py",
+      "function": "compare",
+      "count": 12
+    },
+    {
+      "file": "rounding.py",
+      "function": "decide_scaled",
+      "count": 3
+    },
+    {
+      "file": "rounding.py",
+      "function": "increment",
+      "count": 2
+    },
+    {
+      "file": "rounding.py",
+      "function": "nearest_even",
+      "count": 3
+    },
+    {
+      "file": "spec.py",
+      "function": "<genexpr>",
+      "count": 632
+    },
+    {
+      "file": "spec.py",
+      "function": "freeze",
+      "count": 906
+    },
+    {
+      "file": "spec.py",
+      "function": "load_spec",
+      "count": 2
+    },
+    {
+      "file": "spec.py",
+      "function": "read",
+      "count": 18
+    },
+    {
+      "file": "sqrt_enclosure.py",
+      "function": "sqrt_enclosure",
+      "count": 1
+    },
+    {
+      "file": "wire.py",
+      "function": "<genexpr>",
+      "count": 550
+    },
+    {
+      "file": "wire.py",
+      "function": "canonical_bytes",
+      "count": 12
+    },
+    {
+      "file": "wire.py",
+      "function": "decimal",
+      "count": 36
+    },
+    {
+      "file": "wire.py",
+      "function": "digest",
+      "count": 7
+    },
+    {
+      "file": "wire.py",
+      "function": "emit",
+      "count": 2088
+    },
+    {
+      "file": "wire.py",
+      "function": "integer",
+      "count": 38
+    },
+    {
+      "file": "wire.py",
+      "function": "pairs",
+      "count": 8
+    },
+    {
+      "file": "wire.py",
+      "function": "parse",
+      "count": 1
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "count": 1044
+    }
+  ],
+  "actual_opcodes": [
+    {
+      "file": "attempt.py",
+      "function": "<genexpr>",
+      "line": 23,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "attempt.py",
+      "function": "append_attempt",
+      "line": 40,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "attempt.py",
+      "function": "append_attempt",
+      "line": 40,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 1
+    },
+    {
+      "file": "attempt.py",
+      "function": "append_attempt",
+      "line": 42,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "attempt.py",
+      "function": "append_attempt",
+      "line": 43,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 1
+    },
+    {
+      "file": "attempt.py",
+      "function": "append_attempt",
+      "line": 43,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3
+    },
+    {
+      "file": "attempt.py",
+      "function": "compatibility_table",
+      "line": 13,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "attempt.py",
+      "function": "compatibility_table",
+      "line": 15,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "attempt.py",
+      "function": "compatibility_table",
+      "line": 15,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 2
+    },
+    {
+      "file": "attempt.py",
+      "function": "compatibility_table",
+      "line": 17,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "attempt.py",
+      "function": "validate_attempt",
+      "line": 21,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "attempt.py",
+      "function": "validate_attempt",
+      "line": 21,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 1
+    },
+    {
+      "file": "attempt.py",
+      "function": "validate_attempt",
+      "line": 23,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "attempt.py",
+      "function": "validate_attempt",
+      "line": 27,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "attempt.py",
+      "function": "validate_attempt",
+      "line": 30,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3
+    },
+    {
+      "file": "attempt.py",
+      "function": "validate_attempt",
+      "line": 34,
+      "opcode": "COMPARE_OP",
+      "argument": "<",
+      "count": 3
+    },
+    {
+      "file": "certificate.py",
+      "function": "construct",
+      "line": 17,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 2
+    },
+    {
+      "file": "certificate.py",
+      "function": "construct",
+      "line": 19,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3
+    },
+    {
+      "file": "certificate.py",
+      "function": "construct",
+      "line": 22,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 9
+    },
+    {
+      "file": "certificate.py",
+      "function": "construct",
+      "line": 23,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 3
+    },
+    {
+      "file": "certificate.py",
+      "function": "construct",
+      "line": 25,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 6
+    },
+    {
+      "file": "certificate.py",
+      "function": "construct",
+      "line": 27,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 45
+    },
+    {
+      "file": "certificate.py",
+      "function": "construct",
+      "line": 28,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 9
+    },
+    {
+      "file": "certificate.py",
+      "function": "construct",
+      "line": 29,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 18
+    },
+    {
+      "file": "certificate.py",
+      "function": "construct",
+      "line": 29,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 9
+    },
+    {
+      "file": "certificate.py",
+      "function": "construct",
+      "line": 31,
+      "opcode": "BINARY_OP",
+      "argument": ">>",
+      "count": 9
+    },
+    {
+      "file": "certificate.py",
+      "function": "construct",
+      "line": 31,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 9
+    },
+    {
+      "file": "certificate.py",
+      "function": "construct",
+      "line": 33,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 9
+    },
+    {
+      "file": "certificate.py",
+      "function": "construct",
+      "line": 34,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 27
+    },
+    {
+      "file": "certificate.py",
+      "function": "construct",
+      "line": 35,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 9
+    },
+    {
+      "file": "certificate.py",
+      "function": "construct",
+      "line": 37,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "certificate.py",
+      "function": "construct",
+      "line": 38,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3
+    },
+    {
+      "file": "certificate.py",
+      "function": "construct",
+      "line": 39,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "certificate.py",
+      "function": "construct",
+      "line": 40,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 3
+    },
+    {
+      "file": "certificate.py",
+      "function": "construct",
+      "line": 41,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "certificate.py",
+      "function": "source_identity",
+      "line": 11,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 54
+    },
+    {
+      "file": "certificate.py",
+      "function": "source_identity",
+      "line": 12,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3
+    },
+    {
+      "file": "certificate.py",
+      "function": "source_identity",
+      "line": 13,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3
+    },
+    {
+      "file": "contracts.py",
+      "function": "<genexpr>",
+      "line": 75,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 12
+    },
+    {
+      "file": "contracts.py",
+      "function": "<genexpr>",
+      "line": 76,
+      "opcode": "COMPARE_OP",
+      "argument": "<",
+      "count": 12
+    },
+    {
+      "file": "contracts.py",
+      "function": "<genexpr>",
+      "line": 76,
+      "opcode": "COMPARE_OP",
+      "argument": "<=",
+      "count": 12
+    },
+    {
+      "file": "contracts.py",
+      "function": "<genexpr>",
+      "line": 98,
+      "opcode": "BINARY_OP",
+      "argument": "-",
+      "count": 3
+    },
+    {
+      "file": "contracts.py",
+      "function": "<genexpr>",
+      "line": 99,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3
+    },
+    {
+      "file": "contracts.py",
+      "function": "closed",
+      "line": 25,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 45
+    },
+    {
+      "file": "contracts.py",
+      "function": "closed",
+      "line": 25,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 15
+    },
+    {
+      "file": "contracts.py",
+      "function": "hash_value",
+      "line": 28,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 34
+    },
+    {
+      "file": "contracts.py",
+      "function": "lexeme",
+      "line": 34,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 140
+    },
+    {
+      "file": "contracts.py",
+      "function": "lexeme",
+      "line": 34,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 35
+    },
+    {
+      "file": "contracts.py",
+      "function": "lexeme",
+      "line": 36,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 23
+    },
+    {
+      "file": "contracts.py",
+      "function": "lexeme",
+      "line": 36,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 23
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 22,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 30,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 37,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 38,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 40,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 40,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 42,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 4
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 43,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 2
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 45,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 8
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 45,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 4
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 46,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 12
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 47,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 48,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 4
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 49,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 50,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 53,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 55,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 56,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 24
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 57,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 58,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 23
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 60,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 61,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 62,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 63,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 65,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 66,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 2
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 68,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 68,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 71,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 4
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 72,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 2
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 74,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 8
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 74,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 4
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 75,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 8
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 76,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 8
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 77,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 77,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 4
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 78,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 79,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 80,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 4
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 81,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 82,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 85,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 88,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 89,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 24
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 90,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 91,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 23
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 92,
+      "opcode": "COMPARE_OP",
+      "argument": "<",
+      "count": 4
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 94,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 2
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 96,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 96,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 1
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 98,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "contracts.py",
+      "function": "validate_input",
+      "line": 99,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3
+    },
+    {
+      "file": "derivative.py",
+      "function": "derivative",
+      "line": 6,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "derivative.py",
+      "function": "derivative",
+      "line": 8,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 12
+    },
+    {
+      "file": "derivative.py",
+      "function": "derivative",
+      "line": 9,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 12
+    },
+    {
+      "file": "derivative.py",
+      "function": "derivative",
+      "line": 11,
+      "opcode": "BINARY_OP",
+      "argument": "*",
+      "count": 11
+    },
+    {
+      "file": "derivative.py",
+      "function": "derivative",
+      "line": 11,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 22
+    },
+    {
+      "file": "derivative.py",
+      "function": "derivative",
+      "line": 12,
+      "opcode": "BINARY_OP",
+      "argument": "*",
+      "count": 22
+    },
+    {
+      "file": "derivative.py",
+      "function": "derivative",
+      "line": 12,
+      "opcode": "BINARY_OP",
+      "argument": "-",
+      "count": 11
+    },
+    {
+      "file": "derivative.py",
+      "function": "derivative",
+      "line": 12,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 44
+    },
+    {
+      "file": "derivative.py",
+      "function": "derivative",
+      "line": 13,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 33
+    },
+    {
+      "file": "domain.py",
+      "function": "<genexpr>",
+      "line": 5,
+      "opcode": "BINARY_OP",
+      "argument": "*",
+      "count": 3
+    },
+    {
+      "file": "domain.py",
+      "function": "admit",
+      "line": 5,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3
+    },
+    {
+      "file": "domain.py",
+      "function": "admit",
+      "line": 6,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 1
+    },
+    {
+      "file": "domain.py",
+      "function": "admit",
+      "line": 7,
+      "opcode": "COMPARE_OP",
+      "argument": "<",
+      "count": 1
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 8,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 9
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 8,
+      "opcode": "COMPARE_OP",
+      "argument": "<",
+      "count": 27
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 10,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 9
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 13,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 116
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 13,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 58
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 14,
+      "opcode": "BINARY_OP",
+      "argument": "+=",
+      "count": 49
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 14,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 196
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 15,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 18
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 16,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 9
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 17,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 9
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 17,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 9
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 18,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 239
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 18,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 717
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 19,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 239
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 19,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 717
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 20,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 239
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 20,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1195
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 21,
+      "opcode": "COMPARE_OP",
+      "argument": "<=",
+      "count": 239
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 23,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 239
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 24,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1434
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 25,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 717
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 25,
+      "opcode": "COMPARE_OP",
+      "argument": "<=",
+      "count": 239
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 27,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 460
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 31,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 9
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 32,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 9
+    },
+    {
+      "file": "exp_enclosure.py",
+      "function": "exp_enclosure",
+      "line": 33,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 98
+    },
+    {
+      "file": "identity.py",
+      "function": "bind",
+      "line": 12,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "identity.py",
+      "function": "bind",
+      "line": 13,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "identity.py",
+      "function": "bind",
+      "line": 14,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "identity.py",
+      "function": "bind",
+      "line": 17,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "identity.py",
+      "function": "bind",
+      "line": 19,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "identity.py",
+      "function": "bind",
+      "line": 21,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "identity.py",
+      "function": "bind",
+      "line": 22,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "identity.py",
+      "function": "bind",
+      "line": 23,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "identity.py",
+      "function": "bind",
+      "line": 24,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "interval.py",
+      "function": "__post_init__",
+      "line": 13,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2680
+    },
+    {
+      "file": "interval.py",
+      "function": "__post_init__",
+      "line": 16,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1045
+    },
+    {
+      "file": "interval.py",
+      "function": "__post_init__",
+      "line": 16,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 1045
+    },
+    {
+      "file": "interval.py",
+      "function": "add",
+      "line": 28,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 621
+    },
+    {
+      "file": "interval.py",
+      "function": "extrema",
+      "line": 44,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1331
+    },
+    {
+      "file": "interval.py",
+      "function": "extrema",
+      "line": 44,
+      "opcode": "COMPARE_OP",
+      "argument": "<",
+      "count": 1331
+    },
+    {
+      "file": "interval.py",
+      "function": "extrema",
+      "line": 46,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1331
+    },
+    {
+      "file": "interval.py",
+      "function": "extrema",
+      "line": 46,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 1331
+    },
+    {
+      "file": "interval.py",
+      "function": "extrema",
+      "line": 48,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 487
+    },
+    {
+      "file": "interval.py",
+      "function": "mul",
+      "line": 52,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2110
+    },
+    {
+      "file": "interval.py",
+      "function": "neg",
+      "line": 34,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 123
+    },
+    {
+      "file": "interval.py",
+      "function": "point",
+      "line": 22,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 278
+    },
+    {
+      "file": "interval.py",
+      "function": "point",
+      "line": 23,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 86
+    },
+    {
+      "file": "interval.py",
+      "function": "point",
+      "line": 24,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 278
+    },
+    {
+      "file": "interval.py",
+      "function": "power",
+      "line": 63,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 106
+    },
+    {
+      "file": "interval.py",
+      "function": "power",
+      "line": 65,
+      "opcode": "COMPARE_OP",
+      "argument": "<",
+      "count": 106
+    },
+    {
+      "file": "interval.py",
+      "function": "power",
+      "line": 66,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 54
+    },
+    {
+      "file": "interval.py",
+      "function": "power",
+      "line": 66,
+      "opcode": "UNARY_NEGATIVE",
+      "argument": "",
+      "count": 27
+    },
+    {
+      "file": "interval.py",
+      "function": "power",
+      "line": 69,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 158
+    },
+    {
+      "file": "interval.py",
+      "function": "power",
+      "line": 70,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 79
+    },
+    {
+      "file": "interval.py",
+      "function": "power",
+      "line": 71,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 14
+    },
+    {
+      "file": "interval.py",
+      "function": "power",
+      "line": 72,
+      "opcode": "BINARY_OP",
+      "argument": "%",
+      "count": 65
+    },
+    {
+      "file": "interval.py",
+      "function": "power",
+      "line": 72,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 58
+    },
+    {
+      "file": "interval.py",
+      "function": "power",
+      "line": 72,
+      "opcode": "COMPARE_OP",
+      "argument": "<=",
+      "count": 29
+    },
+    {
+      "file": "interval.py",
+      "function": "power",
+      "line": 72,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 65
+    },
+    {
+      "file": "interval.py",
+      "function": "power",
+      "line": 74,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 65
+    },
+    {
+      "file": "interval.py",
+      "function": "reciprocal",
+      "line": 57,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 58
+    },
+    {
+      "file": "interval.py",
+      "function": "reciprocal",
+      "line": 57,
+      "opcode": "COMPARE_OP",
+      "argument": "<=",
+      "count": 29
+    },
+    {
+      "file": "interval.py",
+      "function": "reciprocal",
+      "line": 59,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 145
+    },
+    {
+      "file": "interval.py",
+      "function": "scalar",
+      "line": 68,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 158
+    },
+    {
+      "file": "interval.py",
+      "function": "scaled",
+      "line": 80,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 232
+    },
+    {
+      "file": "interval.py",
+      "function": "sub",
+      "line": 38,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 80
+    },
+    {
+      "file": "interval.py",
+      "function": "widen",
+      "line": 78,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 58
+    },
+    {
+      "file": "interval.py",
+      "function": "widen",
+      "line": 81,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 58
+    },
+    {
+      "file": "interval.py",
+      "function": "widen",
+      "line": 82,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 58
+    },
+    {
+      "file": "interval.py",
+      "function": "widen",
+      "line": 83,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 290
+    },
+    {
+      "file": "interval.py",
+      "function": "widen",
+      "line": 83,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 58
+    },
+    {
+      "file": "policy.py",
+      "function": "<genexpr>",
+      "line": 26,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 16
+    },
+    {
+      "file": "policy.py",
+      "function": "<genexpr>",
+      "line": 26,
+      "opcode": "COMPARE_OP",
+      "argument": "<=",
+      "count": 16
+    },
+    {
+      "file": "policy.py",
+      "function": "<module>",
+      "line": 6,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "policy.py",
+      "function": "<module>",
+      "line": 7,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "policy.py",
+      "function": "__post_init__",
+      "line": 26,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 4
+    },
+    {
+      "file": "policy.py",
+      "function": "__post_init__",
+      "line": 28,
+      "opcode": "COMPARE_OP",
+      "argument": "<",
+      "count": 3
+    },
+    {
+      "file": "policy.py",
+      "function": "__post_init__",
+      "line": 28,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 1
+    },
+    {
+      "file": "policy.py",
+      "function": "account",
+      "line": 32,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "policy.py",
+      "function": "attempts",
+      "line": 39,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "policy.py",
+      "function": "attempts",
+      "line": 40,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 2
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 62,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 18
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 63,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 6
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 64,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 18
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 65,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 6
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 66,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 68,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 6
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 69,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 6
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 70,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 3
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 70,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 71,
+      "opcode": "BINARY_OP",
+      "argument": "*",
+      "count": 11
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 71,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 11
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 71,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 11
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 72,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 11
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 72,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 11
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 73,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 520
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 74,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 11
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 75,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 22
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 76,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 17
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 77,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 78,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 13
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 79,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 81,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 18
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 82,
+      "opcode": "BINARY_OP",
+      "argument": "*",
+      "count": 11
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 82,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 33
+    },
+    {
+      "file": "potential.py",
+      "function": "evaluate_terms",
+      "line": 83,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 4
+    },
+    {
+      "file": "potential.py",
+      "function": "polynomial",
+      "line": 32,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 12
+    },
+    {
+      "file": "potential.py",
+      "function": "polynomial",
+      "line": 33,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 6
+    },
+    {
+      "file": "potential.py",
+      "function": "polynomial",
+      "line": 34,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 6
+    },
+    {
+      "file": "potential.py",
+      "function": "polynomial",
+      "line": 36,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 80
+    },
+    {
+      "file": "potential.py",
+      "function": "polynomial",
+      "line": 38,
+      "opcode": "BINARY_OP",
+      "argument": "-",
+      "count": 14
+    },
+    {
+      "file": "potential.py",
+      "function": "polynomial",
+      "line": 38,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 84
+    },
+    {
+      "file": "potential.py",
+      "function": "retardation",
+      "line": 43,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "potential.py",
+      "function": "retardation",
+      "line": 44,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "potential.py",
+      "function": "retardation",
+      "line": 45,
+      "opcode": "COMPARE_OP",
+      "argument": "<=",
+      "count": 6
+    },
+    {
+      "file": "potential.py",
+      "function": "retardation",
+      "line": 47,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 20
+    },
+    {
+      "file": "potential.py",
+      "function": "retardation",
+      "line": 48,
+      "opcode": "BINARY_OP",
+      "argument": "-",
+      "count": 5
+    },
+    {
+      "file": "potential.py",
+      "function": "retardation",
+      "line": 48,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 30
+    },
+    {
+      "file": "potential.py",
+      "function": "retardation",
+      "line": 50,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 24
+    },
+    {
+      "file": "potential.py",
+      "function": "retardation",
+      "line": 51,
+      "opcode": "BINARY_OP",
+      "argument": "-",
+      "count": 6
+    },
+    {
+      "file": "potential.py",
+      "function": "retardation",
+      "line": 51,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 36
+    },
+    {
+      "file": "potential.py",
+      "function": "retardation",
+      "line": 52,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "potential.py",
+      "function": "retardation",
+      "line": 53,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 5
+    },
+    {
+      "file": "producer.py",
+      "function": "<genexpr>",
+      "line": 58,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3
+    },
+    {
+      "file": "producer.py",
+      "function": "<genexpr>",
+      "line": 60,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 9
+    },
+    {
+      "file": "producer.py",
+      "function": "<genexpr>",
+      "line": 65,
+      "opcode": "UNARY_NEGATIVE",
+      "argument": "",
+      "count": 3
+    },
+    {
+      "file": "producer.py",
+      "function": "<genexpr>",
+      "line": 106,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 16
+    },
+    {
+      "file": "producer.py",
+      "function": "<genexpr>",
+      "line": 109,
+      "opcode": "BINARY_OP",
+      "argument": "*",
+      "count": 3
+    },
+    {
+      "file": "producer.py",
+      "function": "<genexpr>",
+      "line": 118,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 3
+    },
+    {
+      "file": "producer.py",
+      "function": "<genexpr>",
+      "line": 119,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 15
+    },
+    {
+      "file": "producer.py",
+      "function": "decide_vector",
+      "line": 57,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "producer.py",
+      "function": "decide_vector",
+      "line": 57,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 1
+    },
+    {
+      "file": "producer.py",
+      "function": "decide_vector",
+      "line": 58,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "producer.py",
+      "function": "decide_vector",
+      "line": 60,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 6
+    },
+    {
+      "file": "producer.py",
+      "function": "decide_vector",
+      "line": 61,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "producer.py",
+      "function": "evaluate_reference",
+      "line": 104,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "producer.py",
+      "function": "evaluate_reference",
+      "line": 106,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 4
+    },
+    {
+      "file": "producer.py",
+      "function": "evaluate_reference",
+      "line": 108,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "producer.py",
+      "function": "evaluate_reference",
+      "line": 109,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3
+    },
+    {
+      "file": "producer.py",
+      "function": "evaluate_reference",
+      "line": 110,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "producer.py",
+      "function": "evaluate_reference",
+      "line": 112,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "producer.py",
+      "function": "evaluate_reference",
+      "line": 114,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 1
+    },
+    {
+      "file": "producer.py",
+      "function": "evaluate_reference",
+      "line": 115,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "producer.py",
+      "function": "evaluate_reference",
+      "line": 116,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "producer.py",
+      "function": "evaluate_reference",
+      "line": 117,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3
+    },
+    {
+      "file": "producer.py",
+      "function": "evaluate_reference",
+      "line": 118,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "producer.py",
+      "function": "evaluate_reference",
+      "line": 122,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "producer.py",
+      "function": "evaluate_reference",
+      "line": 125,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 4
+    },
+    {
+      "file": "producer.py",
+      "function": "evaluate_reference",
+      "line": 132,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 1
+    },
+    {
+      "file": "producer.py",
+      "function": "evaluate_reference",
+      "line": 132,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "producer.py",
+      "function": "evaluate_reference",
+      "line": 133,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "producer.py",
+      "function": "evaluate_reference",
+      "line": 135,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "producer.py",
+      "function": "evaluate_reference",
+      "line": 136,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "producer.py",
+      "function": "evaluate_reference",
+      "line": 137,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3
+    },
+    {
+      "file": "producer.py",
+      "function": "opposite_vector",
+      "line": 65,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "producer.py",
+      "function": "prepared",
+      "line": 79,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3
+    },
+    {
+      "file": "producer.py",
+      "function": "prepared",
+      "line": 80,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "resource.py",
+      "function": "<genexpr>",
+      "line": 42,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 4
+    },
+    {
+      "file": "resource.py",
+      "function": "<genexpr>",
+      "line": 42,
+      "opcode": "COMPARE_OP",
+      "argument": "<=",
+      "count": 4
+    },
+    {
+      "file": "resource.py",
+      "function": "<genexpr>",
+      "line": 49,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "resource.py",
+      "function": "<genexpr>",
+      "line": 49,
+      "opcode": "COMPARE_OP",
+      "argument": "<=",
+      "count": 2
+    },
+    {
+      "file": "resource.py",
+      "function": "__init__",
+      "line": 42,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "resource.py",
+      "function": "__init__",
+      "line": 48,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "resource.py",
+      "function": "__init__",
+      "line": 49,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "resource.py",
+      "function": "add",
+      "line": 73,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 1683
+    },
+    {
+      "file": "resource.py",
+      "function": "add",
+      "line": 73,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 8415
+    },
+    {
+      "file": "resource.py",
+      "function": "add",
+      "line": 74,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1683
+    },
+    {
+      "file": "resource.py",
+      "function": "add",
+      "line": 75,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 1683
+    },
+    {
+      "file": "resource.py",
+      "function": "compare",
+      "line": 147,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 4074
+    },
+    {
+      "file": "resource.py",
+      "function": "compare",
+      "line": 148,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 4074
+    },
+    {
+      "file": "resource.py",
+      "function": "compare",
+      "line": 149,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 4074
+    },
+    {
+      "file": "resource.py",
+      "function": "compare",
+      "line": 149,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 24444
+    },
+    {
+      "file": "resource.py",
+      "function": "compare",
+      "line": 150,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 4074
+    },
+    {
+      "file": "resource.py",
+      "function": "compare",
+      "line": 150,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 20370
+    },
+    {
+      "file": "resource.py",
+      "function": "compare",
+      "line": 151,
+      "opcode": "BINARY_OP",
+      "argument": "-",
+      "count": 4074
+    },
+    {
+      "file": "resource.py",
+      "function": "compare",
+      "line": 151,
+      "opcode": "COMPARE_OP",
+      "argument": "<",
+      "count": 4074
+    },
+    {
+      "file": "resource.py",
+      "function": "compare",
+      "line": 151,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 4074
+    },
+    {
+      "file": "resource.py",
+      "function": "divmod",
+      "line": 90,
+      "opcode": "COMPARE_OP",
+      "argument": "<=",
+      "count": 129
+    },
+    {
+      "file": "resource.py",
+      "function": "divmod",
+      "line": 92,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 387
+    },
+    {
+      "file": "resource.py",
+      "function": "divmod",
+      "line": 93,
+      "opcode": "BINARY_OP",
+      "argument": "*",
+      "count": 129
+    },
+    {
+      "file": "resource.py",
+      "function": "divmod",
+      "line": 93,
+      "opcode": "BINARY_OP",
+      "argument": "**",
+      "count": 129
+    },
+    {
+      "file": "resource.py",
+      "function": "divmod",
+      "line": 93,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 387
+    },
+    {
+      "file": "resource.py",
+      "function": "divmod",
+      "line": 93,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 258
+    },
+    {
+      "file": "resource.py",
+      "function": "divmod",
+      "line": 94,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 129
+    },
+    {
+      "file": "resource.py",
+      "function": "footprint",
+      "line": 26,
+      "opcode": "BINARY_OP",
+      "argument": "*",
+      "count": 70788
+    },
+    {
+      "file": "resource.py",
+      "function": "footprint",
+      "line": 26,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 70788
+    },
+    {
+      "file": "resource.py",
+      "function": "footprint",
+      "line": 26,
+      "opcode": "BINARY_OP",
+      "argument": "-",
+      "count": 35394
+    },
+    {
+      "file": "resource.py",
+      "function": "footprint",
+      "line": 26,
+      "opcode": "BINARY_OP",
+      "argument": "//",
+      "count": 35394
+    },
+    {
+      "file": "resource.py",
+      "function": "fraction",
+      "line": 104,
+      "opcode": "COMPARE_OP",
+      "argument": "<=",
+      "count": 6804
+    },
+    {
+      "file": "resource.py",
+      "function": "fraction",
+      "line": 106,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 20412
+    },
+    {
+      "file": "resource.py",
+      "function": "fraction",
+      "line": 107,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 6804
+    },
+    {
+      "file": "resource.py",
+      "function": "fraction",
+      "line": 108,
+      "opcode": "BINARY_OP",
+      "argument": "*",
+      "count": 13608
+    },
+    {
+      "file": "resource.py",
+      "function": "fraction",
+      "line": 108,
+      "opcode": "BINARY_OP",
+      "argument": "**",
+      "count": 6804
+    },
+    {
+      "file": "resource.py",
+      "function": "fraction",
+      "line": 108,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 20412
+    },
+    {
+      "file": "resource.py",
+      "function": "fraction",
+      "line": 108,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 6804
+    },
+    {
+      "file": "resource.py",
+      "function": "fraction",
+      "line": 109,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 6804
+    },
+    {
+      "file": "resource.py",
+      "function": "fraction",
+      "line": 110,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 20412
+    },
+    {
+      "file": "resource.py",
+      "function": "fraction",
+      "line": 110,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 13608
+    },
+    {
+      "file": "resource.py",
+      "function": "isqrt",
+      "line": 97,
+      "opcode": "COMPARE_OP",
+      "argument": "<",
+      "count": 1
+    },
+    {
+      "file": "resource.py",
+      "function": "isqrt",
+      "line": 99,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "resource.py",
+      "function": "isqrt",
+      "line": 100,
+      "opcode": "BINARY_OP",
+      "argument": "**",
+      "count": 1
+    },
+    {
+      "file": "resource.py",
+      "function": "isqrt",
+      "line": 100,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 2
+    },
+    {
+      "file": "resource.py",
+      "function": "isqrt",
+      "line": 100,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "resource.py",
+      "function": "isqrt",
+      "line": 101,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "resource.py",
+      "function": "multiply",
+      "line": 78,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 89864
+    },
+    {
+      "file": "resource.py",
+      "function": "multiply",
+      "line": 79,
+      "opcode": "BINARY_OP",
+      "argument": "*",
+      "count": 22466
+    },
+    {
+      "file": "resource.py",
+      "function": "multiply",
+      "line": 79,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 67398
+    },
+    {
+      "file": "resource.py",
+      "function": "multiply",
+      "line": 79,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 22466
+    },
+    {
+      "file": "resource.py",
+      "function": "multiply",
+      "line": 80,
+      "opcode": "BINARY_OP",
+      "argument": "*",
+      "count": 22466
+    },
+    {
+      "file": "resource.py",
+      "function": "pre",
+      "line": 58,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 35236
+    },
+    {
+      "file": "resource.py",
+      "function": "pre",
+      "line": 60,
+      "opcode": "BINARY_OP",
+      "argument": "-",
+      "count": 35236
+    },
+    {
+      "file": "resource.py",
+      "function": "pre",
+      "line": 60,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 35236
+    },
+    {
+      "file": "resource.py",
+      "function": "pre",
+      "line": 62,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 35236
+    },
+    {
+      "file": "resource.py",
+      "function": "pre",
+      "line": 64,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 35236
+    },
+    {
+      "file": "resource.py",
+      "function": "pre",
+      "line": 65,
+      "opcode": "BINARY_OP",
+      "argument": "-",
+      "count": 35236
+    },
+    {
+      "file": "resource.py",
+      "function": "pre",
+      "line": 65,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 35236
+    },
+    {
+      "file": "resource.py",
+      "function": "pre",
+      "line": 66,
+      "opcode": "BINARY_OP",
+      "argument": "+=",
+      "count": 35236
+    },
+    {
+      "file": "resource.py",
+      "function": "pre",
+      "line": 67,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 35236
+    },
+    {
+      "file": "resource.py",
+      "function": "pre",
+      "line": 68,
+      "opcode": "BINARY_OP",
+      "argument": "+=",
+      "count": 35236
+    },
+    {
+      "file": "resource.py",
+      "function": "pre",
+      "line": 69,
+      "opcode": "BINARY_OP",
+      "argument": "+=",
+      "count": 35236
+    },
+    {
+      "file": "resource.py",
+      "function": "pre",
+      "line": 70,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 35236
+    },
+    {
+      "file": "resource.py",
+      "function": "qadd",
+      "line": 115,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3226
+    },
+    {
+      "file": "resource.py",
+      "function": "qadd",
+      "line": 116,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1613
+    },
+    {
+      "file": "resource.py",
+      "function": "qadd",
+      "line": 117,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3226
+    },
+    {
+      "file": "resource.py",
+      "function": "qdiv",
+      "line": 127,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 1590
+    },
+    {
+      "file": "resource.py",
+      "function": "qdiv",
+      "line": 129,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 1590
+    },
+    {
+      "file": "resource.py",
+      "function": "qdiv",
+      "line": 130,
+      "opcode": "BINARY_OP",
+      "argument": "*",
+      "count": 1590
+    },
+    {
+      "file": "resource.py",
+      "function": "qdiv",
+      "line": 130,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3180
+    },
+    {
+      "file": "resource.py",
+      "function": "qdiv",
+      "line": 131,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3180
+    },
+    {
+      "file": "resource.py",
+      "function": "qmul",
+      "line": 123,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 5618
+    },
+    {
+      "file": "resource.py",
+      "function": "qmul",
+      "line": 124,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2809
+    },
+    {
+      "file": "resource.py",
+      "function": "qneg",
+      "line": 120,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1120
+    },
+    {
+      "file": "resource.py",
+      "function": "qpower",
+      "line": 134,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 158
+    },
+    {
+      "file": "resource.py",
+      "function": "qpower",
+      "line": 134,
+      "opcode": "COMPARE_OP",
+      "argument": "<",
+      "count": 158
+    },
+    {
+      "file": "resource.py",
+      "function": "qpower",
+      "line": 135,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 632
+    },
+    {
+      "file": "resource.py",
+      "function": "qpower",
+      "line": 137,
+      "opcode": "BINARY_OP",
+      "argument": "//",
+      "count": 158
+    },
+    {
+      "file": "resource.py",
+      "function": "qpower",
+      "line": 137,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 158
+    },
+    {
+      "file": "resource.py",
+      "function": "qpower",
+      "line": 139,
+      "opcode": "BINARY_OP",
+      "argument": "*",
+      "count": 158
+    },
+    {
+      "file": "resource.py",
+      "function": "qpower",
+      "line": 139,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 316
+    },
+    {
+      "file": "resource.py",
+      "function": "qpower",
+      "line": 140,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 158
+    },
+    {
+      "file": "resource.py",
+      "function": "qpower",
+      "line": 141,
+      "opcode": "BINARY_OP",
+      "argument": "-",
+      "count": 158
+    },
+    {
+      "file": "resource.py",
+      "function": "qpower",
+      "line": 141,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 158
+    },
+    {
+      "file": "resource.py",
+      "function": "qpower",
+      "line": 142,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 158
+    },
+    {
+      "file": "resource.py",
+      "function": "qpower",
+      "line": 143,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 758
+    },
+    {
+      "file": "resource.py",
+      "function": "shift",
+      "line": 83,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 79
+    },
+    {
+      "file": "resource.py",
+      "function": "shift",
+      "line": 83,
+      "opcode": "COMPARE_OP",
+      "argument": "<",
+      "count": 79
+    },
+    {
+      "file": "resource.py",
+      "function": "shift",
+      "line": 85,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 158
+    },
+    {
+      "file": "resource.py",
+      "function": "shift",
+      "line": 85,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 158
+    },
+    {
+      "file": "resource.py",
+      "function": "shift",
+      "line": 86,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 79
+    },
+    {
+      "file": "resource.py",
+      "function": "shift",
+      "line": 87,
+      "opcode": "BINARY_OP",
+      "argument": "<<",
+      "count": 79
+    },
+    {
+      "file": "rounding.py",
+      "function": "add",
+      "line": 30,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 12
+    },
+    {
+      "file": "rounding.py",
+      "function": "compare",
+      "line": 29,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 12
+    },
+    {
+      "file": "rounding.py",
+      "function": "decide_scaled",
+      "line": 31,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 18
+    },
+    {
+      "file": "rounding.py",
+      "function": "decide_scaled",
+      "line": 32,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 6
+    },
+    {
+      "file": "rounding.py",
+      "function": "decide_scaled",
+      "line": 32,
+      "opcode": "COMPARE_OP",
+      "argument": "<",
+      "count": 3
+    },
+    {
+      "file": "rounding.py",
+      "function": "decide_scaled",
+      "line": 32,
+      "opcode": "COMPARE_OP",
+      "argument": ">=",
+      "count": 3
+    },
+    {
+      "file": "rounding.py",
+      "function": "decide_scaled",
+      "line": 35,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3
+    },
+    {
+      "file": "rounding.py",
+      "function": "decide_scaled",
+      "line": 36,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 18
+    },
+    {
+      "file": "rounding.py",
+      "function": "decide_scaled",
+      "line": 37,
+      "opcode": "BINARY_OP",
+      "argument": "%",
+      "count": 3
+    },
+    {
+      "file": "rounding.py",
+      "function": "decide_scaled",
+      "line": 37,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 6
+    },
+    {
+      "file": "rounding.py",
+      "function": "decide_scaled",
+      "line": 37,
+      "opcode": "COMPARE_OP",
+      "argument": "<",
+      "count": 4
+    },
+    {
+      "file": "rounding.py",
+      "function": "decide_scaled",
+      "line": 37,
+      "opcode": "COMPARE_OP",
+      "argument": "<=",
+      "count": 2
+    },
+    {
+      "file": "rounding.py",
+      "function": "decide_scaled",
+      "line": 37,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 3
+    },
+    {
+      "file": "rounding.py",
+      "function": "decide_scaled",
+      "line": 40,
+      "opcode": "COMPARE_OP",
+      "argument": "<",
+      "count": 3
+    },
+    {
+      "file": "rounding.py",
+      "function": "decide_scaled",
+      "line": 40,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 3
+    },
+    {
+      "file": "rounding.py",
+      "function": "decide_scaled",
+      "line": 42,
+      "opcode": "COMPARE_OP",
+      "argument": "<",
+      "count": 3
+    },
+    {
+      "file": "rounding.py",
+      "function": "decide_scaled",
+      "line": 42,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 3
+    },
+    {
+      "file": "rounding.py",
+      "function": "decide_scaled",
+      "line": 42,
+      "opcode": "UNARY_NEGATIVE",
+      "argument": "",
+      "count": 6
+    },
+    {
+      "file": "rounding.py",
+      "function": "decide_scaled",
+      "line": 44,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3
+    },
+    {
+      "file": "rounding.py",
+      "function": "increment",
+      "line": 19,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "rounding.py",
+      "function": "nearest_even",
+      "line": 16,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3
+    },
+    {
+      "file": "rounding.py",
+      "function": "nearest_even",
+      "line": 17,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 3
+    },
+    {
+      "file": "rounding.py",
+      "function": "nearest_even",
+      "line": 20,
+      "opcode": "COMPARE_OP",
+      "argument": "<",
+      "count": 3
+    },
+    {
+      "file": "rounding.py",
+      "function": "nearest_even",
+      "line": 22,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 2
+    },
+    {
+      "file": "rounding.py",
+      "function": "nearest_even",
+      "line": 23,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "spec.py",
+      "function": "<genexpr>",
+      "line": 18,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 516
+    },
+    {
+      "file": "spec.py",
+      "function": "freeze",
+      "line": 15,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 906
+    },
+    {
+      "file": "spec.py",
+      "function": "freeze",
+      "line": 16,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 530
+    },
+    {
+      "file": "spec.py",
+      "function": "freeze",
+      "line": 17,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 834
+    },
+    {
+      "file": "spec.py",
+      "function": "freeze",
+      "line": 18,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 232
+    },
+    {
+      "file": "spec.py",
+      "function": "load_spec",
+      "line": 44,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "spec.py",
+      "function": "load_spec",
+      "line": 45,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 18
+    },
+    {
+      "file": "spec.py",
+      "function": "load_spec",
+      "line": 46,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 2
+    },
+    {
+      "file": "spec.py",
+      "function": "load_spec",
+      "line": 48,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 438
+    },
+    {
+      "file": "spec.py",
+      "function": "load_spec",
+      "line": 49,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 182
+    },
+    {
+      "file": "spec.py",
+      "function": "load_spec",
+      "line": 51,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 6
+    },
+    {
+      "file": "spec.py",
+      "function": "load_spec",
+      "line": 52,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 10
+    },
+    {
+      "file": "spec.py",
+      "function": "read",
+      "line": 35,
+      "opcode": "BINARY_OP",
+      "argument": "/",
+      "count": 18
+    },
+    {
+      "file": "spec.py",
+      "function": "read",
+      "line": 35,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 18
+    },
+    {
+      "file": "spec.py",
+      "function": "read",
+      "line": 36,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 36
+    },
+    {
+      "file": "spec.py",
+      "function": "read",
+      "line": 36,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 18
+    },
+    {
+      "file": "spec.py",
+      "function": "read",
+      "line": 38,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 36
+    },
+    {
+      "file": "spec.py",
+      "function": "read",
+      "line": 39,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 18
+    },
+    {
+      "file": "spec.py",
+      "function": "read",
+      "line": 39,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 36
+    },
+    {
+      "file": "spec.py",
+      "function": "read",
+      "line": 39,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 18
+    },
+    {
+      "file": "spec.py",
+      "function": "read",
+      "line": 41,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 18
+    },
+    {
+      "file": "spec.py",
+      "function": "read",
+      "line": 41,
+      "opcode": "BINARY_OP",
+      "argument": "/",
+      "count": 18
+    },
+    {
+      "file": "spec.py",
+      "function": "read",
+      "line": 41,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 36
+    },
+    {
+      "file": "spec.py",
+      "function": "read",
+      "line": 41,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 18
+    },
+    {
+      "file": "sqrt_enclosure.py",
+      "function": "sqrt_enclosure",
+      "line": 6,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "sqrt_enclosure.py",
+      "function": "sqrt_enclosure",
+      "line": 6,
+      "opcode": "COMPARE_OP",
+      "argument": "<",
+      "count": 2
+    },
+    {
+      "file": "sqrt_enclosure.py",
+      "function": "sqrt_enclosure",
+      "line": 8,
+      "opcode": "BINARY_OP",
+      "argument": "*",
+      "count": 1
+    },
+    {
+      "file": "sqrt_enclosure.py",
+      "function": "sqrt_enclosure",
+      "line": 8,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "sqrt_enclosure.py",
+      "function": "sqrt_enclosure",
+      "line": 9,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "sqrt_enclosure.py",
+      "function": "sqrt_enclosure",
+      "line": 10,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "sqrt_enclosure.py",
+      "function": "sqrt_enclosure",
+      "line": 11,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "sqrt_enclosure.py",
+      "function": "sqrt_enclosure",
+      "line": 12,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "sqrt_enclosure.py",
+      "function": "sqrt_enclosure",
+      "line": 12,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 1
+    },
+    {
+      "file": "sqrt_enclosure.py",
+      "function": "sqrt_enclosure",
+      "line": 13,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "sqrt_enclosure.py",
+      "function": "sqrt_enclosure",
+      "line": 14,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "sqrt_enclosure.py",
+      "function": "sqrt_enclosure",
+      "line": 15,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "wire.py",
+      "function": "<genexpr>",
+      "line": 63,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 458
+    },
+    {
+      "file": "wire.py",
+      "function": "canonical_bytes",
+      "line": 80,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 24
+    },
+    {
+      "file": "wire.py",
+      "function": "canonical_bytes",
+      "line": 81,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 12
+    },
+    {
+      "file": "wire.py",
+      "function": "decimal",
+      "line": 18,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 36
+    },
+    {
+      "file": "wire.py",
+      "function": "decimal",
+      "line": 20,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 36
+    },
+    {
+      "file": "wire.py",
+      "function": "decimal",
+      "line": 20,
+      "opcode": "COMPARE_OP",
+      "argument": ">=",
+      "count": 36
+    },
+    {
+      "file": "wire.py",
+      "function": "decimal",
+      "line": 23,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 36
+    },
+    {
+      "file": "wire.py",
+      "function": "digest",
+      "line": 129,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 6
+    },
+    {
+      "file": "wire.py",
+      "function": "digest",
+      "line": 129,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 6
+    },
+    {
+      "file": "wire.py",
+      "function": "digest",
+      "line": 130,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 7
+    },
+    {
+      "file": "wire.py",
+      "function": "digest",
+      "line": 130,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 21
+    },
+    {
+      "file": "wire.py",
+      "function": "emit",
+      "line": 45,
+      "opcode": "BINARY_OP",
+      "argument": "+=",
+      "count": 2088
+    },
+    {
+      "file": "wire.py",
+      "function": "emit",
+      "line": 45,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2088
+    },
+    {
+      "file": "wire.py",
+      "function": "emit",
+      "line": 46,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 2088
+    },
+    {
+      "file": "wire.py",
+      "function": "emit",
+      "line": 48,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2088
+    },
+    {
+      "file": "wire.py",
+      "function": "integer",
+      "line": 29,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 152
+    },
+    {
+      "file": "wire.py",
+      "function": "integer",
+      "line": 29,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 38
+    },
+    {
+      "file": "wire.py",
+      "function": "integer",
+      "line": 32,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 38
+    },
+    {
+      "file": "wire.py",
+      "function": "integer",
+      "line": 35,
+      "opcode": "COMPARE_OP",
+      "argument": "<=",
+      "count": 25
+    },
+    {
+      "file": "wire.py",
+      "function": "parse",
+      "line": 85,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "wire.py",
+      "function": "parse",
+      "line": 87,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "wire.py",
+      "function": "parse",
+      "line": 87,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 1
+    },
+    {
+      "file": "wire.py",
+      "function": "parse",
+      "line": 94,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 1622
+    },
+    {
+      "file": "wire.py",
+      "function": "parse",
+      "line": 95,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 1622
+    },
+    {
+      "file": "wire.py",
+      "function": "parse",
+      "line": 97,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 253
+    },
+    {
+      "file": "wire.py",
+      "function": "parse",
+      "line": 99,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 13
+    },
+    {
+      "file": "wire.py",
+      "function": "parse",
+      "line": 100,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 13
+    },
+    {
+      "file": "wire.py",
+      "function": "parse",
+      "line": 100,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 13
+    },
+    {
+      "file": "wire.py",
+      "function": "parse",
+      "line": 101,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 184
+    },
+    {
+      "file": "wire.py",
+      "function": "parse",
+      "line": 102,
+      "opcode": "BINARY_OP",
+      "argument": "+=",
+      "count": 55
+    },
+    {
+      "file": "wire.py",
+      "function": "parse",
+      "line": 103,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 55
+    },
+    {
+      "file": "wire.py",
+      "function": "parse",
+      "line": 104,
+      "opcode": "COMPARE_OP",
+      "argument": "==",
+      "count": 130
+    },
+    {
+      "file": "wire.py",
+      "function": "parse",
+      "line": 105,
+      "opcode": "BINARY_OP",
+      "argument": "+=",
+      "count": 9
+    },
+    {
+      "file": "wire.py",
+      "function": "parse",
+      "line": 106,
+      "opcode": "COMPARE_OP",
+      "argument": ">=",
+      "count": 9
+    },
+    {
+      "file": "wire.py",
+      "function": "parse",
+      "line": 109,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 13
+    },
+    {
+      "file": "wire.py",
+      "function": "parse",
+      "line": 119,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2
+    },
+    {
+      "file": "wire.py",
+      "function": "parse",
+      "line": 123,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1
+    },
+    {
+      "file": "wire.py",
+      "function": "parse",
+      "line": 123,
+      "opcode": "COMPARE_OP",
+      "argument": "!=",
+      "count": 1
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 50,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1044
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 50,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 129
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 53,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 6
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 54,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1038
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 55,
+      "opcode": "BINARY_OP",
+      "argument": "-",
+      "count": 909
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 55,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 909
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 55,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 909
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 59,
+      "opcode": "BINARY_OP",
+      "argument": "+=",
+      "count": 12753
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 59,
+      "opcode": "BINARY_OP",
+      "argument": "-",
+      "count": 12753
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 59,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 25506
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 60,
+      "opcode": "BINARY_OP",
+      "argument": "-",
+      "count": 12753
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 60,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 12753
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 61,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 2727
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 62,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 129
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 63,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 184
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 65,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 92
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 66,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 184
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 67,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 366
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 68,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 458
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 68,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 1374
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 69,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 92
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 70,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 37
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 71,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 37
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 71,
+      "opcode": "COMPARE_OP",
+      "argument": ">",
+      "count": 37
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 73,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 37
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 74,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 37
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 75,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 79
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 76,
+      "opcode": "BINARY_OP",
+      "argument": "+",
+      "count": 116
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 76,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 116
+    },
+    {
+      "file": "wire.py",
+      "function": "visit",
+      "line": 77,
+      "opcode": "CALL",
+      "argument": "",
+      "count": 37
+    }
+  ],
+  "additional_finding": {
+    "id": "F-RESOURCE-QDIV-SIGN",
+    "status": "AUTHOR CONFIRMED / OPEN / NOT FIXED",
+    "source": "resource.py:ResourceAccount.qdiv",
+    "expression": "self.multiply(a.numerator, b.denominator)*sign",
+    "scalar": {
+      "a": "1",
+      "b": "1",
+      "work_max": 40,
+      "result": "1",
+      "charged_work": 40,
+      "operations": 3,
+      "omitted_multiply_work": 4
+    },
+    "whole_call_direct_sign_multiply_occurrences": 1590,
+    "expected_complete_schedule_work": 44,
+    "limitation": "Confirmed author contract counterexample; independent review pending. Outside the requested minimal fix."
+  }
+}

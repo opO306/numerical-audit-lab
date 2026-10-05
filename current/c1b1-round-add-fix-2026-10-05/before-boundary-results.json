@@ -1,0 +1,127 @@
+{
+  "scope": "AUTHOR REGRESSION / PRIVATE REFERENCE ONLY",
+  "scalar": [
+    {
+      "q": "7/4",
+      "work_max": 73,
+      "result": 2,
+      "refusal": null,
+      "charged_work": 73,
+      "operations": 2,
+      "add_events": []
+    },
+    {
+      "q": "7/4",
+      "work_max": 74,
+      "result": 2,
+      "refusal": null,
+      "charged_work": 73,
+      "operations": 2,
+      "add_events": []
+    },
+    {
+      "q": "7/4",
+      "work_max": 75,
+      "result": 2,
+      "refusal": null,
+      "charged_work": 73,
+      "operations": 2,
+      "add_events": []
+    },
+    {
+      "q": "-5/2",
+      "work_max": 42,
+      "result": -2,
+      "refusal": null,
+      "charged_work": 42,
+      "operations": 2,
+      "add_events": []
+    },
+    {
+      "q": "-5/2",
+      "work_max": 44,
+      "result": -2,
+      "refusal": null,
+      "charged_work": 42,
+      "operations": 2,
+      "add_events": []
+    },
+    {
+      "q": "-5/2",
+      "work_max": 45,
+      "result": -2,
+      "refusal": null,
+      "charged_work": 42,
+      "operations": 2,
+      "add_events": []
+    }
+  ],
+  "whole_call": [
+    {
+      "cap": "2605253326086889986",
+      "input_sha256": "bab9520968c7e3b5be3e6d5c5e53627a06d066bbb950579c7cc8ec2b65dcfffd",
+      "layers": {
+        "producer": "RESOLVED",
+        "rechecker": "NOT_RUN",
+        "executor_comparison": "NOT_RUN",
+        "arithmetic": "NOT_RUN",
+        "publication": "NOT_PUBLISHED",
+        "execution": "STOP"
+      },
+      "raw": [
+        "52119986341579705480988",
+        "31271991804947823288593",
+        "-20847994536631882192395"
+      ],
+      "opposite": [
+        "-52119986341579705480988",
+        "-31271991804947823288593",
+        "20847994536631882192395"
+      ],
+      "certificate_present": true,
+      "account": {
+        "mathematical_work": 2605253326086889986,
+        "operations": 35234,
+        "peak_integer_bits": 13394,
+        "predicted_live_bytes": 91241568,
+        "peak_temporary_bytes": 14816,
+        "allocation_basis": "AUTHOR_FIXTURE_MODEL_UNVALIDATED"
+      },
+      "failure": null,
+      "input_unchanged": true
+    },
+    {
+      "cap": "2605253326086890138",
+      "input_sha256": "835314dcc102ff841c7cf532bc90c5b9f76702e26ad4ba3403cc0ff4f6fba0f7",
+      "layers": {
+        "producer": "RESOLVED",
+        "rechecker": "NOT_RUN",
+        "executor_comparison": "NOT_RUN",
+        "arithmetic": "NOT_RUN",
+        "publication": "NOT_PUBLISHED",
+        "execution": "STOP"
+      },
+      "raw": [
+        "52119986341579705480988",
+        "31271991804947823288593",
+        "-20847994536631882192395"
+      ],
+      "opposite": [
+        "-52119986341579705480988",
+        "-31271991804947823288593",
+        "20847994536631882192395"
+      ],
+      "certificate_present": true,
+      "account": {
+        "mathematical_work": 2605253326086889986,
+        "operations": 35234,
+        "peak_integer_bits": 13394,
+        "predicted_live_bytes": 91241568,
+        "peak_temporary_bytes": 14816,
+        "allocation_basis": "AUTHOR_FIXTURE_MODEL_UNVALIDATED"
+      },
+      "failure": null,
+      "input_unchanged": true
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+FFFF                                                                     [100%]
+================================== FAILURES ===================================
+_________________ test_increment_refuses_before_add[q0-73-73] _________________
+
+q = Fraction(7, 4), cap = 73, charged_before_add = 73
+
+    @pytest.mark.parametrize('q,cap,charged_before_add', [
+        (Fraction(7, 4), 73, 73),
+        (Fraction(7, 4), 74, 73),
+        (Fraction(-5, 2), 42, 42),
+        (Fraction(-5, 2), 44, 42),
+    ])
+    def test_increment_refuses_before_add(q, cap, charged_before_add):
+        c = account(cap)
+>       with pytest.raises(ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_round_add_accounting.py:37: Failed
+_________________ test_increment_refuses_before_add[q1-74-73] _________________
+
+q = Fraction(7, 4), cap = 74, charged_before_add = 73
+
+    @pytest.mark.parametrize('q,cap,charged_before_add', [
+        (Fraction(7, 4), 73, 73),
+        (Fraction(7, 4), 74, 73),
+        (Fraction(-5, 2), 42, 42),
+        (Fraction(-5, 2), 44, 42),
+    ])
+    def test_increment_refuses_before_add(q, cap, charged_before_add):
+        c = account(cap)
+>       with pytest.raises(ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_round_add_accounting.py:37: Failed
+_________________ test_increment_refuses_before_add[q2-42-42] _________________
+
+q = Fraction(-5, 2), cap = 42, charged_before_add = 42
+
+    @pytest.mark.parametrize('q,cap,charged_before_add', [
+        (Fraction(7, 4), 73, 73),
+        (Fraction(7, 4), 74, 73),
+        (Fraction(-5, 2), 42, 42),
+        (Fraction(-5, 2), 44, 42),
+    ])
+    def test_increment_refuses_before_add(q, cap, charged_before_add):
+        c = account(cap)
+>       with pytest.raises(ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_round_add_accounting.py:37: Failed
+_________________ test_increment_refuses_before_add[q3-44-42] _________________
+
+q = Fraction(-5, 2), cap = 44, charged_before_add = 42
+
+    @pytest.mark.parametrize('q,cap,charged_before_add', [
+        (Fraction(7, 4), 73, 73),
+        (Fraction(7, 4), 74, 73),
+        (Fraction(-5, 2), 42, 42),
+        (Fraction(-5, 2), 44, 42),
+    ])
+    def test_increment_refuses_before_add(q, cap, charged_before_add):
+        c = account(cap)
+>       with pytest.raises(ResourceLimit) as err:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_round_add_accounting.py:37: Failed
+=========================== short test summary info ===========================
+FAILED tests/test_impulse_round_add_accounting.py::test_increment_refuses_before_add[q0-73-73]
+FAILED tests/test_impulse_round_add_accounting.py::test_increment_refuses_before_add[q1-74-73]
+FAILED tests/test_impulse_round_add_accounting.py::test_increment_refuses_before_add[q2-42-42]
+FAILED tests/test_impulse_round_add_accounting.py::test_increment_refuses_before_add[q3-44-42]
+4 failed in 0.45s

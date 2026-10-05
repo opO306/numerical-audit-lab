@@ -1,0 +1,15 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+________________ test_large_exp_no_cutoff_and_tail_order_limit ________________
+
+    def test_large_exp_no_cutoff_and_tail_order_limit():
+        e=module('exp_enclosure'); m=module('interval')
+        v,_,_=e.exp_enclosure(m.Interval(Q(100),Q(100)),256,300,context())
+>       assert 0<v.lo<=v.hi<Q(1,10**40)
+E       assert 0 < Fraction(0, 1)
+E        +  where Fraction(0, 1) = Interval(lo=Fraction(0, 1), hi=Fraction(0, 1)).lo
+
+tests\test_impulse_reference_primitives.py:64: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_impulse_reference_primitives.py::test_large_exp_no_cutoff_and_tail_order_limit
+1 failed in 0.37s

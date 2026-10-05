@@ -1,0 +1,27 @@
+{
+  "AUDIT_REPORT_KO.md": {
+    "original": "D:\\\uac10\uc0ac\\REPORT_KO(7)\\AUDIT_REPORT_KO.md",
+    "sha256": "450d51eba1d652d879aaff45a0b1a2cf919624aaf8ee3a9ebae028f8eb7ab6c9",
+    "bytes": 36659
+  },
+  "VERDICT.json": {
+    "original": "D:\\\uac10\uc0ac\\REPORT_KO(7)\\VERDICT.json",
+    "sha256": "0d92af197737bf4ad6a2bb4cd274af49e5edc8a882bf70ab0865b0ee2ec33ad1",
+    "bytes": 8803
+  },
+  "COUNTEREXAMPLE_INPUT.json": {
+    "original": "D:\\\uac10\uc0ac\\REPORT_KO(7)\\COUNTEREXAMPLE_INPUT.json",
+    "sha256": "bab9520968c7e3b5be3e6d5c5e53627a06d066bbb950579c7cc8ec2b65dcfffd",
+    "bytes": 1875
+  },
+  "COUNTEREXAMPLE_RESULT.json": {
+    "original": "D:\\\uac10\uc0ac\\REPORT_KO(7)\\COUNTEREXAMPLE_RESULT.json",
+    "sha256": "8492ccc40b12d35416325784b203cb8313abab5c124e0c2bb4c24174503d9944",
+    "bytes": 2808
+  },
+  "user-request.txt": {
+    "original": "C:\\Users\\zun24\\.codex\\attachments\\7b4662ef-2568-4cfb-bbab-489f49eaf739\\\ubd99\uc5ec\ub123\uc740 \ud14d\uc2a4\ud2b8.txt",
+    "sha256": "0efd44d5fab5f029c79cee94a2a3c961fd11538a32352732ab6d1597f8aa81e3",
+    "bytes": 9206
+  }
+}

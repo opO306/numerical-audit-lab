@@ -1,0 +1,14 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+__________________________ test_small_resource_guard __________________________
+
+    def test_small_resource_guard():
+        c=ResourceAccount(bit_max=32,num_bit_max=32,den_bit_max=32,work_max=10000)
+>       with pytest.raises(ResourceLimit) as err:c.shift(1,64)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResourceLimit
+
+tests\test_impulse_mutant_resource_probe.py:7: Failed
+=========================== short test summary info ===========================
+FAILED tests/test_impulse_mutant_resource_probe.py::test_small_resource_guard
+1 failed in 0.47s
