@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="0.512" timestamp="2026-10-06T18:17:27.670596+09:00" hostname="localhost"><testcase classname="tests.test_verified_driver_v1_review" name="test_controller_death_reaps_owned_child_with_distinct_process_group[paused]" time="0.225"><failure message="AssertionError: owned separate-group child survived successful group receipt&#10;assert False&#10; +  where False = all(&lt;generator object test_controller_death_reaps_owned_child_with_distinct_process_group.&lt;locals&gt;.&lt;genexpr&gt; at 0x77fb184cb010&gt;)">tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_controller_death_reaps_ow0')
+mode = 'paused'
+
+    @pytest.mark.parametrize('mode',['paused','active'])
+    def test_controller_death_reaps_owned_child_with_distinct_process_group(tmp_path,mode):
+        import json,os,signal,subprocess,sys
+        from pathlib import Path
+        from tests.test_verified_driver_v1_containment import CONTROLLER,until
+        worker=tmp_path/'separate-group.py'
+        worker.write_text('''import os,sys,time,subprocess,json
+    from pathlib import Path
+    root=Path(sys.argv[1]);mode=sys.argv[2]
+    child=subprocess.Popen([sys.executable,'-c','import time;time.sleep(30)'],start_new_session=True)
+    (root/'pids.json').write_text(json.dumps([os.getpid(),child.pid]))
+    (root/'separate-groups.json').write_text(json.dumps([os.getpgrp(),os.getpgid(child.pid)]))
+    (root/mode).write_text('TEST_ONLY')
+    time.sleep(30)
+    ''')
+        controller=subprocess.Popen([sys.executable,'-c',CONTROLLER,str(tmp_path),str(worker),mode],cwd=ROOT)
+        owned=[]
+        try:
+            until(lambda:(tmp_path/mode).exists() and (tmp_path/'controller-ready').exists())
+            owned=json.loads((tmp_path/'pids.json').read_bytes())
+            groups=json.loads((tmp_path/'separate-groups.json').read_bytes());assert groups[0]!=groups[1]
+            os.kill(controller.pid,signal.SIGKILL);controller.wait(timeout=5)
+            until(lambda:(tmp_path/'containment.json').exists())
+            receipt=json.loads((tmp_path/'containment.json').read_bytes())
+&gt;           assert all(not Path('/proc',str(pid)).exists() for pid in owned),'owned separate-group child survived successful group receipt'
+E           AssertionError: owned separate-group child survived successful group receipt
+E           assert False
+E            +  where False = all(&lt;generator object test_controller_death_reaps_owned_child_with_distinct_process_group.&lt;locals&gt;.&lt;genexpr&gt; at 0x77fb184cb010&gt;)
+
+tests/test_verified_driver_v1_review.py:86: AssertionError</failure></testcase><testcase classname="tests.test_verified_driver_v1_review" name="test_controller_death_reaps_owned_child_with_distinct_process_group[active]" time="0.171"><failure message="AssertionError: owned separate-group child survived successful group receipt&#10;assert False&#10; +  where False = all(&lt;generator object test_controller_death_reaps_owned_child_with_distinct_process_group.&lt;locals&gt;.&lt;genexpr&gt; at 0x77fb184cb100&gt;)">tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_controller_death_reaps_ow1')
+mode = 'active'
+
+    @pytest.mark.parametrize('mode',['paused','active'])
+    def test_controller_death_reaps_owned_child_with_distinct_process_group(tmp_path,mode):
+        import json,os,signal,subprocess,sys
+        from pathlib import Path
+        from tests.test_verified_driver_v1_containment import CONTROLLER,until
+        worker=tmp_path/'separate-group.py'
+        worker.write_text('''import os,sys,time,subprocess,json
+    from pathlib import Path
+    root=Path(sys.argv[1]);mode=sys.argv[2]
+    child=subprocess.Popen([sys.executable,'-c','import time;time.sleep(30)'],start_new_session=True)
+    (root/'pids.json').write_text(json.dumps([os.getpid(),child.pid]))
+    (root/'separate-groups.json').write_text(json.dumps([os.getpgrp(),os.getpgid(child.pid)]))
+    (root/mode).write_text('TEST_ONLY')
+    time.sleep(30)
+    ''')
+        controller=subprocess.Popen([sys.executable,'-c',CONTROLLER,str(tmp_path),str(worker),mode],cwd=ROOT)
+        owned=[]
+        try:
+            until(lambda:(tmp_path/mode).exists() and (tmp_path/'controller-ready').exists())
+            owned=json.loads((tmp_path/'pids.json').read_bytes())
+            groups=json.loads((tmp_path/'separate-groups.json').read_bytes());assert groups[0]!=groups[1]
+            os.kill(controller.pid,signal.SIGKILL);controller.wait(timeout=5)
+            until(lambda:(tmp_path/'containment.json').exists())
+            receipt=json.loads((tmp_path/'containment.json').read_bytes())
+&gt;           assert all(not Path('/proc',str(pid)).exists() for pid in owned),'owned separate-group child survived successful group receipt'
+E           AssertionError: owned separate-group child survived successful group receipt
+E           assert False
+E            +  where False = all(&lt;generator object test_controller_death_reaps_owned_child_with_distinct_process_group.&lt;locals&gt;.&lt;genexpr&gt; at 0x77fb184cb100&gt;)
+
+tests/test_verified_driver_v1_review.py:86: AssertionError</failure></testcase></testsuite></testsuites>

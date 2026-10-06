@@ -1,0 +1,20 @@
+{
+  "orbit": "regular",
+  "n_steps": 3,
+  "dt_bits": "0x3f90000000000000",
+  "output_bits": [
+    "0x3f87fdfd0828277f",
+    "0x3f77fdfb883c273f",
+    "0x3fcff6ed62825295",
+    "0x3fbff6e3e3c24415"
+  ],
+  "python": "3.12.3",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "packages": {
+    "gala": "1.12.0",
+    "numpy": "2.5.3",
+    "astropy": "8.0.1",
+    "scipy": "1.18.1"
+  },
+  "integrate_call_wall_seconds": 0.0007923739999853296
+}

@@ -1,0 +1,1 @@
+{"job_cap": 55, "stage": "positive", "storage": {"actual_storage_bytes": 3132209759, "files": 4727, "host": "desktop Windows metadata", "scope": "existing batch artifacts plus new V1 evidence; reparse aliases not double-counted"}, "total_ceiling": 4200}

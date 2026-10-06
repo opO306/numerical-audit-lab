@@ -1,0 +1,483 @@
+FFFFFFFFFFFFFFF                                                          [100%]
+=================================== FAILURES ===================================
+___ test_saved_original_three_edges_preserve_hidden_state_and_final_boundary ___
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_saved_original_three_edge0')
+
+    def test_saved_original_three_edges_preserve_hidden_state_and_final_boundary(tmp_path):
+        pred=chain_genesis(ROOT,3); states=[]
+        original=json.loads((CASE/'capture.json').read_bytes())
+        for k in (1,2,3):
+            cp,identity,event=checkpoint(tmp_path/f'cp{k}',pred,k); out=tmp_path/f'edge{k}'
+>           build_edge(cp,pred,out,ROOT); report=check_edge(cp,out,pred,ROOT)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_live_chain_incremental.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/live_chain/producer.py:10: in build_edge
+    doc,event,capture,rows,native,identity=validate_edge(checkpoint_dir,predecessor,repo_root)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/raw.py:94: in validate_edge
+    for name in ('q','full_v','latent','gradient'): r.require(list(snap[name])==following['start_state'][name],'checkpoint entry component snapshot')
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ok = False, reason = 'checkpoint entry component snapshot'
+
+    def require(ok, reason):
+        if not ok:
+>           raise ValueError(reason)
+E           ValueError: checkpoint entry component snapshot
+
+runtime_trace/regular_nstep/raw_check.py:19: ValueError
+_________ test_rehashed_candidate_mutations_fail_semantically[latent] __________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_rehashed_candidate_mutati0')
+attack = 'latent'
+
+    @pytest.mark.parametrize('attack',['latent','coefficient','box_reset','form_reset','early_body','tdt','gradient','final_successor'])
+    def test_rehashed_candidate_mutations_fail_semantically(tmp_path,attack):
+>       pred,cp,out,report=first(tmp_path)
+                           ^^^^^^^^^^^^^^^
+
+tests/test_live_chain_incremental.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_live_chain_incremental.py:12: in first
+    out=tmp_path/'derived1'; report=build_edge(capture,pred,out,ROOT)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/producer.py:10: in build_edge
+    doc,event,capture,rows,native,identity=validate_edge(checkpoint_dir,predecessor,repo_root)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/raw.py:94: in validate_edge
+    for name in ('q','full_v','latent','gradient'): r.require(list(snap[name])==following['start_state'][name],'checkpoint entry component snapshot')
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ok = False, reason = 'checkpoint entry component snapshot'
+
+    def require(ok, reason):
+        if not ok:
+>           raise ValueError(reason)
+E           ValueError: checkpoint entry component snapshot
+
+runtime_trace/regular_nstep/raw_check.py:19: ValueError
+_______ test_rehashed_candidate_mutations_fail_semantically[coefficient] _______
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_rehashed_candidate_mutati1')
+attack = 'coefficient'
+
+    @pytest.mark.parametrize('attack',['latent','coefficient','box_reset','form_reset','early_body','tdt','gradient','final_successor'])
+    def test_rehashed_candidate_mutations_fail_semantically(tmp_path,attack):
+>       pred,cp,out,report=first(tmp_path)
+                           ^^^^^^^^^^^^^^^
+
+tests/test_live_chain_incremental.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_live_chain_incremental.py:12: in first
+    out=tmp_path/'derived1'; report=build_edge(capture,pred,out,ROOT)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/producer.py:10: in build_edge
+    doc,event,capture,rows,native,identity=validate_edge(checkpoint_dir,predecessor,repo_root)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/raw.py:94: in validate_edge
+    for name in ('q','full_v','latent','gradient'): r.require(list(snap[name])==following['start_state'][name],'checkpoint entry component snapshot')
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ok = False, reason = 'checkpoint entry component snapshot'
+
+    def require(ok, reason):
+        if not ok:
+>           raise ValueError(reason)
+E           ValueError: checkpoint entry component snapshot
+
+runtime_trace/regular_nstep/raw_check.py:19: ValueError
+________ test_rehashed_candidate_mutations_fail_semantically[box_reset] ________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_rehashed_candidate_mutati2')
+attack = 'box_reset'
+
+    @pytest.mark.parametrize('attack',['latent','coefficient','box_reset','form_reset','early_body','tdt','gradient','final_successor'])
+    def test_rehashed_candidate_mutations_fail_semantically(tmp_path,attack):
+>       pred,cp,out,report=first(tmp_path)
+                           ^^^^^^^^^^^^^^^
+
+tests/test_live_chain_incremental.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_live_chain_incremental.py:12: in first
+    out=tmp_path/'derived1'; report=build_edge(capture,pred,out,ROOT)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/producer.py:10: in build_edge
+    doc,event,capture,rows,native,identity=validate_edge(checkpoint_dir,predecessor,repo_root)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/raw.py:94: in validate_edge
+    for name in ('q','full_v','latent','gradient'): r.require(list(snap[name])==following['start_state'][name],'checkpoint entry component snapshot')
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ok = False, reason = 'checkpoint entry component snapshot'
+
+    def require(ok, reason):
+        if not ok:
+>           raise ValueError(reason)
+E           ValueError: checkpoint entry component snapshot
+
+runtime_trace/regular_nstep/raw_check.py:19: ValueError
+_______ test_rehashed_candidate_mutations_fail_semantically[form_reset] ________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_rehashed_candidate_mutati3')
+attack = 'form_reset'
+
+    @pytest.mark.parametrize('attack',['latent','coefficient','box_reset','form_reset','early_body','tdt','gradient','final_successor'])
+    def test_rehashed_candidate_mutations_fail_semantically(tmp_path,attack):
+>       pred,cp,out,report=first(tmp_path)
+                           ^^^^^^^^^^^^^^^
+
+tests/test_live_chain_incremental.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_live_chain_incremental.py:12: in first
+    out=tmp_path/'derived1'; report=build_edge(capture,pred,out,ROOT)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/producer.py:10: in build_edge
+    doc,event,capture,rows,native,identity=validate_edge(checkpoint_dir,predecessor,repo_root)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/raw.py:94: in validate_edge
+    for name in ('q','full_v','latent','gradient'): r.require(list(snap[name])==following['start_state'][name],'checkpoint entry component snapshot')
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ok = False, reason = 'checkpoint entry component snapshot'
+
+    def require(ok, reason):
+        if not ok:
+>           raise ValueError(reason)
+E           ValueError: checkpoint entry component snapshot
+
+runtime_trace/regular_nstep/raw_check.py:19: ValueError
+_______ test_rehashed_candidate_mutations_fail_semantically[early_body] ________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_rehashed_candidate_mutati4')
+attack = 'early_body'
+
+    @pytest.mark.parametrize('attack',['latent','coefficient','box_reset','form_reset','early_body','tdt','gradient','final_successor'])
+    def test_rehashed_candidate_mutations_fail_semantically(tmp_path,attack):
+>       pred,cp,out,report=first(tmp_path)
+                           ^^^^^^^^^^^^^^^
+
+tests/test_live_chain_incremental.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_live_chain_incremental.py:12: in first
+    out=tmp_path/'derived1'; report=build_edge(capture,pred,out,ROOT)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/producer.py:10: in build_edge
+    doc,event,capture,rows,native,identity=validate_edge(checkpoint_dir,predecessor,repo_root)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/raw.py:94: in validate_edge
+    for name in ('q','full_v','latent','gradient'): r.require(list(snap[name])==following['start_state'][name],'checkpoint entry component snapshot')
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ok = False, reason = 'checkpoint entry component snapshot'
+
+    def require(ok, reason):
+        if not ok:
+>           raise ValueError(reason)
+E           ValueError: checkpoint entry component snapshot
+
+runtime_trace/regular_nstep/raw_check.py:19: ValueError
+___________ test_rehashed_candidate_mutations_fail_semantically[tdt] ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_rehashed_candidate_mutati5')
+attack = 'tdt'
+
+    @pytest.mark.parametrize('attack',['latent','coefficient','box_reset','form_reset','early_body','tdt','gradient','final_successor'])
+    def test_rehashed_candidate_mutations_fail_semantically(tmp_path,attack):
+>       pred,cp,out,report=first(tmp_path)
+                           ^^^^^^^^^^^^^^^
+
+tests/test_live_chain_incremental.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_live_chain_incremental.py:12: in first
+    out=tmp_path/'derived1'; report=build_edge(capture,pred,out,ROOT)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/producer.py:10: in build_edge
+    doc,event,capture,rows,native,identity=validate_edge(checkpoint_dir,predecessor,repo_root)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/raw.py:94: in validate_edge
+    for name in ('q','full_v','latent','gradient'): r.require(list(snap[name])==following['start_state'][name],'checkpoint entry component snapshot')
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ok = False, reason = 'checkpoint entry component snapshot'
+
+    def require(ok, reason):
+        if not ok:
+>           raise ValueError(reason)
+E           ValueError: checkpoint entry component snapshot
+
+runtime_trace/regular_nstep/raw_check.py:19: ValueError
+________ test_rehashed_candidate_mutations_fail_semantically[gradient] _________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_rehashed_candidate_mutati6')
+attack = 'gradient'
+
+    @pytest.mark.parametrize('attack',['latent','coefficient','box_reset','form_reset','early_body','tdt','gradient','final_successor'])
+    def test_rehashed_candidate_mutations_fail_semantically(tmp_path,attack):
+>       pred,cp,out,report=first(tmp_path)
+                           ^^^^^^^^^^^^^^^
+
+tests/test_live_chain_incremental.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_live_chain_incremental.py:12: in first
+    out=tmp_path/'derived1'; report=build_edge(capture,pred,out,ROOT)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/producer.py:10: in build_edge
+    doc,event,capture,rows,native,identity=validate_edge(checkpoint_dir,predecessor,repo_root)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/raw.py:94: in validate_edge
+    for name in ('q','full_v','latent','gradient'): r.require(list(snap[name])==following['start_state'][name],'checkpoint entry component snapshot')
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ok = False, reason = 'checkpoint entry component snapshot'
+
+    def require(ok, reason):
+        if not ok:
+>           raise ValueError(reason)
+E           ValueError: checkpoint entry component snapshot
+
+runtime_trace/regular_nstep/raw_check.py:19: ValueError
+_____ test_rehashed_candidate_mutations_fail_semantically[final_successor] _____
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_rehashed_candidate_mutati7')
+attack = 'final_successor'
+
+    @pytest.mark.parametrize('attack',['latent','coefficient','box_reset','form_reset','early_body','tdt','gradient','final_successor'])
+    def test_rehashed_candidate_mutations_fail_semantically(tmp_path,attack):
+>       pred,cp,out,report=first(tmp_path)
+                           ^^^^^^^^^^^^^^^
+
+tests/test_live_chain_incremental.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_live_chain_incremental.py:12: in first
+    out=tmp_path/'derived1'; report=build_edge(capture,pred,out,ROOT)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/producer.py:10: in build_edge
+    doc,event,capture,rows,native,identity=validate_edge(checkpoint_dir,predecessor,repo_root)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/raw.py:94: in validate_edge
+    for name in ('q','full_v','latent','gradient'): r.require(list(snap[name])==following['start_state'][name],'checkpoint entry component snapshot')
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ok = False, reason = 'checkpoint entry component snapshot'
+
+    def require(ok, reason):
+        if not ok:
+>           raise ValueError(reason)
+E           ValueError: checkpoint entry component snapshot
+
+runtime_trace/regular_nstep/raw_check.py:19: ValueError
+_ test_live_checkpoint_substitution_and_hidden_handoff_refuse[foreign_session] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_live_checkpoint_substitut0')
+attack = 'foreign_session'
+
+    @pytest.mark.parametrize('attack',['foreign_session','wrong_predecessor','wrong_latent_predecessor','prefix_mismatch','next_entry_t','gradient_omit'])
+    def test_live_checkpoint_substitution_and_hidden_handoff_refuse(tmp_path,attack):
+>       _,_,_,first_report=first(tmp_path); pred=observed_state(first_report)
+                           ^^^^^^^^^^^^^^^
+
+tests/test_live_chain_incremental.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_live_chain_incremental.py:12: in first
+    out=tmp_path/'derived1'; report=build_edge(capture,pred,out,ROOT)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/producer.py:10: in build_edge
+    doc,event,capture,rows,native,identity=validate_edge(checkpoint_dir,predecessor,repo_root)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/raw.py:94: in validate_edge
+    for name in ('q','full_v','latent','gradient'): r.require(list(snap[name])==following['start_state'][name],'checkpoint entry component snapshot')
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ok = False, reason = 'checkpoint entry component snapshot'
+
+    def require(ok, reason):
+        if not ok:
+>           raise ValueError(reason)
+E           ValueError: checkpoint entry component snapshot
+
+runtime_trace/regular_nstep/raw_check.py:19: ValueError
+_ test_live_checkpoint_substitution_and_hidden_handoff_refuse[wrong_predecessor] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_live_checkpoint_substitut1')
+attack = 'wrong_predecessor'
+
+    @pytest.mark.parametrize('attack',['foreign_session','wrong_predecessor','wrong_latent_predecessor','prefix_mismatch','next_entry_t','gradient_omit'])
+    def test_live_checkpoint_substitution_and_hidden_handoff_refuse(tmp_path,attack):
+>       _,_,_,first_report=first(tmp_path); pred=observed_state(first_report)
+                           ^^^^^^^^^^^^^^^
+
+tests/test_live_chain_incremental.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_live_chain_incremental.py:12: in first
+    out=tmp_path/'derived1'; report=build_edge(capture,pred,out,ROOT)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/producer.py:10: in build_edge
+    doc,event,capture,rows,native,identity=validate_edge(checkpoint_dir,predecessor,repo_root)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/raw.py:94: in validate_edge
+    for name in ('q','full_v','latent','gradient'): r.require(list(snap[name])==following['start_state'][name],'checkpoint entry component snapshot')
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ok = False, reason = 'checkpoint entry component snapshot'
+
+    def require(ok, reason):
+        if not ok:
+>           raise ValueError(reason)
+E           ValueError: checkpoint entry component snapshot
+
+runtime_trace/regular_nstep/raw_check.py:19: ValueError
+_ test_live_checkpoint_substitution_and_hidden_handoff_refuse[wrong_latent_predecessor] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_live_checkpoint_substitut2')
+attack = 'wrong_latent_predecessor'
+
+    @pytest.mark.parametrize('attack',['foreign_session','wrong_predecessor','wrong_latent_predecessor','prefix_mismatch','next_entry_t','gradient_omit'])
+    def test_live_checkpoint_substitution_and_hidden_handoff_refuse(tmp_path,attack):
+>       _,_,_,first_report=first(tmp_path); pred=observed_state(first_report)
+                           ^^^^^^^^^^^^^^^
+
+tests/test_live_chain_incremental.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_live_chain_incremental.py:12: in first
+    out=tmp_path/'derived1'; report=build_edge(capture,pred,out,ROOT)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/producer.py:10: in build_edge
+    doc,event,capture,rows,native,identity=validate_edge(checkpoint_dir,predecessor,repo_root)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/raw.py:94: in validate_edge
+    for name in ('q','full_v','latent','gradient'): r.require(list(snap[name])==following['start_state'][name],'checkpoint entry component snapshot')
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ok = False, reason = 'checkpoint entry component snapshot'
+
+    def require(ok, reason):
+        if not ok:
+>           raise ValueError(reason)
+E           ValueError: checkpoint entry component snapshot
+
+runtime_trace/regular_nstep/raw_check.py:19: ValueError
+_ test_live_checkpoint_substitution_and_hidden_handoff_refuse[prefix_mismatch] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_live_checkpoint_substitut3')
+attack = 'prefix_mismatch'
+
+    @pytest.mark.parametrize('attack',['foreign_session','wrong_predecessor','wrong_latent_predecessor','prefix_mismatch','next_entry_t','gradient_omit'])
+    def test_live_checkpoint_substitution_and_hidden_handoff_refuse(tmp_path,attack):
+>       _,_,_,first_report=first(tmp_path); pred=observed_state(first_report)
+                           ^^^^^^^^^^^^^^^
+
+tests/test_live_chain_incremental.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_live_chain_incremental.py:12: in first
+    out=tmp_path/'derived1'; report=build_edge(capture,pred,out,ROOT)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/producer.py:10: in build_edge
+    doc,event,capture,rows,native,identity=validate_edge(checkpoint_dir,predecessor,repo_root)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/raw.py:94: in validate_edge
+    for name in ('q','full_v','latent','gradient'): r.require(list(snap[name])==following['start_state'][name],'checkpoint entry component snapshot')
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ok = False, reason = 'checkpoint entry component snapshot'
+
+    def require(ok, reason):
+        if not ok:
+>           raise ValueError(reason)
+E           ValueError: checkpoint entry component snapshot
+
+runtime_trace/regular_nstep/raw_check.py:19: ValueError
+__ test_live_checkpoint_substitution_and_hidden_handoff_refuse[next_entry_t] ___
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_live_checkpoint_substitut4')
+attack = 'next_entry_t'
+
+    @pytest.mark.parametrize('attack',['foreign_session','wrong_predecessor','wrong_latent_predecessor','prefix_mismatch','next_entry_t','gradient_omit'])
+    def test_live_checkpoint_substitution_and_hidden_handoff_refuse(tmp_path,attack):
+>       _,_,_,first_report=first(tmp_path); pred=observed_state(first_report)
+                           ^^^^^^^^^^^^^^^
+
+tests/test_live_chain_incremental.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_live_chain_incremental.py:12: in first
+    out=tmp_path/'derived1'; report=build_edge(capture,pred,out,ROOT)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/producer.py:10: in build_edge
+    doc,event,capture,rows,native,identity=validate_edge(checkpoint_dir,predecessor,repo_root)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/raw.py:94: in validate_edge
+    for name in ('q','full_v','latent','gradient'): r.require(list(snap[name])==following['start_state'][name],'checkpoint entry component snapshot')
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ok = False, reason = 'checkpoint entry component snapshot'
+
+    def require(ok, reason):
+        if not ok:
+>           raise ValueError(reason)
+E           ValueError: checkpoint entry component snapshot
+
+runtime_trace/regular_nstep/raw_check.py:19: ValueError
+__ test_live_checkpoint_substitution_and_hidden_handoff_refuse[gradient_omit] __
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_live_checkpoint_substitut5')
+attack = 'gradient_omit'
+
+    @pytest.mark.parametrize('attack',['foreign_session','wrong_predecessor','wrong_latent_predecessor','prefix_mismatch','next_entry_t','gradient_omit'])
+    def test_live_checkpoint_substitution_and_hidden_handoff_refuse(tmp_path,attack):
+>       _,_,_,first_report=first(tmp_path); pred=observed_state(first_report)
+                           ^^^^^^^^^^^^^^^
+
+tests/test_live_chain_incremental.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_live_chain_incremental.py:12: in first
+    out=tmp_path/'derived1'; report=build_edge(capture,pred,out,ROOT)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/producer.py:10: in build_edge
+    doc,event,capture,rows,native,identity=validate_edge(checkpoint_dir,predecessor,repo_root)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/live_chain/raw.py:94: in validate_edge
+    for name in ('q','full_v','latent','gradient'): r.require(list(snap[name])==following['start_state'][name],'checkpoint entry component snapshot')
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ok = False, reason = 'checkpoint entry component snapshot'
+
+    def require(ok, reason):
+        if not ok:
+>           raise ValueError(reason)
+E           ValueError: checkpoint entry component snapshot
+
+runtime_trace/regular_nstep/raw_check.py:19: ValueError
+=========================== short test summary info ============================
+FAILED tests/test_live_chain_incremental.py::test_saved_original_three_edges_preserve_hidden_state_and_final_boundary
+FAILED tests/test_live_chain_incremental.py::test_rehashed_candidate_mutations_fail_semantically[latent]
+FAILED tests/test_live_chain_incremental.py::test_rehashed_candidate_mutations_fail_semantically[coefficient]
+FAILED tests/test_live_chain_incremental.py::test_rehashed_candidate_mutations_fail_semantically[box_reset]
+FAILED tests/test_live_chain_incremental.py::test_rehashed_candidate_mutations_fail_semantically[form_reset]
+FAILED tests/test_live_chain_incremental.py::test_rehashed_candidate_mutations_fail_semantically[early_body]
+FAILED tests/test_live_chain_incremental.py::test_rehashed_candidate_mutations_fail_semantically[tdt]
+FAILED tests/test_live_chain_incremental.py::test_rehashed_candidate_mutations_fail_semantically[gradient]
+FAILED tests/test_live_chain_incremental.py::test_rehashed_candidate_mutations_fail_semantically[final_successor]
+FAILED tests/test_live_chain_incremental.py::test_live_checkpoint_substitution_and_hidden_handoff_refuse[foreign_session]
+FAILED tests/test_live_chain_incremental.py::test_live_checkpoint_substitution_and_hidden_handoff_refuse[wrong_predecessor]
+FAILED tests/test_live_chain_incremental.py::test_live_checkpoint_substitution_and_hidden_handoff_refuse[wrong_latent_predecessor]
+FAILED tests/test_live_chain_incremental.py::test_live_checkpoint_substitution_and_hidden_handoff_refuse[prefix_mismatch]
+FAILED tests/test_live_chain_incremental.py::test_live_checkpoint_substitution_and_hidden_handoff_refuse[next_entry_t]
+FAILED tests/test_live_chain_incremental.py::test_live_checkpoint_substitution_and_hidden_handoff_refuse[gradient_omit]
+15 failed in 5.52s

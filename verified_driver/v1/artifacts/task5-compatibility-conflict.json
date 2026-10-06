@@ -1,0 +1,27 @@
+{
+  "added": [
+    "runtime_trace/live_chain/__init__.py",
+    "runtime_trace/live_chain/checker.py",
+    "runtime_trace/live_chain/checkpoint.py",
+    "runtime_trace/live_chain/gdb_live.py",
+    "runtime_trace/live_chain/harness.py",
+    "runtime_trace/live_chain/producer.py",
+    "runtime_trace/live_chain/protocol.py",
+    "runtime_trace/live_chain/raw.py",
+    "runtime_trace/live_chain/schema.py",
+    "runtime_trace/live_chain/session.py",
+    "runtime_trace/live_chain/worker.py"
+  ],
+  "approved_count": 89,
+  "approved_pinset_sha256": "c949e61b420696f9ecfc61608d8e0e13be5f12a965e1e103f40ea2941689ddb3",
+  "changed_protected": [],
+  "combined_regression": {
+    "failed": 10,
+    "passed": 173,
+    "receipt": "verified_driver/v1/artifacts/jobs/task5-done/execution.json"
+  },
+  "current_count": 100,
+  "removed": [],
+  "schema": "V1_V0_PINSET_CONFLICT",
+  "status": "DESIGNER_DECISION_REQUIRED; no V0 gate/pinset changes"
+}

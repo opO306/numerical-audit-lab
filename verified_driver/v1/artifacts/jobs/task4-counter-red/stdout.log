@@ -1,0 +1,39 @@
+F
+=================================== FAILURES ===================================
+__________ test_rehashed_acquisition_counters_refuse[scalar_fp_count] __________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_rehashed_acquisition_coun0')
+counter = 'scalar_fp_count'
+
+    @pytest.mark.parametrize('counter',['scalar_fp_count','opcode_histogram'])
+    def test_rehashed_acquisition_counters_refuse(tmp_path,counter):
+>       pred,cp,out,report=first(tmp_path)
+                           ^^^^^^^^^^^^^^^
+
+tests/test_live_chain_incremental.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_live_chain_incremental.py:11: in first
+    pred=chain_genesis(ROOT,3); capture,identity,event=checkpoint(tmp_path/'cp1',pred,1)
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/live_chain_fixture.py:34: in checkpoint
+    opcode_histogram=dict(Counter(json.loads(line)['opcode'] for line in lines[:end])),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/collections/__init__.py:607: in __init__
+    self.update(iterable, **kwds)
+/usr/lib/python3.12/collections/__init__.py:699: in update
+    _count_elements(self, iterable)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+.0 = <list_iterator object at 0x7196411fdea0>
+
+>   opcode_histogram=dict(Counter(json.loads(line)['opcode'] for line in lines[:end])),
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    trace_sha256=digest_bytes(raw),final_chain=json.loads(lines[end-1])['chain'],
+    source_pinset_sha256=content_id(sources),harness_completed_normally=False,gdb_exit_event=None)
+E   KeyError: 'opcode'
+
+tests/live_chain_fixture.py:34: KeyError
+=========================== short test summary info ============================
+FAILED tests/test_live_chain_incremental.py::test_rehashed_acquisition_counters_refuse[scalar_fp_count]
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 15 deselected in 0.27s

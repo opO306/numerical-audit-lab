@@ -1,0 +1,9 @@
+{
+  "existing_ledger": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/budget.json",
+  "jobs_count": 144,
+  "jobs_unchanged": true,
+  "new_ceiling": 4200,
+  "old_ceiling": 3600,
+  "pre_amendment_snapshot_sha256": "340d7921835391cf4fa32360e0f954da66874d1208efe6302838f357820491c1",
+  "used_seconds_unchanged": 3472.7506255470207
+}

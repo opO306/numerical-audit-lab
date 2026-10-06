@@ -1,0 +1,139 @@
+{
+  "ceiling_increase": 600,
+  "jobs": [
+    {
+      "classification": "necessary_failure_review_validation_or_reacquisition",
+      "job": "task8-review-red01",
+      "wall_seconds": 0.5716825540000023
+    },
+    {
+      "classification": "necessary_failure_review_validation_or_reacquisition",
+      "job": "task8-review-red02",
+      "wall_seconds": 1.7228472310000011
+    },
+    {
+      "classification": "necessary_failure_review_validation_or_reacquisition",
+      "job": "task8-review-green01",
+      "wall_seconds": 6.847199700000004
+    },
+    {
+      "classification": "necessary_failure_review_validation_or_reacquisition",
+      "job": "task8-review-related-full",
+      "wall_seconds": 113.39857679599996
+    },
+    {
+      "classification": "original_planned_sequence",
+      "job": "task8-ordinary-01",
+      "wall_seconds": 2.4766909100000003
+    },
+    {
+      "classification": "necessary_failure_review_validation_or_reacquisition",
+      "job": "task8-positive-01",
+      "wall_seconds": 0.7356423289999974
+    },
+    {
+      "classification": "original_planned_sequence",
+      "job": "task8-positive-02",
+      "wall_seconds": 14.065877654999994
+    },
+    {
+      "classification": "original_planned_sequence",
+      "job": "task8-negative-01",
+      "wall_seconds": 15.466942888999995
+    },
+    {
+      "classification": "original_planned_sequence",
+      "job": "task8-nonterminal-01",
+      "wall_seconds": 22.1635429
+    },
+    {
+      "classification": "original_planned_sequence",
+      "job": "task8-terminal-01",
+      "wall_seconds": 16.792222642
+    },
+    {
+      "classification": "original_planned_sequence",
+      "job": "task8-paused-death-01",
+      "wall_seconds": 6.332439693999998
+    },
+    {
+      "classification": "original_planned_sequence",
+      "job": "task8-active-death-01",
+      "wall_seconds": 4.865630314999997
+    },
+    {
+      "classification": "original_planned_sequence",
+      "job": "task8-interruption-01",
+      "wall_seconds": 10.707243916
+    },
+    {
+      "classification": "original_planned_sequence",
+      "job": "task8-final01",
+      "wall_seconds": 100.82271907
+    },
+    {
+      "classification": "necessary_failure_review_validation_or_reacquisition",
+      "job": "task8-containment-red",
+      "wall_seconds": 0.933560859
+    },
+    {
+      "classification": "necessary_failure_review_validation_or_reacquisition",
+      "job": "task8-containment-green",
+      "wall_seconds": 5.134265051999989
+    },
+    {
+      "classification": "necessary_failure_review_validation_or_reacquisition",
+      "job": "task8-ordinary-02",
+      "wall_seconds": 2.6391276970000206
+    },
+    {
+      "classification": "necessary_failure_review_validation_or_reacquisition",
+      "job": "task8-positive-03",
+      "wall_seconds": 15.314360003000019
+    },
+    {
+      "classification": "necessary_failure_review_validation_or_reacquisition",
+      "job": "task8-negative-02",
+      "wall_seconds": 14.388732199000003
+    },
+    {
+      "classification": "necessary_failure_review_validation_or_reacquisition",
+      "job": "task8-nonterminal-02",
+      "wall_seconds": 19.973404732000006
+    },
+    {
+      "classification": "necessary_failure_review_validation_or_reacquisition",
+      "job": "task8-terminal-02",
+      "wall_seconds": 13.581250737000005
+    },
+    {
+      "classification": "necessary_failure_review_validation_or_reacquisition",
+      "job": "task8-paused-death-02",
+      "wall_seconds": 5.564969602000019
+    },
+    {
+      "classification": "necessary_failure_review_validation_or_reacquisition",
+      "job": "task8-active-death-02",
+      "wall_seconds": 3.901518535999969
+    },
+    {
+      "classification": "necessary_failure_review_validation_or_reacquisition",
+      "job": "task8-interruption-02",
+      "wall_seconds": 8.397768554000038
+    },
+    {
+      "classification": "necessary_failure_review_validation_or_reacquisition",
+      "job": "task8-final02",
+      "wall_seconds": 92.740996091
+    }
+  ],
+  "necessary_failure_review_wall_seconds": 305.845902672,
+  "planned_caps_seconds": 400,
+  "planned_sequence_measured_wall_seconds": 193.69330999099998,
+  "reasons": "Initial three reviewer defects; failed S0 writer quota attempt; final reviewer complete-subtree defect RED/minimum fix/GREEN; globally bound source change requires all eight actual stages and full regression reacquisition. No unrelated execution. Details in reruns.md and immutable receipts.",
+  "remaining_review_reserve_seconds": 21.40347178097926,
+  "reserve_allowance_seconds": 327.2493744529793,
+  "same_existing_ledger": true,
+  "total_remaining_seconds": 227.71016178998025,
+  "unused_planned_cap_seconds": 206.30669000900002
+}

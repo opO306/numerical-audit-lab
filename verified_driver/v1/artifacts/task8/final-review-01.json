@@ -1,0 +1,14 @@
+{
+  "schema": "FRESH_INTERNAL_REVIEW_V1",
+  "verdict": "REQUEST_CHANGES",
+  "reviewer": "/root/task8_internal_review",
+  "source_binding": "0b9e14faacb4fc4b6862a08a2f3f8b527c27a5f27af97f2a0d96ab6428a849ee",
+  "critical": 0,
+  "important": 1,
+  "earlier_findings_closed": ["prefix revalidation before resume", "genesis replay-only dispatch", "logical Form source identity"],
+  "finding": "Supervisor only terminates/rechecks the GDB process group. Actual paused inferior PID/PGID419 differs from GDB409; active inferior396 differs from GDB386. Both actual inferiors were observed absent, but the product receipt can claim success while an owned distinct-group child survives. Require complete owned descendant identity termination and receipt, preserve RED, repeat actual evidence on fixed source.",
+  "basis": "Read-only source, saved actual evidence, pinset/mirror hashes and 328/0/0/0 JUnit. No independent test or numerical re-execution by reviewer.",
+  "historical_evidence": ["paused-death-01", "active-death-01", "task8-final01-junit.xml"],
+  "external_audit": false,
+  "formal_certification": false
+}

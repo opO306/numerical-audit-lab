@@ -1,0 +1,213 @@
+.................F.F..FFF......F.....F......FF.F........................ [ 39%]
+........................................................................ [ 78%]
+.......................................                                  [100%]
+=================================== FAILURES ===================================
+________________ test_publish_before_controller_check_is_denied ________________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_publish_before_controller0')
+
+    def test_publish_before_controller_check_is_denied(tmp_path):
+        driver=make_driver(tmp_path); before,pred=driver.store.current()
+        def run(n,out):
+            foreign=control(tmp_path/'foreign','foreign',pred)
+            candidate=candidate_from_evidence('foreign',before,foreign)
+            with pytest.raises(ValueError,match='private controller'):
+                driver._publish_candidate(candidate,pred)
+            assert driver.store.current()==(before,pred)
+            return copy_control(out)
+        driver._run_segment=run
+>       assert driver.transact(10,'normal').verdict=='ACCEPT'
+E       AssertionError: assert 'STOP' == 'ACCEPT'
+E         
+E         - ACCEPT
+E         + STOP
+
+tests/test_verified_driver_v0_attacks.py:62: AssertionError
+_________ test_previous_transaction_acceptance_receipt_is_not_reusable _________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_previous_transaction_acce0')
+
+    def test_previous_transaction_acceptance_receipt_is_not_reusable(tmp_path):
+>       a=saved_runner(make_driver(tmp_path/'a')); assert a.transact(10,'a').verdict=='ACCEPT'
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 'STOP' == 'ACCEPT'
+E         
+E         - ACCEPT
+E         + STOP
+
+tests/test_verified_driver_v0_attacks.py:74: AssertionError
+__ test_actual_process_exit_recovers_only_complete_generation[after_objects] ___
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_actual_process_exit_recov0')
+point = 'after_objects'
+
+    @pytest.mark.parametrize('point',['after_objects','before_replace','after_replace'])
+    def test_actual_process_exit_recovers_only_complete_generation(tmp_path,point):
+        driver=make_driver(tmp_path); before=driver.store.current()
+        # Same real Driver path, terminated by os._exit: no Python cleanup/catch.
+        code='''import os,sys
+    sys.path.insert(0,str(__import__('pathlib').Path.cwd()/'tests'))
+    from test_verified_driver_v0_driver import make_driver
+    from verified_driver_v0_support import test_runner
+    from pathlib import Path
+    d=test_runner(make_driver(Path(sys.argv[1])))
+    d.store._crash_hook=lambda p:os._exit(73) if p==sys.argv[2] else None
+    d.transact(10,'crash')
+    '''
+        process=subprocess.run([sys.executable,'-c',code,str(tmp_path),point],cwd=ROOT,timeout=15)
+>       assert process.returncode==73
+E       assert 0 == 73
+E        +  where 0 = CompletedProcess(args=['/home/otherside123/venvs/gate2c1-trace/bin/python', '-c', "import os,sys\nsys.path.insert(0,st...10,'crash')\n", '/tmp/pytest-of-otherside123/pytest-0/test_actual_process_exit_recov0', 'after_objects'], returncode=0).returncode
+
+tests/test_verified_driver_v0_attacks.py:104: AssertionError
+__ test_actual_process_exit_recovers_only_complete_generation[before_replace] __
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_actual_process_exit_recov1')
+point = 'before_replace'
+
+    @pytest.mark.parametrize('point',['after_objects','before_replace','after_replace'])
+    def test_actual_process_exit_recovers_only_complete_generation(tmp_path,point):
+        driver=make_driver(tmp_path); before=driver.store.current()
+        # Same real Driver path, terminated by os._exit: no Python cleanup/catch.
+        code='''import os,sys
+    sys.path.insert(0,str(__import__('pathlib').Path.cwd()/'tests'))
+    from test_verified_driver_v0_driver import make_driver
+    from verified_driver_v0_support import test_runner
+    from pathlib import Path
+    d=test_runner(make_driver(Path(sys.argv[1])))
+    d.store._crash_hook=lambda p:os._exit(73) if p==sys.argv[2] else None
+    d.transact(10,'crash')
+    '''
+        process=subprocess.run([sys.executable,'-c',code,str(tmp_path),point],cwd=ROOT,timeout=15)
+>       assert process.returncode==73
+E       assert 0 == 73
+E        +  where 0 = CompletedProcess(args=['/home/otherside123/venvs/gate2c1-trace/bin/python', '-c', "import os,sys\nsys.path.insert(0,st...0,'crash')\n", '/tmp/pytest-of-otherside123/pytest-0/test_actual_process_exit_recov1', 'before_replace'], returncode=0).returncode
+
+tests/test_verified_driver_v0_attacks.py:104: AssertionError
+__ test_actual_process_exit_recovers_only_complete_generation[after_replace] ___
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_actual_process_exit_recov2')
+point = 'after_replace'
+
+    @pytest.mark.parametrize('point',['after_objects','before_replace','after_replace'])
+    def test_actual_process_exit_recovers_only_complete_generation(tmp_path,point):
+        driver=make_driver(tmp_path); before=driver.store.current()
+        # Same real Driver path, terminated by os._exit: no Python cleanup/catch.
+        code='''import os,sys
+    sys.path.insert(0,str(__import__('pathlib').Path.cwd()/'tests'))
+    from test_verified_driver_v0_driver import make_driver
+    from verified_driver_v0_support import test_runner
+    from pathlib import Path
+    d=test_runner(make_driver(Path(sys.argv[1])))
+    d.store._crash_hook=lambda p:os._exit(73) if p==sys.argv[2] else None
+    d.transact(10,'crash')
+    '''
+        process=subprocess.run([sys.executable,'-c',code,str(tmp_path),point],cwd=ROOT,timeout=15)
+>       assert process.returncode==73
+E       assert 0 == 73
+E        +  where 0 = CompletedProcess(args=['/home/otherside123/venvs/gate2c1-trace/bin/python', '-c', "import os,sys\nsys.path.insert(0,st...10,'crash')\n", '/tmp/pytest-of-otherside123/pytest-0/test_actual_process_exit_recov2', 'after_replace'], returncode=0).returncode
+
+tests/test_verified_driver_v0_attacks.py:104: AssertionError
+_____ test_candidate_has_no_authority_before_check_and_accept_commits_once _____
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_candidate_has_no_authorit0')
+
+    def test_candidate_has_no_authority_before_check_and_accept_commits_once(tmp_path):
+        driver=make_driver(tmp_path); before=driver.store.current()
+        def inspect():
+            assert driver.store.current()==before
+            assert load(driver.pending_root/'normal'/'transaction.json')['predecessor_id']==before[0]
+        saved_runner(driver,inspect=inspect)
+        result=driver.transact(10,'normal')
+>       assert result.verdict=='ACCEPT',result.reason
+E       AssertionError: gate refused: approved Runtime Trace source/harness binding
+E       assert 'STOP' == 'ACCEPT'
+E         
+E         - ACCEPT
+E         + STOP
+
+tests/test_verified_driver_v0_driver.py:25: AssertionError
+_______________ test_test_only_fallback_requires_same_gate[True] _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_test_only_fallback_requir0')
+good = True
+
+    @pytest.mark.parametrize('good',[True,False])
+    def test_test_only_fallback_requires_same_gate(tmp_path,good):
+        driver=make_driver(tmp_path); before=driver.store.current()
+        def run(n,out):
+            from verified_driver_v0_support import copy_control
+            observed=copy_control(out)
+            if out.name=='fallback' and not good:
+                h=load(out/'capture/harness_output.json'); h['output_bits'][0]='0x3fa3eaff7788ac23'; dump(out/'capture/harness_output.json',h)
+            if out.name!='fallback': return {'verdict':'REFUSED','reason':'controlled'}
+            return observed
+        driver._run_segment=run
+        class TestOnly(FallbackRegistry):
+            def resolve(self,reason,context):
+                # A controller-run fallback, not a copied PASS or production solver.
+                return context['validate_segment'](context['fallback_dir'])
+        driver.fallback=TestOnly()
+        result=driver.transact(10,'fallback-tx')
+>       assert result.verdict==('ACCEPT' if good else 'STOP')
+E       AssertionError: assert 'STOP' == 'ACCEPT'
+E         
+E         - ACCEPT
+E         + STOP
+
+tests/test_verified_driver_v0_driver.py:70: AssertionError
+___________ test_recovery_does_not_claim_arbitrary_gala_continuation ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_recovery_does_not_claim_a0')
+
+    def test_recovery_does_not_claim_arbitrary_gala_continuation(tmp_path):
+>       driver=saved_runner(make_driver(tmp_path)); assert driver.transact(10,'first').verdict=='ACCEPT'
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 'STOP' == 'ACCEPT'
+E         
+E         - ACCEPT
+E         + STOP
+
+tests/test_verified_driver_v0_driver.py:83: AssertionError
+___________ test_passing_saved_control_binds_exact_checked_four_bits ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_passing_saved_control_bin0')
+
+    def test_passing_saved_control_binds_exact_checked_four_bits(tmp_path):
+        pred,out,c=fixture(tmp_path)
+        decision=evaluate_candidate(c,pred,ROOT)
+>       assert decision.verdict=='ACCEPT' and c.state_bits==BITS
+E       AssertionError: assert ('REFUSE' == 'ACCEPT'
+E         
+E         - ACCEPT
+E         + REFUSE)
+
+tests/test_verified_driver_v0_gate.py:15: AssertionError
+____________ test_one_ulp_candidate_and_repaired_content_id_refuses ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_one_ulp_candidate_and_rep0')
+
+    def test_one_ulp_candidate_and_repaired_content_id_refuses(tmp_path):
+        pred,out,c=fixture(tmp_path)
+        bad=replace(c,state_bits=('0x3fa3eaff7788ac23',*c.state_bits[1:]))
+        assert bad.content_hash!=c.content_hash
+        decision=evaluate_candidate(bad,pred,ROOT)
+>       assert decision.verdict=='REFUSE' and 'terminal output' in decision.reason
+E       AssertionError: assert ('REFUSE' == 'REFUSE'
+E         
+E           REFUSE and 'terminal output' in 'approved Runtime Trace source/harness binding')
+E        +  where 'approved Runtime Trace source/harness binding' = GateDecision(verdict='REFUSE', reason='approved Runtime Trace source/harness binding', acceptance_bytes=None).reason
+
+tests/test_verified_driver_v0_gate.py:32: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_verified_driver_v0_attacks.py::test_publish_before_controller_check_is_denied
+FAILED tests/test_verified_driver_v0_attacks.py::test_previous_transaction_acceptance_receipt_is_not_reusable
+FAILED tests/test_verified_driver_v0_attacks.py::test_actual_process_exit_recovers_only_complete_generation[after_objects]
+FAILED tests/test_verified_driver_v0_attacks.py::test_actual_process_exit_recovers_only_complete_generation[before_replace]
+FAILED tests/test_verified_driver_v0_attacks.py::test_actual_process_exit_recovers_only_complete_generation[after_replace]
+FAILED tests/test_verified_driver_v0_driver.py::test_candidate_has_no_authority_before_check_and_accept_commits_once
+FAILED tests/test_verified_driver_v0_driver.py::test_test_only_fallback_requires_same_gate[True]
+FAILED tests/test_verified_driver_v0_driver.py::test_recovery_does_not_claim_arbitrary_gala_continuation
+FAILED tests/test_verified_driver_v0_gate.py::test_passing_saved_control_binds_exact_checked_four_bits
+FAILED tests/test_verified_driver_v0_gate.py::test_one_ulp_candidate_and_repaired_content_id_refuses
+10 failed, 173 passed in 30.95s

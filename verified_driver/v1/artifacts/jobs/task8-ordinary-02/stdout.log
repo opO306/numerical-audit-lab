@@ -1,0 +1,1 @@
+{"verdict": "PASS", "public_bits": ["0x3f87fdfd0828277f", "0x3f77fdfb883c273f", "0x3fcff6ed62825295", "0x3fbff6e3e3c24415"], "scope": "ordinary original Gala N3 public output only", "run_id": "ordinary-02", "stage": "ordinary", "source_binding": "f75980706aefbbd68cddce09549695c2f633905e01185f92f96660db81a9e2cd", "experiment_wall_seconds": 2.182175451000006}

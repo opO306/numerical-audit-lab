@@ -1,0 +1,16 @@
+
+==================================== ERRORS ====================================
+_________ ERROR collecting tests/test_verified_driver_v1_controller.py _________
+ImportError while importing test module '/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/tests/test_verified_driver_v1_controller.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_verified_driver_v1_controller.py:6: in <module>
+    from verified_driver.v1.controller import VerifiedChainDriver
+E   ModuleNotFoundError: No module named 'verified_driver.v1.controller'
+=========================== short test summary info ============================
+ERROR tests/test_verified_driver_v1_controller.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.14s

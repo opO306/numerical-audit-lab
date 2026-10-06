@@ -1,0 +1,28 @@
+{
+  "approved_pinset_sha256": "c949e61b420696f9ecfc61608d8e0e13be5f12a965e1e103f40ea2941689ddb3",
+  "approved_runtime_files": 89,
+  "git_diff_check": 0,
+  "historical_changed": [],
+  "historical_files_checked": 152,
+  "moved_live_chain_files_pinned": 11,
+  "namespace_only_source_changes": [
+    "tests/live_chain_fixture.py",
+    "tests/live_chain_worker.py",
+    "tests/test_live_chain_checkpoint.py",
+    "tests/test_live_chain_incremental.py",
+    "tests/test_live_chain_protocol.py",
+    "tests/test_live_chain_session.py",
+    "tests/verified_driver_v1_control_support.py",
+    "verified_driver/v1/live_chain/gdb_live.py",
+    "verified_driver/v1/live_chain/harness.py",
+    "verified_driver/v1/live_chain/raw.py",
+    "verified_driver/v1/live_chain/session.py",
+    "verified_driver/v1/controller.py",
+    "verified_driver/v1/gate.py"
+  ],
+  "remaining_seconds": 369.6038362469785,
+  "runtime_source_bytes_and_universe_unchanged": true,
+  "staged_files": "",
+  "used_seconds": 3230.3961637530215,
+  "v1_source_pinset_files": 37
+}

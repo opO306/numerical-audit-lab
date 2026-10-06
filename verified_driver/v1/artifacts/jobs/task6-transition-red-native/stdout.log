@@ -1,0 +1,430 @@
+FFFFFFFFFFFFFFFFFFFFF                                                    [100%]
+=================================== FAILURES ===================================
+_ test_complete_replay_only_creates_no_store_generation_objects_or_acceptance __
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_complete_replay_only_crea0')
+
+    def test_complete_replay_only_creates_no_store_generation_objects_or_acceptance(tmp_path):
+>       from verified_driver.v1.replay import ReplayEngine
+E       ImportError: cannot import name 'ReplayEngine' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/test_verified_driver_v1_replay_transition.py:19: ImportError
+___ test_valid_transition_publishes_exactly_one_new_generation_and_recovers ____
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_valid_transition_publishe0')
+
+    def test_valid_transition_publishes_exactly_one_new_generation_and_recovers(tmp_path):
+>       driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:26: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+driver = <verified_driver.v1.controller.VerifiedChainDriver object at 0x743d75333fb0>
+
+    def proof_document(driver):
+>       from verified_driver.v1.replay import ReplayTransition
+E       ImportError: cannot import name 'ReplayTransition' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/verified_driver_v1_replay_support.py:14: ImportError
+_ test_repaired_attachment_hashes_cannot_hide_semantic_mutation[latent_bits-value0] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_repaired_attachment_hashe0')
+field = 'latent_bits', value = ['0x3fc0000000000000', '0x3fc0000000000000']
+
+    @pytest.mark.parametrize('field,value',[
+     ('latent_bits',['0x3fc0000000000000']*2),('next_t_bits','0x3fa0000000000000'),
+     ('dt_bits','0x3fa0000000000000'),('source_binding','f'*64),('step_index',1),
+     ('form_box','0x1.0000000000000p-53'),('form_coefficient','0x1.0000000000000p-54')])
+    def test_repaired_attachment_hashes_cannot_hide_semantic_mutation(tmp_path,field,value):
+>       driver=prepared(tmp_path); doc=copy.deepcopy(proof_document(driver)); fresh=doc['fresh_anchor']
+                                                     ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+driver = <verified_driver.v1.controller.VerifiedChainDriver object at 0x743d753a0170>
+
+    def proof_document(driver):
+>       from verified_driver.v1.replay import ReplayTransition
+E       ImportError: cannot import name 'ReplayTransition' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/verified_driver_v1_replay_support.py:14: ImportError
+_ test_repaired_attachment_hashes_cannot_hide_semantic_mutation[next_t_bits-0x3fa0000000000000] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_repaired_attachment_hashe1')
+field = 'next_t_bits', value = '0x3fa0000000000000'
+
+    @pytest.mark.parametrize('field,value',[
+     ('latent_bits',['0x3fc0000000000000']*2),('next_t_bits','0x3fa0000000000000'),
+     ('dt_bits','0x3fa0000000000000'),('source_binding','f'*64),('step_index',1),
+     ('form_box','0x1.0000000000000p-53'),('form_coefficient','0x1.0000000000000p-54')])
+    def test_repaired_attachment_hashes_cannot_hide_semantic_mutation(tmp_path,field,value):
+>       driver=prepared(tmp_path); doc=copy.deepcopy(proof_document(driver)); fresh=doc['fresh_anchor']
+                                                     ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+driver = <verified_driver.v1.controller.VerifiedChainDriver object at 0x743d75236f90>
+
+    def proof_document(driver):
+>       from verified_driver.v1.replay import ReplayTransition
+E       ImportError: cannot import name 'ReplayTransition' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/verified_driver_v1_replay_support.py:14: ImportError
+_ test_repaired_attachment_hashes_cannot_hide_semantic_mutation[dt_bits-0x3fa0000000000000] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_repaired_attachment_hashe2')
+field = 'dt_bits', value = '0x3fa0000000000000'
+
+    @pytest.mark.parametrize('field,value',[
+     ('latent_bits',['0x3fc0000000000000']*2),('next_t_bits','0x3fa0000000000000'),
+     ('dt_bits','0x3fa0000000000000'),('source_binding','f'*64),('step_index',1),
+     ('form_box','0x1.0000000000000p-53'),('form_coefficient','0x1.0000000000000p-54')])
+    def test_repaired_attachment_hashes_cannot_hide_semantic_mutation(tmp_path,field,value):
+>       driver=prepared(tmp_path); doc=copy.deepcopy(proof_document(driver)); fresh=doc['fresh_anchor']
+                                                     ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+driver = <verified_driver.v1.controller.VerifiedChainDriver object at 0x743d753aed20>
+
+    def proof_document(driver):
+>       from verified_driver.v1.replay import ReplayTransition
+E       ImportError: cannot import name 'ReplayTransition' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/verified_driver_v1_replay_support.py:14: ImportError
+_ test_repaired_attachment_hashes_cannot_hide_semantic_mutation[source_binding-ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_repaired_attachment_hashe3')
+field = 'source_binding'
+value = 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
+
+    @pytest.mark.parametrize('field,value',[
+     ('latent_bits',['0x3fc0000000000000']*2),('next_t_bits','0x3fa0000000000000'),
+     ('dt_bits','0x3fa0000000000000'),('source_binding','f'*64),('step_index',1),
+     ('form_box','0x1.0000000000000p-53'),('form_coefficient','0x1.0000000000000p-54')])
+    def test_repaired_attachment_hashes_cannot_hide_semantic_mutation(tmp_path,field,value):
+>       driver=prepared(tmp_path); doc=copy.deepcopy(proof_document(driver)); fresh=doc['fresh_anchor']
+                                                     ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+driver = <verified_driver.v1.controller.VerifiedChainDriver object at 0x743d75236d50>
+
+    def proof_document(driver):
+>       from verified_driver.v1.replay import ReplayTransition
+E       ImportError: cannot import name 'ReplayTransition' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/verified_driver_v1_replay_support.py:14: ImportError
+_ test_repaired_attachment_hashes_cannot_hide_semantic_mutation[step_index-1] __
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_repaired_attachment_hashe4')
+field = 'step_index', value = 1
+
+    @pytest.mark.parametrize('field,value',[
+     ('latent_bits',['0x3fc0000000000000']*2),('next_t_bits','0x3fa0000000000000'),
+     ('dt_bits','0x3fa0000000000000'),('source_binding','f'*64),('step_index',1),
+     ('form_box','0x1.0000000000000p-53'),('form_coefficient','0x1.0000000000000p-54')])
+    def test_repaired_attachment_hashes_cannot_hide_semantic_mutation(tmp_path,field,value):
+>       driver=prepared(tmp_path); doc=copy.deepcopy(proof_document(driver)); fresh=doc['fresh_anchor']
+                                                     ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+driver = <verified_driver.v1.controller.VerifiedChainDriver object at 0x743d753aee10>
+
+    def proof_document(driver):
+>       from verified_driver.v1.replay import ReplayTransition
+E       ImportError: cannot import name 'ReplayTransition' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/verified_driver_v1_replay_support.py:14: ImportError
+_ test_repaired_attachment_hashes_cannot_hide_semantic_mutation[form_box-0x1.0000000000000p-53] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_repaired_attachment_hashe5')
+field = 'form_box', value = '0x1.0000000000000p-53'
+
+    @pytest.mark.parametrize('field,value',[
+     ('latent_bits',['0x3fc0000000000000']*2),('next_t_bits','0x3fa0000000000000'),
+     ('dt_bits','0x3fa0000000000000'),('source_binding','f'*64),('step_index',1),
+     ('form_box','0x1.0000000000000p-53'),('form_coefficient','0x1.0000000000000p-54')])
+    def test_repaired_attachment_hashes_cannot_hide_semantic_mutation(tmp_path,field,value):
+>       driver=prepared(tmp_path); doc=copy.deepcopy(proof_document(driver)); fresh=doc['fresh_anchor']
+                                                     ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+driver = <verified_driver.v1.controller.VerifiedChainDriver object at 0x743d75236630>
+
+    def proof_document(driver):
+>       from verified_driver.v1.replay import ReplayTransition
+E       ImportError: cannot import name 'ReplayTransition' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/verified_driver_v1_replay_support.py:14: ImportError
+_ test_repaired_attachment_hashes_cannot_hide_semantic_mutation[form_coefficient-0x1.0000000000000p-54] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_repaired_attachment_hashe6')
+field = 'form_coefficient', value = '0x1.0000000000000p-54'
+
+    @pytest.mark.parametrize('field,value',[
+     ('latent_bits',['0x3fc0000000000000']*2),('next_t_bits','0x3fa0000000000000'),
+     ('dt_bits','0x3fa0000000000000'),('source_binding','f'*64),('step_index',1),
+     ('form_box','0x1.0000000000000p-53'),('form_coefficient','0x1.0000000000000p-54')])
+    def test_repaired_attachment_hashes_cannot_hide_semantic_mutation(tmp_path,field,value):
+>       driver=prepared(tmp_path); doc=copy.deepcopy(proof_document(driver)); fresh=doc['fresh_anchor']
+                                                     ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+driver = <verified_driver.v1.controller.VerifiedChainDriver object at 0x743d752804a0>
+
+    def proof_document(driver):
+>       from verified_driver.v1.replay import ReplayTransition
+E       ImportError: cannot import name 'ReplayTransition' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/verified_driver_v1_replay_support.py:14: ImportError
+_ test_transition_refuses_missing_partial_foreign_or_nonforward_child[absent] __
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_transition_refuses_missin0')
+attack = 'absent'
+
+    @pytest.mark.parametrize('attack',['absent','partial','wrong_parent','wrong_session','wrong_process','prefix','frontier'])
+    def test_transition_refuses_missing_partial_foreign_or_nonforward_child(tmp_path,attack):
+>       driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+driver = <verified_driver.v1.controller.VerifiedChainDriver object at 0x743d752362d0>
+
+    def proof_document(driver):
+>       from verified_driver.v1.replay import ReplayTransition
+E       ImportError: cannot import name 'ReplayTransition' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/verified_driver_v1_replay_support.py:14: ImportError
+_ test_transition_refuses_missing_partial_foreign_or_nonforward_child[partial] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_transition_refuses_missin1')
+attack = 'partial'
+
+    @pytest.mark.parametrize('attack',['absent','partial','wrong_parent','wrong_session','wrong_process','prefix','frontier'])
+    def test_transition_refuses_missing_partial_foreign_or_nonforward_child(tmp_path,attack):
+>       driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+driver = <verified_driver.v1.controller.VerifiedChainDriver object at 0x743d75236060>
+
+    def proof_document(driver):
+>       from verified_driver.v1.replay import ReplayTransition
+E       ImportError: cannot import name 'ReplayTransition' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/verified_driver_v1_replay_support.py:14: ImportError
+_ test_transition_refuses_missing_partial_foreign_or_nonforward_child[wrong_parent] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_transition_refuses_missin2')
+attack = 'wrong_parent'
+
+    @pytest.mark.parametrize('attack',['absent','partial','wrong_parent','wrong_session','wrong_process','prefix','frontier'])
+    def test_transition_refuses_missing_partial_foreign_or_nonforward_child(tmp_path,attack):
+>       driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+driver = <verified_driver.v1.controller.VerifiedChainDriver object at 0x743d753aeae0>
+
+    def proof_document(driver):
+>       from verified_driver.v1.replay import ReplayTransition
+E       ImportError: cannot import name 'ReplayTransition' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/verified_driver_v1_replay_support.py:14: ImportError
+_ test_transition_refuses_missing_partial_foreign_or_nonforward_child[wrong_session] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_transition_refuses_missin3')
+attack = 'wrong_session'
+
+    @pytest.mark.parametrize('attack',['absent','partial','wrong_parent','wrong_session','wrong_process','prefix','frontier'])
+    def test_transition_refuses_missing_partial_foreign_or_nonforward_child(tmp_path,attack):
+>       driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+driver = <verified_driver.v1.controller.VerifiedChainDriver object at 0x743d74b60140>
+
+    def proof_document(driver):
+>       from verified_driver.v1.replay import ReplayTransition
+E       ImportError: cannot import name 'ReplayTransition' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/verified_driver_v1_replay_support.py:14: ImportError
+_ test_transition_refuses_missing_partial_foreign_or_nonforward_child[wrong_process] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_transition_refuses_missin4')
+attack = 'wrong_process'
+
+    @pytest.mark.parametrize('attack',['absent','partial','wrong_parent','wrong_session','wrong_process','prefix','frontier'])
+    def test_transition_refuses_missing_partial_foreign_or_nonforward_child(tmp_path,attack):
+>       driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+driver = <verified_driver.v1.controller.VerifiedChainDriver object at 0x743d75280e60>
+
+    def proof_document(driver):
+>       from verified_driver.v1.replay import ReplayTransition
+E       ImportError: cannot import name 'ReplayTransition' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/verified_driver_v1_replay_support.py:14: ImportError
+_ test_transition_refuses_missing_partial_foreign_or_nonforward_child[prefix] __
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_transition_refuses_missin5')
+attack = 'prefix'
+
+    @pytest.mark.parametrize('attack',['absent','partial','wrong_parent','wrong_session','wrong_process','prefix','frontier'])
+    def test_transition_refuses_missing_partial_foreign_or_nonforward_child(tmp_path,attack):
+>       driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+driver = <verified_driver.v1.controller.VerifiedChainDriver object at 0x743d753a0980>
+
+    def proof_document(driver):
+>       from verified_driver.v1.replay import ReplayTransition
+E       ImportError: cannot import name 'ReplayTransition' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/verified_driver_v1_replay_support.py:14: ImportError
+_ test_transition_refuses_missing_partial_foreign_or_nonforward_child[frontier] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_transition_refuses_missin6')
+attack = 'frontier'
+
+    @pytest.mark.parametrize('attack',['absent','partial','wrong_parent','wrong_session','wrong_process','prefix','frontier'])
+    def test_transition_refuses_missing_partial_foreign_or_nonforward_child(tmp_path,attack):
+>       driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+driver = <verified_driver.v1.controller.VerifiedChainDriver object at 0x743d75280e90>
+
+    def proof_document(driver):
+>       from verified_driver.v1.replay import ReplayTransition
+E       ImportError: cannot import name 'ReplayTransition' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/verified_driver_v1_replay_support.py:14: ImportError
+_____ test_cross_session_without_transition_and_second_child_reuse_refuse ______
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_cross_session_without_tra0')
+
+    def test_cross_session_without_transition_and_second_child_reuse_refuse(tmp_path):
+>       driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+driver = <verified_driver.v1.controller.VerifiedChainDriver object at 0x743d753afbc0>
+
+    def proof_document(driver):
+>       from verified_driver.v1.replay import ReplayTransition
+E       ImportError: cannot import name 'ReplayTransition' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/verified_driver_v1_replay_support.py:14: ImportError
+_ test_transition_pre_and_post_current_crash_recovery[before_current_replace-2] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_transition_pre_and_post_c0')
+point = 'before_current_replace', generation = 2
+
+    @pytest.mark.parametrize('point,generation',[('before_current_replace',2),('after_current_replace',3)])
+    def test_transition_pre_and_post_current_crash_recovery(tmp_path,point,generation):
+>       driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+driver = <verified_driver.v1.controller.VerifiedChainDriver object at 0x743d753a13d0>
+
+    def proof_document(driver):
+>       from verified_driver.v1.replay import ReplayTransition
+E       ImportError: cannot import name 'ReplayTransition' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/verified_driver_v1_replay_support.py:14: ImportError
+_ test_transition_pre_and_post_current_crash_recovery[after_current_replace-3] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_transition_pre_and_post_c1')
+point = 'after_current_replace', generation = 3
+
+    @pytest.mark.parametrize('point,generation',[('before_current_replace',2),('after_current_replace',3)])
+    def test_transition_pre_and_post_current_crash_recovery(tmp_path,point,generation):
+>       driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+driver = <verified_driver.v1.controller.VerifiedChainDriver object at 0x743d74b61370>
+
+    def proof_document(driver):
+>       from verified_driver.v1.replay import ReplayTransition
+E       ImportError: cannot import name 'ReplayTransition' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/verified_driver_v1_replay_support.py:14: ImportError
+__________ test_terminal_replay_never_creates_transition_or_successor __________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_terminal_replay_never_cre0')
+
+    def test_terminal_replay_never_creates_transition_or_successor(tmp_path):
+>       from verified_driver.v1.replay import ReplayEngine
+E       ImportError: cannot import name 'ReplayEngine' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/test_verified_driver_v1_replay_transition.py:93: ImportError
+______ test_replay_to_live_preserves_historical_parent_then_normal_links _______
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_replay_to_live_preserves_0')
+
+    def test_replay_to_live_preserves_historical_parent_then_normal_links(tmp_path):
+>       from verified_driver.v1.replay import ReplayEngine
+E       ImportError: cannot import name 'ReplayEngine' from 'verified_driver.v1.replay' (/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/replay.py)
+
+tests/test_verified_driver_v1_replay_transition.py:103: ImportError
+=========================== short test summary info ============================
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_complete_replay_only_creates_no_store_generation_objects_or_acceptance
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_valid_transition_publishes_exactly_one_new_generation_and_recovers
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_repaired_attachment_hashes_cannot_hide_semantic_mutation[latent_bits-value0]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_repaired_attachment_hashes_cannot_hide_semantic_mutation[next_t_bits-0x3fa0000000000000]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_repaired_attachment_hashes_cannot_hide_semantic_mutation[dt_bits-0x3fa0000000000000]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_repaired_attachment_hashes_cannot_hide_semantic_mutation[source_binding-ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_repaired_attachment_hashes_cannot_hide_semantic_mutation[step_index-1]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_repaired_attachment_hashes_cannot_hide_semantic_mutation[form_box-0x1.0000000000000p-53]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_repaired_attachment_hashes_cannot_hide_semantic_mutation[form_coefficient-0x1.0000000000000p-54]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_transition_refuses_missing_partial_foreign_or_nonforward_child[absent]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_transition_refuses_missing_partial_foreign_or_nonforward_child[partial]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_transition_refuses_missing_partial_foreign_or_nonforward_child[wrong_parent]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_transition_refuses_missing_partial_foreign_or_nonforward_child[wrong_session]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_transition_refuses_missing_partial_foreign_or_nonforward_child[wrong_process]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_transition_refuses_missing_partial_foreign_or_nonforward_child[prefix]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_transition_refuses_missing_partial_foreign_or_nonforward_child[frontier]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_cross_session_without_transition_and_second_child_reuse_refuse
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_transition_pre_and_post_current_crash_recovery[before_current_replace-2]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_transition_pre_and_post_current_crash_recovery[after_current_replace-3]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_terminal_replay_never_creates_transition_or_successor
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_replay_to_live_preserves_historical_parent_then_normal_links
+21 failed in 2.86s

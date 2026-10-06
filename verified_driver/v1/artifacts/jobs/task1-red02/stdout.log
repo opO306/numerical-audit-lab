@@ -1,0 +1,27 @@
+
+==================================== ERRORS ====================================
+___________ ERROR collecting tests/test_verified_driver_v1_model.py ____________
+ImportError while importing test module '/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/tests/test_verified_driver_v1_model.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_verified_driver_v1_model.py:3: in <module>
+    from verified_driver.v1.model import ChainState, FormLane, chain_genesis
+E   ModuleNotFoundError: No module named 'verified_driver.v1'
+___________ ERROR collecting tests/test_verified_driver_v1_store.py ____________
+ImportError while importing test module '/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/tests/test_verified_driver_v1_store.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_verified_driver_v1_store.py:3: in <module>
+    from verified_driver.v1.model import chain_genesis
+E   ModuleNotFoundError: No module named 'verified_driver.v1'
+=========================== short test summary info ============================
+ERROR tests/test_verified_driver_v1_model.py
+ERROR tests/test_verified_driver_v1_store.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!!
+2 errors in 0.10s

@@ -1,0 +1,21 @@
+{
+  "destination": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/verified_driver/v1/artifacts/task8/paused-death-01",
+  "exact_byte_copy": true,
+  "files": {
+    "SUMMARY.json": "045d4b60b345fddc494240d66a82d961100625e5ec8d0fd660484e199027ae51",
+    "before-controller-death.json": "0216da78b27dfd436848adc0d3e248035347b8e49dab4f7f01b03001c3216cd2",
+    "controller-ready.json": "ceb3fc852a50b43f8599f77be0c6ee210b87ec26ec1c8e8ddb2d48defb94ef10",
+    "live/body-start-1.json": "875700fce876be2dd0d02307e9737710b176ef506742b60313c89668bff319cb",
+    "live/containment.json": "d202ed74ceea72c8d48b509c392fb3a4a29f0fd8d80c9ebcb68a2667546a6c81",
+    "live/gdb.log": "59ea854ec34439359cb0dc9661eb33009d1ead5efab3a2abe1bcae803aaead4d",
+    "live/metadata-1.json": "67ad51770044ba97dceff6ee9c7e24e27e5f3102a7267ca741ecd1aec3f413c6",
+    "live/trace.jsonl": "3d9d41984a7d6d6c5ba8c6491ab5831cced7edbb7e583305f011019fb2a5218e",
+    "paused.json": "543ed1a9efb22400b866d8788140f6b9e692fb88942eedd01fcd5d55f0234acd",
+    "pre-run.json": "8de0543eff8a4d7fc7af03561e803f60658a89b9fcbcba9a41c10f4b1e2893bd",
+    "source-pinset.json": "0b9e14faacb4fc4b6862a08a2f3f8b527c27a5f27af97f2a0d96ab6428a849ee",
+    "store/.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "store/CURRENT": "1fd14a67a373253b618dd8410ff9f7546a96353ea2012186673c31bc232add2e",
+    "store/objects/9979a2b110d16b283d5995912608f37817c5713270d46528c652083cb22e4c9e.json": "9979a2b110d16b283d5995912608f37817c5713270d46528c652083cb22e4c9e"
+  },
+  "source": "/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/artifacts/task8/paused-death-01"
+}

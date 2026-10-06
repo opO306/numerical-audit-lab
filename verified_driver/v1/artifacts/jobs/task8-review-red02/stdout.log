@@ -1,0 +1,173 @@
+FFFFFFF.FF                                                               [100%]
+=================================== FAILURES ===================================
+___ test_certified_master_prefix_mutation_after_current_blocks_first_resume ____
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_certified_master_prefix_m0')
+
+    def test_certified_master_prefix_mutation_after_current_blocks_first_resume(tmp_path):
+        driver=marker_driver(tmp_path)
+        def mutate(point):
+            if point=='after_current_replace_before_token':
+                path=driver.session.master_trace;raw=path.read_bytes();path.write_bytes(b'X'+raw[1:])
+        driver._crash_hook=mutate
+        result=driver.run(3,'prefix-after-current')
+        assert result.verdict=='STOP' and result.generation==1
+        assert driver.store.recover()[1].generation==1
+>       assert driver.session.markers==[1] and driver.session.stopped
+E       assert ([1, 2] == [1]
+E         
+E         Left contains one more item: 2
+E         Use -v to get more diff)
+
+tests/test_verified_driver_v1_review.py:18: AssertionError
+______________ test_replay_only_genesis_never_dispatches_live_run ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_replay_only_genesis_never0')
+
+    def test_replay_only_genesis_never_dispatches_live_run(tmp_path):
+        driver=marker_driver(tmp_path);calls=[]
+        driver.run=lambda *args:calls.append(args)
+        result=ReplayEngine(lambda:driver,driver.store).recover(3,'genesis-only',continue_live=False)
+>       assert calls==[]
+E       AssertionError: assert [(3, 'genesis-only')] == []
+E         
+E         Left contains one more item: (3, 'genesis-only')
+E         Use -v to get more diff
+
+tests/test_verified_driver_v1_review.py:24: AssertionError
+_________ test_replay_prefix_mutation_before_intermediate_resume_stops _________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_replay_prefix_mutation_be0')
+
+    def test_replay_prefix_mutation_before_intermediate_resume_stops(tmp_path):
+        original=prepared(tmp_path);fresh=replay_driver(original)
+        class Changed(ReplayMarkerGate):
+            def observe(self,*args):
+                report=super().observe(*args);p=fresh.session.master_trace;raw=p.read_bytes();p.write_bytes(b'X'+raw[1:]);return report
+        fresh._gate=Changed()
+        result=ReplayEngine(lambda:fresh,original.store).recover(4,'prefix-replay',continue_live=False)
+>       assert result.verdict=='STOP' and result.generation==2 and fresh.session.markers==[1]
+E       AssertionError: assert ('STOP' == 'STOP'
+E         
+E           STOP and 2 == 2 and [1, 2] == [1]
+E        +  where 2 = ChainResult(verdict='STOP', run_id='prefix-replay', state_id='c94bc8c99fa9f626e5027a1216cf34fb03bbcacdcae41d00cfaf94938de1ad57', generation=2, step_index=2, reason='ValueError: sealed master prefix changed').generation
+E         
+E         Left contains one more item: 2
+E         Use -v to get more diff)
+
+tests/test_verified_driver_v1_review.py:35: AssertionError
+_ test_repaired_transition_hash_cannot_replace_logical_form_source[step999/q/0] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_repaired_transition_hash_0')
+tail = 'step999/q/0'
+
+    @pytest.mark.parametrize('tail',['step999/q/0','step2/latent/0','step2/q/8','step2/q/0/unrelated-producer'])
+    def test_repaired_transition_hash_cannot_replace_logical_form_source(tmp_path,tail):
+        driver=prepared(tmp_path);document=copy.deepcopy(proof_document(driver))
+        candidate=document['fresh_anchor'];candidate['forms'][0]['source_state_id']='f'*64+'/'+tail
+        document['replay_proofs'][-1]['checker_report']['candidate']=copy.deepcopy(candidate)
+        document['replay_proofs'][-1]['checker_report_sha256']=content_id(document['replay_proofs'][-1]['checker_report'])
+>       with pytest.raises(ValueError):driver.store.add_replay_transition(document)
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_verified_driver_v1_review.py:43: Failed
+_ test_repaired_transition_hash_cannot_replace_logical_form_source[step2/latent/0] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_repaired_transition_hash_1')
+tail = 'step2/latent/0'
+
+    @pytest.mark.parametrize('tail',['step999/q/0','step2/latent/0','step2/q/8','step2/q/0/unrelated-producer'])
+    def test_repaired_transition_hash_cannot_replace_logical_form_source(tmp_path,tail):
+        driver=prepared(tmp_path);document=copy.deepcopy(proof_document(driver))
+        candidate=document['fresh_anchor'];candidate['forms'][0]['source_state_id']='f'*64+'/'+tail
+        document['replay_proofs'][-1]['checker_report']['candidate']=copy.deepcopy(candidate)
+        document['replay_proofs'][-1]['checker_report_sha256']=content_id(document['replay_proofs'][-1]['checker_report'])
+>       with pytest.raises(ValueError):driver.store.add_replay_transition(document)
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_verified_driver_v1_review.py:43: Failed
+_ test_repaired_transition_hash_cannot_replace_logical_form_source[step2/q/8] __
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_repaired_transition_hash_2')
+tail = 'step2/q/8'
+
+    @pytest.mark.parametrize('tail',['step999/q/0','step2/latent/0','step2/q/8','step2/q/0/unrelated-producer'])
+    def test_repaired_transition_hash_cannot_replace_logical_form_source(tmp_path,tail):
+        driver=prepared(tmp_path);document=copy.deepcopy(proof_document(driver))
+        candidate=document['fresh_anchor'];candidate['forms'][0]['source_state_id']='f'*64+'/'+tail
+        document['replay_proofs'][-1]['checker_report']['candidate']=copy.deepcopy(candidate)
+        document['replay_proofs'][-1]['checker_report_sha256']=content_id(document['replay_proofs'][-1]['checker_report'])
+>       with pytest.raises(ValueError):driver.store.add_replay_transition(document)
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_verified_driver_v1_review.py:43: Failed
+_ test_repaired_transition_hash_cannot_replace_logical_form_source[step2/q/0/unrelated-producer] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_repaired_transition_hash_3')
+tail = 'step2/q/0/unrelated-producer'
+
+    @pytest.mark.parametrize('tail',['step999/q/0','step2/latent/0','step2/q/8','step2/q/0/unrelated-producer'])
+    def test_repaired_transition_hash_cannot_replace_logical_form_source(tmp_path,tail):
+        driver=prepared(tmp_path);document=copy.deepcopy(proof_document(driver))
+        candidate=document['fresh_anchor'];candidate['forms'][0]['source_state_id']='f'*64+'/'+tail
+        document['replay_proofs'][-1]['checker_report']['candidate']=copy.deepcopy(candidate)
+        document['replay_proofs'][-1]['checker_report_sha256']=content_id(document['replay_proofs'][-1]['checker_report'])
+>       with pytest.raises(ValueError):driver.store.add_replay_transition(document)
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_verified_driver_v1_review.py:43: Failed
+___ test_real_state_id_shape_preserves_dynamic_source_coordinates[producer] ____
+
+changed = 'producer'
+
+    @pytest.mark.parametrize('changed',['none','producer','byte'])
+    def test_real_state_id_shape_preserves_dynamic_source_coordinates(changed):
+        from dataclasses import replace
+        from tests.test_verified_driver_v1_replay import pair
+        stored,observed=pair();old=[];new=[]
+        for i,(a,b) in enumerate(zip(stored.forms,observed.forms)):
+            tail=f'step1/v:r{100+i}:result:byte:0'
+            old.append(replace(a,source_state_id='state:'+stored.live_session_id+'/'+tail))
+            if i==0 and changed=='producer':tail=tail.replace(':result:',':copy:')
+            if i==0 and changed=='byte':tail=tail.removesuffix(':0')+':8'
+            new.append(replace(b,source_state_id='state:'+observed.live_session_id+'/'+tail))
+        stored=replace(stored,forms=tuple(old));observed=replace(observed,forms=tuple(new),stored_position_id=stored.content_hash)
+        if changed=='none':ReplayComparator.compare(stored,observed)
+        else:
+>           with pytest.raises(ValueError):ReplayComparator.compare(stored,observed)
+E           Failed: DID NOT RAISE ValueError
+
+tests/test_verified_driver_v1_review.py:60: Failed
+_____ test_real_state_id_shape_preserves_dynamic_source_coordinates[byte] ______
+
+changed = 'byte'
+
+    @pytest.mark.parametrize('changed',['none','producer','byte'])
+    def test_real_state_id_shape_preserves_dynamic_source_coordinates(changed):
+        from dataclasses import replace
+        from tests.test_verified_driver_v1_replay import pair
+        stored,observed=pair();old=[];new=[]
+        for i,(a,b) in enumerate(zip(stored.forms,observed.forms)):
+            tail=f'step1/v:r{100+i}:result:byte:0'
+            old.append(replace(a,source_state_id='state:'+stored.live_session_id+'/'+tail))
+            if i==0 and changed=='producer':tail=tail.replace(':result:',':copy:')
+            if i==0 and changed=='byte':tail=tail.removesuffix(':0')+':8'
+            new.append(replace(b,source_state_id='state:'+observed.live_session_id+'/'+tail))
+        stored=replace(stored,forms=tuple(old));observed=replace(observed,forms=tuple(new),stored_position_id=stored.content_hash)
+        if changed=='none':ReplayComparator.compare(stored,observed)
+        else:
+>           with pytest.raises(ValueError):ReplayComparator.compare(stored,observed)
+E           Failed: DID NOT RAISE ValueError
+
+tests/test_verified_driver_v1_review.py:60: Failed
+=========================== short test summary info ============================
+FAILED tests/test_verified_driver_v1_review.py::test_certified_master_prefix_mutation_after_current_blocks_first_resume
+FAILED tests/test_verified_driver_v1_review.py::test_replay_only_genesis_never_dispatches_live_run
+FAILED tests/test_verified_driver_v1_review.py::test_replay_prefix_mutation_before_intermediate_resume_stops
+FAILED tests/test_verified_driver_v1_review.py::test_repaired_transition_hash_cannot_replace_logical_form_source[step999/q/0]
+FAILED tests/test_verified_driver_v1_review.py::test_repaired_transition_hash_cannot_replace_logical_form_source[step2/latent/0]
+FAILED tests/test_verified_driver_v1_review.py::test_repaired_transition_hash_cannot_replace_logical_form_source[step2/q/8]
+FAILED tests/test_verified_driver_v1_review.py::test_repaired_transition_hash_cannot_replace_logical_form_source[step2/q/0/unrelated-producer]
+FAILED tests/test_verified_driver_v1_review.py::test_real_state_id_shape_preserves_dynamic_source_coordinates[producer]
+FAILED tests/test_verified_driver_v1_review.py::test_real_state_id_shape_preserves_dynamic_source_coordinates[byte]
+9 failed, 1 passed in 1.30s

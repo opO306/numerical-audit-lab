@@ -1,0 +1,97 @@
+{
+  "additional_guarded_wall_seconds": 119.499047652,
+  "approved_runtime_pinset_files": 89,
+  "approved_runtime_pinset_sha256": "c949e61b420696f9ecfc61608d8e0e13be5f12a965e1e103f40ea2941689ddb3",
+  "attack_count": 54,
+  "attack_verdict_counts": {
+    "PASS": 2,
+    "REFUSED": 20,
+    "STOP": 32
+  },
+  "combined_regression": {
+    "errors": 0,
+    "failures": 0,
+    "passed": 318,
+    "skipped": 0,
+    "tests": 318,
+    "tests_by_module": {
+      "tests.test_live_chain_checkpoint": 8,
+      "tests.test_live_chain_incremental": 17,
+      "tests.test_live_chain_protocol": 11,
+      "tests.test_live_chain_session": 8,
+      "tests.test_regular_nstep_acquisition": 4,
+      "tests.test_regular_nstep_pipeline": 3,
+      "tests.test_regular_nstep_public": 7,
+      "tests.test_regular_nstep_raw": 15,
+      "tests.test_regular_nstep_resources": 11,
+      "tests.test_verified_driver_v0_admission": 6,
+      "tests.test_verified_driver_v0_attacks": 25,
+      "tests.test_verified_driver_v0_driver": 14,
+      "tests.test_verified_driver_v0_gate": 15,
+      "tests.test_verified_driver_v0_model": 10,
+      "tests.test_verified_driver_v0_store": 13,
+      "tests.test_verified_driver_v1_attacks": 54,
+      "tests.test_verified_driver_v1_containment": 4,
+      "tests.test_verified_driver_v1_controller": 13,
+      "tests.test_verified_driver_v1_model": 31,
+      "tests.test_verified_driver_v1_replay": 14,
+      "tests.test_verified_driver_v1_replay_transition": 23,
+      "tests.test_verified_driver_v1_store": 12
+    }
+  },
+  "combined_source_identical_files": 187,
+  "guarded_jobs": [
+    {
+      "host": "localhost",
+      "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/verified_driver/v1/artifacts/jobs/task7-attacks-01",
+      "return_code": 1,
+      "wall_seconds": 17.323757201
+    },
+    {
+      "host": "localhost",
+      "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/verified_driver/v1/artifacts/jobs/task7-attacks-green01",
+      "return_code": 0,
+      "wall_seconds": 16.355402128999998
+    },
+    {
+      "host": "localhost",
+      "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/verified_driver/v1/artifacts/jobs/task7-all-final",
+      "return_code": 0,
+      "wall_seconds": 85.819888322
+    }
+  ],
+  "new_architecture_or_contract_conflict_found": false,
+  "pre_compatibility_history": {
+    "changed": [],
+    "checked": 152
+  },
+  "pre_task7_history": {
+    "changed": [],
+    "checked": 287
+  },
+  "product_fixes": [],
+  "product_sources_unchanged": true,
+  "protected_changed": [],
+  "protected_files_checked": 7232,
+  "red_history": "task7-attacks-01: 51 PASS / 3 FAIL; exact malformed-token constructor refusal occurred outside the original test assertion; only test assertion boundary corrected",
+  "relocated_live_chain_files_pinned": 11,
+  "remaining_task8_seconds": 127.24937445297928,
+  "schema": "TASK7_FINAL_SUBMISSION_V1",
+  "standalone_attacks": {
+    "errors": 0,
+    "failures": 0,
+    "passed": 54,
+    "skipped": 0,
+    "tests": 54,
+    "tests_by_module": {
+      "tests.test_verified_driver_v1_attacks": 54
+    }
+  },
+  "status": "COMPLETE_UNIT_MARKER_SAVED_SCOPE",
+  "task8_required_cap_seconds": 400,
+  "task8_shortfall_seconds": 272.7506255470207,
+  "task8_started": false,
+  "used_seconds": 3472.7506255470207,
+  "v1_pinset_files": 40,
+  "v1_pinset_sha256": "1b8c9d97907b2308b079aefdb6b40c6263b741c3b8c6d4cd136c6b0451e160c5"
+}

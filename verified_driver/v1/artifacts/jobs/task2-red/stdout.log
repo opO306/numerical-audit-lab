@@ -1,0 +1,27 @@
+
+==================================== ERRORS ====================================
+______________ ERROR collecting tests/test_live_chain_protocol.py ______________
+ImportError while importing test module '/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/tests/test_live_chain_protocol.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_live_chain_protocol.py:3: in <module>
+    from runtime_trace.live_chain.protocol import BarrierEvent, ResumeToken, TokenLedger, encode_record, decode_record
+E   ModuleNotFoundError: No module named 'runtime_trace.live_chain'
+_____________ ERROR collecting tests/test_live_chain_checkpoint.py _____________
+ImportError while importing test module '/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/tests/test_live_chain_checkpoint.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_live_chain_checkpoint.py:4: in <module>
+    from runtime_trace.live_chain.protocol import BarrierEvent
+E   ModuleNotFoundError: No module named 'runtime_trace.live_chain'
+=========================== short test summary info ============================
+ERROR tests/test_live_chain_protocol.py
+ERROR tests/test_live_chain_checkpoint.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!!
+2 errors in 0.15s

@@ -1,0 +1,21 @@
+ M docs/superpowers/specs/2026-10-06-verified-driver-v1-certified-chain-design.md
+ M runtime_trace/regular_nstep/artifacts/budget.json
+ M runtime_trace/regular_nstep/artifacts/budget.running.json
+?? current/VERIFIED_DRIVER_V1_2026-10-06.md
+?? docs/superpowers/plans/2026-10-06-verified-driver-v1-certified-chain.md
+?? tests/live_chain_fixture.py
+?? tests/live_chain_worker.py
+?? tests/test_live_chain_checkpoint.py
+?? tests/test_live_chain_incremental.py
+?? tests/test_live_chain_protocol.py
+?? tests/test_live_chain_session.py
+?? tests/test_verified_driver_v1_containment.py
+?? tests/test_verified_driver_v1_controller.py
+?? tests/test_verified_driver_v1_model.py
+?? tests/test_verified_driver_v1_replay.py
+?? tests/test_verified_driver_v1_replay_transition.py
+?? tests/test_verified_driver_v1_store.py
+?? tests/verified_driver_v1_control_support.py
+?? tests/verified_driver_v1_replay_support.py
+?? tests/verified_driver_v1_support.py
+?? verified_driver/v1/

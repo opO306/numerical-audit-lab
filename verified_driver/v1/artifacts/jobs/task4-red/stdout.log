@@ -1,0 +1,16 @@
+
+==================================== ERRORS ====================================
+____________ ERROR collecting tests/test_live_chain_incremental.py _____________
+ImportError while importing test module '/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/tests/test_live_chain_incremental.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_live_chain_incremental.py:4: in <module>
+    from runtime_trace.live_chain.producer import build_edge
+E   ModuleNotFoundError: No module named 'runtime_trace.live_chain.producer'
+=========================== short test summary info ============================
+ERROR tests/test_live_chain_incremental.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.12s

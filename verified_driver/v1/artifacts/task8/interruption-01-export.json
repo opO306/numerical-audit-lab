@@ -1,0 +1,33 @@
+{
+  "destination": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/verified_driver/v1/artifacts/task8/interruption-01",
+  "exact_byte_copy": true,
+  "files": {
+    "SUMMARY.json": "eb9f9f83502a428e2560ae8fd10d05b6f2791d4908909448470e98690274e744",
+    "interrupted.json": "936902522c1ce9bac13884603fced48f55266e42e82a220590d2946af2b5f065",
+    "pre-run.json": "7cb66dca93a49c7c9ae7c4c4f51edc88988dab66ee8a942f1e0d3746a79f3b6f",
+    "publication-1.json": "d961d1be2f75eda51343bef22c5f940397f54f79f0b93296dfa1205ab1dadce5",
+    "recovery.json": "0756bd8b5bdf3167b897986af1d80c61006cc555d5a363600a30e6a1af370085",
+    "runs/actual/checkpoint-1/CHECKPOINT": "b0a1c68cb69d429e663526335683490fd47cfe7170e8d3dc5989ce35b5507377",
+    "runs/actual/checkpoint-1/checkpoint.json": "4a18d949bb8f8d00361333d5f19214a30a5ae2759ef780a3f8c32d085144f6f7",
+    "runs/actual/checkpoint-1/trace.jsonl": "086d25538ae44bc07a835437d2bc73203715a5df0658f755132d59b8889bcb73",
+    "runs/actual/edge-1.check.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/actual/edge-1.checker.json": "f568ad3667fd0495790c7ffa72d41645fe45f00ca1896eb567f8432533c6abd1",
+    "runs/actual/edge-1.predecessor.json": "9979a2b110d16b283d5995912608f37817c5713270d46528c652083cb22e4c9e",
+    "runs/actual/edge-1.produce.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/actual/edge-1/completion.json": "a7755537225b546737d56f050e8cd687f5269a1b150370235d1193c30560b14f",
+    "runs/actual/edge-1/edge.json": "7289db39cb28cd7999a00643ed5429dd3faed599d26999cd84f73099c0f698c8",
+    "runs/actual/live/body-start-1.json": "d995b31cf9147282cfa47f3bdb6ba5c4719182fa1e268c9f0e52c140983dac87",
+    "runs/actual/live/containment.json": "a5192a4b62a2762210d1b11828c88808fa2a3aa2bb1833d30180f815f81855c5",
+    "runs/actual/live/gdb.log": "3bf9273c14328f4a47d295978f9b1de67e168fdc8f19aa3bf8a1ea5195fe9bb6",
+    "runs/actual/live/metadata-1.json": "7ec22c41cc498a5a35ad6d8895946c0028e029a593336820f254f188a9e453b4",
+    "runs/actual/live/observed-barrier-1.json": "95b46f683447f74844b2fe9fb0c221f01081f0267e7b9e4527b6824741aaf648",
+    "runs/actual/live/trace.jsonl": "086d25538ae44bc07a835437d2bc73203715a5df0658f755132d59b8889bcb73",
+    "source-pinset.json": "0b9e14faacb4fc4b6862a08a2f3f8b527c27a5f27af97f2a0d96ab6428a849ee",
+    "store/.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "store/CURRENT": "bf886e6e82097cd2b9e9c18cc2ec2b28428de4dfcd6c084fed54cdb96ebe0e51",
+    "store/objects/9979a2b110d16b283d5995912608f37817c5713270d46528c652083cb22e4c9e.json": "9979a2b110d16b283d5995912608f37817c5713270d46528c652083cb22e4c9e",
+    "store/objects/9cc06dd2c9693f0a59d1e807dc15a734bb646f14364a2fa8bde86b3f63881b73.json": "9cc06dd2c9693f0a59d1e807dc15a734bb646f14364a2fa8bde86b3f63881b73",
+    "store/receipts/16c691fbac9d7455600c0729f63f097d44175fcb3f402de06f4ee0c39eb6f2fd.json": "16c691fbac9d7455600c0729f63f097d44175fcb3f402de06f4ee0c39eb6f2fd"
+  },
+  "source": "/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/artifacts/task8/interruption-01"
+}

@@ -1,0 +1,1115 @@
+.FFFFFFFF.FFFFFFFFF.F.................                                   [100%]
+=================================== FAILURES ===================================
+___ test_valid_transition_publishes_exactly_one_new_generation_and_recovers ____
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_valid_transition_publishe0')
+
+    def test_valid_transition_publishes_exactly_one_new_generation_and_recovers(tmp_path):
+        driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+>       tid=driver.store.add_replay_transition(doc); child,receipt=transitioned_child(driver,doc)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v1/store.py:90: in add_replay_transition
+    ReplayTransition.validate(document,self._historical_chain(parent))
+verified_driver/v1/replay.py:126: in validate
+    if document['historical_chain']!=strict_json(canonical_bytes(chain)):
+                                                 ^^^^^^^^^^^^^^^^^^^^^^
+verified_driver/v0/model.py:13: in canonical_bytes
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x7092baad7200>
+o = ChainState(generation=0, step_index=0, requested_steps=4, barrier_kind='GENESIS', public_bits=('0x0000000000000000', '...rontier=-1, predecessor_id=None, acceptance_id=None, live_session_id=None, process_identity_digest=None, barrier_seq=0)
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ChainState is not JSON serializable
+
+/usr/lib/python3.12/json/encoder.py:180: TypeError
+_ test_repaired_attachment_hashes_cannot_hide_semantic_mutation[latent_bits-value0] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_repaired_attachment_hashe0')
+field = 'latent_bits', value = ['0x3fc0000000000000', '0x3fc0000000000000']
+
+    @pytest.mark.parametrize('field,value',[
+     ('latent_bits',['0x3fc0000000000000']*2),('next_t_bits','0x3fa0000000000000'),
+     ('dt_bits','0x3fa0000000000000'),('source_binding','f'*64),('step_index',1),
+     ('form_box','0x1.0000000000000p-53'),('form_coefficient','0x1.0000000000000p-54')])
+    def test_repaired_attachment_hashes_cannot_hide_semantic_mutation(tmp_path,field,value):
+        driver=prepared(tmp_path); doc=copy.deepcopy(proof_document(driver)); fresh=doc['fresh_anchor']
+        if field=='form_box': fresh['forms'][0]['box']=value
+        elif field=='form_coefficient': fresh['forms'][0]['coefficients'][0]=value
+        else: fresh[field]=value
+        doc['replay_proofs'][-1]['checker_report']['candidate']=copy.deepcopy(fresh)
+        doc['replay_proofs'][-1]['checker_report_sha256']=content_id(doc['replay_proofs'][-1]['checker_report'])
+>       with pytest.raises(ValueError): driver.store.add_replay_transition(doc)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v1/store.py:90: in add_replay_transition
+    ReplayTransition.validate(document,self._historical_chain(parent))
+verified_driver/v1/replay.py:126: in validate
+    if document['historical_chain']!=strict_json(canonical_bytes(chain)):
+                                                 ^^^^^^^^^^^^^^^^^^^^^^
+verified_driver/v0/model.py:13: in canonical_bytes
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x7092ba98ecc0>
+o = ChainState(generation=0, step_index=0, requested_steps=4, barrier_kind='GENESIS', public_bits=('0x0000000000000000', '...rontier=-1, predecessor_id=None, acceptance_id=None, live_session_id=None, process_identity_digest=None, barrier_seq=0)
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ChainState is not JSON serializable
+
+/usr/lib/python3.12/json/encoder.py:180: TypeError
+_ test_repaired_attachment_hashes_cannot_hide_semantic_mutation[next_t_bits-0x3fa0000000000000] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_repaired_attachment_hashe1')
+field = 'next_t_bits', value = '0x3fa0000000000000'
+
+    @pytest.mark.parametrize('field,value',[
+     ('latent_bits',['0x3fc0000000000000']*2),('next_t_bits','0x3fa0000000000000'),
+     ('dt_bits','0x3fa0000000000000'),('source_binding','f'*64),('step_index',1),
+     ('form_box','0x1.0000000000000p-53'),('form_coefficient','0x1.0000000000000p-54')])
+    def test_repaired_attachment_hashes_cannot_hide_semantic_mutation(tmp_path,field,value):
+        driver=prepared(tmp_path); doc=copy.deepcopy(proof_document(driver)); fresh=doc['fresh_anchor']
+        if field=='form_box': fresh['forms'][0]['box']=value
+        elif field=='form_coefficient': fresh['forms'][0]['coefficients'][0]=value
+        else: fresh[field]=value
+        doc['replay_proofs'][-1]['checker_report']['candidate']=copy.deepcopy(fresh)
+        doc['replay_proofs'][-1]['checker_report_sha256']=content_id(doc['replay_proofs'][-1]['checker_report'])
+>       with pytest.raises(ValueError): driver.store.add_replay_transition(doc)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v1/store.py:90: in add_replay_transition
+    ReplayTransition.validate(document,self._historical_chain(parent))
+verified_driver/v1/replay.py:126: in validate
+    if document['historical_chain']!=strict_json(canonical_bytes(chain)):
+                                                 ^^^^^^^^^^^^^^^^^^^^^^
+verified_driver/v0/model.py:13: in canonical_bytes
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x7092ba99dee0>
+o = ChainState(generation=0, step_index=0, requested_steps=4, barrier_kind='GENESIS', public_bits=('0x0000000000000000', '...rontier=-1, predecessor_id=None, acceptance_id=None, live_session_id=None, process_identity_digest=None, barrier_seq=0)
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ChainState is not JSON serializable
+
+/usr/lib/python3.12/json/encoder.py:180: TypeError
+_ test_repaired_attachment_hashes_cannot_hide_semantic_mutation[dt_bits-0x3fa0000000000000] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_repaired_attachment_hashe2')
+field = 'dt_bits', value = '0x3fa0000000000000'
+
+    @pytest.mark.parametrize('field,value',[
+     ('latent_bits',['0x3fc0000000000000']*2),('next_t_bits','0x3fa0000000000000'),
+     ('dt_bits','0x3fa0000000000000'),('source_binding','f'*64),('step_index',1),
+     ('form_box','0x1.0000000000000p-53'),('form_coefficient','0x1.0000000000000p-54')])
+    def test_repaired_attachment_hashes_cannot_hide_semantic_mutation(tmp_path,field,value):
+        driver=prepared(tmp_path); doc=copy.deepcopy(proof_document(driver)); fresh=doc['fresh_anchor']
+        if field=='form_box': fresh['forms'][0]['box']=value
+        elif field=='form_coefficient': fresh['forms'][0]['coefficients'][0]=value
+        else: fresh[field]=value
+        doc['replay_proofs'][-1]['checker_report']['candidate']=copy.deepcopy(fresh)
+        doc['replay_proofs'][-1]['checker_report_sha256']=content_id(doc['replay_proofs'][-1]['checker_report'])
+>       with pytest.raises(ValueError): driver.store.add_replay_transition(doc)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v1/store.py:90: in add_replay_transition
+    ReplayTransition.validate(document,self._historical_chain(parent))
+verified_driver/v1/replay.py:126: in validate
+    if document['historical_chain']!=strict_json(canonical_bytes(chain)):
+                                                 ^^^^^^^^^^^^^^^^^^^^^^
+verified_driver/v0/model.py:13: in canonical_bytes
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x7092bab37860>
+o = ChainState(generation=0, step_index=0, requested_steps=4, barrier_kind='GENESIS', public_bits=('0x0000000000000000', '...rontier=-1, predecessor_id=None, acceptance_id=None, live_session_id=None, process_identity_digest=None, barrier_seq=0)
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ChainState is not JSON serializable
+
+/usr/lib/python3.12/json/encoder.py:180: TypeError
+_ test_repaired_attachment_hashes_cannot_hide_semantic_mutation[source_binding-ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_repaired_attachment_hashe3')
+field = 'source_binding'
+value = 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
+
+    @pytest.mark.parametrize('field,value',[
+     ('latent_bits',['0x3fc0000000000000']*2),('next_t_bits','0x3fa0000000000000'),
+     ('dt_bits','0x3fa0000000000000'),('source_binding','f'*64),('step_index',1),
+     ('form_box','0x1.0000000000000p-53'),('form_coefficient','0x1.0000000000000p-54')])
+    def test_repaired_attachment_hashes_cannot_hide_semantic_mutation(tmp_path,field,value):
+        driver=prepared(tmp_path); doc=copy.deepcopy(proof_document(driver)); fresh=doc['fresh_anchor']
+        if field=='form_box': fresh['forms'][0]['box']=value
+        elif field=='form_coefficient': fresh['forms'][0]['coefficients'][0]=value
+        else: fresh[field]=value
+        doc['replay_proofs'][-1]['checker_report']['candidate']=copy.deepcopy(fresh)
+        doc['replay_proofs'][-1]['checker_report_sha256']=content_id(doc['replay_proofs'][-1]['checker_report'])
+>       with pytest.raises(ValueError): driver.store.add_replay_transition(doc)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v1/store.py:90: in add_replay_transition
+    ReplayTransition.validate(document,self._historical_chain(parent))
+verified_driver/v1/replay.py:126: in validate
+    if document['historical_chain']!=strict_json(canonical_bytes(chain)):
+                                                 ^^^^^^^^^^^^^^^^^^^^^^
+verified_driver/v0/model.py:13: in canonical_bytes
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x7092ba98f200>
+o = ChainState(generation=0, step_index=0, requested_steps=4, barrier_kind='GENESIS', public_bits=('0x0000000000000000', '...rontier=-1, predecessor_id=None, acceptance_id=None, live_session_id=None, process_identity_digest=None, barrier_seq=0)
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ChainState is not JSON serializable
+
+/usr/lib/python3.12/json/encoder.py:180: TypeError
+_ test_repaired_attachment_hashes_cannot_hide_semantic_mutation[step_index-1] __
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_repaired_attachment_hashe4')
+field = 'step_index', value = 1
+
+    @pytest.mark.parametrize('field,value',[
+     ('latent_bits',['0x3fc0000000000000']*2),('next_t_bits','0x3fa0000000000000'),
+     ('dt_bits','0x3fa0000000000000'),('source_binding','f'*64),('step_index',1),
+     ('form_box','0x1.0000000000000p-53'),('form_coefficient','0x1.0000000000000p-54')])
+    def test_repaired_attachment_hashes_cannot_hide_semantic_mutation(tmp_path,field,value):
+        driver=prepared(tmp_path); doc=copy.deepcopy(proof_document(driver)); fresh=doc['fresh_anchor']
+        if field=='form_box': fresh['forms'][0]['box']=value
+        elif field=='form_coefficient': fresh['forms'][0]['coefficients'][0]=value
+        else: fresh[field]=value
+        doc['replay_proofs'][-1]['checker_report']['candidate']=copy.deepcopy(fresh)
+        doc['replay_proofs'][-1]['checker_report_sha256']=content_id(doc['replay_proofs'][-1]['checker_report'])
+>       with pytest.raises(ValueError): driver.store.add_replay_transition(doc)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v1/store.py:90: in add_replay_transition
+    ReplayTransition.validate(document,self._historical_chain(parent))
+verified_driver/v1/replay.py:126: in validate
+    if document['historical_chain']!=strict_json(canonical_bytes(chain)):
+                                                 ^^^^^^^^^^^^^^^^^^^^^^
+verified_driver/v0/model.py:13: in canonical_bytes
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x7092bab37e00>
+o = ChainState(generation=0, step_index=0, requested_steps=4, barrier_kind='GENESIS', public_bits=('0x0000000000000000', '...rontier=-1, predecessor_id=None, acceptance_id=None, live_session_id=None, process_identity_digest=None, barrier_seq=0)
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ChainState is not JSON serializable
+
+/usr/lib/python3.12/json/encoder.py:180: TypeError
+_ test_repaired_attachment_hashes_cannot_hide_semantic_mutation[form_box-0x1.0000000000000p-53] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_repaired_attachment_hashe5')
+field = 'form_box', value = '0x1.0000000000000p-53'
+
+    @pytest.mark.parametrize('field,value',[
+     ('latent_bits',['0x3fc0000000000000']*2),('next_t_bits','0x3fa0000000000000'),
+     ('dt_bits','0x3fa0000000000000'),('source_binding','f'*64),('step_index',1),
+     ('form_box','0x1.0000000000000p-53'),('form_coefficient','0x1.0000000000000p-54')])
+    def test_repaired_attachment_hashes_cannot_hide_semantic_mutation(tmp_path,field,value):
+        driver=prepared(tmp_path); doc=copy.deepcopy(proof_document(driver)); fresh=doc['fresh_anchor']
+        if field=='form_box': fresh['forms'][0]['box']=value
+        elif field=='form_coefficient': fresh['forms'][0]['coefficients'][0]=value
+        else: fresh[field]=value
+        doc['replay_proofs'][-1]['checker_report']['candidate']=copy.deepcopy(fresh)
+        doc['replay_proofs'][-1]['checker_report_sha256']=content_id(doc['replay_proofs'][-1]['checker_report'])
+>       with pytest.raises(ValueError): driver.store.add_replay_transition(doc)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v1/store.py:90: in add_replay_transition
+    ReplayTransition.validate(document,self._historical_chain(parent))
+verified_driver/v1/replay.py:126: in validate
+    if document['historical_chain']!=strict_json(canonical_bytes(chain)):
+                                                 ^^^^^^^^^^^^^^^^^^^^^^
+verified_driver/v0/model.py:13: in canonical_bytes
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x7092baa80f50>
+o = ChainState(generation=0, step_index=0, requested_steps=4, barrier_kind='GENESIS', public_bits=('0x0000000000000000', '...rontier=-1, predecessor_id=None, acceptance_id=None, live_session_id=None, process_identity_digest=None, barrier_seq=0)
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ChainState is not JSON serializable
+
+/usr/lib/python3.12/json/encoder.py:180: TypeError
+_ test_repaired_attachment_hashes_cannot_hide_semantic_mutation[form_coefficient-0x1.0000000000000p-54] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_repaired_attachment_hashe6')
+field = 'form_coefficient', value = '0x1.0000000000000p-54'
+
+    @pytest.mark.parametrize('field,value',[
+     ('latent_bits',['0x3fc0000000000000']*2),('next_t_bits','0x3fa0000000000000'),
+     ('dt_bits','0x3fa0000000000000'),('source_binding','f'*64),('step_index',1),
+     ('form_box','0x1.0000000000000p-53'),('form_coefficient','0x1.0000000000000p-54')])
+    def test_repaired_attachment_hashes_cannot_hide_semantic_mutation(tmp_path,field,value):
+        driver=prepared(tmp_path); doc=copy.deepcopy(proof_document(driver)); fresh=doc['fresh_anchor']
+        if field=='form_box': fresh['forms'][0]['box']=value
+        elif field=='form_coefficient': fresh['forms'][0]['coefficients'][0]=value
+        else: fresh[field]=value
+        doc['replay_proofs'][-1]['checker_report']['candidate']=copy.deepcopy(fresh)
+        doc['replay_proofs'][-1]['checker_report_sha256']=content_id(doc['replay_proofs'][-1]['checker_report'])
+>       with pytest.raises(ValueError): driver.store.add_replay_transition(doc)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v1/store.py:90: in add_replay_transition
+    ReplayTransition.validate(document,self._historical_chain(parent))
+verified_driver/v1/replay.py:126: in validate
+    if document['historical_chain']!=strict_json(canonical_bytes(chain)):
+                                                 ^^^^^^^^^^^^^^^^^^^^^^
+verified_driver/v0/model.py:13: in canonical_bytes
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x7092ba99d280>
+o = ChainState(generation=0, step_index=0, requested_steps=4, barrier_kind='GENESIS', public_bits=('0x0000000000000000', '...rontier=-1, predecessor_id=None, acceptance_id=None, live_session_id=None, process_identity_digest=None, barrier_seq=0)
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ChainState is not JSON serializable
+
+/usr/lib/python3.12/json/encoder.py:180: TypeError
+_ test_transition_refuses_missing_partial_foreign_or_nonforward_child[partial] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_transition_refuses_missin1')
+attack = 'partial'
+
+    @pytest.mark.parametrize('attack',['absent','partial','wrong_parent','wrong_session','wrong_process','prefix','frontier'])
+    def test_transition_refuses_missing_partial_foreign_or_nonforward_child(tmp_path,attack):
+        driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+        if attack=='partial':
+            doc['replay_proofs'].pop(0)
+>           with pytest.raises(ValueError): driver.store.add_replay_transition(doc)
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v1/store.py:90: in add_replay_transition
+    ReplayTransition.validate(document,self._historical_chain(parent))
+verified_driver/v1/replay.py:126: in validate
+    if document['historical_chain']!=strict_json(canonical_bytes(chain)):
+                                                 ^^^^^^^^^^^^^^^^^^^^^^
+verified_driver/v0/model.py:13: in canonical_bytes
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x7092ba98ddc0>
+o = ChainState(generation=0, step_index=0, requested_steps=4, barrier_kind='GENESIS', public_bits=('0x0000000000000000', '...rontier=-1, predecessor_id=None, acceptance_id=None, live_session_id=None, process_identity_digest=None, barrier_seq=0)
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ChainState is not JSON serializable
+
+/usr/lib/python3.12/json/encoder.py:180: TypeError
+_ test_transition_refuses_missing_partial_foreign_or_nonforward_child[wrong_parent] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_transition_refuses_missin2')
+attack = 'wrong_parent'
+
+    @pytest.mark.parametrize('attack',['absent','partial','wrong_parent','wrong_session','wrong_process','prefix','frontier'])
+    def test_transition_refuses_missing_partial_foreign_or_nonforward_child(tmp_path,attack):
+        driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+        if attack=='partial':
+            doc['replay_proofs'].pop(0)
+            with pytest.raises(ValueError): driver.store.add_replay_transition(doc)
+            return
+>       if attack!='absent': driver.store.add_replay_transition(doc)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v1/store.py:90: in add_replay_transition
+    ReplayTransition.validate(document,self._historical_chain(parent))
+verified_driver/v1/replay.py:126: in validate
+    if document['historical_chain']!=strict_json(canonical_bytes(chain)):
+                                                 ^^^^^^^^^^^^^^^^^^^^^^
+verified_driver/v0/model.py:13: in canonical_bytes
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x7092baa822d0>
+o = ChainState(generation=0, step_index=0, requested_steps=4, barrier_kind='GENESIS', public_bits=('0x0000000000000000', '...rontier=-1, predecessor_id=None, acceptance_id=None, live_session_id=None, process_identity_digest=None, barrier_seq=0)
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ChainState is not JSON serializable
+
+/usr/lib/python3.12/json/encoder.py:180: TypeError
+_ test_transition_refuses_missing_partial_foreign_or_nonforward_child[wrong_session] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_transition_refuses_missin3')
+attack = 'wrong_session'
+
+    @pytest.mark.parametrize('attack',['absent','partial','wrong_parent','wrong_session','wrong_process','prefix','frontier'])
+    def test_transition_refuses_missing_partial_foreign_or_nonforward_child(tmp_path,attack):
+        driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+        if attack=='partial':
+            doc['replay_proofs'].pop(0)
+            with pytest.raises(ValueError): driver.store.add_replay_transition(doc)
+            return
+>       if attack!='absent': driver.store.add_replay_transition(doc)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v1/store.py:90: in add_replay_transition
+    ReplayTransition.validate(document,self._historical_chain(parent))
+verified_driver/v1/replay.py:126: in validate
+    if document['historical_chain']!=strict_json(canonical_bytes(chain)):
+                                                 ^^^^^^^^^^^^^^^^^^^^^^
+verified_driver/v0/model.py:13: in canonical_bytes
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x7092ba99fda0>
+o = ChainState(generation=0, step_index=0, requested_steps=4, barrier_kind='GENESIS', public_bits=('0x0000000000000000', '...rontier=-1, predecessor_id=None, acceptance_id=None, live_session_id=None, process_identity_digest=None, barrier_seq=0)
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ChainState is not JSON serializable
+
+/usr/lib/python3.12/json/encoder.py:180: TypeError
+_ test_transition_refuses_missing_partial_foreign_or_nonforward_child[wrong_process] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_transition_refuses_missin4')
+attack = 'wrong_process'
+
+    @pytest.mark.parametrize('attack',['absent','partial','wrong_parent','wrong_session','wrong_process','prefix','frontier'])
+    def test_transition_refuses_missing_partial_foreign_or_nonforward_child(tmp_path,attack):
+        driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+        if attack=='partial':
+            doc['replay_proofs'].pop(0)
+            with pytest.raises(ValueError): driver.store.add_replay_transition(doc)
+            return
+>       if attack!='absent': driver.store.add_replay_transition(doc)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v1/store.py:90: in add_replay_transition
+    ReplayTransition.validate(document,self._historical_chain(parent))
+verified_driver/v1/replay.py:126: in validate
+    if document['historical_chain']!=strict_json(canonical_bytes(chain)):
+                                                 ^^^^^^^^^^^^^^^^^^^^^^
+verified_driver/v0/model.py:13: in canonical_bytes
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x7092baa83590>
+o = ChainState(generation=0, step_index=0, requested_steps=4, barrier_kind='GENESIS', public_bits=('0x0000000000000000', '...rontier=-1, predecessor_id=None, acceptance_id=None, live_session_id=None, process_identity_digest=None, barrier_seq=0)
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ChainState is not JSON serializable
+
+/usr/lib/python3.12/json/encoder.py:180: TypeError
+_ test_transition_refuses_missing_partial_foreign_or_nonforward_child[prefix] __
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_transition_refuses_missin5')
+attack = 'prefix'
+
+    @pytest.mark.parametrize('attack',['absent','partial','wrong_parent','wrong_session','wrong_process','prefix','frontier'])
+    def test_transition_refuses_missing_partial_foreign_or_nonforward_child(tmp_path,attack):
+        driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+        if attack=='partial':
+            doc['replay_proofs'].pop(0)
+            with pytest.raises(ValueError): driver.store.add_replay_transition(doc)
+            return
+>       if attack!='absent': driver.store.add_replay_transition(doc)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v1/store.py:90: in add_replay_transition
+    ReplayTransition.validate(document,self._historical_chain(parent))
+verified_driver/v1/replay.py:126: in validate
+    if document['historical_chain']!=strict_json(canonical_bytes(chain)):
+                                                 ^^^^^^^^^^^^^^^^^^^^^^
+verified_driver/v0/model.py:13: in canonical_bytes
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x7092ba99ede0>
+o = ChainState(generation=0, step_index=0, requested_steps=4, barrier_kind='GENESIS', public_bits=('0x0000000000000000', '...rontier=-1, predecessor_id=None, acceptance_id=None, live_session_id=None, process_identity_digest=None, barrier_seq=0)
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ChainState is not JSON serializable
+
+/usr/lib/python3.12/json/encoder.py:180: TypeError
+_ test_transition_refuses_missing_partial_foreign_or_nonforward_child[frontier] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_transition_refuses_missin6')
+attack = 'frontier'
+
+    @pytest.mark.parametrize('attack',['absent','partial','wrong_parent','wrong_session','wrong_process','prefix','frontier'])
+    def test_transition_refuses_missing_partial_foreign_or_nonforward_child(tmp_path,attack):
+        driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+        if attack=='partial':
+            doc['replay_proofs'].pop(0)
+            with pytest.raises(ValueError): driver.store.add_replay_transition(doc)
+            return
+>       if attack!='absent': driver.store.add_replay_transition(doc)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v1/store.py:90: in add_replay_transition
+    ReplayTransition.validate(document,self._historical_chain(parent))
+verified_driver/v1/replay.py:126: in validate
+    if document['historical_chain']!=strict_json(canonical_bytes(chain)):
+                                                 ^^^^^^^^^^^^^^^^^^^^^^
+verified_driver/v0/model.py:13: in canonical_bytes
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x7092ba2a1f10>
+o = ChainState(generation=0, step_index=0, requested_steps=4, barrier_kind='GENESIS', public_bits=('0x0000000000000000', '...rontier=-1, predecessor_id=None, acceptance_id=None, live_session_id=None, process_identity_digest=None, barrier_seq=0)
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ChainState is not JSON serializable
+
+/usr/lib/python3.12/json/encoder.py:180: TypeError
+_____ test_cross_session_without_transition_and_second_child_reuse_refuse ______
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_cross_session_without_tra0')
+
+    def test_cross_session_without_transition_and_second_child_reuse_refuse(tmp_path):
+        driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+>       tid=driver.store.add_replay_transition(doc); child,receipt=transitioned_child(driver,doc)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v1/store.py:90: in add_replay_transition
+    ReplayTransition.validate(document,self._historical_chain(parent))
+verified_driver/v1/replay.py:126: in validate
+    if document['historical_chain']!=strict_json(canonical_bytes(chain)):
+                                                 ^^^^^^^^^^^^^^^^^^^^^^
+verified_driver/v0/model.py:13: in canonical_bytes
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x7092ba23d910>
+o = ChainState(generation=0, step_index=0, requested_steps=4, barrier_kind='GENESIS', public_bits=('0x0000000000000000', '...rontier=-1, predecessor_id=None, acceptance_id=None, live_session_id=None, process_identity_digest=None, barrier_seq=0)
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ChainState is not JSON serializable
+
+/usr/lib/python3.12/json/encoder.py:180: TypeError
+_ test_transition_pre_and_post_current_crash_recovery[before_current_replace-2] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_transition_pre_and_post_c0')
+point = 'before_current_replace', generation = 2
+
+    @pytest.mark.parametrize('point,generation',[('before_current_replace',2),('after_current_replace',3)])
+    def test_transition_pre_and_post_current_crash_recovery(tmp_path,point,generation):
+        driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+>       driver.store.add_replay_transition(doc); child,receipt=transitioned_child(driver,doc)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:81: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v1/store.py:90: in add_replay_transition
+    ReplayTransition.validate(document,self._historical_chain(parent))
+verified_driver/v1/replay.py:126: in validate
+    if document['historical_chain']!=strict_json(canonical_bytes(chain)):
+                                                 ^^^^^^^^^^^^^^^^^^^^^^
+verified_driver/v0/model.py:13: in canonical_bytes
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x7092baa825d0>
+o = ChainState(generation=0, step_index=0, requested_steps=4, barrier_kind='GENESIS', public_bits=('0x0000000000000000', '...rontier=-1, predecessor_id=None, acceptance_id=None, live_session_id=None, process_identity_digest=None, barrier_seq=0)
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ChainState is not JSON serializable
+
+/usr/lib/python3.12/json/encoder.py:180: TypeError
+_ test_transition_pre_and_post_current_crash_recovery[after_current_replace-3] _
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_transition_pre_and_post_c1')
+point = 'after_current_replace', generation = 3
+
+    @pytest.mark.parametrize('point,generation',[('before_current_replace',2),('after_current_replace',3)])
+    def test_transition_pre_and_post_current_crash_recovery(tmp_path,point,generation):
+        driver=prepared(tmp_path); parent=driver.store.current()[1]; doc=proof_document(driver)
+>       driver.store.add_replay_transition(doc); child,receipt=transitioned_child(driver,doc)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_replay_transition.py:81: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v1/store.py:90: in add_replay_transition
+    ReplayTransition.validate(document,self._historical_chain(parent))
+verified_driver/v1/replay.py:126: in validate
+    if document['historical_chain']!=strict_json(canonical_bytes(chain)):
+                                                 ^^^^^^^^^^^^^^^^^^^^^^
+verified_driver/v0/model.py:13: in canonical_bytes
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x7092ba2a1490>
+o = ChainState(generation=0, step_index=0, requested_steps=4, barrier_kind='GENESIS', public_bits=('0x0000000000000000', '...rontier=-1, predecessor_id=None, acceptance_id=None, live_session_id=None, process_identity_digest=None, barrier_seq=0)
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ChainState is not JSON serializable
+
+/usr/lib/python3.12/json/encoder.py:180: TypeError
+______ test_replay_to_live_preserves_historical_parent_then_normal_links _______
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_replay_to_live_preserves_0')
+
+    def test_replay_to_live_preserves_historical_parent_then_normal_links(tmp_path):
+        from verified_driver.v1.replay import ReplayEngine
+        driver=prepared(tmp_path); old=driver.store.current()[0]; fresh=replay_driver(driver)
+        result=ReplayEngine(lambda:fresh,driver.store).recover(4,'recover-live')
+>       assert result.verdict=='ACCEPT' and result.generation==4
+E       AssertionError: assert ('STOP' == 'ACCEPT'
+E         
+E         - ACCEPT
+E         + STOP)
+
+tests/test_verified_driver_v1_replay_transition.py:106: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_valid_transition_publishes_exactly_one_new_generation_and_recovers
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_repaired_attachment_hashes_cannot_hide_semantic_mutation[latent_bits-value0]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_repaired_attachment_hashes_cannot_hide_semantic_mutation[next_t_bits-0x3fa0000000000000]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_repaired_attachment_hashes_cannot_hide_semantic_mutation[dt_bits-0x3fa0000000000000]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_repaired_attachment_hashes_cannot_hide_semantic_mutation[source_binding-ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_repaired_attachment_hashes_cannot_hide_semantic_mutation[step_index-1]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_repaired_attachment_hashes_cannot_hide_semantic_mutation[form_box-0x1.0000000000000p-53]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_repaired_attachment_hashes_cannot_hide_semantic_mutation[form_coefficient-0x1.0000000000000p-54]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_transition_refuses_missing_partial_foreign_or_nonforward_child[partial]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_transition_refuses_missing_partial_foreign_or_nonforward_child[wrong_parent]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_transition_refuses_missing_partial_foreign_or_nonforward_child[wrong_session]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_transition_refuses_missing_partial_foreign_or_nonforward_child[wrong_process]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_transition_refuses_missing_partial_foreign_or_nonforward_child[prefix]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_transition_refuses_missing_partial_foreign_or_nonforward_child[frontier]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_cross_session_without_transition_and_second_child_reuse_refuse
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_transition_pre_and_post_current_crash_recovery[before_current_replace-2]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_transition_pre_and_post_current_crash_recovery[after_current_replace-3]
+FAILED tests/test_verified_driver_v1_replay_transition.py::test_replay_to_live_preserves_historical_parent_then_normal_links
+18 failed, 20 passed in 4.64s

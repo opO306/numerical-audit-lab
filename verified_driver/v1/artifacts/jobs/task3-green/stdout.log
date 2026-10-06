@@ -1,0 +1,203 @@
+FFFFFFF.....                                                             [100%]
+=================================== FAILURES ===================================
+______________ test_private_pipe_token_runs_exactly_one_next_body ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_private_pipe_token_runs_e0')
+
+    def test_private_pipe_token_runs_exactly_one_next_body(tmp_path):
+>       session=FixtureSession(ROOT,tmp_path/'run',3,ROOT/'runtime_trace/regular_nstep/artifacts/budget.json')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_live_chain_session.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_live_chain_session.FixtureSession object at 0x713c66a04f80>
+repo_root = PosixPath('/home/otherside123/verified-driver-v1-test-mirror-2026-10-06')
+run_root = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_private_pipe_token_runs_e0/run')
+requested_steps = 3
+ledger = PosixPath('/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/runtime_trace/regular_nstep/artifacts/budget.json')
+
+    def __init__(self,repo_root:Path,run_root:Path,requested_steps:int,ledger:Path):
+        self.repo_root=no_alias(repo_root); self.run_root=no_alias(run_root)
+        self.requested_steps=validate_n(requested_steps); self.ledger=Path(ledger)
+        self.genesis=chain_genesis(self.repo_root,self.requested_steps)
+>       if not self.ledger.is_file(): raise ValueError('existing shared ledger required')
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: existing shared ledger required
+
+runtime_trace/live_chain/session.py:24: ValueError
+_________________ test_bad_token_cannot_enter_next_body[stale] _________________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_bad_token_cannot_enter_ne0')
+attack = 'stale'
+
+    @pytest.mark.parametrize('attack',['stale','foreign','wrong_checkpoint','unbound','duplicate'])
+    def test_bad_token_cannot_enter_next_body(tmp_path,attack):
+>       session=FixtureSession(ROOT,tmp_path/'run',3,ROOT/'runtime_trace/regular_nstep/artifacts/budget.json')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_live_chain_session.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_live_chain_session.FixtureSession object at 0x713c667dabd0>
+repo_root = PosixPath('/home/otherside123/verified-driver-v1-test-mirror-2026-10-06')
+run_root = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_bad_token_cannot_enter_ne0/run')
+requested_steps = 3
+ledger = PosixPath('/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/runtime_trace/regular_nstep/artifacts/budget.json')
+
+    def __init__(self,repo_root:Path,run_root:Path,requested_steps:int,ledger:Path):
+        self.repo_root=no_alias(repo_root); self.run_root=no_alias(run_root)
+        self.requested_steps=validate_n(requested_steps); self.ledger=Path(ledger)
+        self.genesis=chain_genesis(self.repo_root,self.requested_steps)
+>       if not self.ledger.is_file(): raise ValueError('existing shared ledger required')
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: existing shared ledger required
+
+runtime_trace/live_chain/session.py:24: ValueError
+________________ test_bad_token_cannot_enter_next_body[foreign] ________________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_bad_token_cannot_enter_ne1')
+attack = 'foreign'
+
+    @pytest.mark.parametrize('attack',['stale','foreign','wrong_checkpoint','unbound','duplicate'])
+    def test_bad_token_cannot_enter_next_body(tmp_path,attack):
+>       session=FixtureSession(ROOT,tmp_path/'run',3,ROOT/'runtime_trace/regular_nstep/artifacts/budget.json')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_live_chain_session.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_live_chain_session.FixtureSession object at 0x713c6681bf50>
+repo_root = PosixPath('/home/otherside123/verified-driver-v1-test-mirror-2026-10-06')
+run_root = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_bad_token_cannot_enter_ne1/run')
+requested_steps = 3
+ledger = PosixPath('/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/runtime_trace/regular_nstep/artifacts/budget.json')
+
+    def __init__(self,repo_root:Path,run_root:Path,requested_steps:int,ledger:Path):
+        self.repo_root=no_alias(repo_root); self.run_root=no_alias(run_root)
+        self.requested_steps=validate_n(requested_steps); self.ledger=Path(ledger)
+        self.genesis=chain_genesis(self.repo_root,self.requested_steps)
+>       if not self.ledger.is_file(): raise ValueError('existing shared ledger required')
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: existing shared ledger required
+
+runtime_trace/live_chain/session.py:24: ValueError
+___________ test_bad_token_cannot_enter_next_body[wrong_checkpoint] ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_bad_token_cannot_enter_ne2')
+attack = 'wrong_checkpoint'
+
+    @pytest.mark.parametrize('attack',['stale','foreign','wrong_checkpoint','unbound','duplicate'])
+    def test_bad_token_cannot_enter_next_body(tmp_path,attack):
+>       session=FixtureSession(ROOT,tmp_path/'run',3,ROOT/'runtime_trace/regular_nstep/artifacts/budget.json')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_live_chain_session.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_live_chain_session.FixtureSession object at 0x713c66818fb0>
+repo_root = PosixPath('/home/otherside123/verified-driver-v1-test-mirror-2026-10-06')
+run_root = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_bad_token_cannot_enter_ne2/run')
+requested_steps = 3
+ledger = PosixPath('/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/runtime_trace/regular_nstep/artifacts/budget.json')
+
+    def __init__(self,repo_root:Path,run_root:Path,requested_steps:int,ledger:Path):
+        self.repo_root=no_alias(repo_root); self.run_root=no_alias(run_root)
+        self.requested_steps=validate_n(requested_steps); self.ledger=Path(ledger)
+        self.genesis=chain_genesis(self.repo_root,self.requested_steps)
+>       if not self.ledger.is_file(): raise ValueError('existing shared ledger required')
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: existing shared ledger required
+
+runtime_trace/live_chain/session.py:24: ValueError
+________________ test_bad_token_cannot_enter_next_body[unbound] ________________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_bad_token_cannot_enter_ne3')
+attack = 'unbound'
+
+    @pytest.mark.parametrize('attack',['stale','foreign','wrong_checkpoint','unbound','duplicate'])
+    def test_bad_token_cannot_enter_next_body(tmp_path,attack):
+>       session=FixtureSession(ROOT,tmp_path/'run',3,ROOT/'runtime_trace/regular_nstep/artifacts/budget.json')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_live_chain_session.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_live_chain_session.FixtureSession object at 0x713c6681a420>
+repo_root = PosixPath('/home/otherside123/verified-driver-v1-test-mirror-2026-10-06')
+run_root = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_bad_token_cannot_enter_ne3/run')
+requested_steps = 3
+ledger = PosixPath('/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/runtime_trace/regular_nstep/artifacts/budget.json')
+
+    def __init__(self,repo_root:Path,run_root:Path,requested_steps:int,ledger:Path):
+        self.repo_root=no_alias(repo_root); self.run_root=no_alias(run_root)
+        self.requested_steps=validate_n(requested_steps); self.ledger=Path(ledger)
+        self.genesis=chain_genesis(self.repo_root,self.requested_steps)
+>       if not self.ledger.is_file(): raise ValueError('existing shared ledger required')
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: existing shared ledger required
+
+runtime_trace/live_chain/session.py:24: ValueError
+_______________ test_bad_token_cannot_enter_next_body[duplicate] _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_bad_token_cannot_enter_ne4')
+attack = 'duplicate'
+
+    @pytest.mark.parametrize('attack',['stale','foreign','wrong_checkpoint','unbound','duplicate'])
+    def test_bad_token_cannot_enter_next_body(tmp_path,attack):
+>       session=FixtureSession(ROOT,tmp_path/'run',3,ROOT/'runtime_trace/regular_nstep/artifacts/budget.json')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_live_chain_session.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_live_chain_session.FixtureSession object at 0x713c6681af90>
+repo_root = PosixPath('/home/otherside123/verified-driver-v1-test-mirror-2026-10-06')
+run_root = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_bad_token_cannot_enter_ne4/run')
+requested_steps = 3
+ledger = PosixPath('/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/runtime_trace/regular_nstep/artifacts/budget.json')
+
+    def __init__(self,repo_root:Path,run_root:Path,requested_steps:int,ledger:Path):
+        self.repo_root=no_alias(repo_root); self.run_root=no_alias(run_root)
+        self.requested_steps=validate_n(requested_steps); self.ledger=Path(ledger)
+        self.genesis=chain_genesis(self.repo_root,self.requested_steps)
+>       if not self.ledger.is_file(): raise ValueError('existing shared ledger required')
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: existing shared ledger required
+
+runtime_trace/live_chain/session.py:24: ValueError
+_________________ test_final_terminal_refuses_numerical_resume _________________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_final_terminal_refuses_nu0')
+
+    def test_final_terminal_refuses_numerical_resume(tmp_path):
+>       session=FixtureSession(ROOT,tmp_path/'run',1,ROOT/'runtime_trace/regular_nstep/artifacts/budget.json')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_live_chain_session.py:56: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_live_chain_session.FixtureSession object at 0x713c6681bb60>
+repo_root = PosixPath('/home/otherside123/verified-driver-v1-test-mirror-2026-10-06')
+run_root = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_final_terminal_refuses_nu0/run')
+requested_steps = 1
+ledger = PosixPath('/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/runtime_trace/regular_nstep/artifacts/budget.json')
+
+    def __init__(self,repo_root:Path,run_root:Path,requested_steps:int,ledger:Path):
+        self.repo_root=no_alias(repo_root); self.run_root=no_alias(run_root)
+        self.requested_steps=validate_n(requested_steps); self.ledger=Path(ledger)
+        self.genesis=chain_genesis(self.repo_root,self.requested_steps)
+>       if not self.ledger.is_file(): raise ValueError('existing shared ledger required')
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: existing shared ledger required
+
+runtime_trace/live_chain/session.py:24: ValueError
+=========================== short test summary info ============================
+FAILED tests/test_live_chain_session.py::test_private_pipe_token_runs_exactly_one_next_body
+FAILED tests/test_live_chain_session.py::test_bad_token_cannot_enter_next_body[stale]
+FAILED tests/test_live_chain_session.py::test_bad_token_cannot_enter_next_body[foreign]
+FAILED tests/test_live_chain_session.py::test_bad_token_cannot_enter_next_body[wrong_checkpoint]
+FAILED tests/test_live_chain_session.py::test_bad_token_cannot_enter_next_body[unbound]
+FAILED tests/test_live_chain_session.py::test_bad_token_cannot_enter_next_body[duplicate]
+FAILED tests/test_live_chain_session.py::test_final_terminal_refuses_numerical_resume
+7 failed, 5 passed in 0.19s

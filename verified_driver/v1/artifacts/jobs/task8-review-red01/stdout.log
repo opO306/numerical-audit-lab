@@ -1,0 +1,25 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___ test_certified_master_prefix_mutation_after_current_blocks_first_resume ____
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_certified_master_prefix_m0')
+
+    def test_certified_master_prefix_mutation_after_current_blocks_first_resume(tmp_path):
+        driver=marker_driver(tmp_path)
+        def mutate(point):
+            if point=='after_current_replace_before_token':
+                path=driver.session.master_trace;raw=path.read_bytes();path.write_bytes(b'X'+raw[1:])
+        driver._crash_hook=mutate
+        result=driver.run(3,'prefix-after-current')
+        assert result.verdict=='STOP' and result.generation==1
+        assert driver.store.recover()[1].generation==1
+>       assert driver.session.markers==[1] and driver.session.stopped
+E       assert ([1, 2] == [1]
+E         
+E         Left contains one more item: 2
+E         Use -v to get more diff)
+
+tests/test_verified_driver_v1_review.py:13: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_verified_driver_v1_review.py::test_certified_master_prefix_mutation_after_current_blocks_first_resume
+1 failed in 0.19s

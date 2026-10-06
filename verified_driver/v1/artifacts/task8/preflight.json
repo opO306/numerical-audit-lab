@@ -1,0 +1,12 @@
+{
+  "failure_review_rerun_reserve_seconds": 327.2493744529793,
+  "historical_files": 340,
+  "new_ceiling_seconds": 4200,
+  "new_ledger": false,
+  "ordinary_larger_campaigns_authorized": false,
+  "pin_count": 40,
+  "planned_caps_seconds": 400,
+  "remaining_seconds": 727.2493744529793,
+  "source_binding": "1b8c9d97907b2308b079aefdb6b40c6263b741c3b8c6d4cd136c6b0451e160c5",
+  "used_seconds": 3472.7506255470207
+}

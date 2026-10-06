@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="54" time="16.970" timestamp="2026-10-06T16:36:15.460553+09:00" hostname="localhost"><testcase classname="tests.test_verified_driver_v1_attacks" name="test_positive_and_idempotent_transaction_retry" time="0.217" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_post_check_candidate_cannot_escape_exact_acceptance_binding[q]" time="0.048" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_post_check_candidate_cannot_escape_exact_acceptance_binding[full_v]" time="0.048" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_post_check_candidate_cannot_escape_exact_acceptance_binding[latent]" time="0.048" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_post_check_candidate_cannot_escape_exact_acceptance_binding[coefficient]" time="0.050" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_post_check_candidate_cannot_escape_exact_acceptance_binding[box]" time="0.049" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_post_check_candidate_cannot_escape_exact_acceptance_binding[form_reset]" time="0.048" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_post_check_candidate_cannot_escape_exact_acceptance_binding[t]" time="0.048" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_post_check_candidate_cannot_escape_exact_acceptance_binding[source]" time="0.049" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_post_check_candidate_cannot_escape_exact_acceptance_binding[gradient]" time="0.048" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_publication_and_pause_guards[receipt_reuse]" time="0.102" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_publication_and_pause_guards[resume_before_check]" time="0.050" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_publication_and_pause_guards[resume_before_current]" time="0.057" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_publication_and_pause_guards[certified_prefix]" time="0.080" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_publication_and_pause_guards[source_change]" time="0.025" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_barrier_splice_never_advances_authority[wrong_parent]" time="0.024" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_barrier_splice_never_advances_authority[foreign_session]" time="0.024" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_barrier_splice_never_advances_authority[skipped_barrier]" time="0.023" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_barrier_splice_never_advances_authority[duplicate_barrier]" time="0.081" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_checker_failure_stops_before_next_body[checker_crash]" time="0.050" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_checker_failure_stops_before_next_body[checker_timeout]" time="0.050" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_checker_failure_stops_before_next_body[resource_refusal]" time="0.052" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_exact_current_crash_boundary[before_current_replace-0]" time="0.057" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_exact_current_crash_boundary[after_current_replace_before_token-1]" time="0.062" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_exact_current_crash_boundary[after_token_before_resume-1]" time="0.072" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_private_pipe_token_attacks_have_no_forward_body[foreign]" time="0.172" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_private_pipe_token_attacks_have_no_forward_body[checkpoint]" time="0.189" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_private_pipe_token_attacks_have_no_forward_body[skipped]" time="0.160"><failure message="ValueError: token generation/sequence mismatch">tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_private_pipe_token_attack2')
+evidence = [{'attack': 'positive_and_transaction_retry', 'scope': 'TEST_ONLY_CONTROLLER', 'verdict': 'PASS', 'generation': 3, ......: 0, ...}, {'attack': 'post_check_box', 'scope': 'TEST_ONLY_CONTROLLER', 'verdict': 'STOP', 'generation': 0, ...}, ...]
+attack = 'skipped'
+
+    @pytest.mark.parametrize('attack',['foreign','checkpoint','skipped','generation','future','duplicate','unbound'])
+    def test_private_pipe_token_attacks_have_no_forward_body(tmp_path,evidence,attack):
+        s=FixtureSession(ROOT,tmp_path/'worker',3,LEDGER)
+        try:
+            event=s.start(); token=certify_fixture(s,event,1)
+            if attack=='foreign':token=replace(token,session_id='f'*64)
+            elif attack=='checkpoint':token=replace(token,checkpoint_id='f'*64)
+&gt;           elif attack=='skipped':token=replace(token,barrier_seq=3)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_attacks.py:151: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/dataclasses.py:1581: in replace
+    return obj.__class__(**changes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;string&gt;:10: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = ResumeToken(session_id='778861962510baeadba7e77ea93b3c30e333342e90ef2bb37da5c28cac776e7a', barrier_seq=3, predecessor_...1111111111111111111111111111111111111111111', nonce='1f419edecd3d266e2fbaf2257d91ae7d1783d422ec3f39ae7c33a814e4feb537')
+
+    def __post_init__(self):
+        for v in (self.session_id,self.checkpoint_id,self.state_id,self.nonce): check_hash(v)
+        for name in ('barrier_seq','predecessor_generation','candidate_generation'):
+            if type(getattr(self,name)) is not int: raise ValueError('strict token integer')
+        if self.predecessor_generation&lt;0 or self.candidate_generation!=self.predecessor_generation+1 or self.barrier_seq!=self.candidate_generation:
+&gt;           raise ValueError('token generation/sequence mismatch')
+E           ValueError: token generation/sequence mismatch
+
+verified_driver/v1/live_chain/protocol.py:52: ValueError</failure></testcase><testcase classname="tests.test_verified_driver_v1_attacks" name="test_private_pipe_token_attacks_have_no_forward_body[generation]" time="0.233"><failure message="ValueError: token generation/sequence mismatch">tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_private_pipe_token_attack3')
+evidence = [{'attack': 'positive_and_transaction_retry', 'scope': 'TEST_ONLY_CONTROLLER', 'verdict': 'PASS', 'generation': 3, ......: 0, ...}, {'attack': 'post_check_box', 'scope': 'TEST_ONLY_CONTROLLER', 'verdict': 'STOP', 'generation': 0, ...}, ...]
+attack = 'generation'
+
+    @pytest.mark.parametrize('attack',['foreign','checkpoint','skipped','generation','future','duplicate','unbound'])
+    def test_private_pipe_token_attacks_have_no_forward_body(tmp_path,evidence,attack):
+        s=FixtureSession(ROOT,tmp_path/'worker',3,LEDGER)
+        try:
+            event=s.start(); token=certify_fixture(s,event,1)
+            if attack=='foreign':token=replace(token,session_id='f'*64)
+            elif attack=='checkpoint':token=replace(token,checkpoint_id='f'*64)
+            elif attack=='skipped':token=replace(token,barrier_seq=3)
+&gt;           elif attack=='generation':token=replace(token,predecessor_generation=2)
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_attacks.py:152: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/dataclasses.py:1581: in replace
+    return obj.__class__(**changes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;string&gt;:10: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = ResumeToken(session_id='194d502e373228384ced13058322100e0a5ef0b2ed895ea5e5b179aa50d4fb0e', barrier_seq=1, predecessor_...1111111111111111111111111111111111111111111', nonce='310afe9f7cc05babeed8a2d5dbfe72ff1c4efbc649f7c66c36f92f3bb62fce75')
+
+    def __post_init__(self):
+        for v in (self.session_id,self.checkpoint_id,self.state_id,self.nonce): check_hash(v)
+        for name in ('barrier_seq','predecessor_generation','candidate_generation'):
+            if type(getattr(self,name)) is not int: raise ValueError('strict token integer')
+        if self.predecessor_generation&lt;0 or self.candidate_generation!=self.predecessor_generation+1 or self.barrier_seq!=self.candidate_generation:
+&gt;           raise ValueError('token generation/sequence mismatch')
+E           ValueError: token generation/sequence mismatch
+
+verified_driver/v1/live_chain/protocol.py:52: ValueError</failure></testcase><testcase classname="tests.test_verified_driver_v1_attacks" name="test_private_pipe_token_attacks_have_no_forward_body[future]" time="0.196"><failure message="ValueError: token generation/sequence mismatch">tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_private_pipe_token_attack4')
+evidence = [{'attack': 'positive_and_transaction_retry', 'scope': 'TEST_ONLY_CONTROLLER', 'verdict': 'PASS', 'generation': 3, ......: 0, ...}, {'attack': 'post_check_box', 'scope': 'TEST_ONLY_CONTROLLER', 'verdict': 'STOP', 'generation': 0, ...}, ...]
+attack = 'future'
+
+    @pytest.mark.parametrize('attack',['foreign','checkpoint','skipped','generation','future','duplicate','unbound'])
+    def test_private_pipe_token_attacks_have_no_forward_body(tmp_path,evidence,attack):
+        s=FixtureSession(ROOT,tmp_path/'worker',3,LEDGER)
+        try:
+            event=s.start(); token=certify_fixture(s,event,1)
+            if attack=='foreign':token=replace(token,session_id='f'*64)
+            elif attack=='checkpoint':token=replace(token,checkpoint_id='f'*64)
+            elif attack=='skipped':token=replace(token,barrier_seq=3)
+            elif attack=='generation':token=replace(token,predecessor_generation=2)
+&gt;           elif attack=='future':token=replace(token,candidate_generation=3)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_attacks.py:153: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/dataclasses.py:1581: in replace
+    return obj.__class__(**changes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;string&gt;:10: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = ResumeToken(session_id='46d68822c53453c05e457ea39b2cb74a87a841a30f8c94abbe63ae0085494b05', barrier_seq=1, predecessor_...1111111111111111111111111111111111111111111', nonce='2e4a446165627712cd87bd35aa4435530eca434ee8844078790e057f4feed6f8')
+
+    def __post_init__(self):
+        for v in (self.session_id,self.checkpoint_id,self.state_id,self.nonce): check_hash(v)
+        for name in ('barrier_seq','predecessor_generation','candidate_generation'):
+            if type(getattr(self,name)) is not int: raise ValueError('strict token integer')
+        if self.predecessor_generation&lt;0 or self.candidate_generation!=self.predecessor_generation+1 or self.barrier_seq!=self.candidate_generation:
+&gt;           raise ValueError('token generation/sequence mismatch')
+E           ValueError: token generation/sequence mismatch
+
+verified_driver/v1/live_chain/protocol.py:52: ValueError</failure></testcase><testcase classname="tests.test_verified_driver_v1_attacks" name="test_private_pipe_token_attacks_have_no_forward_body[duplicate]" time="0.155" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_private_pipe_token_attacks_have_no_forward_body[unbound]" time="0.156" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_rehashed_saved_numeric_mutants_are_independently_refused[q]" time="2.906" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_rehashed_saved_numeric_mutants_are_independently_refused[full_v]" time="0.894" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_rehashed_saved_numeric_mutants_are_independently_refused[latent]" time="0.876" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_rehashed_saved_numeric_mutants_are_independently_refused[coefficient]" time="0.872" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_rehashed_saved_numeric_mutants_are_independently_refused[box_reset]" time="0.867" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_rehashed_saved_numeric_mutants_are_independently_refused[box_increase]" time="0.870" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_rehashed_saved_numeric_mutants_are_independently_refused[form_reset]" time="0.884" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_rehashed_saved_numeric_mutants_are_independently_refused[early_body]" time="0.869" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_rehashed_saved_numeric_mutants_are_independently_refused[tdt_swap]" time="0.870" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_rehashed_saved_numeric_mutants_are_independently_refused[gradient_omit]" time="0.886" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_rehashed_saved_numeric_mutants_are_independently_refused[terminal_successor]" time="0.869" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_equal_public_replay_cannot_hide_wrong_continuation[latent]" time="0.203" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_equal_public_replay_cannot_hide_wrong_continuation[coefficient]" time="0.227" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_equal_public_replay_cannot_hide_wrong_continuation[box]" time="0.199" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_equal_public_replay_cannot_hide_wrong_continuation[t]" time="0.208" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_equal_public_replay_cannot_hide_wrong_continuation[dt]" time="0.204" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_equal_public_replay_cannot_hide_wrong_continuation[source]" time="0.203" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_equal_public_replay_cannot_hide_wrong_continuation[step]" time="0.204" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_replay_has_no_generation_or_acceptance_publication" time="0.242" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_replay_candidate_cannot_claim_acceptance" time="0.237" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_altered_stored_certificate_refuses_before_fresh_process" time="0.169" /><testcase classname="tests.test_verified_driver_v1_attacks" name="test_cross_process_live_publication_without_transition_refuses" time="0.170" /></testsuite></testsuites>

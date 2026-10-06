@@ -1,0 +1,24 @@
+{
+  "basis": "verified_driver/v1/artifacts/execution-allocation.json and task7/workflow/run.py",
+  "ceiling_changed": false,
+  "decision": "STOP_ALLOWANCE_INSUFFICIENT; designer ceiling decision required before Task8 execution",
+  "fits_existing_allowance": false,
+  "guard_caps_seconds": {
+    "controller_death_active": 15,
+    "controller_death_paused": 15,
+    "final_regression": 120,
+    "live_N3_positive": 55,
+    "live_N4_negative": 60,
+    "nonterminal_replay": 45,
+    "ordinary_N3_control": 10,
+    "post_CURRENT_interruption": 25,
+    "terminal_replay": 55
+  },
+  "heavy_runs_started": false,
+  "interpretation": "Hard stop caps retained from the original allocation plus final-regression 120s cap; not measured Gala completion times or an ETA. No retry/review-fix reserve included.",
+  "new_ledger": false,
+  "remaining_seconds": 127.24937445297928,
+  "required_seconds": 400,
+  "schema": "TASK8_ALLOWANCE_PLAN_NOT_LEDGER_V1",
+  "shortfall_seconds": 272.7506255470207
+}

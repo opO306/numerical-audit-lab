@@ -1,0 +1,11 @@
+{
+  "destination": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/verified_driver/v1/artifacts/task8/ordinary-01",
+  "exact_byte_copy": true,
+  "files": {
+    "SUMMARY.json": "4d3f83e79d9000d7c70c78121bfe21804ad3877615f2a8f9169ccd22a4a3572d",
+    "harness_output.json": "3ef117ddf17596bccdc1194d13649bd1a12da8be445412b037a3191871c331c2",
+    "pre-run.json": "5c385e93498f1c38f13369288a9bc6b1b3fb70f2e11983680cd225ac2f2b74cf",
+    "source-pinset.json": "0b9e14faacb4fc4b6862a08a2f3f8b527c27a5f27af97f2a0d96ab6428a849ee"
+  },
+  "source": "/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/artifacts/task8/ordinary-01"
+}

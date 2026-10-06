@@ -1,0 +1,23 @@
+{
+  "additional_fixture_reason": "No saved completed N3 found; Task4 final S2->S3 needs actual terminal evidence; original batch capture only, never V1 authority evidence",
+  "existing_ledger": "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\budget.json",
+  "fits_existing_allowance": true,
+  "fixture_unit_regression_reserved_seconds": 180,
+  "guard_caps_seconds": {
+    "controller_death_active": 15,
+    "controller_death_paused": 15,
+    "live_N3_positive": 55,
+    "live_N4_negative": 60,
+    "necessary_saved_N3_fixture": 30,
+    "nonterminal_replay": 45,
+    "ordinary_N3_control": 10,
+    "post_CURRENT_interruption": 25,
+    "terminal_replay": 55
+  },
+  "interpretation": "hard stop caps, not predicted durations; no promise of completion within caps",
+  "new_ledger": false,
+  "paid_resources": false,
+  "remaining_seconds": 655.7467632709781,
+  "required_total_upper_seconds": 490,
+  "used_seconds": 2944.253236729022
+}

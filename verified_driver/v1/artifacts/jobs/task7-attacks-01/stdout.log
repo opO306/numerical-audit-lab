@@ -1,0 +1,118 @@
+...........................FFF........................                   [100%]
+=================================== FAILURES ===================================
+________ test_private_pipe_token_attacks_have_no_forward_body[skipped] _________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_private_pipe_token_attack2')
+evidence = [{'attack': 'positive_and_transaction_retry', 'scope': 'TEST_ONLY_CONTROLLER', 'verdict': 'PASS', 'generation': 3, ......: 0, ...}, {'attack': 'post_check_box', 'scope': 'TEST_ONLY_CONTROLLER', 'verdict': 'STOP', 'generation': 0, ...}, ...]
+attack = 'skipped'
+
+    @pytest.mark.parametrize('attack',['foreign','checkpoint','skipped','generation','future','duplicate','unbound'])
+    def test_private_pipe_token_attacks_have_no_forward_body(tmp_path,evidence,attack):
+        s=FixtureSession(ROOT,tmp_path/'worker',3,LEDGER)
+        try:
+            event=s.start(); token=certify_fixture(s,event,1)
+            if attack=='foreign':token=replace(token,session_id='f'*64)
+            elif attack=='checkpoint':token=replace(token,checkpoint_id='f'*64)
+>           elif attack=='skipped':token=replace(token,barrier_seq=3)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_attacks.py:151: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/dataclasses.py:1581: in replace
+    return obj.__class__(**changes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+<string>:10: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = ResumeToken(session_id='778861962510baeadba7e77ea93b3c30e333342e90ef2bb37da5c28cac776e7a', barrier_seq=3, predecessor_...1111111111111111111111111111111111111111111', nonce='1f419edecd3d266e2fbaf2257d91ae7d1783d422ec3f39ae7c33a814e4feb537')
+
+    def __post_init__(self):
+        for v in (self.session_id,self.checkpoint_id,self.state_id,self.nonce): check_hash(v)
+        for name in ('barrier_seq','predecessor_generation','candidate_generation'):
+            if type(getattr(self,name)) is not int: raise ValueError('strict token integer')
+        if self.predecessor_generation<0 or self.candidate_generation!=self.predecessor_generation+1 or self.barrier_seq!=self.candidate_generation:
+>           raise ValueError('token generation/sequence mismatch')
+E           ValueError: token generation/sequence mismatch
+
+verified_driver/v1/live_chain/protocol.py:52: ValueError
+_______ test_private_pipe_token_attacks_have_no_forward_body[generation] _______
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_private_pipe_token_attack3')
+evidence = [{'attack': 'positive_and_transaction_retry', 'scope': 'TEST_ONLY_CONTROLLER', 'verdict': 'PASS', 'generation': 3, ......: 0, ...}, {'attack': 'post_check_box', 'scope': 'TEST_ONLY_CONTROLLER', 'verdict': 'STOP', 'generation': 0, ...}, ...]
+attack = 'generation'
+
+    @pytest.mark.parametrize('attack',['foreign','checkpoint','skipped','generation','future','duplicate','unbound'])
+    def test_private_pipe_token_attacks_have_no_forward_body(tmp_path,evidence,attack):
+        s=FixtureSession(ROOT,tmp_path/'worker',3,LEDGER)
+        try:
+            event=s.start(); token=certify_fixture(s,event,1)
+            if attack=='foreign':token=replace(token,session_id='f'*64)
+            elif attack=='checkpoint':token=replace(token,checkpoint_id='f'*64)
+            elif attack=='skipped':token=replace(token,barrier_seq=3)
+>           elif attack=='generation':token=replace(token,predecessor_generation=2)
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_attacks.py:152: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/dataclasses.py:1581: in replace
+    return obj.__class__(**changes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+<string>:10: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = ResumeToken(session_id='194d502e373228384ced13058322100e0a5ef0b2ed895ea5e5b179aa50d4fb0e', barrier_seq=1, predecessor_...1111111111111111111111111111111111111111111', nonce='310afe9f7cc05babeed8a2d5dbfe72ff1c4efbc649f7c66c36f92f3bb62fce75')
+
+    def __post_init__(self):
+        for v in (self.session_id,self.checkpoint_id,self.state_id,self.nonce): check_hash(v)
+        for name in ('barrier_seq','predecessor_generation','candidate_generation'):
+            if type(getattr(self,name)) is not int: raise ValueError('strict token integer')
+        if self.predecessor_generation<0 or self.candidate_generation!=self.predecessor_generation+1 or self.barrier_seq!=self.candidate_generation:
+>           raise ValueError('token generation/sequence mismatch')
+E           ValueError: token generation/sequence mismatch
+
+verified_driver/v1/live_chain/protocol.py:52: ValueError
+_________ test_private_pipe_token_attacks_have_no_forward_body[future] _________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_private_pipe_token_attack4')
+evidence = [{'attack': 'positive_and_transaction_retry', 'scope': 'TEST_ONLY_CONTROLLER', 'verdict': 'PASS', 'generation': 3, ......: 0, ...}, {'attack': 'post_check_box', 'scope': 'TEST_ONLY_CONTROLLER', 'verdict': 'STOP', 'generation': 0, ...}, ...]
+attack = 'future'
+
+    @pytest.mark.parametrize('attack',['foreign','checkpoint','skipped','generation','future','duplicate','unbound'])
+    def test_private_pipe_token_attacks_have_no_forward_body(tmp_path,evidence,attack):
+        s=FixtureSession(ROOT,tmp_path/'worker',3,LEDGER)
+        try:
+            event=s.start(); token=certify_fixture(s,event,1)
+            if attack=='foreign':token=replace(token,session_id='f'*64)
+            elif attack=='checkpoint':token=replace(token,checkpoint_id='f'*64)
+            elif attack=='skipped':token=replace(token,barrier_seq=3)
+            elif attack=='generation':token=replace(token,predecessor_generation=2)
+>           elif attack=='future':token=replace(token,candidate_generation=3)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v1_attacks.py:153: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/dataclasses.py:1581: in replace
+    return obj.__class__(**changes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+<string>:10: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = ResumeToken(session_id='46d68822c53453c05e457ea39b2cb74a87a841a30f8c94abbe63ae0085494b05', barrier_seq=1, predecessor_...1111111111111111111111111111111111111111111', nonce='2e4a446165627712cd87bd35aa4435530eca434ee8844078790e057f4feed6f8')
+
+    def __post_init__(self):
+        for v in (self.session_id,self.checkpoint_id,self.state_id,self.nonce): check_hash(v)
+        for name in ('barrier_seq','predecessor_generation','candidate_generation'):
+            if type(getattr(self,name)) is not int: raise ValueError('strict token integer')
+        if self.predecessor_generation<0 or self.candidate_generation!=self.predecessor_generation+1 or self.barrier_seq!=self.candidate_generation:
+>           raise ValueError('token generation/sequence mismatch')
+E           ValueError: token generation/sequence mismatch
+
+verified_driver/v1/live_chain/protocol.py:52: ValueError
+=========================== short test summary info ============================
+FAILED tests/test_verified_driver_v1_attacks.py::test_private_pipe_token_attacks_have_no_forward_body[skipped]
+FAILED tests/test_verified_driver_v1_attacks.py::test_private_pipe_token_attacks_have_no_forward_body[generation]
+FAILED tests/test_verified_driver_v1_attacks.py::test_private_pipe_token_attacks_have_no_forward_body[future]
+3 failed, 51 passed in 16.97s

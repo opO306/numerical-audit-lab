@@ -2,7 +2,7 @@
 
 Date: 2026-10-06 (Asia/Seoul)
 
-Status: DESIGN DRAFT FOR DESIGNER REVIEW / NOT IMPLEMENTED / NOT AUDITED
+Status: DESIGNER APPROVED / NOT IMPLEMENTED / NOT AUDITED
 
 ## 1. Purpose
 
@@ -224,8 +224,18 @@ The following orders are forbidden:
 - reuse a prior generation's receipt to resume;
 - change candidate bytes or Forms between verification and publication.
 
-A failure before resume leaves the current inferior stopped and the previous
-certified generation authoritative.
+Failure recovery is defined by the durable CURRENT boundary, not merely by
+whether RESUME has occurred:
+
+| failure point | authoritative generation | numerical continuation |
+| --- | --- | --- |
+| before atomic CURRENT replacement | Sk-1 | body(k+1) must not execute |
+| after a valid CURRENT=Sk replacement but before resume-token issue/resume | Sk | keep the inferior stopped until recovery verifies Sk |
+| replacement completion uncertain | verify the store and recover either the previous valid generation or the fully recorded new generation | no body may execute before that determination |
+
+V1 must never roll back a valid already-published Sk merely because resume did
+not occur. Conversely it must never assume Sk exists until store recovery proves
+the complete object/receipt/CURRENT chain.
 
 ## 10. Failure behavior
 
@@ -266,6 +276,11 @@ supervisor, parent-death signal, or equivalent mechanism. The exact mechanism is
 an implementation choice, but the property is part of the V1 contract and must
 be tested with real process termination.
 
+Termination tests must cover both (a) the inferior paused at a certification
+barrier and (b) the inferior actively executing a numerical body. In either case,
+loss of controller authority must prevent execution from advancing into the next
+uncertified numerical body.
+
 A test that merely checks Python object cleanup is insufficient.
 
 ## 12. Crash recovery: replay, not state injection
@@ -282,15 +297,23 @@ If a live session is lost after certified generation Sk:
    basis contract, gradient rule, t/dt, source binding, and step index; do not
    require the same process-local addresses or acquisition-specific namespace;
 5. do not create duplicate certified generations while replaying;
-6. if every boundary through Sk matches, stop at the Sk continuation barrier;
-7. switch that newly reproduced process into LIVE mode and allow the next new
-   candidate segment.
+6. if every boundary through Sk matches, stop at the Sk certified barrier;
+7. branch recovery by barrier kind:
+   - `NEXT_STEP_ENTRY`: the reproduced process may switch to LIVE mode and allow
+     only the next body that is still inside the original requested run scope;
+   - `FINAL_TERMINAL`: recover the final certified boundary and completion/exit
+     handling only. Do not execute a new numerical body and do not create a new
+     generation from that completed request.
 
 Any replay mismatch causes STOP. V1 does not patch memory to force the new
 process to match the old certificate.
 
 Replay may use new process-local addresses and acquisition identity. Those are
-new evidence, not a failure by themselves.
+new evidence, not a failure by themselves. This namespace relaxation applies
+only to semantic comparison during REPLAY. A live checkpoint and its resume
+token remain strictly bound to one live session, barrier sequence, predecessor
+generation, candidate generation, and exact accepted checkpoint identity;
+cross-session or cross-barrier token/evidence substitution must refuse.
 
 ## 13. V1 first supported experiment
 
@@ -355,7 +378,9 @@ V1 must include at least these authority attacks:
 - omit/alter gradient reset evidence;
 - crash the checker;
 - kill the Driver/controller while the inferior is paused;
-- kill the Driver/controller immediately after CURRENT replacement;
+- kill the Driver/controller while a numerical body is actively executing and verify no next uncertified body can begin;
+- kill after checker PASS but before CURRENT replacement;
+- kill immediately after valid CURRENT replacement but before resume-token issue;
 - replay from genesis with one stored continuation certificate altered;
 - replay with equal q/v but wrong latent/Form;
 - try to create a new generation during replay;
@@ -374,13 +399,14 @@ V1 is complete only when fresh evidence demonstrates all of the following:
 3. q/full_v/latent and carried Forms were preserved across each accepted edge;
 4. S1/S2/S3 form one immutable predecessor chain;
 5. a third-edge failure leaves CURRENT at S2 and prevents forward execution;
-6. controller death cannot leave the numerical inferior running uncontrolled;
-7. restart/replay from genesis reproduces the last certified continuation
+6. controller death, whether paused or during an active body, cannot allow the next uncertified body to run;
+7. recovery distinguishes pre-CURRENT failure from a valid post-CURRENT/pre-resume publication and preserves the store-proven authoritative generation;
+8. restart/replay from genesis reproduces the last certified continuation
    boundary and does not create duplicate generations;
-8. the final N=3 public output matches the ordinary original Gala N=3 control;
-9. retained Runtime Trace trust and UNTRACED boundaries remain explicitly
-   reported;
-10. tests, evidence, and review distinguish internal/fresh review from any
+9. the final N=3 public output matches the ordinary original Gala N=3 control;
+10. retained Runtime Trace trust and UNTRACED boundaries remain explicitly
+    reported;
+11. tests, evidence, and review distinguish internal/fresh review from any
     external independent audit.
 
 A loop counter, successful pause command, or three JSON files alone are not V1

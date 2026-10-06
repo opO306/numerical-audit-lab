@@ -1,0 +1,23 @@
+{
+  "destination": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/verified_driver/v1/artifacts/task8/paused-death-02",
+  "exact_byte_copy": true,
+  "files": {
+    "SUMMARY.json": "0dc1ef58bcacbf1bb39a35fa3205e357cf7f2d231121abf062ba795c8e46cd71",
+    "before-controller-death.json": "6a0683112926273aae8f710b9ffe06b0b185f3ff210e4cf9dd61c7cd87d2a8ed",
+    "controller-ready.json": "c3e731c6b18c28058ae48a172c85572ca95b3e96f31cccba2d9f7813b1f6d649",
+    "execution-helper.json": "7061caa8b3ed76092385fb210676c9f5d14a39882b32907d4e21f1bdf38afcb0",
+    "execution-helper.py": "75f0fb197b56301b6f1ebc36e988d31ca03ac5eb358edc0d41f523cda62e44fa",
+    "live/body-start-1.json": "4a9db260c5457a013fb768ece851aaf5a9eb9e22ce3ce36c8aa56962b77ca920",
+    "live/containment.json": "02b2e4d4141befe19f701e6017e6ad6fa5d81098e9e02a3c8703032ebf9c8883",
+    "live/gdb.log": "18bcb57a728f5b5807c6d57976ca71f36ff5c6a3febd124068dd7b73f8275e44",
+    "live/metadata-1.json": "9dcf0adb849cea999af432777f9016206383a00d313e2a386d59bdc9702127c1",
+    "live/trace.jsonl": "76552b99c0e206a054e9abbf9d050c5eb3e1d616ac395d6d968863f35deee918",
+    "paused.json": "0ec3d968a4927e511ba474adf2c69dc71a6740d572e4d8e97083a3de89c6ec65",
+    "pre-run.json": "447dc10e9fae193eedca998a1c22f1697a9ba39c4aa6848771069a96601b63fd",
+    "source-pinset.json": "f75980706aefbbd68cddce09549695c2f633905e01185f92f96660db81a9e2cd",
+    "store/.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "store/CURRENT": "1fd14a67a373253b618dd8410ff9f7546a96353ea2012186673c31bc232add2e",
+    "store/objects/9979a2b110d16b283d5995912608f37817c5713270d46528c652083cb22e4c9e.json": "9979a2b110d16b283d5995912608f37817c5713270d46528c652083cb22e4c9e"
+  },
+  "source": "/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/artifacts/task8/paused-death-02"
+}

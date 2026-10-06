@@ -1,0 +1,18 @@
+{
+  "historical_files": 152,
+  "moved_files": [
+    "__init__.py",
+    "checker.py",
+    "checkpoint.py",
+    "gdb_live.py",
+    "harness.py",
+    "producer.py",
+    "protocol.py",
+    "raw.py",
+    "schema.py",
+    "session.py",
+    "worker.py"
+  ],
+  "old_python_files": [],
+  "source_scope": "imports, executable paths, root depth, V1 source pinning only"
+}

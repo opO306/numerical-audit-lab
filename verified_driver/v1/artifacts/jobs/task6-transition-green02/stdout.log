@@ -1,0 +1,21 @@
+......................................F                                  [100%]
+=================================== FAILURES ===================================
+____ test_live_session_launcher_is_contained_and_explicit_stop_reaps_group _____
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_live_session_launcher_is_0')
+
+    def test_live_session_launcher_is_contained_and_explicit_stop_reaps_group(tmp_path):
+        from tests.test_live_chain_session import FixtureSession
+        from tests.verified_driver_v1_support import LEDGER
+        session=FixtureSession(ROOT,tmp_path/'session',3,LEDGER)
+        try:
+            session.start()
+>           assert isinstance(session.process,ContainedLiveProcess)
+E           AssertionError: assert False
+E            +  where False = isinstance(<Popen: returncode: None args: ['/home/otherside123/venvs/gate2c1-trace/bin/...>, ContainedLiveProcess)
+E            +    where <Popen: returncode: None args: ['/home/otherside123/venvs/gate2c1-trace/bin/...> = <tests.test_live_chain_session.FixtureSession object at 0x71e595ffca10>.process
+
+tests/test_verified_driver_v1_containment.py:70: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_verified_driver_v1_containment.py::test_live_session_launcher_is_contained_and_explicit_stop_reaps_group
+1 failed, 38 passed in 4.24s

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.190" timestamp="2026-10-06T17:12:35.084274+09:00" hostname="localhost"><testcase classname="tests.test_verified_driver_v1_review" name="test_certified_master_prefix_mutation_after_current_blocks_first_resume" time="0.106"><failure message="assert ([1, 2] == [1]&#10;  &#10;  Left contains one more item: 2&#10;  Use -v to get more diff)">tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_certified_master_prefix_m0')
+
+    def test_certified_master_prefix_mutation_after_current_blocks_first_resume(tmp_path):
+        driver=marker_driver(tmp_path)
+        def mutate(point):
+            if point=='after_current_replace_before_token':
+                path=driver.session.master_trace;raw=path.read_bytes();path.write_bytes(b'X'+raw[1:])
+        driver._crash_hook=mutate
+        result=driver.run(3,'prefix-after-current')
+        assert result.verdict=='STOP' and result.generation==1
+        assert driver.store.recover()[1].generation==1
+&gt;       assert driver.session.markers==[1] and driver.session.stopped
+E       assert ([1, 2] == [1]
+E         
+E         Left contains one more item: 2
+E         Use -v to get more diff)
+
+tests/test_verified_driver_v1_review.py:13: AssertionError</failure></testcase></testsuite></testsuites>

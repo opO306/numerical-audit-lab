@@ -1,0 +1,30 @@
+F
+=================================== FAILURES ===================================
+__________ test_rehashed_acquisition_counters_refuse[scalar_fp_count] __________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_rehashed_acquisition_coun0')
+counter = 'scalar_fp_count'
+
+    @pytest.mark.parametrize('counter',['scalar_fp_count','opcode_histogram'])
+    def test_rehashed_acquisition_counters_refuse(tmp_path,counter):
+        pred,cp,out,report=first(tmp_path)
+        doc=json.loads((cp/'checkpoint.json').read_bytes())
+        doc['metadata']['capture'][counter]=0 if counter=='scalar_fp_count' else {}
+        p=cp/'checkpoint.json'; p.chmod(0o600); p.write_bytes(canonical_bytes(doc)); rehash_checkpoint(cp)
+        edge=json.loads((out/'edge.json').read_bytes()); edge['checkpoint_id']=(cp/'CHECKPOINT').read_text().strip()
+        (out/'edge.json').write_bytes(canonical_bytes(edge)); rehash_derived(out)
+        rejected=check_edge(cp,out,pred,ROOT)
+>       assert rejected['verdict']=='REFUSED' and rejected['failure_stage']=='RAW',rejected
+E       AssertionError: {'schema': 'LIVE_EDGE_CHECK_V1', 'verdict': 'REFUSED', 'failure_stage': 'SEMANTIC', 'requested_complete': False, ...}
+E       assert ('REFUSED' == 'REFUSED'
+E         
+E           REFUSED and 'SEMANTIC' == 'RAW'
+E         
+E         - RAW
+E         + SEMANTIC)
+
+tests/test_live_chain_incremental.py:76: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_live_chain_incremental.py::test_rehashed_acquisition_counters_refuse[scalar_fp_count]
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 15 deselected in 2.14s

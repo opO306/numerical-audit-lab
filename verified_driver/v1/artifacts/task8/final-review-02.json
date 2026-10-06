@@ -1,0 +1,21 @@
+{
+  "schema": "FRESH_INTERNAL_REVIEW_V1",
+  "verdict": "APPROVE",
+  "reviewer": "/root/task8_internal_review",
+  "source_binding": "f75980706aefbbd68cddce09549695c2f633905e01185f92f96660db81a9e2cd",
+  "critical": 0,
+  "important": 0,
+  "findings_closed": ["master-prefix validation before LIVE/replay resume", "replay-only S0 does not dispatch LIVE", "logical Form source coordinates preserved", "complete owned subtree termination including separate-group inferiors"],
+  "combined_source_files_checked": 188,
+  "source_mismatches": 0,
+  "actual_runs_checked": 8,
+  "pinset_files_per_run": 40,
+  "junit": {"tests": 330, "failures": 0, "errors": 0, "skips": 0},
+  "actual_subtree_receipts": {"paused-death-02": [797,807], "active-death-02": [829,839], "interruption-02": [861,871]},
+  "replay_transition_id": "59ab22cc4f5338f6b6f45df70ea52f322deb080dfbce2715ba690795138321c8",
+  "review_scope": "Read-only source, recorded actual numerical-authority artifacts, checksums and JUnit. No tests/checker/Gala/GDB rerun by reviewer; no file edits, delegation or Git mutations.",
+  "limitations": "Linux/GDB/collector truth, allocation/root assumptions and init-to-step1/terminal-to-wrapper UNTRACED remain. Tested local process-loss cases do not establish arbitrary-workload/universal containment. Internal review approval of exact bytes/artifacts only; designer V1 completion decision pending.",
+  "external_audit": false,
+  "formal_certification": false,
+  "v1_completion_declared": false
+}

@@ -1,0 +1,17 @@
+{
+  "mirror": "source-mirror-containment-green.json",
+  "junit": "task8-final02-junit.xml",
+  "review": "final-review-02.json",
+  "runs": {
+    "ordinary": "ordinary-02",
+    "positive": "positive-03",
+    "negative": "negative-02",
+    "nonterminal": "nonterminal-02",
+    "terminal": "terminal-02",
+    "paused-death": "paused-death-02",
+    "active-death": "active-death-02",
+    "interruption": "interruption-02"
+  },
+  "older_task8_runs": "immutable pre-final-review historical evidence; not final source evidence",
+  "task4_fixture": "historical TEST_ONLY; not promoted"
+}

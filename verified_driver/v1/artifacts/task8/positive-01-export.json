@@ -1,0 +1,19 @@
+{
+  "destination": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/verified_driver/v1/artifacts/task8/positive-01",
+  "exact_byte_copy": true,
+  "files": {
+    "FAILED.json": "e40a80a462d2bcd0cf907f667fd864d326b8c1ab0a90a0952ee27824460023f2",
+    "controller-result.json": "844b0c67168932674dfbf28513dcaa40b9e6cbc5cf8081d66275b6b0a28f14a0",
+    "metrics.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "pre-run.json": "055f48d9f4de3313184107c17f883acf4c3a3032b9b581d8a30717492a37a8c0",
+    "runs/actual/live/containment.json": "f9ca83d2f219756686739b08a0489c425bc83f21259db1bb6a7f2d48f5b078ec",
+    "runs/actual/live/gdb.log": "e4ad2c3e49c4516a49028dfa657770401b648deb56c7e5516d51ccf1b98ab12a",
+    "runs/actual/live/session-stop.json": "54f937b39b9f402915928fdda9e2db9d5ac28e05368cc6f984e372c3d4c8e09a",
+    "runs/actual/result.json": "844b0c67168932674dfbf28513dcaa40b9e6cbc5cf8081d66275b6b0a28f14a0",
+    "source-pinset.json": "0b9e14faacb4fc4b6862a08a2f3f8b527c27a5f27af97f2a0d96ab6428a849ee",
+    "store/.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "store/CURRENT": "1fd14a67a373253b618dd8410ff9f7546a96353ea2012186673c31bc232add2e",
+    "store/objects/9979a2b110d16b283d5995912608f37817c5713270d46528c652083cb22e4c9e.json": "9979a2b110d16b283d5995912608f37817c5713270d46528c652083cb22e4c9e"
+  },
+  "source": "/home/otherside123/verified-driver-v1-test-mirror-2026-10-06/verified_driver/v1/artifacts/task8/positive-01"
+}
