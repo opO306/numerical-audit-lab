@@ -1,0 +1,9 @@
+{
+  "scope": "AUTHOR DOCUMENT LINK VALIDATION FAILURE; NOT A NUMERICAL OR IMPLEMENTATION FAILURE",
+  "command": ["python", "-B", "audit/c1b1-r2-limited-reaudit-accepted-2026-10-05/seal.py"],
+  "actual_exit": 1,
+  "failure": "Incorrect ../../../specs relative link from the two-level current output directory",
+  "repair": "Use ../../specs for the finite-policy link",
+  "implementation_changed_by_repair": false,
+  "historical_evidence_modified": false
+}

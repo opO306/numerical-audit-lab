@@ -1,0 +1,163 @@
+{
+  "schema": "C1B1_R2_LIMITED_REAUDIT_ACCEPTANCE_AUTHOR_RECEIPT_V1",
+  "recorded_at_utc": "2026-10-05T06:03:10.392614+00:00",
+  "target": "79a655f0848152aa765e1537b741518b2fa97acf",
+  "parent": "baba8ea942b896af64ceaa7ab41e2bc5db73112c",
+  "source_bundle_sha256": "4bd5cb0ef00c022689aa1a1dd4354deba08961ab4e1887b38d2f62f287a8cced",
+  "accepted_findings": {
+    "ROUND_ADD": "LIMITED INDEPENDENT REAUDIT PASS",
+    "QDIV_SIGN": "LIMITED INDEPENDENT REAUDIT PASS",
+    "R2_PRECHARGE": "LIMITED INDEPENDENT REAUDIT PASS / FINDING CLOSED"
+  },
+  "accepted_verdict_source": "User-supplied independent audit text; not a new author numerical audit",
+  "historical_receipt_files_preserved": 185,
+  "tracked_working_files_preserved": 2916,
+  "global_resource_accounting": "NOT PASS",
+  "remaining_open": [
+    "O-CONTROL-PARAMETERS",
+    "O-DIRECT-FRACTION-CONSTRUCTION",
+    "O-ALLOCATION-AND-WORKER",
+    "ADAPTER-SCHEDULE-RECONSTRUCTION"
+  ],
+  "reference_producer_implementation": "NOT YET INDEPENDENTLY APPROVED",
+  "runtime_activation_allowed": false,
+  "J_status": "J_NOT_VERIFIED",
+  "certification": "NotCertified",
+  "V2_numerical_recheck": "NOT APPROVED",
+  "new_arithmetic_patch": false,
+  "new_tests_or_numeric_execution": false,
+  "commit_performed_this_turn": false,
+  "push_performed_this_turn": false,
+  "commit_push_actor": "UNRESOLVED",
+  "authorization_path": "UNRESOLVED",
+  "exact_push_time": "UNRESOLVED",
+  "previous_author_turn_completion_kst": "2026-10-05T14:41:20+09:00",
+  "commit_recorded_time": "2026-10-05T14:41:41+09:00",
+  "timing": {
+    "commit_recorded_after_previous_author_turn_completion_seconds": 21,
+    "forwarded_report_time_kst_as_reported_by_user": "2026-10-05T14:42:00+09:00",
+    "commit_recorded_before_report_forwarding_seconds_as_reported": 19,
+    "local_turn_completion_is_not_the_external_report_forwarding_timestamp": true,
+    "exact_push_time": "UNRESOLVED",
+    "commit_push_actor": "UNRESOLVED",
+    "authorization_path": "UNRESOLVED"
+  },
+  "final_ls_remote": {
+    "command": [
+      "git",
+      "ls-remote",
+      "--heads",
+      "origin",
+      "refs/heads/codex/c1b1-fclaim1-output-limit"
+    ],
+    "exit": 0,
+    "stdout": "79a655f0848152aa765e1537b741518b2fa97acf\trefs/heads/codex/c1b1-fclaim1-output-limit\n",
+    "stderr": ""
+  },
+  "final_diff_check": {
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "document_links": [
+    {
+      "file": "docs/C1B1_IMPULSE_R2_LIMITED_REAUDIT_ADDENDUM_2026-10-05.md",
+      "target": "../current/c1b1-r2-limited-reaudit-accepted-2026-10-05/USER_PROVIDED_REAUDIT_KO.md"
+    },
+    {
+      "file": "docs/C1B1_IMPULSE_R2_LIMITED_REAUDIT_ADDENDUM_2026-10-05.md",
+      "target": "../current/c1b1-r2-precharge-fix-2026-10-05/receipt.json"
+    },
+    {
+      "file": "docs/C1B1_IMPULSE_R2_LIMITED_REAUDIT_ADDENDUM_2026-10-05.md",
+      "target": "../current/c1b1-r2-limited-reaudit-accepted-2026-10-05/observed-provenance.json"
+    },
+    {
+      "file": "docs/C1B1_IMPULSE_R2_LIMITED_REAUDIT_ADDENDUM_2026-10-05.md",
+      "target": "../current/c1b1-r2-limited-reaudit-accepted-2026-10-05/previous-author-turn-metadata.json"
+    },
+    {
+      "file": "docs/C1B1_IMPULSE_R2_LIMITED_REAUDIT_ADDENDUM_2026-10-05.md",
+      "target": "../current/c1b1-r2-limited-reaudit-accepted-2026-10-05/OPEN_SCOPE_CONTRACT_REGISTER_KO.md"
+    },
+    {
+      "file": "docs/C1B1_IMPULSE_R2_LIMITED_REAUDIT_ADDENDUM_2026-10-05.md",
+      "target": "../current/C1B1_IMPULSE_RESOURCE_ACCOUNTING_LATEST_2026-10-05.md"
+    },
+    {
+      "file": "docs/C1B1_IMPULSE_R2_LIMITED_REAUDIT_ADDENDUM_2026-10-05.md",
+      "target": "../current/c1b1-r2-limited-reaudit-accepted-2026-10-05/initial-helper-failure.json"
+    },
+    {
+      "file": "docs/C1B1_IMPULSE_R2_LIMITED_REAUDIT_ADDENDUM_2026-10-05.md",
+      "target": "../current/c1b1-r2-limited-reaudit-accepted-2026-10-05/initial-seal-failure.json"
+    },
+    {
+      "file": "current/C1B1_IMPULSE_RESOURCE_ACCOUNTING_LATEST_2026-10-05.md",
+      "target": "c1b1-r2-limited-reaudit-accepted-2026-10-05/USER_PROVIDED_REAUDIT_KO.md"
+    },
+    {
+      "file": "current/C1B1_IMPULSE_RESOURCE_ACCOUNTING_LATEST_2026-10-05.md",
+      "target": "c1b1-r2-limited-reaudit-accepted-2026-10-05/observed-provenance.json"
+    },
+    {
+      "file": "current/C1B1_IMPULSE_RESOURCE_ACCOUNTING_LATEST_2026-10-05.md",
+      "target": "../docs/C1B1_IMPULSE_R2_LIMITED_REAUDIT_ADDENDUM_2026-10-05.md"
+    },
+    {
+      "file": "current/C1B1_IMPULSE_RESOURCE_ACCOUNTING_LATEST_2026-10-05.md",
+      "target": "c1b1-r2-limited-reaudit-accepted-2026-10-05/OPEN_SCOPE_CONTRACT_REGISTER_KO.md"
+    },
+    {
+      "file": "current/c1b1-r2-limited-reaudit-accepted-2026-10-05/OPEN_SCOPE_CONTRACT_REGISTER_KO.md",
+      "target": "../../specs/c1b1-independent-impulse-v1-attempt-reason-null/finite-policy.json"
+    },
+    {
+      "file": "current/c1b1-r2-limited-reaudit-accepted-2026-10-05/OPEN_SCOPE_CONTRACT_REGISTER_KO.md",
+      "target": "observed-provenance.json"
+    }
+  ],
+  "git_status": "?? audit/c1b1-r2-limited-reaudit-accepted-2026-10-05/\n?? current/C1B1_IMPULSE_RESOURCE_ACCOUNTING_LATEST_2026-10-05.md\n?? current/c1b1-r2-limited-reaudit-accepted-2026-10-05/\n?? docs/C1B1_IMPULSE_R2_LIMITED_REAUDIT_ADDENDUM_2026-10-05.md\n",
+  "evidence_files": {
+    "audit/c1b1-r2-limited-reaudit-accepted-2026-10-05/record.py": {
+      "sha256": "40e8396ef1c6f8d41b97ba35ac894b7a27a8babc4cac08eca1dfe11701cfcbe2",
+      "bytes": 5893
+    },
+    "audit/c1b1-r2-limited-reaudit-accepted-2026-10-05/seal.py": {
+      "sha256": "f4fd638d32fc0b8deecfc5271db32c8e2f7a0a3d73d80522c08d930a6ca31635",
+      "bytes": 4827
+    },
+    "current/c1b1-r2-limited-reaudit-accepted-2026-10-05/initial-helper-failure.json": {
+      "sha256": "def60bbb82d75f7d76046cc00230c3e353d74b29fb47e407f0c17d3328eb5da3",
+      "bytes": 454
+    },
+    "current/c1b1-r2-limited-reaudit-accepted-2026-10-05/initial-seal-failure.json": {
+      "sha256": "d8c2181b8bacba28e7921948c6ff3f226ef734528f472856eeebc2b7f41ab5cb",
+      "bytes": 455
+    },
+    "current/c1b1-r2-limited-reaudit-accepted-2026-10-05/observed-provenance.json": {
+      "sha256": "4d0af9dabfb38626387e089d8ae654e88deca9ce5f328194f69a3c11e85ac99f",
+      "bytes": 701771
+    },
+    "current/c1b1-r2-limited-reaudit-accepted-2026-10-05/OPEN_SCOPE_CONTRACT_REGISTER_KO.md": {
+      "sha256": "a04a163d2b2ab43214a5660b096d9998512ae5453d79b22111e1aa6eac0eb57c",
+      "bytes": 5529
+    },
+    "current/c1b1-r2-limited-reaudit-accepted-2026-10-05/previous-author-turn-metadata.json": {
+      "sha256": "f0969b3cc689f69fe6e1e8ac13887b85f76bc07f6dfdb937528379978c1ac37f",
+      "bytes": 4513
+    },
+    "current/c1b1-r2-limited-reaudit-accepted-2026-10-05/USER_PROVIDED_REAUDIT_KO.md": {
+      "sha256": "9f72d7e07b2e61f534dc685e7940892bb89ffbaf19e5f1c98fd2397e83698cf3",
+      "bytes": 6519
+    },
+    "current/C1B1_IMPULSE_RESOURCE_ACCOUNTING_LATEST_2026-10-05.md": {
+      "sha256": "6f7c4062264452ca39cf809a5208b08a40b4fd0f7f1c3a968f86cd1348052c57",
+      "bytes": 2286
+    },
+    "docs/C1B1_IMPULSE_R2_LIMITED_REAUDIT_ADDENDUM_2026-10-05.md": {
+      "sha256": "fedac18af447bc474e3ff26973240a81279b115c894c5030d909803a9a4243ab",
+      "bytes": 7824
+    }
+  }
+}

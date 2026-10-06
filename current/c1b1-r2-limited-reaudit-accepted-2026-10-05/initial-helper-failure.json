@@ -1,0 +1,9 @@
+{
+  "scope": "AUTHOR PROVENANCE RECEIPT HELPER; NOT A MATHEMATICAL OR IMPLEMENTATION FAILURE",
+  "command": ["python", "-B", "audit/c1b1-r2-limited-reaudit-accepted-2026-10-05/record.py"],
+  "actual_exit": 1,
+  "failure": "UnicodeDecodeError: default cp949 reading UTF-8 previous-author-turn-metadata.json",
+  "repair": "Read JSON text with explicit UTF-8 encoding",
+  "implementation_changed_by_repair": false,
+  "historical_evidence_modified": false
+}
