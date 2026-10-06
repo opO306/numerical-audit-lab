@@ -1,0 +1,1315 @@
+diff --git "a/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\test_verified_driver_v0_admission.py" "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\test_verified_driver_v0_admission.py"
+new file mode 100644
+index 0000000..d1ac0ae
+--- /dev/null
++++ "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\test_verified_driver_v0_admission.py"
+@@ -0,0 +1,63 @@
++"""Reviewer findings: refuse before any unowned/unreserved evidence write."""
++import shutil
++import pytest
++from verified_driver.v0.driver import VerifiedDriver
++from verified_driver.v0.store import CertifiedStore
++from verified_driver.v0 import driver as implementation
++from verified_driver_v0_support import ROOT,dump,sha
++
++def inventory(root):
++    return {str(p.relative_to(root)):sha(p) for p in root.rglob('*') if p.is_file()}
++
++def test_existing_historical_directory_is_never_given_failure_metadata(tmp_path):
++    history=tmp_path/'historical'; child=history/'old'; child.mkdir(parents=True)
++    (child/'original.json').write_bytes(b'{"sealed":true}')
++    store=CertifiedStore(tmp_path/'store')
++    driver=VerifiedDriver(ROOT,store,history,tmp_path/'unused-ledger.json')
++    before=inventory(history); state=store.current()
++    assert driver.transact(1,'old').verdict=='STOP'
++    assert inventory(history)==before and store.current()==state
++
++def test_outside_namespace_refusal_creates_no_evidence(tmp_path):
++    driver=VerifiedDriver(ROOT,CertifiedStore(tmp_path/'store'),tmp_path/'outside',tmp_path/'unused.json')
++    before=driver.store.current()
++    assert driver.transact(1,'new').verdict=='STOP'
++    assert not (tmp_path/'outside').exists() and driver.store.current()==before
++
++def toy_driver(tmp_path,monkeypatch,used=0):
++    root=tmp_path/'repo'; harness=root/'runtime_trace/harness.py'; harness.parent.mkdir(parents=True)
++    shutil.copyfile(ROOT/'runtime_trace/harness.py',harness)
++    ledger=root/'runtime_trace/regular_nstep/artifacts/budget.json'; dump(ledger,{'used_seconds':used,'jobs':[],'TEST_ONLY':True})
++    monkeypatch.setattr(implementation,'source_snapshot',lambda *args:{'runtime':{},'driver':{}})
++    return VerifiedDriver(root,CertifiedStore(tmp_path/'store'),root/'verified_driver/v0/artifacts/pending',ledger)
++
++def test_exhausted_storage_cannot_grow_refused_metadata(tmp_path,monkeypatch):
++    driver=toy_driver(tmp_path,monkeypatch)
++    import runtime_trace.regular_nstep.resources as resources
++    original=resources.Limits
++    monkeypatch.setattr(resources,'Limits',lambda **k:original(storage_bytes=1))
++    monkeypatch.setattr(resources,'run_guarded',lambda *a,**k:pytest.fail('storage refusal started a numerical job'))
++    before=driver.store.current(); artifacts=driver.repo_root/'verified_driver/v0/artifacts'
++    for i in range(3): assert driver.transact(1,'full-'+str(i)).verdict=='STOP'
++    assert not artifacts.exists() and driver.store.current()==before
++
++def test_exhausted_time_cannot_create_metadata(tmp_path,monkeypatch):
++    driver=toy_driver(tmp_path,monkeypatch,3600)
++    import runtime_trace.regular_nstep.resources as resources
++    def refused(*a,**k): raise resources.ResourceRefused('cumulative execution allowance exhausted')
++    monkeypatch.setattr(resources,'run_guarded',refused)
++    before=driver.store.current()
++    for i in range(3): assert driver.transact(1,'time-'+str(i)).verdict=='STOP'
++    assert not driver.pending_root.exists() and driver.store.current()==before
++
++def test_audit_only_refuses_before_outside_path_write(tmp_path):
++    driver=VerifiedDriver(ROOT,CertifiedStore(tmp_path/'store'),tmp_path/'pending',tmp_path/'unused.json')
++    with pytest.raises(ValueError): driver.audit_only(1,tmp_path/'outside-audit')
++    assert not (tmp_path/'outside-audit').exists()
++
++def test_existing_admissible_directory_is_not_owned_by_failed_request(tmp_path,monkeypatch):
++    driver=toy_driver(tmp_path,monkeypatch)
++    old=driver.pending_root/'old'; old.mkdir(parents=True); (old/'sealed.json').write_bytes(b'{}')
++    before=inventory(old)
++    assert driver.transact(1,'old').verdict=='STOP'
++    assert inventory(old)==before
+diff --git "a/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\test_verified_driver_v0_attacks.py" "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\test_verified_driver_v0_attacks.py"
+new file mode 100644
+index 0000000..e373789
+--- /dev/null
++++ "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\test_verified_driver_v0_attacks.py"
+@@ -0,0 +1,174 @@
++"""Authority attacks exercise the real Driver/gate/store, saved runner only."""
++from dataclasses import replace
++import os
++import subprocess
++import sys
++import pytest
++from verified_driver.v0 import driver as implementation,gate
++from verified_driver.v0.fallback import FallbackRegistry
++from verified_driver.v0.gate import candidate_from_evidence
++from verified_driver_v0_support import ROOT,BITS,load,dump,control,copy_control,rehash_completion,sha,test_runner as saved_runner
++from test_verified_driver_v0_driver import make_driver
++
++MUTANTS=('one_ulp','repaired_hashes','stale_pass','candidate_a_on_b','checker_skipped',
++    'refused_forced_accept','malformed_report','resource_refusal','predecessor_swap')
++
++def mutate(out,kind):
++    if kind in ('one_ulp','repaired_hashes'):
++        h=load(out/'capture/harness_output.json'); h['output_bits'][0]='0x3fa3eaff7788ac23'; dump(out/'capture/harness_output.json',h)
++        if kind=='repaired_hashes':
++            c=load(out/'derived/completion.json')
++            next(x for x in c['final_endpoint'] if x['component']=='q' and x['byte_offset']==0)['center_bits']=h['output_bits'][0]
++            dump(out/'derived/completion.json',c); rehash_completion(out)
++            for name in ('fresh_checker_report.json','run_result.json'):
++                v=load(out/name); v['completion_sha256']=load(out/'derived/completion.json')['completion_sha256']; dump(out/name,v)
++    elif kind in ('stale_pass','candidate_a_on_b'):
++        v=load(out/'fresh_checker_report.json'); v['completion_sha256']='f'*64; dump(out/'fresh_checker_report.json',v)
++    elif kind=='checker_skipped': (out/'independent_check/execution.json').unlink()
++    elif kind=='refused_forced_accept':
++        v=load(out/'run_result.json'); v.update(verdict='REFUSED',requested_complete=False); dump(out/'run_result.json',v)
++    elif kind=='malformed_report': (out/'fresh_checker_report.json').write_bytes(b'{"verdict":')
++    elif kind=='resource_refusal':
++        v=load(out/'independent_check/execution.json'); v['verdict']='REFUSED_RESOURCE'; dump(out/'independent_check/execution.json',v)
++        v=load(out/'run_result.json'); v['stage_receipts'][2]=sha(out/'independent_check/execution.json'); dump(out/'run_result.json',v)
++    elif kind=='predecessor_swap':
++        # Extraction cannot overwrite the controller-owned binding.
++        dump(out/'driver_binding.json',{'transaction_id':'foreign','predecessor_id':'a'*64})
++
++@pytest.mark.parametrize('kind',MUTANTS)
++def test_full_transaction_mutants_never_change_current(tmp_path,kind):
++    driver=saved_runner(make_driver(tmp_path),lambda out:mutate(out,kind)); before=driver.store.current()
++    result=driver.transact(10,'attack')
++    assert result.verdict=='STOP' and driver.store.current()==before
++    assert not list((driver.store.root/'receipts').iterdir())
++
++@pytest.mark.parametrize('error',[TimeoutError('timeout'),RuntimeError('checker exception')])
++def test_checker_exception_and_timeout_do_not_publish(tmp_path,error):
++    driver=make_driver(tmp_path); before=driver.store.current()
++    def run(*args): raise error
++    driver._run_segment=run
++    assert driver.transact(10,'exception').verdict=='STOP' and driver.store.current()==before
++
++def test_publish_before_controller_check_is_denied(tmp_path):
++    driver=make_driver(tmp_path); before,pred=driver.store.current()
++    def run(n,out):
++        foreign=control(tmp_path/'foreign','foreign',pred)
++        candidate=candidate_from_evidence('foreign',before,foreign)
++        with pytest.raises(ValueError,match='private controller'):
++            driver._publish_candidate(candidate,pred)
++        assert driver.store.current()==(before,pred)
++        return copy_control(out)
++    driver._run_segment=run
++    assert driver.transact(10,'normal').verdict=='ACCEPT'
++
++def test_fallback_without_controller_revalidation_cannot_publish(tmp_path):
++    driver=make_driver(tmp_path); before,pred=driver.store.current()
++    foreign=control(tmp_path/'foreign','bad-fallback',pred)
++    stale=candidate_from_evidence('bad-fallback',before,foreign)
++    class TestOnly(FallbackRegistry):
++        def resolve(self,*args): return stale
++    driver.fallback=TestOnly(); driver._run_segment=lambda *x:{'verdict':'REFUSED'}
++    assert driver.transact(10,'bad-fallback').verdict=='STOP' and driver.store.current()==(before,pred)
++
++def test_previous_transaction_acceptance_receipt_is_not_reusable(tmp_path):
++    a=saved_runner(make_driver(tmp_path/'a')); assert a.transact(10,'a').verdict=='ACCEPT'
++    _,state=a.store.current(); data=(a.store.root/'receipts'/(state.acceptance_id+'.json')).read_bytes()
++    b=saved_runner(make_driver(tmp_path/'b')); before=b.store.current()
++    original=implementation.evaluate_candidate
++    from verified_driver.v0.model import GateDecision
++    implementation.evaluate_candidate=lambda *args:GateDecision('ACCEPT','stale',data)
++    try: assert b.transact(10,'b').verdict=='STOP' and b.store.current()==before
++    finally: implementation.evaluate_candidate=original
++
++@pytest.mark.parametrize('pointer',[b'abc',b'f'*64+b'\n'])
++def test_corrupt_pointer_fails_closed(tmp_path,pointer):
++    driver=make_driver(tmp_path); before=driver.store.current()
++    (driver.store.root/'CURRENT').write_bytes(pointer)
++    with pytest.raises(ValueError): driver.transact(10,'bad-current')
++    assert (driver.store.root/'objects'/(before[0]+'.json')).exists()
++
++@pytest.mark.parametrize('point',['after_objects','before_replace','after_replace'])
++def test_actual_process_exit_recovers_only_complete_generation(tmp_path,point):
++    driver=make_driver(tmp_path); before=driver.store.current()
++    # Same real Driver path, terminated by os._exit: no Python cleanup/catch.
++    code='''import os,sys
++sys.path.insert(0,str(__import__('pathlib').Path.cwd()/'tests'))
++from test_verified_driver_v0_driver import make_driver
++from verified_driver_v0_support import test_runner
++from pathlib import Path
++d=test_runner(make_driver(Path(sys.argv[1])))
++d.store._crash_hook=lambda p:os._exit(73) if p==sys.argv[2] else None
++d.transact(10,'crash')
++'''
++    process=subprocess.run([sys.executable,'-c',code,str(tmp_path),point],cwd=ROOT,timeout=15)
++    assert process.returncode==73
++    recovered=driver.store.recover()
++    if point=='after_replace':
++        assert recovered[1].generation==1 and recovered[1].state_bits==BITS
++        assert driver.transact(10,'crash').verdict=='ACCEPT'
++    else: assert recovered==before
++
++def test_source_change_during_transaction_refuses(tmp_path,monkeypatch):
++    driver=make_driver(tmp_path); before=driver.store.current(); original=implementation.source_snapshot
++    changed=False
++    def snapshot(root):
++        value=original(root)
++        if changed: value['driver']['verified_driver/v0/driver.py']='a'*64
++        return value
++    monkeypatch.setattr(implementation,'source_snapshot',snapshot); monkeypatch.setattr(gate,'source_snapshot',snapshot)
++    def run(n,out):
++        nonlocal changed
++        observed=copy_control(out); changed=True; return observed
++    driver._run_segment=run
++    assert driver.transact(10,'changed').verdict=='STOP' and driver.store.current()==before
++
++def test_fallback_cannot_reset_pretransaction_source_binding(tmp_path,monkeypatch):
++    driver=make_driver(tmp_path); before=driver.store.current(); original=implementation.source_snapshot
++    changed=False
++    def snapshot(root):
++        value=original(root)
++        if changed: value['driver']['verified_driver/v0/driver.py']='a'*64
++        return value
++    monkeypatch.setattr(implementation,'source_snapshot',snapshot); monkeypatch.setattr(gate,'source_snapshot',snapshot)
++    def run(n,out):
++        nonlocal changed
++        if out.name!='fallback': changed=True; return {'verdict':'REFUSED'}
++        return copy_control(out)
++    class TestOnly(FallbackRegistry):
++        def resolve(self,reason,context): return context['validate_segment'](context['fallback_dir'])
++    driver._run_segment=run; driver.fallback=TestOnly()
++    assert driver.transact(10,'changed-fallback').verdict=='STOP' and driver.store.current()==before
++
++def test_production_adapter_cannot_start_with_new_budget_ledger(tmp_path,monkeypatch):
++    driver=make_driver(tmp_path); out=tmp_path/'raw'; out.mkdir()
++    import runtime_trace.regular_nstep.resources as resources
++    monkeypatch.setattr(resources,'run_guarded',lambda *a,**k:pytest.fail('unapproved ledger reached execution'))
++    with pytest.raises(ValueError,match='existing approved ledger'): driver._run_segment(1,out)
++
++def test_fallback_cannot_publish_a_different_controller_transaction(tmp_path):
++    driver=make_driver(tmp_path); before,pred=driver.store.current()
++    def run(n,out):
++        return copy_control(out) if out.name=='foreign' else {'verdict':'REFUSED'}
++    class TestOnly(FallbackRegistry):
++        def resolve(self,reason,context):
++            return driver._collect(10,'foreign',pred,tmp_path/'foreign')
++    driver._run_segment=run; driver.fallback=TestOnly()
++    result=driver.transact(10,'expected')
++    assert result.verdict=='STOP' and driver.store.current()==(before,pred)
++
++def test_dangling_current_alias_is_refused_without_reset(tmp_path):
++    driver=make_driver(tmp_path); pointer=driver.store.root/'CURRENT'
++    pointer.unlink(); pointer.symlink_to(tmp_path/'unknown-pointer-target')
++    with pytest.raises(ValueError): make_driver(tmp_path)
++    assert pointer.is_symlink() and not (tmp_path/'unknown-pointer-target').exists()
++
++def test_production_evidence_must_remain_in_accounted_driver_namespace(tmp_path,monkeypatch):
++    # A toy ledger is only to exercise path validation; subprocess execution is intercepted.
++    import runtime_trace.regular_nstep.resources as resources
++    d=object.__new__(implementation.VerifiedDriver); d.repo_root=tmp_path/'root'
++    d.ledger=d.repo_root/'runtime_trace/regular_nstep/artifacts/budget.json'
++    dump(d.ledger,{'used_seconds':0,'jobs':[],'TEST_ONLY':True})
++    (tmp_path/'outside').mkdir()
++    monkeypatch.setattr(implementation,'source_snapshot',lambda *a:{'runtime':{}})
++    monkeypatch.setattr(resources,'run_guarded',lambda *a,**k:pytest.fail('unaccounted output reached execution'))
++    with pytest.raises(ValueError,match='accounted Driver evidence'): d._run_segment(1,tmp_path/'outside')
+diff --git "a/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\test_verified_driver_v0_driver.py" "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\test_verified_driver_v0_driver.py"
+new file mode 100644
+index 0000000..8362da7
+--- /dev/null
++++ "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\test_verified_driver_v0_driver.py"
+@@ -0,0 +1,85 @@
++"""Transactional controls with saved evidence; no fresh numerical claim."""
++from pathlib import Path
++import pytest
++from verified_driver.v0.driver import VerifiedDriver
++from verified_driver.v0.fallback import FallbackRegistry
++from verified_driver.v0.model import regular_genesis
++from verified_driver.v0.store import CertifiedStore
++from verified_driver_v0_support import ROOT,BITS,test_runner as saved_runner,load,dump,control
++
++def make_driver(tmp_path):
++    store=CertifiedStore(tmp_path/'certified')
++    store.initialize(regular_genesis(ROOT))
++    driver=VerifiedDriver(ROOT,store,tmp_path/'pending',tmp_path/'unused-ledger.json')
++    # TEST_ONLY: controlled runner metadata allocation, not a new execution ledger.
++    driver._admit_segment=lambda out:{'remaining':8*1048576}
++    return driver
++
++def test_candidate_has_no_authority_before_check_and_accept_commits_once(tmp_path):
++    driver=make_driver(tmp_path); before=driver.store.current()
++    def inspect():
++        assert driver.store.current()==before
++        assert load(driver.pending_root/'normal'/'transaction.json')['predecessor_id']==before[0]
++    saved_runner(driver,inspect=inspect)
++    result=driver.transact(10,'normal')
++    assert result.verdict=='ACCEPT',result.reason
++    identity,state=driver.store.current()
++    assert state.generation==1 and state.state_bits==BITS and identity==result.state_id
++    assert (driver.store.root/'receipts'/(state.acceptance_id+'.json')).exists()
++    restarted=make_driver(tmp_path)
++    restarted._run_segment=lambda *args: pytest.fail('completed transaction reran external calculation')
++    retry=restarted.transact(10,'normal')
++    assert retry.verdict=='ACCEPT' and retry.state_id==identity and retry.generation==1
++
++@pytest.mark.parametrize('failure',['refused','exception','resource'])
++def test_failure_preserves_authority_and_defaults_stop(tmp_path,failure):
++    driver=make_driver(tmp_path); before=driver.store.current()
++    def run(n,out):
++        if failure=='exception': raise TimeoutError('checker timeout')
++        return {'verdict':'REFUSED_RESOURCE' if failure=='resource' else 'REFUSED'}
++    driver._run_segment=run
++    result=driver.transact(10,'bad')
++    assert result.verdict=='STOP' and driver.store.current()==before
++    assert list((driver.store.root/'receipts').iterdir())==[]
++
++def test_audit_only_does_not_change_result_or_current(tmp_path):
++    driver=saved_runner(make_driver(tmp_path)); before=driver.store.current()
++    candidate=driver.audit_only(10,tmp_path/'audit')
++    assert candidate.state_bits==BITS and driver.store.current()==before
++
++def test_empty_production_fallback(tmp_path):
++    assert FallbackRegistry().resolve('invalid',{}) is None
++
++@pytest.mark.parametrize('good',[True,False])
++def test_test_only_fallback_requires_same_gate(tmp_path,good):
++    driver=make_driver(tmp_path); before=driver.store.current()
++    def run(n,out):
++        from verified_driver_v0_support import copy_control
++        observed=copy_control(out)
++        if out.name=='fallback' and not good:
++            h=load(out/'capture/harness_output.json'); h['output_bits'][0]='0x3fa3eaff7788ac23'; dump(out/'capture/harness_output.json',h)
++        if out.name!='fallback': return {'verdict':'REFUSED','reason':'controlled'}
++        return observed
++    driver._run_segment=run
++    class TestOnly(FallbackRegistry):
++        def resolve(self,reason,context):
++            # A controller-run fallback, not a copied PASS or production solver.
++            return context['validate_segment'](context['fallback_dir'])
++    driver.fallback=TestOnly()
++    result=driver.transact(10,'fallback-tx')
++    assert result.verdict==('ACCEPT' if good else 'STOP')
++    if not good: assert driver.store.current()==before
++
++@pytest.mark.parametrize('steps',[True,0,101,1.0])
++def test_invalid_request_never_starts_runner(tmp_path,steps):
++    driver=make_driver(tmp_path); driver._run_segment=lambda *x: pytest.fail('invalid request ran')
++    with pytest.raises(ValueError): driver.transact(steps,'invalid')
++
++def test_pending_cannot_alias_certified_namespace(tmp_path):
++    driver=make_driver(tmp_path)
++    with pytest.raises(ValueError): VerifiedDriver(ROOT,driver.store,driver.store.root,driver.ledger)
++
++def test_recovery_does_not_claim_arbitrary_gala_continuation(tmp_path):
++    driver=saved_runner(make_driver(tmp_path)); assert driver.transact(10,'first').verdict=='ACCEPT'
++    before=driver.store.current(); driver._run_segment=lambda *x: pytest.fail('arbitrary restart')
++    assert driver.transact(10,'next').verdict=='STOP' and driver.store.current()==before
+diff --git "a/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\test_verified_driver_v0_gate.py" "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\test_verified_driver_v0_gate.py"
+new file mode 100644
+index 0000000..d346065
+--- /dev/null
++++ "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\test_verified_driver_v0_gate.py"
+@@ -0,0 +1,67 @@
++from dataclasses import replace
++from pathlib import Path
++import pytest
++from verified_driver.v0.model import regular_genesis
++from verified_driver.v0.gate import candidate_from_evidence, evaluate_candidate
++from verified_driver_v0_support import ROOT,BITS,bind_control,control,dump,load,rehash_completion,sha
++
++def fixture(tmp_path):
++    pred=regular_genesis(ROOT); out=control(tmp_path/'evidence','tx-a',pred)
++    return pred,out,candidate_from_evidence('tx-a',pred.content_hash,out)
++
++def test_passing_saved_control_binds_exact_checked_four_bits(tmp_path):
++    pred,out,c=fixture(tmp_path)
++    decision=evaluate_candidate(c,pred,ROOT)
++    assert decision.verdict=='ACCEPT' and c.state_bits==BITS
++    assert load_bytes(decision.acceptance_bytes)['candidate_id']==c.content_hash
++
++def load_bytes(data):
++    import json
++    return json.loads(data)
++
++def test_stale_checker_reuse_from_other_transaction_refuses(tmp_path):
++    pred,out,c=fixture(tmp_path)
++    stale=replace(c,transaction_id='tx-b')
++    assert evaluate_candidate(stale,pred,ROOT).verdict=='REFUSE'
++
++def test_one_ulp_candidate_and_repaired_content_id_refuses(tmp_path):
++    pred,out,c=fixture(tmp_path)
++    bad=replace(c,state_bits=('0x3fa3eaff7788ac23',*c.state_bits[1:]))
++    assert bad.content_hash!=c.content_hash
++    decision=evaluate_candidate(bad,pred,ROOT)
++    assert decision.verdict=='REFUSE' and 'terminal output' in decision.reason
++
++def test_wrong_predecessor_refuses(tmp_path):
++    pred,out,c=fixture(tmp_path)
++    assert evaluate_candidate(replace(c,predecessor_id='f'*64),pred,ROOT).verdict=='REFUSE'
++
++@pytest.mark.parametrize('mutation',['harness','prefix','false-complete','resource','completion-digest','old-pass'])
++def test_wrong_binding_or_incomplete_evidence_refuses(tmp_path,mutation):
++    pred,out,c=fixture(tmp_path)
++    if mutation=='harness':
++        p=out/'integration_source_pinset.json'; d=load(p); d['runtime_trace/harness.py']='f'*64; dump(p,d)
++    elif mutation in ('prefix','false-complete','old-pass'):
++        p=out/'fresh_checker_report.json'; d=load(p)
++        d['checked_steps']=1 if mutation=='prefix' else 10
++        if mutation=='false-complete': d['requested_complete']=False
++        if mutation=='old-pass': d['completion_sha256']='f'*64
++        dump(p,d)
++    elif mutation=='resource':
++        p=out/'independent_check/execution.json'; d=load(p); d['verdict']='REFUSED'; d['resource_failure']='wall ceiling'; dump(p,d)
++    else:
++        p=out/'derived/completion.json'; d=load(p); d['final_endpoint'][0]['center_bits']='0x3fa3eaff7788ac23'; dump(p,d)
++    assert evaluate_candidate(c,pred,ROOT).verdict=='REFUSE'
++
++@pytest.mark.parametrize('bad',[b'{"verdict":"CHECKER_PASS","verdict":"REFUSED"}',b'{"x":NaN}',b'{"x":1e999}',b'{bad'])
++def test_duplicate_nonfinite_or_malformed_json_refuses(tmp_path,bad):
++    pred,out,c=fixture(tmp_path)
++    (out/'fresh_checker_report.json').write_bytes(bad)
++    assert evaluate_candidate(c,pred,ROOT).verdict=='REFUSE'
++
++def test_mutated_terminal_and_repaired_hashes_cannot_reuse_old_pass(tmp_path):
++    pred,out,c=fixture(tmp_path)
++    h=load(out/'capture/harness_output.json'); h['output_bits'][0]='0x3fa3eaff7788ac23'; dump(out/'capture/harness_output.json',h)
++    d=load(out/'derived/completion.json'); d['final_endpoint'][0]['center_bits']=h['output_bits'][0]; dump(out/'derived/completion.json',d)
++    rehash_completion(out)
++    bad=replace(c,state_bits=tuple(h['output_bits']))
++    assert evaluate_candidate(bad,pred,ROOT).verdict=='REFUSE'
+diff --git "a/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\test_verified_driver_v0_model.py" "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\test_verified_driver_v0_model.py"
+new file mode 100644
+index 0000000..33de8cc
+--- /dev/null
++++ "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\test_verified_driver_v0_model.py"
+@@ -0,0 +1,33 @@
++from dataclasses import FrozenInstanceError
++import hashlib
++from pathlib import Path
++import pytest
++from verified_driver.v0.model import CertifiedState, canonical_bytes, content_id, regular_genesis
++
++ROOT = Path(__file__).resolve().parents[1]
++BITS = ('0x0000000000000000', '0x0000000000000000', '0x3fd0000000000000', '0x3fc0000000000000')
++
++def test_regular_genesis_requires_pinned_harness_bytes(tmp_path):
++    (tmp_path/'runtime_trace').mkdir()
++    (tmp_path/'runtime_trace/harness.py').write_bytes((ROOT/'runtime_trace/harness.py').read_bytes()+b'\n')
++    with pytest.raises(ValueError): regular_genesis(tmp_path)
++
++def test_regular_genesis_has_exact_four_initial_bits():
++    state = regular_genesis(ROOT)
++    assert state.generation == 0 and state.state_bits == BITS
++    assert state.predecessor_id is None and state.acceptance_id is None
++    with pytest.raises(FrozenInstanceError): state.generation = 1
++
++def test_state_content_id_is_canonical_and_stable():
++    expected = b'{"a":1,"z":[2,3]}'
++    assert canonical_bytes({'z':[2,3],'a':1}) == expected
++    assert content_id({'z':[2,3],'a':1}) == hashlib.sha256(expected).hexdigest()
++    assert canonical_bytes(regular_genesis(ROOT)) == canonical_bytes(regular_genesis(ROOT))
++
++@pytest.mark.parametrize('bad', ['0X0000000000000000','0x000000000000000A','0x0','0x7ff8000000000000','0x7ff0000000000000',1])
++def test_noncanonical_bits_are_rejected(bad):
++    with pytest.raises(ValueError): CertifiedState(0, (bad,*BITS[1:]), '0'*64)
++
++def test_nonfinite_json_and_boolean_generation_are_rejected():
++    with pytest.raises(ValueError): canonical_bytes({'x':float('nan')})
++    with pytest.raises(ValueError): CertifiedState(True,BITS,'0'*64)
+diff --git "a/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\test_verified_driver_v0_store.py" "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\test_verified_driver_v0_store.py"
+new file mode 100644
+index 0000000..b9ecd28
+--- /dev/null
++++ "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\test_verified_driver_v0_store.py"
+@@ -0,0 +1,72 @@
++from dataclasses import replace
++from pathlib import Path
++import pytest
++from verified_driver.v0.model import CertifiedState, canonical_bytes, digest_bytes, regular_genesis
++from verified_driver.v0.store import CertifiedStore
++
++ROOT=Path(__file__).resolve().parents[1]
++BITS=('0x3fa3eaff7788ac22','0x3f93eacc1b020e3a','0x3fcf9999a5c32ae6','0x3fbf984cad4b103f')
++def successor(genesis):
++    receipt=canonical_bytes({'schema':'DRIVER_V0_ACCEPTANCE_V1','verdict':'ACCEPT','transaction_id':'tx-a',
++        'predecessor_id':genesis.content_hash,'candidate_id':'a'*64,'source_pinset_sha256':'b'*64,
++        'completion_sha256':'c'*64,'acquisition_id':'d'*64,'requested_steps':10,'checked_steps':10,
++        'requested_complete':True,'output_bits':BITS})
++    state=CertifiedState(1,BITS,'b'*64,genesis.content_hash,digest_bytes(receipt),'tx-a','d'*64)
++    return state,receipt
++
++def test_same_genesis_idempotent_and_restart(tmp_path):
++    g=regular_genesis(ROOT); store=CertifiedStore(tmp_path)
++    assert store.initialize(g)==g.content_hash
++    assert store.initialize(g)==g.content_hash
++    assert CertifiedStore(tmp_path).recover()==(g.content_hash,g)
++
++def test_predecessor_mismatch_refuses_without_publication(tmp_path):
++    g=regular_genesis(ROOT); store=CertifiedStore(tmp_path); store.initialize(g)
++    state,receipt=successor(g)
++    with pytest.raises(ValueError): store.publish('f'*64,state,receipt)
++    assert store.current()==(g.content_hash,g)
++
++def test_append_only_objects_and_receipts_precede_pointer(tmp_path):
++    g=regular_genesis(ROOT); store=CertifiedStore(tmp_path); store.initialize(g)
++    state,receipt=successor(g); before=(tmp_path/f'objects/{g.content_hash}.json').read_bytes()
++    assert store.publish(g.content_hash,state,receipt)==state.content_hash
++    assert (tmp_path/f'objects/{g.content_hash}.json').read_bytes()==before
++    assert (tmp_path/f'receipts/{state.acceptance_id}.json').read_bytes()==receipt
++    assert CertifiedStore(tmp_path).current()==(state.content_hash,state)
++
++def test_retry_does_not_double_generation(tmp_path):
++    g=regular_genesis(ROOT); store=CertifiedStore(tmp_path); store.initialize(g)
++    state,receipt=successor(g)
++    store.publish(g.content_hash,state,receipt)
++    assert store.publish(g.content_hash,state,receipt)==state.content_hash
++    assert store.current()[1].generation==1
++
++@pytest.mark.parametrize('point,want_new',[('after_objects',False),('before_replace',False),('after_replace',True)])
++def test_crash_recovers_only_old_or_complete_new(tmp_path,point,want_new):
++    g=regular_genesis(ROOT); store=CertifiedStore(tmp_path); store.initialize(g)
++    state,receipt=successor(g)
++    def crash(name):
++        if name==point: raise OSError('injected publication crash')
++    broken=CertifiedStore(tmp_path,_crash_hook=crash)
++    with pytest.raises(OSError): broken.publish(g.content_hash,state,receipt)
++    assert CertifiedStore(tmp_path).recover()==((state.content_hash,state) if want_new else (g.content_hash,g))
++
++@pytest.mark.parametrize('bad',[b'0'*12,b'f'*64+b'\n',b'',b'../escape\n'])
++def test_truncated_or_unknown_current_refuses(tmp_path,bad):
++    g=regular_genesis(ROOT); store=CertifiedStore(tmp_path); store.initialize(g)
++    (tmp_path/'CURRENT').write_bytes(bad)
++    with pytest.raises(ValueError): store.recover()
++
++def test_existing_content_address_bytes_cannot_be_overwritten(tmp_path):
++    g=regular_genesis(ROOT); store=CertifiedStore(tmp_path); store.initialize(g)
++    state,receipt=successor(g)
++    (tmp_path/f'objects/{state.content_hash}.json').write_bytes(b'wrong')
++    with pytest.raises(ValueError): store.publish(g.content_hash,state,receipt)
++    assert store.current()==(g.content_hash,g)
++
++def test_unaccepted_receipt_or_wrong_output_cannot_publish(tmp_path):
++    g=regular_genesis(ROOT); store=CertifiedStore(tmp_path); store.initialize(g)
++    state,receipt=successor(g)
++    bad=replace(state,state_bits=g.state_bits)
++    with pytest.raises(ValueError): store.publish(g.content_hash,bad,receipt)
++    assert store.current()==(g.content_hash,g)
+diff --git "a/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\verified_driver_v0_support.py" "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\verified_driver_v0_support.py"
+new file mode 100644
+index 0000000..1b15867
+--- /dev/null
++++ "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\tests\\verified_driver_v0_support.py"
+@@ -0,0 +1,77 @@
++"""TEST_ONLY controlled runner: saved evidence tests authority/storage, not fresh numerics."""
++import hashlib
++import json
++import os
++from pathlib import Path
++import shutil
++
++ROOT=Path(__file__).resolve().parents[1]
++CASE=ROOT/'runtime_trace/regular_nstep/artifacts/connected10-final2'
++BITS=('0x3fa3eaff7788ac22','0x3f93eacc1b020e3a','0x3fcf9999a5c32ae6','0x3fbf984cad4b103f')
++def dump(path,value):
++    path.parent.mkdir(parents=True,exist_ok=True)
++    path.write_text(json.dumps(value,sort_keys=True,separators=(',',':'),allow_nan=False))
++def load(path): return json.loads(path.read_bytes())
++def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
++def digest(value): return hashlib.sha256(json.dumps(value,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
++def snapshot(root=ROOT):
++    runtime={}
++    for base,dirs,files in os.walk(root/'runtime_trace'):
++        dirs[:]=[d for d in dirs if d not in ('artifacts','__pycache__')]
++        for name in files:
++            if name.endswith('.py'):
++                p=Path(base)/name; runtime[str(p.relative_to(root))]=sha(p)
++    for relative in ('lab/v2_bound.py','independent_checker/oracle.py'): runtime[relative]=sha(root/relative)
++    driver={str(p.relative_to(root)):sha(p) for p in (root/'verified_driver').glob('*.py')}
++    driver.update({str(p.relative_to(root)):sha(p) for p in (root/'verified_driver/v0').glob('*.py')})
++    return {'runtime':runtime,'driver':driver}
++
++def copy_control(out):
++    out=Path(out); out.mkdir(parents=True,exist_ok=True)
++    files=['run_result.json','integration_source_pinset.json','fresh_checker_report.json',
++        'capture/harness_output.json','derived/completion.json']
++    for stage in ('acquisition','derivation','independent_check'): files.append(stage+'/execution.json')
++    for name in files:
++        target=out/name; target.parent.mkdir(parents=True,exist_ok=True); shutil.copyfile(CASE/name,target)
++    for stage in ('acquisition','derivation','independent_check'):
++        path=out/stage/'execution.json'; record=load(path)
++        record['command']=[str(x).replace(str(CASE),str(out)) for x in record['command']]
++        # Historical capture was on the mounted worktree; rebuild only fixture locators.
++        old='/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/connected10-final2'
++        record['command']=[str(x).replace(old,str(out)) for x in record['command']]
++        if '--root' in record['command']:
++            record['command'][record['command'].index('--root')+1]=str(ROOT)
++        record['cwd']=str(ROOT); record['TEST_ONLY_saved_resource_fixture']=True
++        dump(path,record)
++    run=load(out/'run_result.json')
++    run['stage_receipts']=[sha(out/stage/'execution.json') for stage in ('acquisition','derivation','independent_check')]
++    dump(out/'run_result.json',run)
++    return load(out/'fresh_checker_report.json')
++
++def bind_control(out,tx,pred,root=ROOT,observed=None):
++    out=Path(out).resolve()
++    binding={'schema':'DRIVER_V0_RUN_BINDING_V1','transaction_id':tx,'predecessor_id':pred.content_hash,
++        'predecessor_bits':list(pred.state_bits),'evidence_dir':str(out),'requested_steps':10,
++        'source_start':snapshot(root),'observed_report':observed or load(out/'fresh_checker_report.json'),
++        'fresh_report_sha256':sha(out/'fresh_checker_report.json'),'run_result_sha256':sha(out/'run_result.json'),
++        'role':'TEST_ONLY stored-evidence fixture; no fresh numerical execution'}
++    dump(out/'driver_binding.json',binding)
++    return binding
++
++def control(out,tx,pred):
++    copy_control(out); bind_control(out,tx,pred)
++    return out
++
++def rehash_completion(out):
++    document=load(out/'derived/completion.json'); document.pop('completion_sha256')
++    document['completion_sha256']=digest(document); dump(out/'derived/completion.json',document)
++
++def test_runner(driver,mutate=None,inspect=None):
++    def runner(n,out):
++        assert n==10
++        if inspect: inspect()
++        observed=copy_control(out)
++        if mutate: mutate(out)
++        return observed
++    driver._run_segment=runner
++    return driver
+diff --git "a/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\__init__.py" "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\__init__.py"
+new file mode 100644
+index 0000000..6e9eb4e
+--- /dev/null
++++ "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\__init__.py"
+@@ -0,0 +1 @@
++"""External proposer authority control; independent of world implementations."""
+diff --git "a/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\v0\\__init__.py" "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\v0\\__init__.py"
+new file mode 100644
+index 0000000..cebe117
+--- /dev/null
++++ "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\v0\\__init__.py"
+@@ -0,0 +1 @@
++"""Conditional regular-case transactional Driver V0."""
+diff --git "a/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\v0\\driver.py" "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\v0\\driver.py"
+new file mode 100644
+index 0000000..badaec8
+--- /dev/null
++++ "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\v0\\driver.py"
+@@ -0,0 +1,212 @@
++"""Isolated original-runtime proposal, fresh gate, then atomic publication."""
++from dataclasses import asdict
++import os
++from pathlib import Path
++import sys
++import time
++import uuid
++from .fallback import FallbackRegistry
++from .gate import candidate_from_evidence,evaluate_candidate,file_json,file_sha,source_snapshot,STAGES
++from .model import CertifiedState,DriverResult,canonical_bytes,check_transaction,digest_bytes,regular_genesis,strict_json
++
++def _write(path,value,*,reserve=None,newline=False):
++    path=Path(path)
++    path.parent.mkdir(parents=True,exist_ok=True)
++    data=canonical_bytes(value)+(b'\n' if newline else b'')
++    if len(data)>1048576: raise ValueError('bounded Driver metadata required')
++    if reserve: reserve(len(data))
++    with path.open('xb') as stream:
++        stream.write(data); stream.flush(); os.fsync(stream.fileno())
++
++def _isolated(path,store_root):
++    raw=Path(path)
++    if raw.is_symlink(): raise ValueError('pending alias')
++    path=raw.resolve()
++    if path==store_root or path.is_relative_to(store_root) or store_root.is_relative_to(path):
++        raise ValueError('pending/certified namespaces overlap')
++    return path
++
++class VerifiedDriver:
++    def __init__(self,repo_root,store,pending_root,ledger,fallback=None):
++        self.repo_root=Path(repo_root).resolve(); self.store=store
++        self.pending_root=_isolated(pending_root,store.root)
++        self.ledger=Path(ledger).resolve(); self.fallback=fallback or FallbackRegistry()
++        self._owned_budgets={}
++        self.store.initialize(regular_genesis(self.repo_root))
++        self._observed={}; self._runtime_seconds=0.; self._active=None
++
++    def _request(self,steps):
++        if type(steps) is not int or not 1<=steps<=100: raise ValueError('strict supported integer request 1..100')
++
++    def _validate_paths(self,out):
++        from runtime_trace.regular_nstep.resources import ResourceRefused
++        approved=self.repo_root/'runtime_trace/regular_nstep/artifacts/budget.json'
++        if approved.resolve()!=approved or self.ledger!=approved or not self.ledger.is_file():
++            raise ResourceRefused('existing approved ledger required; no reset/new budget')
++        if not Path(out).resolve().is_relative_to(self.repo_root/'verified_driver/v0/artifacts'):
++            raise ResourceRefused('accounted Driver evidence namespace required')
++
++    def _size(self,root):
++        return sum((Path(base)/name).lstat().st_size for base,_,files in os.walk(root) for name in files)
++
++    def _reserved(self): return sum(b['remaining'] for b in self._owned_budgets.values())
++
++    def _admit_segment(self,out):
++        from runtime_trace.regular_nstep.resources import Limits,ResourceRefused
++        self._validate_paths(out)
++        if out.exists(): raise FileExistsError('exclusive pending transaction directory required')
++        limits=Limits(); prior=file_json(self.ledger); used=prior.get('used_seconds')
++        if type(used) not in (int,float) or not 0<=used<limits.total_seconds or limits.total_seconds-used<3:
++            raise ResourceRefused('cumulative execution allowance exhausted')
++        marker=self.ledger.with_suffix('.running.json')
++        if marker.exists() and file_json(marker).get('state')!='FINISHED':
++            raise ResourceRefused('unreconciled prior job prohibits transaction admission')
++        artifact_root=self.repo_root/'verified_driver/v0/artifacts'
++        roots=[self.ledger.parent,artifact_root]
++        if not self.store.root.is_relative_to(artifact_root): roots.append(self.store.root)
++        total=sum(self._size(root) for root in roots)
++        # Reserve every bounded Driver JSON/object/receipt/pointer write and RT jobs.
++        metadata=8*1048576
++        if total+self._reserved()+metadata+1073741824+2*67108864+3*1048576>limits.storage_bytes:
++            raise ResourceRefused('combined Runtime Trace/Driver storage allowance exhausted')
++        return {'remaining':metadata}
++
++    def _reserve(self,out,count):
++        budget=self._owned_budgets.get(Path(out).resolve())
++        if budget is None or count<0 or count>budget['remaining']:
++            raise ValueError('owned reserved Driver metadata allowance required')
++        budget['remaining']-=count
++
++    def _write_owned(self,out,relative,value,*,newline=False):
++        path=Path(out)/relative
++        if path.is_symlink() or not path.resolve().is_relative_to(Path(out).resolve()):
++            raise ValueError('owned metadata namespace alias')
++        _write(path,value,reserve=lambda count:self._reserve(out,count),newline=newline)
++
++    def _collect(self,steps,tx,pred,out):
++        if self._active is None or (tx,steps,pred.content_hash)!=self._active[:3]:
++            raise ValueError('active transaction/input binding required')
++        start=strict_json(self._active[3])
++        if canonical_bytes(source_snapshot(self.repo_root))!=self._active[3]:
++            raise ValueError('pretransaction source changed before candidate/fallback')
++        out=_isolated(out,self.store.root)
++        budget=self._admit_segment(out)
++        out.mkdir(parents=True,exist_ok=False)
++        self._owned_budgets[out]=budget
++        self._write_owned(out,'transaction.json',{'schema':'DRIVER_V0_TRANSACTION_V1','transaction_id':tx,
++            'predecessor_id':pred.content_hash,'predecessor_bits':list(pred.state_bits),
++            'requested_steps':steps,'source_start':start})
++        began=time.perf_counter()
++        try: observed=self._run_segment(steps,out)
++        finally: self._runtime_seconds+=time.perf_counter()-began
++        # Freeze the actual trusted controller response before reading candidate files.
++        observed=strict_json(canonical_bytes(observed))
++        if observed.get('verdict')!='CHECKER_PASS': raise ValueError('runtime/checker did not pass: '+str(observed))
++        binding={'schema':'DRIVER_V0_RUN_BINDING_V1','transaction_id':tx,
++            'predecessor_id':pred.content_hash,'predecessor_bits':list(pred.state_bits),
++            'evidence_dir':str(out),'requested_steps':steps,'source_start':start,
++            'observed_report':observed,'fresh_report_sha256':file_sha(out/'fresh_checker_report.json'),
++            'run_result_sha256':file_sha(out/'run_result.json')}
++        self._write_owned(out,'driver_binding.json',binding)
++        candidate=candidate_from_evidence(tx,pred.content_hash,out)
++        expected=canonical_bytes(binding)
++        if candidate.binding_bytes!=expected: raise ValueError('private controller observation differs')
++        self._observed[candidate.content_hash]=expected
++        return candidate
++
++    def _publish_candidate(self,candidate,pred):
++        if self._observed.get(candidate.content_hash)!=candidate.binding_bytes:
++            raise ValueError('candidate lacks fresh private controller observation')
++        binding=strict_json(candidate.binding_bytes)
++        if self._active is None or (candidate.transaction_id,binding['requested_steps'],pred.content_hash)!=self._active[:3] or canonical_bytes(binding['source_start'])!=self._active[3]:
++            raise ValueError('active publication transaction/input/source binding required')
++        decision=evaluate_candidate(candidate,pred,self.repo_root)
++        if decision.verdict!='ACCEPT' or decision.acceptance_bytes is None:
++            raise ValueError('gate refused: '+decision.reason)
++        receipt=strict_json(decision.acceptance_bytes)
++        if receipt.get('candidate_id')!=candidate.content_hash or receipt.get('controller_binding_sha256')!=digest_bytes(candidate.binding_bytes):
++            raise ValueError('gate acceptance candidate mismatch')
++        state=CertifiedState(pred.generation+1,candidate.state_bits,receipt['source_pinset_sha256'],
++            pred.content_hash,digest_bytes(decision.acceptance_bytes),candidate.transaction_id,receipt['acquisition_id'])
++        self._reserve(candidate.evidence_dir,len(decision.acceptance_bytes)+len(canonical_bytes(state))+130)
++        identity=self.store.publish(pred.content_hash,state,decision.acceptance_bytes)
++        return identity,state
++
++    def transact(self,steps,transaction_id=None):
++        self._request(steps); tx=transaction_id or uuid.uuid4().hex; check_transaction(tx)
++        began=time.perf_counter(); self._runtime_seconds=0.; self._observed={}; self._owned_budgets={}
++        before,pred=self.store.recover(); candidate=None; reason=''
++        self._active=(tx,steps,before,canonical_bytes(source_snapshot(self.repo_root)))
++        if pred.transaction_id==tx:
++            receipt=file_json(self.store.root/'receipts'/(pred.acceptance_id+'.json'))
++            if receipt['requested_steps']!=steps:
++                return DriverResult('STOP',tx,before,pred.generation,'completed transaction request mismatch')
++            return DriverResult('ACCEPT',tx,before,pred.generation,'already fully committed')
++        if pred.generation!=0:
++            return DriverResult('STOP',tx,before,pred.generation,'V0 has no arbitrary-state Gala continuation')
++        out=self.pending_root/tx
++        try:
++            candidate=self._collect(steps,tx,pred,out)
++            identity,state=self._publish_candidate(candidate,pred)
++        except Exception as exc:
++            reason=str(exc)
++            # A crash/exception after replace may already have published a valid generation.
++            identity,state=self.store.recover()
++            if state.transaction_id!=tx and out in self._owned_budgets:
++                try:
++                    fallback=self.fallback.resolve(reason,{'transaction_id':tx,'predecessor':pred,
++                        'fallback_dir':out/'fallback',
++                        'validate_segment':lambda path:self._collect(steps,tx,pred,path)})
++                    if fallback is not None:
++                        candidate=fallback; identity,state=self._publish_candidate(candidate,pred)
++                except Exception as fallback_error: reason+='; fallback refused: '+str(fallback_error)
++        identity,state=self.store.recover()
++        accepted=state.transaction_id==tx and state.generation==pred.generation+1
++        result=DriverResult('ACCEPT' if accepted else 'STOP',tx,identity,state.generation,
++            'exact fresh candidate committed' if accepted else reason,
++            candidate.content_hash if candidate else None,
++            time.perf_counter()-began-self._runtime_seconds,self._runtime_seconds)
++        if out in self._owned_budgets and not (out/'driver_result.json').exists():
++            self._write_owned(out,'driver_result.json',asdict(result))
++        return result
++
++    def audit_only(self,steps,out):
++        self._request(steps); _,pred=self.store.recover()
++        if pred.generation!=0: raise ValueError('regular genesis required for audit-only run')
++        tx='audit-'+uuid.uuid4().hex
++        self._owned_budgets={}; self._observed={}
++        self._active=(tx,steps,pred.content_hash,canonical_bytes(source_snapshot(self.repo_root)))
++        return self._collect(steps,tx,pred,out)
++
++    def _run_segment(self,steps,out):
++        # Adapter consumes unchanged CLIs; no evaluator is imported into the gate.
++        from runtime_trace.regular_nstep.resources import Limits,run_guarded
++        self._validate_paths(out)
++        if Path(out).resolve() not in self._owned_budgets:
++            raise ValueError('reserved transaction admission required before runtime')
++        limits=Limits(); sources=source_snapshot(self.repo_root)['runtime']
++        # Byte serialization equals the existing public integration pinset.
++        self._write_owned(out,'integration_source_pinset.json',sources,newline=True)
++        commands=[
++            [sys.executable,'-m','runtime_trace.regular_nstep.acquire','--steps',str(steps),'--out',str(out/'capture')],
++            [sys.executable,'-m','runtime_trace.regular_nstep.producer','--capture',str(out/'capture'),'--out',str(out/'derived'),'--root',str(self.repo_root)],
++            [sys.executable,'-m','runtime_trace.regular_nstep.checker','--capture',str(out/'capture'),'--derived',str(out/'derived'),'--root',str(self.repo_root),'--report',str(out/'fresh_checker_report.json')]]
++        for stage,command in zip(STAGES,commands):
++            # Existing guard scans its original root. Deduct current Driver files
++            # and unspent metadata reservations so child writers/logs cannot grow
++            # outside the same aggregate8GiB ceiling.
++            artifact_root=self.repo_root/'verified_driver/v0/artifacts'
++            outside=self._size(self.store.root) if not self.store.root.is_relative_to(artifact_root) else 0
++            available=limits.storage_bytes-self._size(artifact_root)-outside-self._reserved()
++            stage_limits=Limits(**{**asdict(limits),'storage_bytes':available})
++            receipt=run_guarded(command,stage_limits,out/stage,self.ledger,cwd=self.repo_root,
++                artifact_allowance=1073741824 if stage=='acquisition' else 67108864)
++            if receipt['verdict']!='EXECUTED':
++                self._write_owned(out,'run_refusal.json',{'verdict':'REFUSED','reason':stage+' '+receipt['verdict'],
++                    'requested_steps':steps,'requested_complete':False})
++                raise ValueError(stage+' '+receipt['verdict'])
++        report=file_json(out/'fresh_checker_report.json')
++        self._write_owned(out,'run_result.json',{**report,'schema':'regular-nstep-guarded-run-v1',
++            'integration_source_pinset_sha256':file_sha(out/'integration_source_pinset.json'),
++            'stage_receipts':[file_sha(out/stage/'execution.json') for stage in STAGES]})
++        return report
+diff --git "a/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\v0\\fallback.py" "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\v0\\fallback.py"
+new file mode 100644
+index 0000000..a3e9c45
+--- /dev/null
++++ "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\v0\\fallback.py"
+@@ -0,0 +1,4 @@
++"""No stronger production path is registered for V0."""
++class FallbackRegistry:
++    def resolve(self,reason,context):
++        return None
+diff --git "a/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\v0\\gate.py" "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\v0\\gate.py"
+new file mode 100644
+index 0000000..9ebe37f
+--- /dev/null
++++ "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\v0\\gate.py"
+@@ -0,0 +1,111 @@
++"""Strict authority predicate over controller-bound fresh Runtime Trace evidence."""
++import os
++from pathlib import Path
++from .model import CandidateState, GateDecision, GENESIS_BITS, HARNESS_SHA, canonical_bytes, content_id, digest_bytes, strict_json
++
++APPROVED_RT_PINSET_SHA='c949e61b420696f9ecfc61608d8e0e13be5f12a965e1e103f40ea2941689ddb3'
++STAGES=('acquisition','derivation','independent_check')
++
++def file_bytes(path):
++    path=Path(path)
++    if path.is_symlink() or path.stat().st_size>1048576: raise ValueError('bounded nonaliased evidence required')
++    return path.read_bytes()
++
++def file_json(path): return strict_json(file_bytes(path))
++
++def file_sha(path):
++    import hashlib
++    with Path(path).open('rb') as stream: return hashlib.file_digest(stream,'sha256').hexdigest()
++
++def source_snapshot(root):
++    root=Path(root).resolve(); runtime={}
++    for base,dirs,files in os.walk(root/'runtime_trace'):
++        dirs[:]=[d for d in dirs if d not in ('artifacts','__pycache__')]
++        for name in files:
++            if name.endswith('.py'):
++                path=Path(base)/name; runtime[str(path.relative_to(root))]=file_sha(path)
++    for name in ('lab/v2_bound.py','independent_checker/oracle.py'): runtime[name]=file_sha(root/name)
++    driver={str(p.relative_to(root)):file_sha(p) for p in (root/'verified_driver').glob('*.py')}
++    driver.update({str(p.relative_to(root)):file_sha(p) for p in (root/'verified_driver/v0').glob('*.py')})
++    return {'runtime':runtime,'driver':driver}
++
++def candidate_from_evidence(transaction_id,predecessor_id,evidence_dir):
++    evidence=Path(evidence_dir).resolve()
++    binding=file_bytes(evidence/'driver_binding.json')
++    parsed=strict_json(binding)
++    if parsed.get('transaction_id')!=transaction_id or parsed.get('predecessor_id')!=predecessor_id or parsed.get('evidence_dir')!=str(evidence):
++        raise ValueError('candidate transaction/run locator binding')
++    harness=file_json(evidence/'capture/harness_output.json')
++    return CandidateState(transaction_id,predecessor_id,str(evidence),tuple(harness['output_bits']),binding)
++
++def _evaluate(candidate,predecessor,repo_root):
++    root=Path(repo_root).resolve(); evidence=Path(candidate.evidence_dir).resolve()
++    binding=strict_json(candidate.binding_bytes)
++    if file_bytes(evidence/'driver_binding.json')!=candidate.binding_bytes: raise ValueError('controller binding changed')
++    if binding.get('schema')!='DRIVER_V0_RUN_BINDING_V1': raise ValueError('controller run binding required')
++    if binding.get('transaction_id')!=candidate.transaction_id or binding.get('predecessor_id')!=candidate.predecessor_id or binding.get('evidence_dir')!=str(evidence):
++        raise ValueError('same candidate transaction required')
++    if predecessor.generation!=0 or predecessor.state_bits!=GENESIS_BITS or predecessor.source_binding!=HARNESS_SHA:
++        raise ValueError('V0 supports regular genesis predecessor only')
++    if predecessor.content_hash!=candidate.predecessor_id or binding.get('predecessor_bits')!=list(predecessor.state_bits):
++        raise ValueError('certified predecessor/input binding')
++    source=source_snapshot(root)
++    if binding.get('source_start')!=source: raise ValueError('source changed during transaction')
++    pins_path=evidence/'integration_source_pinset.json'; pins=file_json(pins_path)
++    pin_sha=file_sha(pins_path)
++    if pin_sha!=APPROVED_RT_PINSET_SHA or pins!=source['runtime'] or pins.get('runtime_trace/harness.py')!=HARNESS_SHA:
++        raise ValueError('approved Runtime Trace source/harness binding')
++    run=file_json(evidence/'run_result.json'); fresh=file_json(evidence/'fresh_checker_report.json')
++    completion=file_json(evidence/'derived/completion.json'); harness=file_json(evidence/'capture/harness_output.json')
++    if binding.get('fresh_report_sha256')!=file_sha(evidence/'fresh_checker_report.json') or binding.get('run_result_sha256')!=file_sha(evidence/'run_result.json') or binding.get('observed_report')!=fresh:
++        raise ValueError('fresh controller-observed checker report mismatch')
++    n=binding.get('requested_steps')
++    if type(n) is not int or not 1<=n<=100: raise ValueError('strict supported segment request')
++    for report in (run,fresh,completion):
++        if report.get('verdict')!='CHECKER_PASS' or type(report.get('requested_steps')) is not int or type(report.get('checked_steps')) is not int or report['requested_steps']!=n or report['checked_steps']!=n or report.get('requested_complete') is not True:
++            raise ValueError('fresh complete independent verification required')
++        if report.get('init_to_step1')!='UNTRACED' or report.get('post_terminal_frontier')!='UNTRACED' or report.get('formal_certification') is not False:
++            raise ValueError('retained Runtime Trace boundary required')
++    digest=completion.get('completion_sha256')
++    body={k:v for k,v in completion.items() if k!='completion_sha256'}
++    if digest!=content_id(body) or run.get('completion_sha256')!=digest or fresh.get('completion_sha256')!=digest:
++        raise ValueError('checked completion digest mismatch')
++    if run.get('integration_source_pinset_sha256')!=pin_sha: raise ValueError('run source receipt mismatch')
++    if harness.get('orbit')!='regular' or type(harness.get('n_steps')) is not int or harness['n_steps']!=n or harness.get('dt_bits')!='0x3f90000000000000':
++        raise ValueError('approved regular input/harness binding')
++    endpoints=completion.get('final_endpoint',[]); bits=[]
++    for component,offset in [('q',0),('q',8),('full_v',0),('full_v',8)]:
++        matches=[x for x in endpoints if x.get('component')==component and type(x.get('byte_offset')) is int and x['byte_offset']==offset]
++        if len(matches)!=1: raise ValueError('unique checked terminal lane required')
++        item=matches[0]
++        if item.get('acquisition_id')!=completion.get('acquisition_id') or item.get('occurrence')!='step'+str(n):
++            raise ValueError('same dynamic checked terminal required')
++        bits.append(item['center_bits'])
++    if tuple(bits)!=candidate.state_bits or harness.get('output_bits')!=bits:
++        raise ValueError('candidate bytes differ from checked terminal output')
++    hashes=run.get('stage_receipts')
++    if not isinstance(hashes,list) or len(hashes)!=3: raise ValueError('all resource receipts required')
++    for stage,want,module in zip(STAGES,hashes,('acquire','producer','checker')):
++        path=evidence/stage/'execution.json'; receipt=file_json(path)
++        if file_sha(path)!=want or receipt.get('verdict')!='EXECUTED' or receipt.get('resource_failure') is not None or type(receipt.get('return_code')) is not int or receipt['return_code']!=0:
++            raise ValueError('successful exact resource receipt required')
++        command=receipt.get('command',[])
++        if command[1:3]!=['-m','runtime_trace.regular_nstep.'+module] or receipt.get('cwd')!=str(root):
++            raise ValueError('approved stage invocation binding')
++        if stage=='independent_check':
++            if '--report' not in command or command[command.index('--report')+1]!=str(evidence/'fresh_checker_report.json'):
++                raise ValueError('fresh same-transaction independent checker required')
++        for flag,want_path in ([('--out',evidence/'capture')] if stage=='acquisition' else
++            [('--capture',evidence/'capture'),('--root',root)]+([('--out',evidence/'derived')] if stage=='derivation' else [('--derived',evidence/'derived')])):
++            if flag not in command or command[command.index(flag)+1]!=str(want_path): raise ValueError('same candidate stage locator required')
++    acceptance={'schema':'DRIVER_V0_ACCEPTANCE_V1','verdict':'ACCEPT','transaction_id':candidate.transaction_id,
++        'predecessor_id':candidate.predecessor_id,'candidate_id':candidate.content_hash,
++        'controller_binding_sha256':digest_bytes(candidate.binding_bytes),'source_pinset_sha256':pin_sha,
++        'completion_sha256':digest,'acquisition_id':completion['acquisition_id'],
++        'requested_steps':n,'checked_steps':n,'requested_complete':True,'output_bits':bits,
++        'init_to_step1':'UNTRACED','post_terminal_frontier':'UNTRACED','formal_certification':False}
++    return GateDecision('ACCEPT','exact fresh candidate accepted',canonical_bytes(acceptance))
++
++def evaluate_candidate(candidate,predecessor,repo_root):
++    try: return _evaluate(candidate,predecessor,repo_root)
++    except (ValueError,OSError,KeyError,TypeError,IndexError) as exc: return GateDecision('REFUSE',str(exc))
+diff --git "a/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\v0\\model.py" "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\v0\\model.py"
+new file mode 100644
+index 0000000..6af3281
+--- /dev/null
++++ "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\v0\\model.py"
+@@ -0,0 +1,109 @@
++"""Immutable canonical records; certification is conditional on the RT contract."""
++from dataclasses import asdict, dataclass, is_dataclass
++import hashlib
++import json
++from pathlib import Path
++import re
++
++HARNESS_SHA = '4928f88e4c6255cfbc3f68798648b543146fb5b13327490d331814f778a9fc26'
++GENESIS_BITS = ('0x0000000000000000','0x0000000000000000','0x3fd0000000000000','0x3fc0000000000000')
++
++def canonical_bytes(value):
++    if is_dataclass(value): value=asdict(value)
++    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
++
++def content_id(value): return hashlib.sha256(canonical_bytes(value)).hexdigest()
++
++def digest_bytes(data): return hashlib.sha256(data).hexdigest()
++
++def strict_json(data):
++    def pairs(items):
++        result={}
++        for key,value in items:
++            if key in result: raise ValueError('duplicate JSON key')
++            result[key]=value
++        return result
++    def nonfinite(value): raise ValueError('nonfinite JSON')
++    result=json.loads(data,object_pairs_hook=pairs,parse_constant=nonfinite)
++    if not isinstance(result,dict): raise ValueError('JSON object required')
++    canonical_bytes(result)
++    return result
++
++def check_hash(value):
++    if type(value) is not str or re.fullmatch('[0-9a-f]{64}',value) is None:
++        raise ValueError('canonical content identity required')
++
++def check_transaction(value):
++    if type(value) is not str or re.fullmatch('[A-Za-z0-9][A-Za-z0-9_-]{0,79}',value) is None:
++        raise ValueError('safe transaction identity required')
++
++def check_bits(bits):
++    if len(bits)!=4: raise ValueError('exact four state lanes required')
++    for value in bits:
++        if type(value) is not str or re.fullmatch('0x[0-9a-f]{16}',value) is None:
++            raise ValueError('canonical binary64 bits required')
++        if (int(value,16)>>52)&0x7ff == 0x7ff: raise ValueError('finite state required')
++
++@dataclass(frozen=True)
++class CertifiedState:
++    generation: int
++    state_bits: tuple[str,...]
++    source_binding: str
++    predecessor_id: str|None=None
++    acceptance_id: str|None=None
++    transaction_id: str|None=None
++    run_id: str|None=None
++
++    def __post_init__(self):
++        if type(self.generation) is not int or self.generation<0: raise ValueError('strict generation')
++        object.__setattr__(self,'state_bits',tuple(self.state_bits)); check_bits(self.state_bits)
++        check_hash(self.source_binding)
++        if self.generation==0:
++            if any(v is not None for v in (self.predecessor_id,self.acceptance_id,self.transaction_id,self.run_id)):
++                raise ValueError('genesis cannot carry acceptance')
++        else:
++            check_hash(self.predecessor_id); check_hash(self.acceptance_id); check_hash(self.run_id)
++            check_transaction(self.transaction_id)
++
++    @property
++    def content_hash(self): return content_id(self)
++
++@dataclass(frozen=True)
++class CandidateState:
++    transaction_id: str
++    predecessor_id: str
++    evidence_dir: str
++    state_bits: tuple[str,...]
++    binding_bytes: bytes
++
++    def __post_init__(self):
++        check_transaction(self.transaction_id); check_hash(self.predecessor_id)
++        object.__setattr__(self,'state_bits',tuple(self.state_bits)); check_bits(self.state_bits)
++        if type(self.binding_bytes) is not bytes: raise ValueError('immutable observed binding required')
++
++    @property
++    def content_hash(self):
++        return content_id({'transaction_id':self.transaction_id,'predecessor_id':self.predecessor_id,
++            'evidence_dir':self.evidence_dir,'state_bits':self.state_bits,'binding_sha256':digest_bytes(self.binding_bytes)})
++
++@dataclass(frozen=True)
++class GateDecision:
++    verdict: str
++    reason: str
++    acceptance_bytes: bytes|None=None
++
++@dataclass(frozen=True)
++class DriverResult:
++    verdict: str
++    transaction_id: str
++    state_id: str
++    generation: int
++    reason: str
++    candidate_id: str|None=None
++    driver_seconds: float=0.
++    runtime_seconds: float=0.
++
++def regular_genesis(repo_root):
++    data=(Path(repo_root)/'runtime_trace/harness.py').read_bytes()
++    if digest_bytes(data)!=HARNESS_SHA: raise ValueError('pinned regular harness mismatch')
++    return CertifiedState(0,GENESIS_BITS,HARNESS_SHA)
+diff --git "a/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\v0\\store.py" "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\v0\\store.py"
+new file mode 100644
+index 0000000..3c7c023
+--- /dev/null
++++ "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\verified_driver\\v0\\store.py"
+@@ -0,0 +1,132 @@
++"""Append-only accepted objects and receipts, locked atomic CURRENT publication."""
++from contextlib import contextmanager
++import os
++from pathlib import Path
++import uuid
++from .model import CertifiedState, GENESIS_BITS, HARNESS_SHA, canonical_bytes, check_hash, digest_bytes, strict_json
++
++class CertifiedStore:
++    def __init__(self,root,*,_crash_hook=None):
++        self.root=Path(root).resolve()
++        self.root.mkdir(parents=True,exist_ok=True)
++        self._crash_hook=_crash_hook
++        for name in ('objects','receipts'):
++            path=self.root/name
++            if path.is_symlink(): raise ValueError('store namespace alias')
++            path.mkdir(exist_ok=True)
++
++    @contextmanager
++    def _lock(self):
++        import fcntl
++        with (self.root/'.lock').open('a+b') as stream:
++            fcntl.flock(stream,fcntl.LOCK_EX)
++            yield
++
++    def _point(self,name):
++        if self._crash_hook: self._crash_hook(name)
++
++    def _sync_dir(self,path):
++        fd=os.open(path,os.O_RDONLY|os.O_DIRECTORY)
++        try: os.fsync(fd)
++        finally: os.close(fd)
++
++    def _exclusive(self,path,data):
++        if path.is_symlink() or path.parent.is_symlink(): raise ValueError('store namespace alias')
++        try:
++            with path.open('xb') as stream:
++                stream.write(data); stream.flush(); os.fsync(stream.fileno())
++        except FileExistsError:
++            if path.read_bytes()!=data: raise ValueError('content-addressed bytes differ')
++        self._sync_dir(path.parent)
++
++    def _pointer(self,identity):
++        check_hash(identity)
++        path=self.root/('.CURRENT.'+uuid.uuid4().hex+'.tmp')
++        self._exclusive(path,(identity+'\n').encode())
++        self._point('before_replace')
++        os.replace(path,self.root/'CURRENT')
++        self._point('after_replace')
++        self._sync_dir(self.root)
++
++    def _state(self,identity):
++        check_hash(identity)
++        path=self.root/'objects'/(identity+'.json')
++        if path.is_symlink(): raise ValueError('object alias')
++        try:
++            data=path.read_bytes(); state=CertifiedState(**strict_json(data))
++        except (OSError,TypeError) as exc: raise ValueError('unavailable certified object') from exc
++        if state.content_hash!=identity or canonical_bytes(state)!=data:
++            raise ValueError('certified object identity/canonical bytes')
++        return state
++
++    def _receipt(self,state,data):
++        receipt=strict_json(data)
++        if canonical_bytes(receipt)!=data or digest_bytes(data)!=state.acceptance_id:
++            raise ValueError('acceptance bytes/identity')
++        if receipt.get('schema')!='DRIVER_V0_ACCEPTANCE_V1' or receipt.get('verdict')!='ACCEPT':
++            raise ValueError('only accepted receipts publish')
++        n=receipt.get('requested_steps')
++        if type(n) is not int or not 1<=n<=100 or type(receipt.get('checked_steps')) is not int or receipt['checked_steps']!=n or receipt.get('requested_complete') is not True:
++            raise ValueError('incomplete acceptance receipt')
++        for name in ('candidate_id','completion_sha256','acquisition_id','source_pinset_sha256'):
++            check_hash(receipt.get(name))
++        for name,want in [('transaction_id',state.transaction_id),('predecessor_id',state.predecessor_id),
++            ('source_pinset_sha256',state.source_binding),('acquisition_id',state.run_id)]:
++            if receipt.get(name)!=want: raise ValueError('state/acceptance binding')
++        if tuple(receipt.get('output_bits',()))!=state.state_bits: raise ValueError('accepted output binding')
++        return receipt
++
++    def _current(self):
++        pointer=self.root/'CURRENT'
++        if pointer.is_symlink(): raise ValueError('CURRENT alias')
++        try: raw=pointer.read_bytes()
++        except OSError as exc: raise ValueError('CURRENT unavailable') from exc
++        if len(raw)!=65 or raw[-1:]!=b'\n': raise ValueError('truncated CURRENT')
++        try: identity=raw[:-1].decode('ascii'); check_hash(identity)
++        except (UnicodeError,ValueError) as exc: raise ValueError('malformed CURRENT') from exc
++        state=self._state(identity); previous=state
++        while previous.generation:
++            receipt_path=self.root/'receipts'/(previous.acceptance_id+'.json')
++            if receipt_path.is_symlink(): raise ValueError('receipt alias')
++            try: data=receipt_path.read_bytes()
++            except OSError as exc: raise ValueError('acceptance unavailable') from exc
++            self._receipt(previous,data)
++            parent=self._state(previous.predecessor_id)
++            if parent.generation+1!=previous.generation: raise ValueError('generation lineage')
++            previous=parent
++        if previous.state_bits!=GENESIS_BITS or previous.source_binding!=HARNESS_SHA:
++            raise ValueError('unsupported genesis contract')
++        return identity,state
++
++    def current(self):
++        with self._lock(): return self._current()
++
++    def recover(self): return self.current()
++
++    def initialize(self,genesis):
++        if genesis.generation!=0 or genesis.state_bits!=GENESIS_BITS or genesis.source_binding!=HARNESS_SHA:
++            raise ValueError('regular genesis required')
++        with self._lock():
++            if (self.root/'CURRENT').is_symlink(): raise ValueError('CURRENT alias')
++            identity=genesis.content_hash
++            self._exclusive(self.root/'objects'/(identity+'.json'),canonical_bytes(genesis))
++            if (self.root/'CURRENT').exists(): self._current()
++            else: self._pointer(identity)
++            return identity
++
++    def publish(self,expected_state_id,state,acceptance_bytes):
++        check_hash(expected_state_id)
++        if state.generation==0: raise ValueError('genesis is not a candidate')
++        self._receipt(state,acceptance_bytes)
++        with self._lock():
++            current_id,current=self._current()
++            if current_id==state.content_hash:
++                if state.predecessor_id!=expected_state_id: raise ValueError('retry predecessor mismatch')
++                return current_id
++            if current_id!=expected_state_id or state.predecessor_id!=current_id or state.generation!=current.generation+1:
++                raise ValueError('certified predecessor changed')
++            self._exclusive(self.root/'receipts'/(state.acceptance_id+'.json'),acceptance_bytes)
++            self._exclusive(self.root/'objects'/(state.content_hash+'.json'),canonical_bytes(state))
++            self._point('after_objects')
++            self._pointer(state.content_hash)
++            return state.content_hash
+diff --git "a/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\current\\VERIFIED_DRIVER_V0_2026-10-05.md" "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\current\\VERIFIED_DRIVER_V0_2026-10-05.md"
+new file mode 100644
+index 0000000..f28f346
+--- /dev/null
++++ "b/C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\current\\VERIFIED_DRIVER_V0_2026-10-05.md"
+@@ -0,0 +1,84 @@
++# Verified Driver V0 최종 보고 — 2026-10-05
++
++승인된 V0 범위의 구현·검증을 완료했다. 실제 외부 Gala 후보는 fresh 독립 검사 PASS 뒤에만 인증 상태로 채택됐고, 최종 소스의 거부·변조·자원·복구 시험이 통과했다. 여기서 인증은 기존 Runtime Trace 계약에 조건부인 Driver 내부 상태다. 외부 독립 감사와 형식·물리 인증은 완료되지 않았다.
++
++| 확인 항목 | 실제 결과 |
++|---|---|
++| 검증 전 후보의 권위 | 최종 후보의 실제 실행·공격 시험에서 무검증 후보의 채택 없음. 개발 RED에서 발견한 잘못된 fallback/source 연결과 거부 metadata 결함은 보존·수정했다. |
++| 실제 실행 경로 | 원본 Gala → GDB 실제 기록 → 기존 Numeric IR/frozen V2 → 기존 독립 checker → Driver gate → 영수증·객체 → atomic CURRENT. 최종 fresh N=1,36연산,전체완료 PASS,세대0→1. |
++| 변조·불완전 실행 | Driver83시험과 기존 Runtime Trace36시험, 총119PASS/0실패/0오류/0skip. 최종 실제 실행 기반1ulp대조 STOP,인증 상태 불변. |
++| fallback·재시작 | 생산 fallback 없음,STOP 기본값. TEST_ONLY 대조만 같은 gate로 검증. 완료 transaction 재요청/재시작은 같은 세대1; 임의 S1에서 Gala 재출발은 STOP. |
++| 완료·감사·Git | 승인된 V0 완료. fresh-context 내부 검토 Important2건을 TDD로 수정하고 전체회귀·원본실행 재검증. 외부감사 없음. commit/push 없음. |
++
++## 실제 작동 범위와 증거
++
++데스크톱 Windows host `으악`의 WSL Ubuntu24.04/Linux x86-64/CPython3.12.3에서 실행했다. 실제 authority 저장소와 수치 증거는 관리 worktree의 NTFS mount에 있다. 이번 V0는 노트북 실행을 추가하지 않았다. 단위·저장 증거 시험은 같은 WSL의 Linux-native mirror를 사용했으며 매 동기화마다 현재 Runtime Trace89소스와 Driver/test 바이트 동일성을 확인했다. 이 mirror는 다른 장비/외부 감사가 아니다.
++
++- 최종 원본 실행: `verified_driver/v0/artifacts/authority-03/authority-proof.json`, `actual-result.json`, `pending/real/fresh_checker_report.json`, `pending/real/derived/completion.json`.
++- 수정 전 실행: `authority-02/` 보존. `authority-01/`은 사전 Git 경로 수집 실패이며 수치 실행을 시작하지 않았다.
++- 최종 source hash·비용·검증 요약: `verified_driver/v0/artifacts/final-summary.json`.
++- 최종 시험: `final-review-green-junit.xml`, `jobs/final-review-green/stdout.log`. 전체명령은 해당 `execution.json`에 기록됐다.
++- 모든 native 시험 증거 내보내기: `native-validation-final/test-evidence.zip` 및 member SHA-256/CRC검증 `manifest.json`. 모두 TEST_ONLY이며 새로운 수치 실행으로 세지 않는다.
++
++최종 출력 q0,q1,v0,v1: `0x3f70000000000000`, `0x3f60000000000000`, `0x3fcffeff00000000`, `0x3fbffefe80000000`.
++
++최종 상태 ID: `080958495fa9ab8df93344ab605a8c2750c8cea923fcf1c1a030c4154a6d2a6a`. acceptance ID: `370d0f47d7f576fec26903d6504f8a7432d00fa270d09074ba081dee0462d1e1`. acquisition ID: `ae162bdc80c372920f74b175be8109298542690a7a99f6e1163ecf010e848b0b`. completion SHA: `35b2d27047e9486da619f5789342706e682b33c4067e300d63a28e961ee5c188`.
++
++`after_objects`와 `before_replace`에서 CURRENT는 genesis ID를 유지했고 checker PASS와 영수증이 존재했다. `after_replace`에서만 새 상태 ID가 보였다. 재요청은 기존 완료를 반환하여 수치 실행·세대 증가를 반복하지 않았다. 원본을 베껴 계산하는 대체 프로그램이나 N별 별도 코드는 추가하지 않았다. fresh Driver 실행은 N=1이며 저장된 N=10은 계약 시험 대조다. 기존 Runtime Trace N=10/100 역사적 결과를 Driver의 새 fresh10/100 증거로 승격하지 않았다.
++
++## 거부·공격·복구
++
++실행한 행렬:1ulp,repair한 hashes,오래된 PASS/이전영수증,후보A의 증거를B에 연결,checker생략,REFUSED강제ACCEPT,checker전 publication,fallback재검증우회,predecessor교체,잘린/unknown/dangling CURRENT,잘못된 checker JSON/중복key/nonfinite,timeout/exception,resource refusal,transaction중 source변경/fallback의 source초기화,기존/금지된 evidence경로에 거부파일 추가,저장·시간예산소진 후 반복metadata작성,audit_only경로.
++
++최종 행렬은 이전 인증 ID·세대·바이트 유지 또는 완전히 기록된 새 세대만 허용했다. 실제 프로세스 `os._exit(73)`를 after_objects/before_replace/after_replace에서 실행했다. 교체 전은 세대0,교체 후는 영수증·객체가 유효한 세대1로 복구했다. 이 crash시험은 Linux-native 시험 파일시스템에서 수행했으며 전원차단·모든 NTFS/스토리지의 내구성을 증명하지 않는다. 잘린 CURRENT를 임의 다른 객체로 복구하거나 genesis로 덮어쓰지 않고 거부한다.
++
++개발 중 RED에서 foreign TEST_ONLY fallback이 다른 transaction 상태를 publish하면서 STOP을 반환하는 반례와 fallback의 source epoch 초기화 반례가 재현됐다. active transaction/input/source를 고정하여 수정했다. 최종 검토는 STOP이 기존 디렉터리에 결과 파일을 추가하는 문제와 소진된 저장예산에서 metadata가 자라는 문제를 추가로 찾았다. 여섯 회귀시험을 RED로 관찰한 뒤 생성 전 admission·8MiB bounded metadata reservation·이번 호출의 exclusive ownership을 적용했다. 실패 로그를 삭제하거나 과거 PASS로 대체하지 않았다.
++
++## 측정 비용과 한도
++
++| 최종 실제 N=1 측정 구간 | 시간 | 메모리 |
++|---|---:|---:|
++| 전체 transact API | 244.440577s | controller RSS peak 20,307,968bytes |
++| 어댑터 밖:admission/소스/게이트/저장 등 | 37.193807s | 위 controller 측정 |
++| 어댑터+guarded Runtime Trace 경로 | 207.176144s | 단계별 아래 |
++| acquisition guarded unit | 6.554875s | cgroup peak 474,890,240bytes |
++| derivation guarded unit | 5.179003s | cgroup peak 105,111,552bytes |
++| independent_check guarded unit | 3.265339s | cgroup peak 97,107,968bytes |
++
++단계 receipt wall 합은 14.999217s다. 어댑터 시간에는 source hashing·저장 장부 filesystem traversal·controller·보고 처리가 섞여 있다. 원본 계산 자체와 추적만의 시간을 분리 측정하지 않았으며, 원본 대비 속도배수·확장성을 보장하지 않는다. API전체와 두 기록구간 합의 작은 차이는 결과metadata/반환 등 계측구간 밖이다. 어댑터 내부를 더 잘게 계측하는 최적화는 미룬 Minor다.
++
++기존 공유장부 사용 2936.687094/3600s,남음 663.312906s. V0에서 장부에 추가된 guarded wall은 415.166828s이며 실패·시험·증거 내보내기도 포함한다. 이 수치는 전체 대화/개발 elapsed나 모든 metadata tooling wall이 아니다. guard 사전 filesystem traversal은 장부 job wall에 포함되지 않으므로 위 실제 API 시간과 구분한다. 장부를 초기화하거나 증액하지 않았다.
++
++수치 단계는 기존 Linux cgroup guard의 단일job 최대600s,tree MemoryMax4GiB/swap0,누적장부3600s를 사용했다. 이번 실제 controller는 RLIMIT_AS4GiB로 실행했다. 이것을 전 장비·모든 controller/작업의 합산메모리 상한으로 표시하지 않는다. 새 transaction은 기존 승인 장부/Driver namespace/완료 marker/남은시간/aggregate 저장공간을 쓰기 전에 검사한다. Driver JSON/object/receipt/pointer용8MiB를 예약하고, 현재 Driver파일과 미사용예약분을 기존 guard storage cap에서 차감하여8GiB범위를 유지한다. 생산 fallback은 없고 유료 자원도 사용하지 않았다.
++
++내보내기 때 old Runtime artifacts 3,114,905,652bytes,관리 Driver artifacts 26,957,458bytes,전체 native mirror(원본 복제 포함) 423,527,584bytes였다. 보수적으로 합산 3,565,390,694bytes <8GiB. 이후 작은 보고서·status metadata는 이 snapshot에 포함되지 않는다. 원본 Gala 실행·수치 기록 수집·IR 변환·독립 검사·Driver 채택은 자동 경로다. source/harness/wheel SHA는 도구로 확인했다. 사람/도구가 수행한 수동 계약 작업은 저장 시험 증거의 경로 재결합,공격 주입,검토 후 수정이다. 실제 계산식을 옮겨 적은 구현은 없다.
++
++## 보존·읽은 자료·한계
++
++design/spec와6-task plan은 전체 읽었다. 기존 runner/acquire/resources/schema와 필요한 연결 경로는 직접 확인했고 전체 Runtime Trace89소스는 바이트 hash로 결합했다. frozen V2/Impulse/A 전체를 새로 감사했다고 주장하지 않는다. 보호 baseline6,892파일을 전후 SHA-256/크기로 재검사하여 변경·누락0건이었다. 승인된 mutable `runtime_trace/regular_nstep/artifacts/budget.json`과 `.running.json`만 제외했다. Gala wheel SHA는 사전/사후 일치하고 그 값은 final-summary에 있다. unrelated 원본 worktree 미커밋 파일도 보존했다.
++
++init-return→step1-entry와 native terminal frontier→Python wrapper tail은 UNTRACED다. 초기 allocation/root 전제와 GDB/collector/OS 실행 진실의 신뢰 전제는 유지된다. native symbolic coefficients0,물리궤적/모든입력/모든미래/범용CPU·GPU/형식인증/외부감사 closure는 미입증이다. trusted controller/low-level Store/OS와 serialized calls 범위이며 임의 권한 Python/filesystem writer나 concurrent runner를 방어한다고 주장하지 않는다.
++
++## 검토·구현 판단
++
++새 문맥 내부 검토는 Critical0/Important2/Minor1,판정With fixes였다. Important2건은 작성자가 한 번의 TDD fix pass와119회귀·fresh authority-03으로 해결했다. 재검토자는 보내지 않았으며 external audit를 수행한 것도 아니다. 검토 원문 요지는 `artifacts/review/fresh-review.md`에 보존했다.
++
++판단1:기존 public runner는 old RT장부폴더만 output으로 허용하여 unchanged acquire/producer/checker CLI 어댑터를 새 Driver경로에 연결했다. 비용/위험은 어댑터차이이며 source/command binding·기존회귀·실제실행으로 검사했다.
++판단2:trusted controller의 실제 observed report와 사전 transaction/source를 candidate디스크와 분리·고정했다. 비용/위험은 OS/controller신뢰 전제이며 적대적 privileged writer를 다루지 않는다.
++판단3:저장·권위 시험은 바이트동일 native mirror로 실행했다. 비용/위험은 파일시스템·환경차이이며 실제수치/authority는 관리NTFS mount에서 별도 수행했고 power-loss 일반화는 하지 않았다.
++판단4:no-commit/no-cleanup 사용자 지시 때문에 generic review-package의 빈 commit range를 실제 Git no-index untracked patch로 대체하고 RED/ledger를 보존했다. 비용/위험은 Git commit recovery checkpoint가 없다는 것이며 current HEAD·source hashes·증거ZIP을 남겼다.
++검토가 판단하지 않은 privileged writer/concurrency/전칭물리·미지원프로그램/생산fallback/전원·하드웨어/상속checker외부감사/검토자의재실행은 모두 위 경계로 남긴다. 그 경계를 넘는 주장에는 새 증거가 필요하다.
++미룬 Minor:어댑터 내부 세부 timer 추가. 현재 측정구간을 혼합 시간으로 정확히 표기했다.
++
++## Git diff/status와 납품
++
++HEAD는 `79a655f0848152aa765e1537b741518b2fa97acf`이며 detached managed worktree를 재사용했다. tracked diff와 tracked status는 비어 있다. 새 Driver package/test/report는 untracked이므로 일반git diff만으로 변경이 보이지 않는다. 기존 Runtime Trace N-step uncommitted 입력은 별도 이전 작업으로 status에 남아 있다. staging/commit/push/강제정리 없음.
++
++- 실제 전체 Git status: `verified_driver/v0/artifacts/review/git-status.txt`.
++- 실제 tracked Git diff: `review/git-diff.patch`(비어 있음).
++- 새 Driver production/test/report를 파일별 실제 `git diff --no-index NUL`로 모은 검토패치: `review/untracked-source-git-diff.patch`.
++- 바이트 SHA/줄수/source목록: `review/source-inventory.json`.
++- 납품 직전 원본/관리 worktree Git 상태·최종 source 일치·119시험·보존·저장공간 재확인: `review/delivery-check.json`, `review/original-git-status.txt`. UTF-8/reparse alias 관련 metadata 도구 실패와 수정은 `review/metadata-failures.json`에 기록했다.
++- Task TDD/판단/실패 기록: `.superpowers/sdd/2026-10-05-verified-driver-v0/progress.md` 및 `verified_driver/v0/artifacts/jobs/`.
++
++승인된 V0 완료 기준을 최종 소스·실제 후보·거부·권위·복구 증거로 충족했다. 이 보고는 merge/push/production 인증의 승인이 아니다. 새 연구 목표나 후속 구현을 자동으로 추가하지 않았다.

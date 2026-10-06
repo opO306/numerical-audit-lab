@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/verified_driver/v0/artifacts/workflow/mirror.py", line 12, in <module>
+    if not MIRROR.exists(): shutil.copytree(SOURCE,MIRROR)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/shutil.py", line 598, in copytree
+    with os.scandir(src) as itr:
+         ^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/otherside123/runtime-nstep-portability-proof-2026-10-05/test_public_fresh_checker_reloc0/relocated'

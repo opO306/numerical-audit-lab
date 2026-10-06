@@ -1,0 +1,1285 @@
+{
+  "budget_snapshot_before_this_metadata_job": {
+    "authorization": "user directed free desktop/laptop execution; proposed ceilings retained as maximums",
+    "bootstrap_accounting": "exec-command reported intervals for six bootstrap test invocations, including WSL launch and metadata work; conservative counted wall interval, not sum of nested jobs",
+    "jobs": [
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/current/runtime-nstep-workflow-2026-10-05/guarded-final1",
+        "return_code": 0,
+        "wall_seconds": 3.6379181240000005
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/native10-01/guard",
+        "return_code": 1,
+        "wall_seconds": 0.8705862910000004
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/missing-receipt-red",
+        "return_code": 1,
+        "wall_seconds": 1.0033850549999954
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/native10-02/guard",
+        "return_code": 0,
+        "wall_seconds": 28.740609622999997
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/raw-red",
+        "return_code": 1,
+        "wall_seconds": 6.536385797
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/raw-green1",
+        "return_code": 1,
+        "wall_seconds": 15.340207797000001
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/pipeline-red",
+        "return_code": 1,
+        "wall_seconds": 16.302480965999997
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/pipeline-green1",
+        "return_code": 1,
+        "wall_seconds": 35.057536201
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/derived10-01/guard",
+        "return_code": 0,
+        "wall_seconds": 21.003046838000003
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/pipeline-green2",
+        "return_code": 0,
+        "wall_seconds": 35.991489908
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/quota-red",
+        "return_code": 1,
+        "wall_seconds": 0.8408056979999969
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/quota-green",
+        "return_code": 0,
+        "wall_seconds": 2.8374163999999995
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/body-machine-red",
+        "return_code": 1,
+        "wall_seconds": 8.458752527000001
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/body-machine-green1",
+        "return_code": 0,
+        "wall_seconds": 14.216049127999998
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/body-machine-positive1",
+        "return_code": 1,
+        "wall_seconds": 3.3354789240000002
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/body-machine-positive2",
+        "return_code": 1,
+        "wall_seconds": 3.796729171999999
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/body-machine-positive3",
+        "return_code": 0,
+        "wall_seconds": 4.062238379999997
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/body-machine-final",
+        "return_code": 1,
+        "wall_seconds": 5.71458402
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/body-machine-final2",
+        "return_code": 1,
+        "wall_seconds": 8.891905572000013
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/body-machine-final3",
+        "return_code": 0,
+        "wall_seconds": 9.249583180000002
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/connected10-01/acquisition",
+        "return_code": 0,
+        "wall_seconds": 22.449626608000017
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/connected10-01/derivation",
+        "return_code": 0,
+        "wall_seconds": 37.275250304
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/connected10-01/independent_check",
+        "return_code": 0,
+        "wall_seconds": 11.397041795999996
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/connected10-02/acquisition",
+        "return_code": 0,
+        "wall_seconds": 25.971299916
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/connected10-02/derivation",
+        "return_code": 0,
+        "wall_seconds": 19.898248244999998
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/connected10-02/independent_check",
+        "return_code": 0,
+        "wall_seconds": 11.125653939999992
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/connected100-01/acquisition",
+        "return_code": 0,
+        "wall_seconds": 293.320450796
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/connected100-01/derivation",
+        "return_code": 0,
+        "wall_seconds": 138.819264111
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/connected100-01/independent_check",
+        "return_code": 0,
+        "wall_seconds": 90.08640719499999
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/final-gates-red",
+        "return_code": 1,
+        "wall_seconds": 4.664528831000001
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/final-gates-green",
+        "return_code": 0,
+        "wall_seconds": 9.251868153
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/redundancy-red",
+        "return_code": 1,
+        "wall_seconds": 11.906444663000002
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/pre-freeze-regression",
+        "return_code": 0,
+        "wall_seconds": 33.789611533
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/frontier-red",
+        "return_code": 1,
+        "wall_seconds": 38.142626882
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/frontier-green",
+        "return_code": 0,
+        "wall_seconds": 22.676231145000003
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/connected10-final/acquisition",
+        "return_code": 0,
+        "wall_seconds": 21.44880409000001
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/connected10-final/derivation",
+        "return_code": 0,
+        "wall_seconds": 16.689268834000018
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/connected10-final/independent_check",
+        "return_code": 0,
+        "wall_seconds": 9.859685723000013
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/frontier-final",
+        "return_code": 0,
+        "wall_seconds": 26.649830821000023
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/connected10-final2/acquisition",
+        "return_code": 0,
+        "wall_seconds": 22.409207972000047
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/connected10-final2/derivation",
+        "return_code": 0,
+        "wall_seconds": 17.484319752999966
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/connected10-final2/independent_check",
+        "return_code": 0,
+        "wall_seconds": 10.00839031299995
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/connected100-final/acquisition",
+        "return_code": 0,
+        "wall_seconds": 283.69472814200003
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/connected100-final/derivation",
+        "return_code": 0,
+        "wall_seconds": 139.37412047199996
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/connected100-final/independent_check",
+        "return_code": 0,
+        "wall_seconds": 84.76297390800005
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/attack-matrix-job",
+        "return_code": 0,
+        "wall_seconds": 176.262901479
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/attack-supplements-job",
+        "return_code": 1,
+        "wall_seconds": 26.347093400999995
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/attack-supplements02-job",
+        "return_code": 0,
+        "wall_seconds": 43.997432332
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/integration-regression",
+        "return_code": 1,
+        "wall_seconds": 306.411318026
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/portability-retry",
+        "return_code": 1,
+        "wall_seconds": 174.235591008
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/portability-retry02",
+        "return_code": 0,
+        "wall_seconds": 52.20287709600001
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/original-baselines/job10",
+        "return_code": 0,
+        "wall_seconds": 2.372904224999999
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/original-baselines/job100",
+        "return_code": 0,
+        "wall_seconds": 1.792060389999989
+      },
+      {
+        "host": "localhost",
+        "path": "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/external-proof-inventory-job",
+        "return_code": 0,
+        "wall_seconds": 2.002682261000018
+      },
+      {
+        "host": "DESKTOP-0EASI0F",
+        "path": "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\laptop-results\\audit10-final-job.json",
+        "receipt_path": "runtime_trace/regular_nstep/artifacts/laptop-results/audit10-final-job.json",
+        "return_code": 0,
+        "verdict": "EXECUTED",
+        "wall_seconds": 2.6666631000116467
+      },
+      {
+        "host": "DESKTOP-0EASI0F",
+        "path": "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\laptop-results\\audit10-final-v2-job.json",
+        "receipt_path": "runtime_trace/regular_nstep/artifacts/laptop-results/audit10-final-v2-job.json",
+        "return_code": 0,
+        "verdict": "EXECUTED",
+        "wall_seconds": 2.633679200007464
+      },
+      {
+        "host": "DESKTOP-0EASI0F",
+        "path": "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\laptop-results\\audit10-job.json",
+        "receipt_path": "runtime_trace/regular_nstep/artifacts/laptop-results/audit10-job.json",
+        "return_code": 2,
+        "verdict": "REFUSED",
+        "wall_seconds": 1.5936880999943241
+      },
+      {
+        "host": "DESKTOP-0EASI0F",
+        "path": "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\laptop-results\\audit10-job02.json",
+        "receipt_path": "runtime_trace/regular_nstep/artifacts/laptop-results/audit10-job02.json",
+        "return_code": 2,
+        "verdict": "REFUSED",
+        "wall_seconds": 1.5315719000063837
+      },
+      {
+        "host": "DESKTOP-0EASI0F",
+        "path": "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\laptop-results\\audit10-job03.json",
+        "receipt_path": "runtime_trace/regular_nstep/artifacts/laptop-results/audit10-job03.json",
+        "return_code": 0,
+        "verdict": "EXECUTED",
+        "wall_seconds": 2.671584499999881
+      },
+      {
+        "host": "DESKTOP-0EASI0F",
+        "path": "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\laptop-results\\audit100-final-job.json",
+        "receipt_path": "runtime_trace/regular_nstep/artifacts/laptop-results/audit100-final-job.json",
+        "return_code": 0,
+        "verdict": "EXECUTED",
+        "wall_seconds": 24.92063649999909
+      },
+      {
+        "host": "DESKTOP-0EASI0F",
+        "path": "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\laptop-results\\guard-probe.json",
+        "receipt_path": "runtime_trace/regular_nstep/artifacts/laptop-results/guard-probe.json",
+        "return_code": 0,
+        "verdict": "EXECUTED",
+        "wall_seconds": 0.15168239999911748
+      },
+      {
+        "host": "DESKTOP-0EASI0F",
+        "path": "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\laptop-results\\memory-limit-probe.json",
+        "receipt_path": "runtime_trace/regular_nstep/artifacts/laptop-results/memory-limit-probe.json",
+        "return_code": 1,
+        "verdict": "REFUSED",
+        "wall_seconds": 0.16709919999993872
+      },
+      {
+        "host": "DESKTOP-0EASI0F",
+        "path": "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\laptop-results\\memory-limit-probe02.json",
+        "receipt_path": "runtime_trace/regular_nstep/artifacts/laptop-results/memory-limit-probe02.json",
+        "return_code": 0,
+        "verdict": "REFUSED",
+        "wall_seconds": 0.1685730000026524
+      },
+      {
+        "host": "DESKTOP-0EASI0F",
+        "path": "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\laptop-results\\timeout-limit-probe.json",
+        "receipt_path": "runtime_trace/regular_nstep/artifacts/laptop-results/timeout-limit-probe.json",
+        "return_code": 124,
+        "verdict": "REFUSED",
+        "wall_seconds": 1.068796099993051
+      },
+      {
+        "host": "\uc73c\uc545",
+        "path": "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\laptop-transfer\\package10-final2-job.json",
+        "receipt_path": "runtime_trace/regular_nstep/artifacts/laptop-transfer/package10-final2-job.json",
+        "return_code": 2,
+        "verdict": "REFUSED",
+        "wall_seconds": 0.17272100000991486
+      },
+      {
+        "host": "\uc73c\uc545",
+        "path": "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\laptop-transfer\\package10-final2-job02.json",
+        "receipt_path": "runtime_trace/regular_nstep/artifacts/laptop-transfer/package10-final2-job02.json",
+        "return_code": 0,
+        "verdict": "EXECUTED",
+        "wall_seconds": 0.491068000002997
+      },
+      {
+        "host": "\uc73c\uc545",
+        "path": "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\laptop-transfer\\package10-job.json",
+        "receipt_path": "runtime_trace/regular_nstep/artifacts/laptop-transfer/package10-job.json",
+        "return_code": 0,
+        "verdict": "EXECUTED",
+        "wall_seconds": 0.5068241999979364
+      },
+      {
+        "host": "\uc73c\uc545",
+        "path": "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\laptop-transfer\\package100-final-job.json",
+        "receipt_path": "runtime_trace/regular_nstep/artifacts/laptop-transfer/package100-final-job.json",
+        "return_code": 0,
+        "verdict": "EXECUTED",
+        "wall_seconds": 2.5745630000019446
+      },
+      {
+        "host": "\uc73c\uc545",
+        "path": "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\laptop-transfer\\final-inventory-job.json",
+        "receipt_path": "runtime_trace/regular_nstep/artifacts/laptop-transfer/final-inventory-job.json",
+        "return_code": 1,
+        "verdict": "REFUSED",
+        "wall_seconds": 3.2885353999881772
+      },
+      {
+        "host": "\uc73c\uc545",
+        "path": "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\laptop-transfer\\final-inventory02-job.json",
+        "receipt_path": "runtime_trace/regular_nstep/artifacts/laptop-transfer/final-inventory02-job.json",
+        "return_code": 1,
+        "verdict": "REFUSED",
+        "wall_seconds": 2.182803200004855
+      },
+      {
+        "host": "\uc73c\uc545",
+        "path": "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\laptop-transfer\\final-inventory03-job.json",
+        "receipt_path": "runtime_trace/regular_nstep/artifacts/laptop-transfer/final-inventory03-job.json",
+        "return_code": 0,
+        "verdict": "EXECUTED",
+        "wall_seconds": 7.352492000005441
+      }
+    ],
+    "used_seconds": 2520.163052665025
+  },
+  "external_audit_closure": false,
+  "files": {
+    "current/RUNTIME_NSTEP_INTEGRATED_CANDIDATE_2026-10-05.md": {
+      "bytes": 22136,
+      "sha256": "9be6006c562d04f2a05969d11022b561260e4e74a3a7da2e05fe2b2261a44ec3"
+    },
+    "current/runtime-nstep-audit-2026-10-05/fresh-review-01.md": {
+      "bytes": 8140,
+      "sha256": "745fc88babfb0d9b9821f5ac4063655bc677e7033281023b8b17079b644e4b7c"
+    },
+    "current/runtime-nstep-audit-2026-10-05/fresh-review-02-followup.md": {
+      "bytes": 4886,
+      "sha256": "8f85676a9f42cab4d40edc80ec4dfe09ed29773b78a240c22a66ce5e91a70f1f"
+    },
+    "current/runtime-nstep-audit-2026-10-05/fresh-review-03-public-frontier.md": {
+      "bytes": 4134,
+      "sha256": "3fd1a1a581b5e5bd83a3906f78bd316ebb7f19a20ffe15cd8a10d6187a3d78be"
+    },
+    "current/runtime-nstep-audit-2026-10-05/fresh-review-final.md": {
+      "bytes": 19660,
+      "sha256": "5882ae3ba00346b7d6803216dd80ee07513a89acb09971d5da44a82c2f540690"
+    },
+    "current/runtime-nstep-audit-2026-10-05/laptop_independent.py": {
+      "bytes": 35518,
+      "sha256": "047858ce7e3d0c5ae50799b80416abaac925f745c2db3a57172fa89a198d5d0a"
+    },
+    "current/runtime-nstep-delivery-2026-10-05-03/inventory.json": {
+      "bytes": 2020398,
+      "sha256": "17e6c9b6dce23b1e048255e610c9d51cda3ee9c21d29204775611d1da8636dbb"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/account_windows.py": {
+      "bytes": 2050,
+      "sha256": "53edb19ec87a615212e018c0ff7e16aefd448690c38e2e175b24da92447a6f66"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/acquire-green.log": {
+      "bytes": 98,
+      "sha256": "17feda5895d98a605722f3dd9aae47864274f86f7259833489b540335156f5c3"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/acquire-red.log": {
+      "bytes": 5786,
+      "sha256": "a18c3c47c9d5592efc9d0e71778226b8056097d8710e464fa0cd4a75669e29a8"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/attack_matrix.py": {
+      "bytes": 9994,
+      "sha256": "770d61c4d68c51b6511afc351a4f6960eb85739a3095af4da6fd85fb2a364af3"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/attack_supplements.py": {
+      "bytes": 4812,
+      "sha256": "e3f4076d2127013d694dc0d700006db58f3b10822ded2c3b4d1ca9bd522a5993"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/attack_supplements_attempt01.py": {
+      "bytes": 4816,
+      "sha256": "96924503c081ce89c32c1d5b849f113ea3a507b41b55571474583b311b6e74c5"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/baseline_runs.py": {
+      "bytes": 783,
+      "sha256": "00903c266e596d49b7781f521bd91b2e103282b43416eecdaf5b8abd6e2de4e5"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/budget.json": {
+      "bytes": 581,
+      "sha256": "d8c7aca7bb805deaf5d71e663a872d47ee03d344e4966d95fbf66aefa6277c3e"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/external_proof_inventory.py": {
+      "bytes": 2199,
+      "sha256": "0857ce35e7a5122ab8303eec727d75e58a30387acf397555aa640582c608e2b0"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/final_inventory.py": {
+      "bytes": 4704,
+      "sha256": "347fe8cc0cc96f5d5b1b1f7aaa58d4229ba0333115bb062a14e1c3c24faa46e0"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/finalize_receipt.py": {
+      "bytes": 5003,
+      "sha256": "74f65fe2d23f4f3969fa210d4d7d09ea3e4d8f98868127088d047395774d541e"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/guard_cli.py": {
+      "bytes": 844,
+      "sha256": "1628c756e8a7ae8d0f7338695e908c47d3f03592e54633b9e59d545d3da0d9e0"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/inspect_body.py": {
+      "bytes": 408,
+      "sha256": "c4fbad48769a930c1fbd3c08c5afcad36a9bc1f956b193fca926da2f863d8bbb"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/inspect_last.py": {
+      "bytes": 292,
+      "sha256": "5d196d1e40c5e56d2a53c72bf6f1e379f757b674fb4cde68a990efb199387cbf"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/inspect_sites.py": {
+      "bytes": 737,
+      "sha256": "aeba087828dbcfe4787a610de344f5ba0b04407edbfdcb4d06e86bb49168c5c1"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/inspect_topology.py": {
+      "bytes": 820,
+      "sha256": "cedaa6572fe9d2d835e54242259eeb03b9f0fde79036471f9a2077e786bf9655"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/package_for_laptop.py": {
+      "bytes": 1347,
+      "sha256": "209a9c624d20b058f4a18522a3e11af01e69de5caca87ad6c9aa005a62c6f254"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/progress.md": {
+      "bytes": 5914,
+      "sha256": "2b9e7240fadd46fb5d1a406026f6a27cbf266732fde5e34905a7b549da2ba142"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/resources-green1.log": {
+      "bytes": 7055,
+      "sha256": "9985c0ce20929b1a15e86cdddfc0760e55e453c0d41d37f1c48c19e7ded0397e"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/resources-green2.log": {
+      "bytes": 1910,
+      "sha256": "f659a00ed7cf4c89fac29388d3d76f640247da3f27f83b13b5b26aab195c156d"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/resources-green3.log": {
+      "bytes": 367,
+      "sha256": "d4def04659fb2076fc58ade06c85b499bbb36596bedef065298f05007b96c393"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/resources-red.log": {
+      "bytes": 365,
+      "sha256": "d5b6d3d89aaaeffb4d896d40d6fec1dd869a6c3a7b9f6493565196de49c8b79d"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/resources-red2.log": {
+      "bytes": 15273,
+      "sha256": "4e04385b9055c15d67066189494e9275e1f06b0a570f5c7386a959aed1db44bb"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/run_metadata.py": {
+      "bytes": 435,
+      "sha256": "64adba65f8924a107dee3508daa05aa9c5f8fa473c090dacd9c7d174d2b331b4"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/seal_delivery.py": {
+      "bytes": 6650,
+      "sha256": "b7bfdb6edd711fdfac4b463ded5af4504169ec3840587fdde2824aa9f59dc541"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/transfer_server.py": {
+      "bytes": 1281,
+      "sha256": "ecc99ae754c0d31b583bb69a39d571ba37d13bcdf57e2c0003137ecbbac3595d"
+    },
+    "current/runtime-nstep-workflow-2026-10-05/windows_job_guard.py": {
+      "bytes": 5693,
+      "sha256": "8c4f8a7859f1caba4dbcdd336aa430cc1772dca0228238131ff9b5abacd36568"
+    },
+    "docs/superpowers/plans/2026-10-05-regular-nstep-runtime-trace.md": {
+      "bytes": 13013,
+      "sha256": "9985da783b57f71cc520a4229a88025130ae4ebcb4077d83e76dac934934339c"
+    },
+    "docs/superpowers/specs/2026-10-05-regular-nstep-runtime-trace.md": {
+      "bytes": 10590,
+      "sha256": "b985b44fe6aa17febf9d8b4fc62e00b6b922266b228409d850f982d28709233c"
+    },
+    "independent_checker/oracle.py": {
+      "bytes": 5664,
+      "sha256": "aee48b452afd0cd115be97b318543d52fbf946ed5b4bcf907ce2e0fff9223ec9"
+    },
+    "lab/v2_bound.py": {
+      "bytes": 6522,
+      "sha256": "48b91d0c45fd7f62dd09df4db28756e6f82c6bd464a040dc60ac1c924ed99780"
+    },
+    "runtime_trace/caller_transition/__init__.py": {
+      "bytes": 78,
+      "sha256": "3729bd7cadae1870f61c52ef8bdf8962f0ecbb596ac54cab3818767a4a4f7c96"
+    },
+    "runtime_trace/caller_transition/capture_contract.py": {
+      "bytes": 2349,
+      "sha256": "ad4b8ee90f4c9b4569a0d84bc73492cf724cc64793a674f60bf7bc89f92af83b"
+    },
+    "runtime_trace/caller_transition/checker.py": {
+      "bytes": 120278,
+      "sha256": "8c1915ed19e9fb1cefd757d8a2ff8c475193ed581fa272784dabcd89e5e125a4"
+    },
+    "runtime_trace/caller_transition/gdb_acquire.py": {
+      "bytes": 17651,
+      "sha256": "f284bd95ee9aaa12acfc2b5b7337741e221271d68631007573acdea15bcd3122"
+    },
+    "runtime_trace/caller_transition/gdb_acquire_reads.py": {
+      "bytes": 24395,
+      "sha256": "00da02b2459289bfcba3635049f27f7d29324c261c7e174e144cea99acc3335b"
+    },
+    "runtime_trace/caller_transition/generate_checker_fix2_mutations.py": {
+      "bytes": 14645,
+      "sha256": "c435f52d976d22b93c3060b8537a45fe670d8eea662a4d77266128c9be972d5d"
+    },
+    "runtime_trace/caller_transition/generate_checker_fix3_mutations.py": {
+      "bytes": 26601,
+      "sha256": "975283794960530871cee63b58f9de9a6be97211bd1ca68fc0725e2f4ea6ee8c"
+    },
+    "runtime_trace/caller_transition/module_resolver.py": {
+      "bytes": 1017,
+      "sha256": "0593b66711df2820e57e647d129af601e7cef8dada1b1fac3b79e5439aed029a"
+    },
+    "runtime_trace/caller_transition/producer.py": {
+      "bytes": 12693,
+      "sha256": "8e5a74a9692251a47c063714e9934f0414f813075aab394e48eb0d7022ce8cf7"
+    },
+    "runtime_trace/caller_transition/producer_reads.py": {
+      "bytes": 23036,
+      "sha256": "2b465a5fc207765375712e3f3eb6495723169d09b72991c0e1a2d446c798048f"
+    },
+    "runtime_trace/caller_transition/read_effects.py": {
+      "bytes": 7123,
+      "sha256": "5d595f6d520ecf0a7e48a01d254abf53d8ac356ad2133656f63c927550ece85a"
+    },
+    "runtime_trace/caller_transition/run_acquisition.py": {
+      "bytes": 4500,
+      "sha256": "fcbfbb97ff8c141c72cb40a5ebdc3b251d056346b52b9a5e980001f6129fcfe3"
+    },
+    "runtime_trace/caller_transition/run_acquisition_reads.py": {
+      "bytes": 10977,
+      "sha256": "68e6c03358b526e92f0ff36261939781ad06cc9c70d2a5a972cbca35bde0f306"
+    },
+    "runtime_trace/caller_transition/tests/test_caller_checker.py": {
+      "bytes": 4275,
+      "sha256": "9a3c4ed34d46d960339a747ab121c488bdf8303acb9586fec50b4883ad75d6c6"
+    },
+    "runtime_trace/caller_transition/tests/test_caller_fix1_mutations.py": {
+      "bytes": 9589,
+      "sha256": "bc9f4622040be32917625c0e2e91d8d2611b4093c8d519e1a43849d7781dd5c0"
+    },
+    "runtime_trace/caller_transition/tests/test_caller_fix2_mutations.py": {
+      "bytes": 10774,
+      "sha256": "b54d98ef166fadae9ccee60c440daf2d7683c14a196f2ca407b476ea7d4e1541"
+    },
+    "runtime_trace/caller_transition/tests/test_caller_fix3_evidence.py": {
+      "bytes": 5095,
+      "sha256": "b4c9ce3b7af203bbc4982b0414c3e7258b6c56fa51809f6fe0b8b7792f30ad16"
+    },
+    "runtime_trace/caller_transition/tests/test_caller_mutations.py": {
+      "bytes": 6335,
+      "sha256": "f1e440c40241823d9dfb89543cf5df03a673b426b5ad56b8fef62ed8404003ab"
+    },
+    "runtime_trace/caller_transition/tests/test_contracts.py": {
+      "bytes": 4630,
+      "sha256": "7bca0ec00dbbf6b4d715e29e5701e694827dfbc851b8ed322d85bd608c7c8208"
+    },
+    "runtime_trace/caller_transition/tests/test_producer.py": {
+      "bytes": 7718,
+      "sha256": "e2bad2c90707af7c4c7010428f572604b3738f04ed30e0a5c13f0edf834f2f6e"
+    },
+    "runtime_trace/caller_transition/tests/test_read_effects.py": {
+      "bytes": 3691,
+      "sha256": "056064eaa821972ea69ee5ccda1ae579607be2965265a64a21b8eb56875a0e01"
+    },
+    "runtime_trace/caller_transition/tests/test_readproof_artifacts.py": {
+      "bytes": 10378,
+      "sha256": "a1fabf469d775c08c1b4d71096b2474915b5ae166952023d1c779a4d6d32957b"
+    },
+    "runtime_trace/caller_transition/tests/test_write_effects.py": {
+      "bytes": 1318,
+      "sha256": "bb348fbb7bdb8a3c1dbfaf47edd44197a15e41c0fc2fa5593e4815f6ec0e9b29"
+    },
+    "runtime_trace/caller_transition/write_effects.py": {
+      "bytes": 5456,
+      "sha256": "0917f62f2ae3f083d3c271522df2b6574023e476cfd24e29239b5e6017bb6b5e"
+    },
+    "runtime_trace/caller_transition/write_effects_reads.py": {
+      "bytes": 3367,
+      "sha256": "d051fbde85df19472ccc9403477adfcaebf7ca4561096cb72030bbb8926c908e"
+    },
+    "runtime_trace/closure_check.py": {
+      "bytes": 8181,
+      "sha256": "eb2472a957cb1d29557721b69039b41d2b679cd27ef9d5ec21b18ade7b148cb0"
+    },
+    "runtime_trace/closure_evidence/auditor_checker_with_packaged_libc.py": {
+      "bytes": 26435,
+      "sha256": "52ccf6bc1c4e35c628267342d07dfb275d7125b4a5940a373149530bf8423f8e"
+    },
+    "runtime_trace/closure_evidence/received/runtime_trace_independent_audit.py": {
+      "bytes": 26314,
+      "sha256": "efee93aa667460898b341d3eeec836c4fe6e95df968bafe87537518405e3f95a"
+    },
+    "runtime_trace/closure_evidence/received/runtime_trace_new_mutations.py": {
+      "bytes": 2746,
+      "sha256": "e907590a8626a0e7547f638f82c5dfa483abae3f783117b558d5b79ea2a512f1"
+    },
+    "runtime_trace/correspondence.py": {
+      "bytes": 22540,
+      "sha256": "757bd34e873f091e375b252c57e29f65b0fc10ae9ddb12b4c0d88233f78564b7"
+    },
+    "runtime_trace/gdb_capture.py": {
+      "bytes": 22926,
+      "sha256": "1e078c258d85c037e0aebebc1df11c6b301734b7b1709a81c123ea8bf77f449d"
+    },
+    "runtime_trace/harness.py": {
+      "bytes": 1671,
+      "sha256": "4928f88e4c6255cfbc3f68798648b543146fb5b13327490d331814f778a9fc26"
+    },
+    "runtime_trace/harness_nsteps2.py": {
+      "bytes": 1671,
+      "sha256": "a9125c7199a73e11dde7780ab833e44d444122b3c7c49e297ea1ea2155777c99"
+    },
+    "runtime_trace/numeric_ir/__init__.py": {
+      "bytes": 325,
+      "sha256": "353b99849ada6b0200b9e37f3dd10660bfb0ed2ea5102db37255808b23093644"
+    },
+    "runtime_trace/numeric_ir/checker.py": {
+      "bytes": 60358,
+      "sha256": "1cb3de6f274be7cc88f14375158e23633703fa152a9a98f89151968bb41fdaf9"
+    },
+    "runtime_trace/numeric_ir/normalization.py": {
+      "bytes": 1429,
+      "sha256": "fe252b234e4dee19443b4bba61b5540625d5c47054e8f2677ff2021dd9fd3246"
+    },
+    "runtime_trace/numeric_ir/schema.py": {
+      "bytes": 596,
+      "sha256": "f5c1159dcc750ec2a3cccc585a0d09f26d7a09073f37ec056ac7ed8f67e139f3"
+    },
+    "runtime_trace/numeric_ir/tests/conftest.py": {
+      "bytes": 1101,
+      "sha256": "ab3693da2d62873508ffae7750e76b07c9aaa84be0d9302e88d29626c0fc5563"
+    },
+    "runtime_trace/numeric_ir/tests/test_checker.py": {
+      "bytes": 10288,
+      "sha256": "491764aa921be8aba4b620460c0d4dcb972c1d959f10c8df85bb11ec7ef7894a"
+    },
+    "runtime_trace/numeric_ir/tests/test_mutations.py": {
+      "bytes": 12179,
+      "sha256": "b0d0b159b8f4db6d57b59ea946dfea46eb20c7bb7c40e80459ec7bc637983aef"
+    },
+    "runtime_trace/numeric_ir/tests/test_normalization.py": {
+      "bytes": 3810,
+      "sha256": "1bd0cb26d2a5e0ad852cc36a43b86cf7ec63b7e5d6f67575fb9bb61415d0e8e2"
+    },
+    "runtime_trace/numeric_ir/tests/test_translator.py": {
+      "bytes": 22560,
+      "sha256": "c2f9b81e24adb218f98d6bdef3492723cbecce33ef87cb83190f2718ba65205a"
+    },
+    "runtime_trace/numeric_ir/translator.py": {
+      "bytes": 55606,
+      "sha256": "c94b7403a770ff74b91629c218048c7285ab720e5c104df14ce59af765b45340"
+    },
+    "runtime_trace/numeric_ir/v2/__init__.py": {
+      "bytes": 320,
+      "sha256": "bad13c125c83641d1fac6bc2e0174947eb38fd1ea955ac390d25a3b192c5d8f0"
+    },
+    "runtime_trace/numeric_ir/v2/adapter.py": {
+      "bytes": 30995,
+      "sha256": "6c92e302d45ce661693cb46326960126dc4859bb341c0d3df89ac987577c3aa4"
+    },
+    "runtime_trace/numeric_ir/v2/checker.py": {
+      "bytes": 39245,
+      "sha256": "c3fc1d7dc0df09096d88b7e9e2e6a04b0a04bd491cfe2e02cb26782c6b7fc733"
+    },
+    "runtime_trace/numeric_ir/v2/normalization.py": {
+      "bytes": 7554,
+      "sha256": "1fcad61e33dd6dd29155a14e08a89548feec56c3db55699dcbd668d380bc2f0f"
+    },
+    "runtime_trace/numeric_ir/v2/schema.py": {
+      "bytes": 781,
+      "sha256": "e73ad8a520a7802befad75d56c9b8f90fdd53a39b1105def5c794d262da67fa4"
+    },
+    "runtime_trace/numeric_ir/v2/tests/conftest.py": {
+      "bytes": 975,
+      "sha256": "89aa0dfa091c6463d5ff584594268833cab6a38dec5c6642cfa15cf3ae7bdb8a"
+    },
+    "runtime_trace/numeric_ir/v2/tests/test_adapter.py": {
+      "bytes": 12888,
+      "sha256": "549781b157f75cac239ae3059e956888b6caa945e395e55f57978b2c0232da48"
+    },
+    "runtime_trace/numeric_ir/v2/tests/test_v2_checker.py": {
+      "bytes": 13016,
+      "sha256": "cbdc28f50309612b8608c3bfdc68f5c9735b762ba02be1410465656fe32c3f28"
+    },
+    "runtime_trace/numeric_ir/v2/tests/test_v2_mutations.py": {
+      "bytes": 6380,
+      "sha256": "533a5fef7bedd87273ba3c1790cc50ca2e6073e77991309272a3bcf5fc3395eb"
+    },
+    "runtime_trace/numeric_ir/v2/tests/test_v2_normalization.py": {
+      "bytes": 3758,
+      "sha256": "0aa8e9bb91fd7be4d6f08a73044a0bd42bdc4b17794f14ac20fb103a1f741296"
+    },
+    "runtime_trace/portable_pytest.py": {
+      "bytes": 1153,
+      "sha256": "96dc33a528db28d6d0c4d0b66ba1dca111f6ce79456a64ec57573c96595bdfc0"
+    },
+    "runtime_trace/regular_2step/__init__.py": {
+      "bytes": 64,
+      "sha256": "9d517b7911f258e2b819407100e440da52d192148f067fae11542da76aa80bc8"
+    },
+    "runtime_trace/regular_2step/acquire.py": {
+      "bytes": 19067,
+      "sha256": "d7495aad611c3feb61e28fe8137ae71781f9883dbe427f2d26d8acc491b118c1"
+    },
+    "runtime_trace/regular_2step/checker.py": {
+      "bytes": 23447,
+      "sha256": "7ba6c687855bc3c3bb0673b0f4f6956e3cd297679741d3547dd7852e3fdf4bf5"
+    },
+    "runtime_trace/regular_2step/delivery.py": {
+      "bytes": 31286,
+      "sha256": "349c5b66d85d44593ad78c9fe7d945328ddc2f681b51b28f1d21d804678939c9"
+    },
+    "runtime_trace/regular_2step/form_oracle.py": {
+      "bytes": 2954,
+      "sha256": "624e09e4ad2a18d8e028c7f36f8311c1c55804c83a25921ae3f45ee3fde83135"
+    },
+    "runtime_trace/regular_2step/gdb_acquire.py": {
+      "bytes": 20293,
+      "sha256": "50c1ac59092a3069df6705ab325be725e9efea5bedd8916b52adbfe420329691"
+    },
+    "runtime_trace/regular_2step/mutations.py": {
+      "bytes": 8592,
+      "sha256": "d47796945f589efd9df57d507afbed3f802c40854f808446f12a7093a5904741"
+    },
+    "runtime_trace/regular_2step/producer.py": {
+      "bytes": 6793,
+      "sha256": "52778e9944cbaab348cbf3a3c7c2cd9b16a90cd7cb039aa5edadeebccaadcd6f"
+    },
+    "runtime_trace/regular_2step/schema.py": {
+      "bytes": 2467,
+      "sha256": "c72710d43fd8ed737fcdb68ad3325f176faea78481173a0ce7496965ac4feab1"
+    },
+    "runtime_trace/regular_2step/structure.py": {
+      "bytes": 42407,
+      "sha256": "956378c31ed5e7e809c72f6dfdff95e7802874e4b5b6831117ed2a8b1d5b19e0"
+    },
+    "runtime_trace/regular_2step/tests/test_acquisition_structure.py": {
+      "bytes": 22952,
+      "sha256": "6fc0ab0d6476167df09fa9b82a9b943df32625f1816849a5613059d5ebd2eea5"
+    },
+    "runtime_trace/regular_2step/tests/test_delivery_guards.py": {
+      "bytes": 6186,
+      "sha256": "108f7a313c4c2d7f51a4667dca4ae5487b557d16e643dcd83bc7448d1b2ad91d"
+    },
+    "runtime_trace/regular_2step/tests/test_portability.py": {
+      "bytes": 7201,
+      "sha256": "0cf74fe4ce5aa6350ee0cebc1c88540d34048a01253bf5f2888870609bfd3bea"
+    },
+    "runtime_trace/regular_2step/tests/test_step2_chain.py": {
+      "bytes": 10558,
+      "sha256": "e38fc7a2bff7b9a2799722dced7455037c976946b0897285b497b1b4d0ab4782"
+    },
+    "runtime_trace/regular_2step/tests/test_step2_mutations.py": {
+      "bytes": 901,
+      "sha256": "1e6b8313aa53507d2642e177b5169de75e82d2e27541192ee42291d0bd0b6743"
+    },
+    "runtime_trace/regular_nstep/README.md": {
+      "bytes": 5695,
+      "sha256": "6b157475291458d226cbbaca117f9459c347bfd04933ddde489fffd9564df3ca"
+    },
+    "runtime_trace/regular_nstep/__init__.py": {
+      "bytes": 80,
+      "sha256": "3507073fd2f6c99367b80b815364220a475b1bc7b462e20ba3795b9431c75a12"
+    },
+    "runtime_trace/regular_nstep/acquire.py": {
+      "bytes": 6476,
+      "sha256": "55a2e1412ced4af1afaf05d8c3aacf8f4451931ac9834c9a4d097f5937dca889"
+    },
+    "runtime_trace/regular_nstep/artifacts/attack-supplements02/final_attack_report.json": {
+      "bytes": 10540,
+      "sha256": "75ce32f87e091f7c9716ec09a3452aff9f449924c91d4a9f19320f70547137f7"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/acquisition/child_measurement.json": {
+      "bytes": 154,
+      "sha256": "99d9c70053146e4e53e9b2d47d6818cf84548bcba085022946b0bf9d5b129474"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/acquisition/execution.json": {
+      "bytes": 1088,
+      "sha256": "91d821109bcdec668ccb126e039199543048217cebbc4a7e874acb4aa58a7379"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/acquisition/stdout.log": {
+      "bytes": 85,
+      "sha256": "3b61bece9ad5fc0aa7b326b0b08286a8d628fdf3882ca1740e4109a46107b58b"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/acquisition/writer_quota.txt": {
+      "bytes": 9,
+      "sha256": "10ce702ad5c2202aa0043688162af66302594932b303dac71d3f00e10efc18db"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/capture/acquisition_seal.json": {
+      "bytes": 648,
+      "sha256": "d915dc077c167081be4bc5278eef3d39817726cb92ac32de1a67c3e9f5428e69"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/capture/capture.json": {
+      "bytes": 3845021,
+      "sha256": "ced94dd0f77351aa123435216371eb998f0d1c91509a1d84ef5503ae4c0325c2"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/capture/capture.pending.json": {
+      "bytes": 3844384,
+      "sha256": "30cffc330bbf0ea96821311270378d519989a1b939924a45ea23264a3ca6d76c"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/capture/gdb.log": {
+      "bytes": 612231,
+      "sha256": "11249886f6a1e34db7625fe444003c5cf17ba94bb9acc8357d97adbfe13d15b5"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/capture/harness_output.json": {
+      "bytes": 468,
+      "sha256": "68e34362d3b4f5ec001b4d5fe0c4aa3653b1e3a1cb8f18dadf6b4bb49a27565f"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/capture/source_pinset.json": {
+      "bytes": 1679,
+      "sha256": "c52593d6ac49e21dfaf042668d2800be99e09b9c0aa20c92e93565a9c28fd40b"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/capture/trace.jsonl": {
+      "bytes": 35959343,
+      "sha256": "e0bd89752e3f21281978de519f03b3cbd398bcc614083f86d36a273e4ef18d1a"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/derivation/child_measurement.json": {
+      "bytes": 154,
+      "sha256": "ccb16a5e14e471b79afb94276550d51b16585f29d1ef7e46ae66959450a17dd0"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/derivation/execution.json": {
+      "bytes": 1348,
+      "sha256": "c44719b9fcf138e265a06e01961ba4a9709c3e35aeb0ab3a830346b10fe2a572"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/derivation/stdout.log": {
+      "bytes": 426,
+      "sha256": "762a47b00d96e9635dcf5436b984c4ddee41c29d7ff429371c3c27a1c3ceb278"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/derivation/writer_quota.txt": {
+      "bytes": 7,
+      "sha256": "904150ba5658acd0d49b45f4076b97e21b0d2438010d5576239d5b07d1c91d4a"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/derived/blocks.json": {
+      "bytes": 2201251,
+      "sha256": "4fa8b999f307f979255b0ea0dfc58593c86b0cebda87477e8bdef78a420618fc"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/derived/checker_report.json": {
+      "bytes": 403,
+      "sha256": "58a2733dfe405db312adbc3e1c6a9ecd999b1a9dd8dcaea7a2246913f62aae4a"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/derived/completion.json": {
+      "bytes": 5182,
+      "sha256": "2ac5e026a07b34aaecbbc726da4ba3786b1b283ca5c40828c56a63a778d43cd8"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/derived/native_report.json": {
+      "bytes": 6037,
+      "sha256": "bf600d9f25ae796f231692e138daa1945c3afe70cac8dc896bb4ef1a1bed9178"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/derived/stage_costs.json": {
+      "bytes": 163,
+      "sha256": "0aefb1a39d7bcf76456b852537114089b05ef102009b05487a70b3c59d60e26a"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/fresh_checker_report.json": {
+      "bytes": 403,
+      "sha256": "58a2733dfe405db312adbc3e1c6a9ecd999b1a9dd8dcaea7a2246913f62aae4a"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/independent_check/child_measurement.json": {
+      "bytes": 154,
+      "sha256": "39c7e13bad6552325d9f34928b658df34844bf98b5966ae5dc2ec4bde56519e0"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/independent_check/execution.json": {
+      "bytes": 1539,
+      "sha256": "a2e303114523402a234c47a532331a06a2b5285ede62d1bf168b978b3ebd6e56"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/independent_check/stdout.log": {
+      "bytes": 426,
+      "sha256": "762a47b00d96e9635dcf5436b984c4ddee41c29d7ff429371c3c27a1c3ceb278"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/independent_check/writer_quota.txt": {
+      "bytes": 3,
+      "sha256": "d26eae87829adde551bf4b852f9da6b8c3c2db9b65b8b68870632a2db5f53e00"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/integration_source_pinset.json": {
+      "bytes": 10288,
+      "sha256": "c949e61b420696f9ecfc61608d8e0e13be5f12a965e1e103f40ea2941689ddb3"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected10-final2/run_result.json": {
+      "bytes": 726,
+      "sha256": "46929f0750a64e2f6a05185faa3a0a54beee5d15e3f64001d9497944cf57cc6b"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/acquisition/child_measurement.json": {
+      "bytes": 154,
+      "sha256": "9a6b5ca05db6969e473e765794dcd4ef85561ebd8d2eea830f0e8651ac939966"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/acquisition/execution.json": {
+      "bytes": 1089,
+      "sha256": "20179c4e9e1a81fce3046b9a86d1adfd3256e674119c97e79aa9e0f270bfa464"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/acquisition/stdout.log": {
+      "bytes": 87,
+      "sha256": "4ee904614937936b3ba167216355b58a827d95d6630917523c6c4d3626c82faa"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/acquisition/writer_quota.txt": {
+      "bytes": 9,
+      "sha256": "b8508128fa216479269be0e2886e66469491c86429c32484b2c3172f92b8868b"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/capture/acquisition_seal.json": {
+      "bytes": 648,
+      "sha256": "fd4b0ee46d06160f531490edd22c86074ba26ea66ab83a9f389a4e63e61c9cab"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/capture/capture.json": {
+      "bytes": 42208118,
+      "sha256": "5c85062b15208e5b28b67d9607dc20a5e3c9287c67ac0aaf5d8ba5d2e3632a5b"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/capture/capture.pending.json": {
+      "bytes": 42207481,
+      "sha256": "8c11de97c686d03101c624588369d2a3000bed7735eab0e158f5675edbada1b6"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/capture/gdb.log": {
+      "bytes": 5995221,
+      "sha256": "950b35adac266860b44c5159cb820d5c16ed471c2c40fc4f6a85344990761e14"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/capture/harness_output.json": {
+      "bytes": 464,
+      "sha256": "3c080c82c4d3d48bdef901a4c576c463271ed5c0f46d52dab565afd928a0b74d"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/capture/source_pinset.json": {
+      "bytes": 1679,
+      "sha256": "c52593d6ac49e21dfaf042668d2800be99e09b9c0aa20c92e93565a9c28fd40b"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/capture/trace.jsonl": {
+      "bytes": 353950758,
+      "sha256": "fe8fe7ff3a63c280829c6905264bb792fef98f83badfbc300a3f7ca26b7f34c0"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/derivation/child_measurement.json": {
+      "bytes": 156,
+      "sha256": "7c8ceeb47f5c6146d9a19043c7e64368aba075351dbb22955165e157104af433"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/derivation/execution.json": {
+      "bytes": 1350,
+      "sha256": "98b2275a38b3b327e950a76b543afad3922bb70dd73c1163c6d3edfc5e0b3f44"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/derivation/stdout.log": {
+      "bytes": 430,
+      "sha256": "4d2c251803601ad3dfedb48cdcadd5ecf8c22d8f23228501dbd5be2632088c3a"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/derivation/writer_quota.txt": {
+      "bytes": 8,
+      "sha256": "a0d12ab7e6f8a6b93236f24eba9c921902f385997959047d3f1d24600de08eb8"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/derived/blocks.json": {
+      "bytes": 20988430,
+      "sha256": "70e1857d6feaa0ef58d784a40b72e5d4a79fbd8a55ecb2b5b7149dcc9575705b"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/derived/checker_report.json": {
+      "bytes": 407,
+      "sha256": "745ce1803f0c2351e3af0ed7c40aa0943ec7d216e781cfd005e15a2a580c9943"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/derived/completion.json": {
+      "bytes": 5227,
+      "sha256": "58a128de4d7f833890c01c337068a23f4acab7c43098a8db0d01de7c1b9a22a7"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/derived/native_report.json": {
+      "bytes": 57438,
+      "sha256": "479cb17cabcfbab174b7e0fd1f35082282015e6ed7834ec7effdea33fdc9aa26"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/derived/stage_costs.json": {
+      "bytes": 163,
+      "sha256": "0f2464f4bf6de697ad175590265ae86bcd42cc50716a7d0115045c872442b1f7"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/fresh_checker_report.json": {
+      "bytes": 407,
+      "sha256": "745ce1803f0c2351e3af0ed7c40aa0943ec7d216e781cfd005e15a2a580c9943"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/independent_check/child_measurement.json": {
+      "bytes": 156,
+      "sha256": "885431cf8fbff7328251af4015e2824966e7ef21574bdf72e693eb74ec8b7050"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/independent_check/execution.json": {
+      "bytes": 1541,
+      "sha256": "f7117fe27d53f6c4d741725c216809f02d840322f3fcd64850a75dc6e3284e15"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/independent_check/stdout.log": {
+      "bytes": 430,
+      "sha256": "4d2c251803601ad3dfedb48cdcadd5ecf8c22d8f23228501dbd5be2632088c3a"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/independent_check/writer_quota.txt": {
+      "bytes": 3,
+      "sha256": "a5abb1500bdeaef41e2edd598c015edfaa46793051b82d7da60a70efbf786da4"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/integration_source_pinset.json": {
+      "bytes": 10288,
+      "sha256": "c949e61b420696f9ecfc61608d8e0e13be5f12a965e1e103f40ea2941689ddb3"
+    },
+    "runtime_trace/regular_nstep/artifacts/connected100-final/run_result.json": {
+      "bytes": 730,
+      "sha256": "abd13f30f457d0ba196c72d276642ab8725d379ecaaba15e8c218eea47419572"
+    },
+    "runtime_trace/regular_nstep/artifacts/external-proof-receipts/audit.jsonl": {
+      "bytes": 47441,
+      "sha256": "345091f113a19313cab11394bbc6b5cc41c724cdc5d8ae2bc1343bf62a0360fc"
+    },
+    "runtime_trace/regular_nstep/artifacts/external-proof-receipts/external-storage-inventory.json": {
+      "bytes": 706250,
+      "sha256": "06752a5c74bd8ce55ab2401cef6254cc45d1df875b99b8e4da4fbcbff2a68493"
+    },
+    "runtime_trace/regular_nstep/artifacts/external-proof-receipts/public-checker-receipt.json": {
+      "bytes": 4277,
+      "sha256": "db9f7a6e99f9c24ddb96fdeee2591fc748b1df4e68f1a645aa3c9fde92102566"
+    },
+    "runtime_trace/regular_nstep/artifacts/integration-regression-junit.xml": {
+      "bytes": 38454,
+      "sha256": "6e5695b3e869523d09b0eb1574780dba161fd86f21cc6b8b9bfdf8b2178526dc"
+    },
+    "runtime_trace/regular_nstep/artifacts/laptop-results/audit10-final-v2-job.json": {
+      "bytes": 807,
+      "sha256": "b8931c666aeba5f088c1756e5ebdfef06bf574ce93709961b8de1d50177f5de7"
+    },
+    "runtime_trace/regular_nstep/artifacts/laptop-results/audit10-final-v2-result.json": {
+      "bytes": 2033,
+      "sha256": "d535465fd4a18c0111a21f83beb4cf428f0371f9fce114ed451a4d5d96fa57cb"
+    },
+    "runtime_trace/regular_nstep/artifacts/laptop-results/audit100-final-job.json": {
+      "bytes": 807,
+      "sha256": "17b6b71bb776ed8f1cce796b5993ca70fc600d72ff05025fb35178e625dbb843"
+    },
+    "runtime_trace/regular_nstep/artifacts/laptop-results/audit100-final-result.json": {
+      "bytes": 2038,
+      "sha256": "8b0c66b2442eff4035f44943d3de881c2468a12a5d9681cb5af6c4c9c7f72526"
+    },
+    "runtime_trace/regular_nstep/artifacts/original-baselines/job10/execution.json": {
+      "bytes": 902,
+      "sha256": "599844a7ebf2d589a43d32fd88bd7ec35649e44ebbdc294b6f8398d22ed948af"
+    },
+    "runtime_trace/regular_nstep/artifacts/original-baselines/job100/execution.json": {
+      "bytes": 902,
+      "sha256": "a5814b29ba6a8e24e9221f675b54fea534d41043c92395ef316ed313f00f7545"
+    },
+    "runtime_trace/regular_nstep/artifacts/original-baselines/output10/harness_output.json": {
+      "bytes": 470,
+      "sha256": "4c4a6144a384a5cbfe22b212f23ee4dd8e698b490c1c44ee5c4611029b93f88f"
+    },
+    "runtime_trace/regular_nstep/artifacts/original-baselines/output100/harness_output.json": {
+      "bytes": 472,
+      "sha256": "e573ea36c9b3cfe3929fa9a34d3b17849426e7f024bb2b5b540feaf3ccf7eac6"
+    },
+    "runtime_trace/regular_nstep/artifacts/portability-retry02-junit.xml": {
+      "bytes": 398,
+      "sha256": "f08b8c8725601da35620b7608d8abf914e29929da878f6c211935a5e5a4f6fc5"
+    },
+    "runtime_trace/regular_nstep/checker.py": {
+      "bytes": 4887,
+      "sha256": "5bd92b2456bca9fae180f219e14d714504cbc0b095fac3865a00040f2772112a"
+    },
+    "runtime_trace/regular_nstep/gdb_acquire.py": {
+      "bytes": 9619,
+      "sha256": "f7a10dfbb1376268807c308ed7784e86d1fdc6cff2c40bc862458bfe87e9edf6"
+    },
+    "runtime_trace/regular_nstep/harness.py": {
+      "bytes": 758,
+      "sha256": "12017bd165a3c4e0f21fc10350f1e4ec5a3d99d5ff8d02276b8738af0c018961"
+    },
+    "runtime_trace/regular_nstep/machine_check.py": {
+      "bytes": 6305,
+      "sha256": "ded293375ea4802051af49b9ff9c960e3447a1d0d52fbf60f28548007dae8932"
+    },
+    "runtime_trace/regular_nstep/producer.py": {
+      "bytes": 8026,
+      "sha256": "98bb4bffe7e21f6c6fbb24e2dba1e399d4549aefc81029abfccb1eab9b10d06f"
+    },
+    "runtime_trace/regular_nstep/raw_check.py": {
+      "bytes": 28327,
+      "sha256": "63e25825a82f87bc7fc2166dcc230409d7c885b7e0f4f6c00fb73be75b8449f3"
+    },
+    "runtime_trace/regular_nstep/resources.py": {
+      "bytes": 13263,
+      "sha256": "f6e662202f5349ae375ee6c4a0b84fc4488f16c400fb2d367d3eaf619f341a8e"
+    },
+    "runtime_trace/regular_nstep/run.py": {
+      "bytes": 4781,
+      "sha256": "40648db0196513db054e005dcfbb9771733fbd979bfb2162ac3691f2858f1895"
+    },
+    "runtime_trace/regular_nstep/schema.py": {
+      "bytes": 2659,
+      "sha256": "6a0a7c5ece4765ff1134a95f5b8769b9d1660cdaa0f8d0abb76c30793976ea3d"
+    },
+    "runtime_trace/run.py": {
+      "bytes": 3620,
+      "sha256": "a7c66323b261fc2af9cd36f7e0472d50589b43983e1acf460bf7d0641cd0c2a8"
+    },
+    "runtime_trace/semantics.py": {
+      "bytes": 6770,
+      "sha256": "d6797e279cdf2b85e91612426e4e2be3cac2fe2a837a4917fffa9530a5286331"
+    },
+    "runtime_trace/tests/test_captured_mutations.py": {
+      "bytes": 4878,
+      "sha256": "5b8b0852a994440f775e0af2cf7dd36ef56380877b91156d2c60638f33c6ba1a"
+    },
+    "runtime_trace/tests/test_closure_comparison.py": {
+      "bytes": 2536,
+      "sha256": "9967fecd85e11f5d823a68245288c00acc2c7bf98f6732bd539ac76139d3bf88"
+    },
+    "runtime_trace/tests/test_correspondence_units.py": {
+      "bytes": 2546,
+      "sha256": "7f12aeab2c76aeb009c8bd98d13b7a47b14493256d268b068b3aaf28236e6fc9"
+    },
+    "runtime_trace/tests/test_frozen_resolver.py": {
+      "bytes": 3456,
+      "sha256": "162cbe048dcb5abb5f157af216a6eb3b8b6bb7ec6155c6009cf83c4fa0057c21"
+    },
+    "runtime_trace/tests/test_semantics.py": {
+      "bytes": 2637,
+      "sha256": "ea766970c7ad70125fe29ac23d4fd4a7dd5e0594991c962fc4db530c6ca9aee9"
+    },
+    "tests/test_regular_nstep_acquisition.py": {
+      "bytes": 1840,
+      "sha256": "cdaa36914619dda372611a420381fdd65f627970bc560505759930f6e7fd8d31"
+    },
+    "tests/test_regular_nstep_pipeline.py": {
+      "bytes": 2401,
+      "sha256": "3c4404afe828d0ce6a564e9b42af69770ef83a1e061a8331b10044a61f3f554d"
+    },
+    "tests/test_regular_nstep_public.py": {
+      "bytes": 4974,
+      "sha256": "ef910005484d21368de59f597460c7ee59d3e145fb7fd11059d2a70014bdd0ec"
+    },
+    "tests/test_regular_nstep_raw.py": {
+      "bytes": 5029,
+      "sha256": "d858ab66388bd534591c53ab78dd2e2b297b810fbf9ef8f838481ff6f82e3655"
+    },
+    "tests/test_regular_nstep_resources.py": {
+      "bytes": 4559,
+      "sha256": "e2a5cedaadc0a0d07a144b19f326378848ef1832dae4ad38fdab182776cccf7a"
+    }
+  },
+  "first_full_suite_failure": 1,
+  "first_full_suite_pass": 210,
+  "formal_certification": false,
+  "fresh_review_sha256": "5882ae3ba00346b7d6803216dd80ee07513a89acb09971d5da44a82c2f540690",
+  "integration_source_pinset_sha256": "c949e61b420696f9ecfc61608d8e0e13be5f12a965e1e103f40ea2941689ddb3",
+  "latest_distinct_tests": 211,
+  "latest_failure_error_skip_count": 0,
+  "post_job_accounting": "Final job receipt is merged only after child exit; mutable ledger excluded from immutable file manifest.",
+  "prior_preservation_inventory_sha256": "17e6c9b6dce23b1e048255e610c9d51cda3ee9c21d29204775611d1da8636dbb",
+  "same_current_core_files": 89,
+  "schema": "regular-nstep-delivery-verification-v1",
+  "semantic_attacks": 22,
+  "separate_controls": 2,
+  "single_full_suite_green": false,
+  "source_or_numerical_implementation_changed_after_final10_100": false,
+  "unchanged_failed_test_retry_pass": 1,
+  "verdict": "DELIVERY_VERIFICATION_PASS"
+}

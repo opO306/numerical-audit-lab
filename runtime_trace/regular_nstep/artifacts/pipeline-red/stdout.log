@@ -1,0 +1,120 @@
+F.......FF                                                               [100%]
+=================================== FAILURES ===================================
+_________________ test_actual_10step_complete_native_frontier __________________
+
+    def test_actual_10step_complete_native_frontier():
+>       capture, rows, report = api().validate(CAPTURE, ROOT)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_raw.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/regular_nstep/raw_check.py:309: in validate
+    report = validate_semantics(capture, rows, root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/regular_nstep/raw_check.py:258: in validate_semantics
+    joins.append(_caller_join(regions[k], regions[k + 1], corridor, subset,
+runtime_trace/regular_nstep/raw_check.py:109: in _caller_join
+    local, writes = _caller_semantics(rows, decoded, modules, allowed)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/regular_nstep/raw_check.py:101: in _caller_semantics
+    caller._validate_memory_observations(rows, local)
+runtime_trace/caller_transition/checker.py:699: in _validate_memory_observations
+    _require(actual_observations == expected_observations, "MEMORY_OBSERVATION",
+runtime_trace/caller_transition/checker.py:179: in _require
+    _refuse(code, reason)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+code = 'MEMORY_OBSERVATION'
+reason = 'read observation set mismatch at sequence 720'
+
+    def _refuse(code: str, reason: str) -> None:
+>       raise CheckerRefused(code, reason)
+E       runtime_trace.caller_transition.checker.CheckerRefused: read observation set mismatch at sequence 720
+
+runtime_trace/caller_transition/checker.py:174: CheckerRefused
+______________ test_connected_10step_actual_ir_v2_and_completion _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_connected_10step_actual_i0')
+
+    def test_connected_10step_actual_ir_v2_and_completion(tmp_path):
+        try:
+>           producer = importlib.import_module('runtime_trace.regular_nstep.producer')
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_pipeline.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime_trace.regular_nstep.producer'
+import_ = <function _gcd_import at 0x75966f5a40e0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'runtime_trace.regular_nstep.producer'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_connected_10step_actual_i0')
+
+    def test_connected_10step_actual_ir_v2_and_completion(tmp_path):
+        try:
+            producer = importlib.import_module('runtime_trace.regular_nstep.producer')
+            checker = importlib.import_module('runtime_trace.regular_nstep.checker')
+        except ModuleNotFoundError:
+>           pytest.fail('connected N-step producer/checker absent')
+E           Failed: connected N-step producer/checker absent
+
+tests/test_regular_nstep_pipeline.py:14: Failed
+_______________ test_missing_capture_never_publishes_completion ________________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_missing_capture_never_pub0')
+
+    def test_missing_capture_never_publishes_completion(tmp_path):
+        try:
+>           producer = importlib.import_module('runtime_trace.regular_nstep.producer')
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_pipeline.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime_trace.regular_nstep.producer'
+import_ = <function _gcd_import at 0x75966f5a40e0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'runtime_trace.regular_nstep.producer'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_missing_capture_never_pub0')
+
+    def test_missing_capture_never_publishes_completion(tmp_path):
+        try:
+            producer = importlib.import_module('runtime_trace.regular_nstep.producer')
+        except ModuleNotFoundError:
+>           pytest.fail('connected producer absent')
+E           Failed: connected producer absent
+
+tests/test_regular_nstep_pipeline.py:30: Failed
+=========================== short test summary info ============================
+FAILED tests/test_regular_nstep_raw.py::test_actual_10step_complete_native_frontier
+FAILED tests/test_regular_nstep_pipeline.py::test_connected_10step_actual_ir_v2_and_completion
+FAILED tests/test_regular_nstep_pipeline.py::test_missing_capture_never_publishes_completion
+3 failed, 7 passed in 15.80s

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="173.759" timestamp="2026-10-05T18:43:32.256998+09:00" hostname="localhost"><testcase classname="runtime_trace.regular_2step.tests.test_portability" name="test_public_fresh_checker_relocated_unchanged_artifacts" time="173.260"><failure message="AssertionError: {'command': ['/home/otherside123/venvs/gate2c1-trace/bin/python', '-m', 'runtime_trace.regular_2step.checker', '--root...ar_nstep/artifacts/portability-retry-tmp/test_public_fresh_checker_relo0/relocated', 'exit_code': 1, 'stdout': '', ...}&#10;assert 1 == 0&#10; +  where 1 = CompletedProcess(args=['/home/otherside123/venvs/gate2c1-trace/bin/python', '-m', 'runtime_trace.regular_2step.checker...p/artifacts/portability-retry-tmp/test_public_fresh_checker_relo0/relocated/runtime_trace/regular_2step/__init__.py\n').returncode">tmp_path = PosixPath('/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/runtime_trace/regular_nstep/artifacts/portability-retry-tmp/test_public_fresh_checker_relo0')
+
+    def test_public_fresh_checker_relocated_unchanged_artifacts(tmp_path):
+        relocated = tmp_path / 'relocated'
+        relocated.mkdir()
+        # Snapshot tracked bytes and new covering tests; preserve all inputs and
+        # command/output/time in pytest's explicitly retained attempt directory.
+        tracked = subprocess.check_output(['git', 'ls-files', '-z'], cwd=ROOT).decode().split('\0')
+        paths = {p for p in tracked if p}
+        paths.update(str(p.relative_to(ROOT)) for p in (PACKAGE / 'tests').glob('*.py'))
+        for relative in sorted(paths):
+            source, target = ROOT / relative, relocated / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, target)
+        capture = relocated / 'runtime_trace/regular_2step/artifacts/fresh-03'
+        derived = relocated / 'runtime_trace/regular_2step/artifacts/derived/fresh'
+        provenance = load(derived / 'components.json')['structure']['distinct_from_known_path']
+        assert not provenance.startswith(str(relocated))
+        identities = {}
+        for directory in (capture, derived):
+            for path in directory.iterdir():
+                if path.is_file():
+                    relative = path.relative_to(relocated)
+                    assert path.read_bytes() == (ROOT / relative).read_bytes()
+                    identities[str(relative)] = hashlib.sha256(path.read_bytes()).hexdigest()
+        hook = tmp_path / 'hook'
+        hook.mkdir()
+        (hook / 'sitecustomize.py').write_text(delivery.AUDIT_HOOK)
+        audit = tmp_path / 'audit.jsonl'
+        denied, required = delivery.relocated_module_paths(load(capture / 'capture.json'), relocated)
+        env = dict(os.environ)
+        env.update(PYTHONPATH=str(hook) + os.pathsep + str(relocated),
+                   REGULAR2_AUDIT_LOG=str(audit), REGULAR2_DENIED_ROOT=str(ROOT),
+                   REGULAR2_RELOCATED_ROOT=str(relocated), REGULAR2_DENIED_PATHS=json.dumps(denied))
+        command = [sys.executable, '-m', 'runtime_trace.regular_2step.checker',
+                   '--root', str(relocated), '--capture', str(capture), '--derived', str(derived)]
+        started = time.monotonic()
+        result = subprocess.run(command, cwd=relocated, env=env, capture_output=True, text=True)
+        receipt = {'command': command, 'cwd': str(relocated), 'exit_code': result.returncode,
+                   'stdout': result.stdout, 'stderr': result.stderr,
+                   'wall_seconds': time.monotonic() - started, 'unchanged_inputs': identities,
+                   'source_sha256': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
+                                     for p in PACKAGE.glob('*.py')}}
+        write(tmp_path / 'public-checker-receipt.json', receipt)
+&gt;       assert result.returncode == 0, receipt
+E       AssertionError: {'command': ['/home/otherside123/venvs/gate2c1-trace/bin/python', '-m', 'runtime_trace.regular_2step.checker', '--root...ar_nstep/artifacts/portability-retry-tmp/test_public_fresh_checker_relo0/relocated', 'exit_code': 1, 'stdout': '', ...}
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/home/otherside123/venvs/gate2c1-trace/bin/python', '-m', 'runtime_trace.regular_2step.checker...p/artifacts/portability-retry-tmp/test_public_fresh_checker_relo0/relocated/runtime_trace/regular_2step/__init__.py\n').returncode
+
+runtime_trace/regular_2step/tests/test_portability.py:132: AssertionError</failure></testcase></testsuite></testsuites>

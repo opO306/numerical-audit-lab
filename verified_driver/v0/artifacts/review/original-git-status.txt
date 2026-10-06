@@ -1,0 +1,7 @@
+?? audit/c1b1-r2-limited-reaudit-accepted-2026-10-05/
+?? current/C1B1_IMPULSE_RESOURCE_ACCOUNTING_LATEST_2026-10-05.md
+?? current/c1b1-r2-limited-reaudit-accepted-2026-10-05/
+?? current/runtime-nstep-preflight-2026-10-05/
+?? docs/C1B1_IMPULSE_R2_LIMITED_REAUDIT_ADDENDUM_2026-10-05.md
+?? docs/superpowers/plans/2026-10-05-regular-nstep-runtime-trace.md
+?? docs/superpowers/specs/2026-10-05-regular-nstep-runtime-trace.md

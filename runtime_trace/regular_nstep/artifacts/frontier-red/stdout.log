@@ -1,0 +1,152 @@
+.FFFFF                                                                   [100%]
+=================================== FAILURES ===================================
+______ test_fresh_partial_report_never_publishes_success[checked_steps-1] ______
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_fresh_partial_report_neve0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x790d3927fcb0>
+field = 'checked_steps', value = 1
+
+    @pytest.mark.parametrize('field,value', [('checked_steps', 1), ('checked_steps', True),
+        ('requested_steps', True), ('requested_complete', False)])
+    def test_fresh_partial_report_never_publishes_success(tmp_path, monkeypatch, field, value):
+        module = importlib.import_module('runtime_trace.regular_nstep.run')
+        good = {'verdict': 'CHECKER_PASS', 'requested_steps': 10, 'checked_steps': 10, 'requested_complete': True}
+        def guard(command, limits, out, ledger, **kwargs):
+            out.mkdir(parents=True)
+            (out / 'execution.json').write_text('{}')
+            if out.name == 'derivation':
+                (out.parent / 'derived').mkdir()
+                (out.parent / 'derived/checker_report.json').write_text(json.dumps(good))
+            if out.name == 'independent_check':
+                (out.parent / 'fresh_checker_report.json').write_text(json.dumps({**good, field: value}))
+            return {'verdict': 'EXECUTED'}
+        monkeypatch.setattr(module, 'run_guarded', guard)
+        report = module.run(10, tmp_path / 'run', tmp_path / 'budget.json', Path(__file__).resolve().parents[1])
+>       assert report['verdict'] == 'REFUSED'
+E       AssertionError: assert 'CHECKER_PASS' == 'REFUSED'
+E         
+E         - REFUSED
+E         + CHECKER_PASS
+
+tests/test_regular_nstep_public.py:57: AssertionError
+____ test_fresh_partial_report_never_publishes_success[checked_steps-True] _____
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_fresh_partial_report_neve1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x790d39302d20>
+field = 'checked_steps', value = True
+
+    @pytest.mark.parametrize('field,value', [('checked_steps', 1), ('checked_steps', True),
+        ('requested_steps', True), ('requested_complete', False)])
+    def test_fresh_partial_report_never_publishes_success(tmp_path, monkeypatch, field, value):
+        module = importlib.import_module('runtime_trace.regular_nstep.run')
+        good = {'verdict': 'CHECKER_PASS', 'requested_steps': 10, 'checked_steps': 10, 'requested_complete': True}
+        def guard(command, limits, out, ledger, **kwargs):
+            out.mkdir(parents=True)
+            (out / 'execution.json').write_text('{}')
+            if out.name == 'derivation':
+                (out.parent / 'derived').mkdir()
+                (out.parent / 'derived/checker_report.json').write_text(json.dumps(good))
+            if out.name == 'independent_check':
+                (out.parent / 'fresh_checker_report.json').write_text(json.dumps({**good, field: value}))
+            return {'verdict': 'EXECUTED'}
+        monkeypatch.setattr(module, 'run_guarded', guard)
+        report = module.run(10, tmp_path / 'run', tmp_path / 'budget.json', Path(__file__).resolve().parents[1])
+>       assert report['verdict'] == 'REFUSED'
+E       AssertionError: assert 'CHECKER_PASS' == 'REFUSED'
+E         
+E         - REFUSED
+E         + CHECKER_PASS
+
+tests/test_regular_nstep_public.py:57: AssertionError
+___ test_fresh_partial_report_never_publishes_success[requested_steps-True] ____
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_fresh_partial_report_neve2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x790d39301f40>
+field = 'requested_steps', value = True
+
+    @pytest.mark.parametrize('field,value', [('checked_steps', 1), ('checked_steps', True),
+        ('requested_steps', True), ('requested_complete', False)])
+    def test_fresh_partial_report_never_publishes_success(tmp_path, monkeypatch, field, value):
+        module = importlib.import_module('runtime_trace.regular_nstep.run')
+        good = {'verdict': 'CHECKER_PASS', 'requested_steps': 10, 'checked_steps': 10, 'requested_complete': True}
+        def guard(command, limits, out, ledger, **kwargs):
+            out.mkdir(parents=True)
+            (out / 'execution.json').write_text('{}')
+            if out.name == 'derivation':
+                (out.parent / 'derived').mkdir()
+                (out.parent / 'derived/checker_report.json').write_text(json.dumps(good))
+            if out.name == 'independent_check':
+                (out.parent / 'fresh_checker_report.json').write_text(json.dumps({**good, field: value}))
+            return {'verdict': 'EXECUTED'}
+        monkeypatch.setattr(module, 'run_guarded', guard)
+        report = module.run(10, tmp_path / 'run', tmp_path / 'budget.json', Path(__file__).resolve().parents[1])
+>       assert report['verdict'] == 'REFUSED'
+E       AssertionError: assert 'CHECKER_PASS' == 'REFUSED'
+E         
+E         - REFUSED
+E         + CHECKER_PASS
+
+tests/test_regular_nstep_public.py:57: AssertionError
+_ test_fresh_partial_report_never_publishes_success[requested_complete-False] __
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_fresh_partial_report_neve3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x790d393039b0>
+field = 'requested_complete', value = False
+
+    @pytest.mark.parametrize('field,value', [('checked_steps', 1), ('checked_steps', True),
+        ('requested_steps', True), ('requested_complete', False)])
+    def test_fresh_partial_report_never_publishes_success(tmp_path, monkeypatch, field, value):
+        module = importlib.import_module('runtime_trace.regular_nstep.run')
+        good = {'verdict': 'CHECKER_PASS', 'requested_steps': 10, 'checked_steps': 10, 'requested_complete': True}
+        def guard(command, limits, out, ledger, **kwargs):
+            out.mkdir(parents=True)
+            (out / 'execution.json').write_text('{}')
+            if out.name == 'derivation':
+                (out.parent / 'derived').mkdir()
+                (out.parent / 'derived/checker_report.json').write_text(json.dumps(good))
+            if out.name == 'independent_check':
+                (out.parent / 'fresh_checker_report.json').write_text(json.dumps({**good, field: value}))
+            return {'verdict': 'EXECUTED'}
+        monkeypatch.setattr(module, 'run_guarded', guard)
+        report = module.run(10, tmp_path / 'run', tmp_path / 'budget.json', Path(__file__).resolve().parents[1])
+>       assert report['verdict'] == 'REFUSED'
+E       AssertionError: assert 'CHECKER_PASS' == 'REFUSED'
+E         
+E         - REFUSED
+E         + CHECKER_PASS
+
+tests/test_regular_nstep_public.py:57: AssertionError
+______________ test_fresh_refusal_frontier_overrides_staged_pass _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_fresh_refusal_frontier_ov0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x790d39303050>
+
+    def test_fresh_refusal_frontier_overrides_staged_pass(tmp_path, monkeypatch):
+        module = importlib.import_module('runtime_trace.regular_nstep.run')
+        def guard(command, limits, out, ledger, **kwargs):
+            out.mkdir(parents=True)
+            (out / 'execution.json').write_text('{}')
+            if out.name == 'derivation':
+                (out.parent / 'derived').mkdir()
+                (out.parent / 'derived/checker_report.json').write_text(json.dumps({'verdict':'CHECKER_PASS','checked_steps':10}))
+            if out.name == 'independent_check':
+                (out.parent / 'fresh_checker_report.json').write_text(json.dumps({'verdict':'REFUSED',
+                    'requested_steps':10, 'checked_steps':1, 'captured_steps':10,
+                    'requested_complete':False, 'last_verified_native_trace_seq':9000,
+                    'last_verified_v2_trace_seq':1900, 'failure_stage':'SEMANTIC'}))
+            return {'verdict': 'FAILED' if out.name == 'independent_check' else 'EXECUTED'}
+        monkeypatch.setattr(module, 'run_guarded', guard)
+        report = module.run(10, tmp_path / 'run', tmp_path / 'budget.json', Path(__file__).resolve().parents[1])
+>       assert report['verdict'] == 'REFUSED' and report['checked_steps'] == 1
+E       AssertionError: assert ('REFUSED' == 'REFUSED'
+E         
+E           REFUSED and 10 == 1)
+
+tests/test_regular_nstep_public.py:77: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_regular_nstep_public.py::test_fresh_partial_report_never_publishes_success[checked_steps-1]
+FAILED tests/test_regular_nstep_public.py::test_fresh_partial_report_never_publishes_success[checked_steps-True]
+FAILED tests/test_regular_nstep_public.py::test_fresh_partial_report_never_publishes_success[requested_steps-True]
+FAILED tests/test_regular_nstep_public.py::test_fresh_partial_report_never_publishes_success[requested_complete-False]
+FAILED tests/test_regular_nstep_public.py::test_fresh_refusal_frontier_overrides_staged_pass
+5 failed, 1 passed in 37.70s

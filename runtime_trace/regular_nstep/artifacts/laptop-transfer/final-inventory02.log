@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "C:\Users\zun24\.codex\worktrees\runtime-nstep\numerical-audit-lab-recovered-2026-10-01\current\runtime-nstep-workflow-2026-10-05\run_metadata.py", line 12, in <module>
+    runpy.run_path(script, run_name='__main__')
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\zun24\.codex\worktrees\runtime-nstep\numerical-audit-lab-recovered-2026-10-01\current\runtime-nstep-workflow-2026-10-05\final_inventory.py", line 49, in <module>
+    for p in ART.rglob('*') if p.is_file()}
+                               ^^^^^^^^^^^
+  File "C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 892, in is_file
+    return S_ISREG(self.stat().st_mode)
+                   ^^^^^^^^^^^
+  File "C:\Users\zun24\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 840, in stat
+    return os.stat(self, follow_symlinks=follow_symlinks)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [WinError 1920] 시스템에서 파일에 액세스할 수 없습니다: 'C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\fresh-03current'

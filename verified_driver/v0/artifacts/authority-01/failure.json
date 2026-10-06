@@ -1,0 +1,1 @@
+{"phase":"PRE_EXECUTION_GIT_METADATA","verdict":"NOT_EXECUTED","reason":"WSL git could not resolve Windows D:/ gitdir pointer; use verified mapped GIT_DIR/GIT_WORK_TREE only for read-only metadata","original_numerical_execution_started":false,"reported_shell_wall_seconds":1.245282}

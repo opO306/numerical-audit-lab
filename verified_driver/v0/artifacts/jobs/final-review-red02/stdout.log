@@ -1,0 +1,114 @@
+FFFFFF                                                                   [100%]
+=================================== FAILURES ===================================
+______ test_existing_historical_directory_is_never_given_failure_metadata ______
+
+tmp_path = PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-final-review-red02/test_existing_historical_direc0')
+
+    def test_existing_historical_directory_is_never_given_failure_metadata(tmp_path):
+        history=tmp_path/'historical'; child=history/'old'; child.mkdir(parents=True)
+        (child/'original.json').write_bytes(b'{"sealed":true}')
+        store=CertifiedStore(tmp_path/'store')
+        driver=VerifiedDriver(ROOT,store,history,tmp_path/'unused-ledger.json')
+        before=inventory(history); state=store.current()
+        assert driver.transact(1,'old').verdict=='STOP'
+>       assert inventory(history)==before and store.current()==state
+E       AssertionError: assert ({'old/driver_...472504606388'} == {'old/origina...472504606388'}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Left contains 1 more item:
+E         {'old/driver_result.json': 'cf6870232ea52d2c9da0546a271904530a4a66ebe44f494b2f98a50298f9da49'}
+E         Use -v to get more diff)
+
+tests/test_verified_driver_v0_admission.py:19: AssertionError
+______________ test_outside_namespace_refusal_creates_no_evidence ______________
+
+tmp_path = PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-final-review-red02/test_outside_namespace_refusal0')
+
+    def test_outside_namespace_refusal_creates_no_evidence(tmp_path):
+        driver=VerifiedDriver(ROOT,CertifiedStore(tmp_path/'store'),tmp_path/'outside',tmp_path/'unused.json')
+        before=driver.store.current()
+        assert driver.transact(1,'new').verdict=='STOP'
+>       assert not (tmp_path/'outside').exists() and driver.store.current()==before
+E       AssertionError: assert (not True)
+E        +  where True = exists()
+E        +    where exists = (PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-final-review-red02/test_outside_namespace_refusal0') / 'outside').exists
+
+tests/test_verified_driver_v0_admission.py:25: AssertionError
+_____________ test_exhausted_storage_cannot_grow_refused_metadata ______________
+
+tmp_path = PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-final-review-red02/test_exhausted_storage_cannot_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7efc87447710>
+
+    def test_exhausted_storage_cannot_grow_refused_metadata(tmp_path,monkeypatch):
+        driver=toy_driver(tmp_path,monkeypatch)
+        import runtime_trace.regular_nstep.resources as resources
+        original=resources.Limits
+        monkeypatch.setattr(resources,'Limits',lambda **k:original(storage_bytes=1))
+        monkeypatch.setattr(resources,'run_guarded',lambda *a,**k:pytest.fail('storage refusal started a numerical job'))
+        before=driver.store.current(); artifacts=driver.repo_root/'verified_driver/v0/artifacts'
+        for i in range(3): assert driver.transact(1,'full-'+str(i)).verdict=='STOP'
+>       assert not artifacts.exists() and driver.store.current()==before
+E       AssertionError: assert (not True)
+E        +  where True = exists()
+E        +    where exists = PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-final-review-red02/test_exhausted_storage_cannot_0/repo/verified_driver/v0/artifacts').exists
+
+tests/test_verified_driver_v0_admission.py:42: AssertionError
+__________________ test_exhausted_time_cannot_create_metadata __________________
+
+tmp_path = PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-final-review-red02/test_exhausted_time_cannot_cre0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7efc87445e50>
+
+    def test_exhausted_time_cannot_create_metadata(tmp_path,monkeypatch):
+        driver=toy_driver(tmp_path,monkeypatch,3600)
+        import runtime_trace.regular_nstep.resources as resources
+        def refused(*a,**k): raise resources.ResourceRefused('cumulative execution allowance exhausted')
+        monkeypatch.setattr(resources,'run_guarded',refused)
+        before=driver.store.current()
+        for i in range(3): assert driver.transact(1,'time-'+str(i)).verdict=='STOP'
+>       assert not driver.pending_root.exists() and driver.store.current()==before
+E       AssertionError: assert (not True)
+E        +  where True = exists()
+E        +    where exists = PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-final-review-red02/test_exhausted_time_cannot_cre0/repo/verified_driver/v0/artifacts/pending').exists
+E        +      where PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-final-review-red02/test_exhausted_time_cannot_cre0/repo/verified_driver/v0/artifacts/pending') = <verified_driver.v0.driver.VerifiedDriver object at 0x7efc87445f10>.pending_root
+
+tests/test_verified_driver_v0_admission.py:51: AssertionError
+______________ test_audit_only_refuses_before_outside_path_write _______________
+
+tmp_path = PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-final-review-red02/test_audit_only_refuses_before0')
+
+    def test_audit_only_refuses_before_outside_path_write(tmp_path):
+        driver=VerifiedDriver(ROOT,CertifiedStore(tmp_path/'store'),tmp_path/'pending',tmp_path/'unused.json')
+        with pytest.raises(ValueError): driver.audit_only(1,tmp_path/'outside-audit')
+>       assert not (tmp_path/'outside-audit').exists()
+E       AssertionError: assert not True
+E        +  where True = exists()
+E        +    where exists = (PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-final-review-red02/test_audit_only_refuses_before0') / 'outside-audit').exists
+
+tests/test_verified_driver_v0_admission.py:56: AssertionError
+______ test_existing_admissible_directory_is_not_owned_by_failed_request _______
+
+tmp_path = PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-final-review-red02/test_existing_admissible_direc0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7efc874c0260>
+
+    def test_existing_admissible_directory_is_not_owned_by_failed_request(tmp_path,monkeypatch):
+        driver=toy_driver(tmp_path,monkeypatch)
+        old=driver.pending_root/'old'; old.mkdir(parents=True); (old/'sealed.json').write_bytes(b'{}')
+        before=inventory(old)
+        assert driver.transact(1,'old').verdict=='STOP'
+>       assert inventory(old)==before
+E       AssertionError: assert {'sealed.json...81462ff04178'} == {'sealed.json...60f61caaff8a'}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Left contains 1 more item:
+E         {'driver_result.json': '581086c866db197d9b2c1d10a3cbaf0f52e7e6302dcec00e429881462ff04178'}
+E         Use -v to get more diff
+
+tests/test_verified_driver_v0_admission.py:63: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_verified_driver_v0_admission.py::test_existing_historical_directory_is_never_given_failure_metadata
+FAILED tests/test_verified_driver_v0_admission.py::test_outside_namespace_refusal_creates_no_evidence
+FAILED tests/test_verified_driver_v0_admission.py::test_exhausted_storage_cannot_grow_refused_metadata
+FAILED tests/test_verified_driver_v0_admission.py::test_exhausted_time_cannot_create_metadata
+FAILED tests/test_verified_driver_v0_admission.py::test_audit_only_refuses_before_outside_path_write
+FAILED tests/test_verified_driver_v0_admission.py::test_existing_admissible_directory_is_not_owned_by_failed_request
+6 failed in 0.25s

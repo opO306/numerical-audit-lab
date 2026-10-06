@@ -1,0 +1,85 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+_________ test_controller_read_error_cannot_erase_already_spent_budget _________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_controller_read_error_can0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f3b0d9043e0>
+
+    def test_controller_read_error_cannot_erase_already_spent_budget(tmp_path, monkeypatch):
+        a = api()
+        def broken(unit):
+            raise OSError('injected controller read error')
+        monkeypatch.setattr(a, '_show', broken)
+        ledger = tmp_path / 'ledger.json'
+>       receipt = a.run_guarded([sys.executable, '-c', 'print(19)'],
+            a.Limits(job_seconds=10), tmp_path / 'run', ledger)
+
+tests/test_regular_nstep_resources.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/regular_nstep/resources.py:179: in run_guarded
+    props = _show(unit)
+            ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+unit = 'nstep-7308e2efa5884d8f9cc0d1513e63af1f'
+
+    def broken(unit):
+>       raise OSError('injected controller read error')
+E       OSError: injected controller read error
+
+tests/test_regular_nstep_resources.py:104: OSError
+_________________ test_unreconciled_job_blocks_next_execution __________________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_unreconciled_job_blocks_n0')
+
+    def test_unreconciled_job_blocks_next_execution(tmp_path):
+        a = api()
+        ledger = tmp_path / 'ledger.json'
+        ledger.write_text('{"used_seconds":0,"jobs":[]}')
+        ledger.with_suffix('.running.json').write_text('{"state":"RUNNING"}')
+>       with pytest.raises(a.ResourceRefused):
+E       Failed: DID NOT RAISE ResourceRefused
+
+tests/test_regular_nstep_resources.py:118: Failed
+_____________ test_source_changed_during_job_blocks_public_success _____________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_source_changed_during_job0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f3b0d9bfda0>
+
+    def test_source_changed_during_job_blocks_public_success(tmp_path, monkeypatch):
+        module = importlib.import_module('runtime_trace.regular_nstep.run')
+        root = Path(__file__).resolve().parents[1]
+        changed = False
+        original_sha = module.sha
+        def source_sha(path):
+            if changed and str(path).endswith('machine_check.py'):
+                return '1' * 64
+            return original_sha(path)
+        monkeypatch.setattr(module, 'sha', source_sha)
+        calls = 0
+        def fake_guard(command, limits, out, ledger, **kwargs):
+            nonlocal calls, changed
+            calls += 1
+            out.mkdir(parents=True)
+            (out / 'execution.json').write_text('{}')
+            if calls == 2:
+                derived = out.parent / 'derived'
+                derived.mkdir()
+                (derived / 'checker_report.json').write_text(json.dumps({'verdict': 'CHECKER_PASS',
+                    'requested_steps': 10, 'checked_steps': 10, 'requested_complete': True}))
+            changed = calls == 3
+            return {'verdict': 'EXECUTED'}
+        monkeypatch.setattr(module, 'run_guarded', fake_guard)
+        report = module.run(10, tmp_path / 'run', tmp_path / 'budget.json', root)
+>       assert report['verdict'] == 'REFUSED'
+E       AssertionError: assert 'CHECKER_PASS' == 'REFUSED'
+E         
+E         - REFUSED
+E         + CHECKER_PASS
+
+tests/test_regular_nstep_public.py:32: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_regular_nstep_resources.py::test_controller_read_error_cannot_erase_already_spent_budget
+FAILED tests/test_regular_nstep_resources.py::test_unreconciled_job_blocks_next_execution
+FAILED tests/test_regular_nstep_public.py::test_source_changed_during_job_blocks_public_success
+3 failed, 9 deselected in 4.23s

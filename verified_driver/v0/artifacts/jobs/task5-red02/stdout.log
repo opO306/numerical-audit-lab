@@ -1,0 +1,82 @@
+....................FFF                                                  [100%]
+=================================== FAILURES ===================================
+___________ test_fallback_cannot_reset_pretransaction_source_binding ___________
+
+tmp_path = PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-task5-red02/test_fallback_cannot_reset_pre0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x77b3a967e000>
+
+    def test_fallback_cannot_reset_pretransaction_source_binding(tmp_path,monkeypatch):
+        driver=make_driver(tmp_path); before=driver.store.current(); original=implementation.source_snapshot
+        changed=False
+        def snapshot(root):
+            value=original(root)
+            if changed: value['driver']['verified_driver/v0/driver.py']='a'*64
+            return value
+        monkeypatch.setattr(implementation,'source_snapshot',snapshot); monkeypatch.setattr(gate,'source_snapshot',snapshot)
+        def run(n,out):
+            nonlocal changed
+            if out.name!='fallback': changed=True; return {'verdict':'REFUSED'}
+            return copy_control(out)
+        class TestOnly(FallbackRegistry):
+            def resolve(self,reason,context): return context['validate_segment'](context['fallback_dir'])
+        driver._run_segment=run; driver.fallback=TestOnly()
+>       assert driver.transact(10,'changed-fallback').verdict=='STOP' and driver.store.current()==before
+E       AssertionError: assert ('ACCEPT' == 'STOP'
+E         
+E         - STOP
+E         + ACCEPT)
+
+tests/test_verified_driver_v0_attacks.py:140: AssertionError
+_________ test_production_adapter_cannot_start_with_new_budget_ledger __________
+
+tmp_path = PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-task5-red02/test_production_adapter_cannot0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x77b3a967ffe0>
+
+    def test_production_adapter_cannot_start_with_new_budget_ledger(tmp_path,monkeypatch):
+        driver=make_driver(tmp_path); out=tmp_path/'raw'; out.mkdir()
+        import runtime_trace.regular_nstep.resources as resources
+        monkeypatch.setattr(resources,'run_guarded',lambda *a,**k:pytest.fail('unapproved ledger reached execution'))
+>       with pytest.raises(ValueError,match='existing approved ledger'): driver._run_segment(1,out)
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v0_attacks.py:146: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v0/driver.py:139: in _run_segment
+    receipt=run_guarded(command,limits,out/stage,self.ledger,cwd=self.repo_root,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+a = (['/home/otherside123/venvs/gate2c1-trace/bin/python', '-m', 'runtime_trace.regular_nstep.acquire', '--steps', '1', '-...st-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-task5-red02/test_production_adapter_cannot0/unused-ledger.json'))
+k = {'cwd': PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05'), 'artifact_allowance': 1073741824}
+
+>   monkeypatch.setattr(resources,'run_guarded',lambda *a,**k:pytest.fail('unapproved ledger reached execution'))
+                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: unapproved ledger reached execution
+
+tests/test_verified_driver_v0_attacks.py:145: Failed
+_______ test_fallback_cannot_publish_a_different_controller_transaction ________
+
+tmp_path = PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-task5-red02/test_fallback_cannot_publish_a0')
+
+    def test_fallback_cannot_publish_a_different_controller_transaction(tmp_path):
+        driver=make_driver(tmp_path); before,pred=driver.store.current()
+        def run(n,out):
+            return copy_control(out) if out.name=='foreign' else {'verdict':'REFUSED'}
+        class TestOnly(FallbackRegistry):
+            def resolve(self,reason,context):
+                return driver._collect(10,'foreign',pred,tmp_path/'foreign')
+        driver._run_segment=run; driver.fallback=TestOnly()
+        result=driver.transact(10,'expected')
+>       assert result.verdict=='STOP' and driver.store.current()==(before,pred)
+E       AssertionError: assert ('STOP' == 'STOP'
+E         
+E           STOP and ('dab32d5c83c...54a17c49a25')) == ('b1c432ad0f1... run_id=None))
+E         
+E         At index 0 diff: 'dab32d5c83cd8f8f36cac1c237cd301e4b4f034cca9367b109a7f02552a15492' != 'b1c432ad0f19daeb6c562baabd857a7951b8c4ca24f51c068794a4dabc44ca23'
+E         Use -v to get more diff)
+
+tests/test_verified_driver_v0_attacks.py:157: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_verified_driver_v0_attacks.py::test_fallback_cannot_reset_pretransaction_source_binding
+FAILED tests/test_verified_driver_v0_attacks.py::test_production_adapter_cannot_start_with_new_budget_ledger
+FAILED tests/test_verified_driver_v0_attacks.py::test_fallback_cannot_publish_a_different_controller_transaction
+3 failed, 20 passed in 1.79s

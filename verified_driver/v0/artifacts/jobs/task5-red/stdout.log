@@ -1,0 +1,59 @@
+....................FF                                                   [100%]
+=================================== FAILURES ===================================
+___________ test_fallback_cannot_reset_pretransaction_source_binding ___________
+
+tmp_path = PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-task5-red/test_fallback_cannot_reset_pre0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7165024dd610>
+
+    def test_fallback_cannot_reset_pretransaction_source_binding(tmp_path,monkeypatch):
+        driver=make_driver(tmp_path); before=driver.store.current(); original=implementation.source_snapshot
+        changed=False
+        def snapshot(root):
+            value=original(root)
+            if changed: value['driver']['verified_driver/v0/driver.py']='a'*64
+            return value
+        monkeypatch.setattr(implementation,'source_snapshot',snapshot); monkeypatch.setattr(gate,'source_snapshot',snapshot)
+        def run(n,out):
+            nonlocal changed
+            if out.name!='fallback': changed=True; return {'verdict':'REFUSED'}
+            return copy_control(out)
+        class TestOnly(FallbackRegistry):
+            def resolve(self,reason,context): return context['validate_segment'](context['fallback_dir'])
+        driver._run_segment=run; driver.fallback=TestOnly()
+>       assert driver.transact(10,'changed-fallback').verdict=='STOP' and driver.store.current()==before
+E       AssertionError: assert ('ACCEPT' == 'STOP'
+E         
+E         - STOP
+E         + ACCEPT)
+
+tests/test_verified_driver_v0_attacks.py:140: AssertionError
+_________ test_production_adapter_cannot_start_with_new_budget_ledger __________
+
+tmp_path = PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-task5-red/test_production_adapter_cannot0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7165024dd4f0>
+
+    def test_production_adapter_cannot_start_with_new_budget_ledger(tmp_path,monkeypatch):
+        driver=make_driver(tmp_path); out=tmp_path/'raw'; out.mkdir()
+        import runtime_trace.regular_nstep.resources as resources
+        monkeypatch.setattr(resources,'run_guarded',lambda *a,**k:pytest.fail('unapproved ledger reached execution'))
+>       with pytest.raises(ValueError,match='existing approved ledger'): driver._run_segment(1,out)
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v0_attacks.py:146: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v0/driver.py:139: in _run_segment
+    receipt=run_guarded(command,limits,out/stage,self.ledger,cwd=self.repo_root,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+a = (['/home/otherside123/venvs/gate2c1-trace/bin/python', '-m', 'runtime_trace.regular_nstep.acquire', '--steps', '1', '-...test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-task5-red/test_production_adapter_cannot0/unused-ledger.json'))
+k = {'cwd': PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05'), 'artifact_allowance': 1073741824}
+
+>   monkeypatch.setattr(resources,'run_guarded',lambda *a,**k:pytest.fail('unapproved ledger reached execution'))
+                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: unapproved ledger reached execution
+
+tests/test_verified_driver_v0_attacks.py:145: Failed
+=========================== short test summary info ============================
+FAILED tests/test_verified_driver_v0_attacks.py::test_fallback_cannot_reset_pretransaction_source_binding
+FAILED tests/test_verified_driver_v0_attacks.py::test_production_adapter_cannot_start_with_new_budget_ledger
+2 failed, 20 passed in 1.57s

@@ -1,0 +1,21 @@
+{"attack": "missing-dense", "verdict": "REFUSED", "reason": "semantic PC seam/order"}
+{"attack": "duplicate-dense", "verdict": "REFUSED", "reason": "semantic PC seam/order"}
+{"attack": "reorder-dense", "verdict": "REFUSED", "reason": "semantic PC seam/order"}
+{"attack": "wrong-result", "verdict": "REFUSED", "reason": "actual ordered complete IR graph"}
+{"attack": "body-write-omission", "verdict": "REFUSED", "reason": "observed read/shadow def-use"}
+{"attack": "body-read-omission", "verdict": "REFUSED", "reason": "complete derived read/ABI observation set"}
+{"attack": "body-callee-saved", "verdict": "REFUSED", "reason": "complete native body register/flag effects"}
+{"attack": "terminal-save-pointer", "verdict": "REFUSED", "reason": "observed read/shadow def-use"}
+{"attack": "cross-process", "verdict": "REFUSED", "reason": "cross-process/thread transcript splice"}
+{"attack": "all-stop-off", "verdict": "REFUSED", "reason": "actual body owner/entry/return/all-stop"}
+{"attack": "wrong-gradient", "verdict": "REFUSED", "reason": "caller/entry bits"}
+{"attack": "unsupported-opcode", "verdict": "REFUSED", "reason": "recorded assembly vs independent decode"}
+{"attack": "reset-error", "verdict": "REFUSED", "reason": "immediate prior dynamic state/Form join"}
+{"attack": "wrong-error-link", "verdict": "REFUSED", "reason": "immediate prior dynamic state/Form join"}
+{"attack": "other-execution-id", "verdict": "REFUSED", "reason": "immediate prior dynamic state/Form join"}
+{"attack": "IR-order", "verdict": "REFUSED", "reason": "actual ordered complete IR graph"}
+{"attack": "false-completion", "verdict": "REFUSED", "reason": "honest requested-run completion/frontier"}
+{"attack": "missing-final-block", "verdict": "REFUSED", "reason": "all N+1 graph blocks"}
+{"attack": "missing-normal-exit", "verdict": "REFUSED", "reason": "actual same-inferior normal exit"}
+{"attack": "hash-control", "verdict": "REFUSED", "reason": "component integrity"}
+{"attack": "trust-control", "verdict": "REFUSED", "reason": "complete reviewed source set"}

@@ -1,0 +1,31 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____ test_actual_semantics_positive_separate_from_historical_source_pins ______
+
+    def test_actual_semantics_positive_separate_from_historical_source_pins():
+        capture = json.loads((CAPTURE / 'capture.json').read_bytes())
+        rows = [json.loads(line) for line in (CAPTURE / 'trace.jsonl').read_bytes().splitlines()]
+>       assert api().validate_semantics(capture, rows, ROOT)['checked_steps'] == 10
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_raw.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/regular_nstep/raw_check.py:317: in validate_semantics
+    machine_check.registers(native_rows, native_decoded)
+runtime_trace/regular_nstep/machine_check.py:61: in registers
+    c._validate_register_semantics([row], decoded)
+runtime_trace/caller_transition/checker.py:999: in _validate_register_semantics
+    _refuse("UNKNOWN_INSTRUCTION_EFFECT", f"unsupported register semantics at sequence {sequence}: {decoded[sequence]}")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+code = 'UNKNOWN_INSTRUCTION_EFFECT'
+reason = 'unsupported register semantics at sequence 142: xchg   %ax,%ax'
+
+    def _refuse(code: str, reason: str) -> None:
+>       raise CheckerRefused(code, reason)
+E       runtime_trace.caller_transition.checker.CheckerRefused: unsupported register semantics at sequence 142: xchg   %ax,%ax
+
+runtime_trace/caller_transition/checker.py:174: CheckerRefused
+=========================== short test summary info ============================
+FAILED tests/test_regular_nstep_raw.py::test_actual_semantics_positive_separate_from_historical_source_pins
+1 failed, 11 deselected in 3.10s

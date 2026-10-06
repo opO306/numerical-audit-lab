@@ -1,0 +1,9 @@
+Running as unit: nstep-resource-green3.service; invocation ID: 30f4e1f1a6f84a4dbcf3952bbe875aca
+.......                                                                  [100%]
+7 passed in 2.40s
+Finished with result: success
+Main processes terminated with: code=exited/status=0
+Service runtime: 2.764s
+CPU time consumed: 476ms
+Memory peak: 512.0K
+Memory swap peak: 0B

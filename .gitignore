@@ -1,3 +1,15 @@
 __pycache__/
 .pytest_cache/
 reports/latest/
+
+# Generated pytest workspaces and relocation copies; keep sources and evidence.
+/current/runtime-nstep-workflow-2026-10-05/pytest-green3/
+/current/runtime-nstep-workflow-2026-10-05/pytest-guarded-final1/
+/runtime_trace/regular_nstep/artifacts/integration-regression-tmp/
+/runtime_trace/regular_nstep/artifacts/portability-retry-tmp/
+/verified_driver/v0/artifacts/tmp-task1-green/
+
+# Raw 100-step traces stay local; restore byte-identical copies from Git gzip files.
+/runtime_trace/regular_nstep/artifacts/connected100-01/capture/trace.jsonl
+/runtime_trace/regular_nstep/artifacts/connected100-final/capture/trace.jsonl
+/runtime_trace/regular_nstep/artifacts/connected100-*/capture/.restore-*.part

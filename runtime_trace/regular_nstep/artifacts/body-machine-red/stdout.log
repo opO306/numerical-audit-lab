@@ -1,0 +1,73 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+__ test_whole_body_machine_semantics_not_only_numeric_ir[body-write-omission] __
+
+attack = 'body-write-omission'
+
+    @pytest.mark.parametrize('attack', ['body-write-omission', 'body-read-omission', 'body-callee-saved'])
+    def test_whole_body_machine_semantics_not_only_numeric_ir(attack):
+        capture = json.loads((CAPTURE / 'capture.json').read_bytes())
+        rows = [json.loads(line) for line in (CAPTURE / 'trace.jsonl').read_bytes().splitlines()]
+        if attack.endswith('write-omission'):
+            row = next(r for r in rows if r['occurrence'] == 'step2' and r['possible_memory_writes'])
+            row['possible_memory_writes'] = []
+        elif attack.endswith('read-omission'):
+            row = next(r for r in rows if r['occurrence'] == 'step2' and r['pre_memory_observations'])
+            row['pre_memory_observations'] = []
+        else:
+            row = next(r for r in rows if r['occurrence'] == 'step2' and r['kind'] == 'MUL')
+            row['post']['gpr']['r13'] = '0x0000000000000000'
+            rows[row['seq'] + 1]['pre']['gpr']['r13'] = '0x0000000000000000'
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_regular_nstep_raw.py:44: Failed
+__ test_whole_body_machine_semantics_not_only_numeric_ir[body-read-omission] ___
+
+attack = 'body-read-omission'
+
+    @pytest.mark.parametrize('attack', ['body-write-omission', 'body-read-omission', 'body-callee-saved'])
+    def test_whole_body_machine_semantics_not_only_numeric_ir(attack):
+        capture = json.loads((CAPTURE / 'capture.json').read_bytes())
+        rows = [json.loads(line) for line in (CAPTURE / 'trace.jsonl').read_bytes().splitlines()]
+        if attack.endswith('write-omission'):
+            row = next(r for r in rows if r['occurrence'] == 'step2' and r['possible_memory_writes'])
+            row['possible_memory_writes'] = []
+        elif attack.endswith('read-omission'):
+            row = next(r for r in rows if r['occurrence'] == 'step2' and r['pre_memory_observations'])
+            row['pre_memory_observations'] = []
+        else:
+            row = next(r for r in rows if r['occurrence'] == 'step2' and r['kind'] == 'MUL')
+            row['post']['gpr']['r13'] = '0x0000000000000000'
+            rows[row['seq'] + 1]['pre']['gpr']['r13'] = '0x0000000000000000'
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_regular_nstep_raw.py:44: Failed
+___ test_whole_body_machine_semantics_not_only_numeric_ir[body-callee-saved] ___
+
+attack = 'body-callee-saved'
+
+    @pytest.mark.parametrize('attack', ['body-write-omission', 'body-read-omission', 'body-callee-saved'])
+    def test_whole_body_machine_semantics_not_only_numeric_ir(attack):
+        capture = json.loads((CAPTURE / 'capture.json').read_bytes())
+        rows = [json.loads(line) for line in (CAPTURE / 'trace.jsonl').read_bytes().splitlines()]
+        if attack.endswith('write-omission'):
+            row = next(r for r in rows if r['occurrence'] == 'step2' and r['possible_memory_writes'])
+            row['possible_memory_writes'] = []
+        elif attack.endswith('read-omission'):
+            row = next(r for r in rows if r['occurrence'] == 'step2' and r['pre_memory_observations'])
+            row['pre_memory_observations'] = []
+        else:
+            row = next(r for r in rows if r['occurrence'] == 'step2' and r['kind'] == 'MUL')
+            row['post']['gpr']['r13'] = '0x0000000000000000'
+            rows[row['seq'] + 1]['pre']['gpr']['r13'] = '0x0000000000000000'
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_regular_nstep_raw.py:44: Failed
+=========================== short test summary info ============================
+FAILED tests/test_regular_nstep_raw.py::test_whole_body_machine_semantics_not_only_numeric_ir[body-write-omission]
+FAILED tests/test_regular_nstep_raw.py::test_whole_body_machine_semantics_not_only_numeric_ir[body-read-omission]
+FAILED tests/test_regular_nstep_raw.py::test_whole_body_machine_semantics_not_only_numeric_ir[body-callee-saved]
+3 failed, 8 deselected in 7.96s

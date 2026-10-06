@@ -1,0 +1,24 @@
+........F.                                                               [100%]
+=================================== FAILURES ===================================
+______________ test_connected_10step_actual_ir_v2_and_completion _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_connected_10step_actual_i0')
+
+    def test_connected_10step_actual_ir_v2_and_completion(tmp_path):
+        try:
+            producer = importlib.import_module('runtime_trace.regular_nstep.producer')
+            checker = importlib.import_module('runtime_trace.regular_nstep.checker')
+        except ModuleNotFoundError:
+            pytest.fail('connected N-step producer/checker absent')
+        out = tmp_path / 'derived'
+        report = producer.build(CAPTURE, out, ROOT)
+        assert report['verdict'] == 'CHECKER_PASS'
+        assert report['requested_complete'] is True
+        assert report['checked_steps'] == 10
+>       assert report['operation_count'] == 12 + 10 * 24
+E       assert 234 == (12 + (10 * 24))
+
+tests/test_regular_nstep_pipeline.py:20: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_regular_nstep_pipeline.py::test_connected_10step_actual_ir_v2_and_completion
+1 failed, 9 passed in 33.88s

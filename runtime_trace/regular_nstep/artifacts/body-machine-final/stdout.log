@@ -1,0 +1,173 @@
+FFFF                                                                     [100%]
+=================================== FAILURES ===================================
+_____ test_actual_semantics_positive_separate_from_historical_source_pins ______
+
+    def test_actual_semantics_positive_separate_from_historical_source_pins():
+        capture = json.loads((CAPTURE / 'capture.json').read_bytes())
+        rows = [json.loads(line) for line in (CAPTURE / 'trace.jsonl').read_bytes().splitlines()]
+>       assert api().validate_semantics(capture, rows, ROOT)['checked_steps'] == 10
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_raw.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/regular_nstep/raw_check.py:314: in validate_semantics
+    require(capture['opcode_histogram'] == dict(Counter(r.get('opcode', r.get('assembly', '').split()[0]) for r in rows)),
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/collections/__init__.py:607: in __init__
+    self.update(iterable, **kwds)
+/usr/lib/python3.12/collections/__init__.py:699: in update
+    _count_elements(self, iterable)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+.0 = <list_iterator object at 0x7b89155c6c80>
+
+>   require(capture['opcode_histogram'] == dict(Counter(r.get('opcode', r.get('assembly', '').split()[0]) for r in rows)),
+                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            'actual opcode histogram')
+E   IndexError: list index out of range
+
+runtime_trace/regular_nstep/raw_check.py:314: IndexError
+__ test_whole_body_machine_semantics_not_only_numeric_ir[body-write-omission] __
+
+attack = 'body-write-omission'
+
+    @pytest.mark.parametrize('attack', ['body-write-omission', 'body-read-omission', 'body-callee-saved'])
+    def test_whole_body_machine_semantics_not_only_numeric_ir(attack):
+        capture = json.loads((CAPTURE / 'capture.json').read_bytes())
+        rows = [json.loads(line) for line in (CAPTURE / 'trace.jsonl').read_bytes().splitlines()]
+        if attack.endswith('write-omission'):
+            row = next(r for r in rows if r['occurrence'] == 'step2' and r['possible_memory_writes'])
+            row['possible_memory_writes'] = []
+        elif attack.endswith('read-omission'):
+            row = next(r for r in rows if r['occurrence'] == 'step2' and r['pre_memory_observations'])
+            row['pre_memory_observations'] = []
+        else:
+            row = next(r for r in rows if r['occurrence'] == 'step2' and r['kind'] == 'MUL')
+            changed = f"0x{int(row['post']['gpr']['r13'], 16) + 1:016x}"
+            row['post']['gpr']['r13'] = changed
+            for following in rows[row['seq'] + 1:]:
+                original_pre = following['pre']['gpr']['r13']
+                following['pre']['gpr']['r13'] = changed
+                if original_pre != following['post']['gpr']['r13']:
+                    break  # actual later POP restores it; all seams remain coherent
+                following['post']['gpr']['r13'] = changed
+        with pytest.raises(ValueError):
+>           api().validate_semantics(capture, rows, ROOT)
+
+tests/test_regular_nstep_raw.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/regular_nstep/raw_check.py:314: in validate_semantics
+    require(capture['opcode_histogram'] == dict(Counter(r.get('opcode', r.get('assembly', '').split()[0]) for r in rows)),
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/collections/__init__.py:607: in __init__
+    self.update(iterable, **kwds)
+/usr/lib/python3.12/collections/__init__.py:699: in update
+    _count_elements(self, iterable)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+.0 = <list_iterator object at 0x7b891a69bfd0>
+
+>   require(capture['opcode_histogram'] == dict(Counter(r.get('opcode', r.get('assembly', '').split()[0]) for r in rows)),
+                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            'actual opcode histogram')
+E   IndexError: list index out of range
+
+runtime_trace/regular_nstep/raw_check.py:314: IndexError
+__ test_whole_body_machine_semantics_not_only_numeric_ir[body-read-omission] ___
+
+attack = 'body-read-omission'
+
+    @pytest.mark.parametrize('attack', ['body-write-omission', 'body-read-omission', 'body-callee-saved'])
+    def test_whole_body_machine_semantics_not_only_numeric_ir(attack):
+        capture = json.loads((CAPTURE / 'capture.json').read_bytes())
+        rows = [json.loads(line) for line in (CAPTURE / 'trace.jsonl').read_bytes().splitlines()]
+        if attack.endswith('write-omission'):
+            row = next(r for r in rows if r['occurrence'] == 'step2' and r['possible_memory_writes'])
+            row['possible_memory_writes'] = []
+        elif attack.endswith('read-omission'):
+            row = next(r for r in rows if r['occurrence'] == 'step2' and r['pre_memory_observations'])
+            row['pre_memory_observations'] = []
+        else:
+            row = next(r for r in rows if r['occurrence'] == 'step2' and r['kind'] == 'MUL')
+            changed = f"0x{int(row['post']['gpr']['r13'], 16) + 1:016x}"
+            row['post']['gpr']['r13'] = changed
+            for following in rows[row['seq'] + 1:]:
+                original_pre = following['pre']['gpr']['r13']
+                following['pre']['gpr']['r13'] = changed
+                if original_pre != following['post']['gpr']['r13']:
+                    break  # actual later POP restores it; all seams remain coherent
+                following['post']['gpr']['r13'] = changed
+        with pytest.raises(ValueError):
+>           api().validate_semantics(capture, rows, ROOT)
+
+tests/test_regular_nstep_raw.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/regular_nstep/raw_check.py:314: in validate_semantics
+    require(capture['opcode_histogram'] == dict(Counter(r.get('opcode', r.get('assembly', '').split()[0]) for r in rows)),
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/collections/__init__.py:607: in __init__
+    self.update(iterable, **kwds)
+/usr/lib/python3.12/collections/__init__.py:699: in update
+    _count_elements(self, iterable)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+.0 = <list_iterator object at 0x7b891699c310>
+
+>   require(capture['opcode_histogram'] == dict(Counter(r.get('opcode', r.get('assembly', '').split()[0]) for r in rows)),
+                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            'actual opcode histogram')
+E   IndexError: list index out of range
+
+runtime_trace/regular_nstep/raw_check.py:314: IndexError
+___ test_whole_body_machine_semantics_not_only_numeric_ir[body-callee-saved] ___
+
+attack = 'body-callee-saved'
+
+    @pytest.mark.parametrize('attack', ['body-write-omission', 'body-read-omission', 'body-callee-saved'])
+    def test_whole_body_machine_semantics_not_only_numeric_ir(attack):
+        capture = json.loads((CAPTURE / 'capture.json').read_bytes())
+        rows = [json.loads(line) for line in (CAPTURE / 'trace.jsonl').read_bytes().splitlines()]
+        if attack.endswith('write-omission'):
+            row = next(r for r in rows if r['occurrence'] == 'step2' and r['possible_memory_writes'])
+            row['possible_memory_writes'] = []
+        elif attack.endswith('read-omission'):
+            row = next(r for r in rows if r['occurrence'] == 'step2' and r['pre_memory_observations'])
+            row['pre_memory_observations'] = []
+        else:
+            row = next(r for r in rows if r['occurrence'] == 'step2' and r['kind'] == 'MUL')
+            changed = f"0x{int(row['post']['gpr']['r13'], 16) + 1:016x}"
+            row['post']['gpr']['r13'] = changed
+            for following in rows[row['seq'] + 1:]:
+                original_pre = following['pre']['gpr']['r13']
+                following['pre']['gpr']['r13'] = changed
+                if original_pre != following['post']['gpr']['r13']:
+                    break  # actual later POP restores it; all seams remain coherent
+                following['post']['gpr']['r13'] = changed
+        with pytest.raises(ValueError):
+>           api().validate_semantics(capture, rows, ROOT)
+
+tests/test_regular_nstep_raw.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/regular_nstep/raw_check.py:314: in validate_semantics
+    require(capture['opcode_histogram'] == dict(Counter(r.get('opcode', r.get('assembly', '').split()[0]) for r in rows)),
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/collections/__init__.py:607: in __init__
+    self.update(iterable, **kwds)
+/usr/lib/python3.12/collections/__init__.py:699: in update
+    _count_elements(self, iterable)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+.0 = <list_iterator object at 0x7b89172c0700>
+
+>   require(capture['opcode_histogram'] == dict(Counter(r.get('opcode', r.get('assembly', '').split()[0]) for r in rows)),
+                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            'actual opcode histogram')
+E   IndexError: list index out of range
+
+runtime_trace/regular_nstep/raw_check.py:314: IndexError
+=========================== short test summary info ============================
+FAILED tests/test_regular_nstep_raw.py::test_actual_semantics_positive_separate_from_historical_source_pins
+FAILED tests/test_regular_nstep_raw.py::test_whole_body_machine_semantics_not_only_numeric_ir[body-write-omission]
+FAILED tests/test_regular_nstep_raw.py::test_whole_body_machine_semantics_not_only_numeric_ir[body-read-omission]
+FAILED tests/test_regular_nstep_raw.py::test_whole_body_machine_semantics_not_only_numeric_ir[body-callee-saved]
+4 failed, 8 deselected in 5.10s

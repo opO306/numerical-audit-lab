@@ -1,0 +1,309 @@
+{
+  "candidate_checkout_before_this_receipt": {
+    "logical_file_bytes": 3470796476,
+    "regular_file_count": 7391,
+    "root": "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01",
+    "unfollowed_links": [
+      {
+        "logical_payload_bytes": 0,
+        "path": "current\\runtime-nstep-workflow-2026-10-05\\pytest-green3\\test_cumulative_budget_refusescurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "current\\runtime-nstep-workflow-2026-10-05\\pytest-green3\\test_exclusive_and_traversal_wcurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "current\\runtime-nstep-workflow-2026-10-05\\pytest-green3\\test_guarded_subprocess_checkscurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "current\\runtime-nstep-workflow-2026-10-05\\pytest-green3\\test_storage_reserves_before_wcurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "current\\runtime-nstep-workflow-2026-10-05\\pytest-green3\\test_timeout_kills_entire_guarcurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "current\\runtime-nstep-workflow-2026-10-05\\pytest-guarded-final1\\test_cumulative_budget_refusescurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "current\\runtime-nstep-workflow-2026-10-05\\pytest-guarded-final1\\test_descendant_memory_is_limicurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "current\\runtime-nstep-workflow-2026-10-05\\pytest-guarded-final1\\test_exclusive_and_traversal_wcurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "current\\runtime-nstep-workflow-2026-10-05\\pytest-guarded-final1\\test_guarded_subprocess_checkscurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "current\\runtime-nstep-workflow-2026-10-05\\pytest-guarded-final1\\test_storage_reserves_before_wcurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "current\\runtime-nstep-workflow-2026-10-05\\pytest-guarded-final1\\test_timeout_kills_entire_guarcurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\fresh-03current"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\known-03current"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_all_fifteen_saved_semanticurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_changed_python_path_set_icurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_changed_source_bytes_and_current"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_changed_source_hash_is_recurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_cli_resource_parse_failurcurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_connected_10step_actual_icurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_controller_read_error_cancurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_correct_frozen_binding_iscurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_cumulative_budget_refusescurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_derivation_failure_presercurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_descendant_memory_is_limicurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_duplicate_json_object_keycurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_escaping_packaged_path_recurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_exact_harness_proof_accepcurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_exclusive_and_traversal_wcurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_fresh_partial_report_nevecurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_fresh_refusal_frontier_ovcurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_guarded_subprocess_checkscurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_historical_whole_branch_ccurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_malformed_derived_refusedcurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_malformed_fresh_report_prcurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_malformed_resource_payloacurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_malformed_type_duplicate_current"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_mismatched_reviewed_head_current"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_mismatched_review_hash_iscurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_missing_approved_review_icurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_missing_capture_never_pubcurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_missing_pending_receipt_icurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_missing_whole_branch_fix_current"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_old_needs_fixes_review_cacurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_publication_cleans_new_dicurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_publication_is_exclusive_current"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_public_fresh_checker_relocurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_receipt_rejects_altered_scurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_repaired_boolean_operatiocurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_repaired_chain_rejects_rocurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_repaired_lower_component_current"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_repaired_seal_rejects_bogcurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_repaired_seal_rejects_eaccurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_repaired_seal_rejects_miscurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_repaired_seal_rejects_norcurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_repaired_seal_rejects_shrcurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_repaired_seal_rejects_unbcurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_shared_writer_quota_cannocurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_source_changed_during_jobcurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_storage_reserves_before_wcurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_timeout_kills_entire_guarcurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\integration-regression-tmp\\test_unreconciled_job_blocks_ncurrent"
+      },
+      {
+        "logical_payload_bytes": 0,
+        "path": "runtime_trace\\regular_nstep\\artifacts\\portability-retry-tmp\\test_public_fresh_checker_relocurrent"
+      }
+    ]
+  },
+  "commit_or_push_performed": false,
+  "counted_metadata_jobs": "bounded inventory and final seal jobs included; control-plane reconciliation/static writing not timed",
+  "external_audit_closure": false,
+  "external_retained_proof": {
+    "file_bytes": 352826723,
+    "file_count": 2933,
+    "host": "desktop WSL",
+    "root": "/home/otherside123/runtime-nstep-portability-proof-2026-10-05"
+  },
+  "final_accounting_sha256": "d66ca92cb619943cb077b7a1b732a3e6bf4c60b44dc05453fbfbdba74987161b",
+  "final_budget_sha256": "fc7dc79860e72a05096cc5fdaeb7934ef4f7c47fce079abf11056f33c6b6d442",
+  "final_guard_receipt_sha256": "84cbc9fdee37b1aa6086f063038d657251dd60231116a9f62772d7c3e097b731",
+  "final_total_file_bytes": 3862485557,
+  "formal_certification": false,
+  "fresh_review_sha256": "5882ae3ba00346b7d6803216dd80ee07513a89acb09971d5da44a82c2f540690",
+  "init_to_step1": "UNTRACED",
+  "job_count": 72,
+  "laptop_retained": {
+    "device_id": "2bb57131-8320-4fbf-8c9f-63e1f44738ec",
+    "device_name": "DESKTOP-0EASI0F",
+    "file_bytes": 38522999,
+    "file_count": 28,
+    "method": "Remote Desktop Commander read-only Get-ChildItem file sum; environment and remote byte hashes are separately sealed in host-environment-final.json",
+    "numerical_job": false,
+    "observed_utc": "2026-10-05T09:55:16.7520652Z",
+    "root": "C:\\Users\\zun24\\Documents\\runtime-nstep-audit-2026-10-05",
+    "schema": "laptop-final-storage-observation-v1"
+  },
+  "original_own_preflight": {
+    "additional_original_task_docs": [
+      "D:\\numerical-audit-lab-recovered-2026-10-01\\docs\\superpowers\\plans\\2026-10-05-regular-nstep-runtime-trace.md",
+      "D:\\numerical-audit-lab-recovered-2026-10-01\\docs\\superpowers\\specs\\2026-10-05-regular-nstep-runtime-trace.md"
+    ],
+    "logical_file_bytes": 325484,
+    "regular_file_count": 3,
+    "root": "D:\\numerical-audit-lab-recovered-2026-10-01\\current\\runtime-nstep-preflight-2026-10-05",
+    "unfollowed_links": []
+  },
+  "paid_resource_started": false,
+  "post_terminal_frontier": "UNTRACED",
+  "prior_total_file_bytes": 3862471682,
+  "requested100_complete": true,
+  "requested10_complete": true,
+  "schema": "regular-nstep-final-closeout-v1",
+  "storage_basis": "logical file payload, including the entire isolated checkout and copied old assets; links lstat only, not physical allocation",
+  "storage_ceiling_bytes": 8589934592,
+  "this_receipt_bytes": 13875,
+  "time_ceiling_seconds": 3600,
+  "total_charged_wall_seconds": 2521.5202657650216,
+  "verdict": "CONDITIONAL_INTEGRATED_CANDIDATE_DELIVERED",
+  "verification_sha256": "c8b9e21960c108da15539d38cf0e7726d245d158202c2b16220e9b0f405c5bd5",
+  "verified_driver_implemented": false
+}

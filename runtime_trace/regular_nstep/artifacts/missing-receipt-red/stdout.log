@@ -1,0 +1,15 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________ test_missing_pending_receipt_is_explicit_refusal _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_missing_pending_receipt_i0')
+
+    def test_missing_pending_receipt_is_explicit_refusal(tmp_path):
+>       assert api().read_pending(tmp_path, 10)['verdict'] == 'REFUSED'
+               ^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'runtime_trace.regular_nstep.acquire' has no attribute 'read_pending'
+
+tests/test_regular_nstep_acquisition.py:48: AttributeError
+=========================== short test summary info ============================
+FAILED tests/test_regular_nstep_acquisition.py::test_missing_pending_receipt_is_explicit_refusal
+1 failed in 0.50s

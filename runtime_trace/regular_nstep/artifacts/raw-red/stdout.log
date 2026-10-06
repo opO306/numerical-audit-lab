@@ -1,0 +1,517 @@
+FFFFFFFF                                                                 [100%]
+=================================== FAILURES ===================================
+_________________ test_actual_10step_complete_native_frontier __________________
+
+    def api():
+        try:
+>           return importlib.import_module('runtime_trace.regular_nstep.raw_check')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_raw.py:14: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime_trace.regular_nstep.raw_check'
+import_ = <function _gcd_import at 0x76168f54c0e0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'runtime_trace.regular_nstep.raw_check'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_actual_10step_complete_native_frontier():
+>       capture, rows, report = api().validate(CAPTURE, ROOT)
+                                ^^^^^
+
+tests/test_regular_nstep_raw.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def api():
+        try:
+            return importlib.import_module('runtime_trace.regular_nstep.raw_check')
+        except ModuleNotFoundError:
+>           pytest.fail('independent generic raw checker is absent')
+E           Failed: independent generic raw checker is absent
+
+tests/test_regular_nstep_raw.py:16: Failed
+_____________ test_repaired_semantic_raw_attacks_refused[missing] ______________
+
+    def api():
+        try:
+>           return importlib.import_module('runtime_trace.regular_nstep.raw_check')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_raw.py:14: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime_trace.regular_nstep.raw_check'
+import_ = <function _gcd_import at 0x76168f54c0e0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'runtime_trace.regular_nstep.raw_check'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+attack = 'missing'
+
+    @pytest.mark.parametrize('attack', ['missing', 'duplicate', 'reorder', 'cross-process', 'arithmetic', 'false-N', 'gradient'])
+    def test_repaired_semantic_raw_attacks_refused(attack):
+        capture = json.loads((CAPTURE / 'capture.json').read_bytes())
+        rows = [json.loads(line) for line in (CAPTURE / 'trace.jsonl').read_bytes().splitlines()]
+        if attack == 'missing':
+            del rows[500]
+        elif attack == 'duplicate':
+            rows.insert(500, copy.deepcopy(rows[500]))
+        elif attack == 'reorder':
+            rows[500], rows[501] = rows[501], rows[500]
+        elif attack == 'cross-process':
+            rows[500]['pid'] += 1
+        elif attack == 'arithmetic':
+            row = next(r for r in rows if r.get('kind') == 'MUL')
+            row['result_bits'] = '0x3ff0000000000000'
+        elif attack == 'false-N':
+            capture['requested_steps'] = 100
+        else:
+            capture['regions'][2]['start_state']['gradient'][0] = '0x3ff0000000000000'
+        # No hashes are used by this semantic entry point. The attack cannot rely
+        # on a stale hash to be rejected; all outer digests can be repaired.
+        with pytest.raises(ValueError):
+>           api().validate_semantics(capture, rows, ROOT)
+            ^^^^^
+
+tests/test_regular_nstep_raw.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def api():
+        try:
+            return importlib.import_module('runtime_trace.regular_nstep.raw_check')
+        except ModuleNotFoundError:
+>           pytest.fail('independent generic raw checker is absent')
+E           Failed: independent generic raw checker is absent
+
+tests/test_regular_nstep_raw.py:16: Failed
+____________ test_repaired_semantic_raw_attacks_refused[duplicate] _____________
+
+    def api():
+        try:
+>           return importlib.import_module('runtime_trace.regular_nstep.raw_check')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_raw.py:14: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime_trace.regular_nstep.raw_check'
+import_ = <function _gcd_import at 0x76168f54c0e0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'runtime_trace.regular_nstep.raw_check'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+attack = 'duplicate'
+
+    @pytest.mark.parametrize('attack', ['missing', 'duplicate', 'reorder', 'cross-process', 'arithmetic', 'false-N', 'gradient'])
+    def test_repaired_semantic_raw_attacks_refused(attack):
+        capture = json.loads((CAPTURE / 'capture.json').read_bytes())
+        rows = [json.loads(line) for line in (CAPTURE / 'trace.jsonl').read_bytes().splitlines()]
+        if attack == 'missing':
+            del rows[500]
+        elif attack == 'duplicate':
+            rows.insert(500, copy.deepcopy(rows[500]))
+        elif attack == 'reorder':
+            rows[500], rows[501] = rows[501], rows[500]
+        elif attack == 'cross-process':
+            rows[500]['pid'] += 1
+        elif attack == 'arithmetic':
+            row = next(r for r in rows if r.get('kind') == 'MUL')
+            row['result_bits'] = '0x3ff0000000000000'
+        elif attack == 'false-N':
+            capture['requested_steps'] = 100
+        else:
+            capture['regions'][2]['start_state']['gradient'][0] = '0x3ff0000000000000'
+        # No hashes are used by this semantic entry point. The attack cannot rely
+        # on a stale hash to be rejected; all outer digests can be repaired.
+        with pytest.raises(ValueError):
+>           api().validate_semantics(capture, rows, ROOT)
+            ^^^^^
+
+tests/test_regular_nstep_raw.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def api():
+        try:
+            return importlib.import_module('runtime_trace.regular_nstep.raw_check')
+        except ModuleNotFoundError:
+>           pytest.fail('independent generic raw checker is absent')
+E           Failed: independent generic raw checker is absent
+
+tests/test_regular_nstep_raw.py:16: Failed
+_____________ test_repaired_semantic_raw_attacks_refused[reorder] ______________
+
+    def api():
+        try:
+>           return importlib.import_module('runtime_trace.regular_nstep.raw_check')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_raw.py:14: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime_trace.regular_nstep.raw_check'
+import_ = <function _gcd_import at 0x76168f54c0e0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'runtime_trace.regular_nstep.raw_check'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+attack = 'reorder'
+
+    @pytest.mark.parametrize('attack', ['missing', 'duplicate', 'reorder', 'cross-process', 'arithmetic', 'false-N', 'gradient'])
+    def test_repaired_semantic_raw_attacks_refused(attack):
+        capture = json.loads((CAPTURE / 'capture.json').read_bytes())
+        rows = [json.loads(line) for line in (CAPTURE / 'trace.jsonl').read_bytes().splitlines()]
+        if attack == 'missing':
+            del rows[500]
+        elif attack == 'duplicate':
+            rows.insert(500, copy.deepcopy(rows[500]))
+        elif attack == 'reorder':
+            rows[500], rows[501] = rows[501], rows[500]
+        elif attack == 'cross-process':
+            rows[500]['pid'] += 1
+        elif attack == 'arithmetic':
+            row = next(r for r in rows if r.get('kind') == 'MUL')
+            row['result_bits'] = '0x3ff0000000000000'
+        elif attack == 'false-N':
+            capture['requested_steps'] = 100
+        else:
+            capture['regions'][2]['start_state']['gradient'][0] = '0x3ff0000000000000'
+        # No hashes are used by this semantic entry point. The attack cannot rely
+        # on a stale hash to be rejected; all outer digests can be repaired.
+        with pytest.raises(ValueError):
+>           api().validate_semantics(capture, rows, ROOT)
+            ^^^^^
+
+tests/test_regular_nstep_raw.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def api():
+        try:
+            return importlib.import_module('runtime_trace.regular_nstep.raw_check')
+        except ModuleNotFoundError:
+>           pytest.fail('independent generic raw checker is absent')
+E           Failed: independent generic raw checker is absent
+
+tests/test_regular_nstep_raw.py:16: Failed
+__________ test_repaired_semantic_raw_attacks_refused[cross-process] ___________
+
+    def api():
+        try:
+>           return importlib.import_module('runtime_trace.regular_nstep.raw_check')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_raw.py:14: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime_trace.regular_nstep.raw_check'
+import_ = <function _gcd_import at 0x76168f54c0e0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'runtime_trace.regular_nstep.raw_check'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+attack = 'cross-process'
+
+    @pytest.mark.parametrize('attack', ['missing', 'duplicate', 'reorder', 'cross-process', 'arithmetic', 'false-N', 'gradient'])
+    def test_repaired_semantic_raw_attacks_refused(attack):
+        capture = json.loads((CAPTURE / 'capture.json').read_bytes())
+        rows = [json.loads(line) for line in (CAPTURE / 'trace.jsonl').read_bytes().splitlines()]
+        if attack == 'missing':
+            del rows[500]
+        elif attack == 'duplicate':
+            rows.insert(500, copy.deepcopy(rows[500]))
+        elif attack == 'reorder':
+            rows[500], rows[501] = rows[501], rows[500]
+        elif attack == 'cross-process':
+            rows[500]['pid'] += 1
+        elif attack == 'arithmetic':
+            row = next(r for r in rows if r.get('kind') == 'MUL')
+            row['result_bits'] = '0x3ff0000000000000'
+        elif attack == 'false-N':
+            capture['requested_steps'] = 100
+        else:
+            capture['regions'][2]['start_state']['gradient'][0] = '0x3ff0000000000000'
+        # No hashes are used by this semantic entry point. The attack cannot rely
+        # on a stale hash to be rejected; all outer digests can be repaired.
+        with pytest.raises(ValueError):
+>           api().validate_semantics(capture, rows, ROOT)
+            ^^^^^
+
+tests/test_regular_nstep_raw.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def api():
+        try:
+            return importlib.import_module('runtime_trace.regular_nstep.raw_check')
+        except ModuleNotFoundError:
+>           pytest.fail('independent generic raw checker is absent')
+E           Failed: independent generic raw checker is absent
+
+tests/test_regular_nstep_raw.py:16: Failed
+____________ test_repaired_semantic_raw_attacks_refused[arithmetic] ____________
+
+    def api():
+        try:
+>           return importlib.import_module('runtime_trace.regular_nstep.raw_check')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_raw.py:14: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime_trace.regular_nstep.raw_check'
+import_ = <function _gcd_import at 0x76168f54c0e0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'runtime_trace.regular_nstep.raw_check'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+attack = 'arithmetic'
+
+    @pytest.mark.parametrize('attack', ['missing', 'duplicate', 'reorder', 'cross-process', 'arithmetic', 'false-N', 'gradient'])
+    def test_repaired_semantic_raw_attacks_refused(attack):
+        capture = json.loads((CAPTURE / 'capture.json').read_bytes())
+        rows = [json.loads(line) for line in (CAPTURE / 'trace.jsonl').read_bytes().splitlines()]
+        if attack == 'missing':
+            del rows[500]
+        elif attack == 'duplicate':
+            rows.insert(500, copy.deepcopy(rows[500]))
+        elif attack == 'reorder':
+            rows[500], rows[501] = rows[501], rows[500]
+        elif attack == 'cross-process':
+            rows[500]['pid'] += 1
+        elif attack == 'arithmetic':
+            row = next(r for r in rows if r.get('kind') == 'MUL')
+            row['result_bits'] = '0x3ff0000000000000'
+        elif attack == 'false-N':
+            capture['requested_steps'] = 100
+        else:
+            capture['regions'][2]['start_state']['gradient'][0] = '0x3ff0000000000000'
+        # No hashes are used by this semantic entry point. The attack cannot rely
+        # on a stale hash to be rejected; all outer digests can be repaired.
+        with pytest.raises(ValueError):
+>           api().validate_semantics(capture, rows, ROOT)
+            ^^^^^
+
+tests/test_regular_nstep_raw.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def api():
+        try:
+            return importlib.import_module('runtime_trace.regular_nstep.raw_check')
+        except ModuleNotFoundError:
+>           pytest.fail('independent generic raw checker is absent')
+E           Failed: independent generic raw checker is absent
+
+tests/test_regular_nstep_raw.py:16: Failed
+_____________ test_repaired_semantic_raw_attacks_refused[false-N] ______________
+
+    def api():
+        try:
+>           return importlib.import_module('runtime_trace.regular_nstep.raw_check')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_raw.py:14: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime_trace.regular_nstep.raw_check'
+import_ = <function _gcd_import at 0x76168f54c0e0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'runtime_trace.regular_nstep.raw_check'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+attack = 'false-N'
+
+    @pytest.mark.parametrize('attack', ['missing', 'duplicate', 'reorder', 'cross-process', 'arithmetic', 'false-N', 'gradient'])
+    def test_repaired_semantic_raw_attacks_refused(attack):
+        capture = json.loads((CAPTURE / 'capture.json').read_bytes())
+        rows = [json.loads(line) for line in (CAPTURE / 'trace.jsonl').read_bytes().splitlines()]
+        if attack == 'missing':
+            del rows[500]
+        elif attack == 'duplicate':
+            rows.insert(500, copy.deepcopy(rows[500]))
+        elif attack == 'reorder':
+            rows[500], rows[501] = rows[501], rows[500]
+        elif attack == 'cross-process':
+            rows[500]['pid'] += 1
+        elif attack == 'arithmetic':
+            row = next(r for r in rows if r.get('kind') == 'MUL')
+            row['result_bits'] = '0x3ff0000000000000'
+        elif attack == 'false-N':
+            capture['requested_steps'] = 100
+        else:
+            capture['regions'][2]['start_state']['gradient'][0] = '0x3ff0000000000000'
+        # No hashes are used by this semantic entry point. The attack cannot rely
+        # on a stale hash to be rejected; all outer digests can be repaired.
+        with pytest.raises(ValueError):
+>           api().validate_semantics(capture, rows, ROOT)
+            ^^^^^
+
+tests/test_regular_nstep_raw.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def api():
+        try:
+            return importlib.import_module('runtime_trace.regular_nstep.raw_check')
+        except ModuleNotFoundError:
+>           pytest.fail('independent generic raw checker is absent')
+E           Failed: independent generic raw checker is absent
+
+tests/test_regular_nstep_raw.py:16: Failed
+_____________ test_repaired_semantic_raw_attacks_refused[gradient] _____________
+
+    def api():
+        try:
+>           return importlib.import_module('runtime_trace.regular_nstep.raw_check')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_raw.py:14: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime_trace.regular_nstep.raw_check'
+import_ = <function _gcd_import at 0x76168f54c0e0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'runtime_trace.regular_nstep.raw_check'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+attack = 'gradient'
+
+    @pytest.mark.parametrize('attack', ['missing', 'duplicate', 'reorder', 'cross-process', 'arithmetic', 'false-N', 'gradient'])
+    def test_repaired_semantic_raw_attacks_refused(attack):
+        capture = json.loads((CAPTURE / 'capture.json').read_bytes())
+        rows = [json.loads(line) for line in (CAPTURE / 'trace.jsonl').read_bytes().splitlines()]
+        if attack == 'missing':
+            del rows[500]
+        elif attack == 'duplicate':
+            rows.insert(500, copy.deepcopy(rows[500]))
+        elif attack == 'reorder':
+            rows[500], rows[501] = rows[501], rows[500]
+        elif attack == 'cross-process':
+            rows[500]['pid'] += 1
+        elif attack == 'arithmetic':
+            row = next(r for r in rows if r.get('kind') == 'MUL')
+            row['result_bits'] = '0x3ff0000000000000'
+        elif attack == 'false-N':
+            capture['requested_steps'] = 100
+        else:
+            capture['regions'][2]['start_state']['gradient'][0] = '0x3ff0000000000000'
+        # No hashes are used by this semantic entry point. The attack cannot rely
+        # on a stale hash to be rejected; all outer digests can be repaired.
+        with pytest.raises(ValueError):
+>           api().validate_semantics(capture, rows, ROOT)
+            ^^^^^
+
+tests/test_regular_nstep_raw.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def api():
+        try:
+            return importlib.import_module('runtime_trace.regular_nstep.raw_check')
+        except ModuleNotFoundError:
+>           pytest.fail('independent generic raw checker is absent')
+E           Failed: independent generic raw checker is absent
+
+tests/test_regular_nstep_raw.py:16: Failed
+=========================== short test summary info ============================
+FAILED tests/test_regular_nstep_raw.py::test_actual_10step_complete_native_frontier
+FAILED tests/test_regular_nstep_raw.py::test_repaired_semantic_raw_attacks_refused[missing]
+FAILED tests/test_regular_nstep_raw.py::test_repaired_semantic_raw_attacks_refused[duplicate]
+FAILED tests/test_regular_nstep_raw.py::test_repaired_semantic_raw_attacks_refused[reorder]
+FAILED tests/test_regular_nstep_raw.py::test_repaired_semantic_raw_attacks_refused[cross-process]
+FAILED tests/test_regular_nstep_raw.py::test_repaired_semantic_raw_attacks_refused[arithmetic]
+FAILED tests/test_regular_nstep_raw.py::test_repaired_semantic_raw_attacks_refused[false-N]
+FAILED tests/test_regular_nstep_raw.py::test_repaired_semantic_raw_attacks_refused[gradient]
+8 failed in 5.93s

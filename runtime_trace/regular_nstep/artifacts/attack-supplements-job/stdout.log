@@ -1,0 +1,6 @@
+{"attack": "wrong-result-full-rebind", "outer_hashes_repaired": true, "derived_dynamic_identity_rebound": true, "targeted_gate_confirmed": true, "category": "SEMANTIC", "wall_seconds": 13.439666547999998, "report": {"schema": "regular-nstep-checker-report-v1", "verdict": "REFUSED", "requested_complete": false, "checked_steps": 1, "requested_steps": 10, "captured_steps": 10, "last_verified_native_trace_seq": 9921, "last_verified_v2_trace_seq": 445, "failure_stage": "SEMANTIC", "reason": "scalar result rounding / operand mutation"}}
+Traceback (most recent call last):
+  File "/mnt/c/Users/zun24/.codex/worktrees/runtime-nstep/numerical-audit-lab-recovered-2026-10-01/current/runtime-nstep-workflow-2026-10-05/attack_supplements.py", line 66, in <module>
+    assert report['reason'] == expected_reason, (name, report)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('wrong-source-operand-full-rebind', {'schema': 'regular-nstep-checker-report-v1', 'verdict': 'REFUSED', 'requested_complete': False, 'checked_steps': 1, 'requested_steps': 10, 'captured_steps': 10, 'last_verified_native_trace_seq': 9921, 'last_verified_v2_trace_seq': 445, 'failure_stage': 'SEMANTIC', 'reason': 'memory/register def-use bits'})

@@ -1,0 +1,34 @@
+F.......                                                                 [100%]
+=================================== FAILURES ===================================
+_________________ test_actual_10step_complete_native_frontier __________________
+
+    def test_actual_10step_complete_native_frontier():
+>       capture, rows, report = api().validate(CAPTURE, ROOT)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_raw.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/regular_nstep/raw_check.py:285: in validate
+    report = validate_semantics(capture, rows, root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/regular_nstep/raw_check.py:249: in validate_semantics
+    joins.append(_caller_join(regions[k], regions[k + 1], corridor, subset,
+runtime_trace/regular_nstep/raw_check.py:101: in _caller_join
+    local, writes = _caller_semantics(rows, decoded, modules, allowed)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/regular_nstep/raw_check.py:91: in _caller_semantics
+    require((row['module_sha256'], row['elf_address'], row['instruction_bytes']) in allowed,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ok = False
+reason = 'caller helper/site outside reviewed finite opcode corridor'
+
+    def require(ok, reason):
+        if not ok:
+>           raise ValueError(reason)
+E           ValueError: caller helper/site outside reviewed finite opcode corridor
+
+runtime_trace/regular_nstep/raw_check.py:17: ValueError
+=========================== short test summary info ============================
+FAILED tests/test_regular_nstep_raw.py::test_actual_10step_complete_native_frontier
+1 failed, 7 passed in 14.86s

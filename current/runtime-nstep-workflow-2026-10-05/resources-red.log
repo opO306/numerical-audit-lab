@@ -1,0 +1,11 @@
+Running as unit: nstep-resource-red.service; invocation ID: 138c90cc0ec34231a96d942c5c885fe1
+ERROR: file or directory not found: tests/test_regular_nstep_resources.py
+
+
+no tests ran in 0.00s
+Finished with result: exit-code
+Main processes terminated with: code=exited/status=4
+Service runtime: 307ms
+CPU time consumed: 265ms
+Memory peak: 512.0K
+Memory swap peak: 0B

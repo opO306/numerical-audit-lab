@@ -1,0 +1,1 @@
+{"candidate_id":"487a4a142906673cbed632b76bb6b11bb6085ead6b773e599d765a76c2cba57e","driver_seconds":37.07822676500007,"generation":0,"reason":"gate refused: candidate bytes differ from checked terminal output","runtime_seconds":0.35371756899996853,"state_id":"b1c432ad0f19daeb6c562baabd857a7951b8c4ca24f51c068794a4dabc44ca23","transaction_id":"mutated","verdict":"STOP"}

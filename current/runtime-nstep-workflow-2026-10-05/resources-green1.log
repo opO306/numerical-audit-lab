@@ -1,0 +1,115 @@
+Running as unit: nstep-resource-green1.service; invocation ID: 9a2dbfb9cabd49f78d641f64c6bd0a87
+....F..                                                                  [100%]
+=================================== FAILURES ===================================
+____ test_guarded_subprocess_checks_memory_controller_and_records_identity _____
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_guarded_subprocess_checks0')
+
+    def test_guarded_subprocess_checks_memory_controller_and_records_identity(tmp_path):
+        a = api()
+>       receipt = a.run_guarded([sys.executable, '-c', 'print(17)'],
+            a.Limits(job_seconds=10), tmp_path / 'run', tmp_path / 'ledger.json')
+
+tests/test_regular_nstep_resources.py:50: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+command = ['/home/otherside123/venvs/gate2c1-trace/bin/python', '-c', 'print(17)']
+limits = Limits(total_seconds=3600, job_seconds=10, memory_bytes=4294967296, storage_bytes=8589934592)
+out = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_guarded_subprocess_checks0/run')
+ledger = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_guarded_subprocess_checks0/ledger.json')
+cwd = None, env = None
+
+    def run_guarded(command, limits, out, ledger, *, cwd=None, env=None):
+        """One job at a time. Cumulative wall time includes the complete unit wait."""
+        if platform.system() != 'Linux':
+            raise ResourceRefused('Linux cgroup guard required')
+        out, ledger = Path(out).resolve(), Path(ledger).resolve()
+        prior = _strict_load(ledger) if ledger.exists() else {'used_seconds': 0., 'jobs': []}
+        used = prior.get('used_seconds')
+        if type(used) not in (int, float) or isinstance(used, bool) or not 0 <= used <= limits.total_seconds:
+            raise ResourceRefused('invalid cumulative ledger')
+        allowance = min(limits.job_seconds, int(limits.total_seconds - used))
+        if allowance < 1:
+            raise ResourceRefused('cumulative execution allowance exhausted')
+        if out.exists():
+            raise FileExistsError(out)
+        budget = EvidenceBudget(ledger.parent, limits.storage_bytes)
+        # Reserve receipts before the job. Capture/derived writers have their own
+        # bounded reservations; a subsequent invocation reconciles actual files.
+        budget.reserve(16384)
+        out.mkdir(parents=True, exist_ok=False)
+        unit = 'nstep-' + uuid.uuid4().hex
+        child_report = out / 'child_measurement.json'
+        working = str(Path(cwd or os.getcwd()).resolve())
+        launch = ['systemd-run', '--user', '--wait', '--pipe', '--unit=' + unit,
+            '--working-directory=' + working, '--property=MemoryAccounting=yes',
+            '--property=MemoryMax=' + str(limits.memory_bytes), '--property=MemorySwapMax=0',
+            '--property=RuntimeMaxSec=' + str(allowance), '--property=OOMPolicy=kill',
+            '--property=KillMode=control-group', sys.executable, '-m',
+            'runtime_trace.regular_nstep.resources', '--child-report', str(child_report),
+            '--memory', str(limits.memory_bytes), '--file-limit', str(limits.storage_bytes), '--', *command]
+        # Transient services do not inherit caller environment. Pass only explicit
+        # overrides and numerical/thread settings, never unrelated secrets.
+        environment = {'PYTEST_DISABLE_PLUGIN_AUTOLOAD': '1', 'OMP_NUM_THREADS': '1',
+                       'OPENBLAS_NUM_THREADS': '1', **(env or {})}
+        for key, value in environment.items():
+            if not key.replace('_', '').isalnum() or '\x00' in str(value):
+                raise ValueError('invalid job environment')
+            launch.insert(2, '--setenv=' + key + '=' + str(value))
+        started = time.monotonic()
+        process = subprocess.Popen(launch, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        selector = selectors.DefaultSelector()
+        selector.register(process.stdout, selectors.EVENT_READ)
+        resource_failure = None
+        with (out / 'stdout.log').open('xb') as log:
+            while selector.get_map():
+                if time.monotonic() - started > allowance + 5:
+                    resource_failure = 'wall watchdog'
+                    subprocess.run(['systemctl', '--user', 'kill', '--kill-whom=all', unit],
+                                   capture_output=True, timeout=5)
+                for key, _ in selector.select(.1):
+                    chunk = os.read(key.fd, 65536)
+                    if not chunk:
+                        selector.unregister(key.fileobj)
+                        continue
+                    try:
+                        budget.reserve(len(chunk))
+                        log.write(chunk)
+                    except ResourceRefused:
+                        resource_failure = 'log/evidence storage ceiling'
+                        subprocess.run(['systemctl', '--user', 'kill', '--kill-whom=all', unit],
+                                       capture_output=True, timeout=5)
+        selector.close()
+        code = process.wait(timeout=5)
+        elapsed = time.monotonic() - started
+        props = _show(unit)
+        child = _strict_load(child_report) if child_report.exists() else {}
+        enforced = child.get('memory_max') == limits.memory_bytes and child.get('memory_swap_max') == 0
+        if not enforced:
+            resource_failure = resource_failure or 'child did not verify cgroup limits'
+        if props.get('Result') in ('timeout', 'oom-kill', 'resources'):
+            resource_failure = resource_failure or props['Result']
+        receipt = {'schema': 'nstep-guarded-execution-v1', 'host': platform.node(),
+            'platform': platform.platform(), 'python': platform.python_version(),
+            'command': list(command), 'cwd': working, 'unit': unit, 'return_code': code,
+            'wall_seconds': elapsed, 'memory_limit': limits.memory_bytes,
+            'enforced_memory_bytes': child.get('memory_max'),
+            'enforced_swap_bytes': child.get('memory_swap_max'),
+>           'peak_tree_memory_bytes': int(props.get('MemoryPeak', '0')),
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            'sampled_tree_rss_peak_bytes': child.get('sampled_tree_rss_peak_bytes'),
+            'rss_sample_interval_seconds': .02, 'systemd': props,
+            'requested_complete': False, 'resource_failure': resource_failure,
+            'verdict': 'REFUSED_RESOURCE' if resource_failure else ('EXECUTED' if code == 0 else 'FAILED')}
+E       ValueError: invalid literal for int() with base 10: '[not set]'
+
+runtime_trace/regular_nstep/resources.py:158: ValueError
+=========================== short test summary info ============================
+FAILED tests/test_regular_nstep_resources.py::test_guarded_subprocess_checks_memory_controller_and_records_identity
+1 failed, 6 passed in 1.85s
+Finished with result: exit-code
+Main processes terminated with: code=exited/status=1
+Service runtime: 2.151s
+CPU time consumed: 371ms
+Memory peak: 256.0K
+Memory swap peak: 0B

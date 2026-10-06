@@ -1,0 +1,97 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+____ test_record_redundancy_and_owner_contract_refuses[false-write-changed] ____
+
+attack = 'false-write-changed'
+
+    @pytest.mark.parametrize('attack', ['false-write-changed', 'inconsistent-bit-repr', 'wrong-owner'])
+    def test_record_redundancy_and_owner_contract_refuses(attack):
+        capture = json.loads((CAPTURE / 'capture.json').read_bytes())
+        rows = [json.loads(line) for line in (CAPTURE / 'trace.jsonl').read_bytes().splitlines()]
+        if attack == 'wrong-owner':
+            owner = [capture['process_identity']['pid'] + 1, 99, 0]
+            for row in rows:
+                row['ptid'] = owner
+                if 'thread_ptid' in row:
+                    row['thread_ptid'] = owner
+            for region in capture['regions']:
+                region['ptid'] = owner
+            for corridor in capture['caller_corridors']:
+                corridor['owner_ptid'] = owner
+        else:
+            write = next(w for row in rows if row['occurrence'] == 'init'
+                         for w in row['possible_memory_writes'] if w['before_hex'] != w['after_hex'])
+            if attack == 'false-write-changed':
+                write['value_changed'] = False
+            else:
+                value = int.from_bytes(bytes.fromhex(write['before_hex']), 'little') ^ 1
+                write['before_bits'] = f"0x{value:0{write['size'] * 2}x}"
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_regular_nstep_raw.py:58: Failed
+___ test_record_redundancy_and_owner_contract_refuses[inconsistent-bit-repr] ___
+
+attack = 'inconsistent-bit-repr'
+
+    @pytest.mark.parametrize('attack', ['false-write-changed', 'inconsistent-bit-repr', 'wrong-owner'])
+    def test_record_redundancy_and_owner_contract_refuses(attack):
+        capture = json.loads((CAPTURE / 'capture.json').read_bytes())
+        rows = [json.loads(line) for line in (CAPTURE / 'trace.jsonl').read_bytes().splitlines()]
+        if attack == 'wrong-owner':
+            owner = [capture['process_identity']['pid'] + 1, 99, 0]
+            for row in rows:
+                row['ptid'] = owner
+                if 'thread_ptid' in row:
+                    row['thread_ptid'] = owner
+            for region in capture['regions']:
+                region['ptid'] = owner
+            for corridor in capture['caller_corridors']:
+                corridor['owner_ptid'] = owner
+        else:
+            write = next(w for row in rows if row['occurrence'] == 'init'
+                         for w in row['possible_memory_writes'] if w['before_hex'] != w['after_hex'])
+            if attack == 'false-write-changed':
+                write['value_changed'] = False
+            else:
+                value = int.from_bytes(bytes.fromhex(write['before_hex']), 'little') ^ 1
+                write['before_bits'] = f"0x{value:0{write['size'] * 2}x}"
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_regular_nstep_raw.py:58: Failed
+________ test_record_redundancy_and_owner_contract_refuses[wrong-owner] ________
+
+attack = 'wrong-owner'
+
+    @pytest.mark.parametrize('attack', ['false-write-changed', 'inconsistent-bit-repr', 'wrong-owner'])
+    def test_record_redundancy_and_owner_contract_refuses(attack):
+        capture = json.loads((CAPTURE / 'capture.json').read_bytes())
+        rows = [json.loads(line) for line in (CAPTURE / 'trace.jsonl').read_bytes().splitlines()]
+        if attack == 'wrong-owner':
+            owner = [capture['process_identity']['pid'] + 1, 99, 0]
+            for row in rows:
+                row['ptid'] = owner
+                if 'thread_ptid' in row:
+                    row['thread_ptid'] = owner
+            for region in capture['regions']:
+                region['ptid'] = owner
+            for corridor in capture['caller_corridors']:
+                corridor['owner_ptid'] = owner
+        else:
+            write = next(w for row in rows if row['occurrence'] == 'init'
+                         for w in row['possible_memory_writes'] if w['before_hex'] != w['after_hex'])
+            if attack == 'false-write-changed':
+                write['value_changed'] = False
+            else:
+                value = int.from_bytes(bytes.fromhex(write['before_hex']), 'little') ^ 1
+                write['before_bits'] = f"0x{value:0{write['size'] * 2}x}"
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_regular_nstep_raw.py:58: Failed
+=========================== short test summary info ============================
+FAILED tests/test_regular_nstep_raw.py::test_record_redundancy_and_owner_contract_refuses[false-write-changed]
+FAILED tests/test_regular_nstep_raw.py::test_record_redundancy_and_owner_contract_refuses[inconsistent-bit-repr]
+FAILED tests/test_regular_nstep_raw.py::test_record_redundancy_and_owner_contract_refuses[wrong-owner]
+3 failed, 12 deselected in 11.40s

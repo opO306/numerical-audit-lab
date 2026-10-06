@@ -1,0 +1,19 @@
+{
+  "bootstrap_extra_wall_seconds": 51.35213790000034,
+  "job_count": 72,
+  "linux_finished_before_merge": true,
+  "newly_added": [
+    {
+      "host": "\uc73c\uc545",
+      "path": "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\laptop-transfer\\delivery-seal-job.json",
+      "receipt_path": "runtime_trace/regular_nstep/artifacts/laptop-transfer/delivery-seal-job.json",
+      "return_code": 0,
+      "verdict": "EXECUTED",
+      "wall_seconds": 1.357213099996443
+    }
+  ],
+  "schema": "cross-host-serial-ledger-reconciliation-v1",
+  "separate_windows_receipt_count": 18,
+  "total_charged_wall_seconds": 2521.5202657650216,
+  "windows_guard_wall_seconds": 55.50019390002126
+}

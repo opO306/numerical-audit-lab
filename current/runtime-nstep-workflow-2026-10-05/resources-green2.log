@@ -1,0 +1,38 @@
+Running as unit: nstep-resource-green2.service; invocation ID: 2289a2a3c8e2432499b4b15ac3d38e60
+....F..                                                                  [100%]
+=================================== FAILURES ===================================
+____ test_guarded_subprocess_checks_memory_controller_and_records_identity _____
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_guarded_subprocess_checks0')
+
+    def test_guarded_subprocess_checks_memory_controller_and_records_identity(tmp_path):
+        a = api()
+        receipt = a.run_guarded([sys.executable, '-c', 'print(17)'],
+            a.Limits(job_seconds=10), tmp_path / 'run', tmp_path / 'ledger.json')
+        assert receipt['return_code'] == 0
+        assert receipt['enforced_memory_bytes'] == 4294967296
+        assert receipt['enforced_swap_bytes'] == 0
+        assert receipt['host']
+        assert receipt['peak_tree_memory_bytes'] > 0
+>       assert (tmp_path / 'run' / 'stdout.log').read_text().strip() == '17'
+E       AssertionError: assert 'Running as u...swap peak: 0B' == '17'
+E         
+E         + Running as unit: nstep-6f2567eb90ba4cceb53fb3484f922cc8.service; invocation ID: dcdbbf35086042b4a52b5a680dee34f1
+E         - 17
+E         + 17
+E         ?   +
+E         + Finished with result: success
+E         + Main processes terminated with: code=exited/status=0...
+E         
+E         ...Full output truncated (4 lines hidden), use '-vv' to show
+
+tests/test_regular_nstep_resources.py:57: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_regular_nstep_resources.py::test_guarded_subprocess_checks_memory_controller_and_records_identity
+1 failed, 6 passed in 2.02s
+Finished with result: exit-code
+Main processes terminated with: code=exited/status=1
+Service runtime: 2.455s
+CPU time consumed: 485ms
+Memory peak: 512.0K
+Memory swap peak: 0B

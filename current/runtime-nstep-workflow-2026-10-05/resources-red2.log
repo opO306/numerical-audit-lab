@@ -1,0 +1,389 @@
+Running as unit: nstep-resource-red2.service; invocation ID: f70c0f24b2cf4f3c81bea9452e80054b
+FFFFFFF                                                                  [100%]
+=================================== FAILURES ===================================
+________________________ test_boolean_budget_is_refused ________________________
+
+    def api():
+        try:
+>           return importlib.import_module('runtime_trace.regular_nstep.resources')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_resources.py:10: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime_trace.regular_nstep'
+import_ = <function _gcd_import at 0x710c9571c0e0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'runtime_trace.regular_nstep'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_boolean_budget_is_refused():
+        with pytest.raises(ValueError):
+>           api().Limits(total_seconds=True)
+            ^^^^^
+
+tests/test_regular_nstep_resources.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def api():
+        try:
+            return importlib.import_module('runtime_trace.regular_nstep.resources')
+        except ModuleNotFoundError:
+>           pytest.fail('new guarded execution API is absent')
+E           Failed: new guarded execution API is absent
+
+tests/test_regular_nstep_resources.py:12: Failed
+__________________ test_invalid_and_increased_limits_refused ___________________
+
+    def api():
+        try:
+>           return importlib.import_module('runtime_trace.regular_nstep.resources')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_resources.py:10: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime_trace.regular_nstep'
+import_ = <function _gcd_import at 0x710c9571c0e0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'runtime_trace.regular_nstep'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_invalid_and_increased_limits_refused():
+        for kw in ({'total_seconds': 0}, {'job_seconds': 601},
+                   {'memory_bytes': 4294967297}, {'storage_bytes': 8589934593}):
+            with pytest.raises(ValueError):
+>               api().Limits(**kw)
+                ^^^^^
+
+tests/test_regular_nstep_resources.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def api():
+        try:
+            return importlib.import_module('runtime_trace.regular_nstep.resources')
+        except ModuleNotFoundError:
+>           pytest.fail('new guarded execution API is absent')
+E           Failed: new guarded execution API is absent
+
+tests/test_regular_nstep_resources.py:12: Failed
+___________ test_storage_reserves_before_write_and_preserves_failure ___________
+
+    def api():
+        try:
+>           return importlib.import_module('runtime_trace.regular_nstep.resources')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_resources.py:10: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime_trace.regular_nstep'
+import_ = <function _gcd_import at 0x710c9571c0e0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'runtime_trace.regular_nstep'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_storage_reserves_before_w0')
+
+    def test_storage_reserves_before_write_and_preserves_failure(tmp_path):
+>       a = api()
+            ^^^^^
+
+tests/test_regular_nstep_resources.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def api():
+        try:
+            return importlib.import_module('runtime_trace.regular_nstep.resources')
+        except ModuleNotFoundError:
+>           pytest.fail('new guarded execution API is absent')
+E           Failed: new guarded execution API is absent
+
+tests/test_regular_nstep_resources.py:12: Failed
+_________________ test_exclusive_and_traversal_writes_refused __________________
+
+    def api():
+        try:
+>           return importlib.import_module('runtime_trace.regular_nstep.resources')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_resources.py:10: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime_trace.regular_nstep'
+import_ = <function _gcd_import at 0x710c9571c0e0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'runtime_trace.regular_nstep'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_exclusive_and_traversal_w0')
+
+    def test_exclusive_and_traversal_writes_refused(tmp_path):
+>       a = api()
+            ^^^^^
+
+tests/test_regular_nstep_resources.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def api():
+        try:
+            return importlib.import_module('runtime_trace.regular_nstep.resources')
+        except ModuleNotFoundError:
+>           pytest.fail('new guarded execution API is absent')
+E           Failed: new guarded execution API is absent
+
+tests/test_regular_nstep_resources.py:12: Failed
+____ test_guarded_subprocess_checks_memory_controller_and_records_identity _____
+
+    def api():
+        try:
+>           return importlib.import_module('runtime_trace.regular_nstep.resources')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_resources.py:10: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime_trace.regular_nstep'
+import_ = <function _gcd_import at 0x710c9571c0e0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'runtime_trace.regular_nstep'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_guarded_subprocess_checks0')
+
+    def test_guarded_subprocess_checks_memory_controller_and_records_identity(tmp_path):
+>       a = api()
+            ^^^^^
+
+tests/test_regular_nstep_resources.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def api():
+        try:
+            return importlib.import_module('runtime_trace.regular_nstep.resources')
+        except ModuleNotFoundError:
+>           pytest.fail('new guarded execution API is absent')
+E           Failed: new guarded execution API is absent
+
+tests/test_regular_nstep_resources.py:12: Failed
+_______ test_timeout_kills_entire_guarded_job_and_cannot_report_success ________
+
+    def api():
+        try:
+>           return importlib.import_module('runtime_trace.regular_nstep.resources')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_resources.py:10: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime_trace.regular_nstep'
+import_ = <function _gcd_import at 0x710c9571c0e0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'runtime_trace.regular_nstep'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_timeout_kills_entire_guar0')
+
+    def test_timeout_kills_entire_guarded_job_and_cannot_report_success(tmp_path):
+>       a = api()
+            ^^^^^
+
+tests/test_regular_nstep_resources.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def api():
+        try:
+            return importlib.import_module('runtime_trace.regular_nstep.resources')
+        except ModuleNotFoundError:
+>           pytest.fail('new guarded execution API is absent')
+E           Failed: new guarded execution API is absent
+
+tests/test_regular_nstep_resources.py:12: Failed
+_______________ test_cumulative_budget_refuses_before_child_exec _______________
+
+    def api():
+        try:
+>           return importlib.import_module('runtime_trace.regular_nstep.resources')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_resources.py:10: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime_trace.regular_nstep'
+import_ = <function _gcd_import at 0x710c9571c0e0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'runtime_trace.regular_nstep'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-otherside123/pytest-0/test_cumulative_budget_refuses0')
+
+    def test_cumulative_budget_refuses_before_child_exec(tmp_path):
+>       a = api()
+            ^^^^^
+
+tests/test_regular_nstep_resources.py:70: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def api():
+        try:
+            return importlib.import_module('runtime_trace.regular_nstep.resources')
+        except ModuleNotFoundError:
+>           pytest.fail('new guarded execution API is absent')
+E           Failed: new guarded execution API is absent
+
+tests/test_regular_nstep_resources.py:12: Failed
+=========================== short test summary info ============================
+FAILED tests/test_regular_nstep_resources.py::test_boolean_budget_is_refused
+FAILED tests/test_regular_nstep_resources.py::test_invalid_and_increased_limits_refused
+FAILED tests/test_regular_nstep_resources.py::test_storage_reserves_before_write_and_preserves_failure
+FAILED tests/test_regular_nstep_resources.py::test_exclusive_and_traversal_writes_refused
+FAILED tests/test_regular_nstep_resources.py::test_guarded_subprocess_checks_memory_controller_and_records_identity
+FAILED tests/test_regular_nstep_resources.py::test_timeout_kills_entire_guarded_job_and_cannot_report_success
+FAILED tests/test_regular_nstep_resources.py::test_cumulative_budget_refuses_before_child_exec
+7 failed in 0.79s
+Finished with result: exit-code
+Main processes terminated with: code=exited/status=1
+Service runtime: 1.092s
+CPU time consumed: 401ms
+Memory peak: 256.0K
+Memory swap peak: 0B

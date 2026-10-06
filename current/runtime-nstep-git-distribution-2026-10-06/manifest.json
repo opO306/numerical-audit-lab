@@ -1,0 +1,32 @@
+{
+  "build_and_roundtrip_seconds": 5.036831000004895,
+  "encoding": "gzip level1, mtime0, exact original trace bytes",
+  "files": [
+    {
+      "acquisition_id": "186876da0784e2a029ab9ab85dcb95fed86572bb9b0d447f206c8a8164d30fa6",
+      "gzip_bytes": 26071371,
+      "gzip_file": "connected100-01.trace.jsonl.gz",
+      "gzip_sha256": "de94b3f4550d300ec47cb502ff4cf63f55ddf2aba50ae0674f307612a7c5ff4b",
+      "original_bytes": 353950758,
+      "original_git_blob": "f59120e230ededa4e8e2363fe699369d4c412a19",
+      "original_path": "runtime_trace/regular_nstep/artifacts/connected100-01/capture/trace.jsonl",
+      "original_sha256": "5a4849904546a915699db8ca93ca6c644bdd9bbb65f324cf017c118a012ad54a",
+      "roundtrip_exact_bytes": true
+    },
+    {
+      "acquisition_id": "5561ca5c3790b17b45f0a4e00a0375e8cc0cf763a1ead0f96bf33be092f515c1",
+      "gzip_bytes": 26053533,
+      "gzip_file": "connected100-final.trace.jsonl.gz",
+      "gzip_sha256": "f60658900622b04f8c784f218b7a382ff842383e26704d928b43390910bf3f61",
+      "original_bytes": 353950758,
+      "original_git_blob": "10fba558d93c5dec6ae3d598c0f3d08cef97210a",
+      "original_path": "runtime_trace/regular_nstep/artifacts/connected100-final/capture/trace.jsonl",
+      "original_sha256": "fe8fe7ff3a63c280829c6905264bb792fef98f83badfbc300a3f7ca26b7f34c0",
+      "roundtrip_exact_bytes": true
+    }
+  ],
+  "historical_source_commit": "f686e6ca17d2c8dee5d7b5beb2af0477d306b41b",
+  "numerical_execution": "NOT RERUN",
+  "paid_resources": false,
+  "schema": "RUNTIME_TRACE_GIT_GZIP_DISTRIBUTION_V1"
+}

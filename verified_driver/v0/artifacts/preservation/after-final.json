@@ -1,0 +1,10 @@
+{
+  "baseline_sha256": "dd931f0646201f2657e82f3986445078e311eaa7956a6c4032aca75a51af7fff",
+  "changed_or_missing": [],
+  "checked_files": 6892,
+  "mutable_exclusions": [
+    "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\budget.json",
+    "C:\\Users\\zun24\\.codex\\worktrees\\runtime-nstep\\numerical-audit-lab-recovered-2026-10-01\\runtime_trace\\regular_nstep\\artifacts\\budget.running.json"
+  ],
+  "schema": "driver-v0-protected-preservation-v1"
+}

@@ -1,0 +1,19 @@
+F........................                                                [100%]
+=================================== FAILURES ===================================
+___________ test_passing_saved_control_binds_exact_checked_four_bits ___________
+
+tmp_path = PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-task3-green/test_passing_saved_control_bin0')
+
+    def test_passing_saved_control_binds_exact_checked_four_bits(tmp_path):
+        pred,out,c=fixture(tmp_path)
+        decision=evaluate_candidate(c,pred,ROOT)
+>       assert decision.verdict=='ACCEPT' and c.state_bits==BITS
+E       AssertionError: assert ('REFUSE' == 'ACCEPT'
+E         
+E         - ACCEPT
+E         + REFUSE)
+
+tests/test_verified_driver_v0_gate.py:15: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_verified_driver_v0_gate.py::test_passing_saved_control_binds_exact_checked_four_bits
+1 failed, 24 passed in 16.23s

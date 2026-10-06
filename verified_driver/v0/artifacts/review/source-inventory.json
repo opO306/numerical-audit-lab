@@ -1,0 +1,83 @@
+{
+  "head": "79a655f0848152aa765e1537b741518b2fa97acf",
+  "new_driver_review_files": {
+    "current/VERIFIED_DRIVER_V0_2026-10-05.md": {
+      "bytes": 12934,
+      "lines": 84,
+      "sha256": "e94626c8839f22a47f2de631d1d708a611bbbd16151b8528a6d02e8a43d1bded"
+    },
+    "tests/test_verified_driver_v0_admission.py": {
+      "bytes": 3680,
+      "lines": 63,
+      "sha256": "4f23b7274c420ed3b72b788b3f605dff77327fd8b658c06c8e6e18fce08060ba"
+    },
+    "tests/test_verified_driver_v0_attacks.py": {
+      "bytes": 10201,
+      "lines": 174,
+      "sha256": "7641557280b79cc896beee6a6cce245d14cc32eb8f3fc3e6a1ae079c39aa7081"
+    },
+    "tests/test_verified_driver_v0_driver.py": {
+      "bytes": 4551,
+      "lines": 85,
+      "sha256": "a805a6911f90c8a967d3142afbdb1dd12be37ad997e7927d05fae0c950faf1b0"
+    },
+    "tests/test_verified_driver_v0_gate.py": {
+      "bytes": 3479,
+      "lines": 67,
+      "sha256": "ee8a777f2f3f42d7eb56b58922957fc1bcb7e29856d487ef9c306f467d287d5a"
+    },
+    "tests/test_verified_driver_v0_model.py": {
+      "bytes": 1682,
+      "lines": 33,
+      "sha256": "d8819349e055bdd7d7dd0f0340672689fd8bcd6c5571a74bfe0c79f4f5844e9e"
+    },
+    "tests/test_verified_driver_v0_store.py": {
+      "bytes": 4022,
+      "lines": 72,
+      "sha256": "10ad91215911e9a6c9af1674fba1e06a7cd353d40f6cf4d7f49b855c281538a0"
+    },
+    "tests/verified_driver_v0_support.py": {
+      "bytes": 4163,
+      "lines": 77,
+      "sha256": "64287e7ca0cea65ee2171aff48ef543e9e7d3ffbc6e212500cc64c2425c47767"
+    },
+    "verified_driver/__init__.py": {
+      "bytes": 81,
+      "lines": 1,
+      "sha256": "2c1362913928b2783d6608ce47ac6ce6e0c2bcd6e588aa7b54f86484582aab40"
+    },
+    "verified_driver/v0/__init__.py": {
+      "bytes": 56,
+      "lines": 1,
+      "sha256": "84b093a322fb69f39601c2ac389570c0603fd44c27ba336774e03f858bebead5"
+    },
+    "verified_driver/v0/driver.py": {
+      "bytes": 13527,
+      "lines": 212,
+      "sha256": "074a28cad55fae504e603a900606b857501ee98b86d3e0eced98e61202fcc4d0"
+    },
+    "verified_driver/v0/fallback.py": {
+      "bytes": 138,
+      "lines": 4,
+      "sha256": "b028c36682248c62cf50fe103bbabc4bea450d8198d63aa89ebe0a91e9918269"
+    },
+    "verified_driver/v0/gate.py": {
+      "bytes": 8516,
+      "lines": 111,
+      "sha256": "166727c202d97738e6aa7c5939d6542f66bdc45944863d7096c04df9402eff41"
+    },
+    "verified_driver/v0/model.py": {
+      "bytes": 4233,
+      "lines": 109,
+      "sha256": "cfd1fb0c1f70a27492687d36b75505cdbab7439e53a48e25cb2499f330bb3b68"
+    },
+    "verified_driver/v0/store.py": {
+      "bytes": 6561,
+      "lines": 132,
+      "sha256": "c2b2be55b688bdd70bd42f5225982fb6d062af6130c054054b17ee523948117c"
+    }
+  },
+  "note": "BASE==HEAD because commit/push forbidden. RT N-step prior uncommitted assets remain prior input, not this Driver diff.",
+  "tracked_diff_bytes": 0,
+  "tracked_status": ""
+}

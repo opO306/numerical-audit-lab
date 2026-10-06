@@ -1,0 +1,61 @@
+.......................FF                                                [100%]
+=================================== FAILURES ===================================
+_____________ test_dangling_current_alias_is_refused_without_reset _____________
+
+tmp_path = PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-task5-red03/test_dangling_current_alias_is0')
+
+    def test_dangling_current_alias_is_refused_without_reset(tmp_path):
+        driver=make_driver(tmp_path); pointer=driver.store.root/'CURRENT'
+        pointer.unlink(); pointer.symlink_to(tmp_path/'unknown-pointer-target')
+>       with pytest.raises(ValueError): make_driver(tmp_path)
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_verified_driver_v0_attacks.py:162: Failed
+______ test_production_evidence_must_remain_in_accounted_driver_namespace ______
+
+tmp_path = PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-task5-red03/test_production_evidence_must_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f8e3aa80590>
+
+    def test_production_evidence_must_remain_in_accounted_driver_namespace(tmp_path,monkeypatch):
+        # A toy ledger is only to exercise path validation; subprocess execution is intercepted.
+        import runtime_trace.regular_nstep.resources as resources
+        d=object.__new__(implementation.VerifiedDriver); d.repo_root=tmp_path/'root'
+        d.ledger=d.repo_root/'runtime_trace/regular_nstep/artifacts/budget.json'
+        dump(d.ledger,{'used_seconds':0,'jobs':[],'TEST_ONLY':True})
+        monkeypatch.setattr(resources,'run_guarded',lambda *a,**k:pytest.fail('unaccounted output reached execution'))
+>       with pytest.raises(ValueError,match='accounted Driver evidence'): d._run_segment(1,tmp_path/'outside')
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v0_attacks.py:172: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v0/driver.py:135: in _run_segment
+    limits=Limits(); sources=source_snapshot(self.repo_root)['runtime']
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+verified_driver/v0/gate.py:27: in source_snapshot
+    for name in ('lab/v2_bound.py','independent_checker/oracle.py'): runtime[name]=file_sha(root/name)
+                                                                                   ^^^^^^^^^^^^^^^^^^^
+verified_driver/v0/gate.py:18: in file_sha
+    with Path(path).open('rb') as stream: return hashlib.file_digest(stream,'sha256').hexdigest()
+         ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-task5-red03/test_production_evidence_must_0/root/lab/v2_bound.py')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-task5-red03/test_production_evidence_must_0/root/lab/v2_bound.py'
+
+/usr/lib/python3.12/pathlib.py:1015: FileNotFoundError
+=========================== short test summary info ============================
+FAILED tests/test_verified_driver_v0_attacks.py::test_dangling_current_alias_is_refused_without_reset
+FAILED tests/test_verified_driver_v0_attacks.py::test_production_evidence_must_remain_in_accounted_driver_namespace
+2 failed, 23 passed in 1.76s

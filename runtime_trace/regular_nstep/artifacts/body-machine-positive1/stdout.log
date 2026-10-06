@@ -1,0 +1,38 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____ test_actual_semantics_positive_separate_from_historical_source_pins ______
+
+    def test_actual_semantics_positive_separate_from_historical_source_pins():
+        capture = json.loads((CAPTURE / 'capture.json').read_bytes())
+        rows = [json.loads(line) for line in (CAPTURE / 'trace.jsonl').read_bytes().splitlines()]
+>       assert api().validate_semantics(capture, rows, ROOT)['checked_steps'] == 10
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_raw.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+runtime_trace/regular_nstep/raw_check.py:314: in validate_semantics
+    _memory(native_rows[:gap], native_decoded)
+runtime_trace/regular_nstep/raw_check.py:105: in _memory
+    expected = machine_check.observations(row, decoded[row['sequence']])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/regular_nstep/machine_check.py:38: in observations
+    result = c._expected_observations({**row, 'sequence': -1}, assembly)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/caller_transition/checker.py:677: in _expected_observations
+    kind, size = "READ_MODIFY_WRITE", _operand_width(base, operands) // 8
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+runtime_trace/caller_transition/checker.py:851: in _operand_width
+    _refuse("UNKNOWN_INSTRUCTION_EFFECT", f"cannot derive operand width: {mnemonic} {operands}")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+code = 'UNKNOWN_INSTRUCTION_EFFECT'
+reason = "cannot derive operand width: data16 ['cs nopw 0x0(%rax,%rax,1)']"
+
+    def _refuse(code: str, reason: str) -> None:
+>       raise CheckerRefused(code, reason)
+E       runtime_trace.caller_transition.checker.CheckerRefused: cannot derive operand width: data16 ['cs nopw 0x0(%rax,%rax,1)']
+
+runtime_trace/caller_transition/checker.py:174: CheckerRefused
+=========================== short test summary info ============================
+FAILED tests/test_regular_nstep_raw.py::test_actual_semantics_positive_separate_from_historical_source_pins
+1 failed, 11 deselected in 2.68s

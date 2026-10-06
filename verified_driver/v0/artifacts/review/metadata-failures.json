@@ -1,0 +1,16 @@
+{
+  "schema": "VERIFIED_DRIVER_V0_DELIVERY_METADATA_FAILURES_V1",
+  "numerical_or_production_changes": false,
+  "failures": [
+    {
+      "tool": "workflow/package.py",
+      "reason": "Windows subprocess default cp949 could not decode UTF-8 Git no-index output containing the Korean final report.",
+      "fix": "Use explicit UTF-8 subprocess decoding; actual Git patch regenerated successfully."
+    },
+    {
+      "tool": "workflow/delivery.py",
+      "reason": "Windows stat follows a retained WSL reparse alias that Windows cannot access (WinError 1920).",
+      "fix": "Use lstat and exclude recorded reparse aliases, matching the preserved logical-regular-file accounting boundary; no alias removed or modified."
+    }
+  ]
+}

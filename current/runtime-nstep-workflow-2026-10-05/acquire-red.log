@@ -1,0 +1,137 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+_______ test_harness_changes_only_parameter_and_metadata_not_calculation _______
+
+    def api():
+        try:
+>           return importlib.import_module('runtime_trace.regular_nstep.acquire')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_acquisition.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime_trace.regular_nstep.acquire'
+import_ = <function _gcd_import at 0x72751d1a40e0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'runtime_trace.regular_nstep.acquire'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_harness_changes_only_parameter_and_metadata_not_calculation():
+>       text, proof = api().harness_source(ROOT)
+                      ^^^^^
+
+tests/test_regular_nstep_acquisition.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def api():
+        try:
+            return importlib.import_module('runtime_trace.regular_nstep.acquire')
+        except ModuleNotFoundError:
+>           pytest.fail('generic actual acquisition API is absent')
+E           Failed: generic actual acquisition API is absent
+
+tests/test_regular_nstep_acquisition.py:11: Failed
+__________ test_collector_guard_adaptation_does_not_change_old_source __________
+
+    def api():
+        try:
+>           return importlib.import_module('runtime_trace.regular_nstep.acquire')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_acquisition.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime_trace.regular_nstep.acquire'
+import_ = <function _gcd_import at 0x72751d1a40e0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'runtime_trace.regular_nstep.acquire'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_collector_guard_adaptation_does_not_change_old_source():
+        old = (ROOT / 'runtime_trace/gdb_capture.py').read_text()
+>       transformed, proof = api().collector_source(old, 'body')
+                             ^^^^^
+
+tests/test_regular_nstep_acquisition.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def api():
+        try:
+            return importlib.import_module('runtime_trace.regular_nstep.acquire')
+        except ModuleNotFoundError:
+>           pytest.fail('generic actual acquisition API is absent')
+E           Failed: generic actual acquisition API is absent
+
+tests/test_regular_nstep_acquisition.py:11: Failed
+__________ test_source_pinset_includes_reused_and_new_capture_inputs ___________
+
+    def api():
+        try:
+>           return importlib.import_module('runtime_trace.regular_nstep.acquire')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_regular_nstep_acquisition.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime_trace.regular_nstep.acquire'
+import_ = <function _gcd_import at 0x72751d1a40e0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'runtime_trace.regular_nstep.acquire'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_source_pinset_includes_reused_and_new_capture_inputs():
+>       pins = api().source_pinset(ROOT)
+               ^^^^^
+
+tests/test_regular_nstep_acquisition.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def api():
+        try:
+            return importlib.import_module('runtime_trace.regular_nstep.acquire')
+        except ModuleNotFoundError:
+>           pytest.fail('generic actual acquisition API is absent')
+E           Failed: generic actual acquisition API is absent
+
+tests/test_regular_nstep_acquisition.py:11: Failed
+=========================== short test summary info ============================
+FAILED tests/test_regular_nstep_acquisition.py::test_harness_changes_only_parameter_and_metadata_not_calculation
+FAILED tests/test_regular_nstep_acquisition.py::test_collector_guard_adaptation_does_not_change_old_source
+FAILED tests/test_regular_nstep_acquisition.py::test_source_pinset_includes_reused_and_new_capture_inputs
+3 failed in 0.74s

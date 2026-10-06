@@ -106,3 +106,14 @@ current/caller-external-audit-2026-10-03/** -text
 runtime_trace/regular_2step/artifacts/** -text
 current/REGULAR_2STEP_RECEIVED_AUDIT_IDENTITY.json -text
 runtime_trace/regular_2step/COST_REPORT.json -text
+
+# N-step and Driver delivery evidence: retain exact hashed bytes on add/checkout.
+runtime_trace/regular_nstep/artifacts/** -text
+verified_driver/v0/artifacts/** -text
+current/runtime-nstep-audit-2026-10-05/** -text
+current/runtime-nstep-delivery-2026-10-05-03/** -text
+current/runtime-nstep-delivery-2026-10-05-final/** -text
+current/runtime-nstep-workflow-2026-10-05/** -text
+current/RUNTIME_NSTEP_INTEGRATED_CANDIDATE_2026-10-05.md -text
+current/VERIFIED_DRIVER_V0_2026-10-05.md -text
+current/runtime-nstep-git-distribution-2026-10-06/** -text

@@ -1,0 +1,48 @@
+.......................FF                                                [100%]
+=================================== FAILURES ===================================
+_____________ test_dangling_current_alias_is_refused_without_reset _____________
+
+tmp_path = PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-task5-red04/test_dangling_current_alias_is0')
+
+    def test_dangling_current_alias_is_refused_without_reset(tmp_path):
+        driver=make_driver(tmp_path); pointer=driver.store.root/'CURRENT'
+        pointer.unlink(); pointer.symlink_to(tmp_path/'unknown-pointer-target')
+>       with pytest.raises(ValueError): make_driver(tmp_path)
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_verified_driver_v0_attacks.py:162: Failed
+______ test_production_evidence_must_remain_in_accounted_driver_namespace ______
+
+tmp_path = PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-task5-red04/test_production_evidence_must_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x79d5d9e84dd0>
+
+    def test_production_evidence_must_remain_in_accounted_driver_namespace(tmp_path,monkeypatch):
+        # A toy ledger is only to exercise path validation; subprocess execution is intercepted.
+        import runtime_trace.regular_nstep.resources as resources
+        d=object.__new__(implementation.VerifiedDriver); d.repo_root=tmp_path/'root'
+        d.ledger=d.repo_root/'runtime_trace/regular_nstep/artifacts/budget.json'
+        dump(d.ledger,{'used_seconds':0,'jobs':[],'TEST_ONLY':True})
+        (tmp_path/'outside').mkdir()
+        monkeypatch.setattr(implementation,'source_snapshot',lambda *a:{'runtime':{}})
+        monkeypatch.setattr(resources,'run_guarded',lambda *a,**k:pytest.fail('unaccounted output reached execution'))
+>       with pytest.raises(ValueError,match='accounted Driver evidence'): d._run_segment(1,tmp_path/'outside')
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_verified_driver_v0_attacks.py:174: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+verified_driver/v0/driver.py:152: in _run_segment
+    receipt=run_guarded(command,limits,out/stage,self.ledger,cwd=self.repo_root,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+a = (['/home/otherside123/venvs/gate2c1-trace/bin/python', '-m', 'runtime_trace.regular_nstep.acquire', '--steps', '1', '-.../v0/artifacts/tmp-task5-red04/test_production_evidence_must_0/root/runtime_trace/regular_nstep/artifacts/budget.json'))
+k = {'cwd': PosixPath('/home/otherside123/verified-driver-v0-test-mirror-2026-10-05/verified_driver/v0/artifacts/tmp-task5-red04/test_production_evidence_must_0/root'), 'artifact_allowance': 1073741824}
+
+>   monkeypatch.setattr(resources,'run_guarded',lambda *a,**k:pytest.fail('unaccounted output reached execution'))
+                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: unaccounted output reached execution
+
+tests/test_verified_driver_v0_attacks.py:173: Failed
+=========================== short test summary info ============================
+FAILED tests/test_verified_driver_v0_attacks.py::test_dangling_current_alias_is_refused_without_reset
+FAILED tests/test_verified_driver_v0_attacks.py::test_production_evidence_must_remain_in_accounted_driver_namespace
+2 failed, 23 passed in 1.59s
