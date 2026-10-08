@@ -19,7 +19,11 @@ def check_edge(checkpoint_dir,derived_dir,predecessor,repo_root,report=None):
         for region in regions:
             namespace=capture['acquisition_id']+'/'+region['occurrence']
             view=[None]*region['start_seq']+rows[region['start_seq']:region['end_seq']]
-            ops,values,state=audited.graph(capture,view,[region],Path(repo_root))
+            if 'evex_spans' in native:
+                from verified_driver.v1.native_evex_graph_checker import graph as finite_graph
+                spans=[{key:item[key] for key in ('start_seq','end_seq')} for item in native['evex_spans']]
+                ops,values,state=finite_graph(capture,rows,[region],Path(repo_root),verified_spans=spans)
+            else:ops,values,state=audited.graph(capture,view,[region],Path(repo_root))
             ir={'schema':'regular-nstep-body-ir-v1','namespace':namespace,'acquisition_id':capture['acquisition_id'],
               'region':region,'operations':namespaced(ops,namespace),'values':namespaced(values,namespace)}
             link=boundary(capture,region,prior)

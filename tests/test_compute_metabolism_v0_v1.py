@@ -27,7 +27,7 @@ def test_finalfix_raw_stop_checks_existing_anomalies(evidence,mutation,expected)
     if mutation=='foreign-body': put(run/'live/body-start-4.json',{'TEST_ONLY':'no identity'})
     if mutation=='partial':
         first=get(root/'publication-1.json')['state_id']
-        (root/'store/CURRENT').write_text(first+'\n')
+        (root/'store/CURRENT').write_bytes((first+'\n').encode('ascii'))
         result.update(state_id=first,generation=1,step_index=1); put(run/'result.json',result)
     report=api().evaluate_v1_evidence(root,3,reference)
     assert report['outcome']==expected
@@ -65,7 +65,7 @@ def test_finalfix_partial_driver_metrics_preserved(runner_fixture,monkeypatch,ra
     assert json.loads((root/'runs/test-run/metrics.json').read_bytes())==original_metrics
     assert get(root/'runs/test-run/result.json')['verdict']=='STOP'
 
-from compute_metabolism.v0.profiles import APPROVED_N3_FINAL_PUBLIC_BITS, APPROVED_V1_SOURCE_BINDING, CampaignLimits
+from compute_metabolism.v0.profiles import APPROVED_N3_FINAL_PUBLIC_BITS, APPROVED_V1_SOURCE_BINDING, CampaignLimits, get_profile
 from compute_metabolism.v0.campaign import CampaignLedger
 from verified_driver.v1.model import (BASIS, DT, ZERO, ChainState, FormLane,
     canonical_bytes, chain_genesis, content_id, digest_bytes, strict_json)
@@ -109,8 +109,11 @@ def snapshot(t=1):
 
 
 def environment():
+    # This fixture models the immutable historical prepared universe. Current
+    # amended sources are exercised by test_compute_metabolism_epoch_integration.
+    archive=ROOT/'compute_metabolism/v0/source_epochs'/APPROVED_V1_SOURCE_BINDING/'manifest.json'
     return {'evidence_scope': 'TEST_ONLY', 'runtime': get(PREP)['identity'],
-        'source_snapshot': live_source_snapshot(ROOT), 'boot_id': 'test-boot', 'topology': topo(),
+        'source_snapshot': get(archive)['source_snapshot'], 'boot_id': 'test-boot', 'topology': topo(),
         'instance_observation': {'instance_id': '123456', 'raw': '123456', 'observed_utc': '2026-10-06T00:00:00+00:00'},
         'proc': {'loadavg': 'TEST_ONLY', 'cpu_pressure': 'TEST_ONLY', 'stat': 'cpu 1 2 3 4 5 6 7 8', 'steal_ticks': {'cpu': 8}},
         'wrapper_identity': {'pid': os.getpid(), 'start_ticks': '42'},
@@ -145,7 +148,7 @@ def evidence(tmp_path):
         reference = {'schema': 'COMPUTE_METABOLISM_REFERENCE_V0', 'requested_steps': 3,
             'source_binding': APPROVED_V1_SOURCE_BINDING, 'final_public_bits': list(APPROVED_N3_FINAL_PUBLIC_BITS),
             'provenance': [{'locator': 'immutable/historical/TEST_ONLY.json', 'sha256': 'a'*64, 'role': 'HISTORICAL_REFERENCE'}]}
-        campaign = {'schema': 'COMPUTE_METABOLISM_ENVIRONMENT_V0', 'instance_id': '123456', 'boot_id': 'test-boot', 'topology': topo()}
+        campaign = {'schema': 'COMPUTE_METABOLISM_ENVIRONMENT_V0', 'instance_id': '123456', 'boot_id': 'test-boot', 'topology': topo(), 'platform': environment()['runtime']['platform']}
         (root / 'execution-environment.json').write_bytes(PREP.read_bytes())
         put(root / 'campaign-environment.json', campaign)
         put(root / 'reference.json', reference)
@@ -320,9 +323,13 @@ def test_cgroup_after_wrong_enforcement_or_epoch_refuses(evidence):
 
 
 def test_source_binding_remains_approved_40_file_snapshot():
-    sources = live_source_snapshot(ROOT)
+    archive=ROOT/'compute_metabolism/v0/source_epochs'/APPROVED_V1_SOURCE_BINDING
+    sources=get(archive/'manifest.json')['source_snapshot']
     assert len(sources) == 40
     assert content_id(sources) == APPROVED_V1_SOURCE_BINDING
+    assert all(digest_bytes((archive/'source'/name).read_bytes())==want for name,want in sources.items())
+    current=live_source_snapshot(ROOT)
+    assert len(current)==49 and content_id(current)!=APPROVED_V1_SOURCE_BINDING
 
 
 @pytest.fixture
@@ -343,7 +350,7 @@ def runner_fixture(tmp_path, monkeypatch):
     config_inputs = tmp_path / 'inputs'
     config_inputs.mkdir()
     (config_inputs / 'execution-environment.json').write_bytes(PREP.read_bytes())
-    put(config_inputs / 'campaign-environment.json', {'schema': 'COMPUTE_METABOLISM_ENVIRONMENT_V0', 'instance_id': '123456', 'boot_id': 'test-boot', 'topology': topo()})
+    put(config_inputs / 'campaign-environment.json', {'schema': 'COMPUTE_METABOLISM_ENVIRONMENT_V0', 'instance_id': '123456', 'boot_id': 'test-boot', 'topology': topo(), 'platform': environment()['runtime']['platform']})
     put(config_inputs / 'reference.json', {'schema': 'COMPUTE_METABOLISM_REFERENCE_V0', 'requested_steps': 3, 'source_binding': APPROVED_V1_SOURCE_BINDING,
         'final_public_bits': list(APPROVED_N3_FINAL_PUBLIC_BITS), 'provenance': [{'locator': 'TEST_ONLY', 'sha256': 'a'*64, 'role': 'HISTORICAL_REFERENCE'}]})
     config = mod.AttemptConfig(repo_root=ROOT, attempt_root=parent, ledger_path=ledger, run_id='test-run', profile='2c', role='measured', requested_steps=3,
@@ -353,11 +360,17 @@ def runner_fixture(tmp_path, monkeypatch):
         **({'campaign_id': 'test-campaign', 'round_index': 1} if 'campaign_id' in mod.AttemptConfig.__dataclass_fields__ else {}))
     monkeypatch.setattr(mod, '_capture_environment', lambda root, prepared: environment())
     monkeypatch.setattr(mod, '_validate_environment', lambda *args, **kwargs: None)
+    # This fixture isolates the fresh-store boundary; adaptive admission has
+    # separate refusal/manifest/environment tests and grants no LIVE authority.
+    monkeypatch.setattr(mod, '_validate_execution_profile', lambda *args, **kwargs: {'profile_id':'TEST_ONLY_HISTORICAL_PROFILE'})
     monkeypatch.setattr(mod, 'reserve_writer', lambda count: None)
     monkeypatch.setattr(mod.guard, '_process_identity', lambda pid: {'pid': pid, 'start_ticks': '42'})
     monkeypatch.setattr(mod.guard, 'current_cgroup_path', lambda: Path(snapshot()['epoch']['path']))
     samples = iter([snapshot(), snapshot(2)])
-    monkeypatch.setattr(mod.guard, 'read_cgroup_snapshot', lambda path: next(samples))
+    def read_profile_snapshot(path, *, profile):
+        assert profile == get_profile('2c')
+        return next(samples)
+    monkeypatch.setattr(mod.guard, 'read_cgroup_snapshot', read_profile_snapshot)
     monkeypatch.setattr(mod.guard, 'read_cpu_topology', topo)
     calls = []
     class TEST_ONLYDriver:
@@ -413,7 +426,8 @@ def test_driver_exception_still_writes_final_snapshot(runner_fixture, monkeypatc
 def test_final_snapshot_failure_never_accepts(runner_fixture, monkeypatch):
     mod, config, calls = runner_data(runner_fixture)
     count = [0]
-    def read(path):
+    def read(path, *, profile):
+        assert profile == get_profile('2c')
         count[0] += 1
         if count[0] == 2:
             raise OSError('TEST_ONLY missing final')
@@ -479,7 +493,10 @@ def test_two_invocations_never_reuse_prior_current_checkpoint_or_store(runner_fi
     put(second / 'guard-cgroup-before.json', guard_before)
     monkeypatch.setenv('RTN_QUOTA_FILE', str(second / 'writer_quota.txt'))
     samples = iter([snapshot(), snapshot(2)])
-    monkeypatch.setattr(mod.guard, 'read_cgroup_snapshot', lambda path: next(samples))
+    def read_profile_snapshot(path, *, profile):
+        assert profile == get_profile('2c')
+        return next(samples)
+    monkeypatch.setattr(mod.guard, 'read_cgroup_snapshot', read_profile_snapshot)
     mod.run_fresh_v1(replace(config, attempt_root=second, run_id='second-attempt'))
     assert len(calls) == 2
     assert calls[0][0].root != calls[1][0].root

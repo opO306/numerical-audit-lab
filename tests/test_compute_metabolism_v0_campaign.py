@@ -804,12 +804,59 @@ def cli_config(tmp_path, monkeypatch):
         inputs[name] = dict(path=str(target), sha256=hashlib.sha256(raw).hexdigest())
     config = dict(schema='COMPUTE_METABOLISM_CAMPAIGN_V0', campaign_id='gcp-test',
                   root_directory=str(root), repo_root=str(repo),
-                  ledger_path=str(repo/'compute_metabolism/v0/artifacts/budget.json'),
+                  ledger_path=str(repo/'compute_metabolism/v0/artifacts/operational/budget.json'),
                   inputs=inputs, identities=identities)
     path = tmp_path / 'launch-config.json'
     raw = json.dumps(config).encode()
     path.write_bytes(raw)
     return path, hashlib.sha256(raw).hexdigest(), config
+
+
+def operational_config(tmp_path, monkeypatch):
+    import hashlib
+    path, _, config = cli_config(tmp_path, monkeypatch)
+    config['ledger_path'] = str(Path(config['repo_root']) / 'compute_metabolism/v0/artifacts/operational/budget.json')
+    raw = json.dumps(config).encode()
+    path.write_bytes(raw)
+    return path, hashlib.sha256(raw).hexdigest(), config
+
+
+def test_operational_namespace_first_init_excludes_task8_siblings(api, tmp_path, monkeypatch, capsys):
+    path, digest, config = operational_config(tmp_path, monkeypatch)
+    ledger_path = Path(config['ledger_path'])
+    sibling = ledger_path.parent.parent / 'TEST_ONLY-task8/evidence.bin'
+    sibling.parent.mkdir(parents=True)
+    sibling.write_bytes(b'TEST_ONLY preserved preflight evidence')
+    before = sibling.read_bytes(), sibling.stat().st_mtime_ns
+    assert api.main(['init', '--config', str(path), '--config-sha256', digest]) == 0
+    assert (ledger_path.parent / config['campaign_id'] / 'campaign.json').is_file()
+    state = api.CampaignLedger.read_snapshot(ledger_path)
+    assert state['limits']['total_wall_seconds'] == 4200
+    assert state['limits']['retained_total_bytes'] == 3221225472
+    assert state['total_wall_seconds'] == 0 and state['attempts'] == []
+    assert state['observed_retained_total_bytes'] == api.logical_tree_bytes(ledger_path.parent)
+    assert before == (sibling.read_bytes(), sibling.stat().st_mtime_ns)
+    sibling.write_bytes(b'TEST_ONLY later sibling growth' * 1000)
+    assert api.CampaignLedger.read_snapshot(ledger_path) == state
+
+
+@pytest.mark.parametrize('deleted_budget', [False, True])
+def test_operational_namespace_missing_budget_nonempty_root_still_refuses(api, tmp_path, monkeypatch, capsys, deleted_budget):
+    path, digest, config = operational_config(tmp_path, monkeypatch)
+    ledger_path = Path(config['ledger_path'])
+    if deleted_budget:
+        assert api.main(['init', '--config', str(path), '--config-sha256', digest]) == 0
+        ledger_path.unlink()
+    else:
+        ledger_path.parent.mkdir(parents=True)
+    evidence = ledger_path.parent / 'actual-campaign-evidence.bin'
+    evidence.write_bytes(b'preserved operational evidence')
+    before = {str(p): (p.read_bytes(), p.stat().st_mtime_ns) for p in ledger_path.parent.rglob('*') if p.is_file()}
+    assert api.main(['init', '--config', str(path), '--config-sha256', digest]) == 2
+    failure = json.loads(capsys.readouterr().out.splitlines()[-1])
+    assert failure['error'] == 'LedgerIntegrityError: missing upper ledger in nonempty artifact root; reset refused'
+    assert not ledger_path.exists()
+    assert before == {str(p): (p.read_bytes(), p.stat().st_mtime_ns) for p in ledger_path.parent.rglob('*') if p.is_file()}
 
 
 def test_cli_init_freezes_raw_files_and_status_writes_nothing(api, tmp_path, monkeypatch, capsys):
@@ -925,10 +972,10 @@ def test_post_helper_fixed_prepared_command_hash_binding_and_admin_timing(api, t
     def fake_subprocess(argv, **kwargs):
         from types import SimpleNamespace
         assert argv[:4] == ['sudo','-n','chroot',config['root_directory']]
-        assert '-B' in argv and 'PYTHONDONTWRITEBYTECODE=1' in argv
-        assert '--chdir=/workspace' in argv
+        assert argv == api.prepared_helper_argv(Path(config['root_directory']), 'classification')
+        assert '/usr/bin/env' not in argv and 'os.chdir' in argv[-1]
         request = json.loads(kwargs['input'])
-        assert request['root'] == '/workspace/compute_metabolism/v0/artifacts/gcp-test/warmup/r1/v1'
+        assert request['root'] == '/workspace/compute_metabolism/v0/artifacts/operational/gcp-test/warmup/r1/v1'
         context.update(manifest_sha256=request['evidence_sha256']['attempt.json'],
                        environment_before_sha256=request['evidence_sha256']['environment-before.json'],
                        environment_after_sha256=request['evidence_sha256']['environment-after.json'],
@@ -989,8 +1036,15 @@ def test_structural_resource_cannot_hide_explicit_runner_error(api, tmp_path):
     assert got['wrapper_outcome'] == 'REFUSED_VERIFICATION' and got['campaign_stop']
 
 
+@pytest.mark.parametrize('branch', ['warmup', 'round-01', 'round-07'])
+def test_operational_namespace_helper_accepts_exact_campaign_path(api, branch):
+    value = '/workspace/compute_metabolism/v0/artifacts/operational/gcp-test/' + branch + '/r1/v1'
+    assert api._helper_root(value) == Path(value).absolute()
+
+
 @pytest.mark.parametrize('path', ['/tmp/v1','/workspace/compute_metabolism/v0/artifacts/../bad/v1',
-                                '/workspace/compute_metabolism/v0/artifacts/gcp-test/round-08/r1/v1'])
+                                '/workspace/compute_metabolism/v0/artifacts/operational/gcp-test/round-08/r1/v1',
+                                '/workspace/compute_metabolism/v0/artifacts/gcp-test/warmup/r1/v1'])
 def test_helper_namespace_refuses_escape_or_attempt8(api, path):
     with pytest.raises(ValueError): api._helper_root(path)
 

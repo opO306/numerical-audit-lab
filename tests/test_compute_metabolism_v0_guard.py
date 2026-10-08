@@ -3,7 +3,9 @@ import copy
 import json
 import os
 from pathlib import Path, PurePosixPath
+import signal
 import subprocess
+import sys
 from unittest.mock import Mock
 
 import pytest
@@ -34,6 +36,36 @@ def tree(tmp_path, monkeypatch, guard):
         (unit / name).write_text(raw)
     monkeypatch.setattr(guard, '_boot_id', lambda: 'test-boot')
     monkeypatch.setattr(guard, '_process_identity', lambda pid: {'pid': pid, 'start_ticks': '42'})
+    # TEST_ONLY process witness for this synthetic controller tree. Actual
+    # pidfd/proc binding is tested separately and by GCP native integration.
+    class SyntheticWitness:
+        def __init__(self, pid, path):
+            self.pid, self.path, self.start_ticks = pid, path, None
+        def identity(self):
+            value = dict(guard._process_identity(self.pid))
+            value.setdefault('state', 'R')
+            if self.start_ticks is None:
+                self.start_ticks = value['start_ticks']
+            return value
+        def cgroup(self):
+            return '0::/' + self.path.relative_to(root).as_posix() + '\n'
+        def exit_events(self):
+            return []
+        def close(self):
+            pass
+    monkeypatch.setattr(guard, '_ProcessWitness', SyntheticWitness)
+    original_membership, original_pids = guard._cgroup_membership, guard._cgroup_pids
+    def synthetic_membership(path):
+        value = original_membership(path)
+        if guard._cgroup_pids is not original_pids:
+            value['pids'] = guard._cgroup_pids(path)
+            value['files'][0]['raw'] = ''.join(str(pid) + '\n' for pid in value['pids'])
+        return value
+    monkeypatch.setattr(guard, '_cgroup_membership', synthetic_membership)
+    # The fake cgroup owns no real pytest/multiprocessing children. Explicit
+    # drain tests replace this child-table boundary with their own wait script.
+    monkeypatch.setattr(guard.os, 'waitpid', Mock(side_effect=ChildProcessError()), raising=False)
+    monkeypatch.setattr(guard.os, 'WNOHANG', 1, raising=False)
     return root, parent, unit
 
 
@@ -244,6 +276,50 @@ def test_inner_does_not_start_child_before_live_validation(tree, guard, tmp_path
     assert not popen.called
 
 
+@pytest.mark.skipif(sys.platform != 'linux', reason='actual Linux multiprocessing tracker boundary')
+def test_fake_tree_validation_does_not_wait_for_unrelated_resource_tracker(tmp_path):
+    """Run the fake fixture with a real, unrelated child without hanging pytest."""
+    code = '''
+import os, sys
+from multiprocessing import resource_tracker
+import pytest
+resource_tracker.ensure_running()
+tracker = resource_tracker._resource_tracker
+pid = tracker._pid
+assert isinstance(pid, int) and pid > 0
+os.kill(pid, 0)
+print('TEST_ONLY_UNRELATED_TRACKER_STARTED=' + str(pid), flush=True)
+try:
+    result = int(pytest.main([sys.argv[1], '-q', '--basetemp', sys.argv[2]]))
+    os.kill(pid, 0)
+    print('TEST_ONLY_UNRELATED_TRACKER_STILL_ALIVE=' + str(pid), flush=True)
+finally:
+    tracker._stop()
+raise SystemExit(result)
+'''
+    target = str(Path(__file__).resolve()) + '::test_inner_does_not_start_child_before_live_validation'
+    environment = dict(os.environ, PYTHONDONTWRITEBYTECODE='1', PYTEST_DISABLE_PLUGIN_AUTOLOAD='1')
+    environment.pop('PYTEST_ADDOPTS', None)
+    process = subprocess.Popen([sys.executable, '-B', '-c', code, target, str(tmp_path/'inner-pytest')],
+        cwd=Path(__file__).resolve().parents[1], env=environment,
+        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, start_new_session=True)
+    try:
+        output, _ = process.communicate(timeout=20)
+    except subprocess.TimeoutExpired:
+        # Reap the bounded TEST_ONLY process group, including its real tracker.
+        os.killpg(process.pid, signal.SIGKILL)
+        output, _ = process.communicate(timeout=5)
+        pytest.fail('fake-tree guard waited for an unrelated live tracker: ' + output[-4096:])
+    finally:
+        if process.poll() is None:
+            os.killpg(process.pid, signal.SIGKILL)
+            process.communicate(timeout=5)
+    assert len(output.encode()) <= 65536
+    assert process.returncode == 0, output
+    assert 'TEST_ONLY_UNRELATED_TRACKER_STARTED=' in output
+    assert 'TEST_ONLY_UNRELATED_TRACKER_STILL_ALIVE=' in output
+
+
 def test_inner_final_after_workers_drained(tree, guard, tmp_path, monkeypatch):
     _, _, unit = tree
     monkeypatch.setattr(guard, 'current_cgroup_path', lambda: unit)
@@ -392,7 +468,7 @@ def test_empty_cgroup_still_reaps_adopted_zombie(guard, tree, monkeypatch):
     assert result['reaped_pids'] == [124]
 
 
-def test_worker_exit_during_sampling_preserves_cgroup_authority(tree, guard, monkeypatch):
+def test_unproven_worker_disappearance_refuses_cgroup_authority(tree, guard, monkeypatch):
     _, _, unit = tree
     exited = []
     monkeypatch.setattr(guard, '_cgroup_pids', lambda path: [os.getpid()] if exited else [os.getpid(), 123])
@@ -402,10 +478,8 @@ def test_worker_exit_during_sampling_preserves_cgroup_authority(tree, guard, mon
             raise FileNotFoundError('/proc/123/stat')
         return {'pid': pid, 'start_ticks': '42'}
     monkeypatch.setattr(guard, '_process_identity', identity)
-    snap = guard.read_cgroup_snapshot(unit)
-    assert snap['cpu_stat']['usage_usec'] == 10
-    assert snap['process_observations']['123']['status'] == 'exited_during_sample'
-    assert '123' not in snap['process_identities']
+    with pytest.raises(ValueError, match='positive terminal membership unavailable'):
+        guard.read_cgroup_snapshot(unit)
 
 
 def test_same_pid_reuse_during_sampling_is_refused(tree, guard, monkeypatch):
@@ -500,7 +574,7 @@ def test_outer_cleanup_attempts_survive_retry(guard, tmp_path, monkeypatch):
     assert process.kill.called
 
 
-def test_worker_exit_running_sample_does_not_kill_requested_work(tree, guard, tmp_path, monkeypatch):
+def test_unproven_worker_exit_running_sample_invalidates_measurement(tree, guard, tmp_path, monkeypatch):
     _, _, unit = tree
     monkeypatch.setattr(guard, 'current_cgroup_path', lambda: unit)
     monkeypatch.setattr(guard, 'read_cpu_topology', topology)
@@ -528,11 +602,12 @@ def test_worker_exit_running_sample_does_not_kill_requested_work(tree, guard, tm
     monkeypatch.setattr(guard.subprocess, 'Popen', Mock(return_value=process))
     monkeypatch.setattr(guard, '_drain_owned_children', Mock(return_value={'remaining_pids': [], 'reaped_pids': [124]}))
     result = guard.run_inner(profile_key='2c', run_id='test', unit_name=unit.name, artifact_dir=tmp_path, command=['true'])
-    assert result['outcome'] == 'GUARD_COMPLETE'
-    assert result['measurement_valid'] is True
-    assert not process.kill.called
-    running = json.loads((tmp_path / 'guard-cgroup-running.jsonl').read_text())
-    assert running['process_observations']['123']['status'] == 'exited_during_sample'
+    assert result['outcome'] == 'ENVIRONMENT_INVALID'
+    assert result['measurement_valid'] is False
+    assert 'positive terminal membership unavailable' in result['error']
+    assert not (tmp_path / 'guard-cgroup-running.jsonl').exists()
+    diagnostic = json.loads((tmp_path / 'guard-diagnostic.json').read_text())
+    assert diagnostic['process_evidence']['pid'] == 123
     assert result['after']['pids'] == [os.getpid()]
 
 
@@ -569,3 +644,277 @@ def test_final_topology_failure_does_not_suppress_available_cgroup_snapshot(tree
     assert result['measurement_valid'] is False
     assert result['outcome'] == 'ENVIRONMENT_INVALID'
     assert 'topology unavailable' in str(result['final_errors'])
+
+
+@pytest.mark.parametrize('stage, before_available, path_available', [
+    ('enable_subreaper', False, False),
+    ('current_cgroup_path', False, False),
+    ('read_cpu_topology', False, True),
+    ('read_cgroup_snapshot', False, True),
+    ('validate_enforcement', True, True),
+    ('write_before_receipt', True, True),
+])
+def test_initial_failure_preserves_exact_diagnostic_without_child_launch(
+        tree, guard, tmp_path, monkeypatch, stage, before_available, path_available):
+    _, _, unit = tree
+    artifact = tmp_path / 'diagnostic-attempt'
+    artifact.mkdir()
+    monkeypatch.setattr(guard, 'current_cgroup_path', lambda: unit)
+    monkeypatch.setattr(guard, 'read_cpu_topology', topology)
+    monkeypatch.setattr(guard, '_enable_subreaper', lambda: None)
+    monkeypatch.setattr(guard, '_drain_owned_children', lambda *a, **kw: {'remaining_pids': [], 'reaped_pids': []})
+    popen = Mock(side_effect=AssertionError('TEST_ONLY child must never launch'))
+    monkeypatch.setattr(guard.subprocess, 'Popen', popen)
+    message = 'TEST_ONLY first failure at ' + stage
+    def fail(*args, **kwargs):
+        raise PermissionError(message)
+    functions = {'enable_subreaper': '_enable_subreaper', 'current_cgroup_path': 'current_cgroup_path',
+                 'read_cpu_topology': 'read_cpu_topology', 'read_cgroup_snapshot': 'read_cgroup_snapshot',
+                 'validate_enforcement': 'validate_enforcement'}
+    if stage == 'write_before_receipt':
+        write = guard._write_json
+        def fail_before(path, value):
+            if path.name == 'guard-cgroup-before.json':
+                fail()
+            return write(path, value)
+        monkeypatch.setattr(guard, '_write_json', fail_before)
+    else:
+        monkeypatch.setattr(guard, functions[stage], fail)
+    result = guard.run_inner(profile_key='2c', run_id='TEST_ONLY-diagnostic', unit_name=unit.name,
+                             artifact_dir=artifact, command=['TEST_ONLY-never-execute'])
+    receipt = artifact / 'guard-diagnostic.json'
+    assert receipt.is_file(), 'first failure must be durable even without before/final snapshot'
+    diagnostic = json.loads(receipt.read_text())
+    assert diagnostic['run_id'] == 'TEST_ONLY-diagnostic'
+    assert diagnostic['unit'] == 'compute-metabolism-test.service'
+    assert diagnostic['profile'] == '2c'
+    assert diagnostic['stage'] == stage
+    assert diagnostic['exception_type'] == 'PermissionError'
+    assert diagnostic['exception_message'] == message
+    assert diagnostic['cgroup_path'] == (str(unit) if path_available else None)
+    assert diagnostic['wrapper_pid'] == os.getpid()
+    assert diagnostic['before_available'] is before_available
+    assert diagnostic['outcome'] == 'ENVIRONMENT_INVALID'
+    assert diagnostic['measurement_valid'] is False
+    assert result['diagnostic'] == diagnostic
+    assert result['error'] == 'PermissionError: ' + message
+    assert result['outcome'] == 'ENVIRONMENT_INVALID'
+    assert result['measurement_valid'] is False
+    assert not popen.called
+    if not before_available:
+        assert not (artifact / 'guard-cgroup-final.json').exists()
+
+
+@pytest.mark.parametrize('diagnostic_write_fails', [False, True])
+def test_initial_cli_error_survives_receipt_write_failure_in_structured_stderr(
+        guard, tmp_path, monkeypatch, capsys, diagnostic_write_fails):
+    def fail():
+        raise OSError('TEST_ONLY cannot establish subreaper')
+    monkeypatch.setattr(guard, '_enable_subreaper', fail)
+    monkeypatch.setattr(guard, '_artifact_path', lambda path: path)
+    if diagnostic_write_fails:
+        def no_write(*args):
+            raise PermissionError('TEST_ONLY diagnostic namespace unavailable')
+        monkeypatch.setattr(guard, '_write_json', no_write)
+    status = guard.main(['inner', '--profile', '2c', '--unit', 'compute-metabolism-test.service',
+                         '--run-id', 'TEST_ONLY-cli', '--artifact-dir', str(tmp_path),
+                         '--', 'TEST_ONLY-never-execute'])
+    emitted = capsys.readouterr()
+    assert status == 2
+    assert emitted.out == ''
+    assert emitted.err, 'CLI must preserve original failure even if receipt write fails'
+    diagnostic = json.loads(emitted.err)
+    assert diagnostic['run_id'] == 'TEST_ONLY-cli'
+    assert diagnostic['stage'] == 'enable_subreaper'
+    assert diagnostic['exception_type'] == 'OSError'
+    assert diagnostic['exception_message'] == 'TEST_ONLY cannot establish subreaper'
+    assert diagnostic['before_available'] is False
+    assert diagnostic['measurement_valid'] is False
+    if diagnostic_write_fails:
+        assert 'TEST_ONLY diagnostic namespace unavailable' in diagnostic['receipt_write_error']['error']
+    else:
+        assert json.loads((tmp_path / 'guard-diagnostic.json').read_text()) == diagnostic
+
+
+@pytest.mark.parametrize('source_file, raw, required, found, missing', [
+    ('cpu.stat', 'usage_usec 10\nuser_usec 7\nsystem_usec 3\nextra_counter 9\n',
+     ['usage_usec', 'user_usec', 'system_usec', 'nr_periods', 'nr_throttled', 'throttled_usec'],
+     ['usage_usec', 'user_usec', 'system_usec', 'extra_counter'],
+     ['nr_periods', 'nr_throttled', 'throttled_usec']),
+    ('memory.events', 'low 0\nhigh 0\nmax 0\noom 0\n',
+     ['oom', 'oom_kill'], ['low', 'high', 'max', 'oom'], ['oom_kill']),
+])
+def test_missing_counter_exception_preserves_source_keys_and_exact_raw(
+        guard, tmp_path, source_file, raw, required, found, missing):
+    with pytest.raises(ValueError, match='missing cgroup counter') as caught:
+        guard._counters(raw, required, source_file=source_file, cgroup_path=tmp_path)
+    assert caught.value.counter_failure == {
+        'source_file': source_file, 'required_counters': required,
+        'found_counters': found, 'missing_counters': missing,
+        'raw_text': raw, 'cgroup_path': str(tmp_path),
+    }
+
+
+@pytest.mark.parametrize('source_file', ['cpu.stat', 'memory.events'])
+def test_missing_counter_inner_preserves_both_original_files_and_cli_diagnostic(
+        tree, guard, tmp_path, monkeypatch, capsys, source_file):
+    _, _, unit = tree
+    cpu_raw = 'usage_usec 10\nuser_usec 7\nsystem_usec 3\nnr_periods 1\nnr_throttled 0\nthrottled_usec 0\n'
+    memory_raw = 'low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\n'
+    if source_file == 'cpu.stat':
+        cpu_raw = 'usage_usec 10\nsystem_usec 3\n'
+        required = ['usage_usec', 'user_usec', 'system_usec']
+        found = ['usage_usec', 'system_usec']
+        missing = ['user_usec']
+    else:
+        memory_raw = 'low 0\nhigh 0\nmax 0\noom 0\n'
+        required = ['oom', 'oom_kill']
+        found = ['low', 'high', 'max', 'oom']
+        missing = ['oom_kill']
+    (unit / 'cpu.stat').write_text(cpu_raw)
+    (unit / 'memory.events').write_text(memory_raw)
+    artifact = tmp_path / 'counter-attempt'
+    artifact.mkdir()
+    monkeypatch.setattr(guard, 'current_cgroup_path', lambda: unit)
+    monkeypatch.setattr(guard, 'read_cpu_topology', topology)
+    monkeypatch.setattr(guard, '_enable_subreaper', lambda: None)
+    monkeypatch.setattr(guard, '_artifact_path', lambda path: path)
+    popen = Mock(side_effect=AssertionError('TEST_ONLY child must never launch'))
+    monkeypatch.setattr(guard.subprocess, 'Popen', popen)
+    status = guard.main(['inner', '--profile', '2c', '--unit', unit.name,
+                         '--run-id', 'TEST_ONLY-counter-diagnostic', '--artifact-dir', str(artifact),
+                         '--', 'TEST_ONLY-never-execute'])
+    assert status == 2
+    emitted = capsys.readouterr()
+    assert emitted.out == ''
+    diagnostic = json.loads((artifact / 'guard-diagnostic.json').read_bytes())
+    assert json.loads(emitted.err) == diagnostic
+    assert diagnostic['stage'] == 'read_cgroup_snapshot'
+    assert diagnostic['exception_type'] == 'ValueError'
+    assert diagnostic['exception_message'] == 'missing cgroup counter'
+    assert diagnostic['run_id'] == 'TEST_ONLY-counter-diagnostic'
+    assert diagnostic['profile'] == '2c'
+    assert diagnostic['cgroup_path'] == str(unit)
+    assert diagnostic['counter_failure'] == {
+        'source_file': source_file, 'required_counters': required,
+        'found_counters': found, 'missing_counters': missing,
+        'raw_text': cpu_raw if source_file == 'cpu.stat' else memory_raw,
+        'cgroup_path': str(unit),
+    }
+    assert diagnostic['raw_counter_files'] == {'cpu.stat': cpu_raw, 'memory.events': memory_raw}
+    assert (artifact / 'cpu.stat').read_bytes() == cpu_raw.encode('utf-8')
+    assert (artifact / 'memory.events').read_bytes() == memory_raw.encode('utf-8')
+    assert diagnostic['before_available'] is False
+    assert diagnostic['outcome'] == 'ENVIRONMENT_INVALID'
+    assert diagnostic['measurement_valid'] is False
+    assert not (artifact / 'guard-cgroup-before.json').exists()
+    assert not (artifact / 'guard-cgroup-final.json').exists()
+    assert not popen.called
+
+
+@pytest.mark.parametrize('key,cpus', [('2c', '0-1\n'), ('1c', '0\n')])
+def test_profile_counter_base_only_snapshot_and_delta_allowed(tree, guard, key, cpus):
+    from compute_metabolism.v0.profiles import get_profile
+    _, _, unit = tree
+    (unit / 'cpu.max').unlink()  # Quota must be resolved from ancestors.
+    (unit / 'cpuset.cpus.effective').write_text(cpus)
+    (unit / 'cpu.stat').write_text('usage_usec 10\nuser_usec 7\nsystem_usec 3\n')
+    before = guard.read_cgroup_snapshot(unit, profile=get_profile(key))
+    guard.validate_enforcement(get_profile(key), before, topology())
+    assert before['cpu_stat'] == {'usage_usec': 10, 'user_usec': 7, 'system_usec': 3}
+    assert before['cpu_max']['unlimited'] is True
+    assert before['cpu_max']['finite_ancestors'] == []
+    (unit / 'cpu.stat').write_text('usage_usec 30\nuser_usec 20\nsystem_usec 10\n')
+    after = guard.read_cgroup_snapshot(unit, profile=get_profile(key))
+    assert guard.validate_snapshot_pair(before, after) == {
+        'usage_usec': 20, 'user_usec': 13, 'system_usec': 7, 'cpu_seconds': 0.00002}
+
+
+@pytest.mark.parametrize('key,raw,missing,required', [
+    ('2c', 'usage_usec 10\nsystem_usec 3\n', ['user_usec'],
+     ['usage_usec', 'user_usec', 'system_usec']),
+    ('0p5c', 'usage_usec 10\nuser_usec 7\nsystem_usec 3\nnr_periods 1\nthrottled_usec 0\n',
+     ['nr_throttled'], ['usage_usec', 'user_usec', 'system_usec',
+                        'nr_periods', 'nr_throttled', 'throttled_usec']),
+])
+def test_profile_counter_missing_required_still_refused(tree, guard, key, raw, missing, required):
+    from compute_metabolism.v0.profiles import get_profile
+    _, _, unit = tree
+    (unit / 'cpu.stat').write_text(raw)
+    with pytest.raises(ValueError, match='missing cgroup counter') as caught:
+        guard.read_cgroup_snapshot(unit, profile=get_profile(key))
+    assert caught.value.counter_failure['required_counters'] == required
+    assert caught.value.counter_failure['missing_counters'] == missing
+    assert caught.value.counter_failure['raw_text'] == raw
+
+
+@pytest.mark.parametrize('key', ['2c', '1c'])
+def test_profile_counter_absence_never_proves_unlimited_ancestor(tree, guard, key):
+    from compute_metabolism.v0.profiles import get_profile
+    root, _, unit = tree
+    if key == '1c':
+        (unit / 'cpuset.cpus.effective').write_text('0\n')
+    (unit / 'cpu.stat').write_text('usage_usec 10\nuser_usec 7\nsystem_usec 3\n')
+    (root / 'cpu.max').write_text('80000 100000\n')
+    snapshot = guard.read_cgroup_snapshot(unit, profile=get_profile(key))
+    assert snapshot['cpu_max']['unlimited'] is False
+    with pytest.raises(ValueError, match='CPU ancestor quota restricts unlimited profile'):
+        guard.validate_enforcement(get_profile(key), snapshot, topology())
+
+
+@pytest.mark.parametrize('key', ['2c', '1c'])
+def test_profile_counter_extra_fields_preserved_in_raw(tree, guard, key):
+    from compute_metabolism.v0.profiles import get_profile
+    _, _, unit = tree
+    raw = ('usage_usec 10\nuser_usec 7\nsystem_usec 3\nnice_usec 2\nunknown_stat 9\n'
+           'nr_periods 1\nnr_throttled 0\nthrottled_usec 0\n')
+    (unit / 'cpu.stat').write_text(raw)
+    snapshot = guard.read_cgroup_snapshot(unit, profile=get_profile(key))
+    assert snapshot['raw']['cpu.stat'] == raw
+    assert snapshot['cpu_stat'] == {'usage_usec': 10, 'user_usec': 7, 'system_usec': 3,
+        'nice_usec': 2, 'unknown_stat': 9, 'nr_periods': 1, 'nr_throttled': 0, 'throttled_usec': 0}
+
+
+def test_profile_counter_inner_final_preserved_with_base_only(tree, guard, tmp_path, monkeypatch):
+    _, _, unit = tree
+    (unit / 'cpu.stat').write_text('usage_usec 10\nuser_usec 7\nsystem_usec 3\n')
+    monkeypatch.setattr(guard, 'current_cgroup_path', lambda: unit)
+    monkeypatch.setattr(guard, 'read_cpu_topology', topology)
+    monkeypatch.setattr(guard, '_enable_subreaper', lambda: None)
+    process = Mock(pid=123, returncode=0)
+    process.wait.return_value = 0
+    monkeypatch.setattr(guard.subprocess, 'Popen', Mock(return_value=process))
+    def drain(path, **kwargs):
+        (unit / 'cpu.stat').write_text('usage_usec 30\nuser_usec 20\nsystem_usec 10\n')
+        return {'remaining_pids': [], 'reaped_pids': [123]}
+    monkeypatch.setattr(guard, '_drain_owned_children', drain)
+    result = guard.run_inner(profile_key='2c', run_id='test', unit_name=unit.name,
+        artifact_dir=tmp_path, command=['/bin/true'])
+    assert result['outcome'] == 'GUARD_COMPLETE'
+    assert result['measurement_valid'] is True
+    assert result['delta'] == {'usage_usec': 20, 'user_usec': 13, 'system_usec': 7,
+                               'cpu_seconds': 0.00002}
+    final = json.loads((tmp_path / 'guard-cgroup-final.json').read_text())
+    assert final['after']['raw']['cpu.stat'] == 'usage_usec 30\nuser_usec 20\nsystem_usec 10\n'
+    assert final['containment']['remaining_pids'] == []
+
+
+def test_profile_counter_half_enforcement_rechecks_received_snapshot(tree, guard):
+    from compute_metabolism.v0.profiles import get_profile
+    _, _, unit = tree
+    (unit / 'cpu.max').write_text('50000 100000\n')
+    (unit / 'cpuset.cpus.effective').write_text('0\n')
+    snapshot = guard.read_cgroup_snapshot(unit, profile=get_profile('0p5c'))
+    del snapshot['cpu_stat']['nr_throttled']
+    with pytest.raises(ValueError, match='missing cgroup counter'):
+        guard.validate_enforcement(get_profile('0p5c'), snapshot, topology())
+
+
+def test_profile_counter_available_bandwidth_counter_cannot_disappear(tree, guard):
+    from compute_metabolism.v0.profiles import get_profile
+    _, _, unit = tree
+    before = guard.read_cgroup_snapshot(unit, profile=get_profile('2c'))
+    after = copy.deepcopy(before)
+    del after['cpu_stat']['nr_throttled']
+    with pytest.raises((KeyError, ValueError)):
+        guard.validate_snapshot_pair(before, after)

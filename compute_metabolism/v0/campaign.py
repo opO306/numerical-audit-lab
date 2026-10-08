@@ -518,8 +518,32 @@ def profile_decision(profile: str, attempts: list[dict]) -> dict:
     return result
 
 
-def next_attempt(history: list[dict]) -> dict | None:
+def observation_authorization(config: dict) -> dict | None:
+    """One frozen original-Gala observation; confers no numerical authority."""
+    if 'execution_mode' not in config:
+        return None
+    if config['execution_mode'] != 'OBSERVATION_ONLY':
+        raise ValueError('unknown campaign execution mode')
+    scope = config.get('observation_authorization')
+    keys = {'run_id', 'profile', 'maximum_attempts', 'certified_state_progress',
+            'fingerprint_sha256', 'source_epoch_sha256', 'registry_sha256', 'gdb_sha256'}
+    if (type(scope) is not dict or set(scope) != keys or scope['profile'] != '2c'
+            or type(scope['maximum_attempts']) is not int or scope['maximum_attempts'] != 1
+            or scope['certified_state_progress'] is not False
+            or not isinstance(scope['run_id'], str)
+            or re.fullmatch('[a-z0-9][a-z0-9-]{0,63}', scope['run_id']) is None
+            or not isinstance(config.get('restart_from_campaign_id'), str)):
+        raise ValueError('finite OBSERVATION_ONLY successor authorization required')
+    _hash(config.get('restart_from_finalization_sha256'))
+    for key in ('fingerprint_sha256', 'source_epoch_sha256', 'registry_sha256', 'gdb_sha256'):
+        _hash(scope[key])
+    return dict(scope)
+
+
+def next_attempt(history: list[dict], config: dict | None = None) -> dict | None:
     """One exact scheduled item, retaining all attempts and never creating round 8."""
+    if config is not None and observation_authorization(config) is not None:
+        return None
     rows = [row for row in history if row.get('role') != 'guard-preflight']
     if any(row.get('status') != 'FINISHED' or row.get('campaign_stop') or
            row.get('wrapper_outcome', row.get('outcome')) in _FAULTS for row in rows):
@@ -544,7 +568,17 @@ def next_attempt(history: list[dict]) -> dict | None:
     return None
 
 
-def _policy_status(history: list[dict]) -> dict:
+def _policy_status(history: list[dict], config: dict | None = None) -> dict:
+    if config is not None and observation_authorization(config) is not None:
+        scope = observation_authorization(config)
+        if (len(history) > 1 or any(row.get('kind') != 'OBSERVATION'
+                or row.get('run_id') != scope['run_id'] or row.get('profile') != '2c'
+                or row.get('certified_state_progress') is not False for row in history)):
+            raise ValueError('OBSERVATION_ONLY history outside frozen single authorization')
+        return dict(campaign_outcome='STOP', campaign_stop=True,
+            profile_decisions={key:'NOT_APPLICABLE' for key in ('2c','1c','0p5c')},
+            execution_mode='OBSERVATION_ONLY', authorization_complete=bool(history)
+                and history[0]['status'] == 'FINISHED')
     decisions = {key: profile_decision(key, history)['decision'] for key in ('2c','1c','0p5c')}
     outcome = 'CONTINUE'
     if any(row.get('campaign_stop') or row.get('status') != 'FINISHED' or
@@ -559,7 +593,41 @@ def _policy_status(history: list[dict]) -> dict:
     return dict(campaign_outcome=outcome, campaign_stop=outcome != 'CONTINUE', profile_decisions=decisions)
 
 
-def classify_attempt(v1_report: dict, guard_receipt: dict, retained_bytes: int) -> dict:
+def measured_guard_cost(receipt: dict) -> dict:
+    """Physical CPU cost only; never numerical/resource admission authority."""
+    from . import system_guard as guard
+    raw = _frozen_read(Path(receipt['proof_locator']), receipt['proof_sha256'])
+    if json.loads(raw) != {k:v for k,v in receipt.items() if k not in ('proof_locator','proof_sha256')}:
+        raise ValueError('guard CPU proof differs from saved receipt')
+    if (receipt.get('measurement_valid') is not True or receipt.get('terminal') is not True
+        or receipt.get('launcher_reaped') is not True or receipt.get('test_only') is not False):
+        raise ValueError('final LIVE cgroup CPU measurement unavailable')
+    path = Path(receipt['before']['epoch']['path'])
+    if (path.name != receipt['unit'] or path.parent.name != 'system.slice'
+        or not guard.UNIT_PATTERN.fullmatch(receipt['unit']) or not receipt['run_id']):
+        raise ValueError('CPU measurement cgroup/run identity invalid')
+    delta = guard.validate_snapshot_pair(receipt['before'], receipt['after'])
+    if 'delta' in receipt and receipt['delta'] != delta:
+        raise ValueError('claimed CPU delta differs from raw counters')
+    return dict(cpu_seconds=delta['cpu_seconds'], cpu_measurement_status='AVAILABLE',
+        cpu_measurement_proof=dict(locator=receipt['proof_locator'],sha256=receipt['proof_sha256'],
+            epoch=receipt['after']['epoch'],usage_usec=delta['usage_usec']))
+
+
+def prepared_helper_argv(prepared: Path, operation: str) -> list[str]:
+    """One fixed prepared-Python helper contract; no shell or /usr/bin/env."""
+    from . import system_guard as guard
+    if _safe_path(Path(prepared)) != guard.PREPARED_ROOT:
+        raise ValueError('fixed prepared root required')
+    operations = {'classification': 'from compute_metabolism.v0.campaign import _classification_helper; _classification_helper()',
+        'evaluation': 'from compute_metabolism.v0.analyze import _evaluation_helper; _evaluation_helper()'}
+    if operation not in operations:
+        raise ValueError('bounded prepared helper operation required')
+    code = "import os,sys; os.chdir('/workspace'); sys.path.insert(0,'/workspace'); sys.dont_write_bytecode=True; "+operations[operation]
+    return ['sudo','-n','chroot',str(prepared),guard.INNER_PYTHON,'-B','-c',code]
+
+
+def classify_attempt(v1_report: dict, guard_receipt: dict, retained_bytes: int, *, preserve_legacy_cpu: bool = False) -> dict:
     """Preserve raw outcomes. A STOP string or quota counter grants no proof."""
     _integer(retained_bytes, 'retained_bytes')
     raw = v1_report.get('raw_v1_result') or {}
@@ -569,6 +637,13 @@ def classify_attempt(v1_report: dict, guard_receipt: dict, retained_bytes: int) 
                   campaign_outcome='STOP', campaign_stop=True, eligible=False,
                   invariants_valid=False, resource_proven=False, resource_reason=None,
                   anomalies=[])
+    if not preserve_legacy_cpu:
+        result.update(cpu_accounting_version='GUARD_MEASUREMENT_V2', cpu_seconds=None,
+                      cpu_measurement_status='UNAVAILABLE')
+        try:
+            result.update(measured_guard_cost(guard_receipt))
+        except (ValueError, KeyError, TypeError, OSError) as exc:
+            result['cpu_measurement_error'] = f'{type(exc).__name__}: {exc}'
     explicit = [error.get('outcome') for error in v1_report.get('runner_errors', [])]
     if 'ENVIRONMENT_INVALID' in explicit:
         outcome = 'ENVIRONMENT_INVALID'
@@ -587,7 +662,6 @@ def classify_attempt(v1_report: dict, guard_receipt: dict, retained_bytes: int) 
         return result
     try:
         from . import system_guard as guard
-        from .profiles import APPROVED_V1_SOURCE_BINDING
         receipt = guard_receipt
         raw = _frozen_read(Path(receipt['proof_locator']), receipt['proof_sha256'])
         if json.loads(raw) != {key:value for key, value in receipt.items() if key not in ('proof_locator', 'proof_sha256')}:
@@ -596,7 +670,7 @@ def classify_attempt(v1_report: dict, guard_receipt: dict, retained_bytes: int) 
         if (receipt['test_only'] is not False or not receipt['terminal'] or not receipt['launcher_reaped']
             or receipt['deadline_seconds'] != 180 or receipt['writer_bytes'] != 671088640
             or context['evidence_scope'] != 'LIVE' or v1_report['evidence_scope'] != 'LIVE'
-            or context['source_binding'] != APPROVED_V1_SOURCE_BINDING):
+            or context['source_binding'] != context_source_binding(context)):
             raise ValueError('LIVE guard/source/terminal identity invalid')
         if not context['run_id'] == receipt['run_id'] == v1_report['run_id']:
             raise ValueError('run binding mismatch')
@@ -666,6 +740,69 @@ _IDENTITY_FILES = ('compute_metabolism/v0/profiles.py', 'compute_metabolism/v0/s
                    'docs/superpowers/specs/2026-10-06-compute-metabolism-v0-design.md',
                    'docs/superpowers/plans/2026-10-06-compute-metabolism-v0.md')
 _INPUT_FILES = ('execution-environment.json', 'campaign-environment.json', 'reference.json')
+_ADAPTIVE_IDENTITY_FILES = ('compute_metabolism/v0/adaptive.py', 'compute_metabolism/v0/profile_verify.py',
+    'compute_metabolism/v0/observer.py', 'compute_metabolism/v0/gdb_observer.py',
+    'compute_metabolism/v0/analyze.py', 'compute_metabolism/v0/observation_run.py',
+    'compute_metabolism/v0/execution_profiles/registry.json',
+    'docs/superpowers/specs/2026-10-07-compute-metabolism-adaptive-design.md',
+    'docs/superpowers/plans/2026-10-07-compute-metabolism-adaptive.md')
+_EPOCH_IDENTITY_FILES = tuple('compute_metabolism/v0/' + name for name in (
+    'source_epoch.py', 'historical_profile.py', 'evex_profile.py', 'gala_origin_check.py'))
+_EVEX_PLAN = 'docs/superpowers/plans/2026-10-07-compute-metabolism-evex-promotion.md'
+
+
+def identity_names(config):
+    extra = _EPOCH_IDENTITY_FILES if 'gate_source_snapshot' in config else ()
+    if config.get('adaptive_version') is None:
+        return _IDENTITY_FILES + extra
+    if config['adaptive_version'] != 'COMPUTE_METABOLISM_ADAPTIVE_V1':
+        raise ValueError('unknown adaptive execution identity')
+    return _IDENTITY_FILES+_ADAPTIVE_IDENTITY_FILES + extra
+
+
+def gate_source_snapshot(repo_root, epoch):
+    """Exact pre-registry gate source universe for an explicit epoch campaign.
+
+    Profile/registry JSON stays separately bound to avoid a registration cycle.
+    No arbitrary supplement or receipt PASS label changes this inventory.
+    """
+    from . import source_epoch
+    root = _safe_path(Path(repo_root))
+    current, _ = source_epoch.validate_epoch(epoch, root)
+    protected = source_epoch.protected_snapshot(root)['runtime']
+    paths = set(current) | {p.replace('\\', '/') for p in protected}
+    for directory in ('compute_metabolism/v0', 'verified_driver', 'verified_driver/v0'):
+        paths.update(p.relative_to(root).as_posix() for p in (root/directory).glob('*.py'))
+    paths.update(p for p in _IDENTITY_FILES + _ADAPTIVE_IDENTITY_FILES
+                 if not p.startswith('compute_metabolism/v0/execution_profiles/'))
+    paths.add(_EVEX_PLAN)
+    archive = f'compute_metabolism/v0/source_epochs/{source_epoch.PREDECESSOR_BINDING}'
+    paths.update(archive + '/' + name for name in (
+        'manifest.json', 'authority/adaptive.py', 'authority/profile_verify.py'))
+    return {name: hashlib.sha256(source_epoch._regular_bytes(root/name)).hexdigest()
+            for name in sorted(paths)}
+
+
+def validate_gate_source_snapshot(snapshot, repo_root, epoch):
+    """Recompute the complete physical union; a supplied hash cannot override it."""
+    if type(snapshot) is not dict or snapshot != gate_source_snapshot(repo_root, epoch):
+        raise ValueError('explicit epoch gate source snapshot drift/inventory mismatch')
+    return dict(snapshot)
+
+
+def context_source_binding(context, repo_root=None):
+    """Re-derive a helper context's source identity from physical source bytes."""
+    from .profiles import APPROVED_V1_SOURCE_BINDING
+    if 'source_epoch' not in context:
+        if context['source_binding'] != APPROVED_V1_SOURCE_BINDING:
+            raise ValueError('historical helper source binding drift')
+        return APPROVED_V1_SOURCE_BINDING
+    from .source_epoch import validate_epoch
+    _, binding = validate_epoch(context['source_epoch'],
+        _safe_path(Path(repo_root)) if repo_root is not None else Path(__file__).resolve().parents[2])
+    if context['source_binding'] != binding:
+        raise ValueError('helper context source label differs from physical epoch')
+    return binding
 
 
 def _exclusive_raw(path: Path, raw: bytes) -> None:
@@ -688,9 +825,9 @@ def _configuration(path: Path, expected: str) -> tuple[dict, bytes, dict]:
     root = _safe_path(Path(config['root_directory']))
     repo = _safe_path(Path(config['repo_root']))
     ledger = _safe_path(Path(config['ledger_path']))
-    if root != guard.PREPARED_ROOT or repo != root/'workspace' or ledger != repo/'compute_metabolism/v0/artifacts/budget.json':
+    if root != guard.PREPARED_ROOT or repo != root/'workspace' or ledger != repo/'compute_metabolism/v0/artifacts/operational/budget.json':
         raise ValueError('prepared root/workspace/upper namespace required')
-    if set(config['inputs']) != set(_INPUT_FILES) or set(config['identities']) != set(_IDENTITY_FILES):
+    if set(config['inputs']) != set(_INPUT_FILES) or set(config['identities']) != set(identity_names(config)):
         raise ValueError('all frozen inputs/wrapper/spec/plan identities required')
     files = {}
     for group in ('inputs', 'identities'):
@@ -712,6 +849,16 @@ def _configuration(path: Path, expected: str) -> tuple[dict, bytes, dict]:
                 raise HostSourceInvalid('prepared source identity failure: '+name, observed, config) from exc
     if files['compute_metabolism/v0/campaign.py'] != Path(__file__).read_bytes():
         raise ValueError('executing campaign differs from frozen prepared wrapper')
+    campaign_environment = json.loads(files['campaign-environment.json'])
+    if 'source_epoch' in campaign_environment:
+        if 'gate_source_snapshot' not in config:
+            raise ValueError('explicit epoch campaign requires frozen gate source snapshot')
+        validate_gate_source_snapshot(config['gate_source_snapshot'], repo, campaign_environment['source_epoch'])
+        for name, item in config['identities'].items():
+            if name in config['gate_source_snapshot'] and item['sha256'] != config['gate_source_snapshot'][name]:
+                raise ValueError('campaign identity/gate source hash disagreement')
+    elif 'gate_source_snapshot' in config:
+        raise ValueError('gate source amendment requires explicit frozen campaign epoch')
     _bind_host_dependencies(config)
     return config, raw, files
 
@@ -729,7 +876,15 @@ def _bind_host_dependencies(config: dict) -> dict:
     observations = dict(status='VALID', modules={})
     host_repo = _safe_path(Path(__file__)).parents[2]
     try:
-        for name, module in (('profiles',profiles), ('system_guard',system_guard)):
+        dependencies=[('profiles',profiles), ('system_guard',system_guard)]
+        if config.get('adaptive_version') is not None:
+            from . import adaptive,profile_verify
+            dependencies.extend([('adaptive',adaptive),('profile_verify',profile_verify)])
+        if 'gate_source_snapshot' in config:
+            from . import source_epoch, historical_profile, evex_profile, gala_origin_check
+            dependencies.extend([('source_epoch', source_epoch), ('historical_profile', historical_profile),
+                                 ('evex_profile', evex_profile), ('gala_origin_check', gala_origin_check)])
+        for name, module in dependencies:
             relative = f'compute_metabolism/v0/{name}.py'
             observed = dict(origin=getattr(module,'__file__',None),
                             spec_origin=getattr(getattr(module,'__spec__',None),'origin',None),
@@ -764,16 +919,95 @@ def _persist_host_source_stop(config: dict, config_hash: str, observations: dict
             campaign_outcome='STOP',campaign_stop=True,host_dependencies=observations)))
 
 
+def _restart_predecessor(state: dict, config: dict, root: Path) -> dict:
+    """A hash-bound, complete predecessor STOP grants only a new namespace."""
+    prior = state['formal_campaign']
+    if (config.get('restart_from_campaign_id') != prior['campaign_id']
+        or config['campaign_id'] == prior['campaign_id'] or state['running'] is not None
+        or any(row['status'] != 'FINISHED' for row in state['attempts'])
+        or state.get('campaign_finalization_unresolved')):
+        raise ValueError('explicit completed predecessor campaign required for restart')
+    expected_hash = _hash(config.get('restart_from_finalization_sha256'))
+    pointers = [p for p in state.get('campaign_finalizations', [])
+        if p.get('campaign_id') == prior['campaign_id'] and p.get('sha256') == expected_hash]
+    if len(pointers) != 1:
+        raise ValueError('unique bound predecessor STOP finalization required')
+    pointer = pointers[0]
+    prior_root = root/prior['campaign_id']
+    prior_config = json.loads(_frozen_read(prior_root/'campaign.json', prior['config_sha256']))
+    path = _safe_path(Path(pointer['locator']))
+    if path.parent != prior_root:
+        raise ValueError('predecessor finalization namespace mismatch')
+    receipt = json.loads(_frozen_read(path, expected_hash))
+    if (receipt.get('schema') != 'COMPUTE_METABOLISM_CAMPAIGN_FINALIZATION_V0'
+        or receipt.get('campaign_id') != prior['campaign_id']
+        or receipt.get('run_id') != pointer.get('run_id')
+        or receipt.get('phase') not in ('PRELAUNCH', 'POST_FINISH')
+        or receipt.get('campaign_stop') is not True):
+        raise ValueError('durable predecessor STOP receipt required')
+    proof_path = _safe_path(Path(receipt['upper_proof_locator']))
+    if proof_path.parent != prior_root:
+        raise ValueError('predecessor upper proof namespace mismatch')
+    _frozen_read(proof_path, _hash(receipt['upper_proof_sha256']))
+    proof = _read(proof_path)
+    if (proof.get('formal_campaign') != prior or proof['running'] is not None
+        or proof['attempts'] != state['attempts']
+        or proof['total_wall_seconds'] != state['total_wall_seconds']
+        or receipt['total_wall_seconds'] != proof['total_wall_seconds']
+        or type(receipt['observed_retained_total_bytes']) is not int
+        or not proof['retained_total_bytes'] <= receipt['observed_retained_total_bytes'] <= state['retained_total_bytes']):
+        raise ValueError('predecessor STOP upper history/usage mismatch')
+    rows = [row for row in proof['attempts'] if row['campaign_id'] == prior['campaign_id']]
+    if receipt['phase'] == 'POST_FINISH' and not any(row['run_id'] == receipt['run_id'] for row in rows):
+        raise ValueError('predecessor POST_FINISH attempt missing')
+    needs_next = next_attempt(rows, prior_config) is not None
+    policy = _policy_status(rows, prior_config)
+    resource = _upper_resource_status(dict(proof, observed_retained_total_bytes=receipt['observed_retained_total_bytes']),
+        needs_next, proof_path, receipt['upper_proof_sha256'])
+    if not resource['campaign_stop'] and policy['campaign_stop']:
+        resource.update(campaign_stop=True, campaign_outcome=policy['campaign_outcome'])
+    if (receipt.get('needs_next_attempt') != needs_next or receipt.get('policy_status') != policy
+        or not resource['campaign_stop'] or any(receipt.get(k) != v for k, v in resource.items())
+        or pointer.get('campaign_outcome') != receipt['campaign_outcome']):
+        raise ValueError('predecessor STOP policy/proof mismatch')
+    return dict(campaign_id=prior['campaign_id'], config_sha256=prior['config_sha256'],
+        finalization_locator=str(path), finalization_sha256=expected_hash,
+        total_wall_seconds=state['total_wall_seconds'], retained_total_bytes=state['retained_total_bytes'])
+
+
 def initialize_campaign(config: dict, raw: bytes, files: dict) -> dict:
-    """First formal namespace only; prior guard-preflight rows retain all charges."""
+    """First namespace or explicit verified STOP successor; never new allowance."""
+    environment=json.loads(files['campaign-environment.json'])
+    scope = observation_authorization(config)
+    if scope is not None:
+        if 'execution_profile' in environment or 'execution_registry_sha256' in environment:
+            raise ValueError('OBSERVATION_ONLY cannot claim execution profile authority')
+        if 'source_epoch' in environment and hashlib.sha256(_encode(environment['source_epoch'])).hexdigest() != scope['source_epoch_sha256']:
+            raise ValueError('OBSERVATION_ONLY source epoch binding mismatch')
+    elif environment.get('schema')=='COMPUTE_METABOLISM_ENVIRONMENT_V0' and not environment.get('TEST_ONLY'):
+        if (config.get('adaptive_version') != 'COMPUTE_METABOLISM_ADAPTIVE_V1'
+            or 'execution_profile' not in environment or 'execution_registry_sha256' not in environment):
+            raise ValueError('new formal campaign requires fixed execution profile identity')
+    if scope is not None:
+        CampaignLedger.read_snapshot(Path(config['ledger_path']))  # never issue an observation allowance
     ledger = CampaignLedger.open(Path(config['ledger_path']), CampaignLimits())
     with ledger._authority():
         state = _read(ledger.path)
-        if state.get('formal_campaign') is not None or state['running'] is not None or any(row['role'] != 'guard-preflight' for row in state['attempts']):
-            raise ValueError('formal campaign already exists or prior numerical/RUNNING evidence; restart not authorized')
+        predecessor = None
+        if state.get('formal_campaign') is not None:
+            predecessor = _restart_predecessor(state, config, ledger.root)
+        elif scope is not None:
+            raise ValueError('OBSERVATION_ONLY requires existing predecessor STOP')
+        elif (state['running'] is not None or any(row['role'] != 'guard-preflight' for row in state['attempts'])
+            or 'restart_from_campaign_id' in config or 'restart_from_finalization_sha256' in config):
+            raise ValueError('first formal namespace cannot recover numerical/RUNNING history')
         campaign = ledger.root/config['campaign_id']
         if campaign.exists():
             raise ValueError('exclusive formal namespace required')
+        if predecessor is not None:
+            state.setdefault('formal_campaign_history', []).append(dict(state['formal_campaign']))
+            state.setdefault('campaign_restarts', []).append(dict(predecessor,
+                successor_campaign_id=config['campaign_id'], successor_config_sha256=hashlib.sha256(raw).hexdigest()))
         # Persist identity before directory work; interruption cannot allow new IDs.
         state['formal_campaign'] = dict(campaign_id=config['campaign_id'], config_sha256=hashlib.sha256(raw).hexdigest())
         ledger._write(state)
@@ -783,7 +1017,7 @@ def initialize_campaign(config: dict, raw: bytes, files: dict) -> dict:
             _exclusive_raw(campaign/name, files[name])
         frozen = campaign/'identity'
         _create_durable_artifact_root(frozen)
-        for index, name in enumerate(_IDENTITY_FILES):
+        for index, name in enumerate(identity_names(config)):
             _exclusive_raw(frozen/f'{index:02d}.raw', files[name])
         ledger._write(state)
     return CampaignLedger.read_snapshot(ledger.path)
@@ -793,13 +1027,13 @@ def _campaign_view(config: dict, raw: bytes) -> tuple[dict, list[dict]]:
     path = Path(config['ledger_path'])
     state = CampaignLedger.read_snapshot(path)
     expected = dict(campaign_id=config['campaign_id'], config_sha256=hashlib.sha256(raw).hexdigest())
-    if state.get('formal_campaign') != expected:
+    if state.get('formal_campaign') != expected and expected not in state.get('formal_campaign_history', []):
         raise ValueError('formal campaign/config binding mismatch')
     campaign = path.parent/config['campaign_id']
     _frozen_read(campaign/'campaign.json', expected['config_sha256'])
     for name in _INPUT_FILES:
         _frozen_read(campaign/name, config['inputs'][name]['sha256'])
-    for index, name in enumerate(_IDENTITY_FILES):
+    for index, name in enumerate(identity_names(config)):
         _frozen_read(campaign/'identity'/f'{index:02d}.raw', config['identities'][name]['sha256'])
     rows = [row for row in state['attempts'] if row['campaign_id'] == config['campaign_id']]
     # FINISHED costs remain authoritative even if the subsequent STOP write failed.
@@ -863,6 +1097,8 @@ def _finalize_upper(ledger: CampaignLedger, config: dict, run_id: str | None,
     """Append an immutable upper proof/receipt, accounting their own bytes."""
     with ledger._authority():
         state = _read(ledger.path)
+        if observation_authorization(config) is not None and needs_next:
+            raise ValueError('OBSERVATION_ONLY has no numerical next attempt')
         ledger._write(state)
         if state.get('campaign_resource_stop'):
             return dict(state['campaign_resource_stop'])
@@ -886,7 +1122,7 @@ def _finalize_upper(ledger: CampaignLedger, config: dict, run_id: str | None,
                            total_wall_seconds=state['total_wall_seconds'],observed_retained_total_bytes=observed,
                            needs_next_attempt=needs_next,upper_proof_locator=str(proof_path),upper_proof_sha256=proof_hash,
                            **resource)
-            policy = _policy_status([row for row in state['attempts'] if row['campaign_id']==config['campaign_id']])
+            policy = _policy_status([row for row in state['attempts'] if row['campaign_id']==config['campaign_id']], config)
             receipt['policy_status'] = policy
             if not resource['campaign_stop'] and policy['campaign_stop']:
                 receipt.update(campaign_stop=True,campaign_outcome=policy['campaign_outcome'])
@@ -932,7 +1168,7 @@ def _saved_classification_context(root: Path) -> dict:
     manifest = runner._json(root/'attempt.json')
     before, pair, delta, reference = runner._environment_evidence(root, manifest)
     upper = runner._saved_upper_before(root, manifest)
-    return dict(run_id=manifest['run_id'], profile=manifest['profile'],
+    result = dict(run_id=manifest['run_id'], profile=manifest['profile'],
         campaign_id=manifest['campaign_id'], round_index=manifest['round_index'], role=manifest['role'],
         unit=Path(pair[0]['snapshot']['epoch']['path']).name, epoch=pair[0]['snapshot']['epoch'],
         evidence_scope=manifest['evidence_scope'], source_binding=before['runtime']['source_binding'],
@@ -940,6 +1176,10 @@ def _saved_classification_context(root: Path) -> dict:
         manifest_sha256=hashlib.sha256(runner._read(root/'attempt.json')).hexdigest(),
         environment_before_sha256=hashlib.sha256(runner._read(root/'environment-before.json')).hexdigest(),
         environment_after_sha256=hashlib.sha256(runner._read(root/'environment-after.json')).hexdigest())
+    if 'source_epoch' in before:
+        result['source_epoch'] = before['source_epoch']
+        context_source_binding(result)
+    return result
 
 
 _CONTEXT_FILES = ('attempt.json', 'admission.json', 'execution-environment.json',
@@ -960,9 +1200,10 @@ def _helper_root(value: str) -> Path:
     from pathlib import PurePosixPath
     path = PurePosixPath(value)
     guard._artifact_path(path)
-    if path.name != 'v1' or len(path.relative_to(guard.ARTIFACT_ROOT).parts) != 4:
+    operational_root = guard.ARTIFACT_ROOT / 'operational'
+    if path.name != 'v1' or len(path.relative_to(operational_root).parts) != 4:
         raise ValueError('exact campaign/round/run/v1 helper namespace required')
-    campaign, round_name, run_id, _ = path.relative_to(guard.ARTIFACT_ROOT).parts
+    campaign, round_name, run_id, _ = path.relative_to(operational_root).parts
     if (re.fullmatch('[a-z0-9][a-z0-9-]{0,63}', campaign) is None
         or re.fullmatch('[a-z0-9][a-z0-9-]{0,63}', run_id) is None
         or round_name not in ('warmup', *(f'round-{n:02d}' for n in range(1,8)))):
@@ -998,9 +1239,7 @@ def _post_context(root: Path, config: dict, receipt: dict) -> tuple[dict, dict]:
         hashes[name] = hashlib.sha256(_safe_path(path).read_bytes()).hexdigest()
         _frozen_read(path, hashes[name])
     request = _encode(dict(root=inner, evidence_sha256=hashes))
-    argv = ['sudo','-n','chroot',str(prepared),'/usr/bin/env','--chdir=/workspace','PYTHONDONTWRITEBYTECODE=1',
-            guard.INNER_PYTHON,'-B','-c',
-            'from compute_metabolism.v0.campaign import _classification_helper; _classification_helper()']
+    argv = prepared_helper_argv(prepared, 'classification')
     started = time.monotonic()
     administration = dict(measurement_role='ADMINISTRATION_ONLY', argv=argv, evidence_sha256=hashes)
     try:
@@ -1014,10 +1253,9 @@ def _post_context(root: Path, config: dict, receipt: dict) -> tuple[dict, dict]:
             raise ValueError('saved prepared helper failed')
         response = json.loads(process.stdout)
         context = response['context']
-        from .profiles import APPROVED_V1_SOURCE_BINDING
         if (response['evidence_sha256'] != hashes
             or (context['run_id'],context['unit'],context['epoch']) != (receipt['run_id'],receipt['unit'],receipt['before']['epoch'])
-            or context['profile'] != receipt['profile'] or context['source_binding'] != APPROVED_V1_SOURCE_BINDING
+            or context['profile'] != receipt['profile'] or context['source_binding'] != context_source_binding(context)
             or context['manifest_sha256'] != hashes['attempt.json']
             or context['environment_before_sha256'] != hashes['environment-before.json']
             or context['environment_after_sha256'] != hashes['environment-after.json']
@@ -1035,10 +1273,14 @@ def _post_context(root: Path, config: dict, receipt: dict) -> tuple[dict, dict]:
 
 def run_next(config: dict, raw: bytes, run_id: str) -> dict:
     """Same owner/process: durable begin, exactly one actual guard, durable finish."""
+    if observation_authorization(config) is not None:
+        raise ValueError('OBSERVATION_ONLY cannot launch numerical run_next')
     from . import system_guard as guard
     if re.fullmatch('[a-z0-9][a-z0-9-]{0,63}', run_id) is None:
         raise ValueError('bounded lower-case run identity required')
     state, history = _campaign_view(config, raw)
+    if state.get('formal_campaign') != dict(campaign_id=config['campaign_id'], config_sha256=hashlib.sha256(raw).hexdigest()):
+        raise ValueError('historical campaign is read-only; no execution authority')
     try:
         host_dependencies_before = _bind_host_dependencies(config)
     except HostSourceInvalid as exc:
@@ -1220,13 +1462,13 @@ def main(argv=None) -> int:
             result = initialize_campaign(config, raw, files)
         elif args.operation == 'status':
             state, rows = _campaign_view(config, raw)
-            item = next_attempt(rows)
+            item = next_attempt(rows, config)
             resource = _upper_resource_status(state,item is not None,Path(config['ledger_path']),
                 hashlib.sha256(Path(config['ledger_path']).read_bytes()).hexdigest())
             result = dict(upper=state, next_attempt=None if resource['campaign_stop'] else item,
                           **resource,
                           profiles={key:profile_decision(key, rows) for key in ('2c','1c','0p5c')})
-            policy = _policy_status(rows)
+            policy = _policy_status(rows, config)
             result['policy_status'] = policy
             if not result['campaign_stop'] and policy['campaign_stop']:
                 result.update(campaign_stop=True,campaign_outcome=policy['campaign_outcome'],next_attempt=None)

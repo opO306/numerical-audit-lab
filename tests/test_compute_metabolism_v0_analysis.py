@@ -5,7 +5,9 @@ import hashlib
 import importlib
 import importlib.util
 import json
+import io
 from pathlib import Path
+import types
 
 import pytest
 
@@ -124,7 +126,7 @@ def fixture_campaign(tmp_path, monkeypatch):
     """Real durable ledger; synthetic saved LIVE-shaped admission/helper boundary."""
     root = tmp_path/'prepared'
     repo = root/'workspace'
-    upper = repo/'compute_metabolism/v0/artifacts/budget.json'
+    upper = repo/'compute_metabolism/v0/artifacts/operational/budget.json'
     ident = {}
     files = {}
     for name in campaign._IDENTITY_FILES:
@@ -333,7 +335,7 @@ def test_changed_current_source_preserves_failed_and_partial_history(fixture_cam
     assert result['counts']['campaign_attempts']==2
     assert result['attempts'][0]['raw_record']['outcome']=='ENVIRONMENT_INVALID'
     assert result['attempts'][1]['raw_record']['partial_receipts'][0]['reason']=='interrupted'
-    assert result['attempts'][0]['raw_record']['cpu_seconds'] is None
+    assert result['attempts'][0]['raw_record']['cpu_seconds'] == 5
     assert result['outcome']=='STOP'
     assert inventory(root.parent)==before
 
@@ -361,11 +363,10 @@ def test_prepared_helper_fixed_namespace_hash_response_and_failures(fixture_camp
     report=json.loads((parent/'v1/admission.json').read_bytes())
     context=execution['admission_report']['classification_context']
     def boundary(argv,request,cwd):
-        assert argv[:7]==['sudo','-n','chroot',config['root_directory'],'/usr/bin/env','--chdir=/workspace','PYTHONDONTWRITEBYTECODE=1']
-        assert argv[7]==system_guard.INNER_PYTHON and argv[8:10]==['-B','-c']
+        assert argv==campaign.prepared_helper_argv(Path(config['root_directory']),'evaluation')
         assert cwd==Path(config['repo_root'])
         payload=json.loads(request)
-        assert payload['root']=='/workspace/compute_metabolism/v0/artifacts/gcp-test/round-01/r0/v1'
+        assert payload['root']=='/workspace/compute_metabolism/v0/artifacts/operational/gcp-test/round-01/r0/v1'
         assert payload['requested_steps']==3
         response=dict(report=copy.deepcopy(report),context=copy.deepcopy(context),requested_steps=3,
             attempt_tree_sha256=payload['attempt_tree_sha256'],raw_preserved=True)
@@ -385,8 +386,8 @@ def test_prepared_helper_fixed_namespace_hash_response_and_failures(fixture_camp
         with pytest.raises(ValueError): module._semantic_evaluation(parent/'v1',config,3,execution['guard_receipt'])
 
 
-@pytest.mark.parametrize('inner',['/workspace/compute_metabolism/v0/artifacts/gcp-test/round-08/r0/v1',
-    '/workspace/compute_metabolism/v0/artifacts/gcp-test/round-01/r0/../v1', '/tmp/foreign/v1'])
+@pytest.mark.parametrize('inner',['/workspace/compute_metabolism/v0/artifacts/operational/gcp-test/round-08/r0/v1',
+    '/workspace/compute_metabolism/v0/artifacts/operational/gcp-test/round-01/r0/../v1', '/tmp/foreign/v1'])
 def test_helper_refuses_unapproved_namespace_without_evaluation(monkeypatch,inner):
     module=api()
     import io
@@ -623,3 +624,109 @@ def test_same_size_publication_receipt_substitution_is_preserved_and_stops(fixtu
     assert {name:item for name,item in after.items() if not Path(name).is_relative_to(Path(root.name)/'analysis')}==raw_before
     assert status['output_accounting']['output_bytes']==sum(path.stat().st_size for path in destination.iterdir())
     assert status['output_accounting']['projected_upper_bytes']==campaign.logical_tree_bytes(root.parent)
+
+
+@pytest.mark.parametrize('adaptive',[False,True])
+@pytest.mark.parametrize('mutation',['none','missing_epoch','extra','missing_base','epoch_without_saved_epoch'])
+def test_epoch_saved_helper_exact_source_inventory(tmp_path,monkeypatch,adaptive,mutation):
+    """Only the external helper origin/evaluator boundary is TEST_ONLY mocked."""
+    module=api();root=tmp_path/'attempt/v1';root.mkdir(parents=True)
+    identity_config={'gate_source_snapshot':{}}
+    if adaptive:identity_config['adaptive_version']='COMPUTE_METABOLISM_ADAPTIVE_V1'
+    names=set(campaign.identity_names(identity_config))
+    if mutation=='missing_epoch':names.remove(campaign._EPOCH_IDENTITY_FILES[0])
+    elif mutation=='extra':names.add('compute_metabolism/v0/arbitrary_override.py')
+    elif mutation=='missing_base':names.remove(campaign._IDENTITY_FILES[0])
+    saved_env={} if mutation=='epoch_without_saved_epoch' else {'source_epoch':{'TEST_ONLY':True}}
+    put(root/'campaign-environment.json',saved_env);put(root/'reference.json',{'TEST_ONLY':True})
+    tree=inventory(root.parent)
+    request=dict(root='/TEST_ONLY/v1',requested_steps=1,
+        attempt_tree_sha256=module._tree(root.parent)['sha256'],analysis_source_sha256='b'*64,
+        source_sha256={name:'a'*64 for name in names})
+    output=io.BytesIO();monkeypatch.setattr(module,'sys',types.SimpleNamespace(
+        stdin=types.SimpleNamespace(buffer=io.BytesIO(json.dumps(request).encode())),
+        stdout=types.SimpleNamespace(buffer=output)))
+    monkeypatch.setattr(module,'__file__','/workspace/compute_metabolism/v0/analyze.py')
+    monkeypatch.setattr(campaign,'_helper_root',lambda _:root)
+    checked=[];frozen_read=campaign._frozen_read
+    def read(path,digest):
+        if Path(path).is_relative_to(root):return frozen_read(path,digest)
+        checked.append(str(path))
+        return b''
+    monkeypatch.setattr(campaign,'_frozen_read',read)
+    from compute_metabolism.v0 import run_v1
+    for name,dependency in [('campaign',campaign),('run_v1',run_v1)]:
+        origin=f'/workspace/compute_metabolism/v0/{name}.py'
+        monkeypatch.setattr(dependency,'__file__',origin)
+        monkeypatch.setattr(dependency.__spec__,'origin',origin)
+    calls=[]
+    monkeypatch.setattr(run_v1,'evaluate_v1_evidence',lambda *_:calls.append('evaluation') or {'TEST_ONLY':True})
+    monkeypatch.setattr(campaign,'_saved_classification_context',lambda _:dict(TEST_ONLY=True))
+    if mutation=='none':
+        module._evaluation_helper()
+        response=json.loads(output.getvalue())
+        assert response['raw_preserved'] is True and calls==['evaluation']
+        assert set(checked[1:])=={str(Path('/workspace')/name) for name in names}
+    else:
+        with pytest.raises(ValueError,match='complete helper source binding'):module._evaluation_helper()
+        assert calls==[] and output.getvalue()==b''
+    assert inventory(root.parent)==tree
+
+
+@pytest.mark.parametrize('adaptive',[False,True])
+@pytest.mark.parametrize('mutation',['none','missing_epoch','extra'])
+@pytest.mark.parametrize('cpu_mode',['current','legacy'])
+def test_epoch_saved_attempt_exact_host_dependency_inventory(fixture_campaign,monkeypatch,adaptive,mutation,cpu_mode):
+    module=api();root,config,add=fixture_campaign
+    parent=add(outcome='ENVIRONMENT_INVALID' if cpu_mode=='legacy' else 'ACCEPT')
+    config['gate_source_snapshot']={}
+    if adaptive:config['adaptive_version']='COMPUTE_METABOLISM_ADAPTIVE_V1'
+    repo=Path(config['repo_root'])
+    for name in campaign.identity_names(config):
+        if name not in config['identities']:
+            config['identities'][name]=dict(path=str(repo/name),sha256='a'*64)
+    names={'profiles','system_guard','source_epoch','historical_profile','evex_profile','gala_origin_check'}
+    if adaptive:names|={'adaptive','profile_verify'}
+    if mutation=='missing_epoch':names.remove('source_epoch')
+    elif mutation=='extra':
+        names.add('arbitrary_override')
+        config['identities']['compute_metabolism/v0/arbitrary_override.py']=dict(
+            path=str(repo/'compute_metabolism/v0/arbitrary_override.py'),sha256='a'*64)
+    modules={name:dict(origin=str(repo/f'compute_metabolism/v0/{name}.py'),
+        spec_origin=str(repo/f'compute_metabolism/v0/{name}.py'),
+        expected_origin=str(repo/f'compute_metabolism/v0/{name}.py'),
+        sha256=config['identities'][f'compute_metabolism/v0/{name}.py']['sha256'],
+        expected_sha256=config['identities'][f'compute_metabolism/v0/{name}.py']['sha256']) for name in names}
+    execution_path=parent/'execution.json';execution=json.loads(execution_path.read_bytes())
+    execution.update(identities_before=copy.deepcopy(config['identities']),
+        identities_after={name:item['sha256'] for name,item in config['identities'].items()},
+        host_dependencies_before=dict(status='VALID',modules=modules),
+        host_dependencies_after=dict(status='VALID',modules=modules))
+    if cpu_mode=='legacy':
+        execution['classification']=campaign.classify_attempt(execution['admission_report'],
+            execution['guard_receipt'],execution['retained_bytes'],preserve_legacy_cpu=True)
+    for _ in range(32):
+        put(execution_path,execution);retained=campaign.logical_tree_bytes(parent)
+        if execution['retained_bytes']==retained:break
+        execution['retained_bytes']=retained
+    else:raise AssertionError('test receipt size convergence')
+    row=copy.deepcopy(campaign.CampaignLedger.read_snapshot(Path(config['ledger_path']))['attempts'][0])
+    row.update(execution_sha256=hashlib.sha256(execution_path.read_bytes()).hexdigest(),retained_bytes=retained)
+    if cpu_mode=='legacy':
+        for key in ('cpu_accounting_version','cpu_measurement_status','cpu_measurement_error'):row.pop(key,None)
+        row.update(execution['classification'],cpu_seconds=None)
+    fake_semantics(monkeypatch,module);before=inventory(root.parent)
+    result=module._attempt(row,config,root,True)
+    if mutation=='none':
+        if cpu_mode=='current':assert result['analysis_eligible'] is True, result['issues']
+        else:
+            assert result['analysis_eligible'] is False
+            assert any('fault outcome is not admissible' in issue for issue in result['issues'])
+            assert result['verified_classification']['wrapper_outcome']=='ENVIRONMENT_INVALID'
+        expected_cpu=None if cpu_mode=='legacy' else 5.0
+        assert result['verified_classification'].get('cpu_seconds')==expected_cpu
+        assert row['cpu_seconds']==expected_cpu
+    else:
+        assert result['analysis_eligible'] is False
+        assert any('complete imported host source evidence' in issue for issue in result['issues'])
+    assert inventory(root.parent)==before

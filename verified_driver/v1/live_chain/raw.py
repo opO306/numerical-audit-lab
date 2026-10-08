@@ -55,7 +55,13 @@ def _past_shadow(rows,start):
 
 def validate_edge(checkpoint,pred,root):
     checkpoint=Path(checkpoint); root=Path(root)
-    doc=verify_checkpoint(checkpoint); event=BarrierEvent(**doc['event']); metadata=doc['metadata']; capture=metadata['capture']
+    doc=verify_checkpoint(checkpoint)
+    from verified_driver.v1.native_evex_profile import admit_capture
+    admitted=admit_capture(doc['metadata']['capture'],root)
+    if admitted is not None:
+        from verified_driver.v1.native_evex_raw import validate_edge as finite_edge
+        return finite_edge(checkpoint,pred,root,admitted)
+    event=BarrierEvent(**doc['event']); metadata=doc['metadata']; capture=metadata['capture']
     r.require(event.completed_step==pred.step_index+1 and event.predecessor_id==pred.content_hash and event.requested_steps==pred.requested_steps,'immediate certified predecessor/step')
     r.require(pred.barrier_kind!='FINAL_TERMINAL','terminal predecessor cannot authorize a body')
     snap=event.checkpoint_state; k=event.completed_step

@@ -463,3 +463,81 @@ Compute Metabolism V0의 GCP primary 결과를 `COMPLETE`로 제출하려면 다
 Git에서 새 파일은 본 spec1개뿐이며 기존 tracked 변경과 staged 변경은 없다. `git diff --check` exit0을 확인했고, untracked인 본 문서도 별도로 trailing whitespace0을 확인했다. implementation plan, `compute_metabolism/` 계층, ledger 또는 campaign artifacts를 만들지 않았다. 확인에 사용한 inventory와 source hashing은 read-only inspection이며 numerical test/benchmark나 guarded campaign execution으로 기록하지 않았다.
 
 본 제출은 승인된 written design spec 한 문서이다. wrapper 코드, ledger 및 campaign artifacts를 생성하지 않고 warm-up/benchmark/로컬 실험을 실행하지 않는다. staging/commit/push를 수행하지 않는다. **implementation plan의 설계자 검토·승인 전에는 구현으로 넘어가지 않는다.**
+
+
+## 2026-10-07 Operational namespace amendment (승인된 변경 기록)
+
+Task 9 최초 운영 ledger 초기화는 `artifacts/budget.json`이 없고 그 부모에 보존된 Task 8 TEST_ONLY evidence가 있어 `missing upper ledger in nonempty artifact root; reset refused`로 STOP했다. 기존 승인 내용과 evidence를 보존하면서 이 충돌을 해소하기 위해, 2026-10-07 승인으로 운영 namespace를 아래와 같이 분리한다. 이 amendment는 위의 기존 `artifacts/budget.json` 및 campaign 배치 설명을 운영 실행에 한해 대체하며, 기존 설명은 변경 이력으로 남긴다.
+
+- 운영 retained root: `compute_metabolism/v0/artifacts/operational/`.
+- 유일한 운영 upper ledger: `compute_metabolism/v0/artifacts/operational/budget.json`.
+- 실제 campaign config/identity/inputs, warmup, rounds, analysis 및 후속 metadata는 `operational/<campaign-id>/` 아래에 둔다.
+- 승인된 누적 guarded wall 4200초와 retained evidence 3 GiB = 3,221,225,472 bytes는 이 operational subtree에만 적용한다. Task 8 TEST_ONLY sibling evidence는 현재 위치에서 이동·삭제·수정하지 않고 운영 사용량에 소급 산입하지 않는다.
+- `CampaignLedger.open()`의 missing ledger + nonempty ledger root 거부 규칙은 그대로 유지한다. `operational/` 자체가 nonempty이면 ledger가 없어도 초기화가 거부되며, 운영 evidence가 있는 상태에서 budget만 삭제해 재생성하거나 새 campaign ID로 allowance를 얻을 수 없다.
+- V1 source/numerical contract, system guard CPU/memory/swap 계약과 180초 deadline, 640 MiB writer, 96 MiB post-run threshold는 변경하지 않는다.
+- 이번 실행 승인은 review 후 필요한 변경 배포와 운영 ledger 초기화 1회까지만 포함한다. Gala N=1 warm-up 및 Task 10은 이번 amendment 실행에서 시작하지 않는다.
+
+
+## 2026-10-07 Environment identity + campaign restart amendment (승인된 변경 기록)
+
+Task 9의 첫 warm-up은 준비 당시 platform 문자열과 현재 live platform의 차이를 영구 runtime identity 불일치로 판정하여 ENVIRONMENT_INVALID로 STOP했다. prepared execution-environment.json은 당시 provenance로 원본 bytes/hash를 보존한다. 아래 변경은 이전 승인 설명을 지우거나 실패 이력을 덮어쓰지 않고, prepared identity와 campaign 동안 유지할 live identity를 분리한다.
+
+- Prepared exact identity: Python version/executable, installed package set/version, pinned runtime file hashes, V1 source count/binding/source match. 준비 당시 platform은 provenance이며 exact-match 기준에서 제외한다.
+- 새 formal campaign 초기화 직전 live observation으로 얻은 platform을 campaign-environment.json에 저장하고 config/input SHA-256으로 bind한다. 특정 kernel/platform 문자열을 source에 하드코딩하지 않는다. 모든 attempt에서 live platform과 campaign platform, before/after platform, instance ID, boot ID, topology가 일치해야 한다.
+- 기존 operational/budget.json 하나를 계속 사용한다. 새 campaign은 명시적 restart_from_campaign_id 및 restart_from_finalization_sha256을 config에 bind하고, 현재 campaign의 durable STOP finalization 및 proof hashes를 검증한 경우에만 생성한다. RUNNING은 null, 모든 기존 attempts는 FINISHED여야 하며, 새 ID는 달라야 하고 새 namespace는 없어야 한다. finalization/proof의 campaign/config, attempts, wall 및 STOP 정책 근거도 검증한다.
+- 기존 binding을 formal_campaign_history에 보존하고 predecessor STOP identity와 successor binding을 campaign_restarts에 추가한다. 기존 attempt/finalization/evidence는 변경하지 않는다. 역사 campaign은 읽기 전용으로 조회할 수 있지만 run-next 실행 권한은 없다.
+- 기존 guarded wall 1.0627413820002403초와 retained accounting/history를 이어간다. 새 campaign은 추가 allowance나 reset을 발급하지 않으며 총 4200초/3 GiB, 180초 deadline, 640 MiB writer reservation, 96 MiB retained threshold, 4 GiB memory/swap 0은 유지한다. CampaignLedger.open()의 reset 거부 계약, V1 source/numerical contract 및 system_guard CPU 계약은 변경하지 않는다.
+- 이번 승인 실행은 RED → 최소 구현 → 관련 회귀 GREEN → fresh read-only review 후 필요한 wrapper/spec/plan 배포, live environment 재확인, successor formal campaign 정확히 1개 초기화 및 accounting/history 연속성 확인까지다. 이후 STOP한다. 두 번째 N=1 Gala warm-up, Task 10, Task 8 probe 반복, staging/commit/push는 포함하지 않는다.
+
+## 2026-10-07 Adaptive execution and validation amendment
+
+후속 Task 9에서 같은 pinned libc의 새 CPU 경로가 기존 frozen trace 계약 밖으로 나왔고, 결과 정리 helper의 `/usr/bin/env` 부재 및 실패 CPU 비용의 null 기록도 확인됐다. 설계자는 적응형 프로필 저장소·탐지·고정·격리 관찰·후보 생성·독립 승격 gate와 두 wrapper 결함을 하나의 정비 범위로 승인했다. 이전 STOP/evidence와 예산은 보존하며, 상세 계약은 `2026-10-07-compute-metabolism-adaptive-design.md`, 구현 절차는 대응 adaptive plan에 추가 기록한다.
+
+VERIFIED profile은 기존 V1 검증을 대체하지 않는다. 호출 출처·ELF 경로·입력 범위를 추가 제한하고, 기존 producer/native checker/CURRENT publication 계약을 유지한다. 관찰은 certified state를 생성하지 않는다. 독립 증명 없는 EVEX 결과는 CANDIDATE이며 warm-up 권한이 없다. 새 실행부터 유효한 guard CPU 비용은 수치 성공 여부와 별개로 저장하고, 역사 null/UNAVAILABLE은 그대로 둔다. 새 formal campaign은 선택 profile ID/manifest hash와 환경 지문을 고정하고 동일한 operational upper allowance를 이어간다.
+
+## 2026-10-08 execution ownership amendment (append-only)
+
+The actual Gala observation `observation-gala-evex-01` stopped before child creation:
+its root-owned 0755 attempt directory could not be written by UID 1000 / GID 1003.
+This is an orchestration failure, not a verdict about the new CPU path. Preserve
+that attempt, its STOP finalizations, unavailable measurements and all old evidence.
+
+One immutable system-unit execution identity must supply both systemd credentials
+and artifact ownership. Exclusively create the run directory and writer quota,
+restrict them to 0700 and 0600, apply the execution owner's UID/GID, then read actual
+ownership/type/mode back. Recheck both filesystem ownership and systemd argv identity
+before launch. Preparation failure or mismatch refuses before starting any unit.
+No 0777, user-unit fallback, CPU contract change or EVEX semantic change is authorized.
+
+`system_guard.py` is outside the 49-file V1 numerical source snapshot but inside the
+complete gate source authority. Keep the physical V1 binding 104578c1... and its old
+receipts unchanged; issue a fresh guard-inclusive gate binding, source-epoch hash,
+review and regression receipts. A different V1 digest must not be invented for
+unchanged V1 bytes. The new campaign binds the complete new gate manifest.
+
+Only GCP executes permission tests, related regression and numerical work. After
+CLEAN review, first perform a small system-unit file-write check without Gala or a
+Task 8 CPU/timeout rerun. Then initialize one explicitly last-STOP-linked successor
+on the existing upper ledger (16.948194404001697 seconds, four attempts, 9210281 bytes
+at authorization). No new allowance or reset. Observe one original Gala call in
+uncertified mode. Independent promotion must close all original call/library/input,
+13 instruction, complete state/effect and negative-test obligations. Failure STOPs.
+Only VERIFIED permits one fresh 2C N=1 warm-up; if an observation STOP requires it,
+one additional same-upper STOP-linked successor is authorized. Stop after that N=1
+regardless of result. N=3, Task 10, staging, commit and push remain unauthorized.
+### STOP-linked observation-only successor clarification
+
+The original APIs require a STOP owned by the current formal campaign and a
+VERIFIED execution profile for numerical campaigns. A fresh unknown-route successor
+has neither. The authorized connection therefore declares OBSERVATION_ONLY in its
+frozen config and binds exactly one run ID, profile 2C, no certified state progress,
+fingerprint, source epoch, registry and GDB hashes. It supplies no execution profile.
+Initialization still verifies the explicit predecessor STOP with the existing full
+history/hash/allowance checks. The first observation rechecks its unique recorded
+restart link using a read-only predecessor view; it never writes that view to the
+ledger. Zero own attempts, no own closing receipt, all prior attempts FINISHED and
+RUNNING null are required. A second observation cannot consume this authority.
+Numerical run_next is refused before launch. The observation policy has no numerical
+next item and records a genuine single-authorization STOP without changing the raw
+observation outcome. A subsequent numerical successor must bind an independently
+VERIFIED profile and that observation STOP; ordinary campaign policy is unchanged.

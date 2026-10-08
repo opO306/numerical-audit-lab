@@ -32,6 +32,11 @@ def main():
     ns={'__file__':str(path),'__name__':'verified_driver.v1.live_chain._reviewed_collector_definitions'}
     exec(compile(ast.Module(body=nodes,type_ignores=[]),str(path),'exec'),ns)
     Capture=ns['Capture']; base=ns['base']; Refused=ns['Refused']
+    from verified_driver.v1.native_evex_profile import admit_environment
+    native_binding=admit_environment(root,n)
+    if native_binding is not None:
+        from verified_driver.v1.native_evex_collector import make_capture
+        Capture=make_capture(Capture,gdb,native_binding)
     for command in ('set pagination off','set confirm off','set breakpoint pending on','set disassembly-flavor att',
         'set print symbol-filename on','set debuginfod enabled off','set non-stop off','set startup-with-shell off'):
         gdb.execute(command)
@@ -80,6 +85,9 @@ def main():
               'acquisition_id':event.session_id,'source_pinset_sha256':content_id(self.sources),
               'harness_source_proof':harness_source(root)[1],'guard_source_transformations':ns['guard_proofs'],
               'machine_mapping_read_by_tracer':False,'harness_completed_normally':False,'gdb_exit_event':None}
+            if native_binding is not None:
+                capture.update(native_profile_binding=c.native_profile_binding,
+                    native_evex_control_witness=c.native_evex_control_witness,native_evex_spans=c.native_spans)
             metadata={'source_snapshot':self.sources,'source_binding':content_id(self.sources),'capture':capture,'evidence_role':'LIVE',
               'retained_gaps':['init-return -> step1-entry','terminal frontier -> wrapper tail']}
             name=f'metadata-{k}.json'; write(out/name,metadata)

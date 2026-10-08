@@ -11,12 +11,14 @@ import json
 import os
 from pathlib import Path, PurePosixPath
 import re
+import select
 import signal
+import stat
 import subprocess
 import sys
 import time
 import uuid
-from typing import Sequence
+from typing import NamedTuple, Sequence
 
 from .profiles import CampaignLimits, ProfileSpec, get_profile, parse_cpu_list, parse_cpu_max
 
@@ -24,8 +26,57 @@ CGROUP_ROOT = Path('/sys/fs/cgroup')
 PREPARED_ROOT = Path('/home/zun24/compute-metabolism-v0-prepared-20261006/rootfs')
 INNER_PYTHON = '/home/otherside123/venvs/gate2c1-trace/bin/python'
 ARTIFACT_ROOT = PurePosixPath('/workspace/compute_metabolism/v0/artifacts')
-CPU_COUNTERS = ('usage_usec', 'user_usec', 'system_usec', 'nr_periods', 'nr_throttled', 'throttled_usec')
+CPU_BASE_COUNTERS = ('usage_usec', 'user_usec', 'system_usec')
+CPU_COUNTERS = CPU_BASE_COUNTERS + ('nr_periods', 'nr_throttled', 'throttled_usec')
 UNIT_PATTERN = re.compile(r'compute-metabolism-[A-Za-z0-9_-]+\.service\Z')
+
+
+class UnitExecutionIdentity(NamedTuple):
+    uid: int
+    gid: int
+
+
+# One contract supplies both systemd credentials and artifact ownership.
+SYSTEM_UNIT_IDENTITY = UnitExecutionIdentity(1000, 1003)
+
+
+def validate_artifact_ownership(artifact_dir: Path) -> dict:
+    identity = SYSTEM_UNIT_IDENTITY
+    records = {}
+    for path, mode, directory in ((Path(artifact_dir), 0o700, True),
+            (Path(artifact_dir) / 'writer_quota.txt', 0o600, False)):
+        info = path.lstat()
+        if (not (stat.S_ISDIR(info.st_mode) if directory else stat.S_ISREG(info.st_mode))
+                or (not directory and info.st_nlink != 1)
+                or (info.st_uid, info.st_gid) != identity
+                or stat.S_IMODE(info.st_mode) != mode):
+            raise ValueError('artifact ownership/type/private permissions mismatch: ' + str(path))
+        records['directory' if directory else 'writer_quota'] = dict(
+            path=str(path), uid=info.st_uid, gid=info.st_gid, mode=mode)
+    return records
+
+
+def prepare_artifact_ownership(artifact_dir: Path) -> dict:
+    """Prepare newly created artifacts; fail before starting any system unit."""
+    identity = SYSTEM_UNIT_IDENTITY
+    for path, mode, directory in ((Path(artifact_dir), 0o700, True),
+            (Path(artifact_dir) / 'writer_quota.txt', 0o600, False)):
+        info = path.lstat()
+        if (not (stat.S_ISDIR(info.st_mode) if directory else stat.S_ISREG(info.st_mode))
+                or (not directory and info.st_nlink != 1)):
+            raise ValueError('artifact ownership preparation requires unaliased directory/file')
+        # Restrict access before changing owner, including when the caller is root.
+        os.chmod(path, mode, follow_symlinks=False)
+        if (info.st_uid, info.st_gid) != identity:
+            os.chown(path, identity.uid, identity.gid, follow_symlinks=False)
+    return validate_artifact_ownership(artifact_dir)
+
+
+def _validate_unit_execution_identity(argv: Sequence[str]) -> None:
+    identity = SYSTEM_UNIT_IDENTITY
+    if ([x for x in argv if x.startswith('--uid=')] != [f'--uid={identity.uid}']
+            or [x for x in argv if x.startswith('--gid=')] != [f'--gid={identity.gid}']):
+        raise ValueError('system unit execution identity differs from artifact ownership contract')
 
 
 def _approved(profile: ProfileSpec, limits: CampaignLimits | None = None) -> CampaignLimits:
@@ -76,7 +127,7 @@ def build_systemd_run_argv(profile: ProfileSpec, *, unit_name: str,
         'RTN_QUOTA_FILE': str(artifact_dir / 'writer_quota.txt'), 'RTN_QUOTA_BYTES': str(limits.writer_bytes),
     }
     return ['sudo', '-n', 'systemd-run', '--quiet', '--wait', '--pipe', '--collect',
-            '--uid=1000', '--gid=1003', f'--unit={unit_name}',
+            f'--uid={SYSTEM_UNIT_IDENTITY.uid}', f'--gid={SYSTEM_UNIT_IDENTITY.gid}', f'--unit={unit_name}',
             *(f'--property={key}={value}' for key, value in props.items()),
             *(f'--setenv={key}={value}' for key, value in env.items()),
             INNER_PYTHON, '-m', 'compute_metabolism.v0.system_guard', 'inner',
@@ -152,15 +203,22 @@ def _limit_scan(cgroup_path: Path, name: str) -> dict:
             'scan_root': str(CGROUP_ROOT.resolve())}
 
 
-def _counters(raw: str, required: Sequence[str]) -> dict:
+def _counters(raw: str, required: Sequence[str], *, source_file: str, cgroup_path: Path) -> dict:
     result = {}
     for line in raw.splitlines():
         key, value = line.split()
         if key in result:
             raise ValueError('duplicate cgroup counter')
         result[key] = _uint(value)
-    if any(key not in result for key in required):
-        raise ValueError('missing cgroup counter')
+    missing = [key for key in required if key not in result]
+    if missing:
+        error = ValueError('missing cgroup counter')
+        error.counter_failure = {
+            'source_file': source_file, 'required_counters': list(required),
+            'found_counters': list(result), 'missing_counters': missing,
+            'raw_text': raw, 'cgroup_path': str(cgroup_path),
+        }
+        raise error
     return result
 
 
@@ -169,42 +227,194 @@ def _epoch(path: Path) -> dict:
     return {'path': str(path.resolve()), 'device': stat.st_dev, 'inode': stat.st_ino, 'boot_id': _boot_id()}
 
 
+def _cgroup_membership(path: Path) -> dict:
+    started = time.monotonic_ns()
+    epoch = _epoch(path)
+    files = sorted({path / 'cgroup.procs', *path.glob('**/cgroup.procs')})
+    rows, pids = [], set()
+    if len(files) > 1024:
+        raise ValueError('bounded cgroup membership inventory exceeded')
+    for file in files:
+        begin = time.monotonic_ns()
+        before = file.stat()
+        raw = file.read_text()
+        after = file.stat()
+        if ((before.st_dev, before.st_ino) != (after.st_dev, after.st_ino)
+                or len(raw.encode()) > 65536):
+            raise ValueError('cgroup membership file identity/size changed')
+        values = raw.split()
+        if any(not x.isascii() or not x.isdigit() or int(x) <= 0 for x in values):
+            raise ValueError('invalid cgroup process identity')
+        pids.update(map(int, values))
+        rows.append(dict(path=str(file), raw=raw, begin_ns=begin,
+                         end_ns=time.monotonic_ns(), device=before.st_dev, inode=before.st_ino))
+    if epoch != _epoch(path) or files != sorted({path / 'cgroup.procs', *path.glob('**/cgroup.procs')}):
+        raise ValueError('cgroup membership epoch/inventory changed')
+    return dict(epoch=epoch, files=rows, pids=sorted(pids),
+                begin_ns=started, end_ns=time.monotonic_ns())
+
+
 def _cgroup_pids(path: Path) -> list[int]:
-    files = [path / 'cgroup.procs', *path.glob('**/cgroup.procs')]
-    return sorted({int(pid) for file in files for pid in file.read_text().split()})
+    return _cgroup_membership(path)['pids']
+
+
+class _ProcessWitness:
+    """Pinned proc directory plus a birth-bound, whole-process pidfd."""
+    def __init__(self, pid: int, path: Path):
+        self.pid, self.procfd, self.pidfd = pid, None, None
+        self.samples = []
+        try:
+            self.procfd = os.open(f'/proc/{pid}', os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC)
+            first = self.identity()
+            self.pidfd = os.pidfd_open(pid, 0)
+            second = self.identity()
+            current = _process_identity(pid)
+            if not (first['start_ticks'] == second['start_ticks'] == current['start_ticks']):
+                raise ValueError('PID reuse during pidfd binding')
+            self.start_ticks = first['start_ticks']
+        except BaseException:
+            self.close()
+            raise
+
+    def _read(self, name: str) -> str:
+        fd = os.open(name, os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC, dir_fd=self.procfd)
+        try:
+            stream = os.fdopen(fd, 'r', encoding='utf-8')
+        except BaseException:
+            os.close(fd)
+            raise
+        with stream:
+            raw = stream.read(65537)
+        if len(raw.encode('utf-8')) > 65536:
+            raise ValueError('bounded proc identity record exceeded')
+        return raw
+
+    def identity(self) -> dict:
+        begin = time.monotonic_ns()
+        raw = self._read('stat')
+        fields = raw.rsplit(')', 1)[1].split()
+        if int(raw.split(' ', 1)[0]) != self.pid or len(fields) < 20 or not fields[19].isdigit():
+            raise ValueError('invalid pinned process stat identity')
+        value = dict(pid=self.pid, start_ticks=fields[19], state=fields[0])
+        self.samples.append(dict(kind='stat', begin_ns=begin, end_ns=time.monotonic_ns(),
+                                 raw=raw, identity=value, ppid=int(fields[1])))
+        return value
+
+    def cgroup(self) -> str:
+        begin = time.monotonic_ns()
+        raw = self._read('cgroup')
+        self.samples.append(dict(kind='cgroup', begin_ns=begin,
+                                 end_ns=time.monotonic_ns(), raw=raw))
+        return raw
+
+    def exit_events(self) -> list:
+        poller = select.poll()
+        poller.register(self.pidfd, select.POLLIN)
+        events = poller.poll(0)
+        if events and (len(events) != 1 or events[0][0] != self.pidfd
+                or not events[0][1] & select.POLLIN
+                or events[0][1] & ~(select.POLLIN | select.POLLHUP)):
+            raise ValueError('process pidfd exit authority unknown')
+        return events
+
+    def close(self) -> None:
+        error = None
+        for name in ('pidfd', 'procfd'):
+            fd = getattr(self, name)
+            if fd is not None:
+                try:
+                    os.close(fd)
+                except OSError as exc:
+                    error = exc
+                finally:
+                    setattr(self, name, None)
+        if error is not None:
+            raise error
+
+
+def _owned_process_cgroup(witness, path: Path) -> str:
+    raw = witness.cgroup()
+    lines = [line[3:] for line in raw.splitlines() if line.startswith('0::')]
+    if len(lines) != 1 or not lines[0].startswith('/') or PurePosixPath(lines[0]).as_posix() != lines[0]:
+        raise ValueError('process cgroup authority unknown')
+    if any(x in ('.', '..') for x in lines[0].split('/')[1:]):
+        raise ValueError('process cgroup path alias')
+    if '(deleted)' in lines[0]:
+        raise ValueError('deleted process cgroup refused')
+    actual = CGROUP_ROOT / lines[0].lstrip('/')
+    if not actual.is_dir() or actual.resolve(strict=True) != actual:
+        raise ValueError('process cgroup directory authority unknown')
+    if actual != path and path not in actual.parents:
+        raise ValueError('live process outside owned cgroup')
+    return raw
 
 
 def _sample_processes(path: Path, enumerated: list[int]) -> tuple[dict, dict, list[int]]:
     identities, observations = {}, {}
     for pid in enumerated:
+        witness, evidence = None, dict(pid=pid)
         try:
-            first = _process_identity(pid)
-            member = pid in _cgroup_pids(path)
-            second = _process_identity(pid)
-            if first['start_ticks'] != second['start_ticks']:
-                raise ValueError(f'PID reuse during sample: {first!r} -> {second!r}')
-            if not member or pid not in _cgroup_pids(path):
-                # A zombie can remain in /proc after leaving cgroup.procs.
-                if pid != os.getpid() and second.get('state') == 'Z':
-                    observations[str(pid)] = {'status': 'exited_during_sample', 'observed_identity': second}
-                    continue
-                raise ValueError(f'process membership authority unknown: {second!r}')
-            identities[str(pid)] = second
-            observations[str(pid)] = {'status': 'stable', 'identity': second}
-        except (FileNotFoundError, ProcessLookupError):
-            if pid == os.getpid() or pid in _cgroup_pids(path):
-                raise ValueError(f'process identity authority unknown: PID {pid}') from None
-            observations[str(pid)] = {'status': 'exited_during_sample', 'identity': None}
+            witness = _ProcessWitness(pid, path)
+            first = witness.identity()
+            evidence['first_identity'] = first
+            evidence['first_cgroup'] = _owned_process_cgroup(witness, path)
+            membership1 = _cgroup_membership(path)
+            second = witness.identity()
+            evidence['second_identity'] = second
+            evidence['second_cgroup'] = _owned_process_cgroup(witness, path)
+            membership2 = _cgroup_membership(path)
+            evidence.update(membership1=membership1, membership2=membership2)
+            if not (first['start_ticks'] == second['start_ticks'] == witness.start_ticks):
+                raise ValueError('PID reuse during sample')
+            events = witness.exit_events()
+            if pid in membership1['pids'] and pid in membership2['pids'] and not events:
+                identities[str(pid)] = second
+                observations[str(pid)] = dict(status='stable', identity=second)
+            else:
+                if pid == os.getpid() or not events:
+                    raise ValueError(f'process membership authority unknown: {second!r}')
+                # POLLIN precedes terminal membership: leader Z alone does not
+                # prove that every thread has exited. A reaped proc is refused.
+                terminal = witness.identity()
+                terminal_cgroup = _owned_process_cgroup(witness, path)
+                if terminal['start_ticks'] != witness.start_ticks or terminal['state'] not in ('Z', 'X'):
+                    raise ValueError('terminal process identity authority unknown')
+                evidence.update(basis='BOUND_PROCESS_PIDFD_AND_TERMINAL_OWNED_CGROUP',
+                                terminal_identity=terminal, terminal_cgroup=terminal_cgroup,
+                                pidfd_events=events, process_samples=getattr(witness, 'samples', []))
+                observations[str(pid)] = dict(status='exited_during_sample',
+                                              observed_identity=terminal, exit_evidence=evidence)
+        except (FileNotFoundError, ProcessLookupError) as exc:
+            error = ValueError(f'process identity authority unknown: PID {pid}; positive terminal membership unavailable')
+            error.process_evidence = evidence
+            raise error from exc
+        except ValueError as exc:
+            exc.process_evidence = evidence
+            if witness is not None:
+                evidence['process_samples'] = getattr(witness, 'samples', [])
+            raise
+        finally:
+            if witness is not None:
+                witness.close()
     current = _cgroup_pids(path)
     for pid in current:
+        if observations.get(str(pid), {}).get('status') == 'exited_during_sample':
+            raise ValueError('PID reappeared after proven process termination')
         if pid not in enumerated:
-            observations[str(pid)] = {'status': 'appeared_during_sample', 'identity': None}
+            observations[str(pid)] = dict(status='appeared_during_sample', identity=None)
     if os.getpid() in enumerated and str(os.getpid()) not in identities:
         raise ValueError('wrapper process identity authority unavailable')
     return identities, observations, current
 
 
-def read_cgroup_snapshot(cgroup_path: Path) -> dict:
+def read_cgroup_snapshot(cgroup_path: Path, *, profile: ProfileSpec | None = None) -> dict:
+    # Legacy callers retain the strict full set; only approved unlimited
+    # profiles may omit controller-dependent bandwidth counters.
+    required_cpu = CPU_COUNTERS
+    if profile is not None:
+        _approved(profile)
+        if profile.quota_percent is None:
+            required_cpu = CPU_BASE_COUNTERS
     path = cgroup_path.resolve(strict=True)
     epoch = _epoch(path)
     raw = {name: (path / name).read_text() for name in (
@@ -212,13 +422,20 @@ def read_cgroup_snapshot(cgroup_path: Path) -> dict:
         'memory.current', 'memory.peak', 'memory.events', 'cgroup.procs', 'cgroup.events')}
     cpu_max = resolve_effective_cpu_max(path)
     raw['cpu.max'] = cpu_max['raw']
-    result = {'epoch': epoch, 'monotonic_seconds': time.monotonic(), 'raw': raw,
-              'cpus': list(parse_cpu_list(raw['cpuset.cpus.effective'].strip())),
-              'cpu_max': cpu_max, 'cpu_stat': _counters(raw['cpu.stat'], CPU_COUNTERS),
-              'memory': _limit_scan(path, 'memory.max'), 'swap': _limit_scan(path, 'memory.swap.max'),
-              'memory_current': _uint(raw['memory.current']), 'memory_peak': _uint(raw['memory.peak']),
-              'memory_events': _counters(raw['memory.events'], ('oom', 'oom_kill')),
-              'pids': _cgroup_pids(path)}
+    try:
+        result = {'epoch': epoch, 'monotonic_seconds': time.monotonic(), 'raw': raw,
+                  'cpus': list(parse_cpu_list(raw['cpuset.cpus.effective'].strip())),
+                  'cpu_max': cpu_max, 'cpu_stat': _counters(raw['cpu.stat'], required_cpu,
+                      source_file='cpu.stat', cgroup_path=path),
+                  'memory': _limit_scan(path, 'memory.max'), 'swap': _limit_scan(path, 'memory.swap.max'),
+                  'memory_current': _uint(raw['memory.current']), 'memory_peak': _uint(raw['memory.peak']),
+                  'memory_events': _counters(raw['memory.events'], ('oom', 'oom_kill'),
+                      source_file='memory.events', cgroup_path=path),
+                  'pids': _cgroup_pids(path)}
+    except ValueError as exc:
+        if hasattr(exc, 'counter_failure'):
+            exc.raw_counter_files = {name: raw[name] for name in ('cpu.stat', 'memory.events')}
+        raise
     result['enumerated_pids'] = result['pids']
     result['process_identities'], result['process_observations'], result['pids'] = _sample_processes(path, result['pids'])
     if epoch != _epoch(path):
@@ -237,6 +454,9 @@ def read_cpu_topology() -> dict:
 
 def validate_enforcement(profile: ProfileSpec, snapshot: dict, topology: dict) -> None:
     limits = _approved(profile)
+    required_cpu = CPU_BASE_COUNTERS if profile.quota_percent is None else CPU_COUNTERS
+    if any(field not in snapshot['cpu_stat'] for field in required_cpu):
+        raise ValueError('missing cgroup counter')
     if tuple(snapshot['cpus']) != profile.cpus:
         raise ValueError('CPU set mismatch')
     cpu = snapshot['cpu_max']
@@ -274,6 +494,9 @@ def validate_snapshot_pair(before: dict, after: dict) -> dict:
             raise ValueError(f'PID reuse between snapshots: {pid}')
     delta = {}
     for field in CPU_COUNTERS:
+        if (field not in CPU_BASE_COUNTERS and field not in before['cpu_stat']
+                and field not in after['cpu_stat']):
+            continue
         value = after['cpu_stat'][field] - before['cpu_stat'][field]
         if value < 0:
             raise ValueError('cgroup CPU counter reset')
@@ -378,18 +601,28 @@ def run_inner(*, profile_key: str, run_id: str, unit_name: str,
     old_handlers = {sig: signal.signal(sig, stop) for sig in (signal.SIGTERM, signal.SIGINT)}
     process = None
     path = None
+    stage = 'enable_subreaper'
     try:
         _enable_subreaper()
+        stage = 'current_cgroup_path'
         path = current_cgroup_path()
+        stage = 'validate_cgroup_identity'
         if path.name != unit_name or path.parent.name != 'system.slice':
             raise ValueError('wrapper is outside owned system.slice unit')
+        stage = 'wrapper_identity'
         result['wrapper_identity'] = _process_identity(os.getpid())
+        stage = 'read_cpu_topology'
         result['topology_before'] = read_cpu_topology()
-        result['before'] = read_cgroup_snapshot(path)
+        stage = 'read_cgroup_snapshot'
+        result['before'] = read_cgroup_snapshot(path, profile=profile)
+        stage = 'validate_enforcement'
         validate_enforcement(profile, result['before'], result['topology_before'])
+        stage = 'validate_wrapper_membership'
         if os.getpid() not in result['before']['pids']:
             raise ValueError('wrapper cgroup membership unavailable')
+        stage = 'write_before_receipt'
         _write_json(artifact_dir / 'guard-cgroup-before.json', result)
+        stage = 'child_execution'
         if stopped[0]:
             raise ValueError('wrapper interrupted before child launch')
         process = subprocess.Popen(list(command), stdin=subprocess.DEVNULL)
@@ -399,7 +632,7 @@ def run_inner(*, profile_key: str, run_id: str, unit_name: str,
                 result['child_returncode'] = process.wait(timeout=.1)
                 break
             except subprocess.TimeoutExpired:
-                running = read_cgroup_snapshot(path)
+                running = read_cgroup_snapshot(path, profile=profile)
                 # Preserve the observed violation before refusing more work.
                 with (artifact_dir / 'guard-cgroup-running.jsonl').open('a', encoding='utf-8') as stream:
                     stream.write(json.dumps(running, sort_keys=True, allow_nan=False) + '\n')
@@ -411,6 +644,30 @@ def run_inner(*, profile_key: str, run_id: str, unit_name: str,
         result['outcome'] = 'GUARD_COMPLETE' if result['child_returncode'] == 0 and not stopped[0] else 'UNRESOLVED_FAILURE'
     except Exception as exc:
         result['error'] = f'{type(exc).__name__}: {exc}'
+        diagnostic = {
+            'schema': 'compute-metabolism-v0-guard-diagnostic-v1',
+            'run_id': run_id, 'unit': unit_name, 'profile': profile_key,
+            'stage': stage, 'exception_type': type(exc).__name__,
+            'exception_message': str(exc), 'cgroup_path': str(path) if path is not None else None,
+            'wrapper_pid': os.getpid(), 'before_available': result['before'] is not None,
+            'outcome': 'ENVIRONMENT_INVALID', 'measurement_valid': False,
+        }
+        if hasattr(exc, 'process_evidence'):
+            diagnostic['process_evidence'] = exc.process_evidence
+        if hasattr(exc, 'counter_failure'):
+            diagnostic['counter_failure'] = exc.counter_failure
+            diagnostic['raw_counter_files'] = exc.raw_counter_files
+        result['diagnostic'] = diagnostic
+        try:
+            # Separate error evidence never substitutes for a final measurement.
+            _write_json(artifact_dir / 'guard-diagnostic.json', diagnostic)
+            for name, raw in diagnostic.get('raw_counter_files', {}).items():
+                with (artifact_dir / name).open('xb') as stream:
+                    stream.write(raw.encode('utf-8'))
+                    stream.flush()
+                    os.fsync(stream.fileno())
+        except Exception as write_exc:
+            diagnostic['receipt_write_error'] = _failure(write_exc)
     finally:
         try:
             if path is not None and result['before'] is not None:
@@ -442,7 +699,7 @@ def run_inner(*, profile_key: str, run_id: str, unit_name: str,
                 except Exception as exc:
                     result['final_errors'].append({'stage': 'topology', **_failure(exc)})
                 try:
-                    result['after'] = read_cgroup_snapshot(path)
+                    result['after'] = read_cgroup_snapshot(path, profile=profile)
                 except Exception as exc:
                     result['final_errors'].append({'stage': 'cgroup_snapshot', **_failure(exc)})
                 if result['after'] is not None and result['topology_after'] is not None:
@@ -572,14 +829,18 @@ def _run_outer(profile, *, run_id, artifact_dir, command, topology, root_directo
     unit = f'compute-metabolism-{uuid.uuid4().hex}.service'
     argv = build_systemd_run_argv(profile, unit_name=unit, artifact_dir=inner,
                                   command=command, root_directory=root, limits=limits)
-    path.mkdir(exist_ok=False)
-    (path / 'writer_quota.txt').write_text('0', encoding='ascii')
+    path.mkdir(mode=0o700, exist_ok=False)
+    with (path / 'writer_quota.txt').open('xb') as quota:
+        quota.write(b'0')
+    ownership = prepare_artifact_ownership(path)
+    _validate_unit_execution_identity(argv)
     result = {'run_id': run_id, 'unit': unit, 'profile': profile.key, 'argv': argv,
               'test_only': test_only, 'deadline_seconds': deadline_seconds,
               'writer_bytes': limits.writer_bytes, 'before': None, 'after': None,
               'outcome': 'ENVIRONMENT_INVALID', 'measurement_valid': False,
               'outer_timeout_proved': False, 'terminal': False, 'returncode': None,
-              'launcher_reaped': False, 'unit_states': [], 'cleanup_attempts': []}
+              'launcher_reaped': False, 'unit_states': [], 'cleanup_attempts': [],
+              'artifact_ownership': ownership}
     def cleanup():
         attempt = _stop_owned_unit(unit)
         result['cleanup_attempts'].append(attempt)
@@ -588,6 +849,9 @@ def _run_outer(profile, *, run_id, artifact_dir, command, topology, root_directo
     started = time.monotonic()
     process = None
     try:
+        # Recheck immediately before launch; a successful chown call is not proof.
+        validate_artifact_ownership(path)
+        _validate_unit_execution_identity(argv)
         # Files avoid PIPE deadlock/unbounded communicate buffering. No timeout
         # cleanup can be avoided by a child holding stdout open.
         with (path / 'systemd-stdout.log').open('xb') as stdout, (path / 'systemd-stderr.log').open('xb') as stderr:
@@ -704,6 +968,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     _artifact_path(PurePosixPath(args.artifact_dir))
     result = run_inner(profile_key=args.profile, run_id=args.run_id, unit_name=args.unit,
                        artifact_dir=args.artifact_dir, command=command)
+    if 'diagnostic' in result:
+        print(json.dumps(result['diagnostic'], sort_keys=True, allow_nan=False), file=sys.stderr, flush=True)
     return 0 if result['outcome'] == 'GUARD_COMPLETE' and result['measurement_valid'] else 2
 
 

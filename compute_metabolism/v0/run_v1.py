@@ -6,6 +6,7 @@ remains the original LIVE checker result; this wrapper never reruns it.
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 import importlib.metadata
@@ -23,6 +24,7 @@ from .profiles import (APPROVED_N3_FINAL_PUBLIC_BITS, APPROVED_V1_SOURCE_BINDING
                        CampaignLimits, get_profile)
 from runtime_trace.regular_nstep.resources import reserve_writer
 from verified_driver.v1.controller import VerifiedChainDriver
+from verified_driver.v1.gate import V1Gate
 from verified_driver.v1.model import (ChainState, canonical_bytes,
                                     content_id, digest_bytes, strict_json, check_hash)
 from verified_driver.v1.store import ChainStore
@@ -31,8 +33,43 @@ from verified_driver.v1.live_chain.session import live_source_snapshot
 
 
 APPROVED_PREPARATION_SHA256 = '4901a28b9e4e829b154970ca48077209275b3312aee0be17e53e64670515e7ec'
-RUNTIME_FIELDS = ('python', 'executable', 'packages', 'files', 'source_count', 'source_binding', 'source_matches', 'platform')
+RUNTIME_FIELDS = ('python', 'executable', 'packages', 'files', 'source_count', 'source_binding', 'source_matches')
 INPUT_NAMES = ('execution-environment.json', 'campaign-environment.json', 'reference.json')
+
+
+class ExecutionProfileGate(V1Gate):
+    """Narrow the existing gate before CHECK/CURRENT; never replace its proof."""
+    def __init__(self, profile):
+        super().__init__()
+        self.execution_profile = profile
+
+    def evaluate(self, checkpoint_id, checkpoint_dir, predecessor, derived_dir, repo_root):
+        from .adaptive import validate_native_domain
+        verify_checkpoint(checkpoint_dir,checkpoint_id)
+        rows=[strict_json(line) for line in _read(Path(checkpoint_dir)/'trace.jsonl').splitlines()]
+        validate_native_domain(self.execution_profile,rows)
+        return super().evaluate(checkpoint_id,checkpoint_dir,predecessor,derived_dir,repo_root)
+
+
+@contextmanager
+def _native_execution_environment(profile,repo_root,campaign_path,campaign_sha256,requested_steps):
+    """Install only the independently selected campaign's immutable input."""
+    from verified_driver.v1.native_evex_profile import PROFILE_ID,admit_environment
+    names=('CM_NATIVE_PROFILE_CONFIG','CM_NATIVE_PROFILE_SHA256')
+    if profile['profile_id']!=PROFILE_ID:
+        _require(not any(name in os.environ for name in names),'foreign native profile authority','ENVIRONMENT_INVALID')
+        yield None
+        return
+    previous={name:os.environ.get(name) for name in names}
+    os.environ.update(CM_NATIVE_PROFILE_CONFIG=str(campaign_path),CM_NATIVE_PROFILE_SHA256=campaign_sha256)
+    try:
+        binding=admit_environment(repo_root,requested_steps)
+        _require(binding is not None,'finite native profile admission unavailable','ENVIRONMENT_INVALID')
+        yield binding
+    finally:
+        for name,value in previous.items():
+            if value is None:os.environ.pop(name,None)
+            else:os.environ[name]=value
 
 
 @dataclass(frozen=True)
@@ -247,14 +284,19 @@ def _optional_dmi():
         return {'status': 'UNAVAILABLE', 'value': None, 'reason': f'{type(exc).__name__}: {exc}'}
 
 
-def _capture_environment(repo_root, prepared):
+def _capture_environment(repo_root, prepared, source_epoch=None):
     sources = live_source_snapshot(repo_root)
+    source_authority = APPROVED_V1_SOURCE_BINDING
+    if source_epoch is not None:
+        from .source_epoch import validate_epoch
+        current, source_authority = validate_epoch(source_epoch, repo_root)
+        _require(current == sources, 'source changed before environment acquisition', 'ENVIRONMENT_INVALID')
     raw_stat = Path('/proc/stat').read_text()
     runtime = {'python': sys.version, 'executable': sys.executable,
         'packages': {name: importlib.metadata.version(name) for name in prepared['packages']},
         'files': _runtime_file_hashes(prepared['files']),
         'source_count': len(sources), 'source_binding': content_id(sources),
-        'source_matches': content_id(sources) == APPROVED_V1_SOURCE_BINDING,
+        'source_matches': content_id(sources) == source_authority,
         'platform': platform.platform()}
     # Read the complete installed package set, so added distributions drift too.
     installed = {dist.metadata['Name']: dist.version for dist in importlib.metadata.distributions()}
@@ -269,18 +311,84 @@ def _capture_environment(repo_root, prepared):
                  'steal_ticks': _steal_ticks(raw_stat)},
         'wrapper_identity': guard._process_identity(os.getpid()),
         'thread_environment': {name: os.environ.get(name) for name in ('OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS')}}
+    if source_epoch is not None:
+        from copy import deepcopy
+        from .source_epoch import validate_environment_identity
+        result['source_epoch'] = deepcopy(source_epoch)
+        validate_environment_identity(result, prepared, source_epoch, repo_root)
     result['dmi_observation'] = _optional_dmi()
+    from .adaptive import detect_environment
+    result['execution_fingerprint'] = detect_environment(repo_root, prepared)
     if result['dmi_observation']['status'] == 'OBSERVED':
         result['dmi_identity'] = result['dmi_observation']['value']
     return result
 
 
-def _validate_environment(env, prepared, campaign, scope='LIVE'):
+def _validate_execution_profile(env, campaign, repo_root):
+    """New executions require fixed VERIFIED authority before creating a store.
+
+    This gate adds restrictions. The existing V1 raw/native/lineage/checker
+    contracts still independently authorize every state publication.
+    """
+    from . import adaptive
+    try:
+        registry = Path(repo_root)/'compute_metabolism/v0/execution_profiles'
+        expected = campaign['execution_registry_sha256']
+        _require(digest_bytes(_read(registry/'registry.json')) == expected,
+            'execution profile registry drift', 'ENVIRONMENT_INVALID')
+        profiles = adaptive.load_registry(registry, repo_root=Path(repo_root))
+        selected = adaptive.validate_campaign_binding(campaign['execution_profile'],
+            env['execution_fingerprint'], profiles)
+        _require(adaptive.select_profile(profiles,env['execution_fingerprint']) == selected,
+            'execution profile selection drift', 'ENVIRONMENT_INVALID')
+        return selected
+    except (KeyError, ValueError, OSError, TypeError) as exc:
+        if isinstance(exc, AdmissionFailure):
+            raise
+        raise AdmissionFailure('execution profile identity: '+str(exc), 'ENVIRONMENT_INVALID') from exc
+
+
+def _environment_source_binding(env, repo_root=None):
+    """Derive source identity from physical epoch bytes, never a context label."""
+    if 'source_epoch' not in env:
+        _require(env['runtime']['source_binding'] == APPROVED_V1_SOURCE_BINDING,
+                 'historical environment source binding drift', 'ENVIRONMENT_INVALID')
+        return APPROVED_V1_SOURCE_BINDING
+    from .source_epoch import validate_epoch
+    try:
+        sources, binding = validate_epoch(env['source_epoch'],
+            Path(repo_root) if repo_root is not None else Path(__file__).resolve().parents[2])
+        runtime = env['runtime']
+        _require(env['source_snapshot'] == sources and runtime['source_binding'] == binding
+            and type(runtime['source_count']) is int and runtime['source_count'] == len(sources)
+            and runtime['source_matches'] is True, 'current environment epoch binding drift', 'ENVIRONMENT_INVALID')
+        return binding
+    except (ValueError, KeyError, TypeError, OSError) as exc:
+        if isinstance(exc, AdmissionFailure): raise
+        raise AdmissionFailure('source epoch environment: ' + str(exc), 'ENVIRONMENT_INVALID') from exc
+
+
+def _validate_environment(env, prepared, campaign, scope='LIVE', repo_root=None):
     invalid = 'ENVIRONMENT_INVALID'
     _require(env['evidence_scope'] == scope, 'environment observation role mismatch', invalid)
-    _require(all(env['runtime'][key] == prepared[key] for key in RUNTIME_FIELDS), 'runtime identity drift', invalid)
+    if 'source_epoch' in campaign:
+        from .source_epoch import validate_environment_identity
+        try:
+            _require('source_epoch' in env and env['source_epoch'] == campaign['source_epoch'],
+                     'frozen campaign/environment epoch mismatch', invalid)
+            validate_environment_identity(env, prepared, campaign['source_epoch'],
+                                          Path(repo_root) if repo_root is not None else Path('/workspace'))
+        except (ValueError, KeyError, TypeError, OSError) as exc:
+            if isinstance(exc, AdmissionFailure): raise
+            raise AdmissionFailure('source epoch environment: ' + str(exc), invalid) from exc
+    else:
+        _require('source_epoch' not in env, 'environment cannot self-issue source amendment', invalid)
+        _require(all(env['runtime'][key] == prepared[key] for key in RUNTIME_FIELDS), 'runtime identity drift', invalid)
+    _require(isinstance(campaign.get('platform'), str) and bool(campaign['platform'])
+        and env['runtime']['platform'] == campaign['platform'], 'campaign platform drift', invalid)
     sources = env['source_snapshot']
-    _require(len(sources) == 40 and content_id(sources) == APPROVED_V1_SOURCE_BINDING, 'V1 source drift', invalid)
+    if 'source_epoch' not in campaign:
+        _require(len(sources) == 40 and content_id(sources) == APPROVED_V1_SOURCE_BINDING, 'V1 source drift', invalid)
     _require(campaign['schema'] == 'COMPUTE_METABOLISM_ENVIRONMENT_V0'
         and re.fullmatch(r'[0-9]+', campaign['instance_id']) is not None
         and bool(campaign['boot_id']) and bool(campaign['topology']), 'campaign identity invalid', invalid)
@@ -295,6 +403,8 @@ def _validate_environment(env, prepared, campaign, scope='LIVE'):
         'live process load/pressure/steal observation missing', invalid)
     _require(env['thread_environment'] == {'OMP_NUM_THREADS': '1', 'OPENBLAS_NUM_THREADS': '1'}, 'thread policy drift', invalid)
     _require(type(env['wrapper_identity']['pid']) is int and bool(env['wrapper_identity']['start_ticks']), 'wrapper identity unavailable', invalid)
+    if 'execution_profile' in campaign:
+        _validate_execution_profile(env,campaign,Path(repo_root) if repo_root is not None else Path('/workspace'))
 
 
 def _observe_inferior(identity, cgroup_path):
@@ -358,7 +468,12 @@ def _environment_evidence(root, manifest):
         prepared = _prepared(inputs['execution-environment.json'], manifest['inputs']['execution-environment.json'])
         before, after = (_json(root / f'environment-{which}.json') for which in ('before', 'after'))
         for env in (before, after):
-            _validate_environment(env, prepared, inputs['campaign-environment.json'], manifest['evidence_scope'])
+            if 'source_epoch' in inputs['campaign-environment.json']:
+                _validate_environment(env, prepared, inputs['campaign-environment.json'], manifest['evidence_scope'],
+                                      repo_root=Path(__file__).resolve().parents[2])
+            else:
+                _validate_environment(env, prepared, inputs['campaign-environment.json'], manifest['evidence_scope'])
+        _require(before['runtime']['platform'] == after['runtime']['platform'], 'before/after platform drift', 'ENVIRONMENT_INVALID')
         _require(before['wrapper_identity'] == after['wrapper_identity'], 'wrapper process changed', 'ENVIRONMENT_INVALID')
         pair = [_json(root / f'cgroup-{which}.json') for which in ('before', 'after')]
         guard_raw = _read(root / 'guard-before.json')
@@ -410,6 +525,7 @@ def _states(root, n, *, complete=True):
 
 def _edge_evidence(root, run, pred, state, n, env, cgroup_path):
     k = state.step_index
+    source_binding = _environment_source_binding(env)
     receipt_raw = _read(root / 'store/receipts' / (state.acceptance_id + '.json'))
     receipt = strict_json(receipt_raw)
     _require(canonical_bytes(receipt) == receipt_raw and digest_bytes(receipt_raw) == state.acceptance_id,
@@ -418,13 +534,13 @@ def _edge_evidence(root, run, pred, state, n, env, cgroup_path):
         and receipt['candidate'] == strict_json(canonical_bytes(state.candidate_document()))
         and receipt['predecessor_id'] == pred.content_hash and 'replay_transition_id' not in receipt,
         'receipt candidate/predecessor mismatch or replay')
-    _require(state.predecessor_id == pred.content_hash and state.source_binding == APPROVED_V1_SOURCE_BINDING,
+    _require(state.predecessor_id == pred.content_hash and state.source_binding == source_binding,
         'state predecessor/source mismatch')
     cp = verify_checkpoint(run / f'checkpoint-{k}', receipt['checkpoint_id'])
     event, meta = cp['event'], cp['metadata']
     process = event['process_identity']
     _require(meta['evidence_role'] == 'LIVE' and meta['source_snapshot'] == env['source_snapshot']
-        and meta['source_binding'] == APPROVED_V1_SOURCE_BINDING, 'LIVE checkpoint source binding required')
+        and meta['source_binding'] == source_binding, 'LIVE checkpoint source binding required')
     _require(process['linux_boot_id'] == env['boot_id'] and type(process['pid']) is int
         and type(process['proc_stat_start_time_ticks']) is int and process['proc_stat_start_time_ticks'] > 0,
         'live inferior identity unavailable')
@@ -493,6 +609,7 @@ def _failure_anomalies(root, run, manifest, env, cgroup_path):
     neither STOP prose nor a missing next generation proves one.
     """
     anomalies = []
+    source_binding = _environment_source_binding(env)
     n = manifest['requested_steps']
     manifest_hash = digest_bytes(_read(root/'attempt.json'))
     def record(path, reason, bound=False, checkpoint=None):
@@ -515,7 +632,7 @@ def _failure_anomalies(root, run, manifest, env, cgroup_path):
             cp = verify_checkpoint(cp_path)
             event,meta = cp['event'],cp['metadata']
             cid = _read(cp_path/'CHECKPOINT').decode('ascii').strip()
-            _require(meta['source_binding']==APPROVED_V1_SOURCE_BINDING and meta['source_snapshot']==env['source_snapshot']
+            _require(meta['source_binding']==source_binding and meta['source_snapshot']==env['source_snapshot']
                 and meta['evidence_role']=='LIVE' and event['predecessor_id']==pred.content_hash
                 and event['completed_step']==k and event['requested_steps']==n
                 and event['session_id']==state.live_session_id
@@ -672,20 +789,27 @@ def run_fresh_v1(config: AttemptConfig) -> dict:
         manifest.update(upper_before_sha256=content_id(upper), upper_running_identity=upper['running'])
         _write(root / 'attempt.json', manifest)
         cgroup_path = guard.current_cgroup_path()
-        env = _capture_environment(repo, prepared)
+        if 'source_epoch' in inputs['campaign-environment.json']:
+            env = _capture_environment(repo, prepared, inputs['campaign-environment.json']['source_epoch'])
+        else:
+            env = _capture_environment(repo, prepared)
         _write(root / 'environment-before.json', env)
-        _validate_environment(env, prepared, inputs['campaign-environment.json'])
-        before = guard.read_cgroup_snapshot(cgroup_path)
+        _validate_environment(env, prepared, inputs['campaign-environment.json'], repo_root=repo)
+        execution_profile = _validate_execution_profile(env, inputs['campaign-environment.json'], repo)
+        before = guard.read_cgroup_snapshot(cgroup_path, profile=get_profile(config.profile))
         topology = guard.read_cpu_topology()
         guard.validate_enforcement(get_profile(config.profile), before, topology)
         _write(root / 'cgroup-before.json', {'snapshot': before, 'topology': topology, 'wrapper_identity': env['wrapper_identity']})
         _validate_guard_before(strict_json(guard_raw), manifest, before, topology, parent)
-        store = ChainStore(root / 'store')
-        driver = VerifiedChainDriver(repo, store, root / 'runs', config.ledger_path)
-        store._crash_hook = _publication_observer(root, store, driver, config.run_id, cgroup_path)
-        # Production driver installs its own V1Gate and LiveGalaSession.
-        numerical_started = True
-        driver.run(config.requested_steps, config.run_id)
+        with _native_execution_environment(execution_profile,repo,root/'campaign-environment.json',
+                config.campaign_environment_sha256,config.requested_steps):
+            store = ChainStore(root / 'store')
+            driver = VerifiedChainDriver(repo, store, root / 'runs', config.ledger_path)
+            driver._gate = ExecutionProfileGate(execution_profile)
+            store._crash_hook = _publication_observer(root, store, driver, config.run_id, cgroup_path)
+            # Production session inherits only this campaign's finite admission.
+            numerical_started = True
+            driver.run(config.requested_steps, config.run_id)
     except Exception as exc:
         errors.append({'stage': 'run', 'error': f'{type(exc).__name__}: {exc}',
                        'outcome': exc.outcome if isinstance(exc, AdmissionFailure) else
@@ -707,7 +831,8 @@ def run_fresh_v1(config: AttemptConfig) -> dict:
                 errors.append(dict(stage='driver-metrics-snapshot',error=f'{type(exc).__name__}: {exc}',outcome='UNRESOLVED_FAILURE'))
         # Independent collectors preserve one receipt even if the other fails.
         try:
-            after = guard.read_cgroup_snapshot(cgroup_path or guard.current_cgroup_path())
+            after = guard.read_cgroup_snapshot(cgroup_path or guard.current_cgroup_path(),
+                                                profile=get_profile(config.profile))
             topology = guard.read_cpu_topology()
             _write(root / 'cgroup-after.json', {'snapshot': after, 'topology': topology,
                     'wrapper_identity': guard._process_identity(os.getpid())})
@@ -715,7 +840,12 @@ def run_fresh_v1(config: AttemptConfig) -> dict:
             errors.append({'stage': 'cgroup-after', 'error': f'{type(exc).__name__}: {exc}', 'outcome': 'ENVIRONMENT_INVALID'})
         try:
             prepared = _prepared(_json(root / 'execution-environment.json'), digest_bytes(_read(root / 'execution-environment.json')))
-            _write(root / 'environment-after.json', _capture_environment(repo, prepared))
+            campaign_environment = _json(root / 'campaign-environment.json')
+            if 'source_epoch' in campaign_environment:
+                observed_after = _capture_environment(repo, prepared, campaign_environment['source_epoch'])
+            else:
+                observed_after = _capture_environment(repo, prepared)
+            _write(root / 'environment-after.json', observed_after)
         except Exception as exc:
             errors.append({'stage': 'environment-after', 'error': f'{type(exc).__name__}: {exc}', 'outcome': 'ENVIRONMENT_INVALID'})
     report = evaluate_v1_evidence(root, config.requested_steps, reference)

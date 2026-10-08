@@ -11,7 +11,12 @@ def build_edge(checkpoint_dir,predecessor,out,repo_root):
     prior=prior_endpoint(predecessor); blocks=[]
     regions=capture['regions'][:2] if predecessor.generation==0 else capture['regions'][-1:]
     for region in regions:
-        received=block(capture,rows,region,prior,repo_root); blocks.append(received); prior=received['endpoint']
+        if 'evex_spans' in native:
+            from verified_driver.v1.native_evex_block import block as finite_block
+            spans=[{key:item[key] for key in ('start_seq','end_seq')} for item in native['evex_spans']]
+            received=finite_block(capture,rows,region,prior,repo_root,verified_spans=spans)
+        else:received=block(capture,rows,region,prior,repo_root)
+        blocks.append(received); prior=received['endpoint']
     edge=edge_document(identity,event,blocks,native,doc['metadata'],predecessor)
     write(out/'edge.json',edge)
     finished=completion(edge,digest_bytes((out/'edge.json').read_bytes())); write(out/'completion.json',finished)

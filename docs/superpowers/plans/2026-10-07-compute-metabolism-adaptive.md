@@ -1,0 +1,12 @@
+# Compute Metabolism adaptive layer implementation plan — 2026-10-07
+
+1. Preserve the detached HEAD, earlier operational attempts/finalizations and prepared assets. Record source and evidence inventories before changes.
+2. Run RED contracts covering normalized profiles, live fingerprint compatibility, best VERIFIED selection, campaign pinning, non-certified observations, unknown-effect obligations, independent promotion, the direct prepared-Python helper and failure-independent CPU accounting.
+3. Implement the registry/detector/selector, a bounded synthetic memset observer, candidate artifacts and a separate independent gate. Import the historical AVX2 authority only by rechecking its authenticated LIVE V1 evidence. An EVEX sample with incomplete side-effect coverage stays CANDIDATE.
+4. Add a wrapper gate that constrains caller, ELF path and observed input domain before delegating to the unchanged V1 producer/independent checker. New numerical execution requires a campaign-bound profile and fingerprint before a V1 store is created. Preserve historical re-evaluation semantics, including old unavailable CPU costs.
+5. Charge new isolated observations and attempts to the existing operational upper ledger. Observation authority cannot resume a stopped numerical campaign, create certified state, reset a budget or serve as a warm-up. Persist RUNNING before the guard; unresolved containment remains blocking.
+6. Run targeted and combined Compute Metabolism, Runtime Trace, V0 compatibility and V1 regressions. Recalculate the actual source snapshot and wrapper manifest; do not relabel historical PASS. Verify diff cleanliness and receive a fresh read-only review.
+7. After CLEAN, deploy only the approved wrapper/profile/document files. Detect the live GCP environment; select or observe, generate the first EVEX candidate and compare with AVX2. Record raw observations and the unchanged history plus appended actual costs.
+8. Only a compatible independently VERIFIED GCP profile permits one STOP-bound successor and one fresh 2C N=1 warm-up. Otherwise STOP with the explicit missing proofs. Never run N=3, Task10, numerical retries, package installation, or Git staging/commit/push.
+
+The higher-level memset family describes the intended effect, but endpoint equality and sentinel windows do not prove complete effects. Native verification remains authoritative until those effects are independently proved. Test success is distinct from numerical certification.

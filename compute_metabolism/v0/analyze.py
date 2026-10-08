@@ -21,6 +21,7 @@ import threading
 import time
 
 from . import campaign
+from .campaign import prepared_helper_argv
 from .profiles import CampaignLimits, APPROVED_V1_SOURCE_BINDING, APPROVED_N3_FINAL_PUBLIC_BITS
 
 
@@ -95,7 +96,7 @@ def _statistics(values):
 def _identity_observations(config):
     observations, issues = {}, []
     repo = campaign._safe_path(Path(config['repo_root']))
-    for name in campaign._IDENTITY_FILES:
+    for name in campaign.identity_names(config):
         item = config['identities'][name]
         try:
             target = campaign._safe_path(Path(item['path']))
@@ -223,7 +224,10 @@ def _evaluation_helper():
     from . import run_v1
     _require(Path(__file__)==Path('/workspace/compute_metabolism/v0/analyze.py'), 'inner analyzer origin mismatch')
     campaign._frozen_read(Path(__file__),request['analysis_source_sha256'])
-    _require(set(request['source_sha256']) == set(campaign._IDENTITY_FILES), 'complete helper source binding required')
+    identity_config={'gate_source_snapshot':{}} if 'source_epoch' in _document(root/'campaign-environment.json') else {}
+    source_inventories=(set(campaign.identity_names(identity_config)),
+        set(campaign.identity_names(dict(identity_config,adaptive_version='COMPUTE_METABOLISM_ADAPTIVE_V1'))))
+    _require(set(request['source_sha256']) in source_inventories, 'complete helper source binding required')
     for name, expected in request['source_sha256'].items():
         campaign._frozen_read(Path('/workspace')/name, expected)
     for name, module in (('campaign',campaign),('run_v1',run_v1)):
@@ -257,9 +261,7 @@ def _semantic_evaluation(root, config, n, receipt):
         analysis_source_sha256=_digest(Path(__file__)),
         source_sha256={name:item['sha256'] for name,item in config['identities'].items()}))
     _require(len(request) <= 1024*1024, 'bounded helper request required')
-    argv = ['sudo','-n','chroot',str(prepared),'/usr/bin/env','--chdir=/workspace',
-        'PYTHONDONTWRITEBYTECODE=1',guard.INNER_PYTHON,'-B','-c',
-        'from compute_metabolism.v0.analyze import _evaluation_helper; _evaluation_helper()']
+    argv = prepared_helper_argv(prepared, 'evaluation')
     started = time.monotonic()
     streams = _bounded_process(argv,request,prepared/'workspace')
     administrative = dict(measurement_role='ADMINISTRATION_ONLY',argv=argv,
@@ -279,7 +281,7 @@ def _semantic_evaluation(root, config, n, receipt):
     report, context = response['report'], response['context']
     _require(context is not None and report['run_id'] == context['run_id'] == receipt['run_id']
              and context['unit'] == receipt['unit'] and context['epoch'] == receipt['before']['epoch']
-             and context['source_binding'] == APPROVED_V1_SOURCE_BINDING, 'helper semantic run/source/unit binding mismatch')
+             and context['source_binding'] == campaign.context_source_binding(context), 'helper semantic run/source/unit binding mismatch')
     return report, context, administrative
 
 
@@ -298,18 +300,19 @@ def _finalizations(config, state, rows, root):
                 and receipt['campaign_id'] == config['campaign_id'] and receipt['run_id'] == pointer['run_id']
                 and receipt['phase'] in ('PRELAUNCH','POST_FINISH')
                 and receipt['total_wall_seconds'] == proof['total_wall_seconds']
-                and proof.get('formal_campaign') == state.get('formal_campaign'), 'finalization receipt/upper identity mismatch')
+                and proof.get('formal_campaign') == dict(campaign_id=config['campaign_id'],
+                    config_sha256=_digest(root/'campaign.json')), 'finalization receipt/upper identity mismatch')
             _require(len(proof['attempts']) <= len(state['attempts'])
                 and proof['attempts'] == state['attempts'][:len(proof['attempts'])], 'finalization upper history continuity mismatch')
             observed = receipt['observed_retained_total_bytes']
             _require(type(observed) is int and observed >= proof['retained_total_bytes'], 'finalization retained continuity mismatch')
             history = [row for row in proof['attempts'] if row['campaign_id'] == config['campaign_id']]
-            needs_next = campaign.next_attempt(history) is not None
+            needs_next = campaign.next_attempt(history, config) is not None
             _require(type(receipt['needs_next_attempt']) is bool and receipt['needs_next_attempt'] == needs_next,
                 'finalization next-attempt/history mismatch')
             resource = campaign._upper_resource_status(dict(proof,observed_retained_total_bytes=observed),
                 needs_next,proof_path,receipt['upper_proof_sha256'])
-            policy = campaign._policy_status(history)
+            policy = campaign._policy_status(history, config)
             _require(receipt.get('policy_status') == policy, 'finalization policy status/history mismatch')
             if not resource['campaign_stop'] and policy['campaign_stop']:
                 resource.update(campaign_stop=True,campaign_outcome=policy['campaign_outcome'])
@@ -383,7 +386,10 @@ def _attempt(row,config,root,can_evaluate):
         for key in ('host_dependencies_before','host_dependencies_after'):
             _require(execution[key]['status']=='VALID', 'execution imported host source invalid')
             modules=execution[key]['modules']
-            _require(set(modules)=={'profiles','system_guard'}, 'complete imported host source evidence required')
+            expected_modules={'profiles','system_guard'} | ({'adaptive','profile_verify'} if config.get('adaptive_version') is not None else set())
+            if 'gate_source_snapshot' in config:
+                expected_modules|={Path(name).stem for name in campaign._EPOCH_IDENTITY_FILES}
+            _require(set(modules)==expected_modules, 'complete imported host source evidence required')
             for name,module in modules.items():
                 expected=config['identities'][f'compute_metabolism/v0/{name}.py']['sha256']
                 origin=Path(module['origin'])
@@ -396,7 +402,8 @@ def _attempt(row,config,root,can_evaluate):
         _require(execution['retained_bytes']==campaign.logical_tree_bytes(parent), 'actual retained tree/cost mismatch')
         quota=(parent/'writer_quota.txt').read_bytes()
         _require(re.fullmatch(b'[0-9]+',quota) is not None and int(quota)==row['writer_reserved_bytes'], 'raw writer counter mismatch')
-        classified = campaign.classify_attempt(report,receipt,execution['retained_bytes'])
+        classified = campaign.classify_attempt(report,receipt,execution['retained_bytes'],
+            preserve_legacy_cpu=execution['classification'].get('cpu_accounting_version') != 'GUARD_MEASUREMENT_V2')
         if row['role']=='warm-up' and classified['wrapper_outcome']!='ACCEPT':
             classified.update(campaign_stop=True,campaign_outcome='STOP')
         _require(classified==execution['classification'], 'classification disagrees with saved bound proof')
@@ -464,7 +471,7 @@ def analyze_campaign(campaign_root: Path) -> dict:
              'campaign schema/root identity invalid')
     _require(Path(config['ledger_path'])==root.parent/'budget.json'
              and Path(config['repo_root'])==Path(config['root_directory'])/'workspace'
-             and root.parent==Path(config['repo_root'])/'compute_metabolism/v0/artifacts', 'campaign upper/root namespace invalid')
+             and root.parent==Path(config['repo_root'])/'compute_metabolism/v0/artifacts/operational', 'campaign upper/root namespace invalid')
     executing_source=campaign._safe_path(Path(__file__))
     _require(Path(sys.modules[__name__].__spec__.origin if __spec__ else __file__)==executing_source,
         'executing analyzer source origin mismatch')
@@ -510,7 +517,8 @@ def analyze_campaign(campaign_root: Path) -> dict:
     warm=[item for item in own if item['raw_record']['role']=='warm-up']
     warm_ok=(len(warm)==1 and warm[0]['analysis_eligible'] and warm[0]['raw_record']['profile']=='2c'
              and warm[0]['raw_record']['round_index']==0 and warm[0]['raw_record']['outcome']=='ACCEPT')
-    if not warm_ok: issues.append('exactly one valid unscored 2c N1 warm-up required')
+    observation_only = campaign.observation_authorization(config) is not None
+    if not warm_ok and not observation_only: issues.append('exactly one valid unscored 2c N1 warm-up required')
     profiles={}
     for profile in ('2c','1c','0p5c'):
         subset=[item['raw_record'] for item in own if item['performance_eligible'] and item['raw_record']['profile']==profile]
@@ -521,11 +529,12 @@ def analyze_campaign(campaign_root: Path) -> dict:
             outcomes={outcome:sum(row['profile']==profile and row['role']=='measured' and row.get('outcome')==outcome for row in rows)
                       for outcome in sorted({row.get('outcome','RUNNING') for row in rows})})
     stable=profiles['2c']['decision']['decision']=='STABLE_ACCEPT' and profiles['1c']['decision']['decision']=='STABLE_ACCEPT' and profiles['0p5c']['decision']['decision'] in ('STABLE_ACCEPT','STABLE_RESOURCE_REFUSAL')
-    next_item=campaign.next_attempt(verified_rows)
+    next_item=campaign.next_attempt(verified_rows, config)
     resource=campaign._upper_resource_status(state,next_item is not None,Path(config['ledger_path']),_digest(config['ledger_path']))
     if resource['campaign_stop']: issues.append('upper resource STOP: '+json.dumps(resource,sort_keys=True))
     stopped=bool(view_issues or source_issues or finalization_issues or any(state.get(key) for key in ('campaign_resource_stop','campaign_environment_stop','campaign_finalization_unresolved')) or state['running'] is not None or state['start_refusals'] or observations and any(o['sha256']!=o['expected_sha256'] for o in observations.values())
-        or any(item['issues'] for item in own if item['raw_record']['role']!='guard-preflight') or resource['campaign_stop'])
+        or any(item['issues'] for item in own if item['raw_record']['role']!='guard-preflight') or resource['campaign_stop']
+        or (observation_only and campaign._policy_status(verified_rows, config)['campaign_stop']))
     outcome='COMPLETE' if stable and warm_ok and not issues else 'STOP' if stopped else 'UNRESOLVED_VARIABILITY' if any(item['decision']['decision']=='UNRESOLVED_VARIABILITY' for item in profiles.values()) else 'STOP_INCOMPLETE' if any(item['decision']['decision'] in ('STOP','STOP_INCOMPLETE') for item in profiles.values()) else 'INCOMPLETE'
     ratios={}
     if not stopped and warm_ok and profiles['2c']['decision']['decision']=='STABLE_ACCEPT':
