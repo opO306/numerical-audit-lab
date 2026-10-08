@@ -24,7 +24,7 @@ def _inner(path,expected):
     from runtime_trace.regular_nstep.resources import reserve_writer
     config=json.loads(campaign._frozen_read(path,expected));repo=Path('/workspace')
     out=Path(config['inner_output']);epoch=config['source_epoch']
-    if (config.get('schema')!='COMPUTE_METABOLISM_GALA_OBSERVATION_CONFIG_V1'
+    if (config.get('schema')!='COMPUTE_METABOLISM_GALA_OBSERVATION_CONFIG_V2'
         or config.get('mode')!='OBSERVATION' or config.get('certified_state_progress') is not False
         or config.get('profile')!='2c' or config.get('harness_sha256')!=HARNESS_SHA
         or adaptive.digest(epoch)!=config['source_epoch_sha256']
@@ -77,7 +77,9 @@ def observation_status(receipt,directory,source_matches):
     original=receipt.get('outcome')
     if original!='GUARD_COMPLETE':
         return original if original in ('ENVIRONMENT_INVALID','REFUSED_RESOURCE','UNRESOLVED_FAILURE','REFUSED_VERIFICATION') else 'UNRESOLVED_FAILURE','OBSERVATION_FAILED'
-    if receipt.get('measurement_valid') is not True or (directory/'diagnostic.json').exists():
+    if (receipt.get('measurement_valid') is not True or
+        receipt.get('a_independent_check',{}).get('status')!='A_INDEPENDENT_CHECK_PASS' or
+        (directory/'diagnostic.json').exists()):
         return 'UNRESOLVED_FAILURE','OBSERVATION_FAILED'
     try:
         doc=adaptive._read(directory/'gala-observation.raw.json')
@@ -89,7 +91,14 @@ def observation_status(receipt,directory,source_matches):
     except (OSError,ValueError,KeyError,TypeError):return 'UNRESOLVED_FAILURE','OBSERVATION_FAILED'
     return 'GUARD_COMPLETE','OBSERVED_UNCERTIFIED'
 
-def run_observation(root_directory,run_id,fingerprint,epoch,gate_sources):
+def run_observation(root_directory,run_id,fingerprint,epoch,gate_sources,*,a_authority=None):
+    if type(a_authority) is not dict or a_authority.get('scope')!='LIVE' or a_authority.get('source_manifest')!=gate_sources:
+        raise ValueError('explicit approved LIVE A authority bound to source manifest required')
+    from . import cgroup_noescape_policy
+    cgroup_noescape_policy.validate_authority(get_profile('2c'),True,a_authority)
+    if (a_authority.get('source_epoch')!=epoch or
+        a_authority.get('v1_source_binding')!=fingerprint.get('v1_source_binding')):
+        raise ValueError('exact prelaunch Gala A source epoch and V1 binding required')
     root=campaign._safe_path(root_directory)
     if root!=guard.PREPARED_ROOT:raise ValueError('fixed prepared actual Gala observation root required')
     repo=root/'workspace';ledger_path=repo/'compute_metabolism/v0/artifacts/operational/budget.json'
@@ -110,7 +119,7 @@ def run_observation(root_directory,run_id,fingerprint,epoch,gate_sources):
     attempt=namespace/run_id
     if attempt.exists():raise ValueError('exclusive actual Gala observation attempt required')
     before_path=namespace/('upper-before-'+run_id+'.raw.json');campaign._exclusive_raw(before_path,before_raw)
-    config=dict(schema='COMPUTE_METABOLISM_GALA_OBSERVATION_CONFIG_V1',mode='OBSERVATION',
+    config=dict(schema='COMPUTE_METABOLISM_GALA_OBSERVATION_CONFIG_V2',a_authority=copy.deepcopy(a_authority),mode='OBSERVATION',
         certified_state_progress=False,campaign_id=prior['campaign_id'],run_id=run_id,profile='2c',
         inner_output='/'+(attempt/'observations').relative_to(root).as_posix(),
         fingerprint=fingerprint,fingerprint_sha256=adaptive.digest(fingerprint),source_epoch=epoch,
@@ -128,7 +137,8 @@ def run_observation(root_directory,run_id,fingerprint,epoch,gate_sources):
         '/'+path.relative_to(root).as_posix(),'--config-sha256',hashlib.sha256(raw).hexdigest()]
     try:
         receipt=guard.run_system_guard(get_profile('2c'),run_id=run_id,artifact_dir=attempt,command=command,
-            topology=config['campaign_environment']['topology'],root_directory=root,limits=CampaignLimits())
+            topology=config['campaign_environment']['topology'],root_directory=root,limits=CampaignLimits(),
+            a_authority=config['a_authority'],require_a=True)
     except Exception as exc:
         partial=dict(mode='OBSERVATION',exception_type=type(exc).__name__,exception_message=str(exc),campaign_stop=True)
         ledger.record_unresolved(run_id,partial);return partial

@@ -45,6 +45,7 @@ FILE_ROLES = frozenset(('observation','launch','parent_birth','enabled_writes','
     'source_regression','guard_before','guard_final','guard_outer','execution','upper_before','upper_after',
     'prepared','campaign_environment','campaign_config','negative_skeleton','negative_tests','old_candidate',
     'pre_registry','writer_quota','gdb_raw','candidate_birth','state_acquisitions'))
+A_FILE_ROLES = frozenset(('a_policy','a_proof','a_independent_check','guard_running','a_launch_manifest','a_manager_security'))
 PROOF_KEYS = frozenset(('schema','evidence_role','campaign_id','run_id','files','gate_source_snapshot',
     'required_negative_classes'))
 CONFIG_KEYS = frozenset(('schema','mode','certified_state_progress','campaign_id','run_id','profile',
@@ -53,11 +54,12 @@ CONFIG_KEYS = frozenset(('schema','mode','certified_state_progress','campaign_id
     'execution_registry_sha256','harness_sha256'))
 REVIEW_OBLIGATIONS = frozenset(('independent_four_forms','complete_thirteen_effects','call_plt_got_origin',
     'cpuid_full_raw_state','same_value_store_footprint','owned_birth_and_containment',
-    'finite_profile_admission','immutable_historical_source_authority'))
+    'finite_profile_admission','immutable_historical_source_authority','formal_a_group_policy_and_independent_resource_check'))
 REQUIRED_TEST_FILES = frozenset(('tests/test_v1_evex_producer.py','tests/test_v1_evex_checker.py',
     'tests/test_v1_evex_capture.py','tests/test_v1_evex_collector.py',
     'tests/test_compute_metabolism_gala_origin.py','tests/test_compute_metabolism_gala_observer.py',
-    'tests/test_compute_metabolism_source_epoch.py','tests/test_compute_metabolism_evex_profile.py'))
+    'tests/test_compute_metabolism_source_epoch.py','tests/test_compute_metabolism_evex_profile.py',
+    'tests/test_compute_metabolism_a_proof.py'))
 SPEC_PATHS = frozenset(('docs/superpowers/specs/2026-10-07-compute-metabolism-adaptive-design.md',
     'docs/superpowers/plans/2026-10-07-compute-metabolism-evex-promotion.md'))
 
@@ -466,6 +468,7 @@ def _review_regression(root,review,regression,epoch,gate):
             'owned_birth_and_containment':{'compute_metabolism/v0/gala_observer.py','compute_metabolism/v0/system_guard.py'},
             'finite_profile_admission':{'compute_metabolism/v0/evex_profile.py','verified_driver/v1/native_evex_profile.py'},
             'immutable_historical_source_authority':{'compute_metabolism/v0/source_epoch.py','compute_metabolism/v0/historical_profile.py'},
+            'formal_a_group_policy_and_independent_resource_check':{'compute_metabolism/v0/system_guard.py','compute_metabolism/v0/cgroup_noescape.py','compute_metabolism/v0/cgroup_noescape_check.py','compute_metabolism/v0/gala_observation_run.py','compute_metabolism/v0/evex_profile.py','compute_metabolism/v0/cgroup_noescape_policy.py'},
         }[name]
         _need(required<=set(item['source_sha256']),'source-effect obligation binds its actual implementation files')
         supporting=_read_ref(root,item['supporting_file'])
@@ -519,15 +522,16 @@ def _verify(directory,root):
     candidate=_json(_bytes(directory/'candidate-profile.json'))
     proof_raw=_bytes(directory/'proof-bundle.json');proof=_json(proof_raw)
     _keys(proof,PROOF_KEYS,'proof bundle')
-    _need(proof['schema']=='COMPUTE_METABOLISM_GALA_EVEX_PROOF_V1' and proof['evidence_role']=='LIVE','explicit actual LIVE proof bundle')
+    formal=proof['schema']=='COMPUTE_METABOLISM_GALA_EVEX_PROOF_V2'
+    _need(formal and proof['evidence_role']=='LIVE','current promotion requires explicit formal A V2 LIVE proof bundle')
     for key in ('campaign_id','run_id'):
         _need(type(proof[key]) is str and re.fullmatch('[a-z0-9][a-z0-9-]{0,63}',proof[key]),'fixed operational '+key)
-    _need(set(proof['files'])==FILE_ROLES and proof['required_negative_classes']==list(NEGATIVE_CLASSES),'complete bounded proof inventory')
+    _need(set(proof['files'])==(FILE_ROLES|A_FILE_ROLES if formal else FILE_ROLES) and proof['required_negative_classes']==list(NEGATIVE_CLASSES),'complete bounded proof inventory')
     namespaces=_namespaces(proof['campaign_id'],proof['run_id']);prefix=namespaces['attempt'];proof_prefix=namespaces['proof']
     _need(directory.is_relative_to(root) and directory.relative_to(root).as_posix()==proof_prefix+'candidate',
         'exact separate operational proof candidate namespace')
     files=proof['files'];raw={name:_read_ref(root,ref) for name,ref in files.items()}
-    docs={name:_json(data) for name,data in raw.items() if name not in ('negative_tests','writer_quota')}
+    docs={name:_json(data) for name,data in raw.items() if name not in ('negative_tests','writer_quota','guard_running')}
     _need(len({ref['path'] for ref in files.values()})==len(files),'independent proof files cannot alias each other')
     for role in ('observation','launch','parent_birth','enabled_writes','observer_config','environment_before',
         'environment_after','guard_before','guard_final','guard_outer','execution','writer_quota',
@@ -536,8 +540,8 @@ def _verify(directory,root):
     _need(files['upper_before']['path']==namespaces['upper_before'] and
         files['upper_after']['path']==proof_prefix+'upper-after.raw.json','prelaunch/final immutable allowance snapshot namespaces')
     _need(files['state_acquisitions']['path']==prefix+'observations/state-acquisitions.json','exact original raw83 file locator')
-    config=docs['observation_config'];_keys(config,CONFIG_KEYS,'sealed observation config')
-    _need(config['schema']=='COMPUTE_METABOLISM_GALA_OBSERVATION_CONFIG_V1' and config['mode']=='OBSERVATION'
+    config=docs['observation_config'];_keys(config,CONFIG_KEYS|{'a_authority'} if formal else CONFIG_KEYS,'sealed observation config')
+    _need(config['schema']==('COMPUTE_METABOLISM_GALA_OBSERVATION_CONFIG_V2' if formal else 'COMPUTE_METABOLISM_GALA_OBSERVATION_CONFIG_V1') and config['mode']=='OBSERVATION'
         and config['certified_state_progress'] is False and config['campaign_id']==proof['campaign_id'] and
         config['run_id']==proof['run_id'] and config['profile']=='2c' and
         config['inner_output']=='/workspace/'+prefix+'observations','fixed actual observation config')
@@ -568,6 +572,7 @@ def _verify(directory,root):
     delta=_validate_guard(docs['guard_outer'],docs['guard_final'],docs['guard_before'],
         {'campaign_environment':frozen},proof['run_id'])
     outer=docs['guard_outer'];final=docs['guard_final']
+    if formal:_verify_a_guard(root,files,docs,raw,config,gate)
     for environment in (docs['environment_before'],docs['environment_after']):
         _need(environment['boot_id']==outer['before']['epoch']['boot_id'] and
             all(environment['wrapper_identity'][key]==final['child_identity'][key] for key in ('pid','start_ticks')),
@@ -764,3 +769,28 @@ def verify_state_acquisitions(document,observation,observer_config):
                 'original composed raw pointer: '+label)
     return dict(verdict='PASS',sample_count=30,checked_fields_per_sample=83,
         state_acquisitions_sha256=_sha(_canonical(document)),numerical_certification=False)
+
+
+def _verify_a_guard(root,files,docs,raw,config,gate):
+    from . import cgroup_noescape_check
+    outer=docs['guard_outer'];inner=docs['guard_final'];policy=docs['a_policy'];binding=policy['binding']
+    emitted=outer['a_artifacts'];_keys(emitted,A_FILE_ROLES,'original formal A emitted role inventory')
+    prefix=_namespaces(config['campaign_id'],config['run_id'])['attempt']
+    for role,reference in emitted.items():
+        _keys(reference,('path','sha256','bytes'),'original A emitted role reference')
+        name=_relative(reference['path']);_need('/' not in name,'original A emitted artifact basename')
+        _need(files[role]['path']==prefix+name and files[role]['sha256']==reference['sha256'] and type(reference['bytes']) is int and reference['bytes']==len(raw[role]),'original emitted A role path/hash/size: '+role)
+    for role in A_FILE_ROLES:
+        _need(files[role]['path'].startswith(_namespaces(config['campaign_id'],config['run_id'])['attempt']),'same actual A evidence namespace: '+role)
+    _need(files['a_proof']['path'].endswith('/a_security_proof.json') and files['guard_running']['path'].endswith('/guard-cgroup-running.jsonl'),'original A proof/running filenames')
+    _need(binding['scope']=='LIVE' and binding['run_id']==config['run_id'] and binding['profile']=='2c' and binding['source_manifest']==gate,'formal A live/source/run policy')
+    authority=config['a_authority']
+    _need(type(authority) is dict and authority['source_manifest']==gate and authority['authority_id']==binding['authority_id'] and authority['trust_approval']==binding['trust_approval'] and authority['scope']=='LIVE','frozen explicit Gala A authority')
+    _need(binding['source_epoch']==config['source_epoch'] and authority['source_epoch']==config['source_epoch'] and binding['v1_source_binding']==config['fingerprint']['v1_source_binding'] and authority['v1_source_binding']==binding['v1_source_binding'],'exact formal A epoch and V1 authority binding')
+    _need(outer['a_manager']['launch_manifest']==docs['a_launch_manifest'] and outer['a_manager']['security_rows']==docs['a_manager_security'],'actual root manager file binding')
+    configuration=docs['a_launch_manifest']['configuration']
+    _need(configuration['command'][-1]==files['observation_config']['sha256'],'actual observation config command SHA')
+    _need(inner['a_proof_sha256']==files['a_proof']['sha256'] and outer['running_file']['sha256']==files['guard_running']['sha256'],'actual retained A hashes')
+    directory=(Path(root)/files['a_proof']['path']).parent
+    result=cgroup_noescape_check.check_guard(directory,policy,inner,outer)
+    _need(result['status']=='A_INDEPENDENT_CHECK_PASS' and result==docs['a_independent_check'] and outer['a_independent_check']==result,'fresh independent formal A replay')

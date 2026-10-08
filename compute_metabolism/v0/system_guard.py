@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 import ctypes
+import hashlib
 import json
 import os
 from pathlib import Path, PurePosixPath
@@ -118,6 +119,9 @@ def build_systemd_run_argv(profile: ProfileSpec, *, unit_name: str,
         'ReadOnlyPaths': '/workspace /usr /home/otherside123 /reference',
         'ReadWritePaths': str(ARTIFACT_ROOT),
     }
+    if profile.key == '2c':
+        props.update(NoNewPrivileges='yes',CapabilityBoundingSet='',AmbientCapabilities='',
+                     ProtectControlGroups='yes',RestrictNamespaces='yes',RestrictSUIDSGID='yes')
     if profile.quota_percent is not None:
         props.update(CPUQuota=f'{profile.quota_percent}%', CPUQuotaPeriodSec=f'{profile.quota_period_ms}ms')
     env = {
@@ -407,7 +411,7 @@ def _sample_processes(path: Path, enumerated: list[int]) -> tuple[dict, dict, li
     return identities, observations, current
 
 
-def read_cgroup_snapshot(cgroup_path: Path, *, profile: ProfileSpec | None = None) -> dict:
+def read_cgroup_snapshot(cgroup_path: Path, *, profile: ProfileSpec | None = None, sampler=None) -> dict:
     # Legacy callers retain the strict full set; only approved unlimited
     # profiles may omit controller-dependent bandwidth counters.
     required_cpu = CPU_COUNTERS
@@ -415,6 +419,7 @@ def read_cgroup_snapshot(cgroup_path: Path, *, profile: ProfileSpec | None = Non
         _approved(profile)
         if profile.quota_percent is None:
             required_cpu = CPU_BASE_COUNTERS
+    acquisition_begin_ns = time.monotonic_ns()
     path = cgroup_path.resolve(strict=True)
     epoch = _epoch(path)
     raw = {name: (path / name).read_text() for name in (
@@ -437,7 +442,12 @@ def read_cgroup_snapshot(cgroup_path: Path, *, profile: ProfileSpec | None = Non
             exc.raw_counter_files = {name: raw[name] for name in ('cpu.stat', 'memory.events')}
         raise
     result['enumerated_pids'] = result['pids']
-    result['process_identities'], result['process_observations'], result['pids'] = _sample_processes(path, result['pids'])
+    result['process_identities'], result['process_observations'], result['pids'] = (sampler or _sample_processes)(path, result['pids'])
+    result['acquisition_begin_ns'] = acquisition_begin_ns
+    result['acquisition_end_ns'] = time.monotonic_ns()
+    if sampler is not None and hasattr(getattr(sampler,'__self__',None),'last_security_index'):
+        result['process_security_index'] = sampler.__self__.last_security_index
+        result['process_security_end_index'] = sampler.__self__.last_security_end_index
     if epoch != _epoch(path):
         raise ValueError('cgroup epoch changed while reading')
     return result
@@ -589,8 +599,13 @@ def _drain_owned_children(path: Path, *, interrupted=lambda: False) -> dict:
 
 
 def run_inner(*, profile_key: str, run_id: str, unit_name: str,
-              artifact_dir: Path, command: Sequence[str]) -> dict:
+              artifact_dir: Path, command: Sequence[str], a_security_directory: Path | None = None,
+              a_manifest_sha256: str | None = None, require_a: bool | None = None) -> dict:
     profile = get_profile(profile_key)
+    if require_a is None: require_a = profile_key == '2c'
+    if require_a and profile_key != '2c': raise ValueError('A supported only for 2c')
+    if require_a and (a_security_directory is None or a_manifest_sha256 is None):
+        raise ValueError('A authority manager evidence required before inner launch')
     _owned_name(unit_name)
     result = {'run_id': run_id, 'unit': unit_name, 'profile': profile_key,
               'outcome': 'ENVIRONMENT_INVALID', 'before': None, 'after': None,
@@ -601,6 +616,10 @@ def run_inner(*, profile_key: str, run_id: str, unit_name: str,
     old_handlers = {sig: signal.signal(sig, stop) for sig in (signal.SIGTERM, signal.SIGINT)}
     process = None
     path = None
+    monitor = None
+    child_witness = None
+    result['running_snapshots'] = []
+    result['running_snapshot_chain'] = []
     stage = 'enable_subreaper'
     try:
         _enable_subreaper()
@@ -611,10 +630,15 @@ def run_inner(*, profile_key: str, run_id: str, unit_name: str,
             raise ValueError('wrapper is outside owned system.slice unit')
         stage = 'wrapper_identity'
         result['wrapper_identity'] = _process_identity(os.getpid())
+        if require_a:
+            from . import cgroup_noescape, cgroup_noescape_policy
+            stage = 'a_policy_admission'
+            result['a_policy'] = cgroup_noescape_policy.admit_inner(sys.modules[__name__], artifact_dir, unit_name, run_id, profile_key, a_security_directory, a_manifest_sha256)
+            monitor = cgroup_noescape.Monitor(sys.modules[__name__],artifact_dir,result['a_policy'])
         stage = 'read_cpu_topology'
         result['topology_before'] = read_cpu_topology()
         stage = 'read_cgroup_snapshot'
-        result['before'] = read_cgroup_snapshot(path, profile=profile)
+        result['before'] = read_cgroup_snapshot(path, profile=profile, sampler=monitor.sample if monitor else None)
         stage = 'validate_enforcement'
         validate_enforcement(profile, result['before'], result['topology_before'])
         stage = 'validate_wrapper_membership'
@@ -627,15 +651,22 @@ def run_inner(*, profile_key: str, run_id: str, unit_name: str,
             raise ValueError('wrapper interrupted before child launch')
         process = subprocess.Popen(list(command), stdin=subprocess.DEVNULL)
         result['child_identity'] = _process_identity(process.pid)
+        child_witness = _ProcessWitness(process.pid,path)
+        result['child_individual_witness'] = dict(identity=child_witness.identity(),cgroup=_owned_process_cgroup(child_witness,path),process_samples=child_witness.samples)
+        if monitor is not None: monitor.protected_pids.add(process.pid)
         while True:
             try:
                 result['child_returncode'] = process.wait(timeout=.1)
                 break
             except subprocess.TimeoutExpired:
-                running = read_cgroup_snapshot(path, profile=profile)
+                running = read_cgroup_snapshot(path, profile=profile, sampler=monitor.sample if monitor else None)
                 # Preserve the observed violation before refusing more work.
                 with (artifact_dir / 'guard-cgroup-running.jsonl').open('a', encoding='utf-8') as stream:
                     stream.write(json.dumps(running, sort_keys=True, allow_nan=False) + '\n')
+                result['running_snapshots'].append(running)
+                previous=result['running_snapshot_chain'][-1]['sha256'] if result['running_snapshot_chain'] else None
+                raw=json.dumps(running,sort_keys=True,allow_nan=False).encode()+b'\n'
+                result['running_snapshot_chain'].append(dict(previous=previous,sha256=hashlib.sha256(raw).hexdigest()))
                 validate_enforcement(profile, running, read_cpu_topology())
                 validate_snapshot_pair(result['before'], running)
                 if stopped[0]:
@@ -699,7 +730,7 @@ def run_inner(*, profile_key: str, run_id: str, unit_name: str,
                 except Exception as exc:
                     result['final_errors'].append({'stage': 'topology', **_failure(exc)})
                 try:
-                    result['after'] = read_cgroup_snapshot(path, profile=profile)
+                    result['after'] = read_cgroup_snapshot(path, profile=profile, sampler=monitor.sample if monitor else None)
                 except Exception as exc:
                     result['final_errors'].append({'stage': 'cgroup_snapshot', **_failure(exc)})
                 if result['after'] is not None and result['topology_after'] is not None:
@@ -717,6 +748,15 @@ def run_inner(*, profile_key: str, run_id: str, unit_name: str,
                 if not result['measurement_valid']:
                     result['outcome'] = 'ENVIRONMENT_INVALID'
                 result['interrupted'] = stopped[0]
+                if monitor is not None:
+                    proof=monitor.finish()
+                    result['a_proof_sha256']=hashlib.sha256((artifact_dir/'a_security_proof.json').read_bytes()).hexdigest()
+                    if proof['status']!='CONDITIONAL_GROUP_PROOF': raise ValueError('A collector refused')
+                    _write_json(artifact_dir/'a-completion-ready.json',dict(unit=unit_name,run_id=run_id,pid=os.getpid(),after_monotonic=result['after']['monotonic_seconds']))
+                    end_record=cgroup_noescape_policy.wait_immutable(a_security_directory,'security-end.json',seconds=3)
+                    if end_record['props']!=monitor.record['systemd'] or end_record['monotonic_ns']<result['after']['monotonic_seconds']*1e9:
+                        raise ValueError('A root end handshake mismatch')
+                    result['a_root_end']=end_record
                 _write_json(artifact_dir / 'guard-cgroup-final.json', result)
         except Exception as exc:
             result.update(outcome='ENVIRONMENT_INVALID', measurement_valid=False,
@@ -725,6 +765,10 @@ def run_inner(*, profile_key: str, run_id: str, unit_name: str,
                 _write_json(artifact_dir / 'guard-cgroup-invalid.json', result)
             except Exception as write_exc:
                 result['invalid_receipt_error'] = _failure(write_exc)
+        if child_witness is not None: child_witness.close()
+        if monitor is not None and not (artifact_dir/'a_security_proof.json').exists():
+            monitor.failed = monitor.failed or result.get('error') or result.get('final_error') or 'incomplete guard'
+            monitor.finish()
         for sig, handler in old_handlers.items():
             signal.signal(sig, handler)
     return result
@@ -800,25 +844,35 @@ def _stop_owned_unit(unit_name: str) -> dict:
 
 def run_system_guard(profile: ProfileSpec, *, run_id: str, artifact_dir: Path,
         command: Sequence[str], topology: dict, root_directory: Path = PREPARED_ROOT,
-        limits: CampaignLimits | None = None) -> dict:
+        limits: CampaignLimits | None = None, a_authority: dict | None = None, require_a: bool | None = None) -> dict:
     limits = _approved(profile, limits)
+    from .cgroup_noescape_policy import validate_authority
+    required = profile.key == '2c' if require_a is None else require_a
+    if profile.key == '2c' and required is not True: raise ValueError('A authority cannot be bypassed for 2c')
+    validate_authority(profile, required, a_authority)
+    if required and a_authority is not None and a_authority['scope']!='LIVE': raise ValueError('A formal authority requires LIVE scope')
     return _run_outer(profile, run_id=run_id, artifact_dir=artifact_dir, command=command,
                       topology=topology, root_directory=root_directory,
-                      limits=limits, deadline_seconds=limits.per_run_wall_seconds, test_only=False)
+                      limits=limits, deadline_seconds=limits.per_run_wall_seconds, test_only=False, a_authority=a_authority, require_a=required)
 
 
 def run_system_guard_test_only_probe(profile: ProfileSpec, *, test_only_wall_seconds: float,
         run_id: str, artifact_dir: Path, command: Sequence[str], topology: dict,
-        root_directory: Path = PREPARED_ROOT) -> dict:
+        root_directory: Path = PREPARED_ROOT, a_authority: dict | None = None, require_a: bool | None = None) -> dict:
+    from .cgroup_noescape_policy import validate_authority
+    required = profile.key == '2c' if require_a is None else require_a
+    if profile.key == '2c' and required is not True: raise ValueError('A authority cannot be bypassed for 2c')
+    validate_authority(profile, required, a_authority)
+    if required and a_authority is not None and a_authority['scope']!='TEST_ONLY': raise ValueError('A probe authority requires TEST_ONLY scope')
     if type(test_only_wall_seconds) not in (int, float) or not 0 < test_only_wall_seconds < 180:
         raise ValueError('TEST_ONLY probe requires a shorter deadline')
     return _run_outer(profile, run_id=run_id, artifact_dir=artifact_dir, command=command,
                       topology=topology, root_directory=root_directory, limits=_approved(profile),
-                      deadline_seconds=test_only_wall_seconds, test_only=True)
+                      deadline_seconds=test_only_wall_seconds, test_only=True, a_authority=a_authority, require_a=required)
 
 
 def _run_outer(profile, *, run_id, artifact_dir, command, topology, root_directory,
-               limits, deadline_seconds, test_only):
+               limits, deadline_seconds, test_only, a_authority=None, require_a=False):
     if not re.fullmatch(r'[A-Za-z0-9_-]{1,100}', run_id):
         raise ValueError('invalid run ID')
     root = Path(root_directory).resolve(strict=True)
@@ -846,6 +900,15 @@ def _run_outer(profile, *, run_id, artifact_dir, command, topology, root_directo
         result['cleanup_attempts'].append(attempt)
         result['cleanup'] = attempt
         return attempt
+    manager = None
+    if require_a:
+        from .cgroup_noescape_policy import Manager, INNER_DIRECTORY
+        configuration=dict(run_id=run_id,unit=unit,profile=profile.key,command=list(command),root_directory=str(root),deadline_seconds=deadline_seconds,topology=topology)
+        manager=Manager(authority=a_authority,root=root,artifact_dir=path,configuration=configuration,identity=SYSTEM_UNIT_IDENTITY)
+        offset=argv.index(INNER_PYTHON)
+        argv[offset:offset]=['--property=BindReadOnlyPaths='+str(manager.dir)+':'+INNER_DIRECTORY]
+        separator=argv.index('--',offset)
+        argv[separator:separator]=['--require-a','--a-security-directory',INNER_DIRECTORY,'--a-manifest-sha256',manager.manifest_sha256]
     started = time.monotonic()
     process = None
     try:
@@ -855,6 +918,7 @@ def _run_outer(profile, *, run_id, artifact_dir, command, topology, root_directo
         # Files avoid PIPE deadlock/unbounded communicate buffering. No timeout
         # cleanup can be avoided by a child holding stdout open.
         with (path / 'systemd-stdout.log').open('xb') as stdout, (path / 'systemd-stderr.log').open('xb') as stderr:
+            if manager is not None: manager.start()
             process = subprocess.Popen(argv, stdin=subprocess.DEVNULL, stdout=stdout, stderr=stderr)
             try:
                 remaining = deadline_seconds - (time.monotonic() - started)
@@ -910,6 +974,11 @@ def _run_outer(profile, *, run_id, artifact_dir, command, topology, root_directo
                     result['terminal_error'] = f'{type(unit_exc).__name__}: {unit_exc}'
     finally:
         result['wall_seconds'] = time.monotonic() - started
+        if manager is not None:
+            result['a_manager']=manager.finish()
+            result['security_rows']=result['a_manager']['security_rows']
+            result['security_end_record']=manager.end
+            result['security_end_unchanged']=not manager.errors and manager.end is not None
     try:
         final = json.loads((path / 'guard-cgroup-final.json').read_text())
         if (final['run_id'], final['unit'], final['profile']) != (run_id, unit, profile.key):
@@ -946,8 +1015,66 @@ def _run_outer(profile, *, run_id, artifact_dir, command, topology, root_directo
     except Exception as exc:
         result.update(outcome='ENVIRONMENT_INVALID', measurement_valid=False,
                       measurement_error=f'{type(exc).__name__}: {exc}')
+    if manager is not None:
+        _finalize_a_guard(path,manager,result)
     _write_json(path / 'guard-outer.json', result)
     return result
+
+
+def _materialize_a_artifacts(path: Path, manager, verdict: dict) -> dict:
+    from .cgroup_noescape_policy import canonical, immutable
+    if os.geteuid()!=0 or verdict.get('status')!='A_INDEPENDENT_CHECK_PASS':
+        raise ValueError('A evidence requires root and independent PASS')
+    documents={
+        'a_policy':('a-policy.json',manager.dir/'a-policy.json'),
+        'a_launch_manifest':('a-launch-manifest.json',manager.dir/'launch-manifest.json'),
+    }
+    payloads={}
+    for role,(name,source) in documents.items():
+        immutable(source)
+        payloads[name]=source.read_bytes()
+    payloads['a-manager-security.json']=canonical(manager.rows)
+    payloads['a-independent-check.json']=canonical(verdict)
+    for name,raw in payloads.items():
+        target=path/name
+        with target.open('xb') as stream:
+            stream.write(raw);stream.flush();os.fsync(stream.fileno())
+        os.chown(target,0,0,follow_symlinks=False);os.chmod(target,0o444,follow_symlinks=False)
+    names=dict(a_policy='a-policy.json',a_proof='a_security_proof.json',
+        a_independent_check='a-independent-check.json',guard_running='guard-cgroup-running.jsonl',
+        a_launch_manifest='a-launch-manifest.json',a_manager_security='a-manager-security.json')
+    refs={}
+    for role,name in names.items():
+        target=path/name;info=target.lstat()
+        if not stat.S_ISREG(info.st_mode) or info.st_nlink!=1:raise ValueError('A role must be unaliased regular file')
+        raw=target.read_bytes()
+        if name in payloads:
+            immutable(target)
+            if raw!=payloads[name]:raise ValueError('A retained root evidence copy differs')
+        sha=hashlib.sha256(raw).hexdigest()
+        if role in ('a_proof','guard_running'):
+            field='proof_sha256' if role=='a_proof' else 'running_sha256'
+            if verdict.get(field)!=sha:raise ValueError('A raw role differs from independent checked hash: '+role)
+        refs[role]=dict(path=name,sha256=sha,bytes=len(raw))
+    return refs
+
+
+def _finalize_a_guard(path: Path, manager, result: dict) -> None:
+    try:
+        from .cgroup_noescape_check import check_guard
+        running_path=path/'guard-cgroup-running.jsonl'
+        if not running_path.exists():running_path.touch()
+        result['running_file']=dict(path='guard-cgroup-running.jsonl',sha256=hashlib.sha256(running_path.read_bytes()).hexdigest())
+        verdict=check_guard(path,manager.policy,result.get('inner'),result)
+        result['a_independent_check']=verdict
+        if verdict.get('status')!='A_INDEPENDENT_CHECK_PASS':raise ValueError('A independent checker refused: '+str(verdict))
+        result['a_artifacts']=_materialize_a_artifacts(path,manager,verdict)
+        result['a_conditional_group_proof']='A_CONDITIONAL_GROUP_PROOF'
+        result['a_independent_status']='A_INDEPENDENT_CHECK_PASS'
+    except Exception as exc:
+        if not isinstance(result.get('a_independent_check'),dict):
+            result['a_independent_check']=dict(status='REFUSED',error=str(exc))
+        result.update(outcome='ENVIRONMENT_INVALID',measurement_valid=False,a_evidence_error=f'{type(exc).__name__}: {exc}')
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -962,12 +1089,15 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument('--unit', required=True)
     parser.add_argument('--run-id', required=True)
     parser.add_argument('--artifact-dir', type=Path, required=True)
+    parser.add_argument('--require-a',action='store_true')
+    parser.add_argument('--a-security-directory',type=Path)
+    parser.add_argument('--a-manifest-sha256')
     args = parser.parse_args(option_args)
     if not command:
         parser.error('child argv required')
     _artifact_path(PurePosixPath(args.artifact_dir))
     result = run_inner(profile_key=args.profile, run_id=args.run_id, unit_name=args.unit,
-                       artifact_dir=args.artifact_dir, command=command)
+                       artifact_dir=args.artifact_dir, command=command, a_security_directory=args.a_security_directory, a_manifest_sha256=args.a_manifest_sha256, require_a=True if args.require_a else None)
     if 'diagnostic' in result:
         print(json.dumps(result['diagnostic'], sort_keys=True, allow_nan=False), file=sys.stderr, flush=True)
     return 0 if result['outcome'] == 'GUARD_COMPLETE' and result['measurement_valid'] else 2

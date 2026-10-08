@@ -125,3 +125,11 @@ def test_successful_chown_return_without_changed_owner_is_refused(tmp_path, monk
         guard.run_system_guard(get_profile('2c'), run_id='run', artifact_dir=path,
             command=['/bin/true'], topology={}, root_directory=root)
     assert not launch.called
+
+
+@pytest.fixture(autouse=True)
+def isolate_ownership_before_a_manager(monkeypatch):
+    # These tests reject ownership before any unit can launch; the A authority
+    # boundary is independently exercised by test_compute_metabolism_a_guard.
+    from compute_metabolism.v0 import cgroup_noescape_policy
+    monkeypatch.setattr(cgroup_noescape_policy,'validate_authority',lambda *args: None)

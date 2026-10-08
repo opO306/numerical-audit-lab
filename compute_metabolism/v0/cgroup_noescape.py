@@ -10,7 +10,7 @@ def validate_security(s,r,p):
     require(r.get('schema')=='task9-ab-security-v1','security record schema')
     require(r.get('trust',{}).get('kernel_correct') is True and r.get('trust',{}).get('privileged_manager_no_migration_reconfiguration_or_proxy') is True,'frozen trust missing')
     x=s['status']
-    require(x['Uid'].split()==['1000']*4 and x['Gid'].split()==['1003']*4,'execution IDs')
+    require(x['Uid'].split()==[str(r.get('execution_identity',{'uid':1000})['uid'])]*4 and x['Gid'].split()==[str(r.get('execution_identity',{'gid':1003})['gid'])]*4,'execution IDs')
     frozen_groups=r.get('expected_supplementary_groups')
     require(isinstance(frozen_groups,list) and all(type(v) is int and 0<v<4294967295 for v in frozen_groups),'missing or malformed frozen supplementary groups')
     require(frozen_groups==sorted(set(frozen_groups)),'frozen supplementary groups must be sorted unique')
@@ -25,7 +25,7 @@ def validate_security(s,r,p):
     require(s['namespaces']['cgroup']==r['expected_cgroup_namespace'],'cgroup namespace')
     require(s['cgroup'].strip()=='0::'+r['control_group'],'wrong actual cgroup')
     require(r['control_group']=='/system.slice/'+r['unit'],'unit controlgroup')
-    props={'ControlGroup':r['control_group'],'User':'1000','Group':'1003','Delegate':'no','NoNewPrivileges':'yes','CapabilityBoundingSet':'','AmbientCapabilities':'','ProtectControlGroups':'yes','RestrictNamespaces':'yes','RestrictSUIDSGID':'yes'}
+    props={'ControlGroup':r['control_group'],'User':str(r.get('execution_identity',{'uid':1000})['uid']),'Group':str(r.get('execution_identity',{'gid':1003})['gid']),'Delegate':'no','NoNewPrivileges':'yes','CapabilityBoundingSet':'','AmbientCapabilities':'','ProtectControlGroups':'yes','RestrictNamespaces':'yes','RestrictSUIDSGID':'yes'}
     require(all(str(r['systemd'].get(k))==v for k,v in props.items()),'effective systemd security properties')
     require(bool(s['mounts']),'cgroup mount missing')
     require(all(m['fstype']=='cgroup2' and m['root']=='/' and m['point']=='/sys/fs/cgroup' and 'ro' in m['options'] and 'rw' not in m['options'] for m in s['mounts']),'cgroup mount or alias')
@@ -77,7 +77,7 @@ def invariant(s):
 class Monitor:
     def __init__(self,g,artifact_dir,policy):
         self.g,self.dir,self.policy=g,Path(artifact_dir),dict(policy)
-        self.record=read_record(policy);self.record_raw=Path(policy['security_record_path']).read_text();self.snapshots=[];self.events=[];self.failed=None;self.initial=None;self.path=None
+        self.record=read_record(policy);self.record_raw=Path(policy['security_record_path']).read_text();self.snapshots=[];self.events=[];self.failed=None;self.initial=None;self.path=None;self.protected_pids={os.getpid()}
     def security(self,path):
         current=read_record(self.policy)
         require(current==self.record,'frozen record changed')
@@ -90,11 +90,14 @@ class Monitor:
     def sample(self,path,enumerated):
         self.path=path
         try:
-            proof_index=self.security(path)
+            proof_index=self.security(path);self.last_security_index=proof_index
             identities,observations={},{}
             for pid in enumerated:
                 w=None;ev=dict(pid=pid,security_index=proof_index)
                 try:
+                    if pid in self.protected_pids:
+                        strict_ids,strict_observations,strict_current=self.g._sample_processes(path,[pid])
+                        ev['required_individual_evidence']=dict(identities=strict_ids,observations=strict_observations,current_pids=strict_current)
                     w=self.g._ProcessWitness(pid,path)
                     first=w.identity();cg1=self.g._owned_process_cgroup(w,path)
                     second=w.identity();cg2=self.g._owned_process_cgroup(w,path)
@@ -103,7 +106,7 @@ class Monitor:
                     observations[str(pid)]=dict(status='group_accounted_bound_identity',identity=second,individual_exit_proven=False)
                     ev.update(status='BOUND_IDENTITY',first=first,second=second,cgroups=[cg1,cg2],process_samples=w.samples)
                 except (FileNotFoundError,ProcessLookupError):
-                    require(pid!=os.getpid(),'wrapper identity vanished')
+                    require(pid not in self.protected_pids,'required individual process identity vanished')
                     observations[str(pid)]=dict(status='group_accounted_identity_unknown',identity=None,individual_exit_proven=False,basis='FROZEN_CONDITIONAL_NOESCAPE')
                     ev.update(status='IDENTITY_UNKNOWN',identity=None,individual_exit_proven=False)
                 finally:
@@ -114,7 +117,7 @@ class Monitor:
                 if pid not in enumerated:
                     observations[str(pid)]=dict(status='appeared_during_sample',identity=None,individual_exit_proven=False)
             require(str(os.getpid()) in identities,'wrapper identity unavailable')
-            self.security(path)
+            self.last_security_end_index=self.security(path)
             return identities,observations,current
         except Exception as exc:
             self.failed=str(exc);raise
@@ -129,5 +132,4 @@ class Monitor:
 
 def configure(g,artifact_dir,policy):
     m=Monitor(g,artifact_dir,policy)
-    g._sample_processes=m.sample
     return m

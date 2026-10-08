@@ -205,7 +205,9 @@ def test_test_only_regression_parser_accepts_runtime_inventory_and_refuses_extra
         'verified_driver/v1/native_evex_profile.py','compute_metabolism/v0/gala_origin_check.py',
         'compute_metabolism/v0/gdb_gala_observer.py','compute_metabolism/v0/gala_observer.py',
         'compute_metabolism/v0/system_guard.py','compute_metabolism/v0/evex_profile.py',
-        'compute_metabolism/v0/source_epoch.py','compute_metabolism/v0/historical_profile.py')
+        'compute_metabolism/v0/source_epoch.py','compute_metabolism/v0/historical_profile.py',
+        'compute_metabolism/v0/cgroup_noescape.py','compute_metabolism/v0/cgroup_noescape_check.py',
+        'compute_metabolism/v0/gala_observation_run.py','compute_metabolism/v0/cgroup_noescape_policy.py')
     def put(relative,raw):
         path=tmp_path/relative;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(raw)
         return dict(path=relative,sha256=hashlib.sha256(raw).hexdigest())

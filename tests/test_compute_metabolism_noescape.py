@@ -61,7 +61,7 @@ class SamplingTests(unittest.TestCase):
    if w.pid==43 and behavior=='escape':raise ValueError('live process outside owned cgroup')
    return '0::/system.slice/test.service'
   m=object.__new__(a_impl.Monitor)
-  m.g=types.SimpleNamespace(_ProcessWitness=Witness,_owned_process_cgroup=owned,_cgroup_pids=lambda p:[42]);m.events=[];m.failed=None;m.security=lambda p:0
+  m.g=types.SimpleNamespace(_ProcessWitness=Witness,_owned_process_cgroup=owned,_cgroup_pids=lambda p:[42]);m.events=[];m.failed=None;m.security=lambda p:0;m.protected_pids={42};m.g._sample_processes=lambda *args:({},{},[])
   return m
  def test_disappearance_is_unknown_not_exit(self):
   m=self.monitor('vanish')

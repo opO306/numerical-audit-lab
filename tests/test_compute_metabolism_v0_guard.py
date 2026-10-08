@@ -12,8 +12,24 @@ import pytest
 
 
 @pytest.fixture
-def guard():
-    from compute_metabolism.v0 import system_guard
+def guard(monkeypatch, tmp_path):
+    from compute_metabolism.v0 import system_guard, cgroup_noescape_policy, cgroup_noescape_check
+    # These existing fake-controller tests isolate the legacy resource/cleanup
+    # core. The separate A integration tests exercise public fail-closed defaults.
+    original_inner=system_guard.run_inner
+    def core_inner(**kwargs):
+        kwargs['require_a']=False
+        return original_inner(**kwargs)
+    monkeypatch.setattr(system_guard,'run_inner',core_inner)
+    monkeypatch.setattr(cgroup_noescape_policy,'validate_authority',lambda *args: None)
+    class SyntheticManager:
+        def __init__(self,**kwargs):
+            self.dir=tmp_path;self.manifest_sha256='0'*64;self.policy={};self.end={};self.errors=[]
+        def start(self):pass
+        def finish(self):return {'security_rows':[]}
+    monkeypatch.setattr(cgroup_noescape_policy,'Manager',SyntheticManager)
+    monkeypatch.setattr(cgroup_noescape_check,'check_guard',lambda *args:{'status':'A_INDEPENDENT_CHECK_PASS'})
+    monkeypatch.setattr(system_guard,'_materialize_a_artifacts',lambda *args:{})
     return system_guard
 
 
@@ -41,6 +57,7 @@ def tree(tmp_path, monkeypatch, guard):
     class SyntheticWitness:
         def __init__(self, pid, path):
             self.pid, self.path, self.start_ticks = pid, path, None
+            self.samples=[]
         def identity(self):
             value = dict(guard._process_identity(self.pid))
             value.setdefault('state', 'R')
